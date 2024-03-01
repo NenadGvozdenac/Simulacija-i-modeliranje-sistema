@@ -1,7 +1,9 @@
 ﻿using BookingApp.Model;
 using BookingApp.Serializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace BookingApp.Repository
 {
@@ -23,6 +25,30 @@ namespace BookingApp.Repository
         {
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
+        }
+
+        /// <summary>
+        /// Adds a user to the repository
+        /// </summary>
+        /// <param name="user"></param>
+        public void Add(User user)
+        {
+            _users.Add(user);
+            _serializer.ToCSV(FilePath, _users);
+        }
+
+        /// <summary>
+        /// Gets the next id for the user
+        /// </summary>
+        /// <returns></returns>
+        public int NextId()
+        {
+            _users = _serializer.FromCSV(FilePath);
+            if (_users.Count < 1)
+            {
+                return 1;
+            }
+            return _users.Max(c => c.Id) + 1;
         }
     }
 }

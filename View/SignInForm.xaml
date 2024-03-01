@@ -5,32 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="Sign in" Height="250" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
+        Title="Login" Width="450" Height="450"
+        ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" WindowStartupLocation="CenterScreen">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,450,450" RadiusX="15" RadiusY="15"/>
+    </Window.Clip>
+    <Grid ClipToBounds="True" Background="{StaticResource Lavender}">
+        <Ellipse Fill="{StaticResource RockiesPurple}" Width="171" Height="171" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-71,-68,0,0"/>
+        <Ellipse Fill="{StaticResource HallmarkPurple}" Width="175" Height="175" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-71,-59"/>
+        <Rectangle Fill="{StaticResource Creme}" Margin="80,74,80,107" RadiusX="25" RadiusY="25"/>
 
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontFamily="{StaticResource Verdana}" Margin="0,88,0,0"/>
 
-        <Grid Grid.Row="1" Grid.Column="0" Width="300" Height="100">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Label Content="Username" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Margin="100,138,0,0" />
+        <TextBox Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}" Width="250" HorizontalAlignment="Center" x:Name="UsernameTextBox" Margin="0,166,0,0"/>
+        <TextBlock Text="Enter username..." Style="{StaticResource UsernameTextBlockStyle}" Margin="106,168,0,0"/>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="30">Username:</Label>
-            <Label Grid.Row="1" Grid.Column="0" Height="30">Password:</Label>
-            <TextBox Grid.Row="0" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <PasswordBox Name="txtPassword" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
-        </Grid>
-        
-        <Button Grid.Row="2" Click="SignIn" Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="60"/>
+        <Label Content="Password" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Margin="100,206,0,0" />
+        <PasswordBox PasswordChanged="PasswordTextBox_PasswordChanged" Style="{StaticResource VerdanaPasswordBoxStyle}" Width="250" HorizontalAlignment="Center" Margin="0,232,0,0" x:Name="PasswordTextBox"/>
+        <TextBlock Visibility="Visible" x:Name="PasswordPlaceholder" Text="Enter password..." Style="{StaticResource PasswordTextBlockStyle}" Margin="106,234,0,0"/>
+        <Label x:Name="ErrorMessage" Content="You didn't provide valid credentials." FontFamily="{StaticResource Verdana}" Visibility="Hidden"  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="11" Margin="100,252,0,0" Foreground="Red"/>
 
+        <Button Content="Sign in" Click="SignIn" Style="{StaticResource RoundedButtonStyle}" Margin="0,280,0,0" Width="126" Height="26"/>
+        <TextBlock FontFamily="{StaticResource Verdana}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Margin="0,311,0,0">
+            <Run Text="Need an account?" />
+            <Hyperlink Foreground="{StaticResource RockiesPurple}" TextDecorations="Underline" Click="SignUp">
+                <TextBlock Text="Sign up!" TextDecorations="Underline" Opacity="1"/>
+            </Hyperlink>
+        </TextBlock>
+        <Image Margin="402,0,0,402" Source="/Resources/Images/icon-exit.png" Stretch="Fill" MouseDown="CloseApplication"/>
     </Grid>
 </Window>

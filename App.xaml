@@ -4,6 +4,156 @@
              xmlns:local="clr-namespace:BookingApp"
              StartupUri="View/SignInForm.xaml">
     <Application.Resources>
-         
+        <!-- Global Styles -->
+        <SolidColorBrush x:Key="RockiesPurple"  Color="#33006F"/>
+        <SolidColorBrush x:Key="Plum"           Color="#DDA0DD"/>
+        <SolidColorBrush x:Key="Lavender"       Color="#E6E6FA"/>
+        <SolidColorBrush x:Key="HallmarkPurple" Color="#452C63"/>
+        <SolidColorBrush x:Key="Disabled"       Color="#C4C4DF"/>
+        <SolidColorBrush x:Key="Creme"          Color="#FFF5EA"/>
+        <SolidColorBrush x:Key="Black"          Color="Black"/>
+
+        <!-- Global font used in application -->
+        <FontFamily      x:Key="Verdana">Verdana</FontFamily>
+
+        <!-- Style for text box -->
+        <Style x:Key="VerdanaTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for password text box -->
+        <Style x:Key="VerdanaPasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Placeholder text for inside the normal TextBox -->
+        <Style x:Key="UsernameTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="104,199,0,0"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Text, ElementName=UsernameTextBox}" Value="">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Placeholder text for inside the password TextBox -->
+        <Style x:Key="PasswordTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="104,300,0,0"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+
+        <!-- Style for the rounded button -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Background" Value="{StaticResource Creme}"/>
+            <Setter Property="Foreground" Value="{StaticResource RockiesPurple}"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource HallmarkPurple}"/>
+                                <Setter Property="Foreground" Value="{StaticResource Creme}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for the not rounded button -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{StaticResource Creme}"/>
+            <Setter Property="Foreground" Value="{StaticResource Black}"/>
+            <Setter Property="Width" Value="178"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource HallmarkPurple}"/>
+                                <Setter Property="Foreground" Value="{StaticResource Creme}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Disabled}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.7"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!-- Style for the radio button -->
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource HallmarkPurple}" />
+                    <Setter Property="Background" Value="{StaticResource RockiesPurple}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

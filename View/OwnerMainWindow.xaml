@@ -1,0 +1,61 @@
+﻿<Window x:Class="BookingApp.View.OwnerMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="800" Height="725"
+        ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" WindowStartupLocation="CenterScreen">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,800,725" RadiusX="15" RadiusY="15"/>
+    </Window.Clip>
+    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+        <Border BorderBrush="{StaticResource RockiesPurple}" BorderThickness="0,0,1.5,0" Margin="0,0,600,0">
+            <Grid>
+                <Image Margin="62,7,52,598" Source="\Resources\Images\Owner.png"/>
+                <Label x:Name="Username" Content="Username" FontFamily="{StaticResource Verdana}" Width="156" Height="32" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Margin="26,97,0,0"/>
+                <Label x:Name="Title" Content="Owner" FontFamily="{StaticResource Verdana}" Width="100" Height="20" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,129,0,0"/>
+
+                <Grid Margin="0,175,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Content="Accomodation registration" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Button Grid.Row="1" Content="Accomodation statistics" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False"/>
+                    <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Height="65" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False">
+                        <TextBlock Text="Proposal for registration of new accommodation or removing the existing one" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Height="65" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False">
+                        <TextBlock Text="Management of requests for moving reservations" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Row="4" Content="Guest rating" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Button Grid.Row="5" Content="Review preview" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False"/>
+                    <Button Grid.Row="6" Content="Super-owner" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False"/>
+                    <Button Grid.Row="7" Content="Scheduling reservations" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False"/>
+                    <Button Grid.Row="8" Style="{StaticResource ButtonStyle}" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False">
+                        <TextBlock Text="Display and cancel scheduled reservations" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Row="9" Style="{StaticResource ButtonStyle}" Height="65" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False">
+                        <TextBlock Text="Notifications of a new forum and leaving comments on a forum" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Row="10" Style="{StaticResource ButtonStyle}" Height="65" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="False">
+                        <TextBlock Text="Reporting comment on a forum" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

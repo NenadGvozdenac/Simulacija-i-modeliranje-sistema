@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.Owner;
+﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Model.Vlasnik;
+namespace BookingApp.Model.MutualModels;
 
 class Accomodation : ISerializable
 {

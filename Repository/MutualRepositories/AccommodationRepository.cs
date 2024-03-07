@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Model;
 using BookingApp.Serializer;
-using BookingApp.Model.Vlasnik;
+using BookingApp.Model.MutualModels;
 
 namespace BookingApp.Repository;
 

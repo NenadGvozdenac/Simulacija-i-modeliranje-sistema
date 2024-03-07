@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Model.Owner;
+namespace BookingApp.Model.MutualModels;
 
 public class Location
 {

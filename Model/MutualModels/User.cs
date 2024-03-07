@@ -2,7 +2,7 @@
 using BookingApp.Serializer;
 using System;
 
-namespace BookingApp.Model
+namespace BookingApp.Model.MutualModels
 {
     public class User : ISerializable
     {

@@ -1,4 +1,4 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Resources.Converters;
 using System;

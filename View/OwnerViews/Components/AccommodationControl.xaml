@@ -5,35 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.View.OwnerViews.Components"
              mc:Ignorable="d" 
-             Height="115" Width="380">
-    <UserControl.Clip>
-        <RectangleGeometry Rect="0,0,380,115" RadiusX="15" RadiusY="15"/>
-    </UserControl.Clip>
-    <Grid Background="{StaticResource Creme}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  Margin="10" >
-            <Image x:Name="Image" Stretch="Fill"/>
-        </Border>
-        <Label x:Name="AccommodationName" Content="AccommodationName" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
-            <Label.FontFamily>Verdana</Label.FontFamily>
-            <Label.FontSize>16</Label.FontSize>
-            <Label.FontWeight>Bold</Label.FontWeight>
-        </Label>
-        <Label x:Name="AccommodationLocation" Content="AccommodationLocation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
-            <Label.FontFamily>Verdana</Label.FontFamily>
-            <Label.FontSize>13</Label.FontSize>
-        </Label>
-        <Label x:Name="AccommodationType" Content="AccommodationType" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
-            <Label.FontFamily>Verdana</Label.FontFamily>
-            <Label.FontSize>13</Label.FontSize>
-        </Label>
-    </Grid>
+             Height="115" Width="365">
+    <Border BorderBrush="Black" BorderThickness="1">
+        <Grid Background="{StaticResource Creme}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Lavender" BorderThickness="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  Margin="5" >
+                <Image x:Name="Image" Stretch="Fill"/>
+            </Border>
+            <Label x:Name="AccommodationName" Content="AccommodationName" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>14</Label.FontSize>
+                <Label.FontWeight>Bold</Label.FontWeight>
+            </Label>
+            <Label x:Name="AccommodationLocation" Content="AccommodationLocation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>11.5</Label.FontSize>
+            </Label>
+            <Label x:Name="AccommodationType" Content="AccommodationType" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>11.5</Label.FontSize>
+            </Label>
+            <Image x:Name="EyeButton" Source="..\..\..\Resources\Assets\eye.png" Grid.Column="2" Grid.Row="0" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource ImageHover}"/>
+            <Image x:Name="EditButton" Source="..\..\..\Resources\Assets\pencil.png" Grid.Column="2" Grid.Row="1" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ImageHover}"/>
+            <Image x:Name="TrashButton" Source="..\..\..\Resources\Assets\trash_can.png" Grid.Column="2" Grid.Row="2" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource ImageHover}"/>
+        </Grid>
+    </Border>
 </UserControl>

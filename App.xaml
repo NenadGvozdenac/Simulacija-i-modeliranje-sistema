@@ -31,6 +31,22 @@
             </Setter>
         </Style>
 
+        <!-- Style for text box -->
+        <Style x:Key="VerdanaComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Background" Value="{StaticResource Creme}"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Style for password text box -->
         <Style x:Key="VerdanaPasswordBoxStyle" TargetType="PasswordBox">
             <Setter Property="FontFamily" Value="Verdana"/>
@@ -152,6 +168,28 @@
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Foreground" Value="{StaticResource HallmarkPurple}" />
                     <Setter Property="Background" Value="{StaticResource RockiesPurple}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="FooterButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Black}"/>
+            <Setter Property="Foreground" Value="{StaticResource Creme}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource RockiesPurple}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource RockiesPurple}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ImageHover" TargetType="Image">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

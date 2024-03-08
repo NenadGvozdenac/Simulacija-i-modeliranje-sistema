@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Model.MutualModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,10 @@ namespace BookingApp.View.OwnerViews
     /// </summary>
     public partial class AddAccommodationWindow : Window
     {
-        public AddAccommodationWindow()
+        private User _user;
+        public AddAccommodationWindow(User user)
         {
+            _user = user;
             InitializeComponent();
         }
     }

@@ -61,7 +61,7 @@
 
             <StackPanel Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Maximum number of guests" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=MaximumNumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}" Width="365" x:Name="MaxNumberOfGuests" Margin="5 0"/>
+                <TextBox Text="{Binding Path=MaximumNumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}" Width="365" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
@@ -93,8 +93,8 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Grid.Row="9" Grid.Column="0" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="ConfirmButtonClick"/>
-            <Button Grid.Row="9" Grid.Column="1" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="CancelButtonClick"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="ConfirmButtonClick"/>
+            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="CancelButtonClick"/>
         </Grid>
     </Grid>
 </Window>

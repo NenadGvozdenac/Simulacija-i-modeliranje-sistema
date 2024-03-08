@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.View.OwnerViews.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="115" d:DesignWidth="380">
+             Height="115" Width="380">
     <UserControl.Clip>
         <RectangleGeometry Rect="0,0,380,115" RadiusX="15" RadiusY="15"/>
     </UserControl.Clip>
@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  Margin="10" >
-            <Rectangle Fill="{StaticResource Creme}"/>
+            <Image x:Name="Image" Stretch="Fill"/>
         </Border>
         <Label x:Name="AccommodationName" Content="AccommodationName" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
             <Label.FontFamily>Verdana</Label.FontFamily>

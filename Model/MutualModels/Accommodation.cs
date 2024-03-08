@@ -21,7 +21,7 @@ public class Accommodation : ISerializable
     public int CancellationPeriodDays { get; set; }
     public double AverageReviewScore { get; set; }
     public double Price { get; set; }
-    public List<string> Images { get; set; }
+    public List<AccommodationImage> Images { get; set; }
 
     public void FromCSV(string[] values)
     {

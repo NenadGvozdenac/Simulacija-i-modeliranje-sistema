@@ -8,42 +8,42 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\delete.png" />
-    <None Remove="Resources\Images\edit.png" />
-    <None Remove="Resources\Images\hamburger_menu.png" />
-    <None Remove="Resources\Images\icon-exit.png" />
-    <None Remove="Resources\Images\Owner.png" />
-    <None Remove="Resources\Images\three_dots.png" />
-    <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Assets\add.png" />
+    <None Remove="Resources\Assets\delete.png" />
+    <None Remove="Resources\Assets\edit.png" />
+    <None Remove="Resources\Assets\hamburger_menu.png" />
+    <None Remove="Resources\Assets\icon-exit.png" />
+    <None Remove="Resources\Assets\Owner.png" />
+    <None Remove="Resources\Assets\three_dots.png" />
+    <None Remove="Resources\Assets\view.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\add.png">
+    <Content Include="Resources\Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\delete.png">
+    <Content Include="Resources\Assets\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\edit.png">
+    <Content Include="Resources\Assets\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\hamburger_menu.png">
+    <Content Include="Resources\Assets\hamburger_menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\icon-exit.png">
+    <Content Include="Resources\Assets\icon-exit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\three_dots.png">
+    <Content Include="Resources\Assets\three_dots.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\view.png">
+    <Content Include="Resources\Assets\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\Owner.png">
+    <Content Include="Resources\Assets\Owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -59,6 +59,15 @@
     <Folder Include="Repository\OwnerRepositories\" />
     <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Images\AccommodationImages\110053208.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Images\AccommodationImages\91868346.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

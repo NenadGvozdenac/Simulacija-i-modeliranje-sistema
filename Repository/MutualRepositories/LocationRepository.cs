@@ -59,5 +59,20 @@ namespace BookingApp.Repository.MutualRepositories
                 _serializer.ToCSV(FilePath, _locations);
             }
         }
+
+        public Location GetLocationByCityAndCountry(string city, string country)
+        {
+            return _locations.FirstOrDefault(a => a.City == city && a.Country == country);
+        }
+
+        public List<string> GetCitiesByCountry(string country)
+        {
+            return _locations.Where(a => a.Country == country).Select(a => a.City).ToList();
+        }
+
+        public List<string> GetCountries()
+        {
+            return _locations.Select(a => a.Country).Distinct().ToList();
+        }
     }
 }

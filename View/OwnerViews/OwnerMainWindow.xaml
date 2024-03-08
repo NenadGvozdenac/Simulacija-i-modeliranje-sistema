@@ -21,9 +21,9 @@
                 <ColumnDefinition Width="10*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\Resources\Images\hamburger_menu.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="HamburgerMenuClick"/>
+            <Image Grid.Column="0" Source="..\..\Resources\Assets\hamburger_menu.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="HamburgerMenuClick"/>
             <TextBlock Grid.Column="1" Text="Accommodations" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-            <Image Grid.Column="2" Source="..\..\Resources\Images\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}"/>
+            <Image Grid.Column="2" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}"/>
         </Grid>
         
         <!-- Content -->
@@ -37,9 +37,11 @@
                 <Button Content="Delete Accommodation" Style="{StaticResource ButtonStyle}" Margin="5"/>
                 <Button Content="Update Accommodation" Style="{StaticResource ButtonStyle}" Margin="5"/>
             </StackPanel>
-            <StackPanel x:Name="Accommodations" Grid.Column="1">
-                
-            </StackPanel>
+            <ScrollViewer Grid.Column="1">
+                <StackPanel x:Name="Accommodations">
+                    <!-- Your content here -->
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
 
         <!-- Footer -->

@@ -31,6 +31,22 @@
             </Setter>
         </Style>
 
+        <!-- Style for text box -->
+        <Style x:Key="VerdanaComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Background" Value="{StaticResource Creme}"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Style for password text box -->
         <Style x:Key="VerdanaPasswordBoxStyle" TargetType="PasswordBox">
             <Setter Property="FontFamily" Value="Verdana"/>

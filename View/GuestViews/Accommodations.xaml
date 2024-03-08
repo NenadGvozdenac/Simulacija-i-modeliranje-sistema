@@ -47,7 +47,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <ScrollViewer> <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"> <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
                     <StackPanel>
                         <Label FontSize="100">UGABUGA</Label>
                         <Label FontSize="100">UGABUGA</Label>

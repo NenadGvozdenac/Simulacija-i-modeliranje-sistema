@@ -32,7 +32,7 @@ namespace BookingApp.View.OwnerViews.Components
         private void SetupAccommodation()
         {
             AccommodationName.Content = Accommodation.Name;
-            AccommodationLocation.Content = Accommodation.Location;
+            //TODO: AccommodationLocation.Content = Accommodation.Location;
             AccommodationType.Content = Accommodation.Type;
         }
     }

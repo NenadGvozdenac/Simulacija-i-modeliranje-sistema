@@ -47,7 +47,7 @@ class AccommodationRepository
         if (existingAccommodation != null)
         {
             existingAccommodation.Name = accommodation.Name;
-            existingAccommodation.Location = accommodation.Location;
+            existingAccommodation.LocationId = accommodation.LocationId;
             existingAccommodation.Type = accommodation.Type;
             existingAccommodation.MaxGuestNumber = accommodation.MaxGuestNumber;
             existingAccommodation.MinReservationDays = accommodation.MinReservationDays;

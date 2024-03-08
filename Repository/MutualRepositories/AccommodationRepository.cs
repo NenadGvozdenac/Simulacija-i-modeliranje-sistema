@@ -11,7 +11,7 @@ using BookingApp.Model.MutualModels;
 
 namespace BookingApp.Repository;
 
-class AccommodationRepository
+public class AccommodationRepository
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
 
@@ -53,6 +53,8 @@ class AccommodationRepository
             existingAccommodation.MinReservationDays = accommodation.MinReservationDays;
             existingAccommodation.CancellationPeriodDays = accommodation.CancellationPeriodDays;
             existingAccommodation.Images = accommodation.Images;
+            existingAccommodation.AverageReviewScore = accommodation.AverageReviewScore;
+            existingAccommodation.Price = accommodation.Price;
             _serializer.ToCSV(FilePath, _accommodations);
         }
     }

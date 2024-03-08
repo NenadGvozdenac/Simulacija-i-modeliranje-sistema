@@ -15,12 +15,14 @@ public class Accommodation : ISerializable
     public int OwnerId { get; set; }
     public string Name { get; set; }
     public int LocationId { get; set; }
+    public Location Location { get; set; }
     public AccommodationType Type { get; set; }
     public int MaxGuestNumber { get; set; }
     public int MinReservationDays { get; set; }
     public int CancellationPeriodDays { get; set; }
     public double AverageReviewScore { get; set; }
     public double Price { get; set; }
+    
     public List<AccommodationImage> Images { get; set; }
 
     public void FromCSV(string[] values)

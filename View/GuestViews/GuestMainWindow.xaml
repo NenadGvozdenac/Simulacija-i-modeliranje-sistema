@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.View.GuestViews"
         mc:Ignorable="d"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="GuestMainWindow" Height="768" Width="1024">
     <Grid>
         <Grid.RowDefinitions>

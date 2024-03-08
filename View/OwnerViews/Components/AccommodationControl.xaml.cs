@@ -37,10 +37,10 @@ namespace BookingApp.View.OwnerViews.Components
             AccommodationName.Content = Accommodation.Name;
             AccommodationLocation.Content = Location;
             AccommodationType.Content = Accommodation.Type;
-            LoadImageFromFile("../" + Accommodation.Images[0].Path);
+            LoadImageFromFile();
         }
 
-        private void LoadImageFromFile(string filePath)
+        private void LoadImageFromFile()
         {
             try
             {
@@ -60,10 +60,26 @@ namespace BookingApp.View.OwnerViews.Components
             }
             catch (Exception ex)
             {
-                // Handle any exceptions, such as file not found or invalid image format
-                // You can display an error message or take appropriate action
-                Console.WriteLine("Error loading image: " + ex.Message);
+                string relativeImagePath = "../../../Resources/Assets/default_house.png";
+
+                string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
+
+                using (FileStream stream = new FileStream(absoluteImagePath, FileMode.Open, FileAccess.Read))
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad; // Ensure the image is fully loaded into memory
+                    bitmapImage.EndInit();
+
+                    Image.Source = bitmapImage;
+                }
             }
+        }
+
+        private void EditButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

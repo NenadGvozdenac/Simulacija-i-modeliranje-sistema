@@ -13,7 +13,7 @@
         BorderBrush="Black"
         BorderThickness="1"
         CornerRadius="10">
-        <Grid Background="White"  Width="760" Height="135">
+        <Grid Background="White"  Width="760" Height="140">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -24,18 +24,20 @@
                 <Rectangle Width="180" Height="115" Fill="Aqua"/>
                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="SLIKA" VerticalAlignment="Center"/>
                 <Border BorderThickness="0 0 1 0" BorderBrush="Black"/>
+                <Image Width="180" Height="115"/>
+
             </Grid>
 
             <Grid Grid.Column="1">
-                <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="25" TextWrapping="Wrap" Text="NAZIV" VerticalAlignment="Top" Height="33" Width="515"/>
-                <TextBlock HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="Grad" VerticalAlignment="Top" Width="169"/>
-                <TextBlock HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="Drzava" VerticalAlignment="Top" Width="169"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="25" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Height="33" Width="515"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="{Binding Location.City}" VerticalAlignment="Top" Width="169"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="169"/>
 
             </Grid>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" Text="Price per day:"  VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="92,108,0,0" TextWrapping="Wrap" Text="{Binding Price, StringFormat={}{0} $}" VerticalAlignment="Top" Width="50"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="517,108,0,0" TextWrapping="Wrap" Text="{Binding AverageReviewScore, StringFormat={}{0}/10}" VerticalAlignment="Top"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="467,92,0,0" TextWrapping="Wrap" Text="Reviews score" VerticalAlignment="Top" Width="83" FontWeight="Bold"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,111,0,0" TextWrapping="Wrap" Text="Price per day:"  VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="92,111,0,0" TextWrapping="Wrap" Text="{Binding Price, StringFormat={}{0} $}" VerticalAlignment="Top" Width="50"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="498,111,0,0" TextWrapping="Wrap" Text="{Binding AverageReviewScore, StringFormat={}{0}/10}" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="454,95,0,0" TextWrapping="Wrap" Text="Reviews score" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
 
             <!--<TextBlock Grid.Row="0" Text="Nemanjina velika kuca" /> Text="{Binding Name}
             <TextBlock Grid.Row="1" Text="{Binding LocationId}"/> Text="{Binding LocationId}"-->

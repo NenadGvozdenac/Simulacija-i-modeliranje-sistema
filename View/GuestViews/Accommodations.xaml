@@ -52,7 +52,7 @@
                         ItemsSource="{Binding _accommodations}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <components:AccommodationCard/>
+                                <components:AccommodationCard x:Name="accommodationcard"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

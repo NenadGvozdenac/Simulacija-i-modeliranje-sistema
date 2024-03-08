@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.Repository.MutualRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace BookingApp.View.GuestViews.Components
         public AccommodationCard()
         {
             InitializeComponent();
+
         }
 
     }

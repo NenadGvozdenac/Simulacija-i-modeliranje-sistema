@@ -1,0 +1,29 @@
+﻿<Window x:Class="BookingApp.View.GuestViews.GuestMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View.GuestViews"
+        mc:Ignorable="d"
+        Title="GuestMainWindow" Height="768" Width="1024">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Container" Grid.Row="0">
+            <local:Accommodations x:Name="accommodation"></local:Accommodations>
+            <local:MyReservations x:Name="myreservation" Visibility="Collapsed"></local:MyReservations>
+        </Grid>
+        
+        <Grid Grid.Row ="1" >
+            <Border BorderBrush="Black" BorderThickness="0 1 0 0"/>
+
+            <Button x:Name="BtnAccommodations" Content="Accommodations" Margin="247,10,658,10" Click="BtnAccommodations_Click"/>
+            <Button x:Name="BtnMyReservations" Content="My reservations" Margin="577,10,328,10" Click="BtnMyReservations_Click"/>
+            
+        </Grid>
+        
+    </Grid>
+</Window>

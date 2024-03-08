@@ -19,7 +19,7 @@ public class Accommodation : ISerializable
     public int MaxGuestNumber { get; set; }
     public int MinReservationDays { get; set; }
     public int CancellationPeriodDays { get; set; }
-    public List<string> Images { get; set; }
+    public List<AccommodationImage> Images { get; set; }
 
     public void FromCSV(string[] values)
     {

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using BookingApp.Model;
 using BookingApp.Serializer;
 using BookingApp.Model.MutualModels;
+using System.Xml.Linq;
 
 namespace BookingApp.Repository;
 
-class AccommodationRepository
+public class AccommodationRepository
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
 
@@ -33,6 +34,16 @@ class AccommodationRepository
     public Accommodation GetById(int id)
     {
         return _accommodations.FirstOrDefault(a => a.Id == id);
+    }
+
+    public int NextId()
+    {
+        _accommodations = _serializer.FromCSV(FilePath);
+        if (_accommodations.Count < 1)
+        {
+            return 1;
+        }
+        return _accommodations.Max(c => c.Id) + 1;
     }
 
     public void Add(Accommodation accommodation)

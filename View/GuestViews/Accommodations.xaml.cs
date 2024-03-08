@@ -1,6 +1,10 @@
-﻿using System;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.Repository;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,11 +24,23 @@ namespace BookingApp.View.GuestViews
     /// </summary>
     public partial class Accommodations : UserControl
     {
+
+        public ObservableCollection<Accommodation> _accommodations { get; set; }
+        public AccommodationRepository accomodationrepository { get; set; }
+
         public Accommodations()
         {
             InitializeComponent();
+            DataContext = this;
+            _accommodations = new ObservableCollection<Accommodation>();
+            accomodationrepository = new AccommodationRepository();
+            Update();
         }
 
-        
+        public void Update() 
+        {
+            foreach (Accommodation accom in accomodationrepository.GetAll()) _accommodations.Add(accom);
+        }
+
     }
 }

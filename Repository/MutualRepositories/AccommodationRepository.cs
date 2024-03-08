@@ -64,6 +64,8 @@ public class AccommodationRepository
             existingAccommodation.MinReservationDays = accommodation.MinReservationDays;
             existingAccommodation.CancellationPeriodDays = accommodation.CancellationPeriodDays;
             existingAccommodation.Images = accommodation.Images;
+            existingAccommodation.AverageReviewScore = accommodation.AverageReviewScore;
+            existingAccommodation.Price = accommodation.Price;
             _serializer.ToCSV(FilePath, _accommodations);
         }
     }

@@ -175,8 +175,8 @@
         <Style x:Key="FooterButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource Black}"/>
             <Setter Property="Foreground" Value="{StaticResource Creme}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource RockiesPurple}"/>
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Lavender}"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
             <Setter Property="FontSize" Value="15"/>
             <Style.Triggers>

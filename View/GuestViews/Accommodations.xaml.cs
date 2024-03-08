@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
+using BookingApp.Repository.MutualRepositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,19 +28,33 @@ namespace BookingApp.View.GuestViews
 
         public ObservableCollection<Accommodation> _accommodations { get; set; }
         public AccommodationRepository accomodationrepository { get; set; }
+        public LocationRepository locationrepository { get; set; }
+        public AccommodationImageRepository accommodationimagerepository { get; set; }
 
         public Accommodations()
         {
             InitializeComponent();
             DataContext = this;
+
             _accommodations = new ObservableCollection<Accommodation>();
+
             accomodationrepository = new AccommodationRepository();
+            locationrepository = new LocationRepository();
+            accommodationimagerepository = new AccommodationImageRepository();
+
             Update();
         }
 
         public void Update() 
         {
-            foreach (Accommodation accom in accomodationrepository.GetAll()) _accommodations.Add(accom);
+            foreach (Accommodation accom in accomodationrepository.GetAll())
+            {
+                accom.Location = locationrepository.GetById(accom.LocationId);
+
+                accom.Images = accommodationimagerepository.GetImagesByAccommodationId(accom.Id);
+
+                _accommodations.Add(accom);
+            }
         }
 
     }

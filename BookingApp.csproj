@@ -42,7 +42,6 @@
 
   <ItemGroup>
     <Folder Include="Model\GuestModels\" />
-    <Folder Include="Model\PathfinderModels\" />
     <Folder Include="Model\TouristModels\" />
     <Folder Include="Model\OwnerModels\" />
     <Folder Include="Repository\GuestRepositories\" />

@@ -3,63 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookingApp.View.GuestViews"
+             xmlns:local="clr-namespace:BookingApp.View.GuestViews" xmlns:components="clr-namespace:BookingApp.View.GuestViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="1024">
-    <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+<Grid Background="White">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
 
         
-        <!--Left Column-->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <!--Left Column-->
+    <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Border BorderBrush="Black" BorderThickness="0 0 1 1"></Border>
+        <Grid Grid.Row="0">
+            <Border BorderBrush="Black" BorderThickness="0 0 1 1"></Border>
 
-                <TextBlock Margin="24,17,10,50" FontSize="25">Accomodation</TextBlock>
-                <TextBlock Margin="62,50,62,17" FontSize="25">search</TextBlock>
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <Border BorderBrush="Black" BorderThickness="0 0 1 0"></Border>
-
-            </Grid>
+            <TextBlock Margin="24,17,10,50" FontSize="25">Accomodation</TextBlock>
+            <TextBlock Margin="62,50,62,17" FontSize="25">search</TextBlock>
         </Grid>
 
-        <!--Right Column-->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Border BorderBrush="Black" BorderThickness="0 0 1 0"></Border>
 
-            <Grid Grid.Row="0">
-                <Border BorderBrush="Black" BorderThickness="0 0 0 1"></Border>
-                <TextBlock Margin="40,26,535,26" FontSize="35">Search results:</TextBlock>
-                <Label x:Name="username" Content="Username" Margin="660,46,37,26"></Label>
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"> <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
-                    <StackPanel>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                        <Label FontSize="100">UGABUGA</Label>
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
         </Grid>
     </Grid>
+
+    <!--Right Column-->
+    <Grid Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Border BorderBrush="Black" BorderThickness="0 0 0 1"></Border>
+            <TextBlock Margin="40,26,535,26" FontSize="35">Search results:</TextBlock>
+            <Label x:Name="username" Content="Username" Margin="660,46,37,26"></Label>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"> <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
+                    <ItemsControl
+                        ItemsSource="{Binding _accommodations}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <components:AccommodationCard/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Grid>
 </UserControl>

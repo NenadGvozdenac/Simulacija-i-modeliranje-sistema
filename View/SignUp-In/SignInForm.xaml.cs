@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using BookingApp.Resources.Converters;
+using BookingApp.View.GuestViews;
 
 namespace BookingApp.View;
 
@@ -106,6 +107,9 @@ public partial class SignInForm : Window
                 break;
 
             case UserType.Guest:
+                GuestMainWindow guestMainWindow = new GuestMainWindow(user);
+                guestMainWindow.Show();
+                Close();
                 break;
 
             case UserType.Tourist:

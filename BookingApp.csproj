@@ -49,7 +49,6 @@
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
     <Folder Include="Repository\OwnerRepositories\" />
-    <Folder Include="View\GuestViews\" />
     <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
   </ItemGroup>

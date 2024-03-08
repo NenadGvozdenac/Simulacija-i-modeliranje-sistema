@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Model.MutualModels;
 
-class Accomodation : ISerializable
+public class Accommodation : ISerializable
 {
     public int Id { get; set; }
+    public int OwnerId { get; set; }
     public string Name { get; set; }
     public Location Location { get; set; }
     public AccommodationType Type { get; set; }
@@ -23,17 +24,18 @@ class Accomodation : ISerializable
     public void FromCSV(string[] values)
     {
         Id = Convert.ToInt32(values[0]);
-        Name = values[1];
-        Location = new Location() { City = values[2], Country = values[3] };
-        Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), values[4]);
-        MaxGuestNumber = Convert.ToInt32(values[5]);
-        MinReservationDays = Convert.ToInt32(values[6]);
-        CancellationPeriodDays = Convert.ToInt32(values[7]);
+        OwnerId = Convert.ToInt32(values[1]);
+        Name = values[2];
+        Location = new Location() { City = values[3], Country = values[4] };
+        Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), values[5]);
+        MaxGuestNumber = Convert.ToInt32(values[6]);
+        MinReservationDays = Convert.ToInt32(values[7]);
+        CancellationPeriodDays = Convert.ToInt32(values[8]);
     }
 
     public string[] ToCSV()
     {
-        string[] csvValues = { Id.ToString(), Name, Location.City, Location.Country, Type.ToString(), MaxGuestNumber.ToString(), MinReservationDays.ToString(), CancellationPeriodDays.ToString() };
+        string[] csvValues = { Id.ToString(), OwnerId.ToString(), Name, Location.City, Location.Country, Type.ToString(), MaxGuestNumber.ToString(), MinReservationDays.ToString(), CancellationPeriodDays.ToString() };
         return csvValues;
     }
 }

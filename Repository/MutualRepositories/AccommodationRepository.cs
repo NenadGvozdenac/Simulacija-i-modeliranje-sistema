@@ -15,33 +15,33 @@ class AccommodationRepository
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
 
-    private readonly Serializer<Accomodation> _serializer;
+    private readonly Serializer<Accommodation> _serializer;
 
-    private List<Accomodation> _accommodations;
+    private List<Accommodation> _accommodations;
 
     public AccommodationRepository()
     {
-        _serializer = new Serializer<Accomodation>();
+        _serializer = new Serializer<Accommodation>();
         _accommodations = _serializer.FromCSV(FilePath);
     }
 
-    public List<Accomodation> GetAll()
+    public List<Accommodation> GetAll()
     {
         return _accommodations;
     }
 
-    public Accomodation GetById(int id)
+    public Accommodation GetById(int id)
     {
         return _accommodations.FirstOrDefault(a => a.Id == id);
     }
 
-    public void Add(Accomodation accommodation)
+    public void Add(Accommodation accommodation)
     {
         _accommodations.Add(accommodation);
         _serializer.ToCSV(FilePath, _accommodations);
     }
 
-    public void Update(Accomodation accommodation)
+    public void Update(Accommodation accommodation)
     {
         var existingAccommodation = _accommodations.FirstOrDefault(a => a.Id == accommodation.Id);
         if (existingAccommodation != null)
@@ -65,5 +65,10 @@ class AccommodationRepository
             _accommodations.Remove(existingAccommodation);
             _serializer.ToCSV(FilePath, _accommodations);
         }
+    }
+
+    public List<Accommodation> GetAccommodationsByOwnerId(int id)
+    {
+        return _accommodations.Where(a => a.OwnerId == id).ToList();
     }
 }

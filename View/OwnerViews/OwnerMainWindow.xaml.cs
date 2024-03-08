@@ -1,4 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Repository;
+using BookingApp.View.OwnerViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +24,53 @@ namespace BookingApp.View;
 public partial class OwnerMainWindow : Window
 {
     private readonly User _user;
+    private List<Accommodation> _accommodations;
+    private AccommodationRepository _accommodationRepository;
     public OwnerMainWindow(User user)
     {
         InitializeComponent();
         _user = user;
-        SetUsername();
+        _accommodations = new List<Accommodation>();
+        _accommodationRepository = new AccommodationRepository();
+        LoadAccommodations();
     }
 
-    private void SetUsername()
+    private void LoadAccommodations()
     {
-        Username.Content = _user.Username;
+        _accommodations.Clear();
+        Accommodations.Children.Clear();
+
+        _accommodations = _accommodationRepository.GetAccommodationsByOwnerId(_user.Id);
+
+        foreach(Accommodation accommodation in _accommodations)
+        {
+            AccommodationControl accommodationView = new AccommodationControl(accommodation);
+            Accommodations.Children.Add(accommodationView);
+        }
     }
 
     private void ExitApplication(object sender, MouseButtonEventArgs e)
     {
         Close();
+    }
+
+    private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)
+    {
+        if(Reservations.Visibility == Visibility.Visible)
+        {
+            Reservations.Visibility = Visibility.Collapsed;
+            Navbar.ColumnDefinitions[0].Width = new GridLength(0);
+        }
+        else
+        {
+            Reservations.Visibility = Visibility.Visible;
+            Navbar.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+        }
+    }
+
+    private void AddAccommodationEvent(object sender, RoutedEventArgs e)
+    {
+        AddAccommodationWindow addAccommodationWindow = new AddAccommodationWindow(_user);
+        addAccommodationWindow.ShowDialog();
     }
 }

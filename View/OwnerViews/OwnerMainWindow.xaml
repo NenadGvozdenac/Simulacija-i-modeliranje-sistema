@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\Resources\Assets\hamburger_menu.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="HamburgerMenuClick"/>
             <TextBlock Grid.Column="1" Text="Accommodations" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-            <Image Grid.Column="2" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}"/>
+            <Image Grid.Column="2" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="ThreeDotsClick"/>
         </Grid>
         
         <!-- Content -->
@@ -31,8 +31,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
-            <StackPanel x:Name="Reservations" Grid.Column="0" Background="Lavender" Visibility="Visible">
+            <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
                 <Button Content="Add Accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationEvent"/>
                 <Button Content="Delete Accommodation" Style="{StaticResource ButtonStyle}" Margin="5"/>
                 <Button Content="Update Accommodation" Style="{StaticResource ButtonStyle}" Margin="5"/>
@@ -42,6 +43,11 @@
                     <!-- Your content here -->
                 </StackPanel>
             </ScrollViewer>
+            <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
+                <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
+                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
+                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
+            </StackPanel>
         </Grid>
 
         <!-- Footer -->

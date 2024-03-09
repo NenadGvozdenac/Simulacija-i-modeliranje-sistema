@@ -72,5 +72,11 @@ namespace BookingApp.Repository.MutualRepositories
         {
             return _accommodationImages.Where(a => a.AccommodationId == id).ToList();
         }
+
+        public void DeleteByAccommodationId(int id)
+        {
+            _accommodationImages.RemoveAll(a => a.AccommodationId == id);
+            _serializer.ToCSV(FilePath, _accommodationImages);
+        }
     }
 }

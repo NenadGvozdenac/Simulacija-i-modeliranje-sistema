@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
+using BookingApp.View.GuestViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,16 @@ namespace BookingApp.Repository.MutualRepositories
         {
             _serializer = new Serializer<Tour>();
             _tours = _serializer.FromCSV(FilePath);
+        }
+
+        public List<Tour> GetAll()
+        {
+            return _tours;
+        }
+
+        public Tour GetById(int id)
+        {
+            return _tours.FirstOrDefault(a => a.Id == id);
         }
 
 
@@ -52,6 +63,47 @@ namespace BookingApp.Repository.MutualRepositories
             }
             return _tours.Max(c => c.Id) + 1;
         }
+
+        public void Update(Tour tour)
+        {
+            var existingTour = _tours.FirstOrDefault(t => t.Id == tour.Id);
+            if (existingTour != null)
+            {
+                existingTour.Name = tour.Name;
+                existingTour.Location = tour.Location;
+                existingTour.Duration = tour.Duration;
+                existingTour.Dates = tour.Dates;
+                existingTour.Capacity = tour.Capacity;
+                existingTour.Description = tour.Description;
+                existingTour.Checkpoints = tour.Checkpoints;
+                existingTour.Language = tour.Language;
+                existingTour.Images = tour.Images;
+                _serializer.ToCSV(FilePath, _tours);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var existingTour = _tours.FirstOrDefault(t => t.Id == id);
+            if (existingTour != null)
+            {
+                _tours.Remove(existingTour);
+                _serializer.ToCSV(FilePath, _tours);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

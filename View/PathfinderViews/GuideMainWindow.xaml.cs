@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.View.GuestViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,31 @@ namespace BookingApp.View.PathfinderViews
     /// </summary>
     public partial class GuideMainWindow : Window
     {
-        public GuideMainWindow()
+        private readonly User _user;
+        public GuideMainWindow(User user)
         {
             InitializeComponent();
+            _user = user;
+            //accommodation.username.Content = _user.Username;
         }
+
+        public void ScheduleTourClick(object sender, RoutedEventArgs e)
+        {
+            AddTourWindow tourWindow = new AddTourWindow();
+            tourWindow.Show();
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

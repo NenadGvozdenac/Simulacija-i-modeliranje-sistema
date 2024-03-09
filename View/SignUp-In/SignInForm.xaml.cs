@@ -8,6 +8,7 @@ using System.Windows.Controls;
 
 using BookingApp.Resources.Converters;
 using BookingApp.View.GuestViews;
+using BookingApp.View.PathfinderViews;
 
 namespace BookingApp.View;
 
@@ -116,6 +117,9 @@ public partial class SignInForm : Window
                 break;
 
             case UserType.Pathfinder:
+                GuideMainWindow PathfinderMainWindow = new GuideMainWindow(user);
+                PathfinderMainWindow.Show();
+                Close();
                 break;
         }
     }

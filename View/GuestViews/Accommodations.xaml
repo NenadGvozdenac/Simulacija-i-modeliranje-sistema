@@ -47,6 +47,8 @@
 
                 <Grid Grid.Row="1">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <ComboBox x:Name="CountryComboBox" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" HorizontalAlignment="Left" Margin="91,47,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90"/>
+                    <ComboBox x:Name="CityComboBox" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" IsEnabled="False" HorizontalAlignment="Left" Margin="91,86,0,0" VerticalAlignment="Top" Width="90"/>
                 </Grid>
 
                 <Grid Grid.Row="2">
@@ -57,6 +59,42 @@
                     <CheckBox x:Name="checkBoxShack" Content="Shack" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,109,0,0" VerticalAlignment="Top"/>
                 </Grid>
 
+                <Grid Grid.Row="3">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0 5 15 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="13" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13" />
+                            <RowDefinition Height="13" />
+                        </Grid.RowDefinitions>
+
+                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" PreviewKeyDown="GuestNumber_PreviewKeyDown" PreviewKeyUp="GuestNumber_PreviewKeyUp" TextChanged="GuestNumber_TextChanged"/>
+                        <RepeatButton Name="GuestNumberUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click">5</RepeatButton>
+                        <RepeatButton Name="GuestNumberDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="GuestNumberDown_Click">6</RepeatButton>
+                  
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0 5 15 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="13" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13" />
+                            <RowDefinition Height="13" />
+                        </Grid.RowDefinitions>
+
+                        <TextBox Name="DaysOfStay" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" PreviewKeyDown="DaysOfStay_PreviewKeyDown" PreviewKeyUp="DaysOfStay_PreviewKeyUp" TextChanged="DaysOfStay_TextChanged"/>
+                        <RepeatButton Name="DaysOfStayUp" Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DaysOfStayUp_Click">5</RepeatButton>
+                        <RepeatButton Name="DaysOfStayDown" Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="DaysOfStayDown_Click">6</RepeatButton>
+
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
 

@@ -30,8 +30,10 @@
 
             <Grid Grid.Column="1">
                 <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="25" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Height="33" Width="515"/>
-                <TextBlock HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="{Binding Location.City}" VerticalAlignment="Top" Width="169"/>
-                <TextBlock HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="169"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Text="{Binding Location.City}" VerticalAlignment="Top" Width="169"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,64,0,0" TextWrapping="Wrap" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="169"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Type:" FontWeight="Bold" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="42,90,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="85"/>
 
             </Grid>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,111,0,0" TextWrapping="Wrap" Text="Price per day:"  VerticalAlignment="Top" FontWeight="Bold"/>

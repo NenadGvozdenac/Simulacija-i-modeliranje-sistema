@@ -1,6 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
+using BookingApp.View.GuestViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,7 @@ namespace BookingApp.View.GuestViews
             accomodationrepository = new AccommodationRepository();
             locationrepository = new LocationRepository();
             accommodationimagerepository = new AccommodationImageRepository();
+
 
             Update();
         }

@@ -21,10 +21,10 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <Rectangle Width="180" Height="115" Fill="Aqua"/>
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="SLIKA" VerticalAlignment="Center"/>
+                <!--<Rectangle Width="180" Height="115" Fill="Aqua"/>-->
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Korisnik nije prilozio sliku" VerticalAlignment="Center"/>
                 <Border BorderThickness="0 0 1 0" BorderBrush="Black"/>
-                <Image Width="180" Height="115"/>
+                <Image Width="180" Height="115" Source="{Binding Images[0].Path}" Stretch="Fill"/>
 
             </Grid>
 

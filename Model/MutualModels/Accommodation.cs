@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BookingApp.Model.MutualModels;
 
@@ -22,7 +23,6 @@ public class Accommodation : ISerializable
     public int CancellationPeriodDays { get; set; }
     public double AverageReviewScore { get; set; }
     public double Price { get; set; }
-    
     public List<AccommodationImage> Images { get; set; }
 
     public void FromCSV(string[] values)

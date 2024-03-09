@@ -19,6 +19,8 @@
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
     <None Remove="Resources\Assets\view.png" />
+    <None Remove="Resources\Images\AccommodationImages\110053208.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\91868346.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +60,9 @@
     <Content Include="Resources\Assets\Owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\AccommodationImages\110053208.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -69,9 +74,20 @@
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
     <Folder Include="Repository\OwnerRepositories\" />
-    <Folder Include="Resources\Images\AccommodationImages\" />
     <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\AccommodationImages\91868346.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Images\AccommodationImages\default_house.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -25,8 +25,10 @@ namespace BookingApp.View.GuestViews.Components
         public AccommodationCard()
         {
             InitializeComponent();
-
+            
         }
+
+        
 
     }
 }

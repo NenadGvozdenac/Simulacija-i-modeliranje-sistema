@@ -39,8 +39,6 @@
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="498,111,0,0" TextWrapping="Wrap" Text="{Binding AverageReviewScore, StringFormat={}{0}/10}" VerticalAlignment="Top"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="454,95,0,0" TextWrapping="Wrap" Text="Reviews score" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
 
-            <!--<TextBlock Grid.Row="0" Text="Nemanjina velika kuca" /> Text="{Binding Name}
-            <TextBlock Grid.Row="1" Text="{Binding LocationId}"/> Text="{Binding LocationId}"-->
         </Grid>
     </Border>
 </UserControl>

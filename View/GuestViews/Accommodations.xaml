@@ -6,58 +6,88 @@
              xmlns:local="clr-namespace:BookingApp.View.GuestViews" xmlns:components="clr-namespace:BookingApp.View.GuestViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="1024">
-<Grid Background="White">
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="200"/>
-        <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        
-    <!--Left Column-->
-    <Grid Grid.Column="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Border BorderBrush="Black" BorderThickness="0 0 1 1"></Border>
+        <!--Left Column-->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <TextBlock Margin="24,17,10,50" FontSize="25">Accomodation</TextBlock>
-            <TextBlock Margin="62,50,62,17" FontSize="25">search</TextBlock>
+            <Grid Grid.Row="0">
+                <Border BorderBrush="Black" BorderThickness="0 0 1 1"></Border>
+
+                <TextBlock Margin="24,17,10,50" FontSize="25">Accomodation</TextBlock>
+                <TextBlock Margin="62,50,62,17" FontSize="25">search</TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="94*"/>
+                    <RowDefinition Height="126*"/>
+                    <RowDefinition Height="151*"/>
+                    <RowDefinition Height="124*"/>
+                    <RowDefinition Height="124*"/>
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="Black" BorderThickness="0 0 1 0" Grid.RowSpan="5"></Border>
+
+                <Grid Grid.Row="0">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <TextBox HorizontalAlignment="Left" Margin="15,57,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="159" Grid.Row="0"
+                        Text="{Binding SearchAccommodation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="18"/>
+                    <Label Content="Enter the name of &#x0a;the accommodation" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <Label Content="Select the type or types&#x0a;of the accommodation" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,16,0,0"/>
+                    <CheckBox x:Name="checkBoxApartment" Content="Apartment" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,69,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="checkBoxHouse" Content="House" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,89,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="checkBoxShack" Content="Shack" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,109,0,0" VerticalAlignment="Top"/>
+                </Grid>
+
+            </Grid>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Border BorderBrush="Black" BorderThickness="0 0 1 0"></Border>
+        <!--Right Column-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        </Grid>
-    </Grid>
+            <Grid Grid.Row="0">
+                <Border BorderBrush="Black" BorderThickness="0 0 0 1"></Border>
+                <TextBlock Margin="40,26,535,26" FontSize="35">Search results:</TextBlock>
+                <Label x:Name="username" Content="Username" Margin="660,46,37,26"></Label>
+            </Grid>
 
-    <!--Right Column-->
-    <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <Border BorderBrush="Black" BorderThickness="0 0 0 1"></Border>
-            <TextBlock Margin="40,26,535,26" FontSize="35">Search results:</TextBlock>
-            <Label x:Name="username" Content="Username" Margin="660,46,37,26"></Label>
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"> <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
+            <Grid Grid.Row="1">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                    <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
                     <ItemsControl
-                        ItemsSource="{Binding _accommodations}">
+                        ItemsSource="{Binding FilteredAccommodations}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <components:AccommodationCard x:Name="accommodationcard"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-            </ScrollViewer>
+                </ScrollViewer>
+            </Grid>
         </Grid>
+
+
     </Grid>
-</Grid>
 </UserControl>

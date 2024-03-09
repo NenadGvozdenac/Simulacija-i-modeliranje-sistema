@@ -84,4 +84,10 @@ public class AccommodationRepository
     {
         return _accommodations.Where(a => a.OwnerId == id).ToList();
     }
+
+    public bool IsAccommodationDeletable(int id)
+    {
+        // TODO: Implement this method
+        return true;
+    }
 }

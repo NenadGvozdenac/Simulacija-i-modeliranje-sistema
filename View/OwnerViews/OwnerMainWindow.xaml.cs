@@ -42,7 +42,7 @@ public partial class OwnerMainWindow : Window
         Update();
     }
 
-    private void Update()
+    public void Update()
     {
         _accommodations.Clear();
         Accommodations.Children.Clear();
@@ -50,13 +50,15 @@ public partial class OwnerMainWindow : Window
         foreach(Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
         {
             accommodation.Images = _accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
-            AccommodationControl accommodationView = new AccommodationControl(accommodation, _locationRepository.GetById(accommodation.LocationId));
+            accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
+            AccommodationControl accommodationView = new AccommodationControl(accommodation, _locationRepository.GetById(accommodation.LocationId), _accommodationRepository, _accommodationImageRepository);
             accommodationView.Margin = new Thickness(15);
             _accommodations.Add(accommodation);
             Accommodations.Children.Add(accommodationView);
         }
-
-        ToggleNavbar();
+        
+        HideLeftNavbar();
+        HideRightNavbar();
     }
 
     private void ExitApplication(object sender, MouseButtonEventArgs e)
@@ -66,21 +68,54 @@ public partial class OwnerMainWindow : Window
 
     private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)
     {
-        ToggleNavbar();
-    }
-
-    private void ToggleNavbar()
-    {
-        if (Reservations.Visibility == Visibility.Visible)
+        if (LeftNavbar.Visibility == Visibility.Collapsed)
         {
-            Reservations.Visibility = Visibility.Collapsed;
-            Navbar.ColumnDefinitions[0].Width = new GridLength(0);
+            ShowLeftNavbar();
         }
         else
         {
-            Reservations.Visibility = Visibility.Visible;
-            Navbar.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+            HideLeftNavbar();
         }
+    }
+
+    private void ThreeDotsClick(object sender, MouseButtonEventArgs e)
+    {
+        if (RightNavbar.Visibility == Visibility.Collapsed)
+        {
+            ShowRightNavbar();
+        }
+        else
+        {
+            HideRightNavbar();
+        }
+    }
+
+    private void ShowLeftNavbar()
+    {
+        LeftNavbar.Visibility = Visibility.Visible;
+        Navbar.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+        RightNavbar.Visibility = Visibility.Collapsed;
+        Navbar.ColumnDefinitions[2].Width = new GridLength(0);
+    }
+
+    private void HideLeftNavbar()
+    {
+        LeftNavbar.Visibility = Visibility.Collapsed;
+        Navbar.ColumnDefinitions[0].Width = new GridLength(0);
+    }
+
+    private void ShowRightNavbar()
+    {
+        RightNavbar.Visibility = Visibility.Visible;
+        Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
+        LeftNavbar.Visibility = Visibility.Collapsed;
+        Navbar.ColumnDefinitions[0].Width = new GridLength(0);
+    }
+
+    private void HideRightNavbar()
+    {
+        RightNavbar.Visibility = Visibility.Collapsed;
+        Navbar.ColumnDefinitions[2].Width = new GridLength(0);
     }
 
     private void AddAccommodationEvent(object sender, RoutedEventArgs e)

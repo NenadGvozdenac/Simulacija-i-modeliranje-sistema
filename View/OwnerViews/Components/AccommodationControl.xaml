@@ -34,9 +34,9 @@
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Image x:Name="EyeButton" Source="..\..\..\Resources\Assets\eye.png" Grid.Column="2" Grid.Row="0" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource ImageHover}"/>
+            <Image x:Name="EyeButton" Source="..\..\..\Resources\Assets\eye.png" Grid.Column="2" Grid.Row="0" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource ImageHover}" MouseDown="EyeButton_MouseDown"/>
             <Image x:Name="EditButton" Source="..\..\..\Resources\Assets\pencil.png" Grid.Column="2" Grid.Row="1" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ImageHover}"/>
-            <Image x:Name="TrashButton" Source="..\..\..\Resources\Assets\trash_can.png" Grid.Column="2" Grid.Row="2" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource ImageHover}"/>
+            <Image x:Name="TrashButton" Source="..\..\..\Resources\Assets\trash_can.png" Grid.Column="2" Grid.Row="2" Margin="10 0" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource ImageHover}" MouseDown="TrashButton_MouseDown"/>
         </Grid>
     </Border>
 </UserControl>

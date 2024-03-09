@@ -35,11 +35,19 @@
                 <TextBlock HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Type:" FontWeight="Bold" VerticalAlignment="Top"/>
                 <TextBlock HorizontalAlignment="Left" Margin="42,90,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="85"/>
 
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,111,0,0" TextWrapping="Wrap" Text="Price per day:"  VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="92,111,0,0" TextWrapping="Wrap" Text="{Binding Price, StringFormat={}{0} $}" VerticalAlignment="Top" Width="50"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="498,111,0,0" TextWrapping="Wrap" Text="{Binding AverageReviewScore, StringFormat={}{0}/10}" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="454,95,0,0" TextWrapping="Wrap" Text="Reviews score" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
+
+                <TextBlock HorizontalAlignment="Left" Margin="167,90,0,0" TextWrapping="Wrap" Text="Maximal number of guests:" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="326,90,0,0" TextWrapping="Wrap" Text="{Binding MaxGuestNumber}" VerticalAlignment="Top" Width="30"/>
+
+                <TextBlock HorizontalAlignment="Left" Margin="167,111,0,0" TextWrapping="Wrap" Text="Minimal days to stay:" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="292,111,0,0" TextWrapping="Wrap" Text="{Binding MinReservationDays}" VerticalAlignment="Top" RenderTransformOrigin="0.811,0.54" Width="38"/>
+
             </Grid>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,111,0,0" TextWrapping="Wrap" Text="Price per day:"  VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="92,111,0,0" TextWrapping="Wrap" Text="{Binding Price, StringFormat={}{0} $}" VerticalAlignment="Top" Width="50"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="498,111,0,0" TextWrapping="Wrap" Text="{Binding AverageReviewScore, StringFormat={}{0}/10}" VerticalAlignment="Top"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="454,95,0,0" TextWrapping="Wrap" Text="Reviews score" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
+
 
         </Grid>
     </Border>

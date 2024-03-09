@@ -1,4 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Repository;
+using BookingApp.Repository.MutualRepositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,11 +26,15 @@ namespace BookingApp.View.OwnerViews.Components
     {
         public Accommodation Accommodation { get; set; }
         public Location Location { get; set; }
-        public AccommodationControl(Accommodation accommodation, Location location)
+        private AccommodationRepository _accommodationRepository { get; set; }
+        private AccommodationImageRepository _accommodationImageRepository { get; set; }
+        public AccommodationControl(Accommodation accommodation, Location location, AccommodationRepository accommodationRepository, AccommodationImageRepository accommodationImageRepository)
         {
             InitializeComponent();
             Accommodation = accommodation;
             Location = location;
+            _accommodationRepository = accommodationRepository;
+            _accommodationImageRepository = accommodationImageRepository;
             SetupAccommodation();
         }
 
@@ -58,7 +64,7 @@ namespace BookingApp.View.OwnerViews.Components
                     Image.Source = bitmapImage;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 string relativeImagePath = "../../../Resources/Assets/default_house.png";
 
@@ -77,9 +83,29 @@ namespace BookingApp.View.OwnerViews.Components
             }
         }
 
-        private void EditButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TrashButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(!_accommodationRepository.IsAccommodationDeletable(Accommodation.Id))
+            {
+                MessageBox.Show((OwnerMainWindow)Window.GetWindow(this), "Accommodation cannot be deleted because it has active reservations.", "Delete accommodation", MessageBoxButton.OK);
+                return;
+            }
 
+            if(MessageBox.Show((OwnerMainWindow)Window.GetWindow(this), "Are you sure you want to delete this accommodation?", "Delete accommodation", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            _accommodationRepository.Delete(Accommodation.Id);
+            _accommodationImageRepository.DeleteByAccommodationId(Accommodation.Id);
+            OwnerMainWindow ownerMainWindow = (OwnerMainWindow)Window.GetWindow(this);
+            ownerMainWindow.Update();
+        }
+
+        private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowDetailedAccommodation showDetailedAccommodation = new ShowDetailedAccommodation(Accommodation);
+            showDetailedAccommodation.ShowDialog();
         }
     }
 }

@@ -27,6 +27,11 @@ namespace BookingApp.Repository
             return _users.FirstOrDefault(u => u.Username == username);
         }
 
+        public User GetById(int id)
+        {
+            return _users.FirstOrDefault(u => u.Id == id);
+        }
+
         /// <summary>
         /// Adds a user to the repository
         /// </summary>

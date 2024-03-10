@@ -1,6 +1,8 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.OwnerModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
+using BookingApp.Repository.OwnerRepositories;
 using BookingApp.View.OwnerViews;
 using BookingApp.View.OwnerViews.Components;
 using System;
@@ -31,6 +33,8 @@ public partial class OwnerMainWindow : Window
     private AccommodationRepository _accommodationRepository;
     private LocationRepository _locationRepository;
     private AccommodationImageRepository _accommodationImageRepository;
+    private GuestRatingRepository _guestRatingRepository;
+    private UserRepository _userRepository;
     public OwnerMainWindow(User user)
     {
         InitializeComponent();
@@ -39,6 +43,9 @@ public partial class OwnerMainWindow : Window
         _accommodationRepository = new AccommodationRepository();
         _locationRepository = new LocationRepository();
         _accommodationImageRepository = new AccommodationImageRepository();
+        _userRepository = new UserRepository();
+        _guestRatingRepository = new GuestRatingRepository();
+
         Update();
     }
 
@@ -118,11 +125,17 @@ public partial class OwnerMainWindow : Window
         Navbar.ColumnDefinitions[2].Width = new GridLength(0);
     }
 
-    private void AddAccommodationEvent(object sender, RoutedEventArgs e)
+    private void AddAccommodationClick(object sender, RoutedEventArgs e)
     {
         AddAccommodationWindow addAccommodationWindow = new AddAccommodationWindow(_user, _accommodationRepository, _accommodationImageRepository);
         addAccommodationWindow.ShowDialog();
 
         Update();
+    }
+
+    private void GuestReviewsButtonClick(object sender, RoutedEventArgs e)
+    {
+        GuestReviewWindow guestReviewWindow = new GuestReviewWindow(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository);
+        guestReviewWindow.ShowDialog();
     }
 }

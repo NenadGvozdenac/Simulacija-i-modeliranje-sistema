@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Assets\add.png" />
+    <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\default_user.png" />
     <None Remove="Resources\Assets\delete.png" />
     <None Remove="Resources\Assets\edit.png" />
     <None Remove="Resources\Assets\eye.png" />
@@ -26,6 +28,12 @@
   <ItemGroup>
     <Content Include="Resources\Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\back_left_arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\default_user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -69,11 +77,9 @@
     <Folder Include="Model\GuestModels\" />
     <Folder Include="Model\PathfinderModels\" />
     <Folder Include="Model\TouristModels\" />
-    <Folder Include="Model\OwnerModels\" />
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
-    <Folder Include="Repository\OwnerRepositories\" />
     <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
   </ItemGroup>

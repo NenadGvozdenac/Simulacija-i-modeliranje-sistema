@@ -28,7 +28,24 @@ namespace BookingApp.View.GuestViews.Components
             
         }
 
-        
+        private void SeeMore_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the DataContext (AccommodationViewModel) of the AccommodationCard
+            if (this.DataContext is Accommodation accommodation)
+            {
+                int accommodationId = accommodation.Id;
+
+                // Find the nearest parent window
+                Window parentWindow = Window.GetWindow(this);
+
+                // Cast the parent window to GuestMainWindow
+                if (parentWindow is GuestMainWindow mainWindow)
+                {
+                    // Show the details UserControl passing the selected accommodation
+                    mainWindow.ShowAccommodationDetails(accommodationId);
+                }
+            }
+        }
 
     }
 }

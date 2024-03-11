@@ -16,6 +16,18 @@ namespace BookingApp.Model.MutualModels
         public DateTime FirstDateOfStaying { get; set; }
         public DateTime LastDateOfStaying { get; set; }
 
+        public AccommodationReservation() 
+        {
+            
+        }
+        public AccommodationReservation(int userid, int accommodationid, int guestnumber, DateTime firstday, DateTime lastday)
+        {
+            UserId = userid;
+            AccommodationId = accommodationid;
+            GuestsNumber = guestnumber;
+            FirstDateOfStaying = firstday;
+            LastDateOfStaying = lastday;
+        }
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);

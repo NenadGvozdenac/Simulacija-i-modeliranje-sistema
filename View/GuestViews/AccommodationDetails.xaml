@@ -58,9 +58,26 @@
 
                     </Grid>
 
-                    <Button x:Name="freedatescheck" Content="Tap here if you are ready for us to find you a first free dates" Click="FirstFreeDatesCheck_Click" HorizontalAlignment="Left" Margin="30,230,0,0" VerticalAlignment="Top" Width="326" Height="24"/>
+                    <TextBlock x:Name="MaxGuestsNumberTextBlock" Text="Choose how many guests will there be (maximum 10):" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="30,223,0,0" FontSize="15" VerticalAlignment="Top" Height="21" Width="454"/>
+                    <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0,223,564,65">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="13" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13" />
+                            <RowDefinition Height="13" />
+                        </Grid.RowDefinitions>
 
-                    <Grid Margin="650,10,10,26">
+                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="GuestNumber_TextChanged"/>
+                        <RepeatButton Name="GuestNumberUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click">5</RepeatButton>
+                        <RepeatButton Name="GuestNumberDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="GuestNumberDown_Click">6</RepeatButton>
+
+                    </Grid>
+
+                    <Button x:Name="freedatescheck" Content="Tap here if you are ready for us to find you a first free dates" Click="FirstFreeDatesCheck_Click" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" Width="326" Height="24"/>
+
+                    <Grid Margin="650,30,10,6">
                         <components:FreeDates x:Name="freedates" Visibility="Collapsed"></components:FreeDates>
                     </Grid>
                 </Grid>

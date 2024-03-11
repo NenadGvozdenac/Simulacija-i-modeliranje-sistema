@@ -31,6 +31,7 @@ namespace BookingApp.View.GuestViews
             accomodationrepository = new AccommodationRepository();
             accommodation.username.Content = _user.Username;
             accommodationDetails.username.Content = _user.Username;
+            accommodationDetails._user = _user;
         }
 
         public void SetActiveUserControl(UserControl control)

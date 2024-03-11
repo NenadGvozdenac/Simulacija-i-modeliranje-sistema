@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.Repository.MutualRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,21 @@ namespace BookingApp.View.GuestViews.Components
     /// </summary>
     public partial class FreeDates : UserControl
     {
+        public AccommodationReservationRepository accomodationReservationRepository;
+
+        public AccommodationReservation reservation { get; set; }
         public FreeDates()
         {
             InitializeComponent();
+            reservation = new AccommodationReservation();
         }
+
+        private void ConfrimReservation_Click(object sender, RoutedEventArgs e)
+        {
+            accomodationReservationRepository.Add(reservation);
+            ConfirmButton.IsEnabled = false;
+            SuccessfullTextBox.Visibility = Visibility.Visible;
+        }
+
     }
 }

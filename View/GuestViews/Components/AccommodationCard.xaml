@@ -29,6 +29,9 @@
             </Grid>
 
             <Grid Grid.Column="1">
+
+                <Button Content="See More Information" Click="SeeMore_Click" Width="150" Height="20" Margin="192,57,218,63"/>
+
                 <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="25" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Height="33" Width="515"/>
                 <TextBlock HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Text="{Binding Location.City}" VerticalAlignment="Top" Width="169"/>
                 <TextBlock HorizontalAlignment="Left" Margin="10,64,0,0" TextWrapping="Wrap" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="169"/>

@@ -220,31 +220,31 @@ namespace BookingApp.View.GuestViews
                 GuestNumber.Text = Convert.ToString(number - 1);
         }
 
-        private void GuestNumber_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
+        //private void GuestNumber_PreviewKeyDown(object sender, KeyEventArgs e)
+        //{
 
-            if (e.Key == Key.Up)
-            {
-                GuestNumberUp.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberUp, new object[] { true });
-            }
+        //    if (e.Key == Key.Up)
+        //    {
+        //        GuestNumberUp.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberUp, new object[] { true });
+        //    }
 
 
-            if (e.Key == Key.Down)
-            {
-                GuestNumberDown.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberDown, new object[] { true });
-            }
-        }
+        //    if (e.Key == Key.Down)
+        //    {
+        //        GuestNumberDown.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberDown, new object[] { true });
+        //    }
+        //}
 
-        private void GuestNumber_PreviewKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Up)
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberUp, new object[] { false });
+        //private void GuestNumber_PreviewKeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Up)
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberUp, new object[] { false });
 
-            if (e.Key == Key.Down)
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberDown, new object[] { false });
-        }
+        //    if (e.Key == Key.Down)
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(GuestNumberDown, new object[] { false });
+        //}
 
         private void GuestNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -258,31 +258,31 @@ namespace BookingApp.View.GuestViews
         }
 
         //DaysOfStay
-        private void DaysOfStay_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
+        //private void DaysOfStay_PreviewKeyDown(object sender, KeyEventArgs e)
+        //{
 
-            if (e.Key == Key.Up)
-            {
-                DaysOfStayUp.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayUp, new object[] { true });
-            }
+        //    if (e.Key == Key.Up)
+        //    {
+        //        DaysOfStayUp.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayUp, new object[] { true });
+        //    }
 
 
-            if (e.Key == Key.Down)
-            {
-                DaysOfStayDown.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayDown, new object[] { true });
-            }
-        }
+        //    if (e.Key == Key.Down)
+        //    {
+        //        DaysOfStayDown.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayDown, new object[] { true });
+        //    }
+        //}
 
-        private void DaysOfStay_PreviewKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Up)
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayUp, new object[] { false });
+        //private void DaysOfStay_PreviewKeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Up)
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayUp, new object[] { false });
 
-            if (e.Key == Key.Down)
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayDown, new object[] { false });
-        }
+        //    if (e.Key == Key.Down)
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(DaysOfStayDown, new object[] { false });
+        //}
 
         private void DaysOfStayUp_Click(object sender, RoutedEventArgs e)
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository.MutualRepositories
 {
-    internal class TourRepository
+    public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/Tours.csv";
 

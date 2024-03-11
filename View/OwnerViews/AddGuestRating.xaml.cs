@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
+using BookingApp.Repository;
 using BookingApp.Repository.OwnerRepositories;
 using System;
 using System.Collections.Generic;
@@ -207,14 +208,16 @@ namespace BookingApp.View.OwnerViews
         // TODO: Add reservation
         public AddGuestRating(Accommodation accommodation, GuestRating uncheckedGuestRating, GuestRatingRepository guestRatingRepository)
         {
+            UserRepository userRepository = new UserRepository();
             _guestRatingRepository = guestRatingRepository;
             _uncheckedGuestRating = uncheckedGuestRating;
+            GuestUsername = userRepository.GetById(uncheckedGuestRating.GuestId).Username;
             AccommodationName = accommodation.Name;
             AccommodationLocation = accommodation.Location.ToString();
             AccommodationType = accommodation.Type.ToString();
             Cleanliness = new ObservableCollection<int> { 1, 2, 3, 4, 5 };
             Respectfulness = new ObservableCollection<int> { 1, 2, 3, 4, 5 };
-            ReservationTimespan = string.Format("{0} - {0}", uncheckedGuestRating.Reservation.FirstDateOfStaying, uncheckedGuestRating.Reservation.LastDateOfStaying);
+            ReservationTimespan = string.Format("{0} - {1}", uncheckedGuestRating.Reservation.FirstDateOfStaying.ToShortDateString(), uncheckedGuestRating.Reservation.LastDateOfStaying.ToShortDateString());
             NumberOfGuests = uncheckedGuestRating.Reservation.GuestsNumber;
             ReservationDays = (uncheckedGuestRating.Reservation.LastDateOfStaying - uncheckedGuestRating.Reservation.FirstDateOfStaying).Days;
             DataContext = this;
@@ -240,6 +243,7 @@ namespace BookingApp.View.OwnerViews
             guestRating.IsChecked = true;
 
             _guestRatingRepository.Update(guestRating);
+            Close();
         }
 
         private bool IsDataValid()

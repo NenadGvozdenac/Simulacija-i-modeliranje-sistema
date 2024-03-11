@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1" x:Name="MessagePanel" Background="Aqua" HorizontalAlignment="Right" Margin="0 5 5 0" VerticalAlignment="Top" Width="150" Height="100" Panel.ZIndex="5" Opacity="0.4" Visibility="Hidden">
+            <Grid Grid.Column="1" x:Name="MessagePanel" Background="Aqua" HorizontalAlignment="Right" Margin="0 5 5 0" VerticalAlignment="Top" Width="150" Height="100" Panel.ZIndex="5" Opacity="0.6" Visibility="Hidden">
                 <Rectangle Fill="Aqua" Stroke="Black"/>
                 <StackPanel>
                     <TextBlock Text="You have unreviewed guests. Tap below to review them." TextAlignment="Center" TextWrapping="Wrap" Margin="15 15 15 0 " FontSize="12"/>

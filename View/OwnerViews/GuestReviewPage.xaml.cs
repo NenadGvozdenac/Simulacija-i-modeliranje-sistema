@@ -34,6 +34,7 @@ namespace BookingApp.View.OwnerViews
 
         private ReviewedGuestReviews _reviewedGuestReviews;
         private PendingGuestReviews _pendingGuestReviews;
+
         public GuestReviewPage(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             _user = user;
@@ -42,18 +43,13 @@ namespace BookingApp.View.OwnerViews
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _guestRatingRepository = guestRatingRepository;
-            InitializeComponent();
 
             _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
             _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
 
-            MainPanel.Content = _reviewedGuestReviews;
-        }
+            InitializeComponent();
 
-        private void BackArrowClick(object sender, MouseButtonEventArgs e)
-        {
-            if(NavigationService.CanGoBack)
-                NavigationService.GoBack();
+            MainPanel.Content = _reviewedGuestReviews;
         }
 
         public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
@@ -73,6 +69,26 @@ namespace BookingApp.View.OwnerViews
             MainPanel.Content = _reviewedGuestReviews;
             PendingButton.IsEnabled = true;
             ReviewedButton.IsEnabled = false;
+        }
+
+        private void PendingButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            _reviewedGuestReviews.Update();
+            _pendingGuestReviews.Update();
+        }
+
+        private void ReviewedButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            _reviewedGuestReviews.Update();
+            _pendingGuestReviews.Update();
+        }
+
+        private void BackArrowClick(object sender, MouseButtonEventArgs e)
+        {
+            if(NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

@@ -44,8 +44,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="PendingButton" Grid.Column="0" Content="Pending" Style="{StaticResource FooterButtonStyle}" Click="PendingButton_Click"/>
-            <Button x:Name="ReviewedButton" Grid.Column="1" Content="Reviewed" Style="{StaticResource FooterButtonStyle}" IsEnabled="False" Click="ReviewedButton_Click"/>
+            <Button x:Name="PendingButton" Grid.Column="0" Content="Pending" Style="{StaticResource FooterButtonStyle}" Click="PendingButton_Click" IsEnabledChanged="PendingButton_IsEnabledChanged"/>
+            <Button x:Name="ReviewedButton" Grid.Column="1" Content="Reviewed" Style="{StaticResource FooterButtonStyle}" IsEnabled="False" Click="ReviewedButton_Click" IsEnabledChanged="ReviewedButton_IsEnabledChanged"/>
         </Grid>
     </Grid>
 </Page>

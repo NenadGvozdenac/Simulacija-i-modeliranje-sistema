@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
 using BookingApp.View.OwnerViews.Components;
 using BookingApp.Repository.MutualRepositories;
+using System.Collections.ObjectModel;
 
 namespace BookingApp.View.OwnerViews.GuestReviewControls
 {
@@ -29,7 +30,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
         private GuestRatingRepository _guestRatingRepository;
         private UserRepository _userRepository;
         private AccommodationRepository _accommodationRepository;
-        private List<GuestRating> _guestRatings;
+        private ObservableCollection<GuestRating> _guestRatings;
         private LocationRepository _locationRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
 
@@ -43,22 +44,27 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             _locationRepository = locationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
 
-            _guestRatings = new List<GuestRating>();
+            _guestRatings = new ObservableCollection<GuestRating>();
 
             InitializeComponent();
             Update();
         }
 
-        private void Update()
+        public void Update()
         {
             _guestRatings.Clear();
 
             foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
             {
-                _guestRatings.AddRange(_guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id));
+                foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
+                {
+                    if(guestRating.IsChecked == false)
+                    {
+                        guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+                        _guestRatings.Add(guestRating);
+                    }
+                }
             }
-
-            _guestRatings = _guestRatings.Where(g => g.IsChecked == false).ToList();
 
             foreach(GuestRating guestRating in _guestRatings)
             {
@@ -75,6 +81,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             {
                 GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository);
                 reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
+                reviewedGuestReview.RefreshPage += (sender, e) => Update();
                 Reviews.Children.Add(reviewedGuestReview);
             }
         }

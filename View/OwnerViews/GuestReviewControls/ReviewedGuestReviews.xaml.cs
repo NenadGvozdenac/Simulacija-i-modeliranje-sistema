@@ -6,6 +6,7 @@ using BookingApp.Repository.OwnerRepositories;
 using BookingApp.View.OwnerViews.Components;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,6 @@ using System.Windows.Shapes;
 
 namespace BookingApp.View.OwnerViews.GuestReviewControls
 {
-    /// <summary>
-    /// Interaction logic for ReviewedGuestReviews.xaml
-    /// </summary>
     public partial class ReviewedGuestReviews : UserControl
     {
         private GuestRatingRepository _guestRatingRepository;
@@ -31,7 +29,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
         private AccommodationRepository _accommodationRepository;
         private LocationRepository _locationRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
-        private List<GuestRating> _guestRatings;
+        private ObservableCollection<GuestRating> _guestRatings;
 
         private User _user;
         public ReviewedGuestReviews(User user, UserRepository userRepository, GuestRatingRepository guestRatingRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
@@ -43,22 +41,27 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             _locationRepository = locationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
 
-            _guestRatings = new List<GuestRating>();
+            _guestRatings = new ObservableCollection<GuestRating>();
 
             InitializeComponent();
             Update();
         }
 
-        private void Update()
+        public void Update()
         {
             _guestRatings.Clear();
 
             foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
             {
-                _guestRatings.AddRange(_guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id));
+                foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
+                {
+                    if(guestRating.IsChecked == true)
+                    {
+                        guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+                        _guestRatings.Add(guestRating);
+                    }
+                }
             }
-
-            _guestRatings = _guestRatings.Where(g => g.IsChecked == true).ToList();
 
             foreach (GuestRating guestRating in _guestRatings)
             {

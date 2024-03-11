@@ -30,6 +30,9 @@ namespace BookingApp.View.OwnerViews.Components
         private AccommodationRepository _accommodationRepository;
         private GuestRatingRepository _guestRatingRepository;
         private LocationRepository _locationRepository;
+
+        public EventHandler RefreshPage { get; internal set; }
+
         public GuestRatingControlPending(GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository)
         {
             _guestRating = guestRating;
@@ -47,7 +50,7 @@ namespace BookingApp.View.OwnerViews.Components
             UserName.Content = _userRepository.GetById(_guestRating.GuestId).Username;
             AccommodationName.Content = _accommodationRepository.GetById(_guestRating.AccommodationId).Name;
             AccommodationLocation.Content = _accommodationRepository.GetById(_guestRating.AccommodationId).Location;
-            ReservationTimespan.Content = string.Format("{0} - {0}", _guestRating.Reservation.FirstDateOfStaying, _guestRating.Reservation.LastDateOfStaying);
+            ReservationTimespan.Content = string.Format("{0} - {1}", _guestRating.Reservation.FirstDateOfStaying.ToShortDateString(), _guestRating.Reservation.LastDateOfStaying.ToShortDateString());
         }
 
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -56,6 +59,12 @@ namespace BookingApp.View.OwnerViews.Components
             accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
             AddGuestRating addGuestRating = new AddGuestRating(accommodation, _guestRating, _guestRatingRepository);
             addGuestRating.ShowDialog();
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            RefreshPage.Invoke(this, EventArgs.Empty);
         }
     }
 }

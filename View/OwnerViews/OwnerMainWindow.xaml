@@ -8,58 +8,7 @@
         Title="MainWindow" Width="430" Height="750"
         ResizeMode="NoResize"
         Background="Transparent" WindowStartupLocation="CenterScreen">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <!-- Header -->
-        <Grid Grid.Row="0" Background="Lavender">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\Resources\Assets\hamburger_menu.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="HamburgerMenuClick"/>
-            <TextBlock Grid.Column="1" Text="Accommodations" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-            <Image Grid.Column="2" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="ThreeDotsClick"/>
-        </Grid>
-        
-        <!-- Content -->
-        <Grid Grid.Row="1"  x:Name="Navbar">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0" />
-            </Grid.ColumnDefinitions>
-            <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Add Accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationClick"/>
-                <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestReviewsButtonClick"/>
-                <Button Content="Update Accommodation" Style="{StaticResource ButtonStyle}" Margin="5"/>
-            </StackPanel>
-            <ScrollViewer Grid.Column="1">
-                <StackPanel x:Name="Accommodations">
-                    <!-- Your content here -->
-                </StackPanel>
-            </ScrollViewer>
-            <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
-                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
-                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
-            </StackPanel>
-        </Grid>
-
-        <!-- Footer -->
-        <Grid Grid.Row="2"> 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Reservations" Style="{StaticResource FooterButtonStyle}"/>
-            <Button Grid.Column="1" Content="Accommodations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
-            <Button Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}"/>
-        </Grid>
+    <Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

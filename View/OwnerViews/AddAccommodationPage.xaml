@@ -54,9 +54,14 @@
                 <ComboBox Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="CityTextBox" Margin="5 0" IsEditable="False" IsEnabled="False"/>
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Type of accommodation" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+            <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
+                <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <ComboBox Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0"/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1">
+                <Label Content="Price per night ($)" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <TextBox Text="{Binding Path=AccommodationPrice, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">

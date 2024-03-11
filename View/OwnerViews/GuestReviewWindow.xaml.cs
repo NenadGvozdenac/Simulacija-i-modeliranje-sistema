@@ -29,27 +29,28 @@ namespace BookingApp.View.OwnerViews
         private AccommodationRepository _accommodationRepository;
         private GuestRatingRepository _guestRatingRepository;
         private LocationRepository _locationRepository;
+        private AccommodationReservationRepository _accommodationReservationRepository;
 
         private ReviewedGuestReviews _reviewedGuestReviews;
         private PendingGuestReviews _pendingGuestReviews;
-        public GuestReviewWindow(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository)
+        public GuestReviewWindow(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             _user = user;
             _userRepository = userRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _guestRatingRepository = guestRatingRepository;
             InitializeComponent();
 
-            _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository);
-            _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository);
+            _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
+            _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
         
             MainPanel.Content = _reviewedGuestReviews;
         }
 
         private void BackArrowClick(object sender, MouseButtonEventArgs e)
         {
-            // TODO: go back to the previous window
             Close();
         }
 

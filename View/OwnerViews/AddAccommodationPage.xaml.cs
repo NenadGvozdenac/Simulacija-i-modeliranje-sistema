@@ -89,6 +89,20 @@ namespace BookingApp.View.OwnerViews
             }
         }
 
+        private int accommodationPrice;
+        public int AccommodationPrice
+        {
+            get => accommodationPrice;
+            set
+            {
+                if (value != accommodationPrice)
+                {
+                    accommodationPrice = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private int maximumNumberOfGuests;
         public int MaximumNumberOfGuests
         {
@@ -212,6 +226,7 @@ namespace BookingApp.View.OwnerViews
             accommodation.MaxGuestNumber = MaximumNumberOfGuests;
             accommodation.MinReservationDays = MinimumNumberOfDaysForReservation;
             accommodation.CancellationPeriodDays = DaysBeforeReservationIsFinal;
+            accommodation.Price = AccommodationPrice;
             accommodation.OwnerId = _user.Id;
             accommodation.Images = Images.ToList();
             _accommodationRepository.Add(accommodation);

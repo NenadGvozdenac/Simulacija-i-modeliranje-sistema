@@ -47,12 +47,11 @@ namespace BookingApp.View.OwnerViews.Components
             UserName.Content = _userRepository.GetById(_guestRating.GuestId).Username;
             AccommodationName.Content = _accommodationRepository.GetById(_guestRating.AccommodationId).Name;
             AccommodationLocation.Content = _accommodationRepository.GetById(_guestRating.AccommodationId).Location;
-            ReservationTimespan.Content = "01.01.2020 - 01.02.2020";
+            ReservationTimespan.Content = string.Format("{0} - {0}", _guestRating.Reservation.FirstDateOfStaying, _guestRating.Reservation.LastDateOfStaying);
         }
 
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // TODO: a new window with the rating details
             Accommodation accommodation = _accommodationRepository.GetById(_guestRating.AccommodationId);
             accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
             AddGuestRating addGuestRating = new AddGuestRating(accommodation, _guestRating, _guestRatingRepository);

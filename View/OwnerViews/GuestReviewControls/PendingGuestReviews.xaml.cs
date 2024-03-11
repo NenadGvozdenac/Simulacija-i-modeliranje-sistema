@@ -31,15 +31,17 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
         private AccommodationRepository _accommodationRepository;
         private List<GuestRating> _guestRatings;
         private LocationRepository _locationRepository;
+        private AccommodationReservationRepository _accommodationReservationRepository;
 
         private User _user;
-        public PendingGuestReviews(User user, UserRepository userRepository, GuestRatingRepository guestRatingRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository)
+        public PendingGuestReviews(User user, UserRepository userRepository, GuestRatingRepository guestRatingRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             _user = user;
             _guestRatingRepository = guestRatingRepository;
             _userRepository = userRepository;
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
 
             _guestRatings = new List<GuestRating>();
 
@@ -57,6 +59,11 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             }
 
             _guestRatings = _guestRatings.Where(g => g.IsChecked == false).ToList();
+
+            foreach(GuestRating guestRating in _guestRatings)
+            {
+                guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+            }
 
             AddReviews();
         }

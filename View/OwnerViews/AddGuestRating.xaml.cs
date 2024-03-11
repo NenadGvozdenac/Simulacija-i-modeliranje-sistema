@@ -214,10 +214,9 @@ namespace BookingApp.View.OwnerViews
             AccommodationType = accommodation.Type.ToString();
             Cleanliness = new ObservableCollection<int> { 1, 2, 3, 4, 5 };
             Respectfulness = new ObservableCollection<int> { 1, 2, 3, 4, 5 };
-            // Add reservation timespan
-            // Add reservation number of guests
-            // Add reservation days
-            ReservationTimespan = "01.01.2020 - 01.02.2020";
+            ReservationTimespan = string.Format("{0} - {0}", uncheckedGuestRating.Reservation.FirstDateOfStaying, uncheckedGuestRating.Reservation.LastDateOfStaying);
+            NumberOfGuests = uncheckedGuestRating.Reservation.GuestsNumber;
+            ReservationDays = (uncheckedGuestRating.Reservation.LastDateOfStaying - uncheckedGuestRating.Reservation.FirstDateOfStaying).Days;
             DataContext = this;
             InitializeComponent();
         }

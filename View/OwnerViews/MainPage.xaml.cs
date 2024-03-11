@@ -34,6 +34,7 @@ namespace BookingApp.View.OwnerViews
         private AccommodationImageRepository _accommodationImageRepository;
         private GuestRatingRepository _guestRatingRepository;
         private UserRepository _userRepository;
+        private AccommodationReservationRepository _accommodationReservationRepository;
         public MainPage(User user)
         {
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace BookingApp.View.OwnerViews
             _accommodationImageRepository = new AccommodationImageRepository();
             _userRepository = new UserRepository();
             _guestRatingRepository = new GuestRatingRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
 
             Update();
         }
@@ -137,7 +139,7 @@ namespace BookingApp.View.OwnerViews
 
         private void GuestReviewsButtonClick(object sender, RoutedEventArgs e)
         {
-            GuestReviewWindow guestReviewWindow = new GuestReviewWindow(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository);
+            GuestReviewWindow guestReviewWindow = new GuestReviewWindow(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, _accommodationReservationRepository);
             guestReviewWindow.ShowDialog();
         }
 

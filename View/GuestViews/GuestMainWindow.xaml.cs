@@ -62,7 +62,7 @@ namespace BookingApp.View.GuestViews
 
             // Show the details UserControl
             accommodationDetails.Visibility = Visibility.Visible;
-
+           
             // Hide other controls if needed
             accommodation.Visibility = Visibility.Collapsed;
             myreservation.Visibility = Visibility.Collapsed;

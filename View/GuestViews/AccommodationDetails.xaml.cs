@@ -45,6 +45,8 @@ namespace BookingApp.View.GuestViews
         {
             selectedAccommodation = accommodation;
             
+            freedates.Visibility = Visibility.Collapsed;
+            freedatesalternative.Visibility = Visibility.Collapsed;
             firstDate.Text = string.Empty;
             lastDate.Text = string.Empty;
             lastDate.IsEnabled = false;
@@ -96,13 +98,17 @@ namespace BookingApp.View.GuestViews
 
             if (firstAvailableDate.HasValue && lastAvailableDate.HasValue)
             {
-                SetActiveUserControl(firstAvailableDate, lastAvailableDate);
+                SetFreeDates(firstAvailableDate, lastAvailableDate);
+            }
+            else
+            {
+                SetFreeDatesAlternative();
             }
         }
 
-        public void SetActiveUserControl(DateTime? firstDay, DateTime? lastDay)
+        public void SetFreeDates(DateTime? firstDay, DateTime? lastDay)
         {
-            //freedatescheck.IsEnabled = false;
+            freedatescheck.IsEnabled = false;
             freedates.accomodationReservationRepository = accomodationreservationrepository;
             freedates.reservation.UserId = _user.Id;
             freedates.reservation.AccommodationId = selectedAccommodation.Id;
@@ -114,8 +120,62 @@ namespace BookingApp.View.GuestViews
             freedates.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstDay).ToString();
             freedates.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastDay).ToString();
 
+            freedates.SuccessfullTextBox.Visibility = Visibility.Collapsed;
+            freedatesalternative.Visibility = Visibility.Collapsed;
             freedates.Visibility = Visibility.Visible;
-        } 
+        }
+
+        public void SetFreeDatesAlternative() 
+        {
+            List<DateTime> takenDates = new List<DateTime>();
+            takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
+
+            DateTime? tempDate = firstDate.SelectedDate;
+            int freeDaysInRowCounter = 0;
+            DateTime? firstAvailableDate = null;
+            DateTime? lastAvailableDate = null;
+            bool datesFound = false;
+
+            while (datesFound == false)
+            {
+                if (freeDaysInRowCounter == 0)
+                {
+                    firstAvailableDate = (DateTime)tempDate;
+                }
+
+                if (takenDates.Contains((DateTime)tempDate))
+                {
+                    freeDaysInRowCounter = 0;
+                }
+                else
+                {
+                    freeDaysInRowCounter++;
+                }
+
+                if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
+                {
+                    lastAvailableDate = tempDate;
+                    datesFound = true;
+                }
+                tempDate = tempDate.Value.AddDays(1);
+            }
+
+            freedatescheck.IsEnabled = false;
+            freedatesalternative.accomodationReservationRepository = accomodationreservationrepository;
+            freedatesalternative.reservation.UserId = _user.Id;
+            freedatesalternative.reservation.AccommodationId = selectedAccommodation.Id;
+            freedatesalternative.reservation.FirstDateOfStaying = firstAvailableDate.Value;
+            freedatesalternative.reservation.LastDateOfStaying = lastAvailableDate.Value;
+            freedatesalternative.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
+            freedatesalternative.ConfirmButton.IsEnabled = true;
+
+            freedatesalternative.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstAvailableDate).ToString();
+            freedatesalternative.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastAvailableDate).ToString();
+
+            freedatesalternative.SuccessfullTextBox.Visibility = Visibility.Collapsed;
+            freedates.Visibility = Visibility.Collapsed;
+            freedatesalternative.Visibility = Visibility.Visible;
+        }
         
         //Design Functions
         private void DatePickerCantWrite(object sender, KeyEventArgs e)

@@ -79,6 +79,7 @@
 
                     <Grid Margin="650,30,10,6">
                         <components:FreeDates x:Name="freedates" Visibility="Collapsed"></components:FreeDates>
+                        <components:FreeDatesAlternative x:Name="freedatesalternative" Visibility="Collapsed"></components:FreeDatesAlternative>
                     </Grid>
                 </Grid>
             </Grid>

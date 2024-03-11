@@ -94,5 +94,22 @@ namespace BookingApp.Repository.MutualRepositories
             
             return result;
         }
+
+        public List<AccommodationReservation> GetReservationsByAccommodations(List<Accommodation> accommodations)
+        {
+            List<AccommodationReservation> result = new List<AccommodationReservation>();
+            foreach(AccommodationReservation res in GetAll())
+            {
+                foreach(Accommodation acc in accommodations)
+                {
+                    if (res.AccommodationId == acc.Id)
+                    {
+                        result.Add(res);
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }

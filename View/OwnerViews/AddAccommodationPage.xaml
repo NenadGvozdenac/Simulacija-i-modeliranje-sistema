@@ -9,7 +9,7 @@
     <Grid ClipToBounds="True" Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
         <Grid Grid.Row="0" Background="Lavender">

@@ -1,7 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using BookingApp.Repository.OwnerRepositories;
+using BookingApp.Repository;
 using BookingApp.View.OwnerViews.GuestReviewControls;
 using System;
 using System.Collections.Generic;
@@ -15,14 +15,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BookingApp.View.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for GuestReviewWindow.xaml
+    /// Interaction logic for GuestReviewPage.xaml
     /// </summary>
-    public partial class GuestReviewWindow : Window
+    public partial class GuestReviewPage : Page
     {
         private User _user;
         private UserRepository _userRepository;
@@ -33,7 +34,7 @@ namespace BookingApp.View.OwnerViews
 
         private ReviewedGuestReviews _reviewedGuestReviews;
         private PendingGuestReviews _pendingGuestReviews;
-        public GuestReviewWindow(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public GuestReviewPage(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             _user = user;
             _userRepository = userRepository;
@@ -45,18 +46,19 @@ namespace BookingApp.View.OwnerViews
 
             _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
             _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
-        
+
             MainPanel.Content = _reviewedGuestReviews;
         }
 
         private void BackArrowClick(object sender, MouseButtonEventArgs e)
         {
-            Close();
+            if(NavigationService.CanGoBack)
+                NavigationService.GoBack();
         }
 
         public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
         {
-
+            // TODO: Implement three dots click
         }
 
         private void PendingButton_Click(object sender, RoutedEventArgs e)
@@ -71,7 +73,6 @@ namespace BookingApp.View.OwnerViews
             MainPanel.Content = _reviewedGuestReviews;
             PendingButton.IsEnabled = true;
             ReviewedButton.IsEnabled = false;
-
         }
     }
 }

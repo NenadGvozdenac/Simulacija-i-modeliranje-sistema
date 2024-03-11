@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookingApp.View.GuestViews"
+             xmlns:local="clr-namespace:BookingApp.View.GuestViews" xmlns:components="clr-namespace:BookingApp.View.GuestViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="1024">
     <Grid Background="White">
-        <ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -19,7 +19,7 @@
                 <Grid Grid.Row="0">
                     <Border BorderThickness="0 0 0 1" BorderBrush="Black"/>
                     <TextBlock x:Name="accommodationName" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Name of the accommodation" FontSize="50" Margin="27,0,0,0"/>
-                    <Label x:Name="username" Content="Username" Margin="852,42,10,30"></Label>
+                    <Label x:Name="username" Content="Username" Margin="852,42,10,30"/>
                 </Grid>
 
                 <Grid Grid.Row="1">
@@ -29,8 +29,42 @@
                     <TextBlock x:Name="accomodationAverageReviewScore" HorizontalAlignment="Left" Margin="64,44,0,0" TextWrapping="Wrap" Text="10.0/10" FontSize="20" FontWeight="DemiBold" VerticalAlignment="Top" Width="70"/>
                     <Rectangle Margin="64,94,544,47" Fill="SeaGreen"/>
                 </Grid>
-            </Grid>
 
+                <Grid Grid.Row="2">
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Reservation:" FontWeight="DemiBold" FontSize="40" Margin="30,10,0,0"/>
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Choose the time period that suits you to book this accommodation!" FontWeight="SemiBold" FontSize="20" Margin="30,68,0,0"/>
+
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Tap on the calendar and pick the first date:" FontSize="15" Margin="30,113,0,0"/>
+                    <DatePicker x:Name="firstDate" SelectedDateChanged="FirstDateChanged" HorizontalAlignment="Left" Margin="325,113,0,0" VerticalAlignment="Top" PreviewKeyDown="DatePickerCantWrite"/>
+
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tap on the calendar and pick the last date:" FontSize="15" Margin="31,0,0,0"/>
+                    <DatePicker x:Name="lastDate" SelectedDateChanged="LastDateChanged" HorizontalAlignment="Left" Margin="325,149,0,0" VerticalAlignment="Top" PreviewKeyDown="DatePickerCantWrite"/>
+
+
+                    <TextBlock x:Name="MinDaysofStayTextBlock" Text="Choose how long would you like to stay here (minimum of 10 days):" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="30,188,0,0" FontSize="15" VerticalAlignment="Top" Height="21" Width="454"/>
+                    <Grid Width="34" Height="30" HorizontalAlignment="Right" Margin="0,188,469,100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="13" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13" />
+                            <RowDefinition Height="13" />
+                        </Grid.RowDefinitions>
+
+                        <TextBox x:Name="DaysOfStay" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="DaysOfStay_TextChanged"/>
+                        <RepeatButton x:Name="DaysOfStayUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DaysOfStayUp_Click" Content="5"/>
+                        <RepeatButton x:Name="DaysOfStayDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="DaysOfStayDown_Click" Content="6"/>
+
+                    </Grid>
+
+                    <Button x:Name="freedatescheck" Content="Tap here if you are ready for us to find you a first free dates" Click="FirstFreeDatesCheck_Click" HorizontalAlignment="Left" Margin="30,230,0,0" VerticalAlignment="Top" Width="326" Height="24"/>
+
+                    <Grid Margin="650,10,10,26">
+                        <components:FreeDates x:Name="freedates" Visibility="Collapsed"></components:FreeDates>
+                    </Grid>
+                </Grid>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>

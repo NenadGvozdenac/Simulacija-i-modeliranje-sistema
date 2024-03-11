@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
+using BookingApp.Repository;
 
 namespace BookingApp.View.GuestViews
 {
@@ -21,17 +22,22 @@ namespace BookingApp.View.GuestViews
     public partial class GuestMainWindow : Window
     {
         private readonly User _user;
+
+        public AccommodationRepository accomodationrepository { get; set; }
         public GuestMainWindow(User user)
         {
             InitializeComponent();
             _user = user;
+            accomodationrepository = new AccommodationRepository();
             accommodation.username.Content = _user.Username;
+            accommodationDetails.username.Content = _user.Username;
         }
 
         public void SetActiveUserControl(UserControl control)
         {
             accommodation.Visibility = Visibility.Collapsed;
             myreservation.Visibility = Visibility.Collapsed;
+            accommodationDetails.Visibility = Visibility.Collapsed;
 
             control.Visibility = Visibility.Visible;
         }
@@ -44,6 +50,21 @@ namespace BookingApp.View.GuestViews
         private void BtnMyReservations_Click(object sender, RoutedEventArgs e)
         {
             SetActiveUserControl(myreservation);
+        }
+
+        public void ShowAccommodationDetails(int accommodationId)
+        {
+            // Pass the selected accommodation to the details UserControl
+            Accommodation detailedAccommodation = accomodationrepository.GetById(accommodationId);
+
+            accommodationDetails.SetAccommodation(detailedAccommodation);
+
+            // Show the details UserControl
+            accommodationDetails.Visibility = Visibility.Visible;
+
+            // Hide other controls if needed
+            accommodation.Visibility = Visibility.Collapsed;
+            myreservation.Visibility = Visibility.Collapsed;
         }
     }
 }

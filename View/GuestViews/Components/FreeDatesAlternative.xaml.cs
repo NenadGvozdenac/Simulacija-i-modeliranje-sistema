@@ -18,17 +18,18 @@ using System.Windows.Shapes;
 namespace BookingApp.View.GuestViews.Components
 {
     /// <summary>
-    /// Interaction logic for FreeDates.xaml
+    /// Interaction logic for FreeDatesAlternative.xaml
     /// </summary>
-    public partial class FreeDates : UserControl
+    public partial class FreeDatesAlternative : UserControl
     {
-        public AccommodationReservationRepository accomodationReservationRepository;
 
+        public AccommodationReservationRepository accomodationReservationRepository;
         public AccommodationReservation reservation { get; set; }
-        public FreeDates()
+        public FreeDatesAlternative()
         {
             InitializeComponent();
             reservation = new AccommodationReservation();
+
         }
 
         private void ConfrimReservation_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,5 @@ namespace BookingApp.View.GuestViews.Components
             ConfirmButton.IsEnabled = false;
             SuccessfullTextBox.Visibility = Visibility.Visible;
         }
-
     }
 }

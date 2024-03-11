@@ -27,9 +27,14 @@ namespace BookingApp.View.GuestViews
         maxvalueDaysOfStay = 100,
         startvalueDaysOfStay = 1;
 
+        int minvalueGuestNumber = 1,
+        maxvalueGuestNumber = 30,
+        startvalueGuestNumber = 1;
+
         public Accommodation selectedAccommodation { get; set; }
         public AccommodationReservationRepository accomodationreservationrepository { get; set; }
 
+        public User _user { get; set; }
         public AccommodationDetails()
         {
             InitializeComponent();
@@ -39,15 +44,20 @@ namespace BookingApp.View.GuestViews
         public void SetAccommodation(Accommodation accommodation)
         {
             selectedAccommodation = accommodation;
+            
+            freedates.Visibility = Visibility.Collapsed;
+            freedatesalternative.Visibility = Visibility.Collapsed;
             firstDate.Text = string.Empty;
             lastDate.Text = string.Empty;
             lastDate.IsEnabled = false;
             freedatescheck.IsEnabled = false;
             minvalueDaysOfStay = accommodation.MinReservationDays;
-            DaysOfStay.Text = accommodation.MinReservationDays.ToString();           
-            MinDaysofStayTextBlock.Text = "Choose how long would you like to stay here (minimum of " + accommodation.MinReservationDays + " days):";          
-            
-                       
+            DaysOfStay.Text = accommodation.MinReservationDays.ToString();
+            GuestNumber.Text = "1";
+            MinDaysofStayTextBlock.Text = "Choose how long would you like to stay here (minimum of " + accommodation.MinReservationDays + " days):";
+            MaxGuestsNumberTextBlock.Text = "Choose how many guests will there be (maximum " + accommodation.MaxGuestNumber + " ):";
+            maxvalueGuestNumber = accommodation.MaxGuestNumber;
+
             accommodationName.Text = accommodation.Name;
             accomodationAverageReviewScore.Text = accommodation.AverageReviewScore.ToString() + "/10";
         }
@@ -77,12 +87,6 @@ namespace BookingApp.View.GuestViews
                     freeDaysInRowCounter++;
                 }
 
-                //PROVERI KAKO SU ZAMISLILI OVO SA DATUMIMA
-                //if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text) && !takenDates.Contains((DateTime)tempDate.Value.AddDays(1)) && tempDate != lastDate.SelectedDate)
-                //{
-                //    lastAvailableDate = tempDate.Value.AddDays(1);
-                //    break;
-                //}
                 if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
                 {
                     lastAvailableDate = tempDate;
@@ -94,19 +98,84 @@ namespace BookingApp.View.GuestViews
 
             if (firstAvailableDate.HasValue && lastAvailableDate.HasValue)
             {
-                SetActiveUserControl(firstAvailableDate, lastAvailableDate);
+                SetFreeDates(firstAvailableDate, lastAvailableDate);
+            }
+            else
+            {
+                SetFreeDatesAlternative();
             }
         }
 
-        public void SetActiveUserControl(DateTime? firstDate, DateTime? lastDate)
+        public void SetFreeDates(DateTime? firstDay, DateTime? lastDay)
         {
+            freedatescheck.IsEnabled = false;
+            freedates.accomodationReservationRepository = accomodationreservationrepository;
+            freedates.reservation.UserId = _user.Id;
+            freedates.reservation.AccommodationId = selectedAccommodation.Id;
+            freedates.reservation.FirstDateOfStaying = firstDay.Value;
+            freedates.reservation.LastDateOfStaying = lastDay.Value;
+            freedates.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
+            freedates.ConfirmButton.IsEnabled = true;
 
+            freedates.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstDay).ToString();
+            freedates.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastDay).ToString();
 
-            freedates.first.Text = DateOnly.FromDateTime((DateTime)firstDate).ToString();
-            freedates.last.Text = DateOnly.FromDateTime((DateTime)lastDate).ToString();
-
+            freedates.SuccessfullTextBox.Visibility = Visibility.Collapsed;
+            freedatesalternative.Visibility = Visibility.Collapsed;
             freedates.Visibility = Visibility.Visible;
-        } 
+        }
+
+        public void SetFreeDatesAlternative() 
+        {
+            List<DateTime> takenDates = new List<DateTime>();
+            takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
+
+            DateTime? tempDate = firstDate.SelectedDate;
+            int freeDaysInRowCounter = 0;
+            DateTime? firstAvailableDate = null;
+            DateTime? lastAvailableDate = null;
+            bool datesFound = false;
+
+            while (datesFound == false)
+            {
+                if (freeDaysInRowCounter == 0)
+                {
+                    firstAvailableDate = (DateTime)tempDate;
+                }
+
+                if (takenDates.Contains((DateTime)tempDate))
+                {
+                    freeDaysInRowCounter = 0;
+                }
+                else
+                {
+                    freeDaysInRowCounter++;
+                }
+
+                if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
+                {
+                    lastAvailableDate = tempDate;
+                    datesFound = true;
+                }
+                tempDate = tempDate.Value.AddDays(1);
+            }
+
+            freedatescheck.IsEnabled = false;
+            freedatesalternative.accomodationReservationRepository = accomodationreservationrepository;
+            freedatesalternative.reservation.UserId = _user.Id;
+            freedatesalternative.reservation.AccommodationId = selectedAccommodation.Id;
+            freedatesalternative.reservation.FirstDateOfStaying = firstAvailableDate.Value;
+            freedatesalternative.reservation.LastDateOfStaying = lastAvailableDate.Value;
+            freedatesalternative.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
+            freedatesalternative.ConfirmButton.IsEnabled = true;
+
+            freedatesalternative.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstAvailableDate).ToString();
+            freedatesalternative.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastAvailableDate).ToString();
+
+            freedatesalternative.SuccessfullTextBox.Visibility = Visibility.Collapsed;
+            freedates.Visibility = Visibility.Collapsed;
+            freedatesalternative.Visibility = Visibility.Visible;
+        }
         
         //Design Functions
         private void DatePickerCantWrite(object sender, KeyEventArgs e)
@@ -156,6 +225,34 @@ namespace BookingApp.View.GuestViews
             if (number > maxvalueDaysOfStay) DaysOfStay.Text = maxvalueDaysOfStay.ToString();
             if (number < minvalueDaysOfStay) DaysOfStay.Text = minvalueDaysOfStay.ToString();
             DaysOfStay.SelectionStart = DaysOfStay.Text.Length;
+        }
+
+        private void GuestNumberUp_Click(object sender, RoutedEventArgs e)
+        {
+            int number;
+            if (GuestNumber.Text != "") number = Convert.ToInt32(GuestNumber.Text);
+            else number = 0;
+            if (number < maxvalueGuestNumber)
+                GuestNumber.Text = Convert.ToString(number + 1);
+        }
+
+        private void GuestNumberDown_Click(object sender, RoutedEventArgs e)
+        {
+            int number;
+            if (GuestNumber.Text != "") number = Convert.ToInt32(GuestNumber.Text);
+            else number = 0;
+            if (number > minvalueGuestNumber)
+                GuestNumber.Text = Convert.ToString(number - 1);
+        }
+
+        private void GuestNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int number = 0;
+            if (GuestNumber.Text != "")
+                if (!int.TryParse(GuestNumber.Text, out number)) GuestNumber.Text = startvalueGuestNumber.ToString();
+            if (number > maxvalueGuestNumber) GuestNumber.Text = maxvalueGuestNumber.ToString();
+            if (number < minvalueGuestNumber) GuestNumber.Text = minvalueGuestNumber.ToString();
+            GuestNumber.SelectionStart = GuestNumber.Text.Length;
         }
     }
 }

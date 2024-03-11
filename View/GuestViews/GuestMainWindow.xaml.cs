@@ -31,6 +31,7 @@ namespace BookingApp.View.GuestViews
             accomodationrepository = new AccommodationRepository();
             accommodation.username.Content = _user.Username;
             accommodationDetails.username.Content = _user.Username;
+            accommodationDetails._user = _user;
         }
 
         public void SetActiveUserControl(UserControl control)
@@ -61,7 +62,7 @@ namespace BookingApp.View.GuestViews
 
             // Show the details UserControl
             accommodationDetails.Visibility = Visibility.Visible;
-
+           
             // Hide other controls if needed
             accommodation.Visibility = Visibility.Collapsed;
             myreservation.Visibility = Visibility.Collapsed;

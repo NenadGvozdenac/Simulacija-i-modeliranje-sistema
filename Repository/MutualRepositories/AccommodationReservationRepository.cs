@@ -56,6 +56,7 @@ namespace BookingApp.Repository.MutualRepositories
             {
                 existingAccommodationRes.AccommodationId = accommodationres.AccommodationId;
                 existingAccommodationRes.UserId = accommodationres.UserId;
+                existingAccommodationRes.GuestsNumber = accommodationres.GuestsNumber;
                 existingAccommodationRes.FirstDateOfStaying = accommodationres.FirstDateOfStaying;
                 existingAccommodationRes.LastDateOfStaying = accommodationres.LastDateOfStaying;
 
@@ -79,7 +80,7 @@ namespace BookingApp.Repository.MutualRepositories
 
             foreach(AccommodationReservation res in GetAll())
             {
-                if (res.Id == id)
+                if (res.AccommodationId == id)
                 {
                     DateTime tempdate = res.FirstDateOfStaying;
 

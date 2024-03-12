@@ -1,5 +1,8 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Repository;
+using BookingApp.Repository.MutualRepositories;
 using BookingApp.View.GuestViews;
+using BookingApp.View.OwnerViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,21 +25,29 @@ namespace BookingApp.View.PathfinderViews
     public partial class GuideMainWindow : Window
     {
         private readonly User _user;
+        private TourRepository _tourRepository;
+        private TourImageRepository _tourImageRepository;
         public GuideMainWindow(User user)
         {
             InitializeComponent();
             _user = user;
-            //accommodation.username.Content = _user.Username;
+            _tourImageRepository = new TourImageRepository();
+            _tourRepository = new TourRepository();
+
+            Update();
         }
 
         public void ScheduleTourClick(object sender, RoutedEventArgs e)
         {
-            AddTourWindow tourWindow = new AddTourWindow();
+            AddTourWindow tourWindow = new AddTourWindow(_user, _tourRepository, _tourImageRepository);
             tourWindow.Show();
 
         }
 
-
+        public void Update()
+        {
+            
+        }
 
 
 

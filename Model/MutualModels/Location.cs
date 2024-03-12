@@ -19,7 +19,6 @@ public class Location : ISerializable
         Id = Convert.ToInt32(values[0]);
         City = values[1];
         Country = values[2];
-
     }
 
     public string[] ToCSV()

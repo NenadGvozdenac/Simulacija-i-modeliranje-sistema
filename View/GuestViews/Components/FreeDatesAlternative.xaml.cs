@@ -29,7 +29,6 @@ namespace BookingApp.View.GuestViews.Components
         {
             InitializeComponent();
             reservation = new AccommodationReservation();
-
         }
 
         private void ConfrimReservation_Click(object sender, RoutedEventArgs e)

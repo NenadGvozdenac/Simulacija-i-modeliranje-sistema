@@ -8,17 +8,15 @@ using BookingApp.Serializer;
 
 namespace BookingApp.Model.MutualModels;
     
-    public class Tour : ISerializable
-     {
+public class Tour : ISerializable
+{
 
     public int Id { get; set; }
-
     public string Name { get; set; }
 
     public int LocationId { get; set; }
 
     public Location Location { get; set; }
-
     public string Description { get; set; }
 
     public int LanguageId { get; set; }
@@ -26,15 +24,10 @@ namespace BookingApp.Model.MutualModels;
     public Language Language { get; set; }
 
     public int Capacity { get; set; }
-
     public List<Checkpoint> Checkpoints { get; set; }
-
     public List<TourStartTime> Dates { get; set; }
-
     public int Duration { get; set; }
-
     public List<TourImage> Images { get; set; }
-
 
     public void FromCSV(string[] values)
     {
@@ -53,5 +46,4 @@ namespace BookingApp.Model.MutualModels;
         string[] csvValues = { Id.ToString(), Name,LocationId.ToString(), Description, LanguageId.ToString(), Capacity.ToString(), Duration.ToString() };
         return csvValues;
     }
-
 }

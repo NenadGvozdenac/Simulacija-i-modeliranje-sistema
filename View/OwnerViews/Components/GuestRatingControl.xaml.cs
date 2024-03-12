@@ -1,4 +1,5 @@
-﻿using BookingApp.Model.OwnerModels;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.OwnerModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using System;
@@ -28,9 +29,11 @@ namespace BookingApp.View.OwnerViews.Components
         private UserRepository _userRepository;
         private AccommodationRepository _accommodationRepository;
         private LocationRepository _locationRepository;
-        public GuestRatingControl(GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository)
+        private User _user;
+        public GuestRatingControl(User user, GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository)
         {
             _guestRating = guestRating;
+            _user = user;
             _userRepository = userRepository;
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
@@ -49,7 +52,8 @@ namespace BookingApp.View.OwnerViews.Components
 
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // TODO: a new window with the rating details
+            DetailedGuestReviewPage detailedGuestReviewPage = new DetailedGuestReviewPage(_user, _guestRating, _accommodationRepository.GetById(_guestRating.AccommodationId));
+            NavigationService.GetNavigationService(this).Navigate(detailedGuestReviewPage);
         }
     }
 }

@@ -24,6 +24,7 @@ public class AccommodationRepository
     {
         _serializer = new Serializer<Accommodation>();
         _accommodations = _serializer.FromCSV(FilePath);
+        _accommodations.Sort((a, b) => string.Compare(a.Name, b.Name));
     }
 
     public List<Accommodation> GetAll()

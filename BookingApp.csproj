@@ -27,6 +27,14 @@
     <None Remove="Resources\Images\AccommodationImages\91868346.jpg" />
     <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
     <None Remove="Resources\Images\AccommodationImages\default_house.png" />
+    <None Remove="Resources\Images\AccommodationImages\eight.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\fifth.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\first.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\fourth.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\second.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\seventh.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\sixth.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\third.jpg" />
     <None Remove="Resources\Images\AccommodationImages\vanzemljoc.png" />
   </ItemGroup>
 
@@ -73,22 +81,28 @@
     <Content Include="Resources\Assets\Owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\110053208.jpg">
+    <Content Include="Resources\Images\AccommodationImages\eight.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\110053374.jpg">
+    <Content Include="Resources\Images\AccommodationImages\fifth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\20221120_100611.jpg">
+    <Content Include="Resources\Images\AccommodationImages\first.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\bars.512x308.png">
+    <Content Include="Resources\Images\AccommodationImages\fourth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\default_house.png">
+    <Content Include="Resources\Images\AccommodationImages\second.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\vanzemljoc.png">
+    <Content Include="Resources\Images\AccommodationImages\seventh.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\sixth.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\third.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -102,12 +116,6 @@
     <Folder Include="Resources\Images\TourImages\" />
     <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\Images\AccommodationImages\91868346.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>

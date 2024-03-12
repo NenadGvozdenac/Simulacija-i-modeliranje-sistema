@@ -37,7 +37,7 @@ namespace BookingApp.View.OwnerViews
         private UserRepository _userRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
 
-        private const int DaysReservationValidForReviewing = 5;
+        private const int DaysReservationValidForReviewing = -5;
         public MainPage(User user)
         {
             InitializeComponent();

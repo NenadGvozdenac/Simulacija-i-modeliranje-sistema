@@ -57,7 +57,8 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             {
                 foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
                 {
-                    if(guestRating.IsChecked == false)
+                    AccommodationReservation accommodationReservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+                    if(guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying.Day < DateTime.Now.Day)
                     {
                         guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
                         _guestRatings.Add(guestRating);
@@ -76,9 +77,12 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
         private void AddReviews()
         {
             Reviews.Children.Clear();
+            DateTime fiveDaysAgo = DateTime.Now.AddDays(-5);
             foreach (GuestRating guestRating in _guestRatings)
             {
-                GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository);
+                DateTime lastDateOfStaying = guestRating.Reservation.LastDateOfStaying;
+                bool isEnabled = lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
+                GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, isEnabled);
                 reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
                 reviewedGuestReview.RefreshPage += (sender, e) => Update();
                 Reviews.Children.Add(reviewedGuestReview);

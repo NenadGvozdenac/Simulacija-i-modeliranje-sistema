@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +29,8 @@ namespace BookingApp.View.OwnerViews.Components
         public Location Location { get; set; }
         private AccommodationRepository _accommodationRepository { get; set; }
         private AccommodationImageRepository _accommodationImageRepository { get; set; }
+        public event EventHandler<Accommodation> EyeButtonClicked;
+        public event EventHandler<Accommodation> TrashButtonClicked;
         public AccommodationControl(Accommodation accommodation, Location location, AccommodationRepository accommodationRepository, AccommodationImageRepository accommodationImageRepository)
         {
             InitializeComponent();
@@ -83,29 +86,14 @@ namespace BookingApp.View.OwnerViews.Components
             }
         }
 
-        private void TrashButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if(!_accommodationRepository.IsAccommodationDeletable(Accommodation.Id))
-            {
-                MessageBox.Show((OwnerMainWindow)Window.GetWindow(this), "Accommodation cannot be deleted because it has active reservations.", "Delete accommodation", MessageBoxButton.OK);
-                return;
-            }
-
-            if(MessageBox.Show((OwnerMainWindow)Window.GetWindow(this), "Are you sure you want to delete this accommodation?", "Delete accommodation", MessageBoxButton.YesNo) == MessageBoxResult.No)
-            {
-                return;
-            }
-
-            _accommodationRepository.Delete(Accommodation.Id);
-            _accommodationImageRepository.DeleteByAccommodationId(Accommodation.Id);
-            OwnerMainWindow ownerMainWindow = (OwnerMainWindow)Window.GetWindow(this);
-            ownerMainWindow.Update();
-        }
-
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ShowDetailedAccommodation showDetailedAccommodation = new ShowDetailedAccommodation(Accommodation);
-            showDetailedAccommodation.ShowDialog();
+            EyeButtonClicked?.Invoke(this, Accommodation);
+        }
+
+        private void TrashButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TrashButtonClicked?.Invoke(this, Accommodation);
         }
     }
 }

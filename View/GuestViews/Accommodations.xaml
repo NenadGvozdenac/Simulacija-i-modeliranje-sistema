@@ -76,7 +76,7 @@
                             <RowDefinition Height="13" />
                         </Grid.RowDefinitions>
 
-                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" PreviewKeyDown="GuestNumber_PreviewKeyDown" PreviewKeyUp="GuestNumber_PreviewKeyUp" TextChanged="GuestNumber_TextChanged"/>
+                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="GuestNumber_TextChanged"/> <!--PreviewKeyDown="GuestNumber_PreviewKeyDown" PreviewKeyUp="GuestNumber_PreviewKeyUp"-->
                         <RepeatButton Name="GuestNumberUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click">5</RepeatButton>
                         <RepeatButton Name="GuestNumberDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="GuestNumberDown_Click">6</RepeatButton>
 
@@ -96,7 +96,7 @@
                             <RowDefinition Height="13" />
                         </Grid.RowDefinitions>
 
-                        <TextBox Name="DaysOfStay" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" PreviewKeyDown="DaysOfStay_PreviewKeyDown" PreviewKeyUp="DaysOfStay_PreviewKeyUp" TextChanged="DaysOfStay_TextChanged"/>
+                        <TextBox Name="DaysOfStay" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="DaysOfStay_TextChanged"/>
                         <RepeatButton Name="DaysOfStayUp" Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DaysOfStayUp_Click">5</RepeatButton>
                         <RepeatButton Name="DaysOfStayDown" Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="DaysOfStayDown_Click">6</RepeatButton>
 

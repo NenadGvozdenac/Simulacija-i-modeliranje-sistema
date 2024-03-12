@@ -36,6 +36,8 @@ namespace BookingApp.View.OwnerViews
         private GuestRatingRepository _guestRatingRepository;
         private UserRepository _userRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
+
+        private const int DaysReservationValidForReviewing = 5;
         public MainPage(User user)
         {
             InitializeComponent();
@@ -71,16 +73,19 @@ namespace BookingApp.View.OwnerViews
                 }
             }
         }
-
         private void CheckReservationsThatEnded()
         {
-            foreach(GuestRating guestRating in _guestRatingRepository.GetAll())
+            DateTime fiveDaysAgo = DateTime.Now.AddDays(DaysReservationValidForReviewing);
+
+            foreach (GuestRating guestRating in _guestRatingRepository.GetAll())
             {
-                if(_accommodationRepository.GetById(guestRating.AccommodationId).OwnerId == _user.Id)
+                if (_accommodationRepository.GetById(guestRating.AccommodationId).OwnerId == _user.Id)
                 {
-                    if(_accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying < DateTime.Now)
+                    DateTime lastDateOfStaying = _accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying;
+
+                    if (lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now)
                     {
-                        if(guestRating.IsChecked == false)
+                        if (guestRating.IsChecked == false)
                         {
                             ActivateVisibilityOfNotification();
                         }

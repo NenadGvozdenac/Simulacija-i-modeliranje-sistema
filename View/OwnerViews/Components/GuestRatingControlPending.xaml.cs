@@ -32,7 +32,7 @@ namespace BookingApp.View.OwnerViews.Components
         private LocationRepository _locationRepository;
         public EventHandler RefreshPage { get; internal set; }
 
-        public GuestRatingControlPending(GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository)
+        public GuestRatingControlPending(GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, bool isPencilEnabled)
         {
             _guestRating = guestRating;
             _userRepository = userRepository;
@@ -41,6 +41,12 @@ namespace BookingApp.View.OwnerViews.Components
             _locationRepository = locationRepository;
 
             InitializeComponent();
+
+            if(!isPencilEnabled)
+            {
+                EyeButton.Visibility = Visibility.Hidden;
+            }
+
             SetupUserControl();
         }
 

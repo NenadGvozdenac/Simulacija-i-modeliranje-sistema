@@ -20,6 +20,7 @@ namespace BookingApp.Repository.MutualRepositories
         {
             _serializer = new Serializer<Language>();
             _languages = _serializer.FromCSV(FilePath);
+            _languages.Sort((language1, language2) => string.Compare(language1.Name, language2.Name));
         }
 
         public List<Language> GetAll()

@@ -76,7 +76,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             Reviews.Children.Clear();
             foreach(GuestRating guestRating in _guestRatings)
             {
-                GuestRatingControl reviewedGuestReview = new GuestRatingControl(guestRating, _userRepository, _accommodationRepository, _locationRepository);
+                GuestRatingControl reviewedGuestReview = new GuestRatingControl(_user, guestRating, _userRepository, _accommodationRepository, _locationRepository);
                 reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
                 Reviews.Children.Add(reviewedGuestReview);
             }

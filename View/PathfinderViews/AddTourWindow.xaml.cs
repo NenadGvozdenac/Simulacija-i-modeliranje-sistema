@@ -245,10 +245,7 @@ namespace BookingApp.View.PathfinderViews
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        
 
         private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -390,14 +387,14 @@ namespace BookingApp.View.PathfinderViews
 
         private void ConfirmButtonClick(object sender, RoutedEventArgs e)
         {
-          /* if (!IsDataValid())
+           if (!IsDataValid())
             {
                 return;
-            }*/
+            }
 
             Tour tour = new();
             tour.Id = _tourRepository.NextId();
-            tour.Name = Name;
+            tour.Name = NameTextBox.Text;
             tour.LocationId = _locationRepository.GetLocationByCityAndCountry(City, Country).Id;
             tour.Description = Description;
             tour.Duration = Duration;
@@ -434,7 +431,7 @@ namespace BookingApp.View.PathfinderViews
 
         private bool IsDataValid()
         {
-            return !string.IsNullOrEmpty(Name)
+            return !string.IsNullOrEmpty(NameTextBox.Text)
                 && !string.IsNullOrEmpty(Country)
                 && !string.IsNullOrEmpty(City)
                 && !string.IsNullOrEmpty(LanguageTextBox.SelectedItem.ToString())

@@ -55,7 +55,7 @@
         <TextBox HorizontalAlignment="Left" Margin="761,82,0,0" TextWrapping="Wrap" Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="19"/>
 
         <Label Content="Enter tour name :&#xD;&#xA;" HorizontalAlignment="Left" Margin="434,31,0,0" VerticalAlignment="Top"></Label>
-        <TextBox HorizontalAlignment="Left" Margin="535,35,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="130"></TextBox>
+        <TextBox HorizontalAlignment="Left" Margin="535,35,0,0" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="130" x:Name="NameTextBox"></TextBox>
 
         <Label Content="Checkpoint : " HorizontalAlignment="Left" Margin="16,190,0,0" VerticalAlignment="Top"></Label>
         <TextBox HorizontalAlignment="Left" Margin="95,195,0,0" TextWrapping="Wrap" Text="{Binding Path=Checkpoint, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="146" x:Name="CheckpointTextBox"></TextBox>

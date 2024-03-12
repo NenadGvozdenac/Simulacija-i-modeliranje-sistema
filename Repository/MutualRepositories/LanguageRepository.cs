@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository.MutualRepositories
 {
-    internal class LanguageRepository
+    public class LanguageRepository
     {
         private const string FilePath = "../../../Resources/Data/languages.csv";
 

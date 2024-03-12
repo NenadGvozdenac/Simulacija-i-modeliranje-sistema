@@ -22,23 +22,21 @@
                 <ColumnDefinition Width="97*"></ColumnDefinition>
             <ColumnDefinition Width="303*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderBrush="Gray" Opacity="0.5" BorderThickness="1,0,0,0"/>
+            <Border Grid.Column="1" BorderBrush="Gray" Opacity="0.9" BorderThickness="1,0,0,0"/>
            
         
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" x:Name="GridColumn2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <!-- First row within the second column -->
                     <RowDefinition Height="15*" />
                     <!-- Second row within the second column -->
                 </Grid.RowDefinitions>
+                <Grid Grid.Row="1" x:Name="TourContainer">
+                    <local:Tours x:Name="tours"></local:Tours>
 
-                <!-- Content for the first row within the second column -->
-                <TextBlock Grid.Row="0" Text="First Row in Second Column" VerticalAlignment="Center" HorizontalAlignment="Center" />
-
-                <!-- Content for the second row within the second column -->
-                <TextBlock Grid.Row="1" Text="Second Row in Second Column" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </Grid>
+                </Grid>
+        </Grid>
 
 
 

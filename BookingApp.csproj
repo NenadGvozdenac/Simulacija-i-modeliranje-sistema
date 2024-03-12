@@ -15,11 +15,15 @@
     <None Remove="Resources\Assets\edit.png" />
     <None Remove="Resources\Assets\eye.png" />
     <None Remove="Resources\Assets\hamburger_menu.png" />
+    <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
+    <None Remove="Resources\Assets\language.png" />
+    <None Remove="Resources\Assets\map-marker.171x256.png" />
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
+    <None Remove="Resources\Assets\users.png" />
     <None Remove="Resources\Assets\view.png" />
     <None Remove="Resources\Images\AccommodationImages\110053208.jpg" />
     <None Remove="Resources\Images\AccommodationImages\110053374.jpg" />
@@ -60,8 +64,17 @@
     <Content Include="Resources\Assets\hamburger_menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\hourglass.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\icon-exit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\language.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\map-marker.171x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\pencil.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -70,6 +83,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\trash_can.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\users.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\view.png">
@@ -113,8 +129,6 @@
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
-    <Folder Include="Resources\Images\TourImages\" />
-    <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
   </ItemGroup>
 

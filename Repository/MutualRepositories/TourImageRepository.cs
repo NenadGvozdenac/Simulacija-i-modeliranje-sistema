@@ -70,7 +70,7 @@ namespace BookingApp.Repository.MutualRepositories
 
         public List<TourImage> GetImagesByTourId(int id)
         {
-            return _tourImages.Where(a => a.Id == id).ToList();
+            return _tourImages.Where(a => a.TourId == id).ToList();
         }
 
     }

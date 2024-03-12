@@ -15,37 +15,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.GuestViews.Components
+namespace BookingApp.View.GuestViews.Components;
+public partial class AccommodationCard : UserControl
 {
-    /// <summary>
-    /// Interaction logic for AccommodationCard.xaml
-    /// </summary>
-    public partial class AccommodationCard : UserControl
+    public AccommodationCard()
     {
-        public AccommodationCard()
-        {
-            InitializeComponent();
-            
-        }
+        InitializeComponent();
+    }
 
-        private void SeeMore_Click(object sender, RoutedEventArgs e)
+    private void SeeMore_Click(object sender, RoutedEventArgs e)
+    {
+        // Get the DataContext (AccommodationViewModel) of the AccommodationCard
+        if (this.DataContext is Accommodation accommodation)
         {
-            // Get the DataContext (AccommodationViewModel) of the AccommodationCard
-            if (this.DataContext is Accommodation accommodation)
+            int accommodationId = accommodation.Id;
+
+            // Find the nearest parent window
+            Window parentWindow = Window.GetWindow(this);
+
+            // Cast the parent window to GuestMainWindow
+            if (parentWindow is GuestMainWindow mainWindow)
             {
-                int accommodationId = accommodation.Id;
-
-                // Find the nearest parent window
-                Window parentWindow = Window.GetWindow(this);
-
-                // Cast the parent window to GuestMainWindow
-                if (parentWindow is GuestMainWindow mainWindow)
-                {
-                    // Show the details UserControl passing the selected accommodation
-                    mainWindow.ShowAccommodationDetails(accommodationId);
-                }
+                // Show the details UserControl passing the selected accommodation
+                mainWindow.ShowAccommodationDetails(accommodationId);
             }
         }
-
     }
+
 }

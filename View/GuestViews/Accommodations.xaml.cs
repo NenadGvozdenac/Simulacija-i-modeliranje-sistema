@@ -22,241 +22,257 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.GuestViews
+namespace BookingApp.View.GuestViews;
+
+public partial class Accommodations : UserControl, INotifyPropertyChanged
 {
-    /// <summary>
-    /// Interaction logic for Accommodations.xaml
-    /// </summary>
-    public partial class Accommodations : UserControl, INotifyPropertyChanged
+
+    public ObservableCollection<Accommodation> _accommodations { get; set; }  
+    public AccommodationRepository accomodationRepository { get; set; }
+    public LocationRepository locationRepository { get; set; }
+    public AccommodationImageRepository accommodationImageRepository { get; set; }
+
+    int minvalueGuestNumber = 1,
+    maxvalueGuestNumber = 30,
+    startvalueGuestNumber = 1;
+
+    int minvalueDaysOfStay = 0,
+    maxvalueDaysOfStay = 30,
+    startvalueDaysOfStay = 0;
+
+    public Accommodations()
     {
+        InitializeComponent();
+        DataContext = this;
 
-        public ObservableCollection<Accommodation> _accommodations { get; set; }
+        //ObservableCollections
+        _accommodations = new ObservableCollection<Accommodation>();
+        _filteredAccommodations = new ObservableCollection<Accommodation>();
+
+        //Repositories
+        accomodationRepository = new AccommodationRepository();
+        locationRepository = new LocationRepository();
+        accommodationImageRepository = new AccommodationImageRepository();
+        Update();
+
+    }
+
+    public void Update() 
+    {  
+        foreach (Accommodation accommodation in accomodationRepository.GetAll())
+        {
+            accommodation.Location = locationRepository.GetById(accommodation.LocationId);
+            accommodation.Images = accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
+
+            _accommodations.Add(accommodation);
+        }
         
-        public AccommodationRepository accomodationrepository { get; set; }
-        public LocationRepository locationrepository { get; set; }
-        public AccommodationImageRepository accommodationimagerepository { get; set; }
+        DaysOfStay.Text = startvalueDaysOfStay.ToString();
+        GuestNumber.Text = startvalueGuestNumber.ToString();
+        LoadCountries();       
+        FilteredAccommodations = new ObservableCollection<Accommodation>(_accommodations);
+    }
 
-        int minvalueGuestNumber = 1,
-        maxvalueGuestNumber = 30,
-        startvalueGuestNumber = 1;
 
-        int minvalueDaysOfStay = 0,
-        maxvalueDaysOfStay = 30,
-        startvalueDaysOfStay = 0;
+    //Filtering Accommodations
+    private void FilterAccommodations()
+    {
+        //types
+        var checkedTypes = GetCheckedTypes();
 
-        public Accommodations()
+        //countries and cities
+        string selectedCountry = CountryComboBox.SelectedItem?.ToString();
+        string selectedCity = CityComboBox.SelectedItem?.ToString();
+
+        //guest number
+        int selectedGuestNumber = 0;
+        int.TryParse(GuestNumber.Text, out selectedGuestNumber);
+
+        //days of staying
+        int selectedDaysOfStay = 0;
+        int.TryParse(DaysOfStay.Text, out selectedDaysOfStay);
+
+        //Filtering Logic 
+        if ((checkedTypes.Count == 0 && 
+            string.IsNullOrWhiteSpace(selectedCountry) && 
+            string.IsNullOrWhiteSpace(selectedCity) && 
+            string.IsNullOrWhiteSpace(_searchAccommodation)) && 
+            selectedGuestNumber == 1 &&
+            selectedDaysOfStay == 0)
         {
-            InitializeComponent();
-            DataContext = this;
-
-            _accommodations = new ObservableCollection<Accommodation>();
-            _filteredAccommodations = new ObservableCollection<Accommodation>();
-
-            accomodationrepository = new AccommodationRepository();
-            locationrepository = new LocationRepository();
-            accommodationimagerepository = new AccommodationImageRepository();
-
-
-            Update();
-
-            //SearchAccommodation
-            DaysOfStay.Text = startvalueDaysOfStay.ToString();
-            GuestNumber.Text = startvalueGuestNumber.ToString();
-            FilteredAccommodations = new ObservableCollection<Accommodation>(_accommodations);
-            //
+            FilteredAccommodations = _accommodations;
         }
-
-        public void Update() 
-        {                
-            foreach (Accommodation accom in accomodationrepository.GetAll())
-            {
-                accom.Location = locationrepository.GetById(accom.LocationId);
-                accom.Images = accommodationimagerepository.GetImagesByAccommodationId(accom.Id);
-
-                _accommodations.Add(accom);
-            }
-            LoadCountries();
-        }
-
-
-        ////FILTERS FOR SEARCHING ACCOMMODATIONS
-        //
-        
-        private void LoadCountries()
+        else
         {
-            List<string> listOfCountries = locationrepository.GetCountries();
-            CountryComboBox.ItemsSource = listOfCountries;
-        }
-
-        private void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<string> listOfCities = locationrepository.GetCitiesByCountry(CountryComboBox.SelectedItem.ToString());
-            CityComboBox.ItemsSource = listOfCities;
-            CityComboBox.Focus();
-            CityComboBox.IsEnabled = true;
-            FilterAccommodations();
-        }
-
-        private void FilterAccommodations()
-        {
-            //Filtering Types
-            var checkedTypes = new List<string>();
-            if (checkBoxApartment.IsChecked == true)
-                checkedTypes.Add("Apartment");
-            if (checkBoxHouse.IsChecked == true)
-                checkedTypes.Add("House");
-            if (checkBoxShack.IsChecked == true)
-                checkedTypes.Add("Shack");
-
-            //Filtering countries and cities
-            string selectedCountry = CountryComboBox.SelectedItem?.ToString();
-            string selectedCity = CityComboBox.SelectedItem?.ToString();
-
-            int selectedGuestNumber = 0;
-            if (!string.IsNullOrEmpty(GuestNumber.Text))
-            {
-                selectedGuestNumber = Convert.ToInt32(GuestNumber.Text);
-            }
-
-            int selectedDaysOfStay = 0;
-            if (!string.IsNullOrEmpty(DaysOfStay.Text))
-            {
-                selectedDaysOfStay = Convert.ToInt32(DaysOfStay.Text);
-            }
-
-            //Filtering Logic 
-            if ((checkedTypes.Count == 0 && string.IsNullOrWhiteSpace(selectedCountry) && 
-                string.IsNullOrWhiteSpace(selectedCity) && 
-                string.IsNullOrWhiteSpace(_searchAccommodation)) && 
-                selectedGuestNumber == 1 &&
-                selectedDaysOfStay == 0)
-            {
-                FilteredAccommodations = _accommodations;
-            }
-            else
-            {
-                FilteredAccommodations = new ObservableCollection<Accommodation>(
+            FilteredAccommodations = new ObservableCollection<Accommodation>(
                 _accommodations.Where(accommodation =>
-                //Checks for types
-                (checkedTypes.Count == 0 || checkedTypes.Contains(accommodation.Type.ToString())) &&
-                //Checks for countries and cities
-                (string.IsNullOrWhiteSpace(selectedCountry) || accommodation.Location.Country == selectedCountry) &&
-                (string.IsNullOrWhiteSpace(selectedCity) || accommodation.Location.City == selectedCity) &&
-                //Checks for name
-                (string.IsNullOrWhiteSpace(_searchAccommodation) || accommodation.Name.ToLower().Contains(_searchAccommodation.ToLower())) &&
-                //Checks for GuestNumber
-                (selectedGuestNumber == 1 || selectedGuestNumber <= accommodation.MaxGuestNumber) &&
-                (selectedDaysOfStay == 0 || selectedDaysOfStay >= accommodation.MinReservationDays)));
-            }
+                    IsAccommodationTypeValid(accommodation, checkedTypes) &&
+                    IsLocationValid(accommodation, selectedCountry, selectedCity) &&
+                    IsNameValid(accommodation, _searchAccommodation) &&
+                    IsGuestNumberValid(accommodation, selectedGuestNumber) &&
+                    IsDaysOfStayValid(accommodation, selectedDaysOfStay)
+                )
+            );
         }
+    }
 
-        private string _searchAccommodation;
-        public string SearchAccommodation
+    private bool IsAccommodationTypeValid(Accommodation accommodation, List<string> checkedTypes)
+    {
+        return checkedTypes.Count == 0 || checkedTypes.Contains(accommodation.Type.ToString());
+    }
+
+    private bool IsLocationValid(Accommodation accommodation, string selectedCountry, string selectedCity)
+    {
+        return string.IsNullOrWhiteSpace(selectedCountry) || accommodation.Location.Country == selectedCountry &&
+               string.IsNullOrWhiteSpace(selectedCity) || accommodation.Location.City == selectedCity;
+    }
+
+    private bool IsNameValid(Accommodation accommodation, string searchAccommodation)
+    {
+        return string.IsNullOrWhiteSpace(searchAccommodation) ||
+               accommodation.Name.ToLower().Contains(searchAccommodation.ToLower());
+    }
+
+    private bool IsGuestNumberValid(Accommodation accommodation, int selectedGuestNumber)
+    {
+        return selectedGuestNumber == 1 || selectedGuestNumber <= accommodation.MaxGuestNumber;
+    }
+
+    private bool IsDaysOfStayValid(Accommodation accommodation, int selectedDaysOfStay)
+    {
+        return selectedDaysOfStay == 0 || selectedDaysOfStay >= accommodation.MinReservationDays;
+    }
+
+    private List<string> GetCheckedTypes()
+    {
+        var checkedTypes = new List<string>();
+
+        if (checkBoxApartment.IsChecked == true)
+            checkedTypes.Add("Apartment");
+        if (checkBoxHouse.IsChecked == true)
+            checkedTypes.Add("House");
+        if (checkBoxShack.IsChecked == true)
+            checkedTypes.Add("Shack");
+
+        return checkedTypes;
+    }
+
+    //Countries
+    private void LoadCountries()
+    {
+        List<string> listOfCountries = locationRepository.GetCountries();
+        CountryComboBox.ItemsSource = listOfCountries;
+    }
+
+    private void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        List<string> listOfCities = locationRepository.GetCitiesByCountry(CountryComboBox.SelectedItem.ToString());
+        CityComboBox.ItemsSource = listOfCities;
+        CityComboBox.Focus();
+        CityComboBox.IsEnabled = true;
+        FilterAccommodations();
+    }
+    
+
+    //Accommodation Types CheckBoxes
+    private void CheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+        FilterAccommodations();
+    }
+    private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+    {
+        FilterAccommodations();
+    }
+
+    //GuestNumber NumPicker
+    private void GuestNumberUp_Click(object sender, RoutedEventArgs e)
+    {
+        int number;
+        if (GuestNumber.Text != "") number = Convert.ToInt32(GuestNumber.Text);
+        else number = 0;
+        if (number < maxvalueGuestNumber)
+            GuestNumber.Text = Convert.ToString(number + 1);
+    }
+    private void GuestNumberDown_Click(object sender, RoutedEventArgs e)
+    {
+        int number;
+        if (GuestNumber.Text != "") number = Convert.ToInt32(GuestNumber.Text);
+        else number = 0;
+        if (number > minvalueGuestNumber)
+            GuestNumber.Text = Convert.ToString(number - 1);
+    }
+    private void GuestNumber_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        int number = 0;
+        if (GuestNumber.Text != "")
+            if (!int.TryParse(GuestNumber.Text, out number)) GuestNumber.Text = startvalueGuestNumber.ToString();
+        if (number > maxvalueGuestNumber) GuestNumber.Text = maxvalueGuestNumber.ToString();
+        if (number < minvalueGuestNumber) GuestNumber.Text = minvalueGuestNumber.ToString();
+        GuestNumber.SelectionStart = GuestNumber.Text.Length;
+        FilterAccommodations();
+    }
+
+    //DaysOfStay NumPicker
+    private void DaysOfStayUp_Click(object sender, RoutedEventArgs e)
+    {
+        int number;
+        if (DaysOfStay.Text != "") number = Convert.ToInt32(DaysOfStay.Text);
+        else number = 0;
+        if (number < maxvalueDaysOfStay)
+            DaysOfStay.Text = Convert.ToString(number + 1);
+    }
+    private void DaysOfStayDown_Click(object sender, RoutedEventArgs e)
+    {
+        int number;
+        if (DaysOfStay.Text != "") number = Convert.ToInt32(DaysOfStay.Text);
+        else number = 0;
+        if (number > minvalueDaysOfStay)
+            DaysOfStay.Text = Convert.ToString(number - 1);
+    }
+    private void DaysOfStay_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        int number = 0;
+        if (DaysOfStay.Text != "")
+            if (!int.TryParse(DaysOfStay.Text, out number)) DaysOfStay.Text = startvalueDaysOfStay.ToString();
+        if (number > maxvalueDaysOfStay) DaysOfStay.Text = maxvalueDaysOfStay.ToString();
+        if (number < minvalueDaysOfStay) DaysOfStay.Text = minvalueDaysOfStay.ToString();
+        DaysOfStay.SelectionStart = DaysOfStay.Text.Length;
+        FilterAccommodations();
+    }
+    
+    
+    private string _searchAccommodation;
+    public string SearchAccommodation
+    {
+        get { return _searchAccommodation; }
+        set
         {
-            get { return _searchAccommodation; }
-            set
+            if(_searchAccommodation != value)
             {
-                if(_searchAccommodation != value)
-                {
-                    _searchAccommodation = value;
-                    FilterAccommodations();
-                    OnPropertyChanged();
-                }
+                _searchAccommodation = value;
+                FilterAccommodations();
+                OnPropertyChanged();
             }
         }
+    }
 
-        private ObservableCollection<Accommodation> _filteredAccommodations;
-        public ObservableCollection<Accommodation> FilteredAccommodations
+    private ObservableCollection<Accommodation> _filteredAccommodations;
+    public ObservableCollection<Accommodation> FilteredAccommodations
+    {
+        get { return _filteredAccommodations; }
+        set
         {
-            get { return _filteredAccommodations; }
-            set
+            if (_filteredAccommodations != value)
             {
-                if (_filteredAccommodations != value)
-                {
-                    _filteredAccommodations = value;
-                    OnPropertyChanged();
-                }
+                _filteredAccommodations = value;
+                OnPropertyChanged();
             }
         }
+    }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            FilterAccommodations();
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            FilterAccommodations();
-        }
-
-        //
-        ////END OF FILTERING
-        //
-        
-        //Custom Num Picker
-
-        //GuestNumber
-        private void GuestNumberUp_Click(object sender, RoutedEventArgs e)
-        {
-            int number;
-            if (GuestNumber.Text != "") number = Convert.ToInt32(GuestNumber.Text);
-            else number = 0;
-            if (number < maxvalueGuestNumber)
-                GuestNumber.Text = Convert.ToString(number + 1);
-        }
-
-        private void GuestNumberDown_Click(object sender, RoutedEventArgs e)
-        {
-            int number;
-            if (GuestNumber.Text != "") number = Convert.ToInt32(GuestNumber.Text);
-            else number = 0;
-            if (number > minvalueGuestNumber)
-                GuestNumber.Text = Convert.ToString(number - 1);
-        }
-        private void GuestNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            int number = 0;
-            if (GuestNumber.Text != "")
-                if (!int.TryParse(GuestNumber.Text, out number)) GuestNumber.Text = startvalueGuestNumber.ToString();
-            if (number > maxvalueGuestNumber) GuestNumber.Text = maxvalueGuestNumber.ToString();
-            if (number < minvalueGuestNumber) GuestNumber.Text = minvalueGuestNumber.ToString();
-            GuestNumber.SelectionStart = GuestNumber.Text.Length;
-            FilterAccommodations();
-        }
-
-        private void DaysOfStayUp_Click(object sender, RoutedEventArgs e)
-        {
-            int number;
-            if (DaysOfStay.Text != "") number = Convert.ToInt32(DaysOfStay.Text);
-            else number = 0;
-            if (number < maxvalueDaysOfStay)
-                DaysOfStay.Text = Convert.ToString(number + 1);
-        }
-
-        private void DaysOfStayDown_Click(object sender, RoutedEventArgs e)
-        {
-            int number;
-            if (DaysOfStay.Text != "") number = Convert.ToInt32(DaysOfStay.Text);
-            else number = 0;
-            if (number > minvalueDaysOfStay)
-                DaysOfStay.Text = Convert.ToString(number - 1);
-        }
-
-        private void DaysOfStay_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            int number = 0;
-            if (DaysOfStay.Text != "")
-                if (!int.TryParse(DaysOfStay.Text, out number)) DaysOfStay.Text = startvalueDaysOfStay.ToString();
-            if (number > maxvalueDaysOfStay) DaysOfStay.Text = maxvalueDaysOfStay.ToString();
-            if (number < minvalueDaysOfStay) DaysOfStay.Text = minvalueDaysOfStay.ToString();
-            DaysOfStay.SelectionStart = DaysOfStay.Text.Length;
-            FilterAccommodations();
-        }
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

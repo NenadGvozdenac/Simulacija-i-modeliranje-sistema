@@ -1,4 +1,5 @@
-﻿using BookingApp.Serializer;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,7 @@ public class GuestRating : ISerializable
     public int AccommodationId { get; set; }
     public int ReservationId { get; set; }
     public int GuestId { get; set; }
-    // TODO: Odkomentarisi ovo
-    // public Reservation Reservation { get; set }
+    public AccommodationReservation Reservation { get; set; }
     public int Cleanliness { get; set; }
     public int Respectfulness { get; set; }
     public string Comment { get; set; }

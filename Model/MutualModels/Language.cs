@@ -6,21 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Serializer;
 
-namespace BookingApp.Model.MutualModels;
-
-public class Language : ISerializable
+namespace BookingApp.Model.MutualModels
 {
-    public string Name;
-
-    public void FromCSV(string[] values)
+    public class Language : ISerializable
     {
-        Name = values[0];
-        
-    }
+        public int Id { get; set; }
 
-    public string[] ToCSV()
-    {
-        string[] csvValues = { Name };
-        return csvValues;
+        public string Name;
+
+
+        public void FromCSV(string[] values)
+        {
+            Id =Convert.ToInt32(values[0]);
+            Name = values[1];
+            
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues = {Id.ToString(),Name };
+            return csvValues;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
+
     }
 }

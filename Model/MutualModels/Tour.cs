@@ -13,9 +13,16 @@ public class Tour : ISerializable
 
     public int Id { get; set; }
     public string Name { get; set; }
+
+    public int LocationId { get; set; }
+
     public Location Location { get; set; }
     public string Description { get; set; }
-    public string Language { get; set; }
+
+    public int LanguageId { get; set; }
+
+    public Language Language { get; set; }
+
     public int Capacity { get; set; }
     public List<Checkpoint> Checkpoints { get; set; }
     public List<TourStartTime> Dates { get; set; }
@@ -26,16 +33,17 @@ public class Tour : ISerializable
     {
         Id = Convert.ToInt32(values[0]);
         Name = values[1];
-        Location = new Location() { City = values[2], Country = values[3] };
-        Description = values[4];
-        Language = values[5];
-        Capacity = Convert.ToInt32(values[6]);
-        Duration = Convert.ToInt32(values[7]);
+        LocationId = Convert.ToInt32(values[2]);
+        Description = values[3];
+        LanguageId = Convert.ToInt32(values[4]);
+        Capacity = Convert.ToInt32(values[5]);
+        Duration = Convert.ToInt32(values[6]);
+       
     }
 
     public string[] ToCSV()
     {
-        string[] csvValues = { Id.ToString(), Name, Location.City, Location.Country, Description, Language, Capacity.ToString(), Duration.ToString() };
+        string[] csvValues = { Id.ToString(), Name,LocationId.ToString(), Description, LanguageId.ToString(), Capacity.ToString(), Duration.ToString() };
         return csvValues;
     }
 }

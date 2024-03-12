@@ -72,6 +72,24 @@ public class AccommodationReservationRepository
             _accommodationreservation.Remove(existingAccommodationRes);
             _serializer.ToCSV(FilePath, _accommodationreservation);
         }
+
+        
+    }
+    public List<AccommodationReservation> GetReservationsByAccommodations(List<Accommodation> accommodations)
+        {
+            List<AccommodationReservation> result = new List<AccommodationReservation>();
+            foreach(AccommodationReservation res in GetAll())
+            {
+                foreach(Accommodation acc in accommodations)
+                {
+                    if (res.AccommodationId == acc.Id)
+                    {
+                        result.Add(res);
+                    }
+                }
+            }
+
+            return result;
     }
 
     public List<DateTime> FindTakenDates(int id)

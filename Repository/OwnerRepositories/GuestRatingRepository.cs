@@ -46,7 +46,15 @@ namespace BookingApp.Repository.OwnerRepositories
 
         public void Update(GuestRating guestRating)
         {
-            _guestRatings[_guestRatings.FindIndex(guestRating => guestRating.Id == guestRating.Id)] = guestRating;
+            GuestRating oldGuestRating = _guestRatings.FirstOrDefault(guest => guest.Id == guestRating.Id);
+
+            if(oldGuestRating == null)
+            {
+                return;
+            }
+
+            int index = _guestRatings.IndexOf(oldGuestRating);
+            _guestRatings[index] = guestRating;
             _serializer.ToCSV(FilePath, _guestRatings);
         }
 

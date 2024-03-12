@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.View.GuestViews;
+using BookingApp.Model.OwnerModels;
 
 namespace BookingApp.View.OwnerViews
 {
@@ -34,6 +35,9 @@ namespace BookingApp.View.OwnerViews
         private AccommodationImageRepository _accommodationImageRepository;
         private GuestRatingRepository _guestRatingRepository;
         private UserRepository _userRepository;
+        private AccommodationReservationRepository _accommodationReservationRepository;
+
+        private const int DaysReservationValidForReviewing = 5;
         public MainPage(User user)
         {
             InitializeComponent();
@@ -44,8 +48,77 @@ namespace BookingApp.View.OwnerViews
             _accommodationImageRepository = new AccommodationImageRepository();
             _userRepository = new UserRepository();
             _guestRatingRepository = new GuestRatingRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
 
             Update();
+        }
+
+        private void AddAllReservationsThatArentCheckedYet()
+        {
+            foreach(AccommodationReservation accommodationReservation in GetReservationsOfOwner(_user.Id))
+            {
+                if (ReservationNotAlreadyAdded(accommodationReservation, _user.Id))
+                {
+                    _guestRatingRepository.Add(new GuestRating()
+                    {
+                        ReservationId = accommodationReservation.Id,
+                        GuestId = _user.Id,
+                        IsChecked = false,
+                        AccommodationId = accommodationReservation.AccommodationId,
+                        Respectfulness = 0,
+                        Cleanliness = 0,
+                        Id = _guestRatingRepository.NextId(),
+                        Comment = ""
+                    });
+                }
+            }
+        }
+        private void CheckReservationsThatEnded()
+        {
+            DateTime fiveDaysAgo = DateTime.Now.AddDays(DaysReservationValidForReviewing);
+
+            foreach (GuestRating guestRating in _guestRatingRepository.GetAll())
+            {
+                if (_accommodationRepository.GetById(guestRating.AccommodationId).OwnerId == _user.Id)
+                {
+                    DateTime lastDateOfStaying = _accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying;
+
+                    if (lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now)
+                    {
+                        if (guestRating.IsChecked == false)
+                        {
+                            ActivateVisibilityOfNotification();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ActivateVisibilityOfNotification()
+        {
+            MessagePanel.Visibility = Visibility.Visible;
+        }
+
+        private void DeactivateVisibilityOfNotification()
+        {
+            MessagePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private List<AccommodationReservation> GetReservationsOfOwner(int userId)
+        {
+            return _accommodationReservationRepository.GetReservationsByAccommodations(_accommodationRepository.GetAccommodationsByOwnerId(userId));
+        }
+
+        private bool ReservationNotAlreadyAdded(AccommodationReservation accommodationReservation, int userId)
+        {
+            foreach(GuestRating guestRating in _guestRatingRepository.GetAll())
+            {
+                if(guestRating.ReservationId == accommodationReservation.Id && guestRating.GuestId == userId)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void Update()
@@ -57,11 +130,11 @@ namespace BookingApp.View.OwnerViews
             {
                 accommodation.Images = _accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
                 accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
-                
+
                 AccommodationControl accommodationView = new AccommodationControl(accommodation, _locationRepository.GetById(accommodation.LocationId), _accommodationRepository, _accommodationImageRepository);
                 accommodationView.EyeButtonClicked += (sender, e) => AccommodationUserControlEyeClick(sender, accommodation);
                 accommodationView.TrashButtonClicked += (sender, e) => AccommodationUserControlTrashClick(sender, accommodation);
-                
+
                 accommodationView.Margin = new Thickness(15);
                 _accommodations.Add(accommodation);
                 Accommodations.Children.Add(accommodationView);
@@ -69,6 +142,8 @@ namespace BookingApp.View.OwnerViews
 
             HideLeftNavbar();
             HideRightNavbar();
+            AddAllReservationsThatArentCheckedYet();
+            CheckReservationsThatEnded();
         }
 
         private void ExitApplication(object sender, MouseButtonEventArgs e)
@@ -137,8 +212,8 @@ namespace BookingApp.View.OwnerViews
 
         private void GuestReviewsButtonClick(object sender, RoutedEventArgs e)
         {
-            GuestReviewWindow guestReviewWindow = new GuestReviewWindow(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository);
-            guestReviewWindow.ShowDialog();
+            GuestReviewPage guestReviewPage = new GuestReviewPage(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, _accommodationReservationRepository);
+            NavigationService.Navigate(guestReviewPage);
         }
 
         private void AccommodationUserControlEyeClick(object sender, Accommodation accommodation)
@@ -164,6 +239,13 @@ namespace BookingApp.View.OwnerViews
             _accommodationImageRepository.DeleteByAccommodationId(accommodation.Id);
 
             Update();
+        }
+
+        private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
+        {
+            GuestReviewPage guestReviewPage = new GuestReviewPage(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, _accommodationReservationRepository);
+            DeactivateVisibilityOfNotification();
+            NavigationService.Navigate(guestReviewPage);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace BookingApp.View.OwnerViews.Components
             UserName.Content = _userRepository.GetById(_guestRating.GuestId).Username;
             AccommodationName.Content = _accommodationRepository.GetById(_guestRating.AccommodationId).Name;
             AccommodationLocation.Content = _locationRepository.GetById(_accommodationRepository.GetById(_guestRating.AccommodationId).LocationId);
-            ReservationTimespan.Content = "01.01.2020 - 01.02.2020";
+            ReservationTimespan.Content = string.Format("{0} - {1}", _guestRating.Reservation.FirstDateOfStaying.ToShortDateString(), _guestRating.Reservation.LastDateOfStaying.ToShortDateString());
         }
 
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)

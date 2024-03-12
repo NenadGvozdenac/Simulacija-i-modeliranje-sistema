@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
         Title="MainWindow" Width="415" Height="715"
         Background="Transparent">
-    <Grid Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>

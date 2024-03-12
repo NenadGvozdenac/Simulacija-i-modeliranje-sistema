@@ -22,6 +22,16 @@ namespace BookingApp.Repository.MutualRepositories
             _languages = _serializer.FromCSV(FilePath);
         }
 
+        public List<Language> GetAll()
+        {
+            return _languages;
+        }
+
+        public Language GetById(int id)
+        {
+            return _languages.FirstOrDefault(a => a.Id == id);
+        }
+
         public void Add(Language language)
         {
             _languages.Add(language);
@@ -49,9 +59,15 @@ namespace BookingApp.Repository.MutualRepositories
         }
 
 
+        public List<string> GetLanguages()
+        {
+            return _languages.Select(l => l.Name).Distinct().ToList();
+        }
 
-
-
+        public Language GetLanguageByName(String name)
+        {
+            return _languages.FirstOrDefault(l => l.Name == name);
+        }
 
 
 

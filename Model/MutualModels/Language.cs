@@ -10,22 +10,28 @@ namespace BookingApp.Model.MutualModels
 {
     public class Language : ISerializable
     {
+        public int Id { get; set; }
 
         public string Name;
 
 
         public void FromCSV(string[] values)
         {
-            Name = values[0];
+            Id =Convert.ToInt32(values[0]);
+            Name = values[1];
             
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Name };
+            string[] csvValues = {Id.ToString(),Name };
             return csvValues;
         }
 
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
 
     }
 }

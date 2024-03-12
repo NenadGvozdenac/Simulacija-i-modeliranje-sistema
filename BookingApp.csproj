@@ -79,6 +79,7 @@
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
+    <Folder Include="Resources\Images\TourImages\" />
     <Folder Include="View\PathfinderViews\" />
     <Folder Include="View\TouristViews\" />
   </ItemGroup>

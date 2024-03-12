@@ -30,7 +30,6 @@ namespace BookingApp.View.OwnerViews.Components
         private AccommodationRepository _accommodationRepository;
         private GuestRatingRepository _guestRatingRepository;
         private LocationRepository _locationRepository;
-
         public EventHandler RefreshPage { get; internal set; }
 
         public GuestRatingControlPending(GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository)
@@ -57,8 +56,13 @@ namespace BookingApp.View.OwnerViews.Components
         {
             Accommodation accommodation = _accommodationRepository.GetById(_guestRating.AccommodationId);
             accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
-            AddGuestRating addGuestRating = new AddGuestRating(accommodation, _guestRating, _guestRatingRepository);
-            addGuestRating.ShowDialog();
+            AddGuestRatingPage addGuestRating = new AddGuestRatingPage(accommodation, _guestRating, _guestRatingRepository);
+            addGuestRating.NavigationCompleted += NavigationCompleted;
+            NavigationService.GetNavigationService(this).Navigate(addGuestRating);
+        }
+
+        private void NavigationCompleted(object? sender, EventArgs e)
+        {
             Refresh();
         }
 

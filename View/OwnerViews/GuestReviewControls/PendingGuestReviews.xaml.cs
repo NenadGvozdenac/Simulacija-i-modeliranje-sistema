@@ -33,7 +33,6 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
         private ObservableCollection<GuestRating> _guestRatings;
         private LocationRepository _locationRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
-
         private User _user;
         public PendingGuestReviews(User user, UserRepository userRepository, GuestRatingRepository guestRatingRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {

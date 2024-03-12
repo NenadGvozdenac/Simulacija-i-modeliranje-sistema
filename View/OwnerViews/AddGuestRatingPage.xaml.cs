@@ -1,7 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
-using BookingApp.Repository;
 using BookingApp.Repository.OwnerRepositories;
+using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,24 +17,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BookingApp.View.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for AddGuestRating.xaml
+    /// Interaction logic for AddGuestRatingPage.xaml
     /// </summary>
-    public partial class AddGuestRating : Window
+    public partial class AddGuestRatingPage : Page
     {
         private GuestRatingRepository _guestRatingRepository;
         private GuestRating _uncheckedGuestRating;
         private string guestUsername;
+
+        public event EventHandler NavigationCompleted;
         public string GuestUsername
         {
             get => guestUsername;
             set
             {
-                if(value != guestUsername)
+                if (value != guestUsername)
                 {
                     guestUsername = value;
                     OnPropertyChanged("GuestUsername");
@@ -48,7 +51,7 @@ namespace BookingApp.View.OwnerViews
             get => accommodationName;
             set
             {
-                if(value != accommodationName)
+                if (value != accommodationName)
                 {
                     accommodationName = value;
                     OnPropertyChanged("AccommodationName");
@@ -62,7 +65,7 @@ namespace BookingApp.View.OwnerViews
             get => accommodationType;
             set
             {
-                if(value != accommodationType)
+                if (value != accommodationType)
                 {
                     accommodationType = value;
                     OnPropertyChanged("AccommodationType");
@@ -76,7 +79,7 @@ namespace BookingApp.View.OwnerViews
             get => accommodationLocation;
             set
             {
-                if(value != accommodationLocation)
+                if (value != accommodationLocation)
                 {
                     accommodationLocation = value;
                     OnPropertyChanged("AccommodationLocation");
@@ -90,7 +93,7 @@ namespace BookingApp.View.OwnerViews
             get => numberOfGuests;
             set
             {
-                if(value != numberOfGuests)
+                if (value != numberOfGuests)
                 {
                     numberOfGuests = value;
                     OnPropertyChanged("NumberOfGuests");
@@ -118,7 +121,7 @@ namespace BookingApp.View.OwnerViews
             get => reservationTimespan;
             set
             {
-                if(value != reservationTimespan)
+                if (value != reservationTimespan)
                 {
                     reservationTimespan = value;
                     OnPropertyChanged("ReservationTimespan");
@@ -132,7 +135,7 @@ namespace BookingApp.View.OwnerViews
             get => cleanliness;
             set
             {
-                if(value != cleanliness)
+                if (value != cleanliness)
                 {
                     cleanliness = value;
                     OnPropertyChanged("Cleanliness");
@@ -146,7 +149,7 @@ namespace BookingApp.View.OwnerViews
             get => selectedCleanliness;
             set
             {
-                if(value != selectedCleanliness)
+                if (value != selectedCleanliness)
                 {
                     selectedCleanliness = value;
                     OnPropertyChanged("SelectedCleanliness");
@@ -160,7 +163,7 @@ namespace BookingApp.View.OwnerViews
             get => respectfulness;
             set
             {
-                if(value != respectfulness)
+                if (value != respectfulness)
                 {
                     respectfulness = value;
                     OnPropertyChanged("Respectfulness");
@@ -174,7 +177,7 @@ namespace BookingApp.View.OwnerViews
             get => selectedRespectfulness;
             set
             {
-                if(value != selectedRespectfulness)
+                if (value != selectedRespectfulness)
                 {
                     selectedRespectfulness = value;
                     OnPropertyChanged("SelectedRespectfulness");
@@ -188,7 +191,7 @@ namespace BookingApp.View.OwnerViews
             get => comment;
             set
             {
-                if(value != comment)
+                if (value != comment)
                 {
                     comment = value;
                     OnPropertyChanged("Comment");
@@ -206,7 +209,7 @@ namespace BookingApp.View.OwnerViews
         }
 
         // TODO: Add reservation
-        public AddGuestRating(Accommodation accommodation, GuestRating uncheckedGuestRating, GuestRatingRepository guestRatingRepository)
+        public AddGuestRatingPage(Accommodation accommodation, GuestRating uncheckedGuestRating, GuestRatingRepository guestRatingRepository)
         {
             UserRepository userRepository = new UserRepository();
             _guestRatingRepository = guestRatingRepository;
@@ -226,12 +229,16 @@ namespace BookingApp.View.OwnerViews
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            Close();
+            if(NavigationService.CanGoBack)
+            {
+                OnNavigationCompleted();
+                NavigationService.GoBack();
+            }
         }
 
         private void ConfirmButtonClick(object sender, RoutedEventArgs e)
         {
-            if(!IsDataValid())
+            if (!IsDataValid())
             {
                 return;
             }
@@ -243,12 +250,22 @@ namespace BookingApp.View.OwnerViews
             guestRating.IsChecked = true;
 
             _guestRatingRepository.Update(guestRating);
-            Close();
+
+            if (NavigationService.CanGoBack)
+            {
+                OnNavigationCompleted();
+                NavigationService.GoBack();
+            }
         }
 
         private bool IsDataValid()
         {
             return SelectedRespectfulness != 0 && SelectedCleanliness != 0;
+        }
+
+        private void OnNavigationCompleted()
+        {
+            NavigationCompleted?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using BookingApp.Repository.OwnerRepositories;
+using BookingApp.Repository;
 using BookingApp.View.OwnerViews.GuestReviewControls;
 using System;
 using System.Collections.Generic;
@@ -15,47 +15,46 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BookingApp.View.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for GuestReviewWindow.xaml
+    /// Interaction logic for GuestReviewPage.xaml
     /// </summary>
-    public partial class GuestReviewWindow : Window
+    public partial class GuestReviewPage : Page
     {
         private User _user;
         private UserRepository _userRepository;
         private AccommodationRepository _accommodationRepository;
         private GuestRatingRepository _guestRatingRepository;
         private LocationRepository _locationRepository;
+        private AccommodationReservationRepository _accommodationReservationRepository;
 
         private ReviewedGuestReviews _reviewedGuestReviews;
         private PendingGuestReviews _pendingGuestReviews;
-        public GuestReviewWindow(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository)
+
+        public GuestReviewPage(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             _user = user;
             _userRepository = userRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _guestRatingRepository = guestRatingRepository;
+
+            _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
+            _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
+
             InitializeComponent();
 
-            _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository);
-            _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository);
-        
             MainPanel.Content = _reviewedGuestReviews;
-        }
-
-        private void BackArrowClick(object sender, MouseButtonEventArgs e)
-        {
-            // TODO: go back to the previous window
-            Close();
         }
 
         public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
         {
-
+            // TODO: Implement three dots click
         }
 
         private void PendingButton_Click(object sender, RoutedEventArgs e)
@@ -70,7 +69,26 @@ namespace BookingApp.View.OwnerViews
             MainPanel.Content = _reviewedGuestReviews;
             PendingButton.IsEnabled = true;
             ReviewedButton.IsEnabled = false;
+        }
 
+        private void PendingButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            _reviewedGuestReviews.Update();
+            _pendingGuestReviews.Update();
+        }
+
+        private void ReviewedButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            _reviewedGuestReviews.Update();
+            _pendingGuestReviews.Update();
+        }
+
+        private void BackArrowClick(object sender, MouseButtonEventArgs e)
+        {
+            if(NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

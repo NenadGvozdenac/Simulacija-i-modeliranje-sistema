@@ -32,6 +32,13 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" x:Name="MessagePanel" Background="Aqua" HorizontalAlignment="Right" Margin="0 5 5 0" VerticalAlignment="Top" Width="150" Height="100" Panel.ZIndex="5" Opacity="0.6" Visibility="Hidden">
+                <Rectangle Fill="Aqua" Stroke="Black"/>
+                <StackPanel>
+                    <TextBlock Text="You have unreviewed guests. Tap below to review them." TextAlignment="Center" TextWrapping="Wrap" Margin="15 15 15 0 " FontSize="12"/>
+                    <TextBlock Text="Click Here" FontWeight="Bold" TextAlignment="Center" TextDecorations="Underline" Foreground="Blue" Margin="15 10 15 15" Cursor="Hand" FontSize="13" MouseDown="ClickHere_TextBlockClick"/>
+                </StackPanel>
+            </Grid>
             <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
                 <Button Content="Add Accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationClick"/>
                 <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestReviewsButtonClick"/>

@@ -36,8 +36,6 @@ namespace BookingApp.View.OwnerViews
         private GuestRatingRepository _guestRatingRepository;
         private UserRepository _userRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
-
-        private const int DaysReservationValidForReviewing = -5;
         public MainPage(User user)
         {
             InitializeComponent();
@@ -59,39 +57,52 @@ namespace BookingApp.View.OwnerViews
             {
                 if (ReservationNotAlreadyAdded(accommodationReservation, _user.Id))
                 {
-                    _guestRatingRepository.Add(new GuestRating()
-                    {
-                        ReservationId = accommodationReservation.Id,
-                        GuestId = _user.Id,
-                        IsChecked = false,
-                        AccommodationId = accommodationReservation.AccommodationId,
-                        Respectfulness = 0,
-                        Cleanliness = 0,
-                        Id = _guestRatingRepository.NextId(),
-                        Comment = ""
-                    });
+                    AddGuestRating(accommodationReservation);
                 }
             }
         }
+
+        private void AddGuestRating(AccommodationReservation accommodationReservation)
+        {
+            _guestRatingRepository.Add(new GuestRating()
+            {
+                ReservationId = accommodationReservation.Id,
+                GuestId = accommodationReservation.UserId,
+                IsChecked = false,
+                AccommodationId = accommodationReservation.AccommodationId,
+                Respectfulness = 0,
+                Cleanliness = 0,
+                Id = _guestRatingRepository.NextId(),
+                Comment = ""
+            });
+        }
+
         private void CheckReservationsThatEnded()
         {
-            DateTime fiveDaysAgo = DateTime.Now.AddDays(DaysReservationValidForReviewing);
+            DateTime fiveDaysAgo = DateTime.Now.AddDays(-5);
 
             foreach (GuestRating guestRating in _guestRatingRepository.GetAll())
             {
-                if (_accommodationRepository.GetById(guestRating.AccommodationId).OwnerId == _user.Id)
+                if (IsOwnerValid(guestRating))
                 {
                     DateTime lastDateOfStaying = _accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying;
 
-                    if (lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now)
+                    if (IsDateValid(lastDateOfStaying, fiveDaysAgo) && !guestRating.IsChecked)
                     {
-                        if (guestRating.IsChecked == false)
-                        {
-                            ActivateVisibilityOfNotification();
-                        }
+                        ActivateVisibilityOfNotification();
                     }
                 }
             }
+        }
+
+        private bool IsOwnerValid(GuestRating guestRating)
+        {
+            return _accommodationRepository.GetById(guestRating.AccommodationId).OwnerId == _user.Id;
+        }
+
+        private bool IsDateValid(DateTime lastDateOfStaying, DateTime fiveDaysAgo)
+        {
+            return lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
         }
 
         private void ActivateVisibilityOfNotification()
@@ -111,14 +122,7 @@ namespace BookingApp.View.OwnerViews
 
         private bool ReservationNotAlreadyAdded(AccommodationReservation accommodationReservation, int userId)
         {
-            foreach(GuestRating guestRating in _guestRatingRepository.GetAll())
-            {
-                if(guestRating.ReservationId == accommodationReservation.Id && guestRating.GuestId == userId)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return _guestRatingRepository.GetGuestRatingByReservationId(accommodationReservation.Id) == null;
         }
 
         public void Update()
@@ -128,22 +132,36 @@ namespace BookingApp.View.OwnerViews
 
             foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
             {
-                accommodation.Images = _accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
-                accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
-
-                AccommodationControl accommodationView = new AccommodationControl(accommodation, _locationRepository.GetById(accommodation.LocationId), _accommodationRepository, _accommodationImageRepository);
-                accommodationView.EyeButtonClicked += (sender, e) => AccommodationUserControlEyeClick(sender, accommodation);
-                accommodationView.TrashButtonClicked += (sender, e) => AccommodationUserControlTrashClick(sender, accommodation);
-
-                accommodationView.Margin = new Thickness(15);
-                _accommodations.Add(accommodation);
-                Accommodations.Children.Add(accommodationView);
+                LoadAccommodationImages(accommodation);
+                LoadAccommodationLocation(accommodation);
+                MakeAccommodationControl(accommodation);
             }
 
             HideLeftNavbar();
             HideRightNavbar();
             AddAllReservationsThatArentCheckedYet();
             CheckReservationsThatEnded();
+        }
+
+        private void MakeAccommodationControl(Accommodation accommodation)
+        {
+            AccommodationControl accommodationView = new AccommodationControl(accommodation, accommodation.Location, _accommodationRepository, _accommodationImageRepository);
+            accommodationView.EyeButtonClicked += (sender, e) => AccommodationUserControlEyeClick(sender, accommodation);
+            accommodationView.TrashButtonClicked += (sender, e) => AccommodationUserControlTrashClick(sender, accommodation);
+
+            accommodationView.Margin = new Thickness(15);
+            _accommodations.Add(accommodation);
+            Accommodations.Children.Add(accommodationView);
+        }
+
+        private void LoadAccommodationLocation(Accommodation accommodation)
+        {
+            accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
+        }
+
+        private void LoadAccommodationImages(Accommodation accommodation)
+        {
+            accommodation.Images = _accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
         }
 
         private void ExitApplication(object sender, MouseButtonEventArgs e)

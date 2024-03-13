@@ -31,15 +31,18 @@ public partial class AccommodationDetails : UserControl
     maxvalueGuestNumber = 30,
     startvalueGuestNumber = 1;
     public User _user { get; set; }
-    public AccommodationDetails()
+    public AccommodationDetails(Accommodation detailedaccomodation, User user)
     {
         InitializeComponent();
         accomodationreservationrepository = new AccommodationReservationRepository();
+        SetAccommodation(detailedaccomodation, user);
     }
 
-    public void SetAccommodation(Accommodation accommodation)
+    public void SetAccommodation(Accommodation accommodation, User user)
     {
         selectedAccommodation = accommodation;
+        _user = user;
+        username.Content = _user.Username;
         HideElements();
         SetDefaultValues(accommodation);
     }
@@ -53,6 +56,7 @@ public partial class AccommodationDetails : UserControl
 
     private void SetDefaultValues(Accommodation accommodation)
     {
+        firstDate.DisplayDateStart = DateTime.Now;
         minvalueDaysOfStay = accommodation.MinReservationDays;
         DaysOfStay.Text = accommodation.MinReservationDays.ToString();
         GuestNumber.Text = "1";

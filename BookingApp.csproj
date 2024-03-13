@@ -103,10 +103,10 @@
     <Content Include="Resources\Images\AccommodationImages\fifth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\first.jpg">
+    <Content Include="Resources\Images\AccommodationImages\fourth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\fourth.jpg">
+    <Content Include="Resources\Images\AccommodationImages\first.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\AccommodationImages\second.jpg">
@@ -132,4 +132,9 @@
     <Folder Include="View\TouristViews\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Resources\Images\AccommodationImages\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>

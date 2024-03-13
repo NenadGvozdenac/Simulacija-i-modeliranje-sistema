@@ -40,10 +40,11 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
     maxvalueDaysOfStay = 30,
     startvalueDaysOfStay = 0;
 
-    public Accommodations()
+    public Accommodations(User user)
     {
         InitializeComponent();
         DataContext = this;
+        username.Content = user.Username;
 
         //ObservableCollections
         _accommodations = new ObservableCollection<Accommodation>();
@@ -93,18 +94,14 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
         int.TryParse(DaysOfStay.Text, out selectedDaysOfStay);
 
         //Filtering Logic 
-        if ((checkedTypes.Count == 0 && 
-            string.IsNullOrWhiteSpace(selectedCountry) && 
-            string.IsNullOrWhiteSpace(selectedCity) && 
-            string.IsNullOrWhiteSpace(_searchAccommodation)) && 
-            selectedGuestNumber == 1 &&
-            selectedDaysOfStay == 0)
-        {
-            FilteredAccommodations = _accommodations;
-        }
-        else
-        {
-            FilteredAccommodations = new ObservableCollection<Accommodation>(
+
+        FilteringLogic(checkedTypes, selectedCountry, selectedCity, selectedGuestNumber, selectedDaysOfStay);
+
+    }
+
+    private void FilteringLogic(List<string> checkedTypes, string selectedCountry, string selectedCity, int selectedGuestNumber, int selectedDaysOfStay)
+    {
+        FilteredAccommodations = new ObservableCollection<Accommodation>(
                 _accommodations.Where(accommodation =>
                     IsAccommodationTypeValid(accommodation, checkedTypes) &&
                     IsLocationValid(accommodation, selectedCountry, selectedCity) &&
@@ -113,7 +110,6 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
                     IsDaysOfStayValid(accommodation, selectedDaysOfStay)
                 )
             );
-        }
     }
 
     private bool IsAccommodationTypeValid(Accommodation accommodation, List<string> checkedTypes)

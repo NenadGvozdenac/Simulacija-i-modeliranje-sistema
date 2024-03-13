@@ -44,6 +44,12 @@ namespace BookingApp.View.PathfinderViews
 
         }
 
+        public void DailyToursClick(object sender, RoutedEventArgs e) {
+
+            DailyToursWindow dailyWindow = new DailyToursWindow();
+            dailyWindow.Show();
+        }
+
         public void Update()
         {
             

@@ -29,6 +29,8 @@ public class Tour : ISerializable
     public int Duration { get; set; }
     public List<TourImage> Images { get; set; }
 
+    public DateTime CurrentDate { get; set; }  
+
     public void FromCSV(string[] values)
     {
         Id = Convert.ToInt32(values[0]);

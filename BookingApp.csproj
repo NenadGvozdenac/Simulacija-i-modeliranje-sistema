@@ -31,7 +31,7 @@
     <None Remove="Resources\Images\AccommodationImages\91868346.jpg" />
     <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
     <None Remove="Resources\Images\AccommodationImages\default_house.png" />
-    <None Remove="Resources\Images\AccommodationImages\eight.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\eighth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\fifth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\first.jpg" />
     <None Remove="Resources\Images\AccommodationImages\fourth.jpg" />
@@ -97,16 +97,16 @@
     <Content Include="Resources\Assets\Owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\eight.jpg">
+    <Content Include="Resources\Images\AccommodationImages\eighth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\AccommodationImages\fifth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\first.jpg">
+    <Content Include="Resources\Images\AccommodationImages\fourth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\AccommodationImages\fourth.jpg">
+    <Content Include="Resources\Images\AccommodationImages\first.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\AccommodationImages\second.jpg">
@@ -132,4 +132,9 @@
     <Folder Include="View\TouristViews\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Resources\Images\AccommodationImages\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>

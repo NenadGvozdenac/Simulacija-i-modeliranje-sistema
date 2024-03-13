@@ -229,11 +229,7 @@ namespace BookingApp.View.OwnerViews
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            if(NavigationService.CanGoBack)
-            {
-                OnNavigationCompleted();
-                NavigationService.GoBack();
-            }
+            NavigateToPreviousPage();
         }
 
         private void ConfirmButtonClick(object sender, RoutedEventArgs e)
@@ -243,6 +239,22 @@ namespace BookingApp.View.OwnerViews
                 return;
             }
 
+            UpdateGuestRating();
+
+            NavigateToPreviousPage();
+        }
+
+        private void NavigateToPreviousPage()
+        {
+            if (NavigationService.CanGoBack)
+            {
+                OnNavigationCompleted();
+                NavigationService.GoBack();
+            }
+        }
+
+        private void UpdateGuestRating()
+        {
             GuestRating guestRating = _guestRatingRepository.GetById(_uncheckedGuestRating.Id);
             guestRating.Cleanliness = SelectedCleanliness;
             guestRating.Respectfulness = SelectedRespectfulness;
@@ -250,12 +262,6 @@ namespace BookingApp.View.OwnerViews
             guestRating.IsChecked = true;
 
             _guestRatingRepository.Update(guestRating);
-
-            if (NavigationService.CanGoBack)
-            {
-                OnNavigationCompleted();
-                NavigationService.GoBack();
-            }
         }
 
         private bool IsDataValid()

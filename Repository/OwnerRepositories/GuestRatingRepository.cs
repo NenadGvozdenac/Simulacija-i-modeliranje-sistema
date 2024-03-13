@@ -78,5 +78,10 @@ namespace BookingApp.Repository.OwnerRepositories
         {
             return _guestRatings.Where(guestRating => guestRating.GuestId == userId).ToList();
         }
+
+        public GuestRating GetGuestRatingByReservationId(int id)
+        {
+            return _guestRatings.FirstOrDefault(guestRating => guestRating.ReservationId == id);
+        }
     }
 }

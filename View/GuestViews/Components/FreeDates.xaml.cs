@@ -37,6 +37,5 @@ namespace BookingApp.View.GuestViews.Components
             ConfirmButton.IsEnabled = false;
             SuccessfullTextBox.Visibility = Visibility.Visible;
         }
-
     }
 }

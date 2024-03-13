@@ -16,9 +16,10 @@
 
         <!--Container for all UserControls of the app-->
         <Grid x:Name="Container" Grid.Row="0">
-            <local:Accommodations x:Name="accommodation"></local:Accommodations>
-            <local:MyReservations x:Name="myreservation" Visibility="Collapsed"></local:MyReservations>
-            <local:AccommodationDetails x:Name="accommodationDetails" Visibility="Collapsed"/>
+            <Frame x:Name="GuestWindowFrame" NavigationUIVisibility="Hidden"/>
+            <!--<local:Accommodations x:Name="accommodation" Visibility="Collapsed"></local:Accommodations>-->
+            <!--<local:MyReservations x:Name="myreservation" Visibility="Collapsed"></local:MyReservations>-->
+            <!--<local:AccommodationDetails x:Name="accommodationDetails" Visibility="Collapsed"/>-->
         </Grid>
 
         <!--Navigation menu-->

@@ -21,48 +21,34 @@ public partial class GuestMainWindow : Window
 {
     private readonly User _user;
     public AccommodationRepository accomodationrepository { get; set; }
+    public Accommodations AccommodationsUserControl;
+    public MyReservations MyReservationsUserControl;
+
     public GuestMainWindow(User user)
     {
         InitializeComponent();       
         accomodationrepository = new AccommodationRepository();
         _user = user;
-        Update();
+        Update(_user);
+        AccommodationsUserControl = new Accommodations(user);
+        GuestWindowFrame.Content = AccommodationsUserControl;
     }
-
-    public void SetActiveUserControl(UserControl control)
-    {
-        accommodation.Visibility = Visibility.Collapsed;
-        myreservation.Visibility = Visibility.Collapsed;
-        accommodationDetails.Visibility = Visibility.Collapsed;
-
-        control.Visibility = Visibility.Visible;
-    }
-
     private void Accommodations_Click(object sender, RoutedEventArgs e)
     {
-        SetActiveUserControl(accommodation);
+        GuestWindowFrame.Content = AccommodationsUserControl;
     }
-
     private void MyReservations_Click(object sender, RoutedEventArgs e)
     {
-        SetActiveUserControl(myreservation);
+        GuestWindowFrame.Content = MyReservationsUserControl;
     }
-
     public void ShowAccommodationDetails(int accommodationId)
     {
         Accommodation detailedAccommodation = accomodationrepository.GetById(accommodationId);
-
-        accommodationDetails.SetAccommodation(detailedAccommodation);
-        accommodationDetails.Visibility = Visibility.Visible;
-
-        accommodation.Visibility = Visibility.Collapsed;
-        myreservation.Visibility = Visibility.Collapsed;
+        GuestWindowFrame.Content = new AccommodationDetails(detailedAccommodation, _user);
     }
-
-    private void Update()
+    private void Update(User user)
     {
-        accommodation.username.Content = _user.Username;
-        accommodationDetails.username.Content = _user.Username;
-        accommodationDetails._user = _user;
+        AccommodationsUserControl = new Accommodations(user);
+        MyReservationsUserControl = new MyReservations();
     }
 }

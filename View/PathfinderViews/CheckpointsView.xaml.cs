@@ -80,7 +80,11 @@ namespace BookingApp.View.PathfinderViews
             }
         }
 
-
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            checkBox.IsEnabled = false;
+        }
 
 
 

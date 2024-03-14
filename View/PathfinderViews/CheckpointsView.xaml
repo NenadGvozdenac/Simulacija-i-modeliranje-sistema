@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         mc:Ignorable="d"
         Title="CheckpointsView" Height="251" Width="560">
+    <Window.Resources>
+        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <EventSetter Event="Checked" Handler="CheckBox_Checked"/>
+        </Style>
+    </Window.Resources>
     <Grid Height="314" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"></RowDefinition>
@@ -27,7 +32,7 @@
             <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False" x:Name="CheckpointsDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status">
+                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding IsChecked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}" >
                         
                     </DataGridCheckBoxColumn>
                 </DataGrid.Columns>

@@ -239,7 +239,7 @@ namespace BookingApp.View.PathfinderViews
             TourDates = new ObservableCollection<TourStartTime>();
             Checkpoints = new ObservableCollection<Checkpoint>();
             DataContext = this;
-            datePicker.DisplayDateStart = DateTime.Now;
+            datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
             LoadCountries();
             LoadLanguages();
 

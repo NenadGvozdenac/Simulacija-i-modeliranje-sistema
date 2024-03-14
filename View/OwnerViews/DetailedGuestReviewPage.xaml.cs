@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.MutualModels;
+﻿    using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
 using System;
 using System.Collections.Generic;
@@ -162,8 +162,6 @@ namespace BookingApp.View.OwnerViews
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        // The method to invoke the property changed event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -201,19 +201,15 @@ namespace BookingApp.View.OwnerViews
 
         public ObservableCollection<AccommodationImage> Images { get; set; }
 
-        // The event handler for the property changed event
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // The method to invoke the property changed event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Event declaration
         public event EventHandler PageClosed;
 
-        // Method to raise the event when the page is closed
         private void ClosePage()
         {
             PageClosed?.Invoke(this, EventArgs.Empty);
@@ -358,16 +354,13 @@ namespace BookingApp.View.OwnerViews
                 string selectedImagePath = openFileDialog.FileName;
                 string destinationFolder = "../../../Resources/Images/AccommodationImages/"; // Update this with your desired destination folder path
 
-                // Extracting filename from the full path
                 string fileName = System.IO.Path.GetFileName(selectedImagePath);
 
-                // Constructing destination path
                 string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
 
-                // Copy the selected image file to the destination folder
+                // Uncomment to add files from other folders.
                 // System.IO.File.Copy(selectedImagePath, destinationPath, true);
 
-                // Update the text box with the destination path
                 ImageURLTextBox.Text = destinationPath;
             }
         }

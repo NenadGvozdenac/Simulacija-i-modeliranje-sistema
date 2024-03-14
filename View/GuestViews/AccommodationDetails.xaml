@@ -75,21 +75,12 @@
 
                     </Grid>
 
-                    <Button x:Name="FreeDatesCheckButton" Content="Tap here if you are ready for us to find you a first free dates" Click="FirstFreeDatesCheck_Click" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" Width="326" Height="24"/>
-                    <ListBox x:Name="availableDatesListBox" Margin="773,56,35,159">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock>
-                                        <Run Text="{Binding firstAvailableDate}"/>
-                                        <Run Text=" - "/>
-                                        <Run Text="{Binding lastAvailableDate}"/>
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
+                    <Button x:Name="FreeDatesCheckButton" Content="Tap here if you are ready for us to find you a first free dates" Click="FreeDatesCheck_Click" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" Width="326" Height="24"/>
+                    <ListBox x:Name="availableDatesListBox" Margin="754,123,54,89" Height="120" ItemsSource="{Binding _availableDates}" SelectedItem="{Binding SelectedDate}"/>
+                    <Button x:Name="ConfirmButton" Content="Confrim reservation for this accommodation" HorizontalAlignment="Left" Margin="754,264,0,0" VerticalAlignment="Top" Width="239" Click="ConfrimReservation_Click"/>
+                    <TextBlock x:Name="FoundDatesTextBox" HorizontalAlignment="Left" Margin="754,81,0,0" TextWrapping="Wrap" Text="Found dates:" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="FoundAlternativeDatesTextBox" Visibility="Collapsed" HorizontalAlignment="Left" Margin="755,65,0,0" Text="Sadly, there are no free dates in the range&#10;you have selected, however we have&#10;found alternatives if it looks acceptable:" FontWeight="DemiBold" FontSize="12" VerticalAlignment="Top" Height="48" Width="238"/>
+                    <TextBlock x:Name="ConfirmedReservationTextBox" HorizontalAlignment="Left" Visibility="Collapsed" Margin="591,186,0,0" TextWrapping="Wrap" Text="Reservation has been made!" VerticalAlignment="Top"/>
 
                 </Grid>
             </Grid>

@@ -19,19 +19,59 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BookingApp.View.OwnerViews
 {
-    /// <summary>
-    /// Interaction logic for AddAccommodationPage.xaml
-    /// </summary>
-    public partial class AddAccommodationPage : Page
+    public partial class AddAccommodationPage : Page, INotifyPropertyChanged
     {
         private User _user;
 
         private LocationRepository _locationRepository;
         private AccommodationRepository _accommodationRepository;
         private AccommodationImageRepository _imageRepository;
+
+        private ObservableCollection<string> _accommodationTypes;
+        public ObservableCollection<string> AccommodationTypes
+        {
+            get { return _accommodationTypes; }
+            set
+            {
+                if (value != _accommodationTypes)
+                {
+                    _accommodationTypes = value;
+                    OnPropertyChanged(nameof(AccommodationTypes));
+                }
+            }
+        }
+
+        private ObservableCollection<string> countries;
+        public ObservableCollection<string> Countries
+        {
+            get { return countries; }
+            set
+            {
+                if (value != countries)
+                {
+                    countries = value;
+                    OnPropertyChanged(nameof(Countries));
+                }
+            }
+        }
+
+        private ObservableCollection<string> cities;
+        public ObservableCollection<string> Cities
+        {
+            get { return cities; }
+            set
+            {
+                if (value != cities)
+                {
+                    cities = value;
+                    OnPropertyChanged(nameof(Cities));
+                }
+            }
+        }
 
         private string name;
         public string AccommodationName
@@ -42,7 +82,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != name)
                 {
                     name = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(AccommodationName));
                 }
             }
         }
@@ -56,7 +96,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != country)
                 {
                     country = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Country));
                 }
             }
         }
@@ -70,7 +110,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != city)
                 {
                     city = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(City));
                 }
             }
         }
@@ -84,7 +124,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != type)
                 {
                     type = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Type));
                 }
             }
         }
@@ -98,7 +138,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != accommodationPrice)
                 {
                     accommodationPrice = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(AccommodationPrice));
                 }
             }
         }
@@ -112,7 +152,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != maximumNumberOfGuests)
                 {
                     maximumNumberOfGuests = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(MaximumNumberOfGuests));
                 }
             }
         }
@@ -126,7 +166,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != minimumNumberOfDaysForReservation)
                 {
                     minimumNumberOfDaysForReservation = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(MinimumNumberOfDaysForReservation));
                 }
             }
         }
@@ -140,7 +180,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != daysBeforeReservationIsFinal)
                 {
                     daysBeforeReservationIsFinal = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DaysBeforeReservationIsFinal));
                 }
             }
         }
@@ -154,7 +194,7 @@ namespace BookingApp.View.OwnerViews
                 if (value != imageURL)
                 {
                     imageURL = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ImageURL));
                 }
             }
         }
@@ -179,13 +219,6 @@ namespace BookingApp.View.OwnerViews
             PageClosed?.Invoke(this, EventArgs.Empty);
         }
 
-        // Method to close the page (you may call it when the user finishes with the page)
-        public void Close()
-        {
-            // Your logic to close the page
-            ClosePage();
-        }
-
         public AddAccommodationPage(User user, AccommodationRepository accommodationRepository, AccommodationImageRepository accommodationImageRepository)
         {
             _user = user;
@@ -193,7 +226,9 @@ namespace BookingApp.View.OwnerViews
             _accommodationRepository = accommodationRepository;
             _imageRepository = accommodationImageRepository;
             Images = new ObservableCollection<AccommodationImage>();
+
             DataContext = this;
+
             InitializeComponent();
             LoadCountries();
             LoadTypesOfAccommodations();
@@ -201,14 +236,12 @@ namespace BookingApp.View.OwnerViews
 
         private void LoadTypesOfAccommodations()
         {
-            List<string> listOfTypes = new List<string>(Enum.GetNames(typeof(AccommodationType)));
-            AccommodationType.ItemsSource = listOfTypes;
+            AccommodationTypes = new ObservableCollection<string>(Enum.GetNames(typeof(AccommodationType)));
         }
 
         private void LoadCountries()
         {
-            List<string> listOfCountries = _locationRepository.GetCountries();
-            CountryTextBox.ItemsSource = listOfCountries;
+            Countries = new ObservableCollection<string>(_locationRepository.GetCountries());
         }
 
         private void ConfirmButtonClick(object sender, RoutedEventArgs e)
@@ -218,6 +251,13 @@ namespace BookingApp.View.OwnerViews
                 return;
             }
 
+            AddAccommodation();
+
+            NavigateToPreviousPage();
+        }
+
+        private void AddAccommodation()
+        {
             Accommodation accommodation = new();
             accommodation.Id = _accommodationRepository.NextId();
             accommodation.Name = AccommodationName;
@@ -237,12 +277,6 @@ namespace BookingApp.View.OwnerViews
                 image.AccommodationId = accommodation.Id;
                 _imageRepository.Add(image);
             }
-
-            if(NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-                Close();
-            }
         }
 
         private bool IsDataValid()
@@ -258,37 +292,46 @@ namespace BookingApp.View.OwnerViews
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
+            NavigateToPreviousPage();
+        }
+
+        private void NavigateToPreviousPage()
+        {
             if (NavigationService.CanGoBack)
             {
+                ClosePage();
                 NavigationService.GoBack();
             }
         }
 
         private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> listOfCities = _locationRepository.GetCitiesByCountry(CountryTextBox.SelectedItem.ToString());
-            CityTextBox.ItemsSource = listOfCities;
-            CityTextBox.Focus();
+            Cities = new ObservableCollection<string>(_locationRepository.GetCitiesByCountry(CountryTextBox.SelectedItem.ToString()));
             CityTextBox.IsDropDownOpen = true;
             CityTextBox.IsEnabled = true;
         }
 
         private void AddURLClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(ImageURL))
+            if (!IsImageValid())
             {
                 return;
             }
 
-            if (ImageAlreadyExists())
-            {
-                return;
-            }
+            AddImage();
+        }
 
+        private void AddImage()
+        {
             AccommodationImage image = new();
             image.Path = ImageURL;
             Images.Add(image);
             ImageURLTextBox.Clear();
+        }
+
+        private bool IsImageValid()
+        {
+            return !(string.IsNullOrEmpty(ImageURL) || ImageAlreadyExists());
         }
 
         private bool ImageAlreadyExists()

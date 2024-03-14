@@ -41,27 +41,27 @@
 
             <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0"/>
+                <TextBox Text="{Binding Path=AccommodationName, Mode=OneWayToSource}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="1" Grid.Column="0" >
                 <Label Content="Country" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" x:Name="CountryTextBox" Margin="5 0" IsEditable="False" SelectionChanged="CountryTextBox_SelectionChanged"/>
+                <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding Country}" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" x:Name="CountryTextBox" Margin="5 0" IsEditable="False" SelectionChanged="CountryTextBox_SelectionChanged"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="1" Grid.Column="1" >
                 <Label Content="City" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="CityTextBox" Margin="5 0" IsEditable="False" IsEnabled="False"/>
+                <ComboBox ItemsSource="{Binding Cities}" SelectedItem="{Binding City}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="CityTextBox" Margin="5 0" IsEditable="False" IsEnabled="False"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
                 <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0"/>
+                <ComboBox ItemsSource="{Binding AccommodationTypes}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1">
                 <Label Content="Price per night ($)" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=AccommodationPrice, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0"/>
+                <TextBox Text="{Binding Path=AccommodationPrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
@@ -71,7 +71,7 @@
 
             <StackPanel Margin="10" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Minimum number of days for reservation" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=MinimumNumberOfDaysForReservation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="MinNumberOfDaysForReservation" Margin="5 0"/>
+                <TextBox Text="{Binding Path=MinimumNumberOfDaysForReservation, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="MinNumberOfDaysForReservation" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
@@ -87,7 +87,7 @@
 
                 <StackPanel Grid.Column="0">
                     <Label Content="Image URL" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                    <TextBox Text="{Binding Path=ImageURL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="ImageURLTextBox" Margin="5 0" PreviewMouseDown="ImageURLTextBox_MouseDown"/>
+                    <TextBox Text="{Binding Path=ImageURL, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="ImageURLTextBox" Margin="5 0" PreviewMouseDown="ImageURLTextBox_MouseDown"/>
                 </StackPanel>
 
                 <Button Grid.Column="1" Content="+" Style="{StaticResource RoundedButtonStyle}" Width="45" Height="45" Margin="5 0" VerticalAlignment="Center"  HorizontalAlignment="Stretch" Click="AddURLClick"/>

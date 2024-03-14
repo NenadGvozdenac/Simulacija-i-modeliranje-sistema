@@ -118,7 +118,7 @@
                 <Label x:Name="username" Content="Username" Margin="660,46,37,26"></Label>
             </Grid>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Background="#FFF8F0">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
                     <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
                     <ItemsControl

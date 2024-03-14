@@ -18,9 +18,11 @@
     <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
     <None Remove="Resources\Assets\language.png" />
+    <None Remove="Resources\Assets\location.png" />
     <None Remove="Resources\Assets\map-marker.171x256.png" />
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
+    <None Remove="Resources\Assets\star.png" />
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
     <None Remove="Resources\Assets\users.png" />
@@ -74,10 +76,16 @@
     <Content Include="Resources\Assets\language.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\map-marker.171x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\pencil.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\star.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\three_dots.png">

@@ -62,6 +62,7 @@ public partial class AccommodationDetails : UserControl
     {
         firstDate.Text = lastDate.Text = string.Empty;
         lastDate.IsEnabled = FreeDatesCheckButton.IsEnabled = false;
+        ConfirmButton.IsEnabled = false;
     }
 
     private void SetDefaultValues(Accommodation accommodation)
@@ -130,6 +131,7 @@ public partial class AccommodationDetails : UserControl
             FoundDatesTextBox.Visibility = Visibility.Visible;
             FoundAlternativeDatesTextBox.Visibility = Visibility.Collapsed;
             availableDatesListBox.ItemsSource = _availableDates;
+            ConfirmButton.IsEnabled = true;
         }
         else
         {
@@ -144,7 +146,8 @@ public partial class AccommodationDetails : UserControl
         takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
 
         _availableDates.Clear();
-        DateTime? whileDate = lastDate.SelectedDate.Value.AddDays(1);  
+        //DateTime? whileDate = lastDate.SelectedDate.Value.AddDays(1);
+        DateTime? whileDate = firstDate.SelectedDate.Value;
         DateTime? firstAvailableDate = null;
         DateTime? lastAvailableDate = null;
         int freeDaysInRowCounter = 0;
@@ -154,7 +157,7 @@ public partial class AccommodationDetails : UserControl
         {
             freeDaysInRowCounter = 0;
             DateTime tempDate = whileDate.Value;
-            while (tempDate != lastDate.SelectedDate.Value.AddDays(1))
+            while (tempDate != tempDate.AddDays(Convert.ToInt32(DaysOfStay.Text)))
             {
                 if (freeDaysInRowCounter == 0)
                 {
@@ -193,6 +196,7 @@ public partial class AccommodationDetails : UserControl
         FoundDatesTextBox.Visibility = Visibility.Collapsed;
         FoundAlternativeDatesTextBox.Visibility = Visibility.Visible;
         availableDatesListBox.ItemsSource = _availableDates;
+        ConfirmButton.IsEnabled = true;
     }
 
     private void ConfrimReservation_Click(object sender, RoutedEventArgs e)

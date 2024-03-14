@@ -1,0 +1,35 @@
+﻿<Window x:Class="BookingApp.View.PathfinderViews.CheckpointsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
+        mc:Ignorable="d"
+        Title="CheckpointsView" Height="251" Width="560">
+    <Grid Height="314" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <TextBlock  TextWrapping="Wrap" Text="TextBlock" Height="49" Width="236" TextAlignment="Center"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="1" Grid.Row="1">
+            <DataGrid Width="256" Height="143"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="Status"></DataGridCheckBoxColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>

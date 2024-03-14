@@ -227,6 +227,7 @@ namespace BookingApp.View.PathfinderViews
 
         public AddTourWindow(User user, TourRepository tourRepository, TourImageRepository tourImageRepository)
         {
+            InitializeComponent();
             _user = user;
             _locationRepository = new LocationRepository();
             _tourRepository = tourRepository;
@@ -238,7 +239,7 @@ namespace BookingApp.View.PathfinderViews
             TourDates = new ObservableCollection<TourStartTime>();
             Checkpoints = new ObservableCollection<Checkpoint>();
             DataContext = this;
-            InitializeComponent();
+            datePicker.DisplayDateStart = DateTime.Now;
             LoadCountries();
             LoadLanguages();
 

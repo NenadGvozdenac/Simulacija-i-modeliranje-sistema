@@ -49,7 +49,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="454" Height="110"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="342" Height="89"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
@@ -57,7 +57,10 @@
                     <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentDate}"  TextAlignment="Right"  Width="82" VerticalAlignment="Top"/>
                     <!--<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDate}" TextAlignment="Center" FontSize="12" Width="365" VerticalAlignment="Top"/>-->
                 </StackPanel>
-
+                <StackPanel Grid.Row="1" Grid.Column="3">
+                    <Button Height="25" Content="Begin" Click="BeginButton_Click"></Button>
+                    <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="IdTextBlock"></TextBlock>
+                </StackPanel>
             </Grid>
             
             

@@ -40,14 +40,14 @@ namespace BookingApp.View.PathfinderViews
         public void ScheduleTourClick(object sender, RoutedEventArgs e)
         {
             AddTourWindow tourWindow = new AddTourWindow(_user, _tourRepository, _tourImageRepository);
-            tourWindow.Show();
+            tourWindow.ShowDialog();
 
         }
 
         public void DailyToursClick(object sender, RoutedEventArgs e) {
 
             DailyToursWindow dailyWindow = new DailyToursWindow();
-            dailyWindow.Show();
+            dailyWindow.ShowDialog();
         }
 
         public void Update()

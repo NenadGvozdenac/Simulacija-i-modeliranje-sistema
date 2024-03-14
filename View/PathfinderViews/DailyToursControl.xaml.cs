@@ -87,8 +87,5 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-
-
     }
 }

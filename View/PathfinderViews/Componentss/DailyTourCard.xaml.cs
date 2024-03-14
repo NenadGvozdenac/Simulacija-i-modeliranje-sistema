@@ -20,9 +20,22 @@ namespace BookingApp.View.PathfinderViews.Componentss
     /// </summary>
     public partial class DailyTourCard : UserControl
     {
+
+        
+
         public DailyTourCard()
         {
             InitializeComponent();
         }
+
+        public void BeginButton_Click(object sender, RoutedEventArgs e)
+        {
+            CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text));
+            checkpointsView.ShowDialog();
+        }
+
+       
+
+
     }
 }

@@ -58,7 +58,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
                 foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
                 {
                     AccommodationReservation accommodationReservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
-                    if(guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying.Day <= DateTime.Now.Day)
+                    if(guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying <= DateTime.Now)
                     {
                         guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
                         _guestRatings.Add(guestRating);

@@ -365,7 +365,7 @@ namespace BookingApp.View.OwnerViews
                 string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
 
                 // Copy the selected image file to the destination folder
-                System.IO.File.Copy(selectedImagePath, destinationPath, true);
+                // System.IO.File.Copy(selectedImagePath, destinationPath, true);
 
                 // Update the text box with the destination path
                 ImageURLTextBox.Text = destinationPath;

@@ -18,16 +18,18 @@
         
         
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
-            <TextBlock  TextWrapping="Wrap" Text="TextBlock" Height="49" Width="236" TextAlignment="Center"/>
+            <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}" Height="49" Width="236" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel  Grid.Column="1" Grid.Row="1">
             <DataGrid Width="256" Height="143"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False">
+            <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False" x:Name="CheckpointsDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status"></DataGridCheckBoxColumn>
+                    <DataGridCheckBoxColumn Header="Status">
+                        
+                    </DataGridCheckBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

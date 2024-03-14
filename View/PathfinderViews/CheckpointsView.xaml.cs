@@ -41,6 +41,7 @@ namespace BookingApp.View.PathfinderViews
             tourRepository = new TourRepository();
             checkpointRepository = new CheckpointRepository();
             checkpoints = new ObservableCollection<Checkpoint>();
+            CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
             tourName = "";
             Update(TourId);
 
@@ -62,6 +63,27 @@ namespace BookingApp.View.PathfinderViews
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Access the first row
+            var row = CheckpointsDataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
+            if (row != null)
+            {
+                // Access the CheckBox in the first row
+                var checkBox = CheckpointsDataGrid.Columns[1].GetCellContent(row) as CheckBox;
+                if (checkBox != null)
+                {
+                    // Set IsChecked to true
+                    checkBox.IsChecked = true;
+                }
+            }
+        }
+
+
+
+
+
 
     }
 }

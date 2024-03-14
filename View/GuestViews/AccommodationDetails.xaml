@@ -76,11 +76,21 @@
                     </Grid>
 
                     <Button x:Name="FreeDatesCheckButton" Content="Tap here if you are ready for us to find you a first free dates" Click="FirstFreeDatesCheck_Click" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" Width="326" Height="24"/>
+                    <ListBox x:Name="availableDatesListBox" Margin="773,56,35,159">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock>
+                                        <Run Text="{Binding firstAvailableDate}"/>
+                                        <Run Text=" - "/>
+                                        <Run Text="{Binding lastAvailableDate}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                    <Grid Margin="650,30,10,6">
-                        <components:FreeDates x:Name="FreeDatesUserControl" Visibility="Collapsed"></components:FreeDates>
-                        <components:FreeDatesAlternative x:Name="FreeDatesAlternativeUserControl" Visibility="Collapsed"></components:FreeDatesAlternative>
-                    </Grid>
+
                 </Grid>
             </Grid>
         </ScrollViewer>

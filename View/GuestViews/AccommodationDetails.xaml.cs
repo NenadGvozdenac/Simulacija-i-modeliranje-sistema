@@ -1,8 +1,11 @@
-﻿using BookingApp.Model.MutualModels;
+﻿using BookingApp.Model.GuestModels;
+using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +21,15 @@ using System.Windows.Shapes;
 
 namespace BookingApp.View.GuestViews;
 
-public partial class AccommodationDetails : UserControl
+public partial class AccommodationDetails : UserControl, INotifyPropertyChanged
 {
     public Accommodation selectedAccommodation { get; set; }
     public AccommodationReservationRepository accomodationreservationrepository { get; set; }
-    
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private ObservableCollection<AvailableDates> _availableDates;
+
     int minvalueDaysOfStay = -1,
     maxvalueDaysOfStay = 100,
     startvalueDaysOfStay = 1;
@@ -34,6 +41,8 @@ public partial class AccommodationDetails : UserControl
     public AccommodationDetails(Accommodation detailedaccomodation, User user)
     {
         InitializeComponent();
+        DataContext = this;
+        _availableDates = new ObservableCollection<AvailableDates>();
         accomodationreservationrepository = new AccommodationReservationRepository();
         SetAccommodation(detailedaccomodation, user);
     }
@@ -49,7 +58,7 @@ public partial class AccommodationDetails : UserControl
 
     private void HideElements()
     {
-        FreeDatesUserControl.Visibility = FreeDatesAlternativeUserControl.Visibility = Visibility.Collapsed;
+        //FreeDatesUserControl.Visibility = FreeDatesAlternativeUserControl.Visibility = Visibility.Collapsed;
         firstDate.Text = lastDate.Text = string.Empty;
         lastDate.IsEnabled = FreeDatesCheckButton.IsEnabled = false;
     }
@@ -72,116 +81,124 @@ public partial class AccommodationDetails : UserControl
         List<DateTime> takenDates = new List<DateTime>();
         takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
 
-        DateTime? tempDate = firstDate.SelectedDate;
+        DateTime? whileDate = firstDate.SelectedDate;
         int freeDaysInRowCounter = 0;
         DateTime? firstAvailableDate = null;
         DateTime? lastAvailableDate = null;
-        while (tempDate != lastDate.SelectedDate.Value.AddDays(1))
+        while (whileDate != lastDate.SelectedDate.Value.AddDays(1))
         {
-            if (freeDaysInRowCounter == 0) 
+            DateTime tempDate = whileDate.Value;
+            while (tempDate != lastDate.SelectedDate.Value.AddDays(1))
             {
-                firstAvailableDate = (DateTime)tempDate;
-            }
+                if (freeDaysInRowCounter == 0)
+                {
+                    firstAvailableDate = (DateTime)tempDate;
+                }
 
-            if (takenDates.Contains((DateTime)tempDate))
-            {
-                freeDaysInRowCounter = 0;
-            }
-            else
-            {
-                freeDaysInRowCounter++;
-            }
+                if (takenDates.Contains((DateTime)tempDate))
+                {
+                    freeDaysInRowCounter = 0;
+                }
+                else
+                {
+                    freeDaysInRowCounter++;
+                }
 
-            if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
-            {
-                lastAvailableDate = tempDate;
-                break;
+                if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
+                {
+                    lastAvailableDate = tempDate;
+                    if(firstAvailableDate.HasValue && lastAvailableDate.HasValue)
+                        _availableDates.Add(new AvailableDates((DateTime)firstAvailableDate, (DateTime)lastAvailableDate));
+                    freeDaysInRowCounter = 0;
+                    break;
+                }
+                tempDate = tempDate.AddDays(1);
             }
-            tempDate = tempDate.Value.AddDays(1);
-
+            whileDate = whileDate.Value.AddDays(1);
+            
         }
-
-        if (firstAvailableDate.HasValue && lastAvailableDate.HasValue)
-        {
-            SetFreeDates(firstAvailableDate, lastAvailableDate);
-        }
-        else
-        {
-            SetFreeDatesAlternative();
-        }
+        availableDatesListBox.ItemsSource = _availableDates;
+        //if (firstAvailableDate.HasValue && lastAvailableDate.HasValue)
+        //{
+        //    SetFreeDates(firstAvailableDate, lastAvailableDate);
+        //}
+        //else
+        //{
+        //    SetFreeDatesAlternative();
+        //}
     }
 
     //Opening user controls for final/possible reservation
-    public void SetFreeDates(DateTime? firstDay, DateTime? lastDay)
-    {
-        FreeDatesCheckButton.IsEnabled = false;
-        FreeDatesUserControl.accomodationReservationRepository = accomodationreservationrepository;
-        FreeDatesUserControl.reservation.UserId = _user.Id;
-        FreeDatesUserControl.reservation.AccommodationId = selectedAccommodation.Id;
-        FreeDatesUserControl.reservation.FirstDateOfStaying = firstDay.Value;
-        FreeDatesUserControl.reservation.LastDateOfStaying = lastDay.Value;
-        FreeDatesUserControl.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
-        FreeDatesUserControl.ConfirmButton.IsEnabled = true;
+    //public void SetFreeDates(DateTime? firstDay, DateTime? lastDay)
+    //{
+    //    FreeDatesCheckButton.IsEnabled = false;
+    //    FreeDatesUserControl.accomodationReservationRepository = accomodationreservationrepository;
+    //    FreeDatesUserControl.reservation.UserId = _user.Id;
+    //    FreeDatesUserControl.reservation.AccommodationId = selectedAccommodation.Id;
+    //    FreeDatesUserControl.reservation.FirstDateOfStaying = firstDay.Value;
+    //    FreeDatesUserControl.reservation.LastDateOfStaying = lastDay.Value;
+    //    FreeDatesUserControl.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
+    //    FreeDatesUserControl.ConfirmButton.IsEnabled = true;
 
-        FreeDatesUserControl.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstDay).ToString();
-        FreeDatesUserControl.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastDay).ToString();
+    //    FreeDatesUserControl.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstDay).ToString();
+    //    FreeDatesUserControl.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastDay).ToString();
 
-        FreeDatesUserControl.SuccessfullTextBox.Visibility = Visibility.Collapsed;
-        FreeDatesAlternativeUserControl.Visibility = Visibility.Collapsed;
-        FreeDatesUserControl.Visibility = Visibility.Visible;
-    }
+    //    FreeDatesUserControl.SuccessfullTextBox.Visibility = Visibility.Collapsed;
+    //    FreeDatesAlternativeUserControl.Visibility = Visibility.Collapsed;
+    //    FreeDatesUserControl.Visibility = Visibility.Visible;
+    //}
 
-    public void SetFreeDatesAlternative() 
-    {
-        List<DateTime> takenDates = new List<DateTime>();
-        takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
+    //public void SetFreeDatesAlternative() 
+    //{
+    //    List<DateTime> takenDates = new List<DateTime>();
+    //    takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
 
-        DateTime? tempDate = firstDate.SelectedDate;
-        int freeDaysInRowCounter = 0;
-        DateTime? firstAvailableDate = null;
-        DateTime? lastAvailableDate = null;
-        bool datesFound = false;
+    //    DateTime? tempDate = firstDate.SelectedDate;
+    //    int freeDaysInRowCounter = 0;
+    //    DateTime? firstAvailableDate = null;
+    //    DateTime? lastAvailableDate = null;
+    //    bool datesFound = false;
 
-        while (datesFound == false)
-        {
-            if (freeDaysInRowCounter == 0)
-            {
-                firstAvailableDate = (DateTime)tempDate;
-            }
+    //    while (datesFound == false)
+    //    {
+    //        if (freeDaysInRowCounter == 0)
+    //        {
+    //            firstAvailableDate = (DateTime)tempDate;
+    //        }
 
-            if (takenDates.Contains((DateTime)tempDate))
-            {
-                freeDaysInRowCounter = 0;
-            }
-            else
-            {
-                freeDaysInRowCounter++;
-            }
+    //        if (takenDates.Contains((DateTime)tempDate))
+    //        {
+    //            freeDaysInRowCounter = 0;
+    //        }
+    //        else
+    //        {
+    //            freeDaysInRowCounter++;
+    //        }
 
-            if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
-            {
-                lastAvailableDate = tempDate;
-                datesFound = true;
-            }
-            tempDate = tempDate.Value.AddDays(1);
-        }
+    //        if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
+    //        {
+    //            lastAvailableDate = tempDate;
+    //            datesFound = true;
+    //        }
+    //        tempDate = tempDate.Value.AddDays(1);
+    //    }
 
-        FreeDatesCheckButton.IsEnabled = false;
-        FreeDatesAlternativeUserControl.accomodationReservationRepository = accomodationreservationrepository;
-        FreeDatesAlternativeUserControl.reservation.UserId = _user.Id;
-        FreeDatesAlternativeUserControl.reservation.AccommodationId = selectedAccommodation.Id;
-        FreeDatesAlternativeUserControl.reservation.FirstDateOfStaying = firstAvailableDate.Value;
-        FreeDatesAlternativeUserControl.reservation.LastDateOfStaying = lastAvailableDate.Value;
-        FreeDatesAlternativeUserControl.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
-        FreeDatesAlternativeUserControl.ConfirmButton.IsEnabled = true;
+    //    FreeDatesCheckButton.IsEnabled = false;
+    //    FreeDatesAlternativeUserControl.accomodationReservationRepository = accomodationreservationrepository;
+    //    FreeDatesAlternativeUserControl.reservation.UserId = _user.Id;
+    //    FreeDatesAlternativeUserControl.reservation.AccommodationId = selectedAccommodation.Id;
+    //    FreeDatesAlternativeUserControl.reservation.FirstDateOfStaying = firstAvailableDate.Value;
+    //    FreeDatesAlternativeUserControl.reservation.LastDateOfStaying = lastAvailableDate.Value;
+    //    FreeDatesAlternativeUserControl.reservation.GuestsNumber = Convert.ToInt32(GuestNumber.Text);
+    //    FreeDatesAlternativeUserControl.ConfirmButton.IsEnabled = true;
 
-        FreeDatesAlternativeUserControl.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstAvailableDate).ToString();
-        FreeDatesAlternativeUserControl.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastAvailableDate).ToString();
+    //    FreeDatesAlternativeUserControl.first.Text = "First day: " + DateOnly.FromDateTime((DateTime)firstAvailableDate).ToString();
+    //    FreeDatesAlternativeUserControl.last.Text = "Last day: " + DateOnly.FromDateTime((DateTime)lastAvailableDate).ToString();
 
-        FreeDatesAlternativeUserControl.SuccessfullTextBox.Visibility = Visibility.Collapsed;
-        FreeDatesUserControl.Visibility = Visibility.Collapsed;
-        FreeDatesAlternativeUserControl.Visibility = Visibility.Visible;
-    }
+    //    FreeDatesAlternativeUserControl.SuccessfullTextBox.Visibility = Visibility.Collapsed;
+    //    FreeDatesUserControl.Visibility = Visibility.Collapsed;
+    //    FreeDatesAlternativeUserControl.Visibility = Visibility.Visible;
+    //}
     
     //Design Functions
     private void DatePickerCantWrite(object sender, KeyEventArgs e)
@@ -260,5 +277,9 @@ public partial class AccommodationDetails : UserControl
         if (number > maxvalueGuestNumber) GuestNumber.Text = maxvalueGuestNumber.ToString();
         if (number < minvalueGuestNumber) GuestNumber.Text = minvalueGuestNumber.ToString();
         GuestNumber.SelectionStart = GuestNumber.Text.Length;
+    }
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

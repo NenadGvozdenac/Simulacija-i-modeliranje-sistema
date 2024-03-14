@@ -124,7 +124,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\GuestModels\" />
     <Folder Include="Model\TouristModels\" />
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />

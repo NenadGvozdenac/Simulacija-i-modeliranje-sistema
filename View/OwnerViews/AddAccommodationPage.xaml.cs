@@ -277,6 +277,8 @@ namespace BookingApp.View.OwnerViews
                 image.AccommodationId = accommodation.Id;
                 _imageRepository.Add(image);
             }
+
+            NavigateToPreviousPage();
         }
 
         private bool IsDataValid()

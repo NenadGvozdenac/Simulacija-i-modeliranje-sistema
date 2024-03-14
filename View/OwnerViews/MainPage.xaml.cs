@@ -90,7 +90,7 @@ namespace BookingApp.View.OwnerViews
 
         private bool IsGuestRatingValid(GuestRating guestRating)
         {
-            return IsOwnerValid(guestRating) && IsDateValid(GetLastDateOfStaying(guestRating), DateTime.Now.AddDays(-5));
+            return IsOwnerValid(guestRating) && IsDateValid(GetLastDateOfStaying(guestRating), DateTime.Now.AddDays(-5)) && !guestRating.IsChecked;
         }
 
         private DateTime GetLastDateOfStaying(GuestRating guestRating)

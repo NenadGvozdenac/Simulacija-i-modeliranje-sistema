@@ -26,7 +26,6 @@ namespace BookingApp.View.OwnerViews
     {
         private Accommodation _accommodation;
         private GuestRating _guestRating;
-        private User _user;
         private User _guestUser;
 
         private string accommodationName;
@@ -167,10 +166,9 @@ namespace BookingApp.View.OwnerViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public DetailedGuestReviewPage(User user, User guestUser, GuestRating guestRating, Accommodation accommodation)
+        public DetailedGuestReviewPage(User guestUser, GuestRating guestRating, Accommodation accommodation)
         {
             InitializeComponent();
-            _user = user;
             _guestRating = guestRating;
             _accommodation = accommodation;
             _guestUser = guestUser;

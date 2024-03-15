@@ -34,19 +34,18 @@ namespace BookingApp.View.OwnerViews
         private LocationRepository _locationRepository;
         private AccommodationImageRepository _accommodationImageRepository;
         private GuestRatingRepository _guestRatingRepository;
-        private UserRepository _userRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
         public MainPage(User user)
         {
             InitializeComponent();
             _user = user;
             _accommodations = new ObservableCollection<Accommodation>();
-            _accommodationRepository = new AccommodationRepository();
-            _locationRepository = new LocationRepository();
-            _accommodationImageRepository = new AccommodationImageRepository();
-            _userRepository = new UserRepository();
-            _guestRatingRepository = new GuestRatingRepository();
-            _accommodationReservationRepository = new AccommodationReservationRepository();
+
+            _accommodationRepository = AccommodationRepository.GetInstance();
+            _locationRepository = LocationRepository.GetInstance();
+            _accommodationImageRepository = AccommodationImageRepository.GetInstance();
+            _guestRatingRepository = GuestRatingRepository.GetInstance();
+            _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
 
             Update();
         }
@@ -148,7 +147,7 @@ namespace BookingApp.View.OwnerViews
 
         private void MakeAccommodationControl(Accommodation accommodation)
         {
-            AccommodationControl accommodationView = new AccommodationControl(accommodation, accommodation.Location, _accommodationRepository, _accommodationImageRepository);
+            AccommodationControl accommodationView = new AccommodationControl(accommodation, accommodation.Location);
             accommodationView.EyeButtonClicked += (sender, e) => AccommodationUserControlEyeClick(sender, accommodation);
             accommodationView.TrashButtonClicked += (sender, e) => AccommodationUserControlTrashClick(sender, accommodation);
 
@@ -226,14 +225,14 @@ namespace BookingApp.View.OwnerViews
 
         private void AddAccommodationClick(object sender, RoutedEventArgs e)
         {
-            AddAccommodationPage addAccommodationPage = new AddAccommodationPage(_user, _accommodationRepository, _accommodationImageRepository);
+            AddAccommodationPage addAccommodationPage = new AddAccommodationPage(_user);
             addAccommodationPage.PageClosed += (s, e) => Update();
             NavigationService.Navigate(addAccommodationPage);
         }
 
         private void GuestReviewsButtonClick(object sender, RoutedEventArgs e)
         {
-            GuestReviewPage guestReviewPage = new GuestReviewPage(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, _accommodationReservationRepository);
+            GuestReviewPage guestReviewPage = new GuestReviewPage(_user);
             NavigationService.Navigate(guestReviewPage);
         }
 
@@ -264,7 +263,7 @@ namespace BookingApp.View.OwnerViews
 
         private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
         {
-            GuestReviewPage guestReviewPage = new GuestReviewPage(_user, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, _accommodationReservationRepository);
+            GuestReviewPage guestReviewPage = new GuestReviewPage(_user);
             DeactivateVisibilityOfNotification();
             NavigationService.Navigate(guestReviewPage);
         }

@@ -215,12 +215,12 @@ namespace BookingApp.View.OwnerViews
             PageClosed?.Invoke(this, EventArgs.Empty);
         }
 
-        public AddAccommodationPage(User user, AccommodationRepository accommodationRepository, AccommodationImageRepository accommodationImageRepository)
+        public AddAccommodationPage(User user)
         {
             _user = user;
-            _locationRepository = new LocationRepository();
-            _accommodationRepository = accommodationRepository;
-            _imageRepository = accommodationImageRepository;
+            _locationRepository = LocationRepository.GetInstance();
+            _accommodationRepository = AccommodationRepository.GetInstance();
+            _imageRepository = AccommodationImageRepository.GetInstance();
             Images = new ObservableCollection<AccommodationImage>();
 
             DataContext = this;

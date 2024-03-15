@@ -9,13 +9,14 @@ using BookingApp.Model;
 using BookingApp.Serializer;
 using BookingApp.Model.MutualModels;
 using System.Xml.Linq;
+using BookingApp.Repository.MutualRepositories;
 
 namespace BookingApp.Repository;
 
 public class AccommodationRepository
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
-
+    private static readonly Lazy<AccommodationRepository> instance = new Lazy<AccommodationRepository>(() => new AccommodationRepository());
     private readonly Serializer<Accommodation> _serializer;
 
     private List<Accommodation> _accommodations;
@@ -25,6 +26,11 @@ public class AccommodationRepository
         _serializer = new Serializer<Accommodation>();
         _accommodations = _serializer.FromCSV(FilePath);
         _accommodations.Sort((a, b) => string.Compare(a.Name, b.Name));
+    }
+
+    public static AccommodationRepository GetInstance()
+    {
+        return instance.Value;
     }
 
     public List<Accommodation> GetAll()

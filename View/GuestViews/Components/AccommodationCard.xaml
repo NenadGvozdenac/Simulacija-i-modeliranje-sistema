@@ -24,7 +24,7 @@
 
             <Grid Grid.Column="0">
                 <TextBlock Foreground="White" FontFamily="Cascadia Mono SemiBold" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Korisnik nije&#10;prilozio sliku" VerticalAlignment="Center"/>
-                <Border CornerRadius="25 0 0 25">
+                <Border CornerRadius="25 0 0 25" BorderThickness="0 0 1 0" BorderBrush="#FFF8F0">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Images[0].Path}" Stretch="Fill"/>
                     </Border.Background>

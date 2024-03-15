@@ -146,7 +146,6 @@ public partial class AccommodationDetails : UserControl
         takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
 
         _availableDates.Clear();
-        //DateTime? whileDate = lastDate.SelectedDate.Value.AddDays(1);
         DateTime? whileDate = firstDate.SelectedDate.Value;
         DateTime? firstAvailableDate = null;
         DateTime? lastAvailableDate = null;

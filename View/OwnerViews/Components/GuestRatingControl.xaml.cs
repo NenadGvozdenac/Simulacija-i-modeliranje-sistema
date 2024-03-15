@@ -52,7 +52,8 @@ namespace BookingApp.View.OwnerViews.Components
 
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DetailedGuestReviewPage detailedGuestReviewPage = new DetailedGuestReviewPage(_user, _guestRating, _accommodationRepository.GetById(_guestRating.AccommodationId));
+            User guestUser = _userRepository.GetById(_guestRating.GuestId);
+            DetailedGuestReviewPage detailedGuestReviewPage = new DetailedGuestReviewPage(_user, guestUser, _guestRating, _accommodationRepository.GetById(_guestRating.AccommodationId));
             NavigationService.GetNavigationService(this).Navigate(detailedGuestReviewPage);
         }
     }

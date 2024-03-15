@@ -79,20 +79,23 @@ namespace BookingApp.View.OwnerViews
 
         private void CheckReservationsThatEnded()
         {
-            DateTime fiveDaysAgo = DateTime.Now.AddDays(-5);
-
             foreach (GuestRating guestRating in _guestRatingRepository.GetAll())
             {
-                if (IsOwnerValid(guestRating))
+                if (IsGuestRatingValid(guestRating))
                 {
-                    DateTime lastDateOfStaying = _accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying;
-
-                    if (IsDateValid(lastDateOfStaying, fiveDaysAgo) && !guestRating.IsChecked)
-                    {
-                        ActivateVisibilityOfNotification();
-                    }
+                    ActivateVisibilityOfNotification();
                 }
             }
+        }
+
+        private bool IsGuestRatingValid(GuestRating guestRating)
+        {
+            return IsOwnerValid(guestRating) && IsDateValid(GetLastDateOfStaying(guestRating), DateTime.Now.AddDays(-5)) && !guestRating.IsChecked;
+        }
+
+        private DateTime GetLastDateOfStaying(GuestRating guestRating)
+        {
+            return _accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying;
         }
 
         private bool IsOwnerValid(GuestRating guestRating)

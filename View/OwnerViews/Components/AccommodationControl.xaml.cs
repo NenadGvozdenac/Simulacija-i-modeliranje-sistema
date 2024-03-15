@@ -27,17 +27,13 @@ namespace BookingApp.View.OwnerViews.Components
     {
         public Accommodation Accommodation { get; set; }
         public Location Location { get; set; }
-        private AccommodationRepository _accommodationRepository { get; set; }
-        private AccommodationImageRepository _accommodationImageRepository { get; set; }
         public event EventHandler<Accommodation> EyeButtonClicked;
         public event EventHandler<Accommodation> TrashButtonClicked;
-        public AccommodationControl(Accommodation accommodation, Location location, AccommodationRepository accommodationRepository, AccommodationImageRepository accommodationImageRepository)
+        public AccommodationControl(Accommodation accommodation, Location location)
         {
             InitializeComponent();
             Accommodation = accommodation;
             Location = location;
-            _accommodationRepository = accommodationRepository;
-            _accommodationImageRepository = accommodationImageRepository;
             SetupAccommodation();
         }
 

@@ -10,7 +10,7 @@ namespace BookingApp.Repository;
 public class UserRepository
 {
     private const string FilePath = "../../../Resources/Data/users.csv";
-
+    private static readonly Lazy<UserRepository> instance = new Lazy<UserRepository>(() => new UserRepository());
     private readonly Serializer<User> _serializer;
 
     private List<User> _users;
@@ -19,6 +19,11 @@ public class UserRepository
     {
         _serializer = new Serializer<User>();
         _users = _serializer.FromCSV(FilePath);
+    }
+
+    public static UserRepository GetInstance()
+    {
+        return instance.Value;
     }
 
     public User GetByUsername(string username)

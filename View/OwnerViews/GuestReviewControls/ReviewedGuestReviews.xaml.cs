@@ -25,21 +25,17 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
     public partial class ReviewedGuestReviews : UserControl
     {
         private GuestRatingRepository _guestRatingRepository;
-        private UserRepository _userRepository;
         private AccommodationRepository _accommodationRepository;
-        private LocationRepository _locationRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
         private ObservableCollection<GuestRating> _guestRatings;
 
         private User _user;
-        public ReviewedGuestReviews(User user, UserRepository userRepository, GuestRatingRepository guestRatingRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public ReviewedGuestReviews(User user)
         {
             _user = user;
-            _guestRatingRepository = guestRatingRepository;
-            _userRepository = userRepository;
-            _accommodationRepository = accommodationRepository;
-            _locationRepository = locationRepository;
-            _accommodationReservationRepository = accommodationReservationRepository;
+            _guestRatingRepository = GuestRatingRepository.GetInstance();
+            _accommodationRepository = AccommodationRepository.GetInstance();
+            _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
 
             _guestRatings = new ObservableCollection<GuestRating>();
 
@@ -76,7 +72,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             Reviews.Children.Clear();
             foreach(GuestRating guestRating in _guestRatings)
             {
-                GuestRatingControl reviewedGuestReview = new GuestRatingControl(_user, guestRating, _userRepository, _accommodationRepository, _locationRepository);
+                GuestRatingControl reviewedGuestReview = new GuestRatingControl(_user, guestRating);
                 reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
                 Reviews.Children.Add(reviewedGuestReview);
             }

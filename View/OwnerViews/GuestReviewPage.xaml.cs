@@ -26,26 +26,16 @@ namespace BookingApp.View.OwnerViews
     public partial class GuestReviewPage : Page
     {
         private User _user;
-        private UserRepository _userRepository;
-        private AccommodationRepository _accommodationRepository;
-        private GuestRatingRepository _guestRatingRepository;
-        private LocationRepository _locationRepository;
-        private AccommodationReservationRepository _accommodationReservationRepository;
 
         private ReviewedGuestReviews _reviewedGuestReviews;
         private PendingGuestReviews _pendingGuestReviews;
 
-        public GuestReviewPage(User user, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public GuestReviewPage(User user)
         {
             _user = user;
-            _userRepository = userRepository;
-            _accommodationReservationRepository = accommodationReservationRepository;
-            _accommodationRepository = accommodationRepository;
-            _locationRepository = locationRepository;
-            _guestRatingRepository = guestRatingRepository;
 
-            _reviewedGuestReviews = new ReviewedGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
-            _pendingGuestReviews = new PendingGuestReviews(_user, _userRepository, _guestRatingRepository, _accommodationRepository, _locationRepository, _accommodationReservationRepository);
+            _reviewedGuestReviews = new ReviewedGuestReviews(_user);
+            _pendingGuestReviews = new PendingGuestReviews(_user);
 
             InitializeComponent();
 
@@ -85,7 +75,12 @@ namespace BookingApp.View.OwnerViews
 
         private void BackArrowClick(object sender, MouseButtonEventArgs e)
         {
-            if(NavigationService.CanGoBack)
+            NavigateToPreviousPage();
+        }
+
+        private void NavigateToPreviousPage()
+        {
+            if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }

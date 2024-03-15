@@ -13,6 +13,7 @@ public class LocationRepository
     private const string FilePath = "../../../Resources/Data/locations.csv";
 
     private readonly Serializer<Location> _serializer;
+    private readonly static Lazy<LocationRepository> instance = new Lazy<LocationRepository>(() => new LocationRepository());
 
     private List<Location> _locations;
 
@@ -20,6 +21,11 @@ public class LocationRepository
     {
         _serializer = new Serializer<Location>();
         _locations = _serializer.FromCSV(FilePath);
+    }
+
+    public static LocationRepository GetInstance()
+    {
+        return instance.Value;
     }
 
     public List<Location> GetAll()

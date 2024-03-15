@@ -12,8 +12,8 @@ namespace BookingApp.Repository.MutualRepositories;
 public class AccommodationImageRepository
 {
     private const string FilePath = "../../../Resources/Data/accommodation_images.csv";
-
     private readonly Serializer<AccommodationImage> _serializer;
+    private readonly static Lazy<AccommodationImageRepository> instance = new Lazy<AccommodationImageRepository>(() => new AccommodationImageRepository());
 
     private List<AccommodationImage> _accommodationImages;
 
@@ -21,6 +21,11 @@ public class AccommodationImageRepository
     {
         _serializer = new Serializer<AccommodationImage>();
         _accommodationImages = _serializer.FromCSV(FilePath);
+    }
+
+    public static AccommodationImageRepository GetInstance()
+    {
+        return instance.Value;
     }
 
     public void Add(AccommodationImage accommodation)

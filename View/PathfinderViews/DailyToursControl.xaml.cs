@@ -60,9 +60,9 @@ namespace BookingApp.View.PathfinderViews
                     Tour tour = new Tour();
                     tour.Capacity = toura.Capacity;
                     tour.CurrentDate = startTime.Time;
-                    tour.Location = locationRepository.GetById(tour.LocationId);
+                    tour.Location = locationRepository.GetById(toura.LocationId);
                     tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                    tour.Language = languageRepository.GetById(tour.LanguageId);
+                    tour.Language = languageRepository.GetById(toura.LanguageId);
                     tour.Id = toura.Id;
                     tour.LocationId = toura.LocationId;
                     tour.LanguageId = toura.LanguageId;

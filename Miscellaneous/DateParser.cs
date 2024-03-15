@@ -4,7 +4,7 @@ namespace BookingApp.Miscellaneous;
 
 public class DateParser
 {
-    private static readonly string format = "dd.mm.yyyy";
+    private static readonly string format = "dd.MM.yyyy";
 
     public static DateTime Parse(string date)
     {

@@ -26,36 +26,64 @@ namespace BookingApp.View.PathfinderViews
     public partial class CheckpointsView : Window, INotifyPropertyChanged
     {
        public ObservableCollection<Checkpoint> checkpoints {  get; set; }
+
+       public ObservableCollection<Tourist> tourists { get; set; }
+
+       public ObservableCollection<Tourist> selectedTourists { get; set; }
        public TourRepository tourRepository { get; set; }
 
        public CheckpointRepository checkpointRepository { get; set; }
 
+       public TouristReservationRepository reservationRepository { get; set; }
+
+       public TouristRepository touristRepository { get; set; }
+
+        public TourStartTimeRepository timeRepository { get; set; }
+
        public string tourName {  get; set; } 
 
-       
+       public int tourTimeId { get; set; }
 
-        public CheckpointsView(int TourId)
+        public CheckpointsView(int TourId, DateTime currentDate)
         {
             InitializeComponent();
             DataContext = this;
             tourRepository = new TourRepository();
+            touristRepository = new TouristRepository();
             checkpointRepository = new CheckpointRepository();
+            reservationRepository = new TouristReservationRepository();
+            timeRepository = new TourStartTimeRepository();
             checkpoints = new ObservableCollection<Checkpoint>();
+            tourists = new ObservableCollection<Tourist>();
+            selectedTourists = new ObservableCollection<Tourist>();
             CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
             tourName = "";
-            Update(TourId);
+            tourTimeId = 0;
+            Update(TourId, currentDate);
 
         }
 
-        public void Update(int TourId)
+        public void Update(int TourId, DateTime currentDate)
         {
             tourName = tourRepository.GetById(TourId).Name;
+            tourTimeId = timeRepository.GetByTourStartTimeAndId(currentDate,TourId).Id; //gets current time id
             
             foreach (Checkpoint checkpoint in checkpointRepository.GetCheckpointsByTourId(TourId))
             {
                 checkpoints.Add(checkpoint);
             }
+
+            //gets all reservations
+            foreach (TouristReservation reservation in reservationRepository.GetByTimeId(tourTimeId)) {
+                
+                Tourist tourist_temp = new Tourist();
+                tourist_temp = touristRepository.GetById(reservation.Id_Tourist);
+                tourists.Add(tourist_temp);
             
+            }
+
+
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -80,13 +108,40 @@ namespace BookingApp.View.PathfinderViews
             }
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
             checkBox.IsEnabled = false;
+            if (checkBox.IsChecked == true)
+            {
+                // Transfer selected tourists to another list (or perform desired action)
+                foreach (var tourist in selectedTourists.ToList())
+                {
+                    // Remove the tourist from the tourists collection
+                    tourists.Remove(tourist);
+                    // Add transfer logic as per your requirement, e.g., add to another list
+                }
+                // Clear the selectedTourists list after transfer
+                selectedTourists.Clear();
+            }
         }
 
-
+        private void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            if (checkBox.IsChecked == true)
+            {
+                // If the checkbox is checked, add the corresponding tourist to the selectedTourists list
+                var tourist = checkBox.DataContext as Tourist;
+                selectedTourists.Add(tourist);
+            }
+            else
+            {
+                // If the checkbox is unchecked, remove the corresponding tourist from the selectedTourists list
+                var tourist = checkBox.DataContext as Tourist;
+                selectedTourists.Remove(tourist);
+            }
+        }
 
 
     }

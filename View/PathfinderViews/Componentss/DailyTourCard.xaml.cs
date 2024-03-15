@@ -30,7 +30,7 @@ namespace BookingApp.View.PathfinderViews.Componentss
 
         public void BeginButton_Click(object sender, RoutedEventArgs e)
         {
-            CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text));
+            CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text));
             checkpointsView.ShowDialog();
         }
 

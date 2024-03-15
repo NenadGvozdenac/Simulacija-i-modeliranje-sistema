@@ -8,7 +8,10 @@
         Title="CheckpointsView" Height="251" Width="560">
     <Window.Resources>
         <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
-            <EventSetter Event="Checked" Handler="CheckBox_Checked"/>
+            <EventSetter Event="Checked" Handler="CheckpointCheckboxBox_Checked"/>
+        </Style>
+        <Style x:Key="TouristCheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <EventSetter Event="Checked" Handler="TouristCheckBox_Checked"/>
         </Style>
     </Window.Resources>
     <Grid Height="314" VerticalAlignment="Top">
@@ -26,13 +29,19 @@
             <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}" Height="49" Width="236" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel  Grid.Column="1" Grid.Row="1">
-            <DataGrid Width="256" Height="143"/>
+            <DataGrid Width="259" Height="143" ItemsSource="{Binding tourists}"  AutoGenerateColumns="False" CanUserAddRows="False" x:Name="TouristsDataGrid" SelectionMode="Extended">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="*"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding TouristCheckBox_Checked}" Width="*" ElementStyle="{StaticResource TouristCheckBoxStyle}" EditingElementStyle="{StaticResource TouristCheckBoxStyle}"></DataGridCheckBoxColumn>
+                </DataGrid.Columns>
+        </DataGrid>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
             <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False" x:Name="CheckpointsDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding IsChecked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}" >
+                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding CheckpointCheckboxBox_Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}">
                         
                     </DataGridCheckBoxColumn>
                 </DataGrid.Columns>

@@ -75,6 +75,13 @@ namespace BookingApp.Repository.MutualRepositories
             return _times.Where(a => a.TourId == tourId).ToList();
         }
 
+        public TourStartTime GetByTourStartTimeAndId(DateTime tourTime, int TourId)  
+        {
+            return _times.First(a => a.Time == tourTime && a.TourId == TourId);
+        }
+
+
+
         public void RemoveByTourId(int tourId)
         {
             _times.RemoveAll(a => a.TourId == tourId);

@@ -54,7 +54,7 @@
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
                     <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="365" VerticalAlignment="Top"/>
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentDate}"  TextAlignment="Right"  Width="82" VerticalAlignment="Top"/>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"  TextAlignment="Right"  Width="82" VerticalAlignment="Top" x:Name="DateTextBlock"/>
                     <!--<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDate}" TextAlignment="Center" FontSize="12" Width="365" VerticalAlignment="Top"/>-->
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="3">

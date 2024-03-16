@@ -118,7 +118,11 @@ namespace BookingApp.View.PathfinderViews
                 foreach (var tourist in selectedTourists.ToList())
                 {
                     // Remove the tourist from the tourists collection
+                    var item = checkBox.DataContext as Checkpoint;
                     tourists.Remove(tourist);
+                    TouristReservation reservationTemp = reservationRepository.GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
+                    reservationTemp.CheckpointId = item.Id;
+                    reservationRepository.Update(reservationTemp);
                     // Add transfer logic as per your requirement, e.g., add to another list
                 }
                 // Clear the selectedTourists list after transfer

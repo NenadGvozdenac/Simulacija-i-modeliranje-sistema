@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
+using BookingApp.View.GuestViews;
 
 namespace BookingApp.View.TouristViews
 {
@@ -26,6 +27,7 @@ namespace BookingApp.View.TouristViews
         public TourRepository tourRepository { get; set; }
         public Tours ToursUserControl { get; set; }
 
+
         public TouristMainWindow(User user)
         {
             InitializeComponent();
@@ -34,6 +36,16 @@ namespace BookingApp.View.TouristViews
             Update(_user);
             ToursUserControl = new Tours(user);
             TouristWindowFrame.Content = ToursUserControl;
+        }
+
+        private void Return_Click(object sender, RoutedEventArgs e)
+        {
+            TouristWindowFrame.Content = ToursUserControl;
+        }
+        public void ShowTourDetails(int tourId)
+        {
+            Tour detailedTour = tourRepository.GetById(tourId);
+            TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
         private void Update(User user)

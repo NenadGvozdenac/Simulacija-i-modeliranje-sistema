@@ -19,7 +19,7 @@
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -48,12 +48,15 @@
                     <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="51" Height="19" TextAlignment="Center"/>
                     <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="454" Height="110"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3" >
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="454" Height="103"/>
                 </StackPanel>
 
+
+
+
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="452" VerticalAlignment="Top"/>
+                    <TextBlock MouseLeftButtonDown="SeeTour_Click" Foreground="Blue" TextDecorations="Underline" TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="20" FontWeight="DemiBold" Width="452" VerticalAlignment="Top" Height="53"/>
                 </StackPanel>
             </Grid>
 

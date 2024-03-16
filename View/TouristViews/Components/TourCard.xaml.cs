@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.View.GuestViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,23 @@ namespace BookingApp.View.TouristViews.Components
         {
             InitializeComponent();
         }
+
+        private void SeeTour_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is Tour tour)
+            {
+                int tourId = tour.Id;
+
+                Window parentWindow = Window.GetWindow(this);
+
+                // Cast the parent window to GuestMainWindow
+                if (parentWindow is TouristMainWindow mainWindow)
+                {
+                    // Show the details UserControl passing the selected accommodation
+                    mainWindow.ShowTourDetails(tourId);
+                }
+            }
+        }
+
     }
 }

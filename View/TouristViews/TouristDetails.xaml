@@ -19,7 +19,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="20" FontWeight="DemiBold"/>
-                        <Button Command="{Binding Path=Return_Click}" VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
                             <Image x:Name="Image" Source="..\..\..\Resources\Assets\return.png"/>
                         </Button>
                     </Grid>

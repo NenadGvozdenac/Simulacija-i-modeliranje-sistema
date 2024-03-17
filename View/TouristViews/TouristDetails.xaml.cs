@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,15 +25,28 @@ namespace BookingApp.View.TouristViews
     public partial class TouristDetails : UserControl
     {
         public Tours ToursUserControl;
+        public event EventHandler ReturnRequest;
+        public User _user;
+        public LocationRepository locationRepository;
+
+        public Tour selectedTour {  get; set; }
         public TouristDetails(Tour detailedTour, User user)
         {
             InitializeComponent();
+            _user = user;
+            locationRepository = new LocationRepository();
+            selectedTour = detailedTour;
             ToursUserControl = new Tours(user);
+
+            tourNameTextBlock.Text = selectedTour.Name;
+            tourCountryTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).Country;
+            tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            
+       
+            //ReturnRequest?.Invoke(this, EventArgs.Empty);
         }
 
         private void NumberOfGuests_TextChanged(object sender, TextChangedEventArgs e)

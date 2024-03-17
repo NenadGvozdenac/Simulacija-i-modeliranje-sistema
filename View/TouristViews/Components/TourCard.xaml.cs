@@ -35,10 +35,8 @@ namespace BookingApp.View.TouristViews.Components
 
                 Window parentWindow = Window.GetWindow(this);
 
-                // Cast the parent window to GuestMainWindow
                 if (parentWindow is TouristMainWindow mainWindow)
                 {
-                    // Show the details UserControl passing the selected accommodation
                     mainWindow.ShowTourDetails(tourId);
                 }
             }

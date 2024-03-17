@@ -115,29 +115,29 @@ namespace BookingApp.View.TouristViews
                     tours.Where(tour =>
                         IsLanguageValid(tour, selectedLanguage) &&
                         IsLocationValid(tour, selectedCountry, selectedCity) &&
-                        IsGuestNumberValid(selectedGuestNumber) &&
-                        IsDaysOfStayValid(selectedDaysOfStay)
+                        IsGuestNumberValid(tour, selectedGuestNumber) &&
+                        IsDaysOfStayValid(tour,selectedDaysOfStay)
                     )
                 );
         }
 
         private bool IsLanguageValid(Tour tour, string selectedLanguage)
         {
-            return string.IsNullOrWhiteSpace(selectedLanguage) || tour.Language.Name == selectedLanguage;
+            return string.IsNullOrWhiteSpace(selectedLanguage) || languageRepository.GetById(tour.LanguageId).ToString() == selectedLanguage;
         }
         private bool IsLocationValid(Tour tour, string selectedCountry, string selectedCity)
         {
             return string.IsNullOrWhiteSpace(selectedCountry) || tour.Location.Country == selectedCountry &&
                    string.IsNullOrWhiteSpace(selectedCity) || tour.Location.City == selectedCity;
         }
-        private bool IsGuestNumberValid(int selectedGuestNumber)
+        private bool IsGuestNumberValid(Tour tour, int selectedGuestNumber)
         {
-            return selectedGuestNumber == 1;
+            return selectedGuestNumber == 1 || selectedGuestNumber <= tour.Capacity;
         }
 
-        private bool IsDaysOfStayValid(int selectedDaysOfStay)
+        private bool IsDaysOfStayValid(Tour tour, int selectedDaysOfStay)
         {
-            return selectedDaysOfStay == 0;
+            return selectedDaysOfStay == 0 ||selectedDaysOfStay <= tour.Duration;
         }
 
         private void LoadCountries()

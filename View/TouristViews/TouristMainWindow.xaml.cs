@@ -26,7 +26,7 @@ namespace BookingApp.View.TouristViews
         private readonly User _user;
         public TourRepository tourRepository { get; set; }
         public Tours ToursUserControl { get; set; }
-
+        public TouristDetails ToursDetailsUserControl { get; set; }
 
         public TouristMainWindow(User user)
         {
@@ -38,10 +38,7 @@ namespace BookingApp.View.TouristViews
             TouristWindowFrame.Content = ToursUserControl;
         }
 
-        private void Return_Click(object sender, RoutedEventArgs e)
-        {
-            TouristWindowFrame.Content = ToursUserControl;
-        }
+        
         public void ShowTourDetails(int tourId)
         {
             Tour detailedTour = tourRepository.GetById(tourId);

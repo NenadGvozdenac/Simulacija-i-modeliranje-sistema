@@ -18,15 +18,15 @@
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="20" FontWeight="DemiBold"/>
-                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="164" Height="90" Margin="33,10,0,0"/>
+                        <Button Click="Return_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
                             <Image x:Name="Image" Source="..\..\..\Resources\Assets\return.png"/>
                         </Button>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Margin="79,23,802,29"/>
-                        <TextBlock  TextWrapping="Wrap" Text="," FontSize="15" Margin="176,38,782,34" />
-                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}" Margin="196,41,675,29"/>
+                        <TextBlock FontSize="40" Name="tourCountryTextBlock" TextWrapping="Wrap" Margin="10,25,871,26"/>
+                        <TextBlock  TextWrapping="Wrap" Text="," FontSize="40" Margin="181,33,776,39" />
+                        <TextBlock FontSize="40" Name="tourCityTextBlock" TextWrapping="Wrap" Margin="213,25,658,45"/>
 
                     </Grid>
                     <Grid Grid.Row="2">

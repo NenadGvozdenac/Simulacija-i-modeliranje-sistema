@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.View.TouristViews"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="TouristMainWindow" Height="650" Width="1000">
+        Title="TouristMainWindow" WindowStartupLocation="CenterScreen" Height="650" Width="1000">
 
     <Grid>
         <Grid.RowDefinitions>

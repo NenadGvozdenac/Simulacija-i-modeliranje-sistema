@@ -30,13 +30,13 @@ namespace BookingApp.View.OwnerViews.Components
         private AccommodationRepository _accommodationRepository;
         private LocationRepository _locationRepository;
         private User _user;
-        public GuestRatingControl(User user, GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository)
+        public GuestRatingControl(User user, GuestRating guestRating)
         {
             _guestRating = guestRating;
             _user = user;
-            _userRepository = userRepository;
-            _accommodationRepository = accommodationRepository;
-            _locationRepository = locationRepository;
+            _userRepository = UserRepository.GetInstance();
+            _accommodationRepository = AccommodationRepository.GetInstance();
+            _locationRepository = LocationRepository.GetInstance();
 
             InitializeComponent();
             SetupUserControl();
@@ -52,7 +52,8 @@ namespace BookingApp.View.OwnerViews.Components
 
         private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DetailedGuestReviewPage detailedGuestReviewPage = new DetailedGuestReviewPage(_user, _guestRating, _accommodationRepository.GetById(_guestRating.AccommodationId));
+            User guestUser = _userRepository.GetById(_guestRating.GuestId);
+            DetailedGuestReviewPage detailedGuestReviewPage = new DetailedGuestReviewPage(guestUser, _guestRating, _accommodationRepository.GetById(_guestRating.AccommodationId));
             NavigationService.GetNavigationService(this).Navigate(detailedGuestReviewPage);
         }
     }

@@ -39,6 +39,13 @@ namespace BookingApp.Repository.MutualRepositories
             return _reservations.FirstOrDefault(a => a.Id_Tourist == id);
         }
 
+       
+        public List<TouristReservation> GetByTimeId(int id)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            return _reservations.Where(a => a.Id_TourTime == id).ToList();
+        }
+
         public void Add(TouristReservation reservation)
         {
             _reservations.Add(reservation);
@@ -60,8 +67,9 @@ namespace BookingApp.Repository.MutualRepositories
             if (existingTourist != null)
             {
                 existingTourist.Id = reservation.Id;
-                existingTourist.Id_Tour = reservation.Id_Tour;
+                existingTourist.Id_TourTime = reservation.Id_TourTime;
                 existingTourist.Id_Tourist = reservation.Id_Tourist;
+                existingTourist.CheckpointId = reservation.CheckpointId;
 
                 _serializer.ToCSV(FilePath, _reservations);
             }

@@ -14,19 +14,22 @@ namespace BookingApp.Model.MutualModels
     public class TouristReservation : ISerializable
     {
         public int Id { get; set; }
-        public int Id_Tour {  get; set; }
+        public int Id_TourTime {  get; set; }
         public int Id_Tourist {  get; set; }
+
+        public int CheckpointId {  get; set; }  //NEW
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Id_Tour = Convert.ToInt32(values[1]);
+            Id_TourTime = Convert.ToInt32(values[1]);
             Id_Tourist = Convert.ToInt32(values[2]);
+            CheckpointId = Convert.ToInt32(values[3]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Id_Tour.ToString(), Id_Tourist.ToString() };
+            string[] csvValues = { Id.ToString(), Id_TourTime.ToString(), Id_Tourist.ToString(), CheckpointId.ToString()};
             return csvValues;
         }
     }

@@ -62,10 +62,7 @@ namespace BookingApp.Repository.MutualRepositories
             return _checkpoints.Max(c => c.Id) + 1;
         }
 
-        public List<Checkpoint> GetByTourId(int tourId)
-        {
-            return _checkpoints.Where(a => a.TourId == tourId).ToList();
-        }
+        
 
         public void RemoveByTourId(int tourId)
         {

@@ -208,13 +208,12 @@ namespace BookingApp.View.OwnerViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // TODO: Add reservation
-        public AddGuestRatingPage(Accommodation accommodation, GuestRating uncheckedGuestRating, GuestRatingRepository guestRatingRepository)
+        public AddGuestRatingPage(Accommodation accommodation, GuestRating uncheckedGuestRating)
         {
-            UserRepository userRepository = new UserRepository();
-            _guestRatingRepository = guestRatingRepository;
+            _guestRatingRepository = GuestRatingRepository.GetInstance();
+
             _uncheckedGuestRating = uncheckedGuestRating;
-            GuestUsername = userRepository.GetById(uncheckedGuestRating.GuestId).Username;
+            GuestUsername = UserRepository.GetInstance().GetById(uncheckedGuestRating.GuestId).Username;
             AccommodationName = accommodation.Name;
             AccommodationLocation = accommodation.Location.ToString();
             AccommodationType = accommodation.Type.ToString();
@@ -223,7 +222,9 @@ namespace BookingApp.View.OwnerViews
             ReservationTimespan = string.Format("{0} - {1}", uncheckedGuestRating.Reservation.FirstDateOfStaying.ToShortDateString(), uncheckedGuestRating.Reservation.LastDateOfStaying.ToShortDateString());
             NumberOfGuests = uncheckedGuestRating.Reservation.GuestsNumber;
             ReservationDays = (uncheckedGuestRating.Reservation.LastDateOfStaying - uncheckedGuestRating.Reservation.FirstDateOfStaying).Days;
+            
             DataContext = this;
+
             InitializeComponent();
         }
 

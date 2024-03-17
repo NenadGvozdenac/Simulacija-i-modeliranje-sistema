@@ -185,7 +185,12 @@ public partial class DetailedAccommodationPage : Page
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        if(NavigationService.CanGoBack)
+        NavigateToPreviousPage();
+    }
+
+    private void NavigateToPreviousPage()
+    {
+        if (NavigationService.CanGoBack)
         {
             NavigationService.GoBack();
         }

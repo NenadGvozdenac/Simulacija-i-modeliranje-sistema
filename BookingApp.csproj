@@ -20,22 +20,17 @@
     <None Remove="Resources\Assets\icon-exit.png" />
     <None Remove="Resources\Assets\language-line.512x481.png" />
     <None Remove="Resources\Assets\language.png" />
+    <None Remove="Resources\Assets\location.png" />
     <None Remove="Resources\Assets\map-marker.171x256.png" />
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
-    <None Remove="Resources\Assets\reception.png" />
-    <None Remove="Resources\Assets\return.png" />
-    <None Remove="Resources\Assets\search.512x511.png" />
+    <None Remove="Resources\Assets\star.png" />
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
     <None Remove="Resources\Assets\users.png" />
     <None Remove="Resources\Assets\view.png" />
-    <None Remove="Resources\Images\AccommodationImages\110053208.jpg" />
-    <None Remove="Resources\Images\AccommodationImages\110053374.jpg" />
     <None Remove="Resources\Images\AccommodationImages\20221120_100611.jpg" />
-    <None Remove="Resources\Images\AccommodationImages\91868346.jpg" />
     <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
-    <None Remove="Resources\Images\AccommodationImages\default_house.png" />
     <None Remove="Resources\Images\AccommodationImages\eighth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\fifth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\first.jpg" />
@@ -84,19 +79,13 @@
     <Content Include="Resources\Assets\language.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\map-marker.171x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\pencil.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Assets\reception.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Assets\return.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Assets\search.512x511.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\three_dots.png">
@@ -116,9 +105,6 @@
   <ItemGroup>
     <Content Include="Resources\Assets\Owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\AccommodationImages\eighth.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\AccommodationImages\fifth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -144,7 +130,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\GuestModels\" />
     <Folder Include="Model\TouristModels\" />
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />

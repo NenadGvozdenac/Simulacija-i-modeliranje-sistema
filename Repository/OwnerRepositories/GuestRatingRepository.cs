@@ -12,7 +12,7 @@ namespace BookingApp.Repository.OwnerRepositories
     public class GuestRatingRepository
     {
         private const string FilePath = "../../../Resources/Data/guest_ratings.csv";
-
+        private readonly static Lazy<GuestRatingRepository> instance = new Lazy<GuestRatingRepository>(() => new GuestRatingRepository());
         private readonly Serializer<GuestRating> _serializer;
 
         private List<GuestRating> _guestRatings;
@@ -21,6 +21,11 @@ namespace BookingApp.Repository.OwnerRepositories
         {
             _serializer = new Serializer<GuestRating>();
             _guestRatings = _serializer.FromCSV(FilePath);
+        }
+
+        public static GuestRatingRepository GetInstance()
+        {
+            return instance.Value;
         }
 
         public List<GuestRating> GetGuestRatingsByAccommodationId(int accommodationId)

@@ -358,10 +358,12 @@ namespace BookingApp.View.OwnerViews
 
                 string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
 
-                // Uncomment to add files from other folders.
-                // System.IO.File.Copy(selectedImagePath, destinationPath, true);
+                if (!System.IO.File.Exists(destinationPath))
+                {
+                    System.IO.File.Copy(selectedImagePath, destinationPath, true);
+                }
 
-                ImageURLTextBox.Text = destinationPath;
+                ImageURL = destinationPath;
             }
         }
     }

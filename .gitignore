@@ -350,13 +350,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-
-# Resource files, data files
-/Resources/Data/accommodations.csv
-/Resources/Data/accommodation_images.csv
-/Resources/Data/accommodation_reservations.csv
-/Resources/Data/guest_ratings.csv
-/Resources/Data/reservations.csv
-/Resources/Data/users.csv
-/Resources/Data/languages.csv
-/Resources/Data/locations.csv

@@ -5,7 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View.TouristViews"
         mc:Ignorable="d"
-        Title="TouristMainWindow" Height="450" Width="800">
+        ResizeMode="NoResize"
+        Title="TouristMainWindow" WindowStartupLocation="CenterScreen" Height="650" Width="1000">
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Container" Grid.Row="0">
+            <Frame x:Name="TouristWindowFrame" NavigationUIVisibility="Hidden"/>
+            <!--<local:Accommodations x:Name="accommodation" Visibility="Collapsed"></local:Accommodations>-->
+            <!--<local:MyReservations x:Name="myreservation" Visibility="Collapsed"></local:MyReservations>-->
+            <!--<local:AccommodationDetails x:Name="accommodationDetails" Visibility="Collapsed"/>-->
+        </Grid>
+
+    </Grid>
     
 </Window>

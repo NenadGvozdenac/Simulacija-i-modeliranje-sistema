@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.MutualModels;
+﻿    using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace BookingApp.View.OwnerViews
     {
         private Accommodation _accommodation;
         private GuestRating _guestRating;
-        private User _user;
+        private User _guestUser;
 
         private string accommodationName;
         public string AccommodationName
@@ -161,19 +161,17 @@ namespace BookingApp.View.OwnerViews
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        // The method to invoke the property changed event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public DetailedGuestReviewPage(User user, GuestRating guestRating, Accommodation accommodation)
+        public DetailedGuestReviewPage(User guestUser, GuestRating guestRating, Accommodation accommodation)
         {
             InitializeComponent();
-            _user = user;
             _guestRating = guestRating;
             _accommodation = accommodation;
+            _guestUser = guestUser;
 
             DataContext = this;
             SetupProperties();
@@ -182,7 +180,7 @@ namespace BookingApp.View.OwnerViews
         private void SetupProperties()
         {
             AccommodationName = string.Format("{0}", _accommodation.Name);
-            GuestUsername = string.Format("{0}", _user.Username);
+            GuestUsername = string.Format("{0}", _guestUser.Username);
             CostPerNight = string.Format("${0} per night", _accommodation.Price.ToString());
             Location = string.Format("{0}", _accommodation.Location.ToString());
             TypeOfAccommodation = string.Format("{0}", _accommodation.Type.ToString());

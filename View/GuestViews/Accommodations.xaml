@@ -14,7 +14,7 @@
 
 
         <!--Left Column-->
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Background="#FFF8F0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
@@ -24,7 +24,7 @@
                 <Border BorderBrush="Black" BorderThickness="0 0 1 1"></Border>
 
                 <TextBlock Margin="24,17,10,50" FontSize="25">Accomodation</TextBlock>
-                <TextBlock Margin="62,50,62,17" FontSize="25">search</TextBlock>
+                <TextBlock Margin="24,50,100,17" FontSize="25">filters:</TextBlock>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -40,22 +40,43 @@
 
                 <Grid Grid.Row="0">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
-                    <TextBox HorizontalAlignment="Left" Margin="15,57,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="159" Grid.Row="0"
-                        Text="{Binding SearchAccommodation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="18"/>
-                    <Label Content="Enter the name of &#x0a;the accommodation" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,10,0,0"/>
+
+                    <Border Margin="5 5 5 5" BorderThickness="2" BorderBrush="#575E75" CornerRadius="17" Background="#9DD9D2"/>
+
+                    <TextBox Background="#FFF8F0" FontFamily="Bahnschrift Light" HorizontalAlignment="Left" Margin="15,54,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Grid.Row="0"
+                        Text="{Binding SearchAccommodation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="21"/>
+                    <Label Foreground="White" Content="Enter the name of &#x0a;the accommodation" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,10,0,0" FontFamily="Bahnschrift Light">
+                        <Label.Effect>
+                            <DropShadowEffect ShadowDepth="1" Opacity="2"/>
+                        </Label.Effect>
+                    </Label>
                 </Grid>
 
                 <Grid Grid.Row="1">
+                    <Border Margin="5 5 5 5" BorderThickness="2" BorderBrush="#575E75" CornerRadius="15" Background="#9DD9D2"/>
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
-                    <Label Content="Choose a location" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,4,0,0"/>
-                    <Label Content="Tap to select&#x0a;a country" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,29,0,0"/>
-                    <ComboBox x:Name="CountryComboBox" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" HorizontalAlignment="Left" Margin="91,39,0,0" VerticalAlignment="Top" Width="90"/>
-                    <Label Content="Tap to select&#x0a;a city" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,71,0,0"/>
+                    <Label Foreground="#FFF8F0" FontFamily="Bahnschrift Light" Content="Choose a location" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="15,15,0,0">
+                        <Label.Effect>
+                            <DropShadowEffect ShadowDepth="1" Opacity="2"/>
+                        </Label.Effect>
+                    </Label>
+                    <Label Content="Country" Foreground="White" FontFamily="Bahnschrift Light" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,44,0,0">
+                        <Label.Effect>
+                            <DropShadowEffect ShadowDepth="1" Opacity="2"/>
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox x:Name="CountryComboBox" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" HorizontalAlignment="Left" Margin="91,45,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Label Content="City" Foreground="White" FontFamily="Bahnschrift Light" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,81,0,0">
+                        <Label.Effect>
+                            <DropShadowEffect ShadowDepth="1" Opacity="2"/>
+                        </Label.Effect>
+                    </Label>
                     <ComboBox x:Name="CityComboBox" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" IsEnabled="False" HorizontalAlignment="Left" Margin="91,81,0,0" VerticalAlignment="Top" Width="90"/>
                 </Grid>
 
                 <Grid Grid.Row="2">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <Border Margin="5 5 5 5" BorderThickness="2" BorderBrush="#575E75" CornerRadius="15" Background="#9DD9D2"/>
                     <Label Content="Select the type or types&#x0a;of the accommodation" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,16,0,0"/>
                     <CheckBox x:Name="checkBoxApartment" Content="Apartment" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,69,0,0" VerticalAlignment="Top"/>
                     <CheckBox x:Name="checkBoxHouse" Content="House" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,89,0,0" VerticalAlignment="Top"/>
@@ -64,6 +85,7 @@
 
                 <Grid Grid.Row="3">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <Border Margin="5 5 5 5" BorderThickness="2" BorderBrush="#575E75" CornerRadius="15" Background="#9DD9D2"/>
                     <Label Content="Number of guests" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,4,0,0"/>
                     <Label Content="Type in or use the&#x0a;arrows to choose&#x0a;the number of guests" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0"/>
                     <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0 13 15 0">
@@ -76,7 +98,8 @@
                             <RowDefinition Height="13" />
                         </Grid.RowDefinitions>
 
-                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="GuestNumber_TextChanged"/> <!--PreviewKeyDown="GuestNumber_PreviewKeyDown" PreviewKeyUp="GuestNumber_PreviewKeyUp"-->
+                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="GuestNumber_TextChanged"/>
+                        <!--PreviewKeyDown="GuestNumber_PreviewKeyDown" PreviewKeyUp="GuestNumber_PreviewKeyUp"-->
                         <RepeatButton Name="GuestNumberUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click">5</RepeatButton>
                         <RepeatButton Name="GuestNumberDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="GuestNumberDown_Click">6</RepeatButton>
 
@@ -84,6 +107,7 @@
                 </Grid>
 
                 <Grid Grid.Row="4">
+                    <Border Margin="5 5 5 5" BorderThickness="2" BorderBrush="#575E75" CornerRadius="15" Background="#9DD9D2"/>
                     <Label Content="Days of stay" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,4,0,0"/>
                     <Label Content="Type in or use the&#x0a;arrows to choose&#x0a;how many days will&#x0a;you stay" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,31,0,0"/>
                     <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0 13 15 0">
@@ -106,7 +130,7 @@
         </Grid>
 
         <!--Right Column-->
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="#FFF8F0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>

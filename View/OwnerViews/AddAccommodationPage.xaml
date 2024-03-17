@@ -56,7 +56,7 @@
 
             <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
                 <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox ItemsSource="{Binding AccommodationTypes}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0"/>
+                <ComboBox ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding Type}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1">

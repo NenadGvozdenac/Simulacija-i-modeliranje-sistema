@@ -1,4 +1,5 @@
-﻿using BookingApp.Serializer;
+﻿using BookingApp.Miscellaneous;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +32,13 @@ public class AccommodationReservation : ISerializable
         UserId = Convert.ToInt32(values[1]);
         AccommodationId = Convert.ToInt32(values[2]);
         GuestsNumber = Convert.ToInt32(values[3]);
-        FirstDateOfStaying = Convert.ToDateTime(values[4]);
-        LastDateOfStaying = Convert.ToDateTime(values[5]);
+        FirstDateOfStaying = DateParser.Parse(values[4]);
+        LastDateOfStaying = DateParser.Parse(values[5]);
     }
 
     public string[] ToCSV()
     {
-        string[] csvValues = {Id.ToString(), UserId.ToString(), AccommodationId.ToString(), GuestsNumber.ToString(),FirstDateOfStaying.ToString(), LastDateOfStaying.ToString()};
+        string[] csvValues = {Id.ToString(), UserId.ToString(), AccommodationId.ToString(), GuestsNumber.ToString(),DateParser.ToString(FirstDateOfStaying), DateParser.ToString(LastDateOfStaying)};
         return csvValues;
     }
 }

@@ -28,20 +28,16 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
     public partial class PendingGuestReviews : UserControl
     {
         private GuestRatingRepository _guestRatingRepository;
-        private UserRepository _userRepository;
         private AccommodationRepository _accommodationRepository;
         private ObservableCollection<GuestRating> _guestRatings;
-        private LocationRepository _locationRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
         private User _user;
-        public PendingGuestReviews(User user, UserRepository userRepository, GuestRatingRepository guestRatingRepository, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public PendingGuestReviews(User user)
         {
             _user = user;
-            _guestRatingRepository = guestRatingRepository;
-            _userRepository = userRepository;
-            _accommodationRepository = accommodationRepository;
-            _locationRepository = locationRepository;
-            _accommodationReservationRepository = accommodationReservationRepository;
+            _guestRatingRepository = GuestRatingRepository.GetInstance();
+            _accommodationRepository = AccommodationRepository.GetInstance();
+            _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
 
             _guestRatings = new ObservableCollection<GuestRating>();
 
@@ -58,7 +54,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
                 foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
                 {
                     AccommodationReservation accommodationReservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
-                    if(guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying.Day < DateTime.Now.Day)
+                    if(guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying <= DateTime.Now)
                     {
                         guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
                         _guestRatings.Add(guestRating);
@@ -82,7 +78,7 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             {
                 DateTime lastDateOfStaying = guestRating.Reservation.LastDateOfStaying;
                 bool isEnabled = lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
-                GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, _userRepository, _accommodationRepository, _guestRatingRepository, _locationRepository, isEnabled);
+                GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, isEnabled);
                 reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
                 reviewedGuestReview.RefreshPage += (sender, e) => Update();
                 Reviews.Children.Add(reviewedGuestReview);

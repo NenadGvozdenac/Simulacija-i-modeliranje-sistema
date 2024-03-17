@@ -28,17 +28,16 @@ namespace BookingApp.View.OwnerViews.Components
         private GuestRating _guestRating;
         private UserRepository _userRepository;
         private AccommodationRepository _accommodationRepository;
-        private GuestRatingRepository _guestRatingRepository;
         private LocationRepository _locationRepository;
         public EventHandler RefreshPage { get; internal set; }
 
-        public GuestRatingControlPending(GuestRating guestRating, UserRepository userRepository, AccommodationRepository accommodationRepository, GuestRatingRepository guestRatingRepository, LocationRepository locationRepository, bool isPencilEnabled)
+        public GuestRatingControlPending(GuestRating guestRating, bool isPencilEnabled)
         {
             _guestRating = guestRating;
-            _userRepository = userRepository;
-            _accommodationRepository = accommodationRepository;
-            _guestRatingRepository = guestRatingRepository;
-            _locationRepository = locationRepository;
+
+            _userRepository = UserRepository.GetInstance();
+            _accommodationRepository = AccommodationRepository.GetInstance();
+            _locationRepository = LocationRepository.GetInstance();
 
             InitializeComponent();
 
@@ -62,7 +61,7 @@ namespace BookingApp.View.OwnerViews.Components
         {
             Accommodation accommodation = _accommodationRepository.GetById(_guestRating.AccommodationId);
             accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
-            AddGuestRatingPage addGuestRating = new AddGuestRatingPage(accommodation, _guestRating, _guestRatingRepository);
+            AddGuestRatingPage addGuestRating = new AddGuestRatingPage(accommodation, _guestRating);
             addGuestRating.NavigationCompleted += NavigationCompleted;
             NavigationService.GetNavigationService(this).Navigate(addGuestRating);
         }

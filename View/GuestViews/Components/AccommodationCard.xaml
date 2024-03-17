@@ -12,6 +12,7 @@
         CornerRadius="25"
         Background="#545E75"
         MouseLeftButtonDown="SeeMore_Click"
+        BorderThickness="4" BorderBrush="#9DD9D2"
         Cursor="Hand">
         <Border.Effect>
             <DropShadowEffect Opacity="0.5"/>
@@ -24,7 +25,7 @@
 
             <Grid Grid.Column="0">
                 <TextBlock Foreground="White" FontFamily="Cascadia Mono SemiBold" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Korisnik nije&#10;prilozio sliku" VerticalAlignment="Center"/>
-                <Border CornerRadius="25 0 0 25" BorderThickness="0 0 1 0" BorderBrush="#FFF8F0">
+                <Border CornerRadius="25 0 0 25" BorderThickness="0 0 4 0" BorderBrush="#9DD9D2">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Images[0].Path}" Stretch="Fill"/>
                     </Border.Background>
@@ -32,7 +33,6 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <Border />
                 <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="29" TextWrapping="Wrap" Foreground="White" Text="{Binding Name}" VerticalAlignment="Top" Height="37" Width="458" FontFamily="Bahnschrift Light">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
@@ -50,7 +50,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="405,104,0,0" TextAlignment="Right" Text="{Binding Price, StringFormat=${0:0.00}}" VerticalAlignment="Top" Width="155" FontSize="30" Height="40">
+                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="397,100,0,0" TextAlignment="Right" Text="{Binding Price, StringFormat=${0:0.00}}" VerticalAlignment="Top" Width="155" FontSize="30" Height="40">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>

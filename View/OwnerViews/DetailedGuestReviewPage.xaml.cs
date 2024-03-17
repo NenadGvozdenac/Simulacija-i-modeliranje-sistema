@@ -193,11 +193,48 @@ namespace BookingApp.View.OwnerViews
             Comment = string.Format("{0}", _guestRating.Comment);
         }
 
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateBack();
+        }
+
+        private void NavigateBack()
         {
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
+            }
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Window.GetWindow(this).Close();
+        }
+        private void ShowRightNavbar()
+        {
+            RightNavbar.Visibility = Visibility.Visible;
+            Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
+        }
+
+        private void HideRightNavbar()
+        {
+            RightNavbar.Visibility = Visibility.Collapsed;
+            Navbar.ColumnDefinitions[2].Width = new GridLength(0);
+        }
+
+        public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
+        {
+            if (RightNavbar.Visibility == Visibility.Collapsed)
+            {
+                ShowRightNavbar();
+            }
+            else
+            {
+                HideRightNavbar();
             }
         }
     }

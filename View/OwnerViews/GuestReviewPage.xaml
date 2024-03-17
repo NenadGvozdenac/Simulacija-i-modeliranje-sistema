@@ -34,9 +34,9 @@
             <ScrollViewer Grid.Column="1" x:Name="MainPanel">
             </ScrollViewer>
             <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
-                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
-                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5"/>
+                <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
+                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
+                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Logout_Click"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">

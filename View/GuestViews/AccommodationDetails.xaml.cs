@@ -1,4 +1,5 @@
-﻿using BookingApp.Model.GuestModels;
+﻿using BookingApp.Miscellaneous;
+using BookingApp.Model.GuestModels;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
@@ -200,7 +201,7 @@ public partial class AccommodationDetails : UserControl
 
     private void ConfrimReservation_Click(object sender, RoutedEventArgs e)
     {
-        string regex = @"(\d{2}-[A-Za-z]{3}-\d{2})\s-\s(\d{2}-[A-Za-z]{3}-\d{2})";
+        string regex = @"(\d{1,2}\.\d{1,2}\.\d{4}\.)\s-\s(\d{1,2}\.\d{1,2}\.\d{4}\.)";
         Match match = Regex.Match(SelectedDate, regex);
 
         DateTime firstDate;
@@ -211,8 +212,8 @@ public partial class AccommodationDetails : UserControl
             string startDateString = match.Groups[1].Value;
             string endDateString = match.Groups[2].Value;
 
-            firstDate = DateTime.ParseExact(startDateString, "dd-MMM-yy", null);
-            lastDate = DateTime.ParseExact(endDateString, "dd-MMM-yy", null);
+            firstDate = DateParser.Parse(startDateString);
+            lastDate = DateParser.Parse(endDateString);
 
             reservation = new AccommodationReservation(_user.Id, selectedAccommodation.Id, Convert.ToInt32(GuestNumber.Text), firstDate, lastDate);
 

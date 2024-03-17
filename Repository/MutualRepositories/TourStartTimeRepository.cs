@@ -1,6 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Model.PathfinderModels;
 using BookingApp.Serializer;
+using BookingApp.View.PathfinderViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository.MutualRepositories
 {
-    internal class TourStartTimeRepository
+   public class TourStartTimeRepository
     {
         private const string FilePath = "../../../Resources/Data/tourDates.csv";
 
@@ -53,6 +54,12 @@ namespace BookingApp.Repository.MutualRepositories
             }
         }
 
+        public List<TourStartTime> GetAll()
+        {
+            return _times;
+        }
+
+
         public int NextId()
         {
             _times = _serializer.FromCSV(FilePath);
@@ -68,13 +75,20 @@ namespace BookingApp.Repository.MutualRepositories
             return _times.Where(a => a.TourId == tourId).ToList();
         }
 
+        public TourStartTime GetByTourStartTimeAndId(DateTime tourTime, int TourId)  
+        {
+            return _times.First(a => a.Time == tourTime && a.TourId == TourId);
+        }
+
+
+
         public void RemoveByTourId(int tourId)
         {
             _times.RemoveAll(a => a.TourId == tourId);
             _serializer.ToCSV(FilePath, _times);
         }
 
-        public List<TourStartTime> GetImagesByAccommodationId(int id)
+        public List<TourStartTime> GetTimeByTourId(int id)
         {
             return _times.Where(a => a.TourId == id).ToList();
         }

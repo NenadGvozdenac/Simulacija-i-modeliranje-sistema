@@ -11,7 +11,7 @@
             <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick"></MenuItem>
 
 
-            <MenuItem Header="Edit tour (F2)" Foreground="#f2f6fa"></MenuItem>
+            <MenuItem Header="Daily tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick"></MenuItem>
 
 
             <MenuItem Header="Cancel tour (F3)" Foreground="#f2f6fa"></MenuItem>

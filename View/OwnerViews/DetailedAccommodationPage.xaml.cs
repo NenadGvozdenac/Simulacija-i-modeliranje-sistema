@@ -158,28 +158,38 @@ public partial class DetailedAccommodationPage : Page
 
     private void LoadImages(List<AccommodationImage> images)
     {
-        foreach (var image in images)
+        foreach (AccommodationImage image in images)
         {
-            string relativeImagePath = image.Path;
-            string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
+            AddImageToImagePanel(image);
+        }
+    }
 
-            using (FileStream stream = new FileStream(absoluteImagePath, FileMode.Open, FileAccess.Read))
+    private void AddImageToImagePanel(AccommodationImage image)
+    {
+        string relativeImagePath = image.Path;
+        string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
+
+        AddToPanel(absoluteImagePath);
+    }
+
+    private void AddToPanel(string absoluteImagePath)
+    {
+        using (FileStream stream = new FileStream(absoluteImagePath, FileMode.Open, FileAccess.Read))
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = stream;
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.EndInit();
+
+            ImagesPanel.Children.Add(new Image
             {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = stream;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-
-                ImagesPanel.Children.Add(new Image
-                {
-                    Source = bitmapImage,
-                    Width = 250,
-                    Height = 200,
-                    Margin = new Thickness(5),
-                    Stretch = Stretch.Fill
-                });
-            }
+                Source = bitmapImage,
+                Width = 250,
+                Height = 200,
+                Margin = new Thickness(5),
+                Stretch = Stretch.Fill
+            });
         }
     }
 

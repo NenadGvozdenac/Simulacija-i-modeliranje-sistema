@@ -265,27 +265,40 @@ namespace BookingApp.View.OwnerViews
             accommodation.Price = AccommodationPrice;
             accommodation.OwnerId = _user.Id;
             accommodation.Images = Images.ToList();
-            _accommodationRepository.Add(accommodation);
 
+            AddImages(accommodation);
+
+            _accommodationRepository.Add(accommodation);
+        }
+
+        private void AddImages(Accommodation accommodation)
+        {
             foreach (AccommodationImage image in Images)
             {
                 image.Id = _imageRepository.NextId();
                 image.AccommodationId = accommodation.Id;
                 _imageRepository.Add(image);
             }
-
-            NavigateToPreviousPage();
         }
 
         private bool IsDataValid()
         {
+            return AreAllStringsFilled() && AreAllNumbersOK();
+        }
+
+        private bool AreAllNumbersOK()
+        {
+            return MaximumNumberOfGuests > 0
+                && MinimumNumberOfDaysForReservation > 0
+                && DaysBeforeReservationIsFinal > 0;
+        }
+
+        private bool AreAllStringsFilled()
+        {
             return !string.IsNullOrEmpty(AccommodationName)
                 && !string.IsNullOrEmpty(Country)
                 && !string.IsNullOrEmpty(City)
-                && !string.IsNullOrEmpty(Type)
-                && MaximumNumberOfGuests > 0
-                && MinimumNumberOfDaysForReservation > 0
-                && DaysBeforeReservationIsFinal > 0;
+                && !string.IsNullOrEmpty(Type);
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
@@ -352,7 +365,7 @@ namespace BookingApp.View.OwnerViews
             if (openFileDialog.ShowDialog() == true)
             {
                 string selectedImagePath = openFileDialog.FileName;
-                string destinationFolder = "../../../Resources/Images/AccommodationImages/"; // Update this with your desired destination folder path
+                string destinationFolder = "../../../Resources/Images/AccommodationImages/";
 
                 string fileName = System.IO.Path.GetFileName(selectedImagePath);
 

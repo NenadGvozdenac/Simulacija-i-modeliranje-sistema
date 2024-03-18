@@ -184,7 +184,7 @@ namespace BookingApp.View.OwnerViews
             CostPerNight = string.Format("${0} per night", _accommodation.Price.ToString());
             Location = string.Format("{0}", _accommodation.Location.ToString());
             TypeOfAccommodation = string.Format("{0}", _accommodation.Type.ToString());
-            ReservationDays = string.Format("{0} days", _guestRating.Reservation.LastDateOfStaying.Day - _guestRating.Reservation.FirstDateOfStaying.Day);
+            ReservationDays = string.Format("{0} days", (_guestRating.Reservation.LastDateOfStaying - _guestRating.Reservation.FirstDateOfStaying).Days);
             NumberOfGuests = string.Format("{0}", _guestRating.Reservation.GuestsNumber);
             DateTimespan = string.Format("{0} - {1}", _guestRating.Reservation.FirstDateOfStaying.ToShortDateString(), _guestRating.Reservation.LastDateOfStaying.ToShortDateString());
             CurrentRating = string.Format("{0:F2} / 10.00", _accommodation.AverageReviewScore);
@@ -192,8 +192,6 @@ namespace BookingApp.View.OwnerViews
             Respectfulness = string.Format("{0:F2} / 5,00", _guestRating.Respectfulness);
             Comment = string.Format("{0}", _guestRating.Comment);
         }
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

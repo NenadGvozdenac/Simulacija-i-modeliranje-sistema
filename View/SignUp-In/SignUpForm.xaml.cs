@@ -76,61 +76,52 @@ public partial class SignUpForm : Window
         _repository = new UserRepository();
     }
 
-    /// <summary>
-    /// The event handler for the sign up button
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void SignUp(object sender, RoutedEventArgs e)
     {
-        // If the username is empty, reset the errors
         if (string.IsNullOrEmpty(Username))
         {
             ResetErrors();
             return;
         }
 
-        // Get the user by the username
         User user = _repository.GetByUsername(Username);
 
-        // If the user is not null, display the error message
-        if (user != null)
+        if (IsBadPassword(user))
         {
-            ResetErrors();
-            DisplayUsernameErrorMessage();
-            ResetTextBoxes();
+            IsError();
             return;
         }
 
-        // If the password and the confirm password are not the same, display the error message
-        if (PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
-        {
-            ResetErrors();
-            DisplayPasswordsNotSameErrorMessage();
-            ResetTextBoxes();
-            return;
-        }
+        AddUser();
+        OpenSignInForm();
+    }
 
-        // Create a new user
-        User newUser = new User(Username, Password, FindCurrentlyActivatedRadioButton());
-        newUser.Id = _repository.NextId();
-
-        // Add the user to the database
-        _repository.Add(newUser);
-
-        // Show the success message box
-        MessageBox.Show("User created!");
-
-        // Open the sign in form
+    private void OpenSignInForm()
+    {
         SignInForm signInForm = new SignInForm();
         signInForm.Show();
         Close();
     }
 
-    /// <summary>
-    /// Display the error message for the username.
-    /// Invoked when the username is already taken.
-    /// </summary>
+    private void AddUser()
+    {
+        User user = new User(Username, Password, FindCurrentlyActivatedRadioButton());
+        user.Id = _repository.NextId();
+        _repository.Add(user);
+    }
+
+    private bool IsBadPassword(User user)
+    {
+        return user != null || PasswordTextBox.Password != ConfirmPasswordTextBox.Password;
+    }
+
+    private void IsError()
+    {
+        ResetErrors();
+        DisplayPasswordsNotSameErrorMessage();
+        ResetTextBoxes();
+    }
+
     private void DisplayUsernameErrorMessage()
     {
         ErrorMessageUsername.Visibility = Visibility.Visible;
@@ -215,6 +206,14 @@ public partial class SignUpForm : Window
         string password = passwordBox.Password;
 
         // Show/hide the password placeholder
+        ShowHidePasswordPlaceholder(passwordBox, password);
+
+        // Set the password property
+        Password = passwordBox.Password;
+    }
+
+    private void ShowHidePasswordPlaceholder(PasswordBox passwordBox, string password)
+    {
         if (passwordBox.Name == "PasswordTextBox")
         {
             PasswordPlaceholder.Visibility = string.IsNullOrEmpty(password) ? Visibility.Visible : Visibility.Hidden;
@@ -223,12 +222,9 @@ public partial class SignUpForm : Window
         {
             ConfirmPasswordPlaceholder.Visibility = string.IsNullOrEmpty(password) ? Visibility.Visible : Visibility.Hidden;
         }
-
-        // Set the password property
-        Password = passwordBox.Password;
     }
 
-    private void CloseApplication(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void CloseApplication(object sender, MouseButtonEventArgs e)
     {
         Close();
     }

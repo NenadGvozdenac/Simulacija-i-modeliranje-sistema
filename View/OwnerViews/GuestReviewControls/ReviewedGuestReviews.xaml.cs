@@ -51,20 +51,20 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             {
                 foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
                 {
-                    if(guestRating.IsChecked == true)
-                    {
-                        guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
-                        _guestRatings.Add(guestRating);
-                    }
+                    AddGuestRatingIfChecked(guestRating);
                 }
             }
 
-            foreach (GuestRating guestRating in _guestRatings)
+            AddReviews();
+        }
+
+        private void AddGuestRatingIfChecked(GuestRating guestRating)
+        {
+            if (guestRating.IsChecked == true)
             {
                 guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+                _guestRatings.Add(guestRating);
             }
-
-            AddReviews();
         }
 
         private void AddReviews()

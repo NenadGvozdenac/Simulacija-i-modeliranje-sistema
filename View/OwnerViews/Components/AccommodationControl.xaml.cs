@@ -93,38 +93,36 @@ namespace BookingApp.View.OwnerViews.Components
 
         private void LoadImageFromFile()
         {
-            try
+            string relativeImagePath = FindRelativeImagePath(Accommodation.Images);
+
+            string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
+
+            InsertImage(absoluteImagePath);
+        }
+
+        private string FindRelativeImagePath(List<AccommodationImage> images)
+        {
+            if (Accommodation.Images.Count == 0)
             {
-                string relativeImagePath = Accommodation.Images[0].Path;
-                string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
-
-                using (FileStream stream = new FileStream(absoluteImagePath, FileMode.Open, FileAccess.Read))
-                {
-                    BitmapImage bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.StreamSource = stream;
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad; // Ensure the image is fully loaded into memory
-                    bitmapImage.EndInit();
-
-                    Image.Source = bitmapImage;
-                }
+                return "../../../Resources/Assets/default_house.png";
             }
-            catch
+            else
             {
-                string relativeImagePath = "../../../Resources/Assets/default_house.png";
+                return Accommodation.Images[0].Path;
+            }
+        }
 
-                string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
+        private void InsertImage(string absoluteImagePath)
+        {
+            using (FileStream stream = new FileStream(absoluteImagePath, FileMode.Open, FileAccess.Read))
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = stream;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
 
-                using (FileStream stream = new FileStream(absoluteImagePath, FileMode.Open, FileAccess.Read))
-                {
-                    BitmapImage bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.StreamSource = stream;
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad; // Ensure the image is fully loaded into memory
-                    bitmapImage.EndInit();
-
-                    Image.Source = bitmapImage;
-                }
+                Image.Source = bitmapImage;
             }
         }
 

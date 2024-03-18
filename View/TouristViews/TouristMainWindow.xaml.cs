@@ -45,6 +45,11 @@ namespace BookingApp.View.TouristViews
             TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
+        public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists)
+        {
+            Tour detailedTour = tour;
+            TouristWindowFrame.Content = new TourDatesUserControl(detailedTour, guestNumber, tourists);
+        }
         private void Update(User user)
         {
             ToursUserControl = new Tours(user);

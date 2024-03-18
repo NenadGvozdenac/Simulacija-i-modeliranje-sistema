@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.View.TouristViews"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1000">
+             d:DesignHeight="650" d:DesignWidth="1000" Background="LightGray">
     <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
 
-        <Grid Background="White">
+        <Grid Background="LightGray">
             <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -20,7 +20,7 @@
                     <Grid Grid.Row="0">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="156" Height="80" Margin="33,0,0,0"/>
                         <Button Click="Return_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
-                            <Image x:Name="Image" Source="..\..\..\Resources\Assets\return.png" Height="32" Width="39"/>
+                            <Image x:Name="Image" Source="../../Resources\Assets\return.512x467.png" Height="32" Width="39"/>
                         </Button>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -39,25 +39,25 @@
                             <ColumnDefinition Width="500"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65*"/>
+                                <RowDefinition Height="62*"/>
+                            </Grid.RowDefinitions>
                             <TextBlock Text="Reservations:" FontSize="25" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,0,0,0"/>
                             <TextBlock Text="Choose a number of guests" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,49,0,0" Height="45" Width="463"/>
-                            <TextBox x:Name="GuestNumberText" TextChanged="GuestNumber_TextChanged" Margin="285,49,176,189"/>
-                            <RepeatButton Name="GuestNumberUp" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click" Margin="329,48,186,205">5</RepeatButton>
-                            <RepeatButton Name="GuestNumberDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="15" VerticalAlignment="Bottom" Click="GuestNumberDown_Click" Margin="329,0,186,189">6</RepeatButton>
+                            <TextBox x:Name="GuestNumberText" TextChanged="GuestNumber_TextChanged" Margin="285,49,188,50"/>
 
-                            <TextBlock Text="Enter guest's name" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="23,0,0,0"/>
-                            <TextBox x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="233,0,0,0" Height="27" Width="113"/>
+                            <TextBlock Text="Enter guest's name" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,114,0,0" Grid.RowSpan="2"/>
+                            <TextBox x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,115,0,0" Height="25" Width="113" Grid.RowSpan="2"/>
 
-                            <TextBlock Text="Enter guest's surname" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,180,0,0" Height="26" Width="213"/>
-                            <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="214" Margin="254,174,0,0"/>
+                            <TextBlock Text="Enter guest's surname" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,41,0,0" Height="26" Width="213" Grid.Row="1"/>
+                            <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="214" Margin="241,45,0,0" Grid.Row="1"/>
 
-                            <TextBlock Text="Enter guest's age" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,229,0,0"/>
-                            <TextBox x:Name="GuestAge"  TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="38" Margin="198,223,0,0" Height="33"/>
-                            <RepeatButton Name="GuestAgeUp" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestAgeUp_Click" Margin="241,222,275,25">5</RepeatButton>
-                            <RepeatButton Name="GuestAgeDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="16" VerticalAlignment="Bottom" Click="GuestAgeDown_Click" Margin="241,0,275,9">6</RepeatButton>
+                            <TextBlock Text="Enter guest's age" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,83,0,0" Grid.Row="1"/>
+                            <TextBox x:Name="GuestAge"  TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="38" Margin="191,87,0,0" Height="23" Grid.Row="1"/>
 
                             <Button Click="AddTourist_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,27,0" Height="50" Width="59">
-                                <Image Source="../Resources/Assets/plus-symbol-button.png" Height="40" Width="49"/>
+                                <Image Source="../../Resources/Assets/plus-symbol-button.png" Height="40" Width="49"/>
                             </Button>
                         </Grid>
                         <Grid Grid.Column="1">
@@ -66,18 +66,17 @@
                                 <ColumnDefinition Width="0.3*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <DataGrid Name="TouristDataGrid" ItemsSource="{Binding _tourists}" AutoGenerateColumns="False">
+                                <DataGrid Name="TouristDataGrid" ItemsSource="{Binding _tourists}" CanUserAddRows="False" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                                         <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="*" />
                                         <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="*"/>
-                                        <!-- Dodajte kolone za druge osobine turista prema potrebi -->
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Button Click="ReserveTour_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="43" Width="44" Margin="24,10,0,0">
-                                    <Image Source="..\..\..\Resources\Assets\reception.png" Height="28" Width="28"/>
+                                <Button Click="ReserveTour_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="43" Width="44" Margin="14,10,0,0">
+                                    <Image Source="../../Resources/Assets/reserve.512x511.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="30"/>
                                 </Button>
                             </Grid>
                         </Grid>

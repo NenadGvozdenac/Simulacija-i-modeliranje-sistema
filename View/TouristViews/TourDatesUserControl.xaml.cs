@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,22 +36,28 @@ namespace BookingApp.View.TouristViews
         public List<TourStartTime> tourStartTimes { get; set; }
         public TourStartTime selectedTourStartTime {  get; set; }
         public List<Tourist> tourists { get; set; }
-        public TourDatesUserControl(Tour detailedTour, int guestNumber, List<Tourist> tourists)
+        public TourDatesUserControl(Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo)
         {
             InitializeComponent();
             selectedTour = detailedTour;
-            tourStartTimeRepository = new TourStartTimeRepository();
             tourStartTimes = new List<TourStartTime>();
             selectedTourStartTime = new TourStartTime();
-            touristRepository = new TouristRepository();
-            tourStarTimeRepository = new TourStartTimeRepository();
-            touristReservationRepository = new TouristReservationRepository();
+            this.touristRepository = touristRepository;
+            this.tourStartTimeRepository = tourStartTimeRepo;
+            this.touristReservationRepository = touristReservationRepository;
             this.guestNumber = guestNumber;
             this.tourists = tourists;
+            touristsAddedMessage.Visibility = Visibility.Hidden;
+
 
             findTourDates();
             tourDatesDataGrid.ItemsSource = tourStartTimes;
 
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void findTourDates()
@@ -89,16 +97,21 @@ namespace BookingApp.View.TouristViews
 
                     UpdateTourStartTime(tourStartTime);
                 }
-                MessageBox.Show("Dodati turisti!");
-            
+            touristsAddedMessage.Visibility = Visibility.Visible;
+            return;
         }
 
         private bool isTourGuestNumberValid()
         {
-            if (guestNumber > (selectedTour.Capacity - selectedTourStartTime.Guests))
+            if (tourists.Count() >= (selectedTour.Capacity - selectedTourStartTime.Guests)+1)
             {
                 noFreeSpacesMessage.Visibility = Visibility.Visible;
                 freeSpaces.Visibility = Visibility.Visible;
+                if(selectedTour.Capacity - selectedTourStartTime.Guests <= 0)
+                {
+                    alternativeTours.Visibility = Visibility.Visible;
+
+                }
                 freeSpaces.Text = (selectedTour.Capacity - selectedTourStartTime.Guests).ToString();
                 return false;
 
@@ -107,7 +120,7 @@ namespace BookingApp.View.TouristViews
         }
         private void UpdateTourStartTime(TourStartTime tourStartTime)
         {
-            tourStartTime.Guests = guestNumber;
+            tourStartTime.Guests += tourists.Count();
             tourStartTimeRepository.Update(tourStartTime);
         }
         private void CreateReservation(Tourist tourist, TourStartTime tourStartTime)
@@ -130,6 +143,16 @@ namespace BookingApp.View.TouristViews
             if (parentWindow is TouristMainWindow mainWindow)
             {
                 mainWindow.ShowTourDetails(selectedTour.Id);
+            }
+        }
+
+        private void AlternativeTours_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow is TouristMainWindow mainWindow)
+            {
+                mainWindow.ShowAlternativeTours(selectedTour.LocationId, selectedTour);
             }
         }
     }

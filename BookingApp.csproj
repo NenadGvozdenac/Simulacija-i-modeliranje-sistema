@@ -25,6 +25,7 @@
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
     <None Remove="Resources\Assets\plus-symbol-button.png" />
+    <None Remove="Resources\Assets\reserve.png" />
     <None Remove="Resources\Assets\return.512x467.png" />
     <None Remove="Resources\Assets\star.png" />
     <None Remove="Resources\Assets\three_dots.png" />
@@ -91,6 +92,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\plus-symbol-button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\reserve.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\return.512x467.png">

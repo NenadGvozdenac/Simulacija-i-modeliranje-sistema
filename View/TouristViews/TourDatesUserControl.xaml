@@ -38,7 +38,12 @@
         </Grid>
         <Grid Grid.Row="2">
             <Label x:Name="noFreeSpacesMessage" Visibility="Hidden" Content="Not enough free spaces on this tour:" Foreground="Red" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-            <TextBlock Visibility="Hidden" x:Name="freeSpaces" FontSize="20" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="343,0,0,0"/>
+            <TextBlock Visibility="Hidden" x:Name="freeSpaces" FontSize="20" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="343,0,0,0"/>
+            <TextBlock Visibility="Hidden" MouseLeftButtonDown="AlternativeTours_Click" x:Name="alternativeTours" FontSize="17" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="665,0,0,0">
+                <Underline>Alternative Tours</Underline>
+            </TextBlock>
+            <Label x:Name="touristsAddedMessage" Visibility="Hidden" Content="Tourists added!" FontWeight="DemiBold" Foreground="Green" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+
         </Grid>
     </Grid>
 </UserControl>

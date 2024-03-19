@@ -46,6 +46,8 @@
                             <TextBlock Text="Reservations:" FontSize="25" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,0,0,0"/>
                             <TextBlock Text="Choose a number of guests" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,49,0,0" Height="45" Width="463"/>
                             <TextBox x:Name="GuestNumberText" TextChanged="GuestNumber_TextChanged" Margin="285,49,188,50"/>
+                            <Label Visibility="Hidden" x:Name="numberHigherMessage" Foreground="Red" FontWeight="DemiBold" FontSize="13" Content="The number you entered is higher that tour's capacity!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,73,0,0"/>
+                            <Label Visibility="Hidden" x:Name="increaseNumberText" Foreground="Red" FontSize="13" FontWeight="DemiBold" Content="Number of guests is filled!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="323,77,0,0"/>
 
                             <TextBlock Text="Enter guest's name" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,114,0,0" Grid.RowSpan="2"/>
                             <TextBox x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,115,0,0" Height="25" Width="113" Grid.RowSpan="2"/>
@@ -54,11 +56,14 @@
                             <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="214" Margin="241,45,0,0" Grid.Row="1"/>
 
                             <TextBlock Text="Enter guest's age" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,83,0,0" Grid.Row="1"/>
-                            <TextBox x:Name="GuestAge"  TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="38" Margin="191,87,0,0" Height="23" Grid.Row="1"/>
+                            <TextBox x:Name="GuestAgeText"  TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="38" Margin="191,87,0,0" Height="23" Grid.Row="1"/>
+                            <Label x:Name="enterValidAgeMessage" Visibility="Hidden" FontSize="15" FontWeight="DemiBold" Foreground="Red" Content="Enter valid age!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="234,82,0,0" Grid.Row="1"/>
 
                             <Button Click="AddTourist_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,27,0" Height="50" Width="59">
                                 <Image Source="../../Resources/Assets/plus-symbol-button.png" Height="40" Width="49"/>
                             </Button>
+                            <Label x:Name="enterAllFieldsMessage" Visibility="Hidden" Content="Enter all fields!" FontWeight="DemiBold" FontSize="15" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,72,0,0"/>
+
                         </Grid>
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -76,8 +81,9 @@
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Button Click="ReserveTour_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="43" Width="44" Margin="14,10,0,0">
-                                    <Image Source="../../Resources/Assets/reserve.512x511.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="30"/>
+                                    <Image Source="../../Resources/Assets/reserve.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="30"/>
                                 </Button>
+                                <Label FontSize="15" x:Name="addTouristMessage" Visibility="Hidden" Content="Add Tourists!" Foreground="Red" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-3,58,0,0"/>
                             </Grid>
                         </Grid>
 

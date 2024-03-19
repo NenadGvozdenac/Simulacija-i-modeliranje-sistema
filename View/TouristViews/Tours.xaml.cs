@@ -112,15 +112,19 @@ namespace BookingApp.View.TouristViews
         private void FilteringLogic(string selectedCountry, string selectedCity, int selectedGuestNumber, int selectedDaysOfStay, string selectedLanguage)
         {
             FilteredTours = new ObservableCollection<Tour>(
-                    tours.Where(tour =>
-                        IsLanguageValid(tour, selectedLanguage) &&
-                        IsLocationValid(tour, selectedCountry, selectedCity) &&
-                        IsGuestNumberValid(tour, selectedGuestNumber) &&
-                        IsDaysOfStayValid(tour,selectedDaysOfStay)
-                    )
-                );
+            tours.Where(tour =>
+            IsTourValid(tour, selectedCountry, selectedCity, selectedGuestNumber, selectedDaysOfStay, selectedLanguage)
+        )
+    );
         }
 
+        private bool IsTourValid(Tour tour, string selectedCountry, string selectedCity, int selectedGuestNumber, int selectedDaysOfStay, string selectedLanguage)
+        {
+            return IsLanguageValid(tour, selectedLanguage) &&
+                   IsLocationValid(tour, selectedCountry, selectedCity) &&
+                   IsGuestNumberValid(tour, selectedGuestNumber) &&
+                   IsDaysOfStayValid(tour, selectedDaysOfStay);
+        }
         private bool IsLanguageValid(Tour tour, string selectedLanguage)
         {
             return string.IsNullOrWhiteSpace(selectedLanguage) || languageRepository.GetById(tour.LanguageId).ToString() == selectedLanguage;

@@ -35,6 +35,24 @@
             public TouristRepository touristRepository;
 
             private int _guestNumber;
+            private string name;
+            private string surname;
+            private int _guestAge;
+            public int GuestAge
+        {
+            get { return _guestAge; }
+            set
+            {
+                _guestAge = value;
+                if(_guestAge <= 0)
+                {
+                    enterValidAgeMessage.Visibility = Visibility.Visible;
+                }else
+                {
+                    enterValidAgeMessage.Visibility = Visibility.Hidden;
+                }
+            }
+        }
 
             public int GuestNumber
             {
@@ -42,11 +60,14 @@
                 set
                 {
                     _guestNumber = value;
-                    if (selectedTour != null && _guestNumber > selectedTour.Capacity)
-                    {
-                        MessageBox.Show("The number you entered is higher than tour's capacity");
-                        GuestNumberText.Text = selectedTour.Capacity.ToString();
-                    }
+                if (selectedTour != null && _guestNumber > selectedTour.Capacity)
+                {
+                    numberHigherMessage.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    numberHigherMessage.Visibility = Visibility.Hidden;
+                }
                 }
             }
 
@@ -60,20 +81,25 @@
                 ToursUserControl = new Tours(user);
                 _tourists = new ObservableCollection<Tourist>();
                 touristRepository = new TouristRepository();
-                //GuestNumber = int.Parse(GuestNumberText.Text);
 
                 tourNameTextBlock.Text = selectedTour.Name;
                 tourCountryTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).Country;
                 tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
+
+                HideMessages();
+
+
             }
 
-            private void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
+        private void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
             {
                 if (int.TryParse(GuestNumberText.Text, out int number))
                 {
                     GuestNumber = number;
                 }
-            }
+            //numberHigherMessage.Visibility = Visibility.Hidden;
+
+        }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
@@ -85,32 +111,48 @@
         }
 
         private void GuestAge_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(GuestAgeText.Text, out int result))
             {
-
+                GuestAge = result;
             }
-
-            private void AddTourist_Click(object sender, RoutedEventArgs e)
+            /*else
             {
-                // Dohvatanje vrednosti iz TextBox-ova
+                MessageBox.Show("Molimo unesite validan broj.");
+            }*/
+        }
 
-                if(GuestNumber < _tourists.Count()+1)
+        private void HideMessages()
+        {
+            enterAllFieldsMessage.Visibility = Visibility.Hidden;
+            enterValidAgeMessage.Visibility = Visibility.Hidden;
+            numberHigherMessage.Visibility = Visibility.Hidden;
+            increaseNumberText.Visibility = Visibility.Hidden;
+            addTouristMessage.Visibility = Visibility.Hidden;
+
+        }
+        private void AddTourist_Click(object sender, RoutedEventArgs e)
+        {
+            /*if (_guestNumber > selectedTour.Capacity)
+            {
+                numberHigherMessage.Visibility = Visibility.Visible;
+                return;
+            }*/
+
+            HideMessages();
+
+            
+
+                if (!areFieldsEmpty())
                 {
-                    MessageBox.Show("Increase number of tourists!");
-                    return;
-                }
-
-                if (GuestName.Text != "" || GuestSurname.Text != "" || GuestAge.Text != "")
-                {
-                    string name = GuestName.Text;
-                    string surname = GuestSurname.Text;
-                    int age = int.Parse(GuestAge.Text);
-
+                    name = GuestName.Text;
+                    surname = GuestSurname.Text;
 
                     Tourist tourist = new Tourist
                     {
                         Name = name,
                         Surname = surname,
-                        Age = age
+                        Age = GuestAge
                     };
 
                     _tourists.Add(tourist);
@@ -118,19 +160,30 @@
                     TouristDataGrid.ItemsSource = _tourists;
                     GuestName.Text = "";
                     GuestSurname.Text = "";
-                    GuestAge.Text = "";
+                    GuestAgeText.Text = "";
                 }else
                 {
-                    MessageBox.Show("Enter all fields!");
+                    enterAllFieldsMessage.Visibility = Visibility.Visible;
+                    return;
+                }
+                if (GuestNumber < _tourists.Count() + 1)
+                {
+                    increaseNumberText.Visibility = Visibility.Visible;
+                    return;
                 }
 
-            }
+        }
 
+        private bool areFieldsEmpty()
+        {
+            return GuestNumberText.Text == "" || GuestName.Text == "" || GuestSurname.Text == "" || GuestAgeText.Text == "";
+        }
             private void ReserveTour_Click(object sender, RoutedEventArgs e)
             {
-                if (_tourists.Count() == 0)
+                
+                if(_tourists.Count() < GuestNumber)
                 {
-                    MessageBox.Show("Add tourists!");
+                    addTouristMessage.Visibility = Visibility.Visible;
                     return;
                 }
                 List<Tourist> tourists = new List<Tourist>();
@@ -139,12 +192,12 @@
                     tourists.Add(t);
                 }
 
-                    Window parentWindow = Window.GetWindow(this);
+                Window parentWindow = Window.GetWindow(this);
 
-                    if (parentWindow is TouristMainWindow mainWindow)
-                    {
-                        mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists);
-                    }
+                if (parentWindow is TouristMainWindow mainWindow)
+                  {
+                      mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists);
+                  }
             
             }
         }

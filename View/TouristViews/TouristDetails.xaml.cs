@@ -44,7 +44,7 @@
             set
             {
                 _guestAge = value;
-                if(_guestAge <= 0)
+                if(_guestAge <= 0 || _guestAge > 150)
                 {
                     enterValidAgeMessage.Visibility = Visibility.Visible;
                 }else
@@ -60,15 +60,17 @@
                 set
                 {
                     _guestNumber = value;
-                if (selectedTour != null && _guestNumber > selectedTour.Capacity)
+                if (selectedTour != null && (_guestNumber > selectedTour.Capacity || _guestNumber<=0))
                 {
                     numberHigherMessage.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     numberHigherMessage.Visibility = Visibility.Hidden;
+                    enterValidGuestNumber.Visibility = Visibility.Hidden;
+
                 }
-                }
+            }
             }
 
             public Tour selectedTour { get; set; }
@@ -93,12 +95,15 @@
 
         private void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
             {
-                if (int.TryParse(GuestNumberText.Text, out int number))
+                if (!int.TryParse(GuestNumberText.Text, out int number) && GuestNumberText.Text!="")
+                {
+                enterValidGuestNumber.Visibility = Visibility.Visible;
+                }
+            else
                 {
                     GuestNumber = number;
-                }
-            //numberHigherMessage.Visibility = Visibility.Hidden;
-
+                    enterValidGuestNumber.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
@@ -112,14 +117,15 @@
 
         private void GuestAge_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (int.TryParse(GuestAgeText.Text, out int result))
+            if (!int.TryParse(GuestAgeText.Text, out int result) && GuestAgeText.Text!="")
+            {
+                enterValidAgeMessage.Visibility = Visibility.Visible;
+
+            }
+            else
             {
                 GuestAge = result;
             }
-            /*else
-            {
-                MessageBox.Show("Molimo unesite validan broj.");
-            }*/
         }
 
         private void HideMessages()
@@ -129,19 +135,17 @@
             numberHigherMessage.Visibility = Visibility.Hidden;
             increaseNumberText.Visibility = Visibility.Hidden;
             addTouristMessage.Visibility = Visibility.Hidden;
+            enterValidAgeMessage.Visibility = Visibility.Hidden;
 
         }
         private void AddTourist_Click(object sender, RoutedEventArgs e)
         {
-            /*if (_guestNumber > selectedTour.Capacity)
-            {
-                numberHigherMessage.Visibility = Visibility.Visible;
+
+            if(increaseNumberText.Visibility==Visibility.Visible || enterValidGuestNumber.Visibility == Visibility.Visible || numberHigherMessage.Visibility==Visibility.Visible || enterValidAgeMessage.Visibility==Visibility.Visible) {
                 return;
-            }*/
+            }
 
             HideMessages();
-
-            
 
                 if (!areFieldsEmpty())
                 {
@@ -180,6 +184,10 @@
         }
             private void ReserveTour_Click(object sender, RoutedEventArgs e)
             {
+                if(_tourists.Count() == 0) {
+                    addTouristMessage.Visibility = Visibility.Visible;
+                    return;
+                }
                 
                 if(_tourists.Count() < GuestNumber)
                 {
@@ -197,6 +205,7 @@
                 if (parentWindow is TouristMainWindow mainWindow)
                   {
                       mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists);
+                      _tourists.Clear();
                   }
             
             }

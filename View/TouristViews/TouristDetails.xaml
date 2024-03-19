@@ -48,6 +48,7 @@
                             <TextBox x:Name="GuestNumberText" TextChanged="GuestNumber_TextChanged" Margin="285,49,188,50"/>
                             <Label Visibility="Hidden" x:Name="numberHigherMessage" Foreground="Red" FontWeight="DemiBold" FontSize="13" Content="The number you entered is higher that tour's capacity!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,73,0,0"/>
                             <Label Visibility="Hidden" x:Name="increaseNumberText" Foreground="Red" FontSize="13" FontWeight="DemiBold" Content="Number of guests is filled!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="323,77,0,0"/>
+                            <Label Visibility="Hidden" x:Name="enterValidGuestNumber" Foreground="Red" FontSize="14" FontWeight="DemiBold" Content="Enter valid guest number!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="223,20,0,0"/>
 
                             <TextBlock Text="Enter guest's name" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,114,0,0" Grid.RowSpan="2"/>
                             <TextBox x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,115,0,0" Height="25" Width="113" Grid.RowSpan="2"/>

@@ -75,10 +75,16 @@ namespace BookingApp.View.TouristViews
             {
                 if (currentLocationId == tour.LocationId)
                 {
-                    tour.Location = locationRepository.GetById(tour.LocationId);
-                    tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                    tour.Language = languageRepository.GetById(tour.LanguageId);
-                    tours.Add(tour);
+                    if (currentTour.Id != tour.Id)
+                    {
+                        tour.Location = locationRepository.GetById(tour.LocationId);
+                        tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
+                        tour.Language = languageRepository.GetById(tour.LanguageId);
+                        tours.Add(tour);
+                    }else
+                    {
+                        continue;
+                    }
                 }
             }
             FilteredTours = new ObservableCollection<Tour>(tours);

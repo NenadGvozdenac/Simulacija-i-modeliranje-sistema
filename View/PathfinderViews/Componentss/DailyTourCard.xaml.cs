@@ -25,7 +25,12 @@ namespace BookingApp.View.PathfinderViews.Componentss
     {
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClicked { get; set; }
 
+        public EventHandler<BeginButtonClickedEventArgs> EndButtonClicked { get; set; }
+
+
         public TourStartTimeRepository _timeRepository {  get; set; }
+
+        
 
         public DailyTourCard()
         {
@@ -33,10 +38,12 @@ namespace BookingApp.View.PathfinderViews.Componentss
             _timeRepository = new TourStartTimeRepository();
         }
 
-        public void BeginButton_Click(object sender, RoutedEventArgs e)
+
+      public void BeginButton_Click  (object sender, RoutedEventArgs e) 
         {
             OnBeginButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
             CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text));
+            checkpointsView.EndButtonClicked += (s,e)=>CheckpointsWindow_SomeEventHandler(s, e);
             checkpointsView.ShowDialog();
         }    
 
@@ -46,6 +53,23 @@ namespace BookingApp.View.PathfinderViews.Componentss
         {
             BeginButtonClicked?.Invoke(this, e);
         }
+
+
+        public void CheckpointsWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnEndButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+        }
+
+
+
+
+        public void OnEndButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            EndButtonClicked?.Invoke(this, e);
+            
+       }
+
+
 
 
     }

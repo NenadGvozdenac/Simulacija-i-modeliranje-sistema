@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,9 +41,17 @@ namespace BookingApp.View.PathfinderViews
 
         public TourStartTimeRepository timeRepository { get; set; }
 
-       public string tourName {  get; set; } 
+        public EventHandler<BeginButtonClickedEventArgs> EndButtonClicked { get; set; }
+
+        public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedMain { get; set; }
+
+        public string tourName {  get; set; } 
 
        public int tourTimeId { get; set; }
+
+       public int tourId {  get; set; }
+
+       public DateTime _currentDate { get; set; }
 
         public CheckpointsView(int TourId, DateTime currentDate)
         {
@@ -59,6 +68,8 @@ namespace BookingApp.View.PathfinderViews
             CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
             tourName = "";
             tourTimeId = 0;
+            tourId = TourId;
+            _currentDate = currentDate;
             Update(TourId, currentDate);
 
         }
@@ -127,8 +138,35 @@ namespace BookingApp.View.PathfinderViews
                 }
                 // Clear the selectedTourists list after transfer
                 selectedTourists.Clear();
+                if(CheckIfLast(checkBox) == 1)
+                {
+                    OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
+                    OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
+                    Close();
+                }
             }
         }
+
+        private int CheckIfLast(CheckBox checkbox)
+        {
+            Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
+
+                if(checkpoints.Last() == checkpoint) {
+                    return 1;
+                }
+                return 0;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         private void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -146,6 +184,25 @@ namespace BookingApp.View.PathfinderViews
                 selectedTourists.Remove(tourist);
             }
         }
+
+        public void EndTour_Click(object sender, RoutedEventArgs e)
+        {
+            OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId,_currentDate));
+            OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
+            Close();
+        }
+
+
+        public void OnEndButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            EndButtonClicked?.Invoke(this, e);
+        }
+
+        public void OnEndButtonClickedMain(BeginButtonClickedEventArgs e)
+        {
+            EndButtonClickedMain?.Invoke(this, e);
+        }
+
 
 
     }

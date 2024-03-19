@@ -24,10 +24,13 @@ namespace BookingApp.View.PathfinderViews
     {
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedWindow { get; set; }
 
+        public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedWindow { get; set; }
+
         public DailyToursWindow()
         {
             InitializeComponent();
             DailyTours.BeginButtonClickedControl += (s,e)=>DailyTours_SomeEventHandler(s,e);
+            DailyTours.EndButtonClickedControl = (s, e) => DailyTours_EndEventHandler(s, e);
         }
 
         private void DailyTours_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
@@ -40,5 +43,20 @@ namespace BookingApp.View.PathfinderViews
             BeginButtonClickedWindow?.Invoke(this, e);
             Close();
         }
+
+
+
+        private void DailyTours_EndEventHandler(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnEndButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+        }
+
+
+        public void OnEndButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            EndButtonClickedWindow?.Invoke(this, e);
+            Close();
+        }
+
     }
 }

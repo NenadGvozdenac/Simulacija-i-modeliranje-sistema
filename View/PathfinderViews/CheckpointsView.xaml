@@ -27,7 +27,7 @@
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}" Height="49" Width="306" TextAlignment="Center"/>
-            <Button Content="end tour" Width="59" Height="39" ></Button>
+            <Button Content="end tour" Width="59" Height="39" Click="EndTour_Click"></Button>
         </StackPanel>
         <StackPanel  Grid.Column="1" Grid.Row="1">
             <DataGrid Width="259" Height="143" ItemsSource="{Binding tourists}"  AutoGenerateColumns="False" CanUserAddRows="False" x:Name="TouristsDataGrid" SelectionMode="Extended">

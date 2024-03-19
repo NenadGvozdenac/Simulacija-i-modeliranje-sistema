@@ -52,10 +52,13 @@ namespace BookingApp.View.PathfinderViews
 
         public void DailyToursClick(object sender, RoutedEventArgs e) {
 
+           
+            DailyToursWindow dailyWindow = new DailyToursWindow();
 
             if (ongoingTourCheck() == 0){
-                DailyToursWindow dailyWindow = new DailyToursWindow();
+                
                 dailyWindow.BeginButtonClickedWindow += (s, e) => DailyToursWindow_SomeEventHandler(s, e);
+                dailyWindow.EndButtonClickedWindow += (s, e) => DailyToursWindow_EndEventHandlerDaily(s, e);
                 dailyWindow.ShowDialog();
             }
         }
@@ -66,6 +69,8 @@ namespace BookingApp.View.PathfinderViews
                 if (time.Status == "ongoing")
                 {
                     CheckpointsView checkpointsWindow = new CheckpointsView(time.TourId, time.Time);
+                    checkpointsWindow.EndButtonClickedMain += (s, e) => DailyToursWindow_EndEventHandlerMain(s, e);
+
                     checkpointsWindow.ShowDialog();
                     return 1;
                 }
@@ -86,13 +91,22 @@ namespace BookingApp.View.PathfinderViews
             ChangeTourStatus(e.TourId, e.StartTime);
         }*/
 
-        public void ChangeTourStatus(int tourId, DateTime dateTime)
+        public void ChangeTourStatusOngoing(int tourId, DateTime dateTime)
         {
             TourStartTime startTime = new TourStartTime();
             startTime = _timeRepository.GetByTourStartTimeAndId(dateTime, tourId);
             startTime.Status = "ongoing";
             _timeRepository.Update(startTime);
         }
+
+        public void ChangeTourStatusPassed(int tourId, DateTime dateTime)
+        {
+            TourStartTime startTime = new TourStartTime();
+            startTime = _timeRepository.GetByTourStartTimeAndId(dateTime, tourId);
+            startTime.Status = "passed";
+            _timeRepository.Update(startTime);
+        }
+
 
         private void DailyToursWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
         {
@@ -101,7 +115,30 @@ namespace BookingApp.View.PathfinderViews
 
         public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
         {
-            ChangeTourStatus(e.TourId,e.StartTime);
+            ChangeTourStatusOngoing(e.TourId,e.StartTime);
         }
+
+       
+        
+        private void DailyToursWindow_EndEventHandlerDaily(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnEndButtonClickedDaily(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+        }
+
+        public void OnEndButtonClickedDaily(BeginButtonClickedEventArgs e)
+        {
+            ChangeTourStatusPassed(e.TourId, e.StartTime);
+        }
+
+        private void DailyToursWindow_EndEventHandlerMain(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnEndButtonClickedMain(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+        }
+
+        public void OnEndButtonClickedMain(BeginButtonClickedEventArgs e)
+        {
+            ChangeTourStatusPassed(e.TourId, e.StartTime);
+        }
+
     }
 }

@@ -18,7 +18,7 @@
         <ComboBox HorizontalAlignment="Left" Margin="76,86,0,0" VerticalAlignment="Top" Width="96" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CityTextBox" IsEditable="False" IsEnabled="False"></ComboBox>
 
         <Label Content="Language:" HorizontalAlignment="Left" Margin="220,25,0,0" VerticalAlignment="Top"></Label>
-        <ComboBox HorizontalAlignment="Left" Margin="289,31,0,0" VerticalAlignment="Top" Width="120" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="289,31,0,0" VerticalAlignment="Top" Width="120" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></ComboBox>
         <Label Content="Dates:" HorizontalAlignment="Left" Margin="210,82,0,0" VerticalAlignment="Top"></Label>
 
         <StackPanel Margin="260,82,420,280">

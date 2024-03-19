@@ -358,8 +358,11 @@ namespace BookingApp.View.PathfinderViews
 
         private void AddDateClick(object sender, RoutedEventArgs e){
             DateTime time;
-            
-              DateTime.TryParse(datePicker.SelectedDate.Value.Date.ToShortDateString() + " " + Hours.ToString() + ":" + Minutes.ToString(), out time);
+
+            if (string.IsNullOrEmpty(Hours) || string.IsNullOrEmpty(Minutes))
+                return;
+
+            DateTime.TryParse(datePicker.SelectedDate.Value.Date.ToShortDateString() + " " + Hours.ToString() + ":" + Minutes.ToString(), out time);
 
             if (DateAlreadyExists(time))
             {

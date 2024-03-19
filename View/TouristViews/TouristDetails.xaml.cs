@@ -1,92 +1,205 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Channels;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using BookingApp.Model.MutualModels;
+    using BookingApp.Repository;
+    using BookingApp.Repository.MutualRepositories;
+    using BookingApp.View.PathfinderViews;
 
-namespace BookingApp.View.TouristViews
-{
-    /// <summary>
-    /// Interaction logic for TouristDetails.xaml
-    /// </summary>
-    public partial class TouristDetails : UserControl
+    namespace BookingApp.View.TouristViews
     {
-        public Tours ToursUserControl;
-        public event EventHandler ReturnRequest;
-        public User _user;
-        public LocationRepository locationRepository;
-
-        public Tour selectedTour {  get; set; }
-        public TouristDetails(Tour detailedTour, User user)
+        /// <summary>
+        /// Interaction logic for TouristDetails.xaml
+        /// </summary>
+        public partial class TouristDetails : UserControl
         {
-            InitializeComponent();
-            _user = user;
-            locationRepository = new LocationRepository();
-            selectedTour = detailedTour;
-            ToursUserControl = new Tours(user);
+            public Tours ToursUserControl;
+            public event EventHandler ReturnRequest;
+            public User _user;
+            public LocationRepository locationRepository;
+            public ObservableCollection<Tourist> _tourists {  get; set; }
 
-            tourNameTextBlock.Text = selectedTour.Name;
-            tourCountryTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).Country;
-            tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
+            public TouristRepository touristRepository;
+
+            private int _guestNumber;
+            private string name;
+            private string surname;
+            private int _guestAge;
+            public int GuestAge
+        {
+            get { return _guestAge; }
+            set
+            {
+                _guestAge = value;
+                if(_guestAge <= 0)
+                {
+                    enterValidAgeMessage.Visibility = Visibility.Visible;
+                }else
+                {
+                    enterValidAgeMessage.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+
+            public int GuestNumber
+            {
+                get { return _guestNumber; }
+                set
+                {
+                    _guestNumber = value;
+                if (selectedTour != null && _guestNumber > selectedTour.Capacity)
+                {
+                    numberHigherMessage.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    numberHigherMessage.Visibility = Visibility.Hidden;
+                }
+                }
+            }
+
+            public Tour selectedTour { get; set; }
+            public TouristDetails(Tour detailedTour, User user)
+            {
+                InitializeComponent();
+                _user = user;
+                locationRepository = new LocationRepository();
+                selectedTour = detailedTour;
+                ToursUserControl = new Tours(user);
+                _tourists = new ObservableCollection<Tourist>();
+                touristRepository = new TouristRepository();
+
+                tourNameTextBlock.Text = selectedTour.Name;
+                tourCountryTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).Country;
+                tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
+
+                HideMessages();
+
+
+            }
+
+        private void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
+            {
+                if (int.TryParse(GuestNumberText.Text, out int number))
+                {
+                    GuestNumber = number;
+                }
+            //numberHigherMessage.Visibility = Visibility.Hidden;
+
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-       
-            //ReturnRequest?.Invoke(this, EventArgs.Empty);
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is TouristMainWindow mainWindow)
+            {
+                mainWindow.TouristWindowFrame.Content = mainWindow.ToursUserControl;
+            }
         }
 
-        private void NumberOfGuests_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void GuestAgeDown_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void GuestAgeUp_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void GuestNumberUp_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void GuestNumberDown_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void GuestAge_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (int.TryParse(GuestAgeText.Text, out int result))
+            {
+                GuestAge = result;
+            }
+            /*else
+            {
+                MessageBox.Show("Molimo unesite validan broj.");
+            }*/
         }
 
+        private void HideMessages()
+        {
+            enterAllFieldsMessage.Visibility = Visibility.Hidden;
+            enterValidAgeMessage.Visibility = Visibility.Hidden;
+            numberHigherMessage.Visibility = Visibility.Hidden;
+            increaseNumberText.Visibility = Visibility.Hidden;
+            addTouristMessage.Visibility = Visibility.Hidden;
+
+        }
         private void AddTourist_Click(object sender, RoutedEventArgs e)
         {
+            /*if (_guestNumber > selectedTour.Capacity)
+            {
+                numberHigherMessage.Visibility = Visibility.Visible;
+                return;
+            }*/
+
+            HideMessages();
+
+            
+
+                if (!areFieldsEmpty())
+                {
+                    name = GuestName.Text;
+                    surname = GuestSurname.Text;
+
+                    Tourist tourist = new Tourist
+                    {
+                        Name = name,
+                        Surname = surname,
+                        Age = GuestAge
+                    };
+
+                    _tourists.Add(tourist);
+                    TouristDataGrid.ItemsSource = null;
+                    TouristDataGrid.ItemsSource = _tourists;
+                    GuestName.Text = "";
+                    GuestSurname.Text = "";
+                    GuestAgeText.Text = "";
+                }else
+                {
+                    enterAllFieldsMessage.Visibility = Visibility.Visible;
+                    return;
+                }
+                if (GuestNumber < _tourists.Count() + 1)
+                {
+                    increaseNumberText.Visibility = Visibility.Visible;
+                    return;
+                }
 
         }
 
-        
+        private bool areFieldsEmpty()
+        {
+            return GuestNumberText.Text == "" || GuestName.Text == "" || GuestSurname.Text == "" || GuestAgeText.Text == "";
+        }
+            private void ReserveTour_Click(object sender, RoutedEventArgs e)
+            {
+                
+                if(_tourists.Count() < GuestNumber)
+                {
+                    addTouristMessage.Visibility = Visibility.Visible;
+                    return;
+                }
+                List<Tourist> tourists = new List<Tourist>();
+                foreach(Tourist t in _tourists)
+                {
+                    tourists.Add(t);
+                }
+
+                Window parentWindow = Window.GetWindow(this);
+
+                if (parentWindow is TouristMainWindow mainWindow)
+                  {
+                      mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists);
+                  }
+            
+            }
+        }
+
     }
-}

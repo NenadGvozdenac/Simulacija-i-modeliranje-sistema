@@ -12,6 +12,8 @@ public class Tour : ISerializable
 {
 
     public int Id { get; set; }
+
+    public int OwnerId { get; set; }
     public string Name { get; set; }
 
     public int LocationId { get; set; }
@@ -40,12 +42,13 @@ public class Tour : ISerializable
         LanguageId = Convert.ToInt32(values[4]);
         Capacity = Convert.ToInt32(values[5]);
         Duration = Convert.ToInt32(values[6]);
+        OwnerId = Convert.ToInt32(values[7]);
        
     }
 
     public string[] ToCSV()
     {
-        string[] csvValues = { Id.ToString(), Name,LocationId.ToString(), Description, LanguageId.ToString(), Capacity.ToString(), Duration.ToString() };
+        string[] csvValues = { Id.ToString(), Name,LocationId.ToString(), Description, LanguageId.ToString(), Capacity.ToString(), Duration.ToString(), OwnerId.ToString()};
         return csvValues;
     }
 }

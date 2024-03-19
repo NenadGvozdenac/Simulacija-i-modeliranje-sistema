@@ -8,11 +8,15 @@
 8|4|1|False
 9|4|2|False
 10|4|3|False
-11|5|budva|True
-12|5|kotor|True
+11|5|budva|False
+12|5|kotor|False
 13|5|zabanj|False
 14|6|1|False
 15|6|2|False
 16|7|1|False
 17|7|2|False
 18|7|3|False
+19|8|prvi|False
+20|8|drugi|False
+21|8|treci|False
+22|8|cetvrti|False

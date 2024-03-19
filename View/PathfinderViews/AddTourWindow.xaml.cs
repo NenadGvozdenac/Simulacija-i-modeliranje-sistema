@@ -447,6 +447,7 @@ namespace BookingApp.View.PathfinderViews
                 time.TourId = tour.Id;
                 time.Status = "scheduled";
                 time.Guests = 0;
+                time.CurrentCheckpoint = -1;
                 _timeRepository.Add(time);
             }
 

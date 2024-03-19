@@ -17,19 +17,20 @@ namespace BookingApp.Model.PathfinderModels;
 
         public string Name { get; set; }
 
-       
+       public bool Checked { get; set; }
         
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);  
             TourId = Convert.ToInt32(values[1]);
             Name = values[2];
+            Checked = Convert.ToBoolean(values[3]);
         }
 
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),TourId.ToString(),Name };
+            string[] csvValues = { Id.ToString(),TourId.ToString(),Name,Checked.ToString()};
             return csvValues;
         }
 

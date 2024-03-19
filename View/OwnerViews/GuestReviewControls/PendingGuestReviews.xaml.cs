@@ -53,21 +53,25 @@ namespace BookingApp.View.OwnerViews.GuestReviewControls
             {
                 foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
                 {
-                    AccommodationReservation accommodationReservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
-                    if(guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying <= DateTime.Now)
-                    {
-                        guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
-                        _guestRatings.Add(guestRating);
-                    }
+                    AddGuestReviewIfSatisfiesConditions(guestRating);
                 }
             }
 
-            foreach(GuestRating guestRating in _guestRatings)
+            AddReviews();
+        }
+
+        private void AddGuestReviewIfSatisfiesConditions(GuestRating guestRating)
+        {
+            if (SatisfiedConditions(guestRating, _accommodationReservationRepository.GetById(guestRating.ReservationId)))
             {
                 guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+                _guestRatings.Add(guestRating);
             }
+        }
 
-            AddReviews();
+        private bool SatisfiedConditions(GuestRating guestRating, AccommodationReservation accommodationReservation)
+        {
+            return guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying <= DateTime.Now;
         }
 
         private void AddReviews()

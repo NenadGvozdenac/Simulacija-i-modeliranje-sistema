@@ -34,7 +34,6 @@
     <None Remove="Resources\Assets\view.png" />
     <None Remove="Resources\Images\AccommodationImages\20221120_100611.jpg" />
     <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
-    <None Remove="Resources\Images\AccommodationImages\eighth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\fifth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\first.jpg" />
     <None Remove="Resources\Images\AccommodationImages\fourth.jpg" />

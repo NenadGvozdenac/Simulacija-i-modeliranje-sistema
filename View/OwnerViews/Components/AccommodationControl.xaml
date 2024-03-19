@@ -21,16 +21,16 @@
             <Border BorderBrush="Lavender" BorderThickness="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  Margin="5" >
                 <Image x:Name="Image" Stretch="Fill"/>
             </Border>
-            <Label x:Name="AccommodationName" Content="AccommodationName" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Content="{Binding AccommodationName}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label x:Name="AccommodationLocation" Content="AccommodationLocation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Content="{Binding AccommodationLocation}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label x:Name="AccommodationType" Content="AccommodationType" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Content="{Binding AccommodationType}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

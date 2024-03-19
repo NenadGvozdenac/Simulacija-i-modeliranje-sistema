@@ -1,4 +1,5 @@
-﻿using BookingApp.Model.GuestModels;
+﻿using BookingApp.Miscellaneous;
+using BookingApp.Model.GuestModels;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
@@ -97,28 +98,19 @@ public partial class AccommodationDetails : UserControl
             while (tempDate != lastDate.SelectedDate.Value.AddDays(1))
             {
                 if (freeDaysInRowCounter == 0)
-                {
                     firstAvailableDate = (DateTime)tempDate;
-                }
 
                 if (takenDates.Contains((DateTime)tempDate))
-                {
                     freeDaysInRowCounter = 0;
-                }
                 else
-                {
                     freeDaysInRowCounter++;
-                }
 
                 if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
                 {
                     lastAvailableDate = tempDate;
-                    if (firstAvailableDate.HasValue && lastAvailableDate.HasValue)
-                    {
-                        AvailableDates available = new AvailableDates((DateTime)firstAvailableDate, (DateTime)lastAvailableDate);
-                        if (!_availableDates.Contains(available.ToString())){
-                            _availableDates.Add(available.ToString());
-                        }
+                    AvailableDates available = new AvailableDates((DateTime)firstAvailableDate, (DateTime)lastAvailableDate);
+                    if (!_availableDates.Contains(available.ToString())){
+                        _availableDates.Add(available.ToString());
                     }
                     freeDaysInRowCounter = 0;
                     break;
@@ -127,19 +119,20 @@ public partial class AccommodationDetails : UserControl
             }
             whileDate = whileDate.Value.AddDays(1);            
         }
-        if (_availableDates.Count > 0) {
-            FoundDatesTextBox.Visibility = Visibility.Visible;
-            FoundAlternativeDatesTextBox.Visibility = Visibility.Collapsed;
-            availableDatesListBox.ItemsSource = _availableDates;
-            ConfirmButton.IsEnabled = true;
-        }
+        if (_availableDates.Count > 0)
+            PrepareFreeDatesCheck();
         else
-        {
             FreeAlternativeDates();
-        }
         FreeDatesCheckButton.IsEnabled = false;
     }
 
+    private void PrepareFreeDatesCheck()
+    {
+        FoundDatesTextBox.Visibility = Visibility.Visible;
+        FoundAlternativeDatesTextBox.Visibility = Visibility.Collapsed;
+        availableDatesListBox.ItemsSource = _availableDates;
+        ConfirmButton.IsEnabled = true;
+    }
     private void FreeAlternativeDates()
     {
         List<DateTime> takenDates = new List<DateTime>();
@@ -159,31 +152,20 @@ public partial class AccommodationDetails : UserControl
             while (tempDate != tempDate.AddDays(Convert.ToInt32(DaysOfStay.Text)))
             {
                 if (freeDaysInRowCounter == 0)
-                {
                     firstAvailableDate = (DateTime)tempDate;
-                }
-
                 if (takenDates.Contains((DateTime)tempDate))
-                {
                     freeDaysInRowCounter = 0;
-                }
                 else
-                {
                     freeDaysInRowCounter++;
-                }
-
                 if (freeDaysInRowCounter == Convert.ToInt32(DaysOfStay.Text))
                 {
                     lastAvailableDate = tempDate;
-                    if (firstAvailableDate.HasValue && lastAvailableDate.HasValue)
-                    {
                         AvailableDates available = new AvailableDates((DateTime)firstAvailableDate, (DateTime)lastAvailableDate);
                         if (!_availableDates.Contains(available.ToString()))
                         {
                             _availableDates.Add(available.ToString());
                             foundAvailableDates++;
                         }
-                    }
                     freeDaysInRowCounter = 0;
                     break;
                 }
@@ -191,16 +173,20 @@ public partial class AccommodationDetails : UserControl
             }
             whileDate = whileDate.Value.AddDays(1);
         }
-        
+        PrepareFreeAlternative();
+    }
+
+    private void PrepareFreeAlternative()
+    {
+        availableDatesListBox.ItemsSource = _availableDates;
         FoundDatesTextBox.Visibility = Visibility.Collapsed;
         FoundAlternativeDatesTextBox.Visibility = Visibility.Visible;
-        availableDatesListBox.ItemsSource = _availableDates;
         ConfirmButton.IsEnabled = true;
     }
 
     private void ConfrimReservation_Click(object sender, RoutedEventArgs e)
     {
-        string regex = @"(\d{2}-[A-Za-z]{3}-\d{2})\s-\s(\d{2}-[A-Za-z]{3}-\d{2})";
+        string regex = @"(\d{1,2}\.\d{1,2}\.\d{4}\.)\s-\s(\d{1,2}\.\d{1,2}\.\d{4}\.)";
         Match match = Regex.Match(SelectedDate, regex);
 
         DateTime firstDate;
@@ -211,8 +197,8 @@ public partial class AccommodationDetails : UserControl
             string startDateString = match.Groups[1].Value;
             string endDateString = match.Groups[2].Value;
 
-            firstDate = DateTime.ParseExact(startDateString, "dd-MMM-yy", null);
-            lastDate = DateTime.ParseExact(endDateString, "dd-MMM-yy", null);
+            firstDate = DateParser.Parse(startDateString);
+            lastDate = DateParser.Parse(endDateString);
 
             reservation = new AccommodationReservation(_user.Id, selectedAccommodation.Id, Convert.ToInt32(GuestNumber.Text), firstDate, lastDate);
 

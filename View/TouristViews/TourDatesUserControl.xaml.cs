@@ -75,6 +75,14 @@ namespace BookingApp.View.TouristViews
         {
             if (tourDatesDataGrid.SelectedItem != null)
             {
+                noFreeSpacesMessage.Visibility = Visibility.Hidden;
+                freeSpaces.Visibility = Visibility.Hidden;
+                alternativeTours.Visibility = Visibility.Hidden;
+
+                if (touristsAddedMessage.Visibility == Visibility.Visible)
+                {
+                    return;
+                }
                 selectedTourStartTime = (TourStartTime)tourDatesDataGrid.SelectedItem;
                 TourReservation(selectedTourStartTime);
 
@@ -87,8 +95,12 @@ namespace BookingApp.View.TouristViews
             {
                 return;
             }
-            
-                foreach(Tourist tourist in tourists)
+            List<Tourist> touristList = new List<Tourist>();
+            foreach(Tourist t in tourists)
+            {
+                touristList.Add(t);
+            }
+                foreach(Tourist tourist in touristList)
                 {
                     tourist.Id = touristRepository.NextId();
                     AddTourist(tourist);
@@ -107,11 +119,12 @@ namespace BookingApp.View.TouristViews
             {
                 noFreeSpacesMessage.Visibility = Visibility.Visible;
                 freeSpaces.Visibility = Visibility.Visible;
-                if(selectedTour.Capacity - selectedTourStartTime.Guests <= 0)
+                if(selectedTour.Capacity - selectedTourStartTime.Guests == 0)
                 {
                     alternativeTours.Visibility = Visibility.Visible;
 
                 }
+                touristsAddedMessage.Visibility = Visibility.Hidden;
                 freeSpaces.Text = (selectedTour.Capacity - selectedTourStartTime.Guests).ToString();
                 return false;
 
@@ -122,6 +135,7 @@ namespace BookingApp.View.TouristViews
         {
             tourStartTime.Guests += tourists.Count();
             tourStartTimeRepository.Update(tourStartTime);
+            tourists.Clear();
         }
         private void CreateReservation(Tourist tourist, TourStartTime tourStartTime)
         {
@@ -134,6 +148,13 @@ namespace BookingApp.View.TouristViews
         }
         private void AddTourist(Tourist tourist)
         {
+            foreach(Tourist t in touristRepository.GetAll())
+            {
+                if(t.Id == tourist.Id)
+                {
+                    return;
+                }
+            }
             touristRepository.Add(tourist);
         }
         private void BackToTouristDetails_Click(object sender, RoutedEventArgs e)
@@ -153,6 +174,7 @@ namespace BookingApp.View.TouristViews
             if (parentWindow is TouristMainWindow mainWindow)
             {
                 mainWindow.ShowAlternativeTours(selectedTour.LocationId, selectedTour);
+
             }
         }
     }

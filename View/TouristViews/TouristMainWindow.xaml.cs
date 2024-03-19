@@ -26,6 +26,9 @@ namespace BookingApp.View.TouristViews
         private readonly User _user;
         public TourRepository tourRepository { get; set; }
         public Tours ToursUserControl { get; set; }
+        public TouristRepository touristRepository {  get; set; }
+        public TouristReservationRepository touristReservationRepository {get; set; }
+        public TourStartTimeRepository tourStartTimeRepository { get; set; }
         public TouristDetails ToursDetailsUserControl { get; set; }
 
         public TouristMainWindow(User user)
@@ -36,6 +39,9 @@ namespace BookingApp.View.TouristViews
             Update(_user);
             ToursUserControl = new Tours(user);
             TouristWindowFrame.Content = ToursUserControl;
+            touristRepository = new TouristRepository();
+            touristReservationRepository = new TouristReservationRepository();
+            tourStartTimeRepository = new TourStartTimeRepository();
         }
 
         
@@ -45,6 +51,15 @@ namespace BookingApp.View.TouristViews
             TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
+        public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists)
+        {
+            Tour detailedTour = tour;
+            TouristWindowFrame.Content = new TourDatesUserControl(detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepository);
+        }
+        public void ShowAlternativeTours(int locationId, Tour tour)
+        {
+            TouristWindowFrame.Content = new AlternativeTours(locationId, tour);
+        }
         private void Update(User user)
         {
             ToursUserControl = new Tours(user);

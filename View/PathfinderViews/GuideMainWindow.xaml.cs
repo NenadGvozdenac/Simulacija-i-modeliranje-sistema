@@ -1,8 +1,10 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.PathfinderModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using BookingApp.View.GuestViews;
 using BookingApp.View.OwnerViews.Components;
+using BookingApp.View.PathfinderViews.Componentss;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +29,17 @@ namespace BookingApp.View.PathfinderViews
         private readonly User _user;
         private TourRepository _tourRepository;
         private TourImageRepository _tourImageRepository;
+        private TourStartTimeRepository _timeRepository;
+        private DailyTourCard dailyTourCard;
+
+        public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
         public GuideMainWindow(User user)
         {
             InitializeComponent();
             _user = user;
             _tourImageRepository = new TourImageRepository();
             _tourRepository = new TourRepository();
-
+            _timeRepository = new TourStartTimeRepository();
             Update();
         }
 
@@ -46,9 +52,27 @@ namespace BookingApp.View.PathfinderViews
 
         public void DailyToursClick(object sender, RoutedEventArgs e) {
 
-            DailyToursWindow dailyWindow = new DailyToursWindow();
-            dailyWindow.ShowDialog();
+
+            if (ongoingTourCheck() == 0){
+                DailyToursWindow dailyWindow = new DailyToursWindow();
+                dailyWindow.BeginButtonClickedWindow += (s, e) => DailyToursWindow_SomeEventHandler(s, e);
+                dailyWindow.ShowDialog();
+            }
         }
+
+        public int ongoingTourCheck() {
+            foreach (TourStartTime time in _timeRepository.GetAll())
+            {
+                if (time.Status == "ongoing")
+                {
+                    CheckpointsView checkpointsWindow = new CheckpointsView(time.TourId, time.Time);
+                    checkpointsWindow.ShowDialog();
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
 
         public void Update()
         {
@@ -57,12 +81,27 @@ namespace BookingApp.View.PathfinderViews
 
 
 
+       /* private void DailyTourCard_BeginButtonClicked(object sender, BeginButtonClickedEventArgs e)
+        {
+            ChangeTourStatus(e.TourId, e.StartTime);
+        }*/
 
+        public void ChangeTourStatus(int tourId, DateTime dateTime)
+        {
+            TourStartTime startTime = new TourStartTime();
+            startTime = _timeRepository.GetByTourStartTimeAndId(dateTime, tourId);
+            startTime.Status = "ongoing";
+            _timeRepository.Update(startTime);
+        }
 
+        private void DailyToursWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+        }
 
-
-
-
-
+        public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            ChangeTourStatus(e.TourId,e.StartTime);
+        }
     }
 }

@@ -35,10 +35,11 @@ namespace BookingApp.Repository.MutualRepositories
             var existingTime = _times.FirstOrDefault(c => c.Id == time.Id);
             if (existingTime != null)
             {
-                existingTime.TourId = time.Id;
+                existingTime.Id = time.Id;
                 existingTime.Time = time.Time;
                 existingTime.TourId = time.TourId;
                 existingTime.Guests = time.Guests;
+                existingTime.Status = time.Status;
 
                 _serializer.ToCSV(FilePath, _times);
             }

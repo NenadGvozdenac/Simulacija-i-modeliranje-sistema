@@ -14,7 +14,7 @@
     ItemsSource="{Binding dailyTours}" Margin="3,3,3,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:DailyTourCard x:Name="dailyTourCard"/>
+                        <components:DailyTourCard x:Name="dailyTourCard" BeginButtonClicked="DailyTourCard_BeginButtonClicked"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

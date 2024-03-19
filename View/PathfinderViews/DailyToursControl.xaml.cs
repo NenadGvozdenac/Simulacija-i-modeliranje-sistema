@@ -36,6 +36,8 @@ namespace BookingApp.View.PathfinderViews
 
         public TourStartTimeRepository tourStartTimeRepository { get; set; }
 
+        public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedControl { get; set; }
+
 
         public DailyToursControl()
         {
@@ -87,5 +89,14 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void DailyTourCard_BeginButtonClicked(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+        }
+
+        public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            BeginButtonClickedControl?.Invoke(this, e);
+        }
     }
 }

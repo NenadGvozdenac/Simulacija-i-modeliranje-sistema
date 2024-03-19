@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.PathfinderModels;
 using BookingApp.Repository.MutualRepositories;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,23 @@ namespace BookingApp.View.PathfinderViews
     /// </summary>
     public partial class DailyToursWindow : Window
     {
+        public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedWindow { get; set; }
+
         public DailyToursWindow()
         {
             InitializeComponent();
+            DailyTours.BeginButtonClickedControl += (s,e)=>DailyTours_SomeEventHandler(s,e);
         }
 
+        private void DailyTours_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId,e.StartTime));
+        }
 
+        public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            BeginButtonClickedWindow?.Invoke(this, e);
+            Close();
+        }
     }
 }

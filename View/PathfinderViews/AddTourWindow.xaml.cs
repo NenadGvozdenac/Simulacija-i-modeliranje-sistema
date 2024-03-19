@@ -417,6 +417,8 @@ namespace BookingApp.View.PathfinderViews
             {
                 time.Id = _timeRepository.NextId();
                 time.TourId = tour.Id;
+                time.Status = "Scheduled";
+                time.Guests = 0;
                 _timeRepository.Add(time);
             }
 

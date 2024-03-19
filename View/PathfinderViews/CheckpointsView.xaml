@@ -23,10 +23,11 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
-            <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}" Height="49" Width="236" TextAlignment="Center"/>
+
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}" Height="49" Width="306" TextAlignment="Center"/>
+            <Button Content="end tour" Width="59" Height="39" Click="EndTour_Click"></Button>
         </StackPanel>
         <StackPanel  Grid.Column="1" Grid.Row="1">
             <DataGrid Width="259" Height="143" ItemsSource="{Binding tourists}"  AutoGenerateColumns="False" CanUserAddRows="False" x:Name="TouristsDataGrid" SelectionMode="Extended">
@@ -41,7 +42,7 @@
             <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False" x:Name="CheckpointsDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding CheckpointCheckboxBox_Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}">
+                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}" x:Name="CheckBoxInstance">
                         
                     </DataGridCheckBoxColumn>
                 </DataGrid.Columns>

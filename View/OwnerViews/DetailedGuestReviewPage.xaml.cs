@@ -184,7 +184,7 @@ namespace BookingApp.View.OwnerViews
             CostPerNight = string.Format("${0} per night", _accommodation.Price.ToString());
             Location = string.Format("{0}", _accommodation.Location.ToString());
             TypeOfAccommodation = string.Format("{0}", _accommodation.Type.ToString());
-            ReservationDays = string.Format("{0} days", _guestRating.Reservation.LastDateOfStaying.Day - _guestRating.Reservation.FirstDateOfStaying.Day);
+            ReservationDays = string.Format("{0} days", (_guestRating.Reservation.LastDateOfStaying - _guestRating.Reservation.FirstDateOfStaying).Days);
             NumberOfGuests = string.Format("{0}", _guestRating.Reservation.GuestsNumber);
             DateTimespan = string.Format("{0} - {1}", _guestRating.Reservation.FirstDateOfStaying.ToShortDateString(), _guestRating.Reservation.LastDateOfStaying.ToShortDateString());
             CurrentRating = string.Format("{0:F2} / 10.00", _accommodation.AverageReviewScore);
@@ -195,9 +195,44 @@ namespace BookingApp.View.OwnerViews
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            NavigateBack();
+        }
+
+        private void NavigateBack()
+        {
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
+            }
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Window.GetWindow(this).Close();
+        }
+        private void ShowRightNavbar()
+        {
+            RightNavbar.Visibility = Visibility.Visible;
+            Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
+        }
+
+        private void HideRightNavbar()
+        {
+            RightNavbar.Visibility = Visibility.Collapsed;
+            Navbar.ColumnDefinitions[2].Width = new GridLength(0);
+        }
+
+        public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
+        {
+            if (RightNavbar.Visibility == Visibility.Collapsed)
+            {
+                ShowRightNavbar();
+            }
+            else
+            {
+                HideRightNavbar();
             }
         }
     }

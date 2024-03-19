@@ -51,7 +51,7 @@
             <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
                 <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
                 <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
-                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
+                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Logout_Click"/>
             </StackPanel>
         </Grid>
 
@@ -64,7 +64,7 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Reservations" Style="{StaticResource FooterButtonStyle}"/>
             <Button Grid.Column="1" Content="Accommodations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
-            <Button Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}"/>
+            <Button Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Page>

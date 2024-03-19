@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using BookingApp.Resources.Converters;
 using BookingApp.View.GuestViews;
 using BookingApp.View.PathfinderViews;
+using BookingApp.View.TouristViews;
 
 namespace BookingApp.View;
 
@@ -99,29 +100,51 @@ public partial class SignInForm : Window
     /// <param name="user"></param>
     private void OpenCorrespondingWindow(User user)
     {
-        switch(user.Type)
-        {
+        switch(user.Type) {
             case UserType.Owner:
-                OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
-                ownerMainWindow.Show();
-                Close();
+                OpenOwnerWindow(user);
                 break;
 
             case UserType.Guest:
-                GuestMainWindow guestMainWindow = new GuestMainWindow(user);
-                guestMainWindow.Show();
-                Close();
+                OpenGuestWindow(user);
                 break;
 
             case UserType.Tourist:
+                OpenTouristWindow(user);
                 break;
 
             case UserType.Pathfinder:
-                GuideMainWindow PathfinderMainWindow = new GuideMainWindow(user);
-                PathfinderMainWindow.Show();
-                Close();
+                OpenGuideWindow(user);
                 break;
         }
+    }
+
+    private void OpenGuideWindow(User user)
+    {
+        GuideMainWindow PathfinderMainWindow = new GuideMainWindow(user);
+        PathfinderMainWindow.Show();
+        Close();
+    }
+
+    private void OpenTouristWindow(User user)
+    {
+        TouristMainWindow touristMainWindow = new TouristMainWindow(user);
+        touristMainWindow.Show();
+        Close();
+    }
+
+    private void OpenGuestWindow(User user)
+    {
+        GuestMainWindow guestMainWindow = new GuestMainWindow(user);
+        guestMainWindow.Show();
+        Close();
+    }
+
+    public void OpenOwnerWindow(User user)
+    {
+        OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
+        ownerMainWindow.Show();
+        Close();
     }
 
     /// <summary>

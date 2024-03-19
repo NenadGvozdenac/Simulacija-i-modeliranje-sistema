@@ -267,5 +267,12 @@ namespace BookingApp.View.OwnerViews
             DeactivateVisibilityOfNotification();
             NavigationService.Navigate(guestReviewPage);
         }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Window.GetWindow(this).Close();
+        }
     }
 }

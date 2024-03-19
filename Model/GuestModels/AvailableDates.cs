@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Miscellaneous;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace BookingApp.Model.GuestModels
 
         public override string ToString()
         {
-            return $"{firstAvailableDate.ToShortDateString()} - {lastAvailableDate.ToShortDateString()}";
+            return $"{DateParser.ToString(firstAvailableDate)} - {DateParser.ToString(lastAvailableDate)}";
         }
 
     }

@@ -15,7 +15,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Border BorderThickness="0 0 1 0" BorderBrush="Black"/>
-                <Image Source="{Binding Images[0].Path}" Stretch="Fill" Margin="39,33,17,22"/>
+                <Image Source="{Binding Images[0].Path}" Stretch="Fill" Width="200" Height="150"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

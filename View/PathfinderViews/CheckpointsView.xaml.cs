@@ -136,19 +136,14 @@ namespace BookingApp.View.PathfinderViews
 
             if (checkBox.IsChecked == true)
             {
-               
-                
                 item1.Checked = true;
                 checkpointRepository.Update(item1);
-
                 TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
                 timeTemp.CurrentCheckpoint = item1.Id;
                 timeRepository.Update(timeTemp);
 
                 foreach (var tourist in selectedTourists.ToList())
                 {
-                   
-                    
                     tourists.Remove(tourist);
                     TouristReservation reservationTemp = reservationRepository.GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
                     reservationTemp.CheckpointId = item1.Id;
@@ -172,9 +167,6 @@ namespace BookingApp.View.PathfinderViews
         }
 
         
-
-
-
         private int CheckIfLast(CheckBox checkbox)
         {
             Checkpoint checkpoint = checkbox.DataContext as Checkpoint;

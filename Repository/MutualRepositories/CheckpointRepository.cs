@@ -37,6 +37,7 @@ namespace BookingApp.Repository.MutualRepositories
                 existingCheckpoint.Id = checkpoint.Id;
                 existingCheckpoint.Name = checkpoint.Name;
                 existingCheckpoint.TourId = checkpoint.TourId;
+                existingCheckpoint.Checked = checkpoint.Checked;
                 
                 _serializer.ToCSV(FilePath, _checkpoints);
             }

@@ -78,6 +78,7 @@ namespace BookingApp.Repository.MutualRepositories
                 existingTour.Checkpoints = tour.Checkpoints;
                 existingTour.Language = tour.Language;
                 existingTour.Images = tour.Images;
+                existingTour.OwnerId = tour.OwnerId;
                 _serializer.ToCSV(FilePath, _tours);
             }
         }

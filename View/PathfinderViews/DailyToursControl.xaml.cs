@@ -40,7 +40,10 @@ namespace BookingApp.View.PathfinderViews
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedControl { get; set; }
 
-        public DailyToursControl()
+        private readonly User _user;
+
+
+        public DailyToursControl(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -50,6 +53,7 @@ namespace BookingApp.View.PathfinderViews
             tourImageRepository = new TourImageRepository();
             languageRepository = new LanguageRepository();
             tourStartTimeRepository = new TourStartTimeRepository();
+            _user = user;
             Update();
         
         }
@@ -57,34 +61,35 @@ namespace BookingApp.View.PathfinderViews
         public void Update()
         {
             foreach (TourStartTime startTime in tourStartTimeRepository.GetAll()){
-                if (startTime.Time.Date == System.DateTime.Now.Date){
-                    
-                    if (CheckIfPassed(startTime) == 1)
-                        continue;
-                    
+                if (CheckIfPassed(startTime) == 1) {
+                    continue;
+                }
+                if (startTime.Time.Date == System.DateTime.Now.Date){     
                     Tour toura = tourRepository.GetById(startTime.TourId);
-                    Tour tour = new Tour();
-                    tour.Capacity = toura.Capacity;
-                    tour.CurrentDate = startTime.Time;
-                    tour.Location = locationRepository.GetById(toura.LocationId);
-                    tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                    tour.Language = languageRepository.GetById(toura.LanguageId);
-                    tour.Id = toura.Id;
-                    tour.LocationId = toura.LocationId;
-                    tour.LanguageId = toura.LanguageId;
-                    tour.Duration = toura.Duration;
-                    tour.Checkpoints = toura.Checkpoints;
-                    tour.Dates = toura.Dates;
-                    tour.Description = toura.Description;
+                        if (toura.OwnerId == _user.Id){
+                            Tour tour = new Tour();
+                            tour.Capacity = toura.Capacity;
+                            tour.CurrentDate = startTime.Time;
+                            tour.Location = locationRepository.GetById(toura.LocationId);
+                            tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
+                            tour.Language = languageRepository.GetById(toura.LanguageId);
+                            tour.Id = toura.Id;
+                            tour.LocationId = toura.LocationId;
+                            tour.LanguageId = toura.LanguageId;
+                            tour.Duration = toura.Duration;
+                            tour.Checkpoints = toura.Checkpoints;
+                            tour.Dates = toura.Dates;
+                            tour.Description = toura.Description;
                     
 
 
-                    dailyTours.Add(tour);
-
-                } 
+                            dailyTours.Add(tour);
+                        }
+                    } 
             }
          }
 
+       
         public int CheckIfPassed(TourStartTime startTime)
         {
             if (startTime.Status == "passed")

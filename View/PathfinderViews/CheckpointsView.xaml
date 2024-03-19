@@ -42,7 +42,7 @@
             <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False" x:Name="CheckpointsDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding CheckpointCheckboxBox_Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}">
+                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}" x:Name="CheckBoxInstance">
                         
                     </DataGridCheckBoxColumn>
                 </DataGrid.Columns>

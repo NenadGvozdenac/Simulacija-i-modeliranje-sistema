@@ -53,7 +53,7 @@ namespace BookingApp.View.PathfinderViews
         public void DailyToursClick(object sender, RoutedEventArgs e) {
 
            
-            DailyToursWindow dailyWindow = new DailyToursWindow();
+            DailyToursWindow dailyWindow = new DailyToursWindow(_user);
 
             if (ongoingTourCheck() == 0){
                 

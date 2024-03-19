@@ -395,6 +395,7 @@ namespace BookingApp.View.PathfinderViews
 
             Tour tour = new();
             tour.Id = _tourRepository.NextId();
+            tour.OwnerId = _user.Id;
             tour.Name = NameTextBox.Text;
             tour.LocationId = _locationRepository.GetLocationByCityAndCountry(City, Country).Id;
             tour.Description = Description;
@@ -406,30 +407,49 @@ namespace BookingApp.View.PathfinderViews
             tour.Images = Images.ToList();
             _tourRepository.Add(tour);
 
+
+            SaveImages(Images, tour);
+
+            SaveDates(TourDates, tour);
+
+            SaveCheckpoints(Checkpoints, tour);
+
+            Close();
+        }
+
+        public void SaveImages(ObservableCollection<TourImage> images,Tour tour)
+        {
             foreach (TourImage image in Images)
             {
                 image.Id = _imageRepository.NextId();
                 image.TourId = tour.Id;
                 _imageRepository.Add(image);
             }
+        }
 
+        public void SaveCheckpoints(ObservableCollection<Checkpoint> checkpoints, Tour tour) {
+
+            foreach (Checkpoint checkpoint in Checkpoints)
+            {
+                checkpoint.Id = _checkpointRepository.NextId();
+                checkpoint.TourId = tour.Id;
+                _checkpointRepository.Add(checkpoint);
+
+            }
+
+        }
+
+        public void SaveDates(ObservableCollection<TourStartTime> dates,Tour tour)
+        {
             foreach (TourStartTime time in TourDates)
             {
                 time.Id = _timeRepository.NextId();
                 time.TourId = tour.Id;
-                time.Status = "Scheduled";
+                time.Status = "scheduled";
                 time.Guests = 0;
                 _timeRepository.Add(time);
             }
 
-            foreach (Checkpoint checkpoint in Checkpoints) {
-                checkpoint.Id = _checkpointRepository.NextId();
-                checkpoint.TourId = tour.Id;
-                _checkpointRepository.Add(checkpoint);
-            
-            }
-
-            Close();
         }
 
         private bool IsDataValid()

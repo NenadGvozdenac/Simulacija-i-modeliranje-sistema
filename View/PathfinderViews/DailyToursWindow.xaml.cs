@@ -26,11 +26,16 @@ namespace BookingApp.View.PathfinderViews
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedWindow { get; set; }
 
-        public DailyToursWindow()
+        public User _user {  get; set; }
+
+        public DailyToursWindow(User user)
         {
             InitializeComponent();
-            DailyTours.BeginButtonClickedControl += (s,e)=>DailyTours_SomeEventHandler(s,e);
-            DailyTours.EndButtonClickedControl = (s, e) => DailyTours_EndEventHandler(s, e);
+            _user = user;
+            var dailyToursControl = new DailyToursControl(user);
+            Content = dailyToursControl;
+            dailyToursControl.BeginButtonClickedControl += (s,e)=>DailyTours_SomeEventHandler(s,e);
+            dailyToursControl.EndButtonClickedControl = (s,e) => DailyTours_EndEventHandler(s,e);
         }
 
         private void DailyTours_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)

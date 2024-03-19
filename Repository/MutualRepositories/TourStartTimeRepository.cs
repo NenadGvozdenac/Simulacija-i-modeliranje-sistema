@@ -40,10 +40,13 @@ namespace BookingApp.Repository.MutualRepositories
                 existingTime.TourId = time.TourId;
                 existingTime.Guests = time.Guests;
                 existingTime.Status = time.Status;
+                existingTime.CurrentCheckpoint = time.CurrentCheckpoint;
 
                 _serializer.ToCSV(FilePath, _times);
             }
         }
+
+        
 
         public void Delete(int id)
         {

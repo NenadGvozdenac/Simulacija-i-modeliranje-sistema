@@ -23,6 +23,8 @@ public class TourStartTime : ISerializable
 
     public String Status { get; set; }
 
+    public int CurrentCheckpoint { get; set; }
+
     public void FromCSV(string[] values)
     {
         Id = Convert.ToInt32(values[0]);
@@ -30,11 +32,12 @@ public class TourStartTime : ISerializable
         Time = Convert.ToDateTime(values[2]);
         Guests = Convert.ToInt32(values[3]);
         Status = values[4];
+        CurrentCheckpoint = Convert.ToInt32(values[5]);
     }
 
     public string[] ToCSV()
     {
-        string[] csvValues = { Id.ToString(), TourId.ToString(), Time.ToString(), Guests.ToString(), Status};
+        string[] csvValues = { Id.ToString(), TourId.ToString(), Time.ToString(), Guests.ToString(), Status, CurrentCheckpoint.ToString()};
         return csvValues;
     }
 

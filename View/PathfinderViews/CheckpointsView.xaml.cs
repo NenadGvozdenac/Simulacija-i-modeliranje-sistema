@@ -89,7 +89,10 @@ namespace BookingApp.View.PathfinderViews
                 
                 Tourist tourist_temp = new Tourist();
                 tourist_temp = touristRepository.GetById(reservation.Id_Tourist);
-                tourists.Add(tourist_temp);
+                if (reservation.CheckpointId == -1)
+                {
+                    tourists.Add(tourist_temp);
+                }
             
             }
 
@@ -117,35 +120,60 @@ namespace BookingApp.View.PathfinderViews
                     checkBox.IsChecked = true;
                 }
             }
+
+
         }
 
         private void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
-            checkBox.IsEnabled = false;
+            var item1 = checkBox.DataContext as Checkpoint;
+
+            if (item1.Checked == true)
+            {
+                checkBox.IsChecked = true;
+            }
+
             if (checkBox.IsChecked == true)
             {
-                // Transfer selected tourists to another list (or perform desired action)
+               
+                
+                item1.Checked = true;
+                checkpointRepository.Update(item1);
+
+                TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
+                timeTemp.CurrentCheckpoint = item1.Id;
+                timeRepository.Update(timeTemp);
+
                 foreach (var tourist in selectedTourists.ToList())
                 {
-                    // Remove the tourist from the tourists collection
-                    var item = checkBox.DataContext as Checkpoint;
+                   
+                    
                     tourists.Remove(tourist);
                     TouristReservation reservationTemp = reservationRepository.GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
-                    reservationTemp.CheckpointId = item.Id;
+                    reservationTemp.CheckpointId = item1.Id;
                     reservationRepository.Update(reservationTemp);
-                    // Add transfer logic as per your requirement, e.g., add to another list
+                   
                 }
-                // Clear the selectedTourists list after transfer
                 selectedTourists.Clear();
+
                 if(CheckIfLast(checkBox) == 1)
                 {
                     OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
                     OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
+                    foreach(Checkpoint checkpoint in checkpoints)
+                    {
+                        checkpoint.Checked = false;
+                        checkpointRepository.Update(checkpoint);
+                    }
                     Close();
                 }
             }
         }
+
+        
+
+
 
         private int CheckIfLast(CheckBox checkbox)
         {
@@ -157,16 +185,15 @@ namespace BookingApp.View.PathfinderViews
                 return 0;
         }
 
-
-
-
-
-
-
-
-
-
-
+        private int GoBackToCheckbox(CheckBox checkbox)
+        {
+            Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
+            TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
+            if (checkpoint.Id == timeTemp.CurrentCheckpoint) {
+                return 1;
+            }
+            return 0;
+        }
 
         private void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
         {

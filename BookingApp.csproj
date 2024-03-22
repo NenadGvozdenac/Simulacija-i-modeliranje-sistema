@@ -8,25 +8,148 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\delete.png" />
-    <None Remove="Resources\Images\edit.png" />
-    <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Assets\add.png" />
+    <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
+    <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\default_user.png" />
+    <None Remove="Resources\Assets\delete.png" />
+    <None Remove="Resources\Assets\edit.png" />
+    <None Remove="Resources\Assets\eye.png" />
+    <None Remove="Resources\Assets\hamburger_menu.png" />
+    <None Remove="Resources\Assets\hourglass.png" />
+    <None Remove="Resources\Assets\icon-exit.png" />
+    <None Remove="Resources\Assets\language-line.512x481.png" />
+    <None Remove="Resources\Assets\language.png" />
+    <None Remove="Resources\Assets\location.png" />
+    <None Remove="Resources\Assets\map-marker.171x256.png" />
+    <None Remove="Resources\Assets\Owner.png" />
+    <None Remove="Resources\Assets\pencil.png" />
+    <None Remove="Resources\Assets\plus-symbol-button.png" />
+    <None Remove="Resources\Assets\reserve.png" />
+    <None Remove="Resources\Assets\return.512x467.png" />
+    <None Remove="Resources\Assets\star.png" />
+    <None Remove="Resources\Assets\three_dots.png" />
+    <None Remove="Resources\Assets\trash_can.png" />
+    <None Remove="Resources\Assets\users.png" />
+    <None Remove="Resources\Assets\view.png" />
+    <None Remove="Resources\Images\AccommodationImages\20221120_100611.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
+    <None Remove="Resources\Images\AccommodationImages\fifth.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\first.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\fourth.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\second.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\seventh.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\sixth.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\third.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\vanzemljoc.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\add.png">
+    <Content Include="Resources\Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\delete.png">
+    <Content Include="Resources\Assets\alternate-map-marker.384x512.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\back_left_arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\default_user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\edit.png">
+    <Content Include="Resources\Assets\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\view.png">
+    <Content Include="Resources\Assets\eye.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\hamburger_menu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\hourglass.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\icon-exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\language-line.512x481.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\language.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\map-marker.171x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\pencil.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\plus-symbol-button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\reserve.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\return.512x467.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\three_dots.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\trash_can.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\users.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Resources\Assets\Owner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\fifth.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\fourth.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\first.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\second.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\seventh.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\sixth.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\AccommodationImages\third.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\TouristModels\" />
+    <Folder Include="Repository\GuestRepositories\" />
+    <Folder Include="Repository\PathfinderRepositories\" />
+    <Folder Include="Repository\TouristRepositories\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources\Images\AccommodationImages\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>

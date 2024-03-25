@@ -78,7 +78,10 @@ public partial class AccommodationDetails : UserControl
         accommodationName.Text = accommodation.Name;
         accomodationAverageReviewScore.Text = $"{accommodation.AverageReviewScore}/10";
     }
-
+    private void GoBack_Click(object sender, RoutedEventArgs e)
+    {
+        (Window.GetWindow(this) as GuestMainWindow).Accommodations_Click(sender,e);
+    }
     private void RepeatCheck(AvailableDates available)
     {
         if (!_availableDates.Contains(available.ToString()))
@@ -272,6 +275,8 @@ public partial class AccommodationDetails : UserControl
         if (number > minvalueDaysOfStay)
             DaysOfStay.Text = Convert.ToString(number - 1);
     }
+
+    
 
     private void DaysOfStay_TextChanged(object sender, TextChangedEventArgs e)
     {

@@ -33,11 +33,11 @@ public partial class GuestMainWindow : Window
         AccommodationsUserControl = new Accommodations(user);
         GuestWindowFrame.Content = AccommodationsUserControl;
     }
-    private void Accommodations_Click(object sender, RoutedEventArgs e)
+    public void Accommodations_Click(object sender, RoutedEventArgs e)
     {
         GuestWindowFrame.Content = AccommodationsUserControl;
     }
-    private void MyReservations_Click(object sender, RoutedEventArgs e)
+    public void MyReservations_Click(object sender, RoutedEventArgs e)
     {
         GuestWindowFrame.Content = MyReservationsUserControl;
     }
@@ -50,5 +50,10 @@ public partial class GuestMainWindow : Window
     {
         AccommodationsUserControl = new Accommodations(user);
         MyReservationsUserControl = new MyReservations();
+    }
+
+    private void Logout_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

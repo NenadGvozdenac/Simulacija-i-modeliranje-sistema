@@ -1,6 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
-using BookingApp.Resources.Converters;
+using BookingApp.Resources.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

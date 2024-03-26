@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Resources.Types;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -116,5 +117,28 @@ public class AccommodationReservationRepository
         }
         
         return result;
+    }
+
+    public void CheckDate(AccommodationReservation reservation)
+    {
+        DateTime dateToday = DateTime.Now;
+        DateTime firstDate = reservation.FirstDateOfStaying;
+        DateTime lastDate = reservation.LastDateOfStaying;
+
+        if (dateToday > lastDate)
+        {
+            reservation.ReservationType = ReservationType.Finished;
+            Update(reservation);
+        }
+        else if (dateToday >= firstDate && dateToday <= lastDate)
+        {
+            reservation.ReservationType = ReservationType.Ongoing;
+            Update(reservation);
+        }
+        else if (dateToday < firstDate)
+        {
+            reservation.ReservationType = ReservationType.Upcoming;
+            Update(reservation);
+        }
     }
 }

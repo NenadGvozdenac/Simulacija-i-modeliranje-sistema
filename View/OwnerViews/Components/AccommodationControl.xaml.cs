@@ -29,8 +29,8 @@ namespace BookingApp.View.OwnerViews.Components
     {
         public Accommodation Accommodation { get; set; }
         public Location Location { get; set; }
-        public event EventHandler<Accommodation> EyeButtonClicked;
-        public event EventHandler<Accommodation> TrashButtonClicked;
+
+        public event EventHandler<Accommodation> AccommodationSeeMore;
 
         private string accommodationName;
         public string AccommodationName
@@ -78,15 +78,21 @@ namespace BookingApp.View.OwnerViews.Components
         {
             InitializeComponent();
             Accommodation = accommodation;
+            LoadAccommodationImages();
             Location = location;
             DataContext = this;
             SetupAccommodation();
         }
 
+        private void LoadAccommodationImages()
+        {
+            Accommodation.Images = AccommodationImageRepository.GetInstance().GetImagesByAccommodationId(Accommodation.Id);
+        }
+
         private void SetupAccommodation()
         {
             AccommodationName = Accommodation.Name;
-            AccommodationLocation = Accommodation.Location.ToString();
+            AccommodationLocation = LocationRepository.GetInstance().GetById(Accommodation.LocationId).ToString();
             AccommodationType = Accommodation.Type.ToString();
             LoadImageFromFile();
         }
@@ -94,9 +100,7 @@ namespace BookingApp.View.OwnerViews.Components
         private void LoadImageFromFile()
         {
             string relativeImagePath = FindRelativeImagePath(Accommodation.Images);
-
             string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
-
             InsertImage(absoluteImagePath);
         }
 
@@ -122,18 +126,13 @@ namespace BookingApp.View.OwnerViews.Components
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
 
-                Image.Source = bitmapImage;
+                Image.ImageSource = bitmapImage;
             }
         }
 
-        private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void AccommodationClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            EyeButtonClicked?.Invoke(this, Accommodation);
-        }
-
-        private void TrashButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            TrashButtonClicked?.Invoke(this, Accommodation);
+            AccommodationSeeMore.Invoke(this, Accommodation);
         }
     }
 }

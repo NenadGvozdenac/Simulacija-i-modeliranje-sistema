@@ -379,5 +379,14 @@ namespace BookingApp.View.OwnerViews
                 ImageURL = destinationPath;
             }
         }
+
+        private void BackButton_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                ClosePage();
+                NavigationService.GoBack();
+            }
+        }
     }
 }

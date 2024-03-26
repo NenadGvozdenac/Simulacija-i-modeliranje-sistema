@@ -1,4 +1,5 @@
 ﻿using BookingApp.Miscellaneous;
+using BookingApp.Resources.Types;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ public class AccommodationReservation : ISerializable
     public int GuestsNumber { get; set; }
     public DateTime FirstDateOfStaying { get; set; }
     public DateTime LastDateOfStaying { get; set; }
-
+    public ReservationType ReservationType { get; set; }
     public AccommodationReservation() { }
     public AccommodationReservation(int userid, int accommodationid, int guestnumber, DateTime firstday, DateTime lastday)
     {
@@ -25,7 +26,18 @@ public class AccommodationReservation : ISerializable
         GuestsNumber = guestnumber;
         FirstDateOfStaying = firstday;
         LastDateOfStaying = lastday;
+        ReservationType = ReservationType.Upcoming;
     }
+    public AccommodationReservation(int userid, int accommodationid, int guestnumber, DateTime firstday, DateTime lastday, ReservationType reservationType)
+    {
+        UserId = userid;
+        AccommodationId = accommodationid;
+        GuestsNumber = guestnumber;
+        FirstDateOfStaying = firstday;
+        LastDateOfStaying = lastday;
+        ReservationType = reservationType;
+    }
+
     public void FromCSV(string[] values)
     {
         Id = Convert.ToInt32(values[0]);
@@ -34,11 +46,12 @@ public class AccommodationReservation : ISerializable
         GuestsNumber = Convert.ToInt32(values[3]);
         FirstDateOfStaying = DateParser.Parse(values[4]);
         LastDateOfStaying = DateParser.Parse(values[5]);
+        ReservationType = (ReservationType)Enum.Parse(typeof(ReservationType), values[6]);
     }
 
     public string[] ToCSV()
     {
-        string[] csvValues = {Id.ToString(), UserId.ToString(), AccommodationId.ToString(), GuestsNumber.ToString(),DateParser.ToString(FirstDateOfStaying), DateParser.ToString(LastDateOfStaying)};
+        string[] csvValues = {Id.ToString(), UserId.ToString(), AccommodationId.ToString(), GuestsNumber.ToString(),DateParser.ToString(FirstDateOfStaying), DateParser.ToString(LastDateOfStaying), ReservationType.ToString()};
         return csvValues;
     }
 }

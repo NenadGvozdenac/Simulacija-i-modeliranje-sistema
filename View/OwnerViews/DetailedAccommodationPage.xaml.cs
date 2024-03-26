@@ -193,11 +193,6 @@ public partial class DetailedAccommodationPage : Page
         }
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        NavigateToPreviousPage();
-    }
-
     private void NavigateToPreviousPage()
     {
         if (NavigationService.CanGoBack)
@@ -205,34 +200,9 @@ public partial class DetailedAccommodationPage : Page
             NavigationService.GoBack();
         }
     }
-    private void ShowRightNavbar()
-    {
-        RightNavbar.Visibility = Visibility.Visible;
-        Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
-    }
 
-    private void HideRightNavbar()
+    private void Back_Click(object sender, MouseButtonEventArgs e)
     {
-        RightNavbar.Visibility = Visibility.Collapsed;
-        Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-    }
-
-    public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
-    {
-        if (RightNavbar.Visibility == Visibility.Collapsed)
-        {
-            ShowRightNavbar();
-        }
-        else
-        {
-            HideRightNavbar();
-        }
-    }
-
-    private void Logout_Click(object sender, RoutedEventArgs e)
-    {
-        SignInForm signInForm = new SignInForm();
-        signInForm.Show();
-        Window.GetWindow(this).Close();
+        NavigateToPreviousPage();
     }
 }

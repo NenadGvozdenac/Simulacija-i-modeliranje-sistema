@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
-using BookingApp.Resources.Converters;
+using BookingApp.Resources.Types;
 using BookingApp.View.GuestViews;
 using BookingApp.View.PathfinderViews;
 using BookingApp.View.TouristViews;

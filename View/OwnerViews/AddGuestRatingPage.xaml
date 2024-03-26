@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.View.OwnerViews"
         mc:Ignorable="d"
-        Title="AddGuestRating" Height="715" Width="415">
+      d:DesignHeight="750" d:DesignWidth="430">
     <Grid ClipToBounds="True" Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,11 +14,11 @@
         <!-- Header -->
         <Grid Grid.Row="0" Background="Lavender">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Guest Rating" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-            <Image Grid.Column="1" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}"/>
+            <Image Grid.Column="0" Source="..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="Back_MouseDown"/>
+            <TextBlock Grid.Column="1" Text="Guest Rating" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="10">

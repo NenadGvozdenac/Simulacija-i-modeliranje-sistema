@@ -3,10 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BookingApp.View.OwnerViews"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="430"
-      Title="MainPage">
+      d:DesignHeight="750" d:DesignWidth="430">
     <Grid Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -40,17 +38,20 @@
                 </StackPanel>
             </Grid>
             <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Add Accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationClick"/>
+                <Button Content="Make accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationClick"/>
+                <Button Content="Reschedule reservation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
+                <Button Content="Schedule renovation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
                 <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestReviewsButtonClick"/>
+                <Button Content="Statistics" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
+                <Button Content="Guest feedback" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
             </StackPanel>
-            <ScrollViewer Grid.Column="1">
-                <StackPanel x:Name="Accommodations">
-                    <!-- Your content here -->
-                </StackPanel>
+            <ScrollViewer Grid.Column="1" x:Name="MainPanel">
+
             </ScrollViewer>
             <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
-                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
+                <Button Content="Notifications" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
+                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Settings_Click"/>
+                <Button Content="PDF Report" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
                 <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Logout_Click"/>
             </StackPanel>
         </Grid>
@@ -62,9 +63,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Reservations" Style="{StaticResource FooterButtonStyle}"/>
-            <Button Grid.Column="1" Content="Accommodations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
-            <Button Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
+            <Button x:Name="ReservationsButton" Grid.Column="0" Content="Reservations" Style="{StaticResource FooterButtonStyle}" Click="ReservationsButton_Click"/>
+            <Button x:Name="AccommodationsButton"  Grid.Column="1" Content="Accommodations" Style="{StaticResource FooterButtonStyle}" Click="AccommodationsButton_Click"/>
+            <Button x:Name="RenovationsButton"  Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Page>

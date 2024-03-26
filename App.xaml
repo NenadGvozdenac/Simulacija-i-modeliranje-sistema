@@ -175,11 +175,26 @@
 
         <Style x:Key="FooterButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource Black}"/>
-            <Setter Property="Foreground" Value="{StaticResource Creme}"/>
+            <Setter Property="Foreground" Value="{StaticResource Lavender}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Lavender}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource RockiesPurple}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ActiveFooterButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource Black}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Black}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontFamily" Value="{StaticResource Verdana}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="{StaticResource RockiesPurple}"/>

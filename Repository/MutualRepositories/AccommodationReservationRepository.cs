@@ -1,4 +1,5 @@
-﻿using BookingApp.Model.MutualModels;
+﻿using BookingApp.Miscellaneous;
+using BookingApp.Model.MutualModels;
 using BookingApp.Resources.Types;
 using BookingApp.Serializer;
 using System;
@@ -140,5 +141,24 @@ public class AccommodationReservationRepository
             reservation.ReservationType = ReservationType.Upcoming;
             Update(reservation);
         }
+    }
+
+    public bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation)
+    {
+        List<AccommodationReservation> accommodationReservations = GetAll().Where(a => a.AccommodationId == accommodation.Id).ToList();
+
+        foreach (AccommodationReservation accommodationReservation in accommodationReservations)
+        {
+            if (wantedReservationTimespan.Start >= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.Start <= accommodationReservation.LastDateOfStaying)
+            {
+                return false;
+            }
+            if (wantedReservationTimespan.End >= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.End <= accommodationReservation.LastDateOfStaying)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

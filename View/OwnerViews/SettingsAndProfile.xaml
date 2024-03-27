@@ -6,9 +6,6 @@
       xmlns:local="clr-namespace:BookingApp.View.OwnerViews.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430">
-    <Page.Resources>
-        <local:UppercaseUsertypeConverter x:Key="UppercaseConverter"/>
-    </Page.Resources>
     <Grid ClipToBounds="True" Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -32,7 +29,7 @@
             <StackPanel Grid.Row="0">
                 <Image Source="..\..\Resources\Assets\user_profile_icon.png" Margin="70 10" Style="{StaticResource ImageHover}"/>
                 <Label Content="{Binding User.Username}" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="{StaticResource Verdana}" Content="{Binding User.Type, Converter={StaticResource UppercaseConverter}}" Foreground="DarkOrange"/>
+                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="{StaticResource Verdana}" Content="{Binding OwnerType}" Foreground="DarkOrange"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1">
                 <ComboBox x:Name="LanguageComboBox" Margin="10" Height="40" SelectionChanged="LanguageComboBox_SelectionChanged"  HorizontalAlignment="Stretch" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20">

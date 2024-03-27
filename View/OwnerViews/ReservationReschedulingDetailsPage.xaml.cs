@@ -25,7 +25,7 @@ public partial class ReservationReschedulingDetailsPage : Page
     public int DaysOfReservation { get; set; }
     public string Comment { get; set; }
     public string StatusOfWantedTimespan { get; set; }
-    public string DayBeforeCancellationIsFinal { get; set; }
+    public DateTime DayBeforeCancellationIsFinal { get; set; }
     public EventHandler ReservationReschedulingDetailsPageClosed { get; internal set; }
 
     public ReservationReschedulingDetailsPage(AccommodationReservationMoving accommodationReservationMoving)
@@ -34,7 +34,7 @@ public partial class ReservationReschedulingDetailsPage : Page
         DataContext = this;
         this.AccommodationReservationMoving = accommodationReservationMoving;
         this.DaysOfReservation = (accommodationReservationMoving.CurrentReservationTimespan.End - accommodationReservationMoving.CurrentReservationTimespan.Start).Days;
-        this.DayBeforeCancellationIsFinal = DateParser.ToString(accommodationReservationMoving.CurrentReservationTimespan.Start.AddDays(-accommodationReservationMoving.Accommodation.CancellationPeriodDays));
+        this.DayBeforeCancellationIsFinal = accommodationReservationMoving.CurrentReservationTimespan.Start.AddDays(-accommodationReservationMoving.Accommodation.CancellationPeriodDays);
         CalculateStatus();
     }
 

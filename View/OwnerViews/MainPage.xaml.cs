@@ -87,8 +87,7 @@ namespace BookingApp.View.OwnerViews
 
         private void PrepareFirstPage()
         {
-            AccommodationWrapper accommodationWrapper = new AccommodationWrapper(_user);
-            MainPanel.Content = accommodationWrapper;
+            MainPanel.Content = _accommodationWrapper;
             SetActiveButton(AccommodationsButton);
         }
 
@@ -306,7 +305,7 @@ namespace BookingApp.View.OwnerViews
 
             OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
 
-            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_user, ownerInfo);
+            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_user);
             NavigationService.Navigate(settingsAndProfile);
         }
 

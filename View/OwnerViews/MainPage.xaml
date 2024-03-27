@@ -39,7 +39,7 @@
             </Grid>
             <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
                 <Button Content="Make accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationClick"/>
-                <Button Content="Reschedule reservation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
+                <Button Content="Reschedule reservation" Style="{StaticResource ButtonStyle}" Margin="5" Click="RescheduleReservationClick"/>
                 <Button Content="Schedule renovation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
                 <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestReviewsButtonClick"/>
                 <Button Content="Statistics" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>

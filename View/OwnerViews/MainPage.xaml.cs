@@ -24,9 +24,6 @@ using BookingApp.View.OwnerViews.MainWindowWrappers;
 
 namespace BookingApp.View.OwnerViews
 {
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
     public partial class MainPage : Page
     {
         private readonly User _user;
@@ -58,6 +55,34 @@ namespace BookingApp.View.OwnerViews
             _accommodationReservationWrapper = new AccommodationReservationWrapper(_user);
 
             PrepareFirstPage();
+            CheckForSuperOwner();
+        }
+
+        private void CheckForSuperOwner()
+        {
+            OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
+
+            // TODO: Get all reviews of the owner
+
+            // TODO: Recalculate all reviews of the owner
+
+            // TODO: Recalculate number of accommodations of the owner
+
+            // TODO: Get average review score of the owner
+
+            // If user is reviewed by at least 50 guests, and has average rating above 4.5, make him a super owner
+        
+            if(ownerInfo.NumberOfReviews >= 50 && ownerInfo.AverageReviewScore >= 4.5)
+            {
+                OwnerInfoRepository.GetInstance().Update(new OwnerInfo()
+                {
+                    AverageReviewScore = ownerInfo.AverageReviewScore,
+                    NumberOfReviews = ownerInfo.NumberOfReviews,
+                    NumberOfAccommodations = ownerInfo.NumberOfAccommodations,
+                    OwnerId = ownerInfo.OwnerId,
+                    IsSuperOwner = true
+                });
+            }
         }
 
         private void PrepareFirstPage()
@@ -279,7 +304,9 @@ namespace BookingApp.View.OwnerViews
             HideLeftNavbar();
             HideRightNavbar();
 
-            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_user);
+            OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
+
+            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_user, ownerInfo);
             NavigationService.Navigate(settingsAndProfile);
         }
 
@@ -287,6 +314,12 @@ namespace BookingApp.View.OwnerViews
         {
             MainPanel.Content = _accommodationWrapper;
             SetActiveButton(AccommodationsButton);
+        }
+
+        private void RescheduleReservationClick(object sender, RoutedEventArgs e)
+        {
+            ReservationReschedulingPage reservationSchedulingPage = new ReservationReschedulingPage(_user);
+            NavigationService.Navigate(reservationSchedulingPage);
         }
 
         private void ReservationsButton_Click(object sender, RoutedEventArgs e)
@@ -306,6 +339,16 @@ namespace BookingApp.View.OwnerViews
         {
             MakeAllButtonsInactive();
             activeButton.Style = (Style)FindResource("ActiveFooterButtonStyle");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

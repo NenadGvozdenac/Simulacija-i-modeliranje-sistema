@@ -43,6 +43,7 @@ public class UserRepository
     /// <param name="user"></param>
     public void Add(User user)
     {
+        user.Id = NextId();
         _users.Add(user);
         _serializer.ToCSV(FilePath, _users);
     }

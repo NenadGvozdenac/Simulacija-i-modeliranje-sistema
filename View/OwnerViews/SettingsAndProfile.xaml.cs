@@ -1,4 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.OwnerModels;
+using BookingApp.Repository.OwnerRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +32,28 @@ namespace BookingApp.View.OwnerViews
                 }
             }
         }
-        public SettingsAndProfile(User user)
+
+        private OwnerInfo _ownerInfo;
+        public OwnerInfo OwnerInfo
+        {
+            get => _ownerInfo;
+            set
+            {
+                if(value != _ownerInfo)
+                {
+                    _ownerInfo = value;
+                }
+            }
+        }
+
+        public string OwnerType
+        {
+            get => OwnerInfo.IsSuperOwner ? "SUPER OWNER" : "OWNER";
+        }
+        public SettingsAndProfile(User user, OwnerInfo ownerInfo)
         {
             User = user;
+            OwnerInfo = ownerInfo;
             DataContext = this;
             InitializeComponent();
         }

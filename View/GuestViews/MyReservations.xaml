@@ -3,10 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookingApp.View.GuestViews"
+             xmlns:local="clr-namespace:BookingApp.View.GuestViews" 
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="1024">
-    <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">My Reservations</TextBlock>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+
+        <Grid Grid.Column="0">
+            <Border BorderBrush="Black" BorderThickness="0 0 1 0"/>
+            <TextBlock x:Name="Username_TextBlock" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,160,0,0" TextWrapping="Wrap" FontSize="30" Text="Username" VerticalAlignment="Top" Height="70" Width="198"/>
+            <Button Content="Upcoming Reservations" Margin="56,299,56,391" Click="UpcomingReservations_Click"/>
+        </Grid>
+
+        <Grid x:Name="Container" Grid.Column="1">
+            <Frame x:Name="MyReservationFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </UserControl>

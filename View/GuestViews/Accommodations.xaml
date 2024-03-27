@@ -151,8 +151,10 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-                    <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
+                <TextBlock HorizontalAlignment="Left" Margin="16,10,0,0" TextWrapping="Wrap" FontSize="35" Text="Search results:" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="16,50,0,0" TextWrapping="Wrap" FontSize="25" Text="Tap on the accommodation for more information!" VerticalAlignment="Top"/>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="0,101,0,0">
                     <ItemsControl
                         ItemsSource="{Binding FilteredAccommodations}">
                         <ItemsControl.ItemTemplate>

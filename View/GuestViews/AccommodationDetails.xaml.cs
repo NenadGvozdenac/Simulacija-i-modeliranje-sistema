@@ -30,6 +30,8 @@ public partial class AccommodationDetails : UserControl
     
     public AccommodationReservation reservation;
     public ObservableCollection<string> _availableDates;
+
+    public event EventHandler UpcomingReservationsChanged;
     public string SelectedDate {  get; set; }
 
     int minvalueDaysOfStay = -1,
@@ -47,10 +49,15 @@ public partial class AccommodationDetails : UserControl
         SetAccommodation(detailedaccomodation, user);
     }
 
+    public void UpcomingReservationsChanged_Invoke()
+    {
+        UpcomingReservationsChanged.Invoke(this, EventArgs.Empty);
+    }
+
     public void SetAccommodation(Accommodation accommodation, User user)
     {
         _availableDates = new ObservableCollection<string>();
-        accomodationreservationrepository = new AccommodationReservationRepository();
+        accomodationreservationrepository = AccommodationReservationRepository.GetInstance();
         reservation = new AccommodationReservation();
         selectedAccommodation = accommodation;
         _user = user;
@@ -219,10 +226,12 @@ public partial class AccommodationDetails : UserControl
             lastDate = DateParser.Parse(endDateString);
 
             reservation = new AccommodationReservation(_user.Id, selectedAccommodation.Id, Convert.ToInt32(GuestNumber.Text), firstDate, lastDate);
-
+            
             accomodationreservationrepository.Add(reservation);
+
             ConfirmButton.IsEnabled = false;
             ConfirmedReservationTextBox.Visibility = Visibility.Visible;
+            UpcomingReservationsChanged_Invoke();
         }      
     }
 
@@ -246,7 +255,7 @@ public partial class AccommodationDetails : UserControl
                 lastDate.SelectedDate = null;
                 FreeDatesCheckButton.IsEnabled = false;
             }
-            else
+            else if(lastDate.SelectedDate.HasValue)
                 FreeDatesCheckButton.IsEnabled = true;
 
             lastDate.IsEnabled = true;

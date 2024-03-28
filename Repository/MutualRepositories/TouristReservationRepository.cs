@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.PathfinderModels;
 using BookingApp.Serializer;
 using BookingApp.View.GuestViews;
 using System;
@@ -17,10 +18,13 @@ namespace BookingApp.Repository.MutualRepositories
 
         private List<TouristReservation> _reservations;
 
+        private TourStartTimeRepository TourStartTimeRepository { get; set; }
+
         public TouristReservationRepository()
         {
             _serializer = new Serializer<TouristReservation>();
             _reservations = _serializer.FromCSV(FilePath);
+            TourStartTimeRepository = new TourStartTimeRepository();
         }
 
         public List<TouristReservation> GetAll()
@@ -39,7 +43,12 @@ namespace BookingApp.Repository.MutualRepositories
             return _reservations.FirstOrDefault(a => a.Id_Tourist == id);
         }
 
-       
+        public List<TouristReservation> GetByTourStartTimeAndId(DateTime tourTime, int TourId)
+        {
+            TourStartTime tourStartTime = TourStartTimeRepository.GetByTourStartTimeAndId(tourTime, TourId);
+            return GetByTimeId(tourStartTime.Id);
+        }
+
         public List<TouristReservation> GetByTimeId(int id)
         {
             _reservations = _serializer.FromCSV(FilePath);

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
 using BookingApp.Repository.OwnerRepositories;
+using BookingApp.ViewModel.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,69 +17,39 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews
+namespace BookingApp.View.OwnerViews;
+
+public partial class SettingsAndProfile : Page
 {
-    public partial class SettingsAndProfile : Page
+    private SettingsViewModel _settingsViewModel;
+    public SettingsAndProfile(User user)
     {
-        private User _user;
-        public User User
+        _settingsViewModel = new SettingsViewModel(user);
+        DataContext = _settingsViewModel;
+
+        InitializeComponent();
+    }
+
+    private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    private void DarkModeRadioButton_Checked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void LightModeRadioButton_Checked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if(NavigationService.CanGoBack)
         {
-            get => _user;
-            set
-            {
-                if(value != _user)
-                {
-                    _user = value;
-                }
-            }
-        }
-
-        private OwnerInfo _ownerInfo;
-        public OwnerInfo OwnerInfo
-        {
-            get => _ownerInfo;
-            set
-            {
-                if(value != _ownerInfo)
-                {
-                    _ownerInfo = value;
-                }
-            }
-        }
-
-        public string OwnerType
-        {
-            get => OwnerInfo.IsSuperOwner ? "SUPER OWNER" : "OWNER";
-        }
-        public SettingsAndProfile(User user, OwnerInfo ownerInfo)
-        {
-            User = user;
-            OwnerInfo = ownerInfo;
-            DataContext = this;
-            InitializeComponent();
-        }
-
-        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void DarkModeRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void LightModeRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if(NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
+            NavigationService.GoBack();
         }
     }
 }

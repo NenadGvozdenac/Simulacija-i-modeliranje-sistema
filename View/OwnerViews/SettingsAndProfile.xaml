@@ -28,8 +28,8 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <Image Source="..\..\Resources\Assets\user_profile_icon.png" Margin="70 10" Style="{StaticResource ImageHover}"/>
-                <Label Content="{Binding User.Username}" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="{StaticResource Verdana}" Content="{Binding OwnerType}" Foreground="DarkOrange"/>
+                <Label Content="{Binding OwnerUserDTO.User.Username}" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="{StaticResource Verdana}" Content="{Binding OwnerUserDTO.Title}" Foreground="DarkOrange"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1">
                 <ComboBox x:Name="LanguageComboBox" Margin="10" Height="40" SelectionChanged="LanguageComboBox_SelectionChanged"  HorizontalAlignment="Stretch" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20">

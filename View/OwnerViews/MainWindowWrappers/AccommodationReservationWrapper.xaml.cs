@@ -99,7 +99,7 @@ public partial class AccommodationReservationWrapper : UserControl
 
     private void InvokeSeeMore(AccommodationReservation e)
     {
-        DetailedReservationView detailedReservationView = new DetailedReservationView(e, _accommodationRepository.GetById(e.AccommodationId));
+        DetailedReservationView detailedReservationView = new DetailedReservationView(e);
         NavigationService.GetNavigationService(this).Navigate(detailedReservationView);
     }
 

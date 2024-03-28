@@ -86,7 +86,7 @@
                     <ListBox x:Name="availableDatesListBox" Height="110" Margin="35,269,446,31" ItemsSource="{Binding _availableDates}" SelectedItem="{Binding SelectedDate}"/>
                     <Button x:Name="ConfirmButton" Content="Tap here to confirm" HorizontalAlignment="Left" Margin="441,307,0,0" VerticalAlignment="Top" Width="120" Click="ConfrimReservation_Click" Height="20"/>
                     <TextBlock x:Name="FoundDatesTextBox" HorizontalAlignment="Left" Margin="33,243,0,0" TextWrapping="Wrap" Text="Found dates:" VerticalAlignment="Top" Height="16" Width="73"/>
-                    <TextBlock x:Name="FoundAlternativeDatesTextBox" Visibility="Collapsed" HorizontalAlignment="Left" Margin="15,65,0,0" Text="Sadly, there are no free dates in the range&#10;you have selected, however we have&#10;found alternatives if it looks acceptable:" FontWeight="DemiBold" FontSize="12" VerticalAlignment="Top" Height="48" Width="238" Grid.Column="1"/>
+                    <TextBlock x:Name="FoundAlternativeDatesTextBox" Visibility="Hidden" HorizontalAlignment="Left" Margin="35,217,0,0" Text="Sadly, there are no free dates in the range&#10;you have selected, however we have&#10;found alternatives if it looks acceptable:" FontWeight="DemiBold" FontSize="12" VerticalAlignment="Top" Height="48" Width="238"/>
                     <TextBlock x:Name="ConfirmedReservationTextBox" HorizontalAlignment="Left" Visibility="Collapsed" Margin="591,186,0,0" TextWrapping="Wrap" Text="Reservation has been made!" VerticalAlignment="Top" Height="0" Width="0"/>
 
                 </Grid>

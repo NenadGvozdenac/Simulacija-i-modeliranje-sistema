@@ -26,6 +26,7 @@ namespace BookingApp.View.GuestViews
 
         private User _user;
         public UpcomingReservations UpcomingReservationsUserControl;
+        public PastReservations PastReservationsUserControl;
         public AccommodationRepository _accommodationRepository;
         public AccommodationReservationRepository _accommodationReservationRepository;
         public MyReservations(User user, AccommodationRepository accommodationRepository , AccommodationReservationRepository accommodationReservationRepository)
@@ -35,14 +36,19 @@ namespace BookingApp.View.GuestViews
             _accommodationRepository = accommodationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
             UpcomingReservationsUserControl = new UpcomingReservations(_accommodationRepository, _accommodationReservationRepository);
+            PastReservationsUserControl = new PastReservations(_accommodationRepository, _accommodationReservationRepository);
+            UpcomingReservationsUserControl.RescheduleClicked += MyReservation_RescheduleClicked;          
             Update();
         }
 
         public void Update()
         {
             Username_TextBlock.Text = _user.Username;
-            //var b = new UpcomingReservations(_accommodationRepository, _accommodationReservationRepository); ;
-            //UpcomingReservationsUserControl = b;
+            MyReservationFrame.Content = UpcomingReservationsUserControl;
+        }
+
+        private void RescheduleAccommodationChangedMind()
+        {
             MyReservationFrame.Content = UpcomingReservationsUserControl;
         }
 
@@ -54,6 +60,22 @@ namespace BookingApp.View.GuestViews
         private void UpcomingReservations_Click(object sender, RoutedEventArgs e)
         {
             MyReservationFrame.Content = UpcomingReservationsUserControl;
+        }
+
+        private void PastReservations_Click(object sender, RoutedEventArgs e)
+        {
+            MyReservationFrame.Content = PastReservationsUserControl;
+        }
+
+        private void MyReservation_RescheduleClicked(object sender, int reservationId)
+        {
+            AccommodationReservation reservation = _accommodationReservationRepository.GetById(reservationId);
+            var a = new RescheduleAccommodation(reservation, _accommodationRepository);
+            a.ChangedMind += (sender, e) =>
+            {
+                RescheduleAccommodationChangedMind();
+            };
+            MyReservationFrame.Content = a;
         }
     }
 }

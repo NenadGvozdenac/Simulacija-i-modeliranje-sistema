@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model.GuestModels;
+using BookingApp.Model.MutualModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,20 @@ namespace BookingApp.View.GuestViews.Components
     /// </summary>
     public partial class UpcomingReservationsCard : UserControl
     {
+        public event EventHandler<int> RescheduleClicked;
         public UpcomingReservationsCard()
         {
             InitializeComponent();
+        }
+
+        private void Reschedule_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is UpcomingReservationsDTO reservation)
+            {
+                int reservationId = reservation.ReservationId;
+
+                RescheduleClicked?.Invoke(this, reservationId);
+            }
         }
     }
 }

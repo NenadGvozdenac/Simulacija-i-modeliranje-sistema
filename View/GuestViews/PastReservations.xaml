@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="BookingApp.View.GuestViews.UpcomingReservations"
+﻿<UserControl x:Class="BookingApp.View.GuestViews.PastReservations"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="774">
     <Grid Background="White">
-        <TextBlock x:Name="NumberOfUpcomingRes_TextBlock" HorizontalAlignment="Left" FontSize="30" Margin="27,19,0,0" TextWrapping="Wrap" Text="You have br upcoming reservations" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="30" Margin="27,19,0,0" TextWrapping="Wrap" Text="Past reservations:" VerticalAlignment="Top" Width="232"/>
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="0,70,0,0">
             <ItemsControl
-        ItemsSource="{Binding _upcomingReservations}">
+            ItemsSource="{Binding _pastReservations}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:UpcomingReservationsCard x:Name="upcomingreservationscard" RescheduleClicked="UpcomingReservationsCard_RescheduleClicked"/>
+                        <components:PastReservationCard x:Name="pastreservationscard"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

@@ -38,7 +38,7 @@ public class AccommodationDTO
     private string _averageReviewScore;
     public string AverageReviewScore
     {
-        get => string.Format("{0}/5", _averageReviewScore);
+        get => string.Format("{0} / 5.00", _averageReviewScore);
         set => _averageReviewScore = value;
     }
 
@@ -47,6 +47,13 @@ public class AccommodationDTO
     {
         get => string.Format("{0} $", _price);
         set => _price = value;
+    }
+
+    private string _numberOfReviews;
+    public string NumberOfReviews
+    {
+        get => string.Format(_numberOfReviews == "1" ? "{0} review" : "{0} reviews", _numberOfReviews);
+        set => _numberOfReviews = value;
     }
 
     public List<AccommodationImage> Images { get; set; }
@@ -62,6 +69,7 @@ public class AccommodationDTO
         CancellationPeriodDays = accommodation.CancellationPeriodDays.ToString();
         AverageReviewScore = accommodation.AverageReviewScore.ToString();
         Price = accommodation.Price.ToString();
+        NumberOfReviews = "0";        // TODO: Change when reviews are implemented
         Images = accommodation.Images;
     }
 }

@@ -32,23 +32,7 @@ public partial class ReservationReschedulingDetailsPage : Page
         _detailedReservationMovingViewModel = new DetailedReservationMovingViewModel(new AccommodationReservationMovingDTO(accommodationReservationMoving));
         DataContext = _detailedReservationMovingViewModel;
         InitializeComponent();
-        CalculateStatus();
-    }
-
-    private void CalculateStatus()
-    {
-        DateSpan wantedSpan = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.AccommodationReservationMoving.WantedReservationTimespan;
-        Accommodation accommodation = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation;
-        
-        if (AccommodationReservationRepository.GetInstance().IsTimespanFree(wantedSpan, accommodation))
-        {
-            _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.StatusOfWantedTimespan = "Reservation can be moved to wanted timespan";
-            StatusLabel.Foreground = Brushes.Green;
-        } else
-        {
-            _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.StatusOfWantedTimespan = "Reservation timespan is already reserved.";
-            StatusLabel.Foreground = Brushes.Red;
-        }
+        StatusLabel.Foreground = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.GetLabelColor();
     }
 
     private void Back_Click(object sender, MouseButtonEventArgs e)

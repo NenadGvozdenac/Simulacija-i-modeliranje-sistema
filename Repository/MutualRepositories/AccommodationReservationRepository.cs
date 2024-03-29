@@ -143,12 +143,16 @@ public class AccommodationReservationRepository
         }
     }
 
-    public bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation)
+    public bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving)
     {
         List<AccommodationReservation> accommodationReservations = GetAll().Where(a => a.AccommodationId == accommodation.Id).ToList();
 
         foreach (AccommodationReservation accommodationReservation in accommodationReservations)
         {
+            if(accommodationReservation.Id == accommodationReservationMoving.ReservationId)
+            {
+                continue;
+            }
             if (wantedReservationTimespan.Start >= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.Start <= accommodationReservation.LastDateOfStaying)
             {
                 return false;

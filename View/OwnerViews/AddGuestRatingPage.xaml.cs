@@ -19,11 +19,6 @@ public partial class AddGuestRatingPage : Page
 {
     public event EventHandler NavigationCompleted;
 
-    private void OnNavigationCompleted()
-    {
-        NavigationCompleted?.Invoke(this, EventArgs.Empty);
-    }
-
     private AddGuestRatingViewModel _addGuestRatingViewModel;
 
     public AddGuestRatingPage(GuestRating uncheckedGuestRating)
@@ -50,6 +45,10 @@ public partial class AddGuestRatingPage : Page
         }
 
         NavigateToPreviousPage();
+    }
+    private void OnNavigationCompleted()
+    {
+        NavigationCompleted?.Invoke(this, EventArgs.Empty);
     }
 
     private void NavigateToPreviousPage()

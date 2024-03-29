@@ -47,7 +47,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationReservationMoving.Guest.Username, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Guest.Username, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
                     <Label Content="Accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Name, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
@@ -92,7 +92,7 @@
                 <CheckBox Grid.Row="9" Grid.Column="1" Content="Add comment?" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="5 2" Margin="10 0" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Checked="CheckBox_Checked_Change" Unchecked="CheckBox_Checked_Change"/>
 
                 <ScrollViewer Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBox x:Name="CommentTextbox" Text="{Binding Comment, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsEnabled="False"/>
+                    <TextBox x:Name="CommentTextbox" Text="{Binding AccommodationReservationMovingDTO.Comment, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsEnabled="False"/>
                 </ScrollViewer>
             </Grid>
         </Grid>

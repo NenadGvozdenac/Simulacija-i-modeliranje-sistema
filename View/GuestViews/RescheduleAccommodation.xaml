@@ -14,7 +14,7 @@
             </Grid>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Margin="38,180,155,152">
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Margin="38,180,206,152">
             <Grid>
                 <TextBlock Text="Rescheduling reservation:" FontSize="23" Margin="20,25,289,324"/>
 
@@ -24,9 +24,16 @@
                 <DatePicker x:Name="lastDate" SelectedDateChanged="LastDateChanged" PreviewKeyDown="DatePickerCantWrite" HorizontalAlignment="Left" Margin="155,122,0,0" VerticalAlignment="Top" Height="24" Width="102"/>
 
                 <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Would you like to send the request for rescheduling to the owner? " FontSize="15" Margin="29,192,0,0" Height="20" Width="441"/>
-                <Button x:Name="YesButton" Content="Yes, send the request" Margin="29,227,416,132" Click="SendRequest_Click"/>
-                <Button Content="No, I've changed my mind" Margin="222,227,183,132" Click="ChangedMind_Click"/>
+                <Button x:Name="YesButton" Content="Yes, send the request" Margin="29,227,353,132" Click="SendRequest_Click"/>
+                <Button x:Name="NoButton" Content="No, I've changed my mind" Margin="222,227,160,132" Click="ChangedMind_Click"/>
 
+            </Grid>
+        </Border>
+
+        <Border Name="SoneBorder" BorderBrush="Black" BorderThickness="1" CornerRadius="25" Margin="587,180,23,359" Visibility="Hidden">
+            <Grid>
+                <TextBlock TextWrapping="Wrap" Text="Request has been sent and owner has been notified!&#10;&#10;To check the status of your request you can go to 'Reschedule Requests' section!" Margin="10,10,10,36"/>
+                <Button Content="Go Back" Click="ChangedMind_Click" Margin="48,146,48,10"/>
             </Grid>
         </Border>
     </Grid>

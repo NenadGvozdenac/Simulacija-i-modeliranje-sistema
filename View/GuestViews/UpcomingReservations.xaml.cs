@@ -33,17 +33,18 @@ namespace BookingApp.View.GuestViews
         public event EventHandler<int> RescheduleClicked;
         public event EventHandler CancelClicked;
 
+        private User _user;
         public AccommodationRepository _accommodationRepository;
-
         public AccommodationReservationRepository _accommodationReservationRepository;
         public AccommodationImageRepository _accommodationImageRepository { get; set; }
         public LocationRepository _locationRepository { get; set; }
         public ObservableCollection<UpcomingReservationsDTO> _upcomingReservations { get; set; }
 
-        public UpcomingReservations(AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public UpcomingReservations(User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             InitializeComponent();
             DataContext = this;
+            _user = user;
             _accommodationRepository = accommodationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
             _accommodationImageRepository = new AccommodationImageRepository();
@@ -58,20 +59,32 @@ namespace BookingApp.View.GuestViews
             _upcomingReservations.Clear();
             foreach(AccommodationReservation reservation in _accommodationReservationRepository.GetAll())
             {
-                if(reservation.FirstDateOfStaying > DateTime.Now)
+                if(reservation.FirstDateOfStaying > DateTime.Now && reservation.UserId == _user.Id)
                 {
                     Accommodation acc = _accommodationRepository.GetById(reservation.AccommodationId);
                     AccommodationReservation accRes = _accommodationReservationRepository.GetById(reservation.Id);
                     UpcomingReservationsDTO temp = new UpcomingReservationsDTO(acc, accRes);
                     temp.Images = _accommodationImageRepository.GetImagesByAccommodationId(reservation.AccommodationId);
                     temp.Location = _locationRepository.GetById(acc.LocationId);
-                    _upcomingReservations.Add(temp);
+                    _upcomingReservations.Add(temp);                    
                     NumberOfUpcomingReservation++;
                 }
             }
+            ReverseCollection();
             NumberOfUpcomingRes_TextBlock.Text = "You have " + NumberOfUpcomingReservation + " upcoming reservations";
         }
 
+        private void ReverseCollection()
+        {
+            List<UpcomingReservationsDTO> tempList = new List<UpcomingReservationsDTO>(_upcomingReservations);
+            tempList.Reverse();
+
+            _upcomingReservations.Clear();
+            foreach (UpcomingReservationsDTO item in tempList)
+            {
+                _upcomingReservations.Add(item);
+            }
+        }
         private void UpcomingReservationsCard_RescheduleClicked(object sender, int reservationId)
         {
             RescheduleClicked?.Invoke(this, reservationId);

@@ -5,16 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.View.GuestViews.Components"
              mc:Ignorable="d" 
-            d:DesignHeight="194.486" d:DesignWidth="774" Margin="10 10 0 0">
+            d:DesignHeight="194.486" d:DesignWidth="774" Margin="20 10 0 0">
     <Grid>
         <Border
-    Height="150"
-    Width="539"
-    HorizontalAlignment="Left"
-    CornerRadius="25"
-    Background="#545E75"
-    BorderThickness="4" BorderBrush="#9DD9D2"
-    Cursor="Hand" Margin="1,10,0,34" >
+            Height="150"
+            Width="531"
+            HorizontalAlignment="Left"
+            CornerRadius="25"
+            Background="#545E75"
+            BorderThickness="4" BorderBrush="#9DD9D2"
+            Cursor="Hand" Margin="1,10,0,34" >
             <Border.Effect>
                 <DropShadowEffect Opacity="0.5"/>
             </Border.Effect>
@@ -84,7 +84,8 @@
             BorderBrush="#9DD9D2" 
             CornerRadius="25"
             Background="#545E75"
-            Margin="545,38,20,56">
+            Width="180"
+            Margin="545,38,46,56">
             <Grid>
                 <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" FontSize="15" TextWrapping="Wrap" Foreground="White" Text="Remaining days to leave a review: 5" VerticalAlignment="Top" Height="34" FontFamily="Bahnschrift Light" Margin="6,10,10,0">
                     <TextBlock.Effect>

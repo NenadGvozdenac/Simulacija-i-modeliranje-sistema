@@ -40,13 +40,13 @@
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Center" Margin="0,53,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="You will be staying here between:" VerticalAlignment="Top" Width="224">
+                    <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Center" Margin="0,54,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="You will be staying here between:" VerticalAlignment="Top" Width="224">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <TextBlock x:Name="DateOfStaying_TextBlock" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Center" Margin="0,71,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding AvailableDatesString}" VerticalAlignment="Top" Width="224">
+                    <TextBlock x:Name="DateOfStaying_TextBlock" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Center" Margin="0,73,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding AvailableDatesString}" VerticalAlignment="Top" Width="224">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                         </TextBlock.Effect>

@@ -29,13 +29,14 @@ namespace BookingApp.View.GuestViews
         public AccommodationRepository _accommodationRepository;
         public AccommodationReservationMovingRepository _accommodationMovingRepository;
 
-        public EventHandler ChangedMind;
-        public RescheduleAccommodation(AccommodationReservation _selectedReservation, AccommodationRepository accommodationRepository)
+        public event EventHandler ChangedMind;
+        public event EventHandler SendRequestRefresh;
+        public RescheduleAccommodation(AccommodationReservation _selectedReservation, AccommodationRepository accommodationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
         {
             InitializeComponent();
             selectedReservation = _selectedReservation;
             _accommodationRepository = accommodationRepository;
-            _accommodationMovingRepository = new AccommodationReservationMovingRepository();
+            _accommodationMovingRepository = accommodationReservationMovingRepository;
             SetUpUserControl();
         }
 
@@ -57,7 +58,10 @@ namespace BookingApp.View.GuestViews
         private void SendRequest_Click(object sender, RoutedEventArgs e)
         {
             _accommodationMovingRepository.Add(new AccommodationReservationMoving(selectedReservation.AccommodationId, selectedReservation.Id, selectedReservation.UserId, selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying, firstDate.SelectedDate.Value, lastDate.SelectedDate.Value));
-            ChangedMind?.Invoke(this, EventArgs.Empty);
+            SendRequestRefresh?.Invoke(this, EventArgs.Empty);
+            NoButton.IsEnabled = false;
+            YesButton.IsEnabled = false;
+            SoneBorder.Visibility = Visibility.Visible;
         }
 
         private void DatePickerCantWrite(object sender, KeyEventArgs e)

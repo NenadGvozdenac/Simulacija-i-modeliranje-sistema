@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
+using BookingApp.Repository.MutualRepositories;
 
 namespace BookingApp.View.GuestViews;
 
@@ -20,35 +21,53 @@ namespace BookingApp.View.GuestViews;
 public partial class GuestMainWindow : Window
 {
     private readonly User _user;
-    public AccommodationRepository accomodationrepository { get; set; }
+    public AccommodationRepository _accommodationRepository { get; set; }
     public Accommodations AccommodationsUserControl;
     public MyReservations MyReservationsUserControl;
+    public AccommodationReservationRepository _accommodationReservationRepository;
 
     public GuestMainWindow(User user)
     {
         InitializeComponent();       
-        accomodationrepository = new AccommodationRepository();
+        _accommodationRepository = new AccommodationRepository();
+        _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
         _user = user;
         Update(_user);
         AccommodationsUserControl = new Accommodations(user);
         GuestWindowFrame.Content = AccommodationsUserControl;
     }
-    private void Accommodations_Click(object sender, RoutedEventArgs e)
+    public void Accommodations_Click(object sender, RoutedEventArgs e)
     {
         GuestWindowFrame.Content = AccommodationsUserControl;
     }
-    private void MyReservations_Click(object sender, RoutedEventArgs e)
+    public void MyReservations_Click(object sender, RoutedEventArgs e)
     {
         GuestWindowFrame.Content = MyReservationsUserControl;
     }
     public void ShowAccommodationDetails(int accommodationId)
     {
-        Accommodation detailedAccommodation = accomodationrepository.GetById(accommodationId);
-        GuestWindowFrame.Content = new AccommodationDetails(detailedAccommodation, _user);
+        Accommodation detailedAccommodation = _accommodationRepository.GetById(accommodationId);
+        var a = new AccommodationDetails(detailedAccommodation, _user);
+        a.UpcomingReservationsChanged += (sender, e) =>
+        {
+            RefreshReservations();
+        };
+        GuestWindowFrame.Content = a;
+
     }
+    private void RefreshReservations()
+    {
+        MyReservationsUserControl.RefreshUpcomingReservations();
+    }
+
     private void Update(User user)
     {
         AccommodationsUserControl = new Accommodations(user);
-        MyReservationsUserControl = new MyReservations();
+        MyReservationsUserControl = new MyReservations(user, _accommodationRepository, _accommodationReservationRepository);
+    }
+
+    private void Logout_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

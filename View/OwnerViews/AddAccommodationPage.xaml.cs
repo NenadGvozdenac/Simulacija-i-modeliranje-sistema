@@ -16,11 +16,6 @@ namespace BookingApp.View.OwnerViews
     {
         public event EventHandler PageClosed;
 
-        private void ClosePage()
-        {
-            PageClosed?.Invoke(this, EventArgs.Empty);
-        }
-
         private AddAccommodationViewModel _addAccommodationViewModel;
 
         public AddAccommodationPage(User user)
@@ -72,6 +67,10 @@ namespace BookingApp.View.OwnerViews
             ImageURLTextBox.Clear();
         }
 
+        private void ClosePage()
+        {
+            PageClosed?.Invoke(this, EventArgs.Empty);
+        }
         private void BackButton_Click(object sender, MouseButtonEventArgs e)
         {
             if (NavigationService.CanGoBack)

@@ -1,7 +1,10 @@
-﻿using BookingApp.Miscellaneous;
+﻿using BookingApp.DTOs.OwnerDTOs;
+using BookingApp.Miscellaneous;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository.MutualRepositories;
 using BookingApp.Resources.Types;
+using BookingApp.Services.Owner;
+using BookingApp.ViewModel.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,34 +24,15 @@ namespace BookingApp.View.OwnerViews;
 
 public partial class ReservationReschedulingDetailsPage : Page
 {
-    public AccommodationReservationMoving AccommodationReservationMoving { get; set; }
-    public int DaysOfReservation { get; set; }
-    public string Comment { get; set; }
-    public string StatusOfWantedTimespan { get; set; }
-    public DateTime DayBeforeCancellationIsFinal { get; set; }
+    private DetailedReservationMovingViewModel _detailedReservationMovingViewModel;
     public EventHandler ReservationReschedulingDetailsPageClosed { get; internal set; }
 
     public ReservationReschedulingDetailsPage(AccommodationReservationMoving accommodationReservationMoving)
     {
+        _detailedReservationMovingViewModel = new DetailedReservationMovingViewModel(new AccommodationReservationMovingDTO(accommodationReservationMoving));
+        DataContext = _detailedReservationMovingViewModel;
         InitializeComponent();
-        DataContext = this;
-        this.AccommodationReservationMoving = accommodationReservationMoving;
-        this.DaysOfReservation = (accommodationReservationMoving.CurrentReservationTimespan.End - accommodationReservationMoving.CurrentReservationTimespan.Start).Days;
-        this.DayBeforeCancellationIsFinal = accommodationReservationMoving.CurrentReservationTimespan.Start.AddDays(-accommodationReservationMoving.Accommodation.CancellationPeriodDays);
-        CalculateStatus();
-    }
-
-    private void CalculateStatus()
-    {
-        if(AccommodationReservationRepository.GetInstance().IsTimespanFree(AccommodationReservationMoving.WantedReservationTimespan, AccommodationReservationMoving.Accommodation))
-        {
-            StatusOfWantedTimespan = "Reservation can be moved to wanted timespan";
-            StatusLabel.Foreground = Brushes.Green;
-        } else
-        {
-            StatusOfWantedTimespan = "Reservation timespan is already reserved.";
-            StatusLabel.Foreground = Brushes.Red;
-        }
+        StatusLabel.Foreground = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.GetLabelColor();
     }
 
     private void Back_Click(object sender, MouseButtonEventArgs e)
@@ -72,19 +56,22 @@ public partial class ReservationReschedulingDetailsPage : Page
 
     private void Reject_Click(object sender, RoutedEventArgs e)
     {
-        this.AccommodationReservationMoving.Comment = Comment;
-        this.AccommodationReservationMoving.Status = ReschedulingStatus.Rejected;
+        var accommodationMoving = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.AccommodationReservationMoving;
+        accommodationMoving.Comment = CommentTextbox.Text;
+        accommodationMoving.Status = ReschedulingStatus.Rejected;
 
-        AccommodationReservationMovingRepository.GetInstance().Update(this.AccommodationReservationMoving);
+        AccommodationReservationMovingRepository.GetInstance().Update(accommodationMoving);
 
         NavigateBack();
     }
 
     private void Accept_Click(object sender, RoutedEventArgs e)
     {
-        this.AccommodationReservationMoving.Status = ReschedulingStatus.Accepted;
+        var accommodationMoving = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.AccommodationReservationMoving;
+        accommodationMoving.Status = ReschedulingStatus.Accepted;
 
-        AccommodationReservationMovingRepository.GetInstance().Update(this.AccommodationReservationMoving);
+        AccommodationReservationMovingRepository.GetInstance().Update(accommodationMoving);
+        AccommodationReservationService.GetInstance().MoveReservation(accommodationMoving);
 
         NavigateBack();
     }

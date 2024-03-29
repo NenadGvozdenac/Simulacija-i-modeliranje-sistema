@@ -28,6 +28,8 @@ namespace BookingApp.View.OwnerViews
         private readonly User _user;
         private List<Accommodation> ownerAccommodations;
         private List<AccommodationReservationMoving> reservationMoving;
+
+        public event EventHandler ReservationReschedulingPageClosed;
         public ReservationReschedulingPage(User user)
         {
             _user = user;
@@ -38,6 +40,11 @@ namespace BookingApp.View.OwnerViews
             InitializeComponent();
 
             Update();
+        }
+
+        private void InvokePageClosed()
+        {
+            ReservationReschedulingPageClosed?.Invoke(this, EventArgs.Empty);
         }
 
         private void Update()
@@ -96,6 +103,7 @@ namespace BookingApp.View.OwnerViews
         {
             if(NavigationService.CanGoBack)
             {
+                InvokePageClosed();
                 NavigationService.GoBack();
             }
         }

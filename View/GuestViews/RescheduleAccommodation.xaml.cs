@@ -56,7 +56,8 @@ namespace BookingApp.View.GuestViews
 
         private void SendRequest_Click(object sender, RoutedEventArgs e)
         {
-            _accommodationMovingRepository.Add(new AccommodationReservationMoving(selectedReservation.AccommodationId, selectedReservation.Id, selectedReservation.UserId, selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying, firstDate.SelectedDate.Value, lastDate.SelectedDate.Value)); 
+            _accommodationMovingRepository.Add(new AccommodationReservationMoving(selectedReservation.AccommodationId, selectedReservation.Id, selectedReservation.UserId, selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying, firstDate.SelectedDate.Value, lastDate.SelectedDate.Value));
+            ChangedMind?.Invoke(this, EventArgs.Empty);
         }
 
         private void DatePickerCantWrite(object sender, KeyEventArgs e)

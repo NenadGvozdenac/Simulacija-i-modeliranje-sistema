@@ -29,6 +29,7 @@ namespace BookingApp.View.GuestViews.Components
         public AccommodationReservationMovingRepository _accommodationMovingRepository;
 
         public EventHandler<int> YesClicked;
+        public EventHandler NoClicked;
         public CancelReservation(AccommodationReservation _selectedReservation, AccommodationRepository accommodationRepository)
         {
             InitializeComponent();
@@ -53,7 +54,7 @@ namespace BookingApp.View.GuestViews.Components
 
         private void No_Click(object sender, RoutedEventArgs e)
         {
-
+           NoClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

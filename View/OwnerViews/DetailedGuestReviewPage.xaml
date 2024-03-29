@@ -71,11 +71,11 @@
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
                     <Label Content="Number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestRatingDTO.Reservation.NumberOfGuests, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding GuestRatingDTO.Reservation.GuestsNumber, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
                     <Label Content="Date timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestRatingDTO.Reservation.DateSpan, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding GuestRatingDTO.DateSpan, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
                     <Label Content="Current accommodation rating" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>

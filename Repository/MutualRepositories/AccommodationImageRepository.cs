@@ -83,4 +83,15 @@ public class AccommodationImageRepository
         _accommodationImages.RemoveAll(a => a.AccommodationId == id);
         _serializer.ToCSV(FilePath, _accommodationImages);
     }
+
+    public void AddAll(List<AccommodationImage> images)
+    {
+        foreach(AccommodationImage image in images)
+        {
+            image.Id = NextId();
+        }
+
+        _accommodationImages.AddRange(images);
+        _serializer.ToCSV(FilePath, _accommodationImages);
+    }
 }

@@ -41,37 +41,37 @@
 
             <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Guest username" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding GuestUsername}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.Guest.Username}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
                 <Label Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding AccommodationName}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.Accommodation.Name}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Accommodation location" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding AccommodationLocation}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.Accommodation.Location}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1">
                 <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding AccommodationType}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.Accommodation.Type}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1">
                 <Label Content="Reservation timespan" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding ReservationTimespan}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.DateSpan}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="4" Grid.Column="0">
                 <Label Content="Number of guests" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding NumberOfGuests}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.Reservation.GuestsNumber}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="4" Grid.Column="01">
                 <Label Content="Reservation days" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <Label Content="{Binding ReservationDays}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+                <Label Content="{Binding UncheckedGuestRatingDTO.Reservation.ReservationDays}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="5" Grid.Column="0">

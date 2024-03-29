@@ -10,5 +10,6 @@ public enum ReschedulingStatus
 {
     Pending,
     Accepted,
-    Rejected
+    Rejected,
+    TimedOut
 }

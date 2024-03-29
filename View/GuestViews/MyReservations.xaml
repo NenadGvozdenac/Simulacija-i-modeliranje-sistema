@@ -18,7 +18,8 @@
             <TextBlock x:Name="Username_TextBlock" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,160,0,0" TextWrapping="Wrap" FontSize="30" Text="Username" VerticalAlignment="Top" Height="70" Width="198"/>
             <Button Content="Upcoming Reservations" Margin="56,299,56,391" Click="UpcomingReservations_Click"/>
             <Button Content="Past Reservations" Margin="56,345,56,345" Click="PastReservations_Click"/>
-
+            <Button Content="Owner Feedback" Margin="56,392,56,298"/>
+            <Button Content="Reschedule Requests" Margin="56,437,56,253" Click="RescheduleRequests_Click"/>
         </Grid>
 
         <Grid x:Name="Container" Grid.Column="1">

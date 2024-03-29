@@ -29,10 +29,6 @@ namespace BookingApp.View.GuestViews.Components
             InitializeComponent();
         }
 
-        //private void UpcomingReservationsCard_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //    UpdateButtonState();
-        //}
         private void UpdateButtonState(object sender, DependencyPropertyChangedEventArgs e)
         {
 

@@ -25,16 +25,17 @@ namespace BookingApp.View.GuestViews
     /// </summary>
     public partial class PastReservations : UserControl
     {
+        public User _user;
         public AccommodationRepository _accommodationRepository;
-
         public AccommodationReservationRepository _accommodationReservationRepository;
         public AccommodationImageRepository _accommodationImageRepository { get; set; }
         public LocationRepository _locationRepository { get; set; }
         public ObservableCollection<PastReservationsDTO> _pastReservations { get; set; }
-        public PastReservations(AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public PastReservations(User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             InitializeComponent();
             DataContext = this;
+            _user = user;
             _accommodationRepository = accommodationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
             _accommodationImageRepository = new AccommodationImageRepository();
@@ -48,7 +49,7 @@ namespace BookingApp.View.GuestViews
             _pastReservations.Clear();
             foreach (AccommodationReservation reservation in _accommodationReservationRepository.GetAll())
             {
-                if (reservation.LastDateOfStaying < DateTime.Now)
+                if (reservation.LastDateOfStaying < DateTime.Now && reservation.UserId == _user.Id)
                 {
                     Accommodation acc = _accommodationRepository.GetById(reservation.AccommodationId);
                     AccommodationReservation accRes = _accommodationReservationRepository.GetById(reservation.Id);

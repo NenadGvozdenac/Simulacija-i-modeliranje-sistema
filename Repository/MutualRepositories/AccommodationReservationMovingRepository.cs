@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
+using BookingApp.View.GuestViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,11 @@ public class AccommodationReservationMovingRepository
         accommodationReservationMoving.Id = NextId();
         AccommodationReservationMovings.Add(accommodationReservationMoving);
         _serializer.ToCSV(FilePath, AccommodationReservationMovings);
+    }
+
+    public List<AccommodationReservationMoving> GetAll()
+    {
+        return AccommodationReservationMovings;
     }
 
     private int NextId()

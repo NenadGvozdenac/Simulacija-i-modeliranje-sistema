@@ -22,15 +22,18 @@ public partial class GuestMainWindow : Window
 {
     private readonly User _user;
     public AccommodationRepository _accommodationRepository { get; set; }
+    public AccommodationReservationRepository _accommodationReservationRepository;
+    public AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
     public Accommodations AccommodationsUserControl;
     public MyReservations MyReservationsUserControl;
-    public AccommodationReservationRepository _accommodationReservationRepository;
+    
 
     public GuestMainWindow(User user)
     {
         InitializeComponent();       
         _accommodationRepository = new AccommodationRepository();
         _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
+        _accommodationReservationMovingRepository = new AccommodationReservationMovingRepository();
         _user = user;
         Update(_user);
         AccommodationsUserControl = new Accommodations(user);
@@ -63,7 +66,7 @@ public partial class GuestMainWindow : Window
     private void Update(User user)
     {
         AccommodationsUserControl = new Accommodations(user);
-        MyReservationsUserControl = new MyReservations(user, _accommodationRepository, _accommodationReservationRepository);
+        MyReservationsUserControl = new MyReservations(user, _accommodationRepository, _accommodationReservationRepository, _accommodationReservationMovingRepository);
     }
 
     private void Logout_Click(object sender, RoutedEventArgs e)

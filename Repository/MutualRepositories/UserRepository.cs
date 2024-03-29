@@ -29,12 +29,12 @@ public class UserRepository
     public User GetByUsername(string username)
     {
         _users = _serializer.FromCSV(FilePath);
-        return _users.FirstOrDefault(u => u.Username == username);
+        return _users.First(u => u.Username == username);
     }
 
     public User GetById(int id)
     {
-        return _users.FirstOrDefault(u => u.Id == id);
+        return _users.First(u => u.Id == id);
     }
 
     /// <summary>
@@ -60,5 +60,20 @@ public class UserRepository
             return 1;
         }
         return _users.Max(c => c.Id) + 1;
+    }
+
+    public void Delete(int ownerId)
+    {
+        _users.RemoveAll(u => u.Id == ownerId);
+        _serializer.ToCSV(FilePath, _users);
+    }
+
+    public void Update(User user)
+    {
+        if(_users.Contains(user))
+        {
+            _users[_users.FindIndex(u => u.Id == user.Id)] = user;
+            _serializer.ToCSV(FilePath, _users);
+        }
     }
 }

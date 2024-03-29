@@ -55,6 +55,7 @@ public class AccommodationRepository
 
     public void Add(Accommodation accommodation)
     {
+        accommodation.Id = NextId();
         _accommodations.Add(accommodation);
         _serializer.ToCSV(FilePath, _accommodations);
     }

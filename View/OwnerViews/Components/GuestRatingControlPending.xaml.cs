@@ -61,7 +61,7 @@ namespace BookingApp.View.OwnerViews.Components
         {
             Accommodation accommodation = _accommodationRepository.GetById(_guestRating.AccommodationId);
             accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
-            AddGuestRatingPage addGuestRating = new AddGuestRatingPage(accommodation, _guestRating);
+            AddGuestRatingPage addGuestRating = new AddGuestRatingPage(_guestRating);
             addGuestRating.NavigationCompleted += NavigationCompleted;
             NavigationService.GetNavigationService(this).Navigate(addGuestRating);
         }

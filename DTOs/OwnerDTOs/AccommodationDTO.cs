@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
+using BookingApp.Services.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ public class AccommodationDTO
 
     public AccommodationDTO(Accommodation accommodation)
     {
-        Owner = UserRepository.GetInstance().GetById(accommodation.OwnerId);
+        Owner = OwnerService.GetInstance().GetOwnerInfo(accommodation.OwnerId).Item2;
         Name = accommodation.Name;
         Location = accommodation.Location;
         Type = accommodation.Type;

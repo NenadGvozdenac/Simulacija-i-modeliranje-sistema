@@ -2,6 +2,7 @@
 using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
 using BookingApp.Repository;
+using BookingApp.Services.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace BookingApp.DTOs.OwnerDTOs;
 
 public class GuestRatingDTO
 {
+    public int Id; 
+
     private bool _isChecked;
     public bool IsChecked
     {
@@ -70,10 +73,11 @@ public class GuestRatingDTO
 
     public GuestRatingDTO(GuestRating guestRating)
     {
+        Id = guestRating.Id;
         IsChecked = guestRating.IsChecked;
-        Accommodation = new AccommodationDTO(AccommodationRepository.GetInstance().GetById(guestRating.AccommodationId));
+        Accommodation = new AccommodationDTO(AccommodationService.GetInstance().GetById(guestRating.AccommodationId));
         Reservation = new AccommodationReservationDTO(guestRating.Reservation);
-        Guest = UserRepository.GetInstance().GetById(guestRating.GuestId);
+        Guest = OwnerService.GetInstance().GetOwnerInfo(guestRating.GuestId).Item2;
         Cleanliness = guestRating.Cleanliness.ToString();
         Respectfulness = guestRating.Respectfulness.ToString();
         Comment = guestRating.Comment;

@@ -1,4 +1,5 @@
-﻿using BookingApp.Model.MutualModels;
+﻿using BookingApp.Miscellaneous;
+using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using System;
@@ -60,5 +61,22 @@ public class AccommodationReservationService
     public AccommodationReservation GetById(int reservationId)
     {
         return _accommodationReservationRepository.GetById(reservationId);
+    }
+
+    public void MoveReservation(AccommodationReservationMoving accommodationMoving)
+    {
+        DateSpan wantedDatespan = accommodationMoving.WantedReservationTimespan;
+
+        AccommodationReservation reservation = accommodationMoving.Reservation;
+
+        reservation.FirstDateOfStaying = wantedDatespan.Start;
+        reservation.LastDateOfStaying = wantedDatespan.End;
+
+        _accommodationReservationRepository.Update(reservation);
+    }
+
+    internal bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation)
+    {
+        throw new NotImplementedException();
     }
 }

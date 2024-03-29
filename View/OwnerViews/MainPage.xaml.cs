@@ -277,6 +277,7 @@ namespace BookingApp.View.OwnerViews
         private void RescheduleReservationClick(object sender, RoutedEventArgs e)
         {
             ReservationReschedulingPage reservationSchedulingPage = new ReservationReschedulingPage(_mainPageViewModel.User);
+            reservationSchedulingPage.ReservationReschedulingPageClosed += (s, e) => Refresh();
             NavigationService.Navigate(reservationSchedulingPage);
         }
 
@@ -297,16 +298,6 @@ namespace BookingApp.View.OwnerViews
         {
             MakeAllButtonsInactive();
             activeButton.Style = (Style)FindResource("ActiveFooterButtonStyle");
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -79,9 +79,15 @@ namespace BookingApp.View.OwnerViews.Components
             InitializeComponent();
             Accommodation = accommodation;
             LoadAccommodationImages();
+            LoadAccommodationLocation();
             Location = location;
             DataContext = this;
             SetupAccommodation();
+        }
+
+        private void LoadAccommodationLocation()
+        {
+            AccommodationLocation = LocationRepository.GetInstance().GetById(Accommodation.LocationId).ToString();
         }
 
         private void LoadAccommodationImages()

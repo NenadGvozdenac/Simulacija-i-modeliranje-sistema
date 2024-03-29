@@ -2,6 +2,7 @@
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Resources.Types;
+using BookingApp.Services.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,13 +74,13 @@ public class AccommodationReservationDTO
 
     public AccommodationReservationDTO(AccommodationReservation reservation)
     {
-        Owner = UserRepository.GetInstance().GetById(reservation.UserId);
-        AccommodationDTO = new(AccommodationRepository.GetInstance().GetById(reservation.AccommodationId));
+        Owner = OwnerService.GetInstance().GetOwnerInfo(reservation.UserId).Item2;
+        AccommodationDTO = new(AccommodationService.GetInstance().GetById(reservation.AccommodationId));
         Reservation = reservation;
         NumberOfReviews = "0";
         ReservationDays = (reservation.LastDateOfStaying - reservation.FirstDateOfStaying).Days.ToString();
         GuestsNumber = reservation.GuestsNumber.ToString();
         GuestRating = "0";
-        LastCancellationDate = DateParser.ToString(reservation.FirstDateOfStaying.AddDays(-AccommodationRepository.GetInstance().GetById(reservation.AccommodationId).CancellationPeriodDays));
+        LastCancellationDate = DateParser.ToString(reservation.FirstDateOfStaying.AddDays(-AccommodationService.GetInstance().GetById(reservation.AccommodationId).CancellationPeriodDays));
     }
 }

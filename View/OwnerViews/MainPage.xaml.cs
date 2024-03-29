@@ -20,12 +20,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.View.GuestViews;
 using BookingApp.Model.OwnerModels;
+using BookingApp.View.OwnerViews.MainWindowWrappers;
 
 namespace BookingApp.View.OwnerViews
 {
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
     public partial class MainPage : Page
     {
         private readonly User _user;
@@ -35,6 +33,10 @@ namespace BookingApp.View.OwnerViews
         private AccommodationImageRepository _accommodationImageRepository;
         private GuestRatingRepository _guestRatingRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
+
+        private AccommodationWrapper _accommodationWrapper;
+        private AccommodationReservationWrapper _accommodationReservationWrapper;
+
         public MainPage(User user)
         {
             InitializeComponent();
@@ -48,6 +50,45 @@ namespace BookingApp.View.OwnerViews
             _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
 
             Update();
+
+            _accommodationWrapper = new AccommodationWrapper(_user);
+            _accommodationReservationWrapper = new AccommodationReservationWrapper(_user);
+
+            PrepareFirstPage();
+            CheckForSuperOwner();
+        }
+
+        private void CheckForSuperOwner()
+        {
+            OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
+
+            // TODO: Get all reviews of the owner
+
+            // TODO: Recalculate all reviews of the owner
+
+            // TODO: Recalculate number of accommodations of the owner
+
+            // TODO: Get average review score of the owner
+
+            // If user is reviewed by at least 50 guests, and has average rating above 4.5, make him a super owner
+        
+            if(ownerInfo.NumberOfReviews >= 50 && ownerInfo.AverageReviewScore >= 4.5)
+            {
+                OwnerInfoRepository.GetInstance().Update(new OwnerInfo()
+                {
+                    AverageReviewScore = ownerInfo.AverageReviewScore,
+                    NumberOfReviews = ownerInfo.NumberOfReviews,
+                    NumberOfAccommodations = ownerInfo.NumberOfAccommodations,
+                    OwnerId = ownerInfo.OwnerId,
+                    IsSuperOwner = true
+                });
+            }
+        }
+
+        private void PrepareFirstPage()
+        {
+            MainPanel.Content = _accommodationWrapper;
+            SetActiveButton(AccommodationsButton);
         }
 
         private void AddAllReservationsThatArentCheckedYet()
@@ -129,31 +170,38 @@ namespace BookingApp.View.OwnerViews
 
         public void Update()
         {
-            _accommodations.Clear();
-            Accommodations.Children.Clear();
-
-            foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
-            {
-                LoadAccommodationImages(accommodation);
-                LoadAccommodationLocation(accommodation);
-                MakeAccommodationControl(accommodation);
-            }
-
+            LoadAccommodationInfo();
             HideLeftNavbar();
             HideRightNavbar();
             AddAllReservationsThatArentCheckedYet();
             CheckReservationsThatEnded();
         }
 
-        private void MakeAccommodationControl(Accommodation accommodation)
+        private void LoadAccommodationInfo()
         {
-            AccommodationControl accommodationView = new AccommodationControl(accommodation, accommodation.Location);
-            accommodationView.EyeButtonClicked += (sender, e) => AccommodationUserControlEyeClick(sender, accommodation);
-            accommodationView.TrashButtonClicked += (sender, e) => AccommodationUserControlTrashClick(sender, accommodation);
+            foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
+            {
+                LoadAccommodationImages(accommodation);
+                LoadAccommodationLocation(accommodation);
+            }
+        }
 
-            accommodationView.Margin = new Thickness(15);
-            _accommodations.Add(accommodation);
-            Accommodations.Children.Add(accommodationView);
+        public void Refresh()
+        {
+            RefreshReservations();
+            RefreshAccommodations();
+        }
+
+        private void RefreshAccommodations()
+        {
+            _accommodationWrapper.Update();
+            MainPanel.Content = _accommodationWrapper;
+        }
+
+        private void RefreshReservations()
+        {
+            _accommodationReservationWrapper.Update();
+            MainPanel.Content = _accommodationWrapper;
         }
 
         private void LoadAccommodationLocation(Accommodation accommodation)
@@ -226,7 +274,7 @@ namespace BookingApp.View.OwnerViews
         private void AddAccommodationClick(object sender, RoutedEventArgs e)
         {
             AddAccommodationPage addAccommodationPage = new AddAccommodationPage(_user);
-            addAccommodationPage.PageClosed += (s, e) => Update();
+            addAccommodationPage.PageClosed += (s, e) => Refresh();
             NavigationService.Navigate(addAccommodationPage);
         }
 
@@ -234,31 +282,6 @@ namespace BookingApp.View.OwnerViews
         {
             GuestReviewPage guestReviewPage = new GuestReviewPage(_user);
             NavigationService.Navigate(guestReviewPage);
-        }
-
-        private void AccommodationUserControlEyeClick(object sender, Accommodation accommodation)
-        {
-            DetailedAccommodationPage detailedAccommodationPage = new DetailedAccommodationPage(accommodation);
-            NavigationService.Navigate(detailedAccommodationPage);
-        }
-
-        private void AccommodationUserControlTrashClick(object sender, Accommodation accommodation)
-        {
-            if (!_accommodationRepository.IsAccommodationDeletable(accommodation.Id))
-            {
-                MessageBox.Show((OwnerMainWindow)Window.GetWindow(this), "Accommodation cannot be deleted because it has active reservations.", "Delete accommodation", MessageBoxButton.OK);
-                return;
-            }
-
-            if (MessageBox.Show((OwnerMainWindow)Window.GetWindow(this), "Are you sure you want to delete this accommodation?", "Delete accommodation", MessageBoxButton.YesNo) == MessageBoxResult.No)
-            {
-                return;
-            }
-
-            _accommodationRepository.Delete(accommodation.Id);
-            _accommodationImageRepository.DeleteByAccommodationId(accommodation.Id);
-
-            Update();
         }
 
         private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
@@ -273,6 +296,58 @@ namespace BookingApp.View.OwnerViews
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             Window.GetWindow(this).Close();
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            HideLeftNavbar();
+            HideRightNavbar();
+
+            OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
+
+            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_user);
+            NavigationService.Navigate(settingsAndProfile);
+        }
+
+        private void AccommodationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPanel.Content = _accommodationWrapper;
+            SetActiveButton(AccommodationsButton);
+        }
+
+        private void RescheduleReservationClick(object sender, RoutedEventArgs e)
+        {
+            ReservationReschedulingPage reservationSchedulingPage = new ReservationReschedulingPage(_user);
+            NavigationService.Navigate(reservationSchedulingPage);
+        }
+
+        private void ReservationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPanel.Content = _accommodationReservationWrapper;
+            SetActiveButton(ReservationsButton);
+        }
+
+        private void MakeAllButtonsInactive()
+        {
+            ReservationsButton.Style = (Style)FindResource("FooterButtonStyle");
+            AccommodationsButton.Style = (Style)FindResource("FooterButtonStyle");
+            RenovationsButton.Style = (Style)FindResource("FooterButtonStyle");
+        }
+
+        private void SetActiveButton(Button activeButton)
+        {
+            MakeAllButtonsInactive();
+            activeButton.Style = (Style)FindResource("ActiveFooterButtonStyle");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

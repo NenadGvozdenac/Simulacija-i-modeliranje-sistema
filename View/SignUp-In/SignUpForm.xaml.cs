@@ -1,6 +1,8 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.OwnerModels;
 using BookingApp.Repository;
-using BookingApp.Resources.Converters;
+using BookingApp.Repository.OwnerRepositories;
+using BookingApp.Resources.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -106,8 +108,13 @@ public partial class SignUpForm : Window
     private void AddUser()
     {
         User user = new User(Username, Password, FindCurrentlyActivatedRadioButton());
-        user.Id = _repository.NextId();
         _repository.Add(user);
+
+        // Adds a copy for super owner
+        if(user.Type == UserType.Owner)
+        {
+            OwnerInfoRepository.GetInstance().Add(new OwnerInfo(user.Id, false, 0, 0, 0));
+        }
     }
 
     private bool IsBadPassword(User user)

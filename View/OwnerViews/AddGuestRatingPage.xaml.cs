@@ -274,5 +274,13 @@ namespace BookingApp.View.OwnerViews
         {
             NavigationCompleted?.Invoke(this, EventArgs.Empty);
         }
+
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }

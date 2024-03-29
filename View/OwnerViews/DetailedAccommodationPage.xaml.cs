@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model.MutualModels;
+using BookingApp.ViewModel.Owner;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,136 +25,21 @@ namespace BookingApp.View.OwnerViews;
 /// </summary>
 public partial class DetailedAccommodationPage : Page
 {
-    private Accommodation _accommodation;
-
-    private string accommodationName;
-    public string AccommodationName
-    {
-        get { return accommodationName; }
-        set
-        {
-            accommodationName = value;
-            OnPropertyChanged("AccommodationName");
-        }
-    }
-    private string costPerNight;
-    public string CostPerNight
-    {
-        get { return costPerNight; }
-        set
-        {
-            costPerNight = value;
-            OnPropertyChanged("CostPerNight");
-        }
-    }
-
-    private string location;
-    public string Location
-    {
-        get { return location; }
-        set
-        {
-            location = value;
-            OnPropertyChanged("Location");
-        }
-    }
-
-    private string typeOfAccommodation;
-    public string TypeOfAccommodation
-    {
-        get { return typeOfAccommodation; }
-        set
-        {
-            typeOfAccommodation = value;
-            OnPropertyChanged("TypeOfAccommodation");
-        }
-    }
-
-    private string minimumReservationDays;
-    public string MinimumReservationDays
-    {
-        get { return minimumReservationDays; }
-        set
-        {
-            minimumReservationDays = value;
-            OnPropertyChanged("MinimumReservationDays");
-        }
-    }
-
-    private string daysBeforeCancellationIsFinal;
-    public string DaysBeforeCancellationIsFinal
-    {
-        get { return daysBeforeCancellationIsFinal; }
-        set
-        {
-            daysBeforeCancellationIsFinal = value;
-            OnPropertyChanged("DaysBeforeCancellationIsFinal");
-        }
-    }
-
-    private string maximumNumberOfGuests;
-    public string MaximumNumberOfGuests
-    {
-        get { return maximumNumberOfGuests; }
-        set
-        {
-            maximumNumberOfGuests = value;
-            OnPropertyChanged("MaximumNumberOfGuests");
-        }
-    }
-
-    private string currentRating;
-    public string CurrentRating
-    {
-        get { return currentRating; }
-        set
-        {
-            currentRating = value;
-            OnPropertyChanged("CurrentRating");
-        }
-    }
-
-    private string numberOfReviews;
-    public string NumberOfReviews
-    {
-        get { return numberOfReviews; }
-        set
-        {
-            numberOfReviews = value;
-            OnPropertyChanged("NumberOfReviews");
-        }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    // The method to invoke the property changed event
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
+    private DetailedAccommodationViewModel _viewModel;
     public DetailedAccommodationPage(Accommodation accommodation)
     {
         InitializeComponent();
-        _accommodation = accommodation;
-        DataContext = this;
+
+        _viewModel = new DetailedAccommodationViewModel(accommodation);
+        DataContext = _viewModel;
+
         SetupProperties();
     }
 
     private void SetupProperties()
     {
-        AccommodationName = string.Format("{0}", _accommodation.Name);
-        CostPerNight = string.Format("${0} per night", _accommodation.Price.ToString());
-        Location = string.Format("{0}", _accommodation.Location.ToString());
-        TypeOfAccommodation = string.Format("{0}", _accommodation.Type.ToString());
-        MinimumReservationDays = string.Format("{0} days", _accommodation.MinReservationDays.ToString());
-        DaysBeforeCancellationIsFinal = string.Format("{0} days", _accommodation.CancellationPeriodDays.ToString());
-        MaximumNumberOfGuests = string.Format("{0} guests", _accommodation.MaxGuestNumber.ToString());
-        CurrentRating = string.Format("{0} / 10.00", _accommodation.AverageReviewScore.ToString());
-        NumberOfReviews = string.Format("{0} reviews", "0"); // TODO: Implement this
-
         ImagesPanel.Children.Clear();
-        LoadImages(_accommodation.Images);
+        LoadImages(_viewModel.Accommodation.Images);
     }
 
     private void LoadImages(List<AccommodationImage> images)
@@ -193,11 +79,6 @@ public partial class DetailedAccommodationPage : Page
         }
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        NavigateToPreviousPage();
-    }
-
     private void NavigateToPreviousPage()
     {
         if (NavigationService.CanGoBack)
@@ -205,34 +86,9 @@ public partial class DetailedAccommodationPage : Page
             NavigationService.GoBack();
         }
     }
-    private void ShowRightNavbar()
-    {
-        RightNavbar.Visibility = Visibility.Visible;
-        Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
-    }
 
-    private void HideRightNavbar()
+    private void Back_Click(object sender, MouseButtonEventArgs e)
     {
-        RightNavbar.Visibility = Visibility.Collapsed;
-        Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-    }
-
-    public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
-    {
-        if (RightNavbar.Visibility == Visibility.Collapsed)
-        {
-            ShowRightNavbar();
-        }
-        else
-        {
-            HideRightNavbar();
-        }
-    }
-
-    private void Logout_Click(object sender, RoutedEventArgs e)
-    {
-        SignInForm signInForm = new SignInForm();
-        signInForm.Show();
-        Window.GetWindow(this).Close();
+        NavigateToPreviousPage();
     }
 }

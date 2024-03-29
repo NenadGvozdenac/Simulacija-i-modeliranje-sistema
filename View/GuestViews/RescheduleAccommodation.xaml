@@ -19,12 +19,12 @@
                 <TextBlock Text="Rescheduling reservation:" FontSize="23" Margin="20,25,289,324"/>
 
                 <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Select first date:" FontSize="15" Margin="29,85,0,0" Height="20" Width="105"/>
-                <DatePicker x:Name="firstDate" HorizontalAlignment="Left" Margin="155,85,0,0" VerticalAlignment="Top" Height="24" Width="102"/>
+                <DatePicker x:Name="firstDate" SelectedDateChanged="FirstDateChanged" PreviewKeyDown="DatePickerCantWrite" HorizontalAlignment="Left" Margin="155,85,0,0" VerticalAlignment="Top" Height="24" Width="102"/>
                 <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Select last date:" FontSize="15" Margin="29,124,0,0" Height="20" Width="105"/>
-                <DatePicker x:Name="lastDate" HorizontalAlignment="Left" Margin="155,122,0,0" VerticalAlignment="Top" Height="24" Width="102"/>
+                <DatePicker x:Name="lastDate" SelectedDateChanged="LastDateChanged" PreviewKeyDown="DatePickerCantWrite" HorizontalAlignment="Left" Margin="155,122,0,0" VerticalAlignment="Top" Height="24" Width="102"/>
 
                 <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Would you like to send the request for rescheduling to the owner? " FontSize="15" Margin="29,192,0,0" Height="20" Width="441"/>
-                <Button Content="Yes, send the request" Margin="29,227,416,132"/>
+                <Button x:Name="YesButton" Content="Yes, send the request" Margin="29,227,416,132" Click="SendRequest_Click"/>
                 <Button Content="No, I've changed my mind" Margin="222,227,183,132" Click="ChangedMind_Click"/>
 
             </Grid>

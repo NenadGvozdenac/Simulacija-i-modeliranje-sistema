@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.View.GuestViews.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="194.486" d:DesignWidth="774" Margin="10 10 0 0">
+             d:DesignHeight="194.486" d:DesignWidth="774" Margin="10 10 0 0" DataContextChanged="UpdateButtonState">
     <Grid>
         <Border
         Height="150"
@@ -72,14 +72,14 @@
                 Background="#545E75"
                 Margin="537,38,28,82">
             <Grid>
-                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" FontSize="15" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Top" Height="20" FontFamily="Bahnschrift Light" Margin="6,10,10,0">
+                <TextBlock x:Name="RemainingDays_TextBlock" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" FontSize="15" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Top" Height="20" FontFamily="Bahnschrift Light" Margin="6,10,10,0">
                     <Run Text="Remaining days to cancel: "/>
                     <Run Text="{Binding RemainingDaysToCancel}"/>
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <Button Content="Tap here to cancel the reservation" FontSize="11" Margin="16,36,16,10"></Button>
+                <Button x:Name="CancelReservationButton" Content="Tap here to cancel the reservation" FontSize="11" Margin="16,36,16,10" Click="CancelReservationButton_Click"></Button>
             </Grid>
         </Border>
         <Button Content="Tap here to reschedule the reservation" Margin="537,117,28,55" Click="Reschedule_Click"></Button>

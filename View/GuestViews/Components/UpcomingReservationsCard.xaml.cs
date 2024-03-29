@@ -23,11 +23,36 @@ namespace BookingApp.View.GuestViews.Components
     public partial class UpcomingReservationsCard : UserControl
     {
         public event EventHandler<int> RescheduleClicked;
+        public event EventHandler<int> CancelClicked;
         public UpcomingReservationsCard()
         {
             InitializeComponent();
         }
 
+        //private void UpcomingReservationsCard_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    UpdateButtonState();
+        //}
+        private void UpdateButtonState(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+            UpcomingReservationsDTO reservation = (UpcomingReservationsDTO)DataContext;
+                
+                if (reservation.RemainingDaysToCancel <= 0)
+                {
+                    // Disable the button and change its content
+                    CancelReservationButton.IsEnabled = false;
+                    CancelReservationButton.Content = "Can't cancel the reservation";
+                    RemainingDays_TextBlock.Text = "Remaining days to cancel: 0";
+                }
+                else
+                {
+                    // Enable the button and change its content
+                    CancelReservationButton.IsEnabled = true;
+                    CancelReservationButton.Content = "Tap here to cancel the reservation";
+                }
+
+        }
         private void Reschedule_Click(object sender, RoutedEventArgs e)
         {
             if (this.DataContext is UpcomingReservationsDTO reservation)
@@ -35,6 +60,16 @@ namespace BookingApp.View.GuestViews.Components
                 int reservationId = reservation.ReservationId;
 
                 RescheduleClicked?.Invoke(this, reservationId);
+            }
+        }
+
+        private void CancelReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is UpcomingReservationsDTO reservation)
+            {
+                int reservationId = reservation.ReservationId;
+
+                CancelClicked?.Invoke(this, reservationId);
             }
         }
     }

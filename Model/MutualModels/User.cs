@@ -1,4 +1,4 @@
-﻿using BookingApp.Resources.Converters;
+﻿using BookingApp.Resources.Types;
 using BookingApp.Serializer;
 using System;
 

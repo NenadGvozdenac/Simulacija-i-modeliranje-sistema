@@ -2,6 +2,8 @@
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
+using BookingApp.Repository.OwnerRepositories;
+using BookingApp.View.GuestViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +31,7 @@ namespace BookingApp.View.GuestViews
     {
 
         public event EventHandler<int> RescheduleClicked;
+        public event EventHandler CancelClicked;
         public AccommodationRepository _accommodationRepository;
 
         public AccommodationReservationRepository _accommodationReservationRepository;
@@ -71,6 +74,22 @@ namespace BookingApp.View.GuestViews
         private void UpcomingReservationsCard_RescheduleClicked(object sender, int reservationId)
         {
             RescheduleClicked?.Invoke(this, reservationId);
+        }
+
+        private void UpcomingReservationsCard_CancelClicked(object sender, int reservationId)
+        {
+            AccommodationReservation reservation = _accommodationReservationRepository.GetById(reservationId);
+            var a = new CancelReservation(reservation, _accommodationRepository);
+            a.YesClicked += (sender, e) => CancelTheReservation(e);
+            UpcomingReservationsFrame.Content = a;      
+        }
+
+        private void CancelTheReservation(int reservationId)
+        {
+            UpcomingReservationsFrame.Content = null;
+            _accommodationReservationRepository.Delete(reservationId);
+            GuestRatingRepository.GetInstance().Delete(reservationId); //SONE GUSTER
+            Update();
         }
     }
 }

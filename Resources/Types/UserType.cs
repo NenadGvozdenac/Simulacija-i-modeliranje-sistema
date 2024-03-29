@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace BookingApp.Resources.Converters;
+namespace BookingApp.Resources.Types;
 
 public enum UserType
 {

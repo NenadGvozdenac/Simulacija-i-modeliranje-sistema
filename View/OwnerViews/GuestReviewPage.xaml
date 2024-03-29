@@ -3,9 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BookingApp.View.OwnerViews"
-      Title="MainWindow" Width="416" Height="714"
-      Background="Transparent">
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430">
     <Grid ClipToBounds="True" Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,12 +15,10 @@
         <Grid Grid.Row="0" Background="Lavender">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
             <TextBlock Grid.Column="1" Text="Guest reviews" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-            <Image Grid.Column="2" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="ThreeDotsClick"/>
         </Grid>
 
         <!-- Content -->

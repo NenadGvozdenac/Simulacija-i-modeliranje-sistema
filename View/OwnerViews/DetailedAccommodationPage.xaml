@@ -5,31 +5,30 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.View.OwnerViews"
       mc:Ignorable="d" 
-        Title="MainWindow" Width="416" Height="715"
+      d:DesignHeight="750" d:DesignWidth="430"
         Background="Transparent">
     <Grid ClipToBounds="True" Background="{StaticResource Creme}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="Lavender">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="11*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Detailed accommodation view" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-            <Image Grid.Column="1" Source="..\..\Resources\Assets\three_dots.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="ThreeDotsClick"/>
+            <Image Grid.Column="0" Source="..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="Back_Click"/>
+            <TextBlock Grid.Column="1" Text="Detailed accommodation view" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Margin="10" Grid.Column="1">
+            <Grid Margin="25 10" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -44,45 +43,38 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding AccommodationName, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1" Content="&lt; BACK" Style="{StaticResource ButtonStyle}" Width="80" Click="Button_Click"/>
-                </Grid>
-                <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Accommodation.Name, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
                     <Label Content="Cost per night" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding CostPerNight, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.Price, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch">
                     <Label Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding Location, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.Location, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                     <Label Content="Type of accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding TypeOfAccommodation, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.Type, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="3" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                     <Label Content="Minimum reservation days" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding MinimumReservationDays, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.MinReservationDays, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="4" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                     <Label Content="Days before cancellation is final" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding DaysBeforeCancellationIsFinal, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.CancellationPeriodDays, StringFormat={}, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="5" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                     <Label Content="Maximum number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding MaximumNumberOfGuests, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.MaxGuestNumber, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="6" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                     <Label Content="Current accommodation rating" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding CurrentRating, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.AverageReviewScore}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="7" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                     <Label Content="Number of reviews" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding NumberOfReviews, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Content="{Binding Accommodation.NumberOfReviews}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <Label Content="Images" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2" Margin="5" Grid.Row="8" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                 <Border Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" Margin="40 0">
@@ -93,13 +85,29 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
-            
-            <!-- Right navbar -->
-            <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Profile" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
-                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
-                <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Logout_Click"/>
-            </StackPanel>
         </Grid>
+        <Button Grid.Row="3" x:Name="CloseAccommodation" Width="175" Height="30" FontSize="14">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5" BlurRadius="5"/>
+            </Button.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="&#x1F6AB;" VerticalAlignment="Center"/>
+                <TextBlock Text=" Close accommodation" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="MintCream"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Green"/>
+                            <!-- Change background color when hovered -->
+                            <Setter Property="Foreground" Value="Black"/>
+                            <!-- Change text color when hovered -->
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Page>

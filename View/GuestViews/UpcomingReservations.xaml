@@ -13,10 +13,11 @@
         ItemsSource="{Binding _upcomingReservations}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:UpcomingReservationsCard x:Name="upcomingreservationscard" RescheduleClicked="UpcomingReservationsCard_RescheduleClicked"/>
+                        <components:UpcomingReservationsCard x:Name="upcomingreservationscard" RescheduleClicked="UpcomingReservationsCard_RescheduleClicked" CancelClicked="UpcomingReservationsCard_CancelClicked"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <Frame x:Name="UpcomingReservationsFrame" NavigationUIVisibility="Hidden" Width="291" Height="162"/>
     </Grid>
 </UserControl>

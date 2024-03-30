@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.OwnerModels;
 using BookingApp.Serializer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository.OwnerRepositories;
 
-public class OwnerInfoRepository
+public class OwnerInfoRepository : IRepository<OwnerInfo>
 {
     private const string FilePath = "../../../Resources/Data/owner_infos.csv";
-    private readonly static Lazy<OwnerInfoRepository> instance = new Lazy<OwnerInfoRepository>(() => new OwnerInfoRepository());
     private readonly Serializer<OwnerInfo> _serializer;
 
     public List<OwnerInfo> OwnerInfos { get; set; }
@@ -24,12 +24,7 @@ public class OwnerInfoRepository
 
     public static OwnerInfoRepository GetInstance()
     {
-        return instance.Value;
-    }
-
-    public OwnerInfo GetByOwnerId(int id)
-    {
-        return OwnerInfos.FirstOrDefault(owner => owner.OwnerId == id);
+        return App.ServiceProvider.GetRequiredService<OwnerInfoRepository>();
     }
 
     public void Add(OwnerInfo ownerInfo)
@@ -74,5 +69,10 @@ public class OwnerInfoRepository
     public List<OwnerInfo> GetAll()
     {
         return OwnerInfos;
+    }
+
+    public OwnerInfo GetById(int id)
+    {
+        return OwnerInfos.FirstOrDefault(owner => owner.OwnerId == id);
     }
 }

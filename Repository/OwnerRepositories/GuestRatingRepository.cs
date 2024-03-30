@@ -1,93 +1,92 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Model.OwnerModels;
 using BookingApp.Serializer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Repository.OwnerRepositories
+namespace BookingApp.Repository.OwnerRepositories;
+
+public class GuestRatingRepository : IRepository<GuestRating>
 {
-    public class GuestRatingRepository
+    private const string FilePath = "../../../Resources/Data/guest_ratings.csv";
+    private readonly Serializer<GuestRating> _serializer;
+
+    private List<GuestRating> _guestRatings;
+
+    public GuestRatingRepository()
     {
-        private const string FilePath = "../../../Resources/Data/guest_ratings.csv";
-        private readonly static Lazy<GuestRatingRepository> instance = new Lazy<GuestRatingRepository>(() => new GuestRatingRepository());
-        private readonly Serializer<GuestRating> _serializer;
+        _serializer = new Serializer<GuestRating>();
+        _guestRatings = _serializer.FromCSV(FilePath);
+    }
 
-        private List<GuestRating> _guestRatings;
+    public static GuestRatingRepository GetInstance()
+    {
+        return App.ServiceProvider.GetRequiredService<GuestRatingRepository>();
+    }
 
-        public GuestRatingRepository()
+    public List<GuestRating> GetGuestRatingsByAccommodationId(int accommodationId)
+    {
+        return _guestRatings.Where(guestRating => guestRating.AccommodationId == accommodationId).ToList();
+    }
+
+    public void Add(GuestRating guestRating)
+    {
+        guestRating.Id = NextId();
+        _guestRatings.Add(guestRating);
+        _serializer.ToCSV(FilePath, _guestRatings);
+    }
+
+    public int NextId()
+    {
+        _guestRatings = _serializer.FromCSV(FilePath);
+        if (_guestRatings.Count < 1)
         {
-            _serializer = new Serializer<GuestRating>();
-            _guestRatings = _serializer.FromCSV(FilePath);
+            return 1;
+        }
+        return _guestRatings.Max(c => c.Id) + 1;
+    }
+
+    public void Update(GuestRating guestRating)
+    {
+        GuestRating oldGuestRating = _guestRatings.First(guest => guest.Id == guestRating.Id);
+
+        if(oldGuestRating == null)
+        {
+            return;
         }
 
-        public static GuestRatingRepository GetInstance()
-        {
-            return instance.Value;
-        }
+        int index = _guestRatings.IndexOf(oldGuestRating);
+        _guestRatings[index] = guestRating;
+        _serializer.ToCSV(FilePath, _guestRatings);
+    }
 
-        public List<GuestRating> GetGuestRatingsByAccommodationId(int accommodationId)
-        {
-            return _guestRatings.Where(guestRating => guestRating.AccommodationId == accommodationId).ToList();
-        }
+    public void Delete(int id)
+    {
+        _guestRatings.RemoveAt(_guestRatings.FindIndex(guestRating => guestRating.Id == id));
+        _serializer.ToCSV(FilePath, _guestRatings);
+    }
 
-        public void Add(GuestRating guestRating)
-        {
-            guestRating.Id = NextId();
-            _guestRatings.Add(guestRating);
-            _serializer.ToCSV(FilePath, _guestRatings);
-        }
+    public GuestRating GetById(int id)
+    {
+        return _guestRatings.First(guestRating => guestRating.Id == id);
+    }
 
-        public int NextId()
-        {
-            _guestRatings = _serializer.FromCSV(FilePath);
-            if (_guestRatings.Count < 1)
-            {
-                return 1;
-            }
-            return _guestRatings.Max(c => c.Id) + 1;
-        }
+    public List<GuestRating> GetAll()
+    {
+        return _guestRatings;
+    }
 
-        public void Update(GuestRating guestRating)
-        {
-            GuestRating oldGuestRating = _guestRatings.First(guest => guest.Id == guestRating.Id);
+    public List<GuestRating> GetGuestRatingsByUserId(int userId)
+    {
+        return _guestRatings.Where(guestRating => guestRating.GuestId == userId).ToList();
+    }
 
-            if(oldGuestRating == null)
-            {
-                return;
-            }
-
-            int index = _guestRatings.IndexOf(oldGuestRating);
-            _guestRatings[index] = guestRating;
-            _serializer.ToCSV(FilePath, _guestRatings);
-        }
-
-        public void Delete(int id)
-        {
-            _guestRatings.RemoveAt(_guestRatings.FindIndex(guestRating => guestRating.Id == id));
-            _serializer.ToCSV(FilePath, _guestRatings);
-        }
-
-        public GuestRating GetById(int id)
-        {
-            return _guestRatings.First(guestRating => guestRating.Id == id);
-        }
-
-        public List<GuestRating> GetAll()
-        {
-            return _guestRatings;
-        }
-
-        public List<GuestRating> GetGuestRatingsByUserId(int userId)
-        {
-            return _guestRatings.Where(guestRating => guestRating.GuestId == userId).ToList();
-        }
-
-        public GuestRating GetGuestRatingByReservationId(int id)
-        {
-            return _guestRatings.First(guestRating => guestRating.ReservationId == id);
-        }
+    public GuestRating GetGuestRatingByReservationId(int id)
+    {
+        return _guestRatings.First(guestRating => guestRating.ReservationId == id);
     }
 }

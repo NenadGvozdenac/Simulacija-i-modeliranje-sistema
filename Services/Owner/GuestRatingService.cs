@@ -2,6 +2,7 @@
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using BookingApp.Repository.OwnerRepositories;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,41 +11,30 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Services.Owner;
 
-public class GuestRatingService
+public class GuestRatingService : IService<GuestRating>
 {
-    private AccommodationRepository _accommodationRepository;
-    private UserRepository _userRepository;
     private GuestRatingRepository _guestRatingRepository;
-
-    private static Lazy<GuestRatingService> _instance = new Lazy<GuestRatingService>(() => new GuestRatingService());
     public GuestRatingService()
     {
-        _accommodationRepository = AccommodationRepository.GetInstance();
-        _userRepository = UserRepository.GetInstance();
         _guestRatingRepository = GuestRatingRepository.GetInstance();
     }
 
     public static GuestRatingService GetInstance()
     {
-        return _instance.Value;
+        return App.ServiceProvider.GetRequiredService<GuestRatingService>();
     }
 
     public List<GuestRating> GetAll()
     {
         List<GuestRating> guestRatings = _guestRatingRepository.GetAll();
-        guestRatings.ForEach(guestRating => {
-            guestRating.Reservation = AccommodationReservationRepository.GetInstance().GetById(guestRating.ReservationId);
-        });
+        guestRatings.ForEach(guestRating => guestRating.Reservation = AccommodationReservationRepository.GetInstance().GetById(guestRating.ReservationId));
         return _guestRatingRepository.GetAll();
     }
 
     public List<GuestRating> GetByAccommodationId(int id)
     {
         List<GuestRating> guestRatings = _guestRatingRepository.GetGuestRatingsByAccommodationId(id);
-        guestRatings.ForEach(guestRating =>
-        {
-            guestRating.Reservation = AccommodationReservationRepository.GetInstance().GetById(guestRating.ReservationId);
-        });
+        guestRatings.ForEach(guestRating => guestRating.Reservation = AccommodationReservationRepository.GetInstance().GetById(guestRating.ReservationId));
         return guestRatings;
     }
 

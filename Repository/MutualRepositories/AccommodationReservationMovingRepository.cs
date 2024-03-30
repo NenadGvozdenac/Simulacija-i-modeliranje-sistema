@@ -1,5 +1,7 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
+using BookingApp.View.GuestViews;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository.MutualRepositories;
 
-public class AccommodationReservationMovingRepository
+public class AccommodationReservationMovingRepository : IRepository<AccommodationReservationMoving>
 {
     private const string FilePath = "../../../Resources/Data/accommodation_reservation_moving.csv";
-    private readonly static Lazy<AccommodationReservationMovingRepository> instance = new Lazy<AccommodationReservationMovingRepository>(() => new AccommodationReservationMovingRepository());
+   
     private readonly Serializer<AccommodationReservationMoving> _serializer;
 
     public List<AccommodationReservationMoving> AccommodationReservationMovings { get; set; }
@@ -24,7 +26,7 @@ public class AccommodationReservationMovingRepository
 
     public static AccommodationReservationMovingRepository GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<AccommodationReservationMovingRepository>();
     }
 
     public void Add(AccommodationReservationMoving accommodationReservationMoving)
@@ -32,6 +34,11 @@ public class AccommodationReservationMovingRepository
         accommodationReservationMoving.Id = NextId();
         AccommodationReservationMovings.Add(accommodationReservationMoving);
         _serializer.ToCSV(FilePath, AccommodationReservationMovings);
+    }
+
+    public List<AccommodationReservationMoving> GetAll()
+    {
+        return AccommodationReservationMovings;
     }
 
     private int NextId()
@@ -87,5 +94,10 @@ public class AccommodationReservationMovingRepository
         }
 
         return movings;
+    }
+
+    public AccommodationReservationMoving GetById(int id)
+    {
+        return AccommodationReservationMovings.FirstOrDefault(a => a.Id == id);
     }
 }

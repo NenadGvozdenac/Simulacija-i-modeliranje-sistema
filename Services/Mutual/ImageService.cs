@@ -9,20 +9,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingApp.Services.Mutual;
 
 public class ImageService
 {
-    private static Lazy<ImageService> instance = new Lazy<ImageService>(() => new ImageService());
-
-    private ImageService()
+    public ImageService()
     {
     }
 
     public static ImageService GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<ImageService>();
     }
 
     public string GetImageFromUser()

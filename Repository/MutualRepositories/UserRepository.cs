@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,9 @@ using System.Xml.Linq;
 
 namespace BookingApp.Repository;
 
-public class UserRepository
+public class UserRepository : IRepository<User>
 {
     private const string FilePath = "../../../Resources/Data/users.csv";
-    private static readonly Lazy<UserRepository> instance = new Lazy<UserRepository>(() => new UserRepository());
     private readonly Serializer<User> _serializer;
 
     private List<User> _users;
@@ -23,7 +23,7 @@ public class UserRepository
 
     public static UserRepository GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<UserRepository>();
     }
 
     public User GetByUsername(string username)
@@ -75,5 +75,10 @@ public class UserRepository
             _users[_users.FindIndex(u => u.Id == user.Id)] = user;
             _serializer.ToCSV(FilePath, _users);
         }
+    }
+
+    public List<User> GetAll()
+    {
+        return _users;
     }
 }

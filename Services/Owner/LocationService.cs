@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Repository.MutualRepositories;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +9,17 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Services.Owner;
 
-public class LocationService
+public class LocationService : IService<Location>
 {
     private LocationRepository _locationRepository;
-
-    private static Lazy<LocationService> instance = new Lazy<LocationService>(() => new LocationService());
-    private LocationService()
+    public LocationService()
     {
-        _locationRepository = LocationRepository.GetInstance();
+        _locationRepository = App.ServiceProvider.GetRequiredService<LocationRepository>();
     }
 
     public static LocationService GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<LocationService>();
     }
 
     public List<string> GetCountries()
@@ -41,5 +40,30 @@ public class LocationService
     public Location GetLocationByCityAndCountry(string city, string country)
     {
         return _locationRepository.GetLocationByCityAndCountry(city, country);
+    }
+
+    public void Add(Location entity)
+    {
+        _locationRepository.Add(entity);
+    }
+
+    public void Delete(Location entity)
+    {
+        _locationRepository.Delete(entity.Id);
+    }
+
+    public List<Location> GetAll()
+    {
+        return _locationRepository.GetAll();
+    }
+
+    public Location GetById(int entityId)
+    {
+        return _locationRepository.GetById(entityId);
+    }
+
+    public void Update(Location entity)
+    {
+        _locationRepository.Update(entity);
     }
 }

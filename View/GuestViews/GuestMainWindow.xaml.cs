@@ -56,7 +56,7 @@ public partial class GuestMainWindow : Window
     public void ShowAccommodationDetails(int accommodationId)
     {
         Accommodation detailedAccommodation = _accommodationRepository.GetById(accommodationId);
-        var a = new AccommodationDetails(detailedAccommodation, _user);
+        var a = new AccommodationDetails(detailedAccommodation, _user, _accommodationReviewRepository);
         a.UpcomingReservationsChanged += (sender, e) =>
         {
             RefreshReservations();

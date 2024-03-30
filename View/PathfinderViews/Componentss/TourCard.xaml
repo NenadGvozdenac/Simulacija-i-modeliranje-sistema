@@ -49,11 +49,14 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="454" Height="110"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="387" Height="78"/>
+                    <Button Content="Cancel" Height="26" Click="CancelTour_Click" Width="58" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="452" VerticalAlignment="Top"/>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="369" VerticalAlignment="Top"/>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"  TextAlignment="Right"  Width="102" VerticalAlignment="Top" x:Name="DateTextBlock"/>
+                    <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="IdTextBlock"></TextBlock>
                 </StackPanel>
 
             </Grid>

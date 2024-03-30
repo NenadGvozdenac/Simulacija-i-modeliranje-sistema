@@ -27,9 +27,11 @@ public partial class AccommodationDetails : UserControl
 {
     public Accommodation selectedAccommodation { get; set; }
     public AccommodationReservationRepository accomodationreservationrepository { get; set; }
+    public AccommodationReviewRepository _accommodationReviewRepository;
     
     public AccommodationReservation reservation;
     public ObservableCollection<string> _availableDates;
+    public ObservableCollection<AccommodationReview> _reviews { get; set; }
 
     public event EventHandler UpcomingReservationsChanged;
     public string SelectedDate {  get; set; }
@@ -42,10 +44,12 @@ public partial class AccommodationDetails : UserControl
     maxvalueGuestNumber = 30,
     startvalueGuestNumber = 1;
     public User _user { get; set; }
-    public AccommodationDetails(Accommodation detailedaccomodation, User user)
+    public AccommodationDetails(Accommodation detailedaccomodation, User user,  AccommodationReviewRepository accommodationReviewRepository)
     {
         InitializeComponent();
         DataContext = this;
+        _reviews = new ObservableCollection<AccommodationReview>();
+        _accommodationReviewRepository = accommodationReviewRepository;
         SetAccommodation(detailedaccomodation, user);
     }
 
@@ -64,6 +68,7 @@ public partial class AccommodationDetails : UserControl
         username.Content = _user.Username;
         HideElements();
         SetDefaultValues(accommodation);
+        LoadReviews();
     }
 
     private void HideElements()
@@ -85,6 +90,19 @@ public partial class AccommodationDetails : UserControl
         accommodationName.Text = accommodation.Name;
         accomodationAverageReviewScore.Text = $"{accommodation.AverageReviewScore}/10";
     }
+
+    private void LoadReviews()
+    {
+        _reviews.Clear();
+        foreach (AccommodationReview review in _accommodationReviewRepository.GetAll())
+        {
+            if (review.AccommodationId == selectedAccommodation.Id)
+            {
+                _reviews.Add(review);
+            }
+        }
+    }
+
     private void GoBack_Click(object sender, RoutedEventArgs e)
     {
         (Window.GetWindow(this) as GuestMainWindow).Accommodations_Click(sender,e);

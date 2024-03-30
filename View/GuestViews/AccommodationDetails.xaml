@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="696"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-
+                   
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Reservation:" FontWeight="DemiBold" FontSize="40" Margin="30,10,0,0" Height="53" Width="222"/>
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="Please select a suitable time frame for reserving this accommodation!" FontWeight="SemiBold" FontSize="20" Margin="30,68,0,0" Height="27" Width="630"/>
 
@@ -89,6 +89,19 @@
                     <TextBlock x:Name="FoundAlternativeDatesTextBox" Visibility="Hidden" HorizontalAlignment="Left" Margin="35,217,0,0" Text="Sadly, there are no free dates in the range&#10;you have selected, however we have&#10;found alternatives if it looks acceptable:" FontWeight="DemiBold" FontSize="12" VerticalAlignment="Top" Height="48" Width="238"/>
                     <TextBlock x:Name="ConfirmedReservationTextBox" HorizontalAlignment="Left" Visibility="Collapsed" Margin="591,186,0,0" TextWrapping="Wrap" Text="Reservation has been made!" VerticalAlignment="Top" Height="0" Width="0"/>
 
+                    <Grid Grid.Column="1">
+                        <Border BorderBrush="Black" BorderThickness="1 0 0 0"/>
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden" Height="407">
+                            <ItemsControl
+                             ItemsSource="{Binding _reviews}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <components:ReviewCard/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
                 </Grid>
             </Grid>
         </ScrollViewer>

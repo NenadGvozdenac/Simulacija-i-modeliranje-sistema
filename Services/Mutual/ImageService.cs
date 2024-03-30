@@ -24,14 +24,14 @@ public class ImageService
         return App.ServiceProvider.GetRequiredService<ImageService>();
     }
 
-    public string GetImageFromUser()
+    public string GetImageFromUser(string folder = "AccommodationImages")
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
         if (openFileDialog.ShowDialog() == true)
         {
             string selectedImagePath = openFileDialog.FileName;
-            string destinationFolder = "../../../Resources/Images/AccommodationImages/";
+            string destinationFolder = "../../../Resources/Images/" + folder + "/";
 
             string fileName = System.IO.Path.GetFileName(selectedImagePath);
 

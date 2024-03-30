@@ -23,6 +23,7 @@ namespace BookingApp.View.GuestViews
     /// </summary>
     public partial class MyReservations : UserControl
     {
+        public EventHandler<int> ReviewClicked;
 
         private User _user;
         public UpcomingReservations UpcomingReservationsUserControl;
@@ -41,7 +42,8 @@ namespace BookingApp.View.GuestViews
             UpcomingReservationsUserControl = new UpcomingReservations(_user, _accommodationRepository, _accommodationReservationRepository);
             PastReservationsUserControl = new PastReservations(_user, _accommodationRepository, _accommodationReservationRepository);
             RescheduleRequestsUserControl = new RescheduleRequests(_user,_accommodationRepository, _accommodationReservationMovingRepository);
-            UpcomingReservationsUserControl.RescheduleClicked += MyReservation_RescheduleClicked;          
+            UpcomingReservationsUserControl.RescheduleClicked += MyReservation_RescheduleClicked;
+            PastReservationsUserControl.ReviewClicked += MyReservation_ReviewClicked;
             Update();
         }
 
@@ -87,5 +89,10 @@ namespace BookingApp.View.GuestViews
             a.SendRequestRefresh += (sender, e) => RefreshRecheduleRequests();
             MyReservationFrame.Content = a;
         } 
+
+        private void MyReservation_ReviewClicked(object sender, int reservationId)
+        {
+            ReviewClicked?.Invoke(sender, reservationId);
+        }
     }
 }

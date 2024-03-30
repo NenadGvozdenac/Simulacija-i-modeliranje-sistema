@@ -92,7 +92,7 @@
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <Button Content="Tap here to leave a review" FontSize="11" Margin="16,55,16,15"></Button>
+                <Button Content="Tap here to leave a review" FontSize="11" Margin="16,55,16,15" Click="Review_Click"></Button>
             </Grid>
         </Border>
         <Button Content="Download Reservation Details(PDF)" HorizontalAlignment="Left" Margin="342,165,0,0" VerticalAlignment="Top" Height="27"/>

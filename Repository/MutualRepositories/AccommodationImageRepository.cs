@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,11 @@ using System.Xml.Linq;
 
 namespace BookingApp.Repository.MutualRepositories;
 
-public class AccommodationImageRepository
+public class AccommodationImageRepository : IRepository<AccommodationImage>
 {
     private const string FilePath = "../../../Resources/Data/accommodation_images.csv";
     private readonly Serializer<AccommodationImage> _serializer;
-    private readonly static Lazy<AccommodationImageRepository> instance = new Lazy<AccommodationImageRepository>(() => new AccommodationImageRepository());
-
+    
     private List<AccommodationImage> _accommodationImages;
 
     public AccommodationImageRepository()
@@ -25,7 +25,7 @@ public class AccommodationImageRepository
 
     public static AccommodationImageRepository GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<AccommodationImageRepository>();
     }
 
     public void Add(AccommodationImage accommodation)
@@ -93,5 +93,16 @@ public class AccommodationImageRepository
 
         _accommodationImages.AddRange(images);
         _serializer.ToCSV(FilePath, _accommodationImages);
+    }
+
+    public void Delete(int id)
+    { 
+        _accommodationImages.RemoveAll(a => a.Id == id);
+        _serializer.ToCSV(FilePath, _accommodationImages);
+    }
+
+    public AccommodationImage GetById(int id)
+    {
+        return _accommodationImages.FirstOrDefault(a => a.Id == id);
     }
 }

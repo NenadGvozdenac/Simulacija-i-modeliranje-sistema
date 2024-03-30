@@ -13,7 +13,7 @@
             ItemsSource="{Binding _pastReservations}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:PastReservationCard x:Name="pastreservationscard"/>
+                        <components:PastReservationCard x:Name="pastreservationscard" ReviewHandler="ReviewHandling"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

@@ -10,80 +10,79 @@ using BookingApp.ViewModel.OwnerViewModels;
 using BookingApp.Services.Owner;
 using BookingApp.Services.Mutual;
 
-namespace BookingApp.View.OwnerViews
+namespace BookingApp.View.OwnerViews;
+
+public partial class AddAccommodationPage : Page
 {
-    public partial class AddAccommodationPage : Page
+    public event EventHandler PageClosed;
+
+    private AddAccommodationViewModel _addAccommodationViewModel;
+
+    public AddAccommodationPage(User user)
     {
-        public event EventHandler PageClosed;
+        _addAccommodationViewModel = new AddAccommodationViewModel(user);
+        DataContext = _addAccommodationViewModel;
 
-        private AddAccommodationViewModel _addAccommodationViewModel;
+        InitializeComponent();
+    }
 
-        public AddAccommodationPage(User user)
+    private void ConfirmButtonClick(object sender, RoutedEventArgs e)
+    {
+        bool successfullyAddedAccommodation = _addAccommodationViewModel.AddAccommodation();
+
+        if (!successfullyAddedAccommodation)
         {
-            _addAccommodationViewModel = new AddAccommodationViewModel(user);
-            DataContext = _addAccommodationViewModel;
-
-            InitializeComponent();
+            return;
         }
 
-        private void ConfirmButtonClick(object sender, RoutedEventArgs e)
+        NavigateToPreviousPage();
+    }
+
+    private void CancelButtonClick(object sender, RoutedEventArgs e)
+    {
+        NavigateToPreviousPage();
+    }
+
+    private void NavigateToPreviousPage()
+    {
+        if (NavigationService.CanGoBack)
         {
-            bool successfullyAddedAccommodation = _addAccommodationViewModel.AddAccommodation();
-
-            if (!successfullyAddedAccommodation)
-            {
-                return;
-            }
-
-            NavigateToPreviousPage();
+            ClosePage();
+            NavigationService.GoBack();
         }
+    }
 
-        private void CancelButtonClick(object sender, RoutedEventArgs e)
+    private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var Cities = LocationService.GetInstance().GetCitiesByCountry(CountryTextBox.SelectedItem.ToString());
+        _addAccommodationViewModel.Cities = new ObservableCollection<string>(Cities);
+
+        CityTextBox.IsDropDownOpen = true;
+        CityTextBox.IsEnabled = true;
+    }
+
+    private void AddURLClick(object sender, RoutedEventArgs e)
+    {
+        _addAccommodationViewModel.AddImage();
+        ImageURLTextBox.Clear();
+    }
+
+    private void ClosePage()
+    {
+        PageClosed?.Invoke(this, EventArgs.Empty);
+    }
+    private void BackButton_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (NavigationService.CanGoBack)
         {
-            NavigateToPreviousPage();
+            ClosePage();
+            NavigationService.GoBack();
         }
+    }
 
-        private void NavigateToPreviousPage()
-        {
-            if (NavigationService.CanGoBack)
-            {
-                ClosePage();
-                NavigationService.GoBack();
-            }
-        }
-
-        private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var Cities = LocationService.GetInstance().GetCitiesByCountry(CountryTextBox.SelectedItem.ToString());
-            _addAccommodationViewModel.Cities = new ObservableCollection<string>(Cities);
-
-            CityTextBox.IsDropDownOpen = true;
-            CityTextBox.IsEnabled = true;
-        }
-
-        private void AddURLClick(object sender, RoutedEventArgs e)
-        {
-            _addAccommodationViewModel.AddImage();
-            ImageURLTextBox.Clear();
-        }
-
-        private void ClosePage()
-        {
-            PageClosed?.Invoke(this, EventArgs.Empty);
-        }
-        private void BackButton_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-            {
-                ClosePage();
-                NavigationService.GoBack();
-            }
-        }
-
-        private void ImageURLTextBox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            string imagePath = ImageService.GetInstance().GetImageFromUser();
-            _addAccommodationViewModel.ImageURL = imagePath;
-        }
+    private void ImageURLTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        string imagePath = ImageService.GetInstance().GetImageFromUser();
+        _addAccommodationViewModel.ImageURL = imagePath;
     }
 }

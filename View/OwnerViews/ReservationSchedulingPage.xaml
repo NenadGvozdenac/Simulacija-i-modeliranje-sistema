@@ -22,9 +22,11 @@
             <TextBlock Grid.Column="1" Text="Reservation rescheduling" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
-        <StackPanel x:Name="MainPanel" Grid.Row="1">
-            <!-- Reservation list -->
-        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="MainPanel">
+                <!-- Reservation list -->
+            </StackPanel>
+        </ScrollViewer>
         
         <Button Grid.Row="2" x:Name="AccommodationsButton" Content="Rescheduling" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
     </Grid>

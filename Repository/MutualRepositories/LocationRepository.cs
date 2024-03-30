@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.MutualModels;
 using BookingApp.Serializer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository.MutualRepositories;
 
-public class LocationRepository
+public class LocationRepository : IRepository<Location>
 {
     private const string FilePath = "../../../Resources/Data/locations.csv";
 
     private readonly Serializer<Location> _serializer;
-    private readonly static Lazy<LocationRepository> instance = new Lazy<LocationRepository>(() => new LocationRepository());
-
+    
     private List<Location> _locations;
 
     public LocationRepository()
@@ -25,7 +25,7 @@ public class LocationRepository
 
     public static LocationRepository GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<LocationRepository>();
     }
 
     public List<Location> GetAll()

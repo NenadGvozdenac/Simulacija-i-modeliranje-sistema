@@ -9,30 +9,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingApp.Services.Mutual;
 
 public class ImageService
 {
-    private static Lazy<ImageService> instance = new Lazy<ImageService>(() => new ImageService());
-
-    private ImageService()
+    public ImageService()
     {
     }
 
     public static ImageService GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<ImageService>();
     }
 
-    public string GetImageFromUser()
+    public string GetImageFromUser(string folder = "AccommodationImages")
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
         if (openFileDialog.ShowDialog() == true)
         {
             string selectedImagePath = openFileDialog.FileName;
-            string destinationFolder = "../../../Resources/Images/AccommodationImages/";
+            string destinationFolder = "../../../Resources/Images/" + folder + "/";
 
             string fileName = System.IO.Path.GetFileName(selectedImagePath);
 

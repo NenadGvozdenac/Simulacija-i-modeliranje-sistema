@@ -43,7 +43,7 @@
                 <Button Content="Schedule renovation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
                 <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestReviewsButtonClick"/>
                 <Button Content="Statistics" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
-                <Button Content="Guest feedback" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
+                <Button Content="Guest feedback" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestFeedbackButtonClick"/>
             </StackPanel>
             <ScrollViewer Grid.Column="1" x:Name="MainPanel">
 

@@ -25,6 +25,8 @@ namespace BookingApp.View.GuestViews
     /// </summary>
     public partial class PastReservations : UserControl
     {
+        public event EventHandler<int> ReviewClicked;
+
         public User _user;
         public AccommodationRepository _accommodationRepository;
         public AccommodationReservationRepository _accommodationReservationRepository;
@@ -59,6 +61,11 @@ namespace BookingApp.View.GuestViews
                     _pastReservations.Add(temp);
                 }
             }
+        }
+
+        private void ReviewHandling(object sender, int reservationId)
+        {
+            ReviewClicked?.Invoke(this, reservationId);
         }
     }
 }

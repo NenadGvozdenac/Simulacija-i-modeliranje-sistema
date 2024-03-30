@@ -74,7 +74,18 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
         FilteredAccommodations = new ObservableCollection<Accommodation>(_accommodations);
     }
 
-
+    private void ResetFilters_Click(object sender, RoutedEventArgs e)
+    {
+        SearchBox_TextBox.Text = string.Empty;
+        CountryComboBox.Text = "";
+        CityComboBox.IsEnabled = false;
+        CityComboBox.Text = "";
+        checkBoxApartment.IsChecked = false;
+        checkBoxHouse.IsChecked = false;
+        checkBoxShack.IsChecked = false;
+        GuestNumber.Text = "1";
+        DaysOfStay.Text = "0";
+    }
     //Filtering Accommodations
     private void FilterAccommodations()
     {
@@ -86,11 +97,11 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
         string selectedCity = CityComboBox.SelectedItem?.ToString();
 
         //guest number
-        int selectedGuestNumber = 0;
+        int selectedGuestNumber;
         int.TryParse(GuestNumber.Text, out selectedGuestNumber);
 
         //days of staying
-        int selectedDaysOfStay = 0;
+        int selectedDaysOfStay;
         int.TryParse(DaysOfStay.Text, out selectedDaysOfStay);
 
         //Filtering Logic 
@@ -162,6 +173,10 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
 
     private void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        if(CountryComboBox.SelectedItem == null) { 
+            FilterAccommodations(); 
+            return; 
+        }
         List<string> listOfCities = locationRepository.GetCitiesByCountry(CountryComboBox.SelectedItem.ToString());
         CityComboBox.ItemsSource = listOfCities;
         CityComboBox.Focus();
@@ -251,6 +266,8 @@ public partial class Accommodations : UserControl, INotifyPropertyChanged
             }
         }
     }
+
+    
 
     private ObservableCollection<Accommodation> _filteredAccommodations;
     public ObservableCollection<Accommodation> FilteredAccommodations

@@ -35,6 +35,7 @@ namespace BookingApp.Repository.OwnerRepositories
 
         public void Add(GuestRating guestRating)
         {
+            guestRating.Id = NextId();
             _guestRatings.Add(guestRating);
             _serializer.ToCSV(FilePath, _guestRatings);
         }
@@ -51,7 +52,7 @@ namespace BookingApp.Repository.OwnerRepositories
 
         public void Update(GuestRating guestRating)
         {
-            GuestRating oldGuestRating = _guestRatings.FirstOrDefault(guest => guest.Id == guestRating.Id);
+            GuestRating oldGuestRating = _guestRatings.First(guest => guest.Id == guestRating.Id);
 
             if(oldGuestRating == null)
             {
@@ -71,7 +72,7 @@ namespace BookingApp.Repository.OwnerRepositories
 
         public GuestRating GetById(int id)
         {
-            return _guestRatings.FirstOrDefault(guestRating => guestRating.Id == id);
+            return _guestRatings.First(guestRating => guestRating.Id == id);
         }
 
         public List<GuestRating> GetAll()
@@ -86,7 +87,7 @@ namespace BookingApp.Repository.OwnerRepositories
 
         public GuestRating GetGuestRatingByReservationId(int id)
         {
-            return _guestRatings.FirstOrDefault(guestRating => guestRating.ReservationId == id);
+            return _guestRatings.First(guestRating => guestRating.ReservationId == id);
         }
     }
 }

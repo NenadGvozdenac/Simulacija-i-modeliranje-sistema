@@ -20,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace BookingApp.View.OwnerViews
 {
-    /// <summary>
-    /// Interaction logic for GuestReviewPage.xaml
-    /// </summary>
     public partial class GuestReviewPage : Page
     {
         private User _user;

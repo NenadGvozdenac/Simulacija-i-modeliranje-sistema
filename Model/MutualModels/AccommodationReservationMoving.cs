@@ -36,6 +36,17 @@ public class AccommodationReservationMoving: ISerializable
         Comment = comment;
     }
 
+    public AccommodationReservationMoving(int accommodationId, int reservationId, int guestId, DateTime currentFirst, DateTime currentLast, DateTime wantedFirst, DateTime wantedLast)
+    {
+        AccommodationId = accommodationId;
+        ReservationId = reservationId;
+        GuestId = guestId;
+        CurrentReservationTimespan = new(currentFirst, currentLast);
+        WantedReservationTimespan = new(wantedFirst, wantedLast);
+        Status = ReschedulingStatus.Pending;
+        Comment = "";
+    }
+
     public void FromCSV(string[] values)
     {
         Id = Convert.ToInt32(values[0]);

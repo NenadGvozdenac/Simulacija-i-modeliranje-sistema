@@ -1,58 +1,36 @@
 ﻿using BookingApp.Model.MutualModels;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository.OwnerRepositories;
 using BookingApp.Repository;
-using BookingApp.View.OwnerViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BookingApp.View.GuestViews;
 using BookingApp.Model.OwnerModels;
 using BookingApp.View.OwnerViews.MainWindowWrappers;
+using BookingApp.ViewModel.OwnerViewModels;
+using BookingApp.Services.Owner;
 
 namespace BookingApp.View.OwnerViews
 {
     public partial class MainPage : Page
     {
-        private readonly User _user;
-        private ObservableCollection<Accommodation> _accommodations;
-        private AccommodationRepository _accommodationRepository;
-        private LocationRepository _locationRepository;
-        private AccommodationImageRepository _accommodationImageRepository;
-        private GuestRatingRepository _guestRatingRepository;
-        private AccommodationReservationRepository _accommodationReservationRepository;
-
         private AccommodationWrapper _accommodationWrapper;
         private AccommodationReservationWrapper _accommodationReservationWrapper;
+
+        private MainPageViewModel _mainPageViewModel;
 
         public MainPage(User user)
         {
             InitializeComponent();
-            _user = user;
-            _accommodations = new ObservableCollection<Accommodation>();
 
-            _accommodationRepository = AccommodationRepository.GetInstance();
-            _locationRepository = LocationRepository.GetInstance();
-            _accommodationImageRepository = AccommodationImageRepository.GetInstance();
-            _guestRatingRepository = GuestRatingRepository.GetInstance();
-            _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
+            _mainPageViewModel = new MainPageViewModel(user);
 
             Update();
 
-            _accommodationWrapper = new AccommodationWrapper(_user);
-            _accommodationReservationWrapper = new AccommodationReservationWrapper(_user);
+            _accommodationWrapper = new AccommodationWrapper(_mainPageViewModel);
+            _accommodationReservationWrapper = new AccommodationReservationWrapper(_mainPageViewModel);
 
             PrepareFirstPage();
             CheckForSuperOwner();
@@ -60,7 +38,7 @@ namespace BookingApp.View.OwnerViews
 
         private void CheckForSuperOwner()
         {
-            OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
+            (OwnerInfo, User) ownerInfo = OwnerService.GetInstance().GetOwnerInfo(_mainPageViewModel.User.Id);
 
             // TODO: Get all reviews of the owner
 
@@ -68,18 +46,22 @@ namespace BookingApp.View.OwnerViews
 
             // TODO: Recalculate number of accommodations of the owner
 
+            ownerInfo.Item1.Accommodations = AccommodationService.GetInstance().GetByOwnerId(ownerInfo.Item1.OwnerId);
+
+            ownerInfo.Item1.NumberOfAccommodations = ownerInfo.Item1.Accommodations.Count;
+
             // TODO: Get average review score of the owner
 
             // If user is reviewed by at least 50 guests, and has average rating above 4.5, make him a super owner
         
-            if(ownerInfo.NumberOfReviews >= 50 && ownerInfo.AverageReviewScore >= 4.5)
+            if(ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore >= 4.5)
             {
-                OwnerInfoRepository.GetInstance().Update(new OwnerInfo()
+                OwnerService.GetInstance().UpdateOwnerInfo(new OwnerInfo()
                 {
-                    AverageReviewScore = ownerInfo.AverageReviewScore,
-                    NumberOfReviews = ownerInfo.NumberOfReviews,
-                    NumberOfAccommodations = ownerInfo.NumberOfAccommodations,
-                    OwnerId = ownerInfo.OwnerId,
+                    AverageReviewScore = ownerInfo.Item1.AverageReviewScore,
+                    NumberOfReviews = ownerInfo.Item1.NumberOfReviews,
+                    NumberOfAccommodations = ownerInfo.Item1.NumberOfAccommodations,
+                    OwnerId = ownerInfo.Item1.OwnerId,
                     IsSuperOwner = true
                 });
             }
@@ -93,9 +75,9 @@ namespace BookingApp.View.OwnerViews
 
         private void AddAllReservationsThatArentCheckedYet()
         {
-            foreach(AccommodationReservation accommodationReservation in GetReservationsOfOwner(_user.Id))
+            foreach(AccommodationReservation accommodationReservation in GetReservationsOfOwner(_mainPageViewModel.User.Id))
             {
-                if (ReservationNotAlreadyAdded(accommodationReservation, _user.Id))
+                if (ReservationNotAlreadyAdded(accommodationReservation))
                 {
                     AddGuestRating(accommodationReservation);
                 }
@@ -104,7 +86,7 @@ namespace BookingApp.View.OwnerViews
 
         private void AddGuestRating(AccommodationReservation accommodationReservation)
         {
-            _guestRatingRepository.Add(new GuestRating()
+            GuestRatingService.GetInstance().Add(new GuestRating()
             {
                 ReservationId = accommodationReservation.Id,
                 GuestId = accommodationReservation.UserId,
@@ -112,14 +94,13 @@ namespace BookingApp.View.OwnerViews
                 AccommodationId = accommodationReservation.AccommodationId,
                 Respectfulness = 0,
                 Cleanliness = 0,
-                Id = _guestRatingRepository.NextId(),
                 Comment = ""
             });
         }
 
         private void CheckReservationsThatEnded()
         {
-            foreach (GuestRating guestRating in _guestRatingRepository.GetAll())
+            foreach (GuestRating guestRating in GuestRatingService.GetInstance().GetAll())
             {
                 if (IsGuestRatingValid(guestRating))
                 {
@@ -135,12 +116,12 @@ namespace BookingApp.View.OwnerViews
 
         private DateTime GetLastDateOfStaying(GuestRating guestRating)
         {
-            return _accommodationReservationRepository.GetById(guestRating.ReservationId).LastDateOfStaying;
+            return AccommodationReservationService.GetInstance().GetById(guestRating.ReservationId).LastDateOfStaying;
         }
 
         private bool IsOwnerValid(GuestRating guestRating)
         {
-            return _accommodationRepository.GetById(guestRating.AccommodationId).OwnerId == _user.Id;
+            return AccommodationService.GetInstance().GetById(guestRating.AccommodationId).OwnerId == _mainPageViewModel.User.Id;
         }
 
         private bool IsDateValid(DateTime lastDateOfStaying, DateTime fiveDaysAgo)
@@ -160,30 +141,20 @@ namespace BookingApp.View.OwnerViews
 
         private List<AccommodationReservation> GetReservationsOfOwner(int userId)
         {
-            return _accommodationReservationRepository.GetReservationsByAccommodations(_accommodationRepository.GetAccommodationsByOwnerId(userId));
+            return AccommodationReservationService.GetInstance().GetReservationsByOwnerId(userId);
         }
 
-        private bool ReservationNotAlreadyAdded(AccommodationReservation accommodationReservation, int userId)
+        private bool ReservationNotAlreadyAdded(AccommodationReservation accommodationReservation)
         {
-            return _guestRatingRepository.GetGuestRatingByReservationId(accommodationReservation.Id) == null;
+            return GuestRatingService.GetInstance().GetAll().Find(guestRating => guestRating.ReservationId == accommodationReservation.Id) == null;
         }
 
         public void Update()
         {
-            LoadAccommodationInfo();
             HideLeftNavbar();
             HideRightNavbar();
             AddAllReservationsThatArentCheckedYet();
             CheckReservationsThatEnded();
-        }
-
-        private void LoadAccommodationInfo()
-        {
-            foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
-            {
-                LoadAccommodationImages(accommodation);
-                LoadAccommodationLocation(accommodation);
-            }
         }
 
         public void Refresh()
@@ -194,24 +165,14 @@ namespace BookingApp.View.OwnerViews
 
         private void RefreshAccommodations()
         {
-            _accommodationWrapper.Update();
+            _accommodationWrapper.Refresh();
             MainPanel.Content = _accommodationWrapper;
         }
 
         private void RefreshReservations()
         {
-            _accommodationReservationWrapper.Update();
+            _accommodationReservationWrapper.Refresh();
             MainPanel.Content = _accommodationWrapper;
-        }
-
-        private void LoadAccommodationLocation(Accommodation accommodation)
-        {
-            accommodation.Location = _locationRepository.GetById(accommodation.LocationId);
-        }
-
-        private void LoadAccommodationImages(Accommodation accommodation)
-        {
-            accommodation.Images = _accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
         }
 
         private void ExitApplication(object sender, MouseButtonEventArgs e)
@@ -273,20 +234,20 @@ namespace BookingApp.View.OwnerViews
 
         private void AddAccommodationClick(object sender, RoutedEventArgs e)
         {
-            AddAccommodationPage addAccommodationPage = new AddAccommodationPage(_user);
+            AddAccommodationPage addAccommodationPage = new AddAccommodationPage(_mainPageViewModel.User);
             addAccommodationPage.PageClosed += (s, e) => Refresh();
             NavigationService.Navigate(addAccommodationPage);
         }
 
         private void GuestReviewsButtonClick(object sender, RoutedEventArgs e)
         {
-            GuestReviewPage guestReviewPage = new GuestReviewPage(_user);
+            GuestReviewPage guestReviewPage = new GuestReviewPage(_mainPageViewModel.User);
             NavigationService.Navigate(guestReviewPage);
         }
 
         private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
         {
-            GuestReviewPage guestReviewPage = new GuestReviewPage(_user);
+            GuestReviewPage guestReviewPage = new GuestReviewPage(_mainPageViewModel.User);
             DeactivateVisibilityOfNotification();
             NavigationService.Navigate(guestReviewPage);
         }
@@ -303,9 +264,7 @@ namespace BookingApp.View.OwnerViews
             HideLeftNavbar();
             HideRightNavbar();
 
-            OwnerInfo ownerInfo = OwnerInfoRepository.GetInstance().GetByOwnerId(_user.Id);
-
-            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_user);
+            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_mainPageViewModel.User);
             NavigationService.Navigate(settingsAndProfile);
         }
 
@@ -317,7 +276,8 @@ namespace BookingApp.View.OwnerViews
 
         private void RescheduleReservationClick(object sender, RoutedEventArgs e)
         {
-            ReservationReschedulingPage reservationSchedulingPage = new ReservationReschedulingPage(_user);
+            ReservationReschedulingPage reservationSchedulingPage = new ReservationReschedulingPage(_mainPageViewModel.User);
+            reservationSchedulingPage.ReservationReschedulingPageClosed += (s, e) => Refresh();
             NavigationService.Navigate(reservationSchedulingPage);
         }
 
@@ -338,16 +298,6 @@ namespace BookingApp.View.OwnerViews
         {
             MakeAllButtonsInactive();
             activeButton.Style = (Style)FindResource("ActiveFooterButtonStyle");
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

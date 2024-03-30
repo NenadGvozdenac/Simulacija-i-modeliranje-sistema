@@ -17,37 +17,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.View.OwnerViews.Components;
+using BookingApp.ViewModel.OwnerViewModels;
 
 namespace BookingApp.View.OwnerViews.MainWindowWrappers;
 
 public partial class AccommodationWrapper : UserControl
 {
-    private AccommodationRepository _accommodationRepository;
-    private User _user;
-    private ObservableCollection<Accommodation> _accommodations;
+    private MainPageViewModel _mainPageViewModel;
 
-    public AccommodationWrapper(User user)
+    public AccommodationWrapper(MainPageViewModel mainPageViewModel)
     {
         InitializeComponent();
 
-        _user = user;
-        _accommodationRepository = AccommodationRepository.GetInstance();
-        _accommodations = new ObservableCollection<Accommodation>();
+        _mainPageViewModel = mainPageViewModel;
 
-        Update();
+        AddAccommodations();
     }
 
-    public void Update()
+    public void Refresh()
     {
-        _accommodations.Clear();
-
-        List<Accommodation> accommodations = _accommodationRepository.GetAccommodationsByOwnerId(_user.Id);
-
-        foreach(Accommodation accommodation in accommodations)
-        {
-            _accommodations.Add(accommodation);
-        }
-
+        _mainPageViewModel.Refresh();
         AddAccommodations();
     }
 
@@ -55,7 +44,7 @@ public partial class AccommodationWrapper : UserControl
     {
         Accommodations.Children.Clear();
 
-        foreach(Accommodation accommodation in _accommodations)
+        foreach(Accommodation accommodation in _mainPageViewModel.Accommodations)
         {
             AccommodationControl component = new AccommodationControl(accommodation, LocationRepository.GetInstance().GetById(accommodation.LocationId));
             component.Margin = new Thickness(15);
@@ -68,14 +57,7 @@ public partial class AccommodationWrapper : UserControl
 
     private void InvokeSeeMore(Accommodation e)
     {
-        LoadAccommodationInfo(e);
         DetailedAccommodationPage detailedAccommodationPage = new DetailedAccommodationPage(e);
         NavigationService.GetNavigationService(this).Navigate(detailedAccommodationPage);
-    }
-
-    private void LoadAccommodationInfo(Accommodation e)
-    {
-        e.Location = LocationRepository.GetInstance().GetById(e.LocationId);
-        e.Images = AccommodationImageRepository.GetInstance().GetImagesByAccommodationId(e.Id);
     }
 }

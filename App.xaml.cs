@@ -50,6 +50,8 @@ public partial class App : Application
         services.AddSingleton<AccommodationReservationMovingRepository>();
         services.AddSingleton<AccommodationImageRepository>();
         services.AddSingleton<UserRepository>();
+        services.AddSingleton<AccommodationReviewRepository>();
+        services.AddSingleton<ReviewImageRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -61,6 +63,7 @@ public partial class App : Application
         services.AddSingleton<LocationService>();
         services.AddSingleton<GuestRatingService>();
         services.AddSingleton<ImageService>();
+        services.AddSingleton<AccommodationReviewService>();
     }
 
 }

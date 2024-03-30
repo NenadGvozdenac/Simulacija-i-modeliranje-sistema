@@ -64,7 +64,7 @@ namespace BookingApp.View.GuestViews
 
         private void FinishReview_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationReview review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)cleanliness_Slider.Value, (int)ownersCourtesy_Slider.Value, feedback_TextBox.Text);
+            AccommodationReview review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)cleanliness_Slider.Value, (int)ownersCourtesy_Slider.Value, feedback_TextBox.Text, false); // TODO: Dodao sam false kao polje za requires renovation. Promeni kad budes dodavao
             _accommodationReviewRepository.Add(review);
             
             foreach (ReviewImage reviewImage in _reviewImages)

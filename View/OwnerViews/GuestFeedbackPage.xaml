@@ -26,8 +26,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ScrollViewer x:Name="MainPanel">
-                <!-- Content -->
+            <ScrollViewer>
+                <StackPanel x:Name="MainPanel">
+                    
+                </StackPanel>
             </ScrollViewer>
         </Grid>
         <Grid Grid.Row="2">

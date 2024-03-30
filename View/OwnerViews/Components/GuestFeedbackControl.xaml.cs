@@ -1,4 +1,6 @@
 ﻿using BookingApp.Miscellaneous;
+using BookingApp.Model.MutualModels;
+using BookingApp.ViewModel.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +20,17 @@ namespace BookingApp.View.OwnerViews.Components;
 
 public partial class GuestFeedbackControl : UserControl
 {
-    public string AccommodationName { get; set; }
-    public string GuestName { get; set; }
-    public DateSpan DateSpan { get; set; }
-    public string RequiresRenovation { get; set; }
-    public GuestFeedbackControl()
+    public DetailedGuestFeedbackViewModel DetailedGuestFeedbackViewModel;
+    public GuestFeedbackControl(AccommodationReview accommodationReview)
     {
-        AccommodationName = "Accommodation Name";
-        GuestName = "Guest Name";
-        DateSpan = new DateSpan(DateTime.Now, DateTime.Now.AddDays(10));
-        RequiresRenovation = "Requires Renovation";
+        DetailedGuestFeedbackViewModel = new DetailedGuestFeedbackViewModel(accommodationReview);
+        DataContext = DetailedGuestFeedbackViewModel;
         InitializeComponent();
+    }
+
+    private void Card_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        DetailedGuestFeedbackPage detailedGuestFeedbackPage = new DetailedGuestFeedbackPage(DetailedGuestFeedbackViewModel);
+        NavigationService.GetNavigationService(this).Navigate(detailedGuestFeedbackPage);
     }
 }

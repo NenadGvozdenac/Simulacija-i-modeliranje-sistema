@@ -98,5 +98,29 @@ namespace BookingApp.Repository.MutualRepositories
         {
             return _accommodationReviews.FirstOrDefault(a => a.Id == id);
         }
+
+        public double GetAverageRating(int ownerId)
+        {
+            List<AccommodationReview> reviews = _accommodationReviews.Where(review => review.Accommodation.OwnerId == ownerId).ToList();
+
+            if (reviews.Count == 0)
+            {
+                return 0;
+            }
+
+            double averageRating = reviews.Average(review => review.Cleanliness + review.OwnersCourtesy) / 2;
+
+            return averageRating;
+        }
+
+        public List<AccommodationReview> GetByAccommodationId(int accommodationId)
+        {
+            return _accommodationReviews.Where(review => review.AccommodationId == accommodationId).ToList();
+        }
+
+        public List<AccommodationReview> GetByOwnerId(int userId)
+        {
+            return _accommodationReviews.Where(review => review.Accommodation.OwnerId == userId).ToList();
+        }
     }
 }

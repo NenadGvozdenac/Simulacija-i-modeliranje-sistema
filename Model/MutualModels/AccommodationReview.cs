@@ -11,18 +11,22 @@ namespace BookingApp.Model.MutualModels
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public User Guest { get; set; }
         public int AccommodationId { get; set; }
+        public Accommodation Accommodation { get; set; }
         public int ReservationId { get; set; }
+        public AccommodationReservation Reservation { get; set; }
         public int Cleanliness { get; set; }
         public int OwnersCourtesy { get; set; }
         public string Feedback { get; set; }
-        //public List<ReviewImages> { get; set;} TODO
+        public List<ReviewImage> ReviewImages { get; set; }
+        public bool RequiresRenovation { get; set; }
 
         public AccommodationReview()
         {
 
         }
-        public AccommodationReview(int userId, int accommodationId, int reservationId, int cleanliness, int ownerCourtesy, string feedback)
+        public AccommodationReview(int userId, int accommodationId, int reservationId, int cleanliness, int ownerCourtesy, string feedback, bool requiresRenovation)
         {
             UserId = userId;
             AccommodationId = accommodationId;
@@ -30,6 +34,7 @@ namespace BookingApp.Model.MutualModels
             Cleanliness = cleanliness;
             OwnersCourtesy = ownerCourtesy;
             Feedback = feedback;
+            RequiresRenovation = requiresRenovation;
         }
 
         public void FromCSV(string[] values)
@@ -41,11 +46,12 @@ namespace BookingApp.Model.MutualModels
             Cleanliness = int.Parse(values[4]);
             OwnersCourtesy = int.Parse(values[5]);
             Feedback = values[6];
+            RequiresRenovation = bool.Parse(values[7]);
         }
 
         public string[] ToCSV()
         {
-            return new string[] { Id.ToString(), UserId.ToString() ,AccommodationId.ToString(), ReservationId.ToString(), Cleanliness.ToString(), OwnersCourtesy.ToString(), Feedback};
+            return new string[] { Id.ToString(), UserId.ToString() ,AccommodationId.ToString(), ReservationId.ToString(), Cleanliness.ToString(), OwnersCourtesy.ToString(), Feedback, RequiresRenovation.ToString()};
         }
     }
 }

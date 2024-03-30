@@ -43,6 +43,17 @@
     <None Remove="Resources\Images\AccommodationImages\sixth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\third.jpg" />
     <None Remove="Resources\Images\AccommodationImages\vanzemljoc.png" />
+    <None Remove="Resources\Images\ReviewImages\default_house.png" />
+    <None Remove="Resources\Images\ReviewImages\eighth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\fifth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\first.jpg" />
+    <None Remove="Resources\Images\ReviewImages\fourth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\images.jpg" />
+    <None Remove="Resources\Images\ReviewImages\ninth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\second.jpg" />
+    <None Remove="Resources\Images\ReviewImages\seventh.jpg" />
+    <None Remove="Resources\Images\ReviewImages\sixth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\third.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -149,7 +160,6 @@
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
-    <Folder Include="Resources\Images\ReviewImages\" />
   </ItemGroup>
 
 	<ItemGroup>

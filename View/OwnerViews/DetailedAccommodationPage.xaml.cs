@@ -14,9 +14,6 @@ using System.Windows.Navigation;
 
 namespace BookingApp.View.OwnerViews;
 
-/// <summary>
-/// Interaction logic for DetailedAccommodationPage.xaml
-/// </summary>
 public partial class DetailedAccommodationPage : Page
 {
     private DetailedAccommodationViewModel _viewModel;

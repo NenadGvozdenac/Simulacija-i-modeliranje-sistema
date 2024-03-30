@@ -79,12 +79,22 @@ namespace BookingApp.Repository.MutualRepositories
             return _times.Where(a => a.TourId == tourId).ToList();
         }
 
+        public TourStartTime GetById(int Id)
+        {
+            return _times.FirstOrDefault(a => a.Id == Id);
+        }
+
+
         public TourStartTime GetByTourStartTimeAndId(DateTime tourTime, int TourId)  
         {
             return _times.First(a => a.Time == tourTime && a.TourId == TourId);
         }
 
-
+        public void RemoveByTourStartTimeAndId(DateTime tourTime, int TourId)
+        {
+            _times.RemoveAll(a => a.Time == tourTime && a.TourId == TourId);
+            _serializer.ToCSV(FilePath, _times);
+        }
 
         public void RemoveByTourId(int tourId)
         {

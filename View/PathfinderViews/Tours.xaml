@@ -14,7 +14,7 @@
         ItemsSource="{Binding tours}" Margin="3,3,3,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:TourCard x:Name="tourcard"/>
+                        <components:TourCard x:Name="tourcard" CancelTourClicked = "tourcard_CancelTourClicked"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

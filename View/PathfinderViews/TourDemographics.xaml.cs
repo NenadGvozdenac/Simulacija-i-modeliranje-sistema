@@ -3,7 +3,9 @@ using BookingApp.Model.PathfinderModels;
 using BookingApp.Repository.MutualRepositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,19 +22,67 @@ namespace BookingApp.View.PathfinderViews
     /// <summary>
     /// Interaction logic for TourDemographics.xaml
     /// </summary>
-    public partial class TourDemographics : Window
+    public partial class TourDemographics : Window, INotifyPropertyChanged
     {
-        public int Sub18 {  get; set; }
+        private int sub18;
+        public int Sub18
+        {
+            get => sub18;
+            set
+            {
+                if (value != sub18)
+                {
+                    sub18 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public int Middle {  get; set; }
+        private int middle;
+        public int Middle
+        {
+            get => middle;
+            set
+            {
+                if (value != middle)
+                {
+                    middle = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public int Above50 { get; set; }
+        private int above50;
+        public int Above50
+        {
+            get => above50;
+            set
+            {
+                if (value != above50)
+                {
+                    above50 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+       
 
         public TourStartTimeRepository timeRepository { get; set; }
 
         public TouristReservationRepository reservationRepository { get; set; }
 
         public TouristRepository touristRepository { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // The method to invoke the property changed event
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         public TourDemographics()
         {
             InitializeComponent();
@@ -45,6 +95,8 @@ namespace BookingApp.View.PathfinderViews
             Sub18 = FindSub18(FindMostReserved());
             Middle = FindMiddle(FindMostReserved());
             Above50 = FindAbove50(FindMostReserved());
+
+            demographicsControl.StatsButtonClickedControl += (s, e) => OnStatsButtonClicked_Handler(s,e);
             Update();
         }
 
@@ -139,8 +191,23 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
+        public void OnStatsButtonClicked_Handler(object sender, BeginButtonClickedEventArgs e)
+        {
+            OnStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+         
+        }
 
-
+        public void OnStatsButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            TourStartTime time = timeRepository.GetByTourStartTimeAndId(e.StartTime, e.TourId);
+            Sub18 = FindSub18(time);
+            
+            Middle = FindMiddle(time);
+            
+            Above50 = FindAbove50(time);
+            
+           
+        }
 
     }
 }

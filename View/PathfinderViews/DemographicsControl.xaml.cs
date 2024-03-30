@@ -39,6 +39,8 @@ namespace BookingApp.View.PathfinderViews
 
         public TouristReservationRepository touristReservationRepository { get; set; }
 
+        public EventHandler<BeginButtonClickedEventArgs> StatsButtonClickedControl { get; set; }
+
         public DemographicsControl()
         {
             InitializeComponent();
@@ -89,7 +91,15 @@ namespace BookingApp.View.PathfinderViews
             }
         }
 
+        private void demographicscard_TourStatsClicked(object sender, BeginButtonClickedEventArgs e) 
+        {
+            onStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId,e.StartTime));
+        }
 
+        private void onStatsButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            StatsButtonClickedControl?.Invoke(this, e);
+        }
 
     }
 }

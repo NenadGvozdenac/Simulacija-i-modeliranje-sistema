@@ -50,7 +50,7 @@
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
                     <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="387" Height="78"/>
-                    <Button Content="Stats" Height="26"  Width="58" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <Button Content="Stats" Height="26"  Width="58" VerticalAlignment="Center" HorizontalAlignment="Right" Click="TourStats_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >

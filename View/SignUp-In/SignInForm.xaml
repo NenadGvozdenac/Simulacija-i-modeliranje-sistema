@@ -12,6 +12,7 @@
         <RectangleGeometry Rect="0,0,450,450" RadiusX="15" RadiusY="15"/>
     </Window.Clip>
     <Grid ClipToBounds="True" Background="{StaticResource Lavender}">
+        <Image Source="/Resources/Assets/icon-exit.png" Stretch="Fill" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="Hand" MouseDown="CloseApplication"/>
         <Ellipse Fill="{StaticResource RockiesPurple}" Width="171" Height="171" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-71,-68,0,0"/>
         <Ellipse Fill="{StaticResource HallmarkPurple}" Width="175" Height="175" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-71,-59"/>
         <Rectangle Fill="{StaticResource Creme}" Margin="80,74,80,107" RadiusX="25" RadiusY="25"/>

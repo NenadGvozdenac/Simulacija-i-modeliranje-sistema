@@ -299,5 +299,11 @@ namespace BookingApp.View.OwnerViews
             MakeAllButtonsInactive();
             activeButton.Style = (Style)FindResource("ActiveFooterButtonStyle");
         }
+
+        private void GuestFeedbackButtonClick(object sender, RoutedEventArgs e)
+        {
+            GuestFeedbackPage guestFeedbackPage = new GuestFeedbackPage(_mainPageViewModel.User);
+            NavigationService.Navigate(guestFeedbackPage);
+        }
     }
 }

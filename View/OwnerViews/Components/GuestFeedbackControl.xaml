@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="BookingApp.View.OwnerViews.Components.GuestFeedbackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="115" d:DesignWidth="365">
+    <Border Width="365" Height="115" CornerRadius="5" Background="{StaticResource Creme}" BorderThickness="2" BorderBrush="Black" Cursor="Hand">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="Black">
+                <Image Source="../../../Resources/Assets/user_profile_icon.png" Margin="15"/>
+            </Border>
+            <Label Content="{Binding AccommodationName}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>14</Label.FontSize>
+                <Label.FontWeight>Bold</Label.FontWeight>
+            </Label>
+            <Label Content="{Binding GuestName}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>11.5</Label.FontSize>
+            </Label>
+            <Label Content="{Binding DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>11.5</Label.FontSize>
+            </Label>
+
+            <Label Content="{Binding RequiresRenovation}" Foreground="Orange" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.FontFamily>Verdana</Label.FontFamily>
+                <Label.FontSize>11.5</Label.FontSize>
+            </Label>
+        </Grid>
+    </Border>
+</UserControl>

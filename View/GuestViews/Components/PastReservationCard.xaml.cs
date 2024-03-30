@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Model.GuestModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,20 @@ namespace BookingApp.View.GuestViews.Components
     /// </summary>
     public partial class PastReservationCard : UserControl
     {
+        public event EventHandler<int> ReviewHandler;
         public PastReservationCard()
         {
             InitializeComponent();
+        }
+
+        private void Review_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is PastReservationsDTO reservation)
+            {
+                int reservationId = reservation.ReservationId;
+
+                ReviewHandler?.Invoke(this, reservationId);
+            }
         }
     }
 }

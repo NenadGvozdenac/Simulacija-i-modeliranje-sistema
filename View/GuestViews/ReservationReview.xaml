@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="BookingApp.View.GuestViews.ReservationReview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.View.GuestViews" xmlns:components="clr-namespace:BookingApp.View.GuestViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="890" d:DesignWidth="1024">
+    <Grid Background="White">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="161"/>
+                    <RowDefinition Height="364"/>
+                    <RowDefinition Height="311"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                    <TextBlock x:Name="accommodationName_TextBlock" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Name of the accommodation" FontSize="50" Margin="10,4,0,0" />
+                    <TextBlock x:Name="dearUsername_TextBlock" Text="Dear username," FontSize="20" Margin="35,76,692,57"/>
+                    <TextBlock Text="we sincerely appreciate your time in providing this review!" FontSize="20" Margin="35,109,421,16"/>
+                    <TextBlock x:Name="username_TextBlock" Text="Username" TextAlignment="Center" FontSize="20" Margin="807,56,33,60"/>
+                    <Button Content="Go Back" Click="GoBack_Click" HorizontalAlignment="Left" Margin="899,112,0,0" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please rate the cleanliness of accommodation using a scale of 1 to 5, where 1 represents 'unsatisfactory' and 5 represents 'exceptional'" FontSize="20" Margin="28,34,0,0" Height="135" Width="304"/>
+                    <Slider x:Name="cleanliness_Slider" HorizontalAlignment="Left" Margin="363,72,0,0" VerticalAlignment="Top" Width="120" 
+                            Minimum="1"
+                            Maximum="5"
+                            Value="3"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="1"
+                            TickPlacement="BottomRight" />
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1   2   3   4   5" FontSize="20" Margin="363,96,0,0" Height="24" Width="120"/>
+
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please rate the owner's courtesy on a scale of 1 to 5, where 1 indicates 'poor courtesy' and 5 indicates 'excellent courtesy'" FontSize="20" Margin="550,34,0,0" Height="112" Width="304"/>
+                    <Slider x:Name="ownersCourtesy_Slider" HorizontalAlignment="Left" Margin="876,72,0,0" VerticalAlignment="Top" Width="120" 
+                            Minimum="1"
+                            Maximum="5"
+                            Value="3"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="1"
+                            TickPlacement="BottomRight" />
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1   2   3   4   5" FontSize="20" Margin="876,96,0,0" Height="24" Width="120"/>
+
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please provide any additional comments or feedback:" FontSize="20" Margin="28,202,0,0" Height="59" Width="271"/>
+                    <TextBox x:Name="feedback_TextBox" Panel.ZIndex="2" Height="100" Width="200" Margin="323,202,501,62"/>
+
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="We would greatly appreciate it if you could share one or more images of the accommodation!" FontSize="20" Margin="556,200,0,0" Height="113" Width="237"/>
+                    <Button Content="Click here to add photo" Click="AddPhoto_Click" Margin="638,318,304,22"/>
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Margin="792,187,56,33">
+                        <ScrollViewer x:Name="reviewImages_ScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                            <StackPanel x:Name="reviewImages_StackPanel" Orientation="Vertical" Width="175"/>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <TextBlock Text="Your feedback is invaluable to us!" FontSize="20" Margin="22,10,712,17" />
+                    <Button Content="Tap here to finish the review" HorizontalAlignment="Left" Click="FinishReview_Click" Margin="341,0,0,0" VerticalAlignment="Center" Width="162"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

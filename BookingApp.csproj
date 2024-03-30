@@ -149,6 +149,7 @@
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
+    <Folder Include="Resources\Images\ReviewImages\" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -158,6 +159,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="Resources\Images\ReviewImages\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Resources\Data\accommodation_review.csv">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 </Project>

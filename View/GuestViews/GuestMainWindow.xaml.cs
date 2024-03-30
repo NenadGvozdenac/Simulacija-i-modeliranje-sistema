@@ -20,10 +20,14 @@ namespace BookingApp.View.GuestViews;
 
 public partial class GuestMainWindow : Window
 {
+    public EventHandler<int> ReviewClicked;
+
     private readonly User _user;
     public AccommodationRepository _accommodationRepository { get; set; }
     public AccommodationReservationRepository _accommodationReservationRepository;
     public AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
+    public AccommodationReviewRepository _accommodationReviewRepository;
+    public ReviewImageRepository _reviewImageRepository;
     public Accommodations AccommodationsUserControl;
     public MyReservations MyReservationsUserControl;
     
@@ -34,6 +38,8 @@ public partial class GuestMainWindow : Window
         _accommodationRepository = new AccommodationRepository();
         _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
         _accommodationReservationMovingRepository = new AccommodationReservationMovingRepository();
+        _accommodationReviewRepository = new AccommodationReviewRepository();
+        _reviewImageRepository = new ReviewImageRepository();
         _user = user;
         Update(_user);
         AccommodationsUserControl = new Accommodations(user);
@@ -67,6 +73,12 @@ public partial class GuestMainWindow : Window
     {
         AccommodationsUserControl = new Accommodations(user);
         MyReservationsUserControl = new MyReservations(user, _accommodationRepository, _accommodationReservationRepository, _accommodationReservationMovingRepository);
+        MyReservationsUserControl.ReviewClicked += ShowReviewPage;
+    }
+
+    private void ShowReviewPage(object sender, int reservationId)
+    {
+        GuestWindowFrame.Content = new ReservationReview(_user, _accommodationReservationRepository, _accommodationRepository, _accommodationReviewRepository, _reviewImageRepository, reservationId);
     }
 
     private void Logout_Click(object sender, RoutedEventArgs e)

@@ -23,7 +23,26 @@
             <ColumnDefinition Width="303*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
             <Border Grid.Column="1" BorderBrush="Gray" Opacity="0.9" BorderThickness="1,0,0,0"/>
-           
+            
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <StackPanel >
+                        <TextBlock Width="150" Text="Advanced options" TextAlignment="Center" TextDecorations="Underline" FontWeight="Bold"></TextBlock>
+                        <Border Height="10"/>
+                        <TextBlock Width="150" Text="Your reviews (F4)" TextAlignment="Center"></TextBlock>
+                        <Border Height="10"/>
+                        <TextBlock Width="150" Text="Tour demographics (F5)" TextAlignment="Center" MouseLeftButtonDown="Demographics_MouseLeftButtonDown" Cursor="Hand"></TextBlock>
+                        <Border Height="10"/>
+                        <TextBlock Width="150" Text="Complex tour requests (F6)" TextAlignment="Center"></TextBlock>
+                        <Border Height="10"/>
+                        <TextBlock Width="150" Text="Tour requests statistics (F7)" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>   
         
         <Grid Grid.Column="1" x:Name="GridColumn2">
                 <Grid.RowDefinitions>

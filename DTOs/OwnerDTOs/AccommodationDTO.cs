@@ -63,7 +63,7 @@ public class AccommodationDTO
     {
         Owner = OwnerService.GetInstance().GetOwnerInfo(accommodation.OwnerId).Item2;
         Name = accommodation.Name;
-        Location = accommodation.Location;
+        Location = LocationService.GetInstance().GetById(accommodation.LocationId);
         Type = accommodation.Type;
         MaxGuestNumber = accommodation.MaxGuestNumber.ToString();
         MinReservationDays = accommodation.MinReservationDays.ToString();

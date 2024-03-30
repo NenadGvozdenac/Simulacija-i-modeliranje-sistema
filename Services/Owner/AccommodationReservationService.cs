@@ -2,6 +2,7 @@
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,20 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Services.Owner;
 
-public class AccommodationReservationService
+public class AccommodationReservationService : IService<AccommodationReservation>
 {
     private AccommodationRepository _accommodationRepository;
     private AccommodationReservationRepository _accommodationReservationRepository;
 
-    private static Lazy<AccommodationReservationService> instance = new Lazy<AccommodationReservationService>(() => new AccommodationReservationService());
-
-    private AccommodationReservationService()
+    public AccommodationReservationService()
     {
-        _accommodationRepository = AccommodationRepository.GetInstance();
-        _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
+        _accommodationRepository = App.ServiceProvider.GetRequiredService<AccommodationRepository>();
+        _accommodationReservationRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationRepository>();
     }
 
     public static AccommodationReservationService GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<AccommodationReservationService>();
     }
 
     public List<AccommodationReservation> GetReservationsByOwnerId(int ownerId)
@@ -73,10 +72,5 @@ public class AccommodationReservationService
         reservation.LastDateOfStaying = wantedDatespan.End;
 
         _accommodationReservationRepository.Update(reservation);
-    }
-
-    internal bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation)
-    {
-        throw new NotImplementedException();
     }
 }

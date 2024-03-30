@@ -10,13 +10,13 @@ using BookingApp.Serializer;
 using BookingApp.Model.MutualModels;
 using System.Xml.Linq;
 using BookingApp.Repository.MutualRepositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingApp.Repository;
 
-public class AccommodationRepository
+public class AccommodationRepository : IRepository<Accommodation>
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
-    private static readonly Lazy<AccommodationRepository> instance = new Lazy<AccommodationRepository>(() => new AccommodationRepository());
     private readonly Serializer<Accommodation> _serializer;
 
     private List<Accommodation> _accommodations;
@@ -30,7 +30,7 @@ public class AccommodationRepository
 
     public static AccommodationRepository GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<AccommodationRepository>();
     }
 
     public List<Accommodation> GetAll()

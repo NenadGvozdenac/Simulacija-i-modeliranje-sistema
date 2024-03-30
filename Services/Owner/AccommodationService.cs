@@ -13,27 +13,26 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingApp.Services.Owner;
 
-public class AccommodationService
+public class AccommodationService : IService<Accommodation>
 {
     private AccommodationRepository _accommodationRepository;
     private LocationRepository _locationRepository;
     private AccommodationImageRepository _accommodationImageRepository;
 
-    private static Lazy<AccommodationService> instance = new Lazy<AccommodationService>(() => new AccommodationService());
-
-    private AccommodationService()
+    public AccommodationService()
     {
-        _accommodationRepository = AccommodationRepository.GetInstance();
+        _accommodationRepository        = AccommodationRepository.GetInstance();
         _locationRepository = LocationRepository.GetInstance();
-        _accommodationImageRepository = AccommodationImageRepository.GetInstance();
+        _accommodationImageRepository   = AccommodationImageRepository.GetInstance();
     }
 
     public static AccommodationService GetInstance()
     {
-        return instance.Value;
+        return App.ServiceProvider.GetRequiredService<AccommodationService>();
     }
 
     public List<Accommodation> GetAll()
@@ -70,8 +69,8 @@ public class AccommodationService
         _accommodationRepository.Update(accommodation);
     }
 
-    public void Delete(int id)
+    public void Delete(Accommodation entity)
     {
-        _accommodationRepository.Delete(id);
+        _accommodationRepository.Delete(entity.Id);
     }
 }

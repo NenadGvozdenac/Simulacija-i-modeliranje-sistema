@@ -11,6 +11,7 @@ using BookingApp.Model.OwnerModels;
 using BookingApp.View.OwnerViews.MainWindowWrappers;
 using BookingApp.ViewModel.OwnerViewModels;
 using BookingApp.Services.Owner;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingApp.View.OwnerViews
 {
@@ -46,7 +47,7 @@ namespace BookingApp.View.OwnerViews
 
             // TODO: Recalculate number of accommodations of the owner
 
-            ownerInfo.Item1.Accommodations = AccommodationService.GetInstance().GetByOwnerId(ownerInfo.Item1.OwnerId);
+            ownerInfo.Item1.Accommodations = new AccommodationService().GetByOwnerId(ownerInfo.Item1.OwnerId);
 
             ownerInfo.Item1.NumberOfAccommodations = ownerInfo.Item1.Accommodations.Count;
 

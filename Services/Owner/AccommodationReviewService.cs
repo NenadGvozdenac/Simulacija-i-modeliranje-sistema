@@ -81,4 +81,16 @@ public class AccommodationReviewService : IService<AccommodationReview>
         LoadAll();
         return _accommodationReviewRepository.GetByOwnerId(userId);
     }
+
+    public double GetAverageReviewScore(int ownerId)
+    {
+        LoadAll();
+        List<AccommodationReview> reviews = GetByOwnerId(ownerId);
+        double sum = 0;
+        foreach (var review in reviews)
+        {
+            sum += (review.Cleanliness + review.OwnersCourtesy) / (double)2;
+        }
+        return sum / reviews.Count;
+    }
 }

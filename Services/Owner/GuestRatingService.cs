@@ -1,4 +1,5 @@
-﻿using BookingApp.Model.OwnerModels;
+﻿using BookingApp.Model.MutualModels;
+using BookingApp.Model.OwnerModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
 using BookingApp.Repository.OwnerRepositories;
@@ -62,5 +63,15 @@ public class GuestRatingService : IService<GuestRating>
     internal IEnumerable<GuestRating> GetByOwnerId()
     {
         throw new NotImplementedException();
+    }
+
+    public bool ExistsReviewOfGuest(User guest, Accommodation accommodation)
+    {
+        return _guestRatingRepository.ExistsReviewOfGuest(guest, accommodation);
+    }
+
+    internal void DeleteAll(Func<GuestRating, bool> value)
+    {
+        _guestRatingRepository.DeleteAll(value);
     }
 }

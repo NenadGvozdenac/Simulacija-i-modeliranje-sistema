@@ -19,6 +19,11 @@ public partial class GuestFeedbackPage : Page
     {
         foreach(AccommodationReview review in AccommodationReviewService.GetInstance().GetByOwnerId(_owner.Id))
         {
+            if(!GuestRatingService.GetInstance().ExistsReviewOfGuest(review.Guest, review.Accommodation))
+            {
+                continue;
+            }
+
             GuestFeedbackControl feedbackControl = new GuestFeedbackControl(review);
             feedbackControl.Margin = new System.Windows.Thickness(15);
 

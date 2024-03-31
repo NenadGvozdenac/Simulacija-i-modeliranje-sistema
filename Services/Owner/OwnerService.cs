@@ -2,6 +2,7 @@
 using BookingApp.Model.OwnerModels;
 using BookingApp.Repository;
 using BookingApp.Repository.OwnerRepositories;
+using BookingApp.ViewModel.OwnerViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -87,5 +88,35 @@ public class OwnerService : IService<(OwnerInfo, User)>
     {
         _ownerInfoRepository.Update(entity.Item1);
         _userRepository.Update(entity.Item2);
+    }
+
+    public void CheckForSuperOwner(User user)
+    {
+        (OwnerInfo, User) ownerInfo = OwnerService.GetInstance().GetOwnerInfo(user.Id);
+
+        // TODO: Get all reviews of the owner
+        List<AccommodationReview> accommodationReviews = AccommodationReviewService.GetInstance().GetByOwnerId(ownerInfo.Item1.OwnerId);
+
+        // Put number of reviews in the owner info
+        ownerInfo.Item1.NumberOfReviews = accommodationReviews.Count;
+
+        // Put accommodations of the owner in the owner info
+        ownerInfo.Item1.Accommodations = AccommodationService.GetInstance().GetByOwnerId(ownerInfo.Item1.OwnerId);
+
+        // Put number of accommodations in the owner info
+        ownerInfo.Item1.NumberOfAccommodations = ownerInfo.Item1.Accommodations.Count;
+
+        // TODO: Get average review score of the owner
+        ownerInfo.Item1.AverageReviewScore = AccommodationReviewService.GetInstance().GetAverageReviewScore(ownerInfo.Item1.OwnerId);
+
+        // If user is reviewed by at least 50 guests, and has average rating above 4.5, make him a super owner
+        UpdateOwnerInfo(new OwnerInfo()
+        {
+            AverageReviewScore = ownerInfo.Item1.AverageReviewScore,
+            NumberOfReviews = ownerInfo.Item1.NumberOfReviews,
+            NumberOfAccommodations = ownerInfo.Item1.NumberOfAccommodations,
+            OwnerId = ownerInfo.Item1.OwnerId,
+            IsSuperOwner = ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore >= 4.5
+        });
     }
 }

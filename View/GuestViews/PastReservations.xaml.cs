@@ -40,10 +40,15 @@ namespace BookingApp.View.GuestViews
             _user = user;
             _accommodationRepository = accommodationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
+            SetUpPastReservations();
+            Update();
+        }
+
+        public void SetUpPastReservations()
+        {
             _accommodationImageRepository = new AccommodationImageRepository();
             _locationRepository = new LocationRepository();
             _pastReservations = new ObservableCollection<PastReservationsDTO>();
-            Update();
         }
 
         public void Update()
@@ -51,15 +56,33 @@ namespace BookingApp.View.GuestViews
             _pastReservations.Clear();
             foreach (AccommodationReservation reservation in _accommodationReservationRepository.GetAll())
             {
-                if (reservation.LastDateOfStaying < DateTime.Now && reservation.UserId == _user.Id)
-                {
-                    Accommodation acc = _accommodationRepository.GetById(reservation.AccommodationId);
-                    AccommodationReservation accRes = _accommodationReservationRepository.GetById(reservation.Id);
-                    PastReservationsDTO temp = new PastReservationsDTO(acc, accRes);
-                    temp.Images = _accommodationImageRepository.GetImagesByAccommodationId(reservation.AccommodationId);
-                    temp.Location = _locationRepository.GetById(acc.LocationId);
-                    _pastReservations.Add(temp);
-                }
+                AddToCollection(reservation);
+            }
+            ReverseCollection();
+        }
+
+        private void ReverseCollection()
+        {
+            List<PastReservationsDTO> tempList = new List<PastReservationsDTO>(_pastReservations);
+            tempList.Reverse();
+
+            _pastReservations.Clear();
+            foreach (PastReservationsDTO item in tempList)
+            {
+                _pastReservations.Add(item);
+            }
+        }
+
+        public void AddToCollection(AccommodationReservation reservation)
+        {
+            if (reservation.LastDateOfStaying < DateTime.Now && reservation.UserId == _user.Id)
+            {
+                Accommodation acc = _accommodationRepository.GetById(reservation.AccommodationId);
+                AccommodationReservation accRes = _accommodationReservationRepository.GetById(reservation.Id);
+                PastReservationsDTO temp = new PastReservationsDTO(acc, accRes);
+                temp.Images = _accommodationImageRepository.GetImagesByAccommodationId(reservation.AccommodationId);
+                temp.Location = _locationRepository.GetById(acc.LocationId);
+                _pastReservations.Add(temp);
             }
         }
 

@@ -46,12 +46,14 @@ namespace BookingApp.View.GuestViews
             _reviewImageRepository = reviewImageRepository;
             reservation = _accommodationReservationRepository.GetById(reservationId);
             accommodation = _accommodationRepository.GetById(reservation.AccommodationId);
-            _reviewImages = new List<ReviewImage>();
-            SetUpReviewPage();
+            SetUpReviewPage(reservationId);
         }
 
-        private void SetUpReviewPage()
+        private void SetUpReviewPage(int reservationId)
         {
+            reservation = _accommodationReservationRepository.GetById(reservationId);
+            accommodation = _accommodationRepository.GetById(reservation.AccommodationId);
+            _reviewImages = new List<ReviewImage>();
             accommodationName_TextBlock.Text = accommodation.Name;
             dearUsername_TextBlock.Text = "Dear " + _user.Username + ",";
             username_TextBlock.Text = _user.Username;
@@ -82,7 +84,7 @@ namespace BookingApp.View.GuestViews
             ReviewImage reviewImage = new ReviewImage(reservation.Id, reservation.AccommodationId, imagePath);
 
             slika.Width = 185;
-            slika.Height = 140;
+            slika.Height = 135;
 
             _reviewImages.Add(reviewImage);
             reviewImages_StackPanel.Children.Add(slika);      

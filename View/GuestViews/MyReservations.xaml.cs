@@ -38,13 +38,18 @@ namespace BookingApp.View.GuestViews
             _user = user;
             _accommodationRepository = accommodationRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
-            _accommodationReservationMovingRepository = accommodationReservationMovingRepository;
+            _accommodationReservationMovingRepository = accommodationReservationMovingRepository;         
+            SetUpMyReservations();
+            Update();
+        }
+
+        public void SetUpMyReservations()
+        {
             UpcomingReservationsUserControl = new UpcomingReservations(_user, _accommodationRepository, _accommodationReservationRepository);
             PastReservationsUserControl = new PastReservations(_user, _accommodationRepository, _accommodationReservationRepository);
             RescheduleRequestsUserControl = new RescheduleRequests(_user,_accommodationRepository, _accommodationReservationMovingRepository);
             UpcomingReservationsUserControl.RescheduleClicked += MyReservation_RescheduleClicked;
             PastReservationsUserControl.ReviewClicked += MyReservation_ReviewClicked;
-            Update();
         }
 
         public void Update()
@@ -65,7 +70,7 @@ namespace BookingApp.View.GuestViews
 
         public void RefreshRecheduleRequests()
         {
-            RescheduleRequestsUserControl.SetUpUserControl();
+            RescheduleRequestsUserControl.Update();
         }
 
         private void UpcomingReservations_Click(object sender, RoutedEventArgs e)

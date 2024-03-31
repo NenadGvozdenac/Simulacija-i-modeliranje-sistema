@@ -36,14 +36,12 @@ namespace BookingApp.View.GuestViews.Components
                 
                 if (reservation.RemainingDaysToCancel <= 0)
                 {
-                    // Disable the button and change its content
                     CancelReservationButton.IsEnabled = false;
                     CancelReservationButton.Content = "Can't cancel the reservation";
                     RemainingDays_TextBlock.Text = "Remaining days to cancel: 0";
                 }
                 else
                 {
-                    // Enable the button and change its content
                     CancelReservationButton.IsEnabled = true;
                     CancelReservationButton.Content = "Tap here to cancel the reservation";
                 }

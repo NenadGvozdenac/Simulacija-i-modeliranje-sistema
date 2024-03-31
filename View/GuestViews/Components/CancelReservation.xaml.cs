@@ -36,10 +36,10 @@ namespace BookingApp.View.GuestViews.Components
             selectedReservation = _selectedReservation;
             _accommodationRepository = accommodationRepository;
             _accommodationMovingRepository = new AccommodationReservationMovingRepository();
-            Update();
+            SetUpCancelReservation();
         }
 
-        private void Update()
+        private void SetUpCancelReservation()
         {
             Accommodation accommodation = _accommodationRepository.GetById(selectedReservation.AccommodationId);
             NameOfTheAccommodation_TextBlock.Text = accommodation.Name;

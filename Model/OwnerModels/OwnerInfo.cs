@@ -16,7 +16,7 @@ public class OwnerInfo : ISerializable
     public List<Accommodation> Accommodations { get; set; }
     public List<AccommodationReservation> Reservations { get; set; }
     public int NumberOfAccommodations { get; set; }
-    public int AverageReviewScore { get; set; }
+    public double AverageReviewScore { get; set; }
     public int NumberOfReviews { get; set; }
 
     public OwnerInfo()
@@ -25,7 +25,7 @@ public class OwnerInfo : ISerializable
         Reservations = new List<AccommodationReservation>();
     }
 
-    public OwnerInfo(int ownerId, bool isSuperOwner, List<Accommodation> accommodations, List<AccommodationReservation> reservations, int numberOfAccommodations, int averageReviewScore, int numberOfReviews)
+    public OwnerInfo(int ownerId, bool isSuperOwner, List<Accommodation> accommodations, List<AccommodationReservation> reservations, int numberOfAccommodations, double averageReviewScore, int numberOfReviews)
     {
         OwnerId = ownerId;
         IsSuperOwner = isSuperOwner;
@@ -36,7 +36,7 @@ public class OwnerInfo : ISerializable
         NumberOfReviews = numberOfReviews;
     }
 
-    public OwnerInfo(int ownerId, bool isSuperOwner, int numberOfAccommodations, int averageReviewScore, int numberOfReviews)
+    public OwnerInfo(int ownerId, bool isSuperOwner, int numberOfAccommodations, double averageReviewScore, int numberOfReviews)
     {
         OwnerId = ownerId;
         IsSuperOwner = isSuperOwner;
@@ -50,7 +50,7 @@ public class OwnerInfo : ISerializable
         OwnerId = Convert.ToInt32(values[0]);
         IsSuperOwner = Convert.ToBoolean(values[1]);
         NumberOfAccommodations = Convert.ToInt32(values[2]);
-        AverageReviewScore = Convert.ToInt32(values[3]);
+        AverageReviewScore = Convert.ToDouble(values[3]);
         NumberOfReviews = Convert.ToInt32(values[4]);
     }
 

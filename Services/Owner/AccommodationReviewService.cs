@@ -39,6 +39,7 @@ public class AccommodationReviewService : IService<AccommodationReview>
     public void Delete(AccommodationReview entity)
     { 
         _accommodationReviewRepository.Delete(entity.Id);
+        _reviewImageRepository.DeleteByReviewId(entity.Id);
     }
 
     public void LoadAll()
@@ -91,6 +92,18 @@ public class AccommodationReviewService : IService<AccommodationReview>
         {
             sum += (review.Cleanliness + review.OwnersCourtesy) / (double)2;
         }
-        return sum / reviews.Count;
+        return (sum / reviews.Count) is double.NaN ? 0 : (sum / reviews.Count);
+    }
+
+    public void CheckForCancelledReservations()
+    {
+        List<AccommodationReview> reviews = GetAll();
+        foreach (var review in reviews)
+        {
+            if (review.Reservation == null)
+            {
+                Delete(review);
+            }
+        }
     }
 }

@@ -34,12 +34,6 @@ namespace BookingApp.Repository.MutualRepositories
             _serializer.ToCSV(FilePath, _reviewImages);
         }
 
-        public void Remove(ReviewImage accommodation)
-        {
-            _reviewImages.Remove(accommodation);
-            _serializer.ToCSV(FilePath, _reviewImages);
-        }
-
         public List<ReviewImage> GetAll()
         {
             return _reviewImages;
@@ -109,6 +103,12 @@ namespace BookingApp.Repository.MutualRepositories
         public List<ReviewImage> GetByReviewId(int id)
         {
             return _reviewImages.Where(a => a.ReviewId == id).ToList();
+        }
+
+        public void DeleteByReviewId(int id)
+        {
+            _reviewImages.RemoveAll(a => a.ReviewId == id);
+            _serializer.ToCSV(FilePath, _reviewImages);
         }
     }
 }

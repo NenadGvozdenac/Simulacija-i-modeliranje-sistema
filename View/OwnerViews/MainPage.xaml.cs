@@ -34,6 +34,8 @@ namespace BookingApp.View.OwnerViews
             _accommodationReservationWrapper = new AccommodationReservationWrapper(_mainPageViewModel);
 
             PrepareFirstPage();
+            AccommodationReviewService.GetInstance().CheckForCancelledReservations();
+            AccommodationReservationService.GetInstance().CheckForCancelledReservations();
             OwnerService.GetInstance().CheckForSuperOwner(user);
         }
 

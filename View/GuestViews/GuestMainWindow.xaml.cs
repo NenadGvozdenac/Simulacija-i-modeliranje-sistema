@@ -14,75 +14,37 @@ using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repository;
 using BookingApp.Repository.MutualRepositories;
+using BookingApp.ViewModel.GuestViewModels;
 
 namespace BookingApp.View.GuestViews;
 
 
 public partial class GuestMainWindow : Window
 {
-    public EventHandler<int> ReviewClicked;
-
-    private readonly User _user;
-    public AccommodationRepository _accommodationRepository { get; set; }
-    public AccommodationReservationRepository _accommodationReservationRepository;
-    public AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
-    public AccommodationReviewRepository _accommodationReviewRepository;
-    public ReviewImageRepository _reviewImageRepository;
-    public Accommodations AccommodationsUserControl;
-    public MyReservations MyReservationsUserControl;
-    
-
+    public GuestMainWindowViewModel GuestViewModel { get; set; }
     public GuestMainWindow(User user)
     {
-        InitializeComponent();       
-        _accommodationRepository = new AccommodationRepository();
-        _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
-        _accommodationReservationMovingRepository = new AccommodationReservationMovingRepository();
-        _accommodationReviewRepository = new AccommodationReviewRepository();
-        _reviewImageRepository = new ReviewImageRepository();
-        _user = user;
-        Update(_user);
-        AccommodationsUserControl = new Accommodations(user);
-        GuestWindowFrame.Content = AccommodationsUserControl;
+        InitializeComponent();
+        GuestViewModel = new GuestMainWindowViewModel(this, user, GuestWindowFrame);
+        DataContext = GuestViewModel;    
+    
     }
+
     public void Accommodations_Click(object sender, RoutedEventArgs e)
     {
-        GuestWindowFrame.Content = AccommodationsUserControl;
+        GuestViewModel.Accommodations_Click();
     }
     public void MyReservations_Click(object sender, RoutedEventArgs e)
     {
-        GuestWindowFrame.Content = MyReservationsUserControl;
+        GuestViewModel.MyReservations_Click();
     }
-    public void ShowAccommodationDetails(int accommodationId)
+    private void SeeMore_Click(object sender, RoutedEventArgs e)
     {
-        Accommodation detailedAccommodation = _accommodationRepository.GetById(accommodationId);
-        var a = new AccommodationDetails(detailedAccommodation, _user, _accommodationReviewRepository);
-        a.UpcomingReservationsChanged += (sender, e) =>
-        {
-            RefreshReservations();
-        };
-        GuestWindowFrame.Content = a;
-
-    }
-    private void RefreshReservations()
-    {
-        MyReservationsUserControl.RefreshUpcomingReservations();
-    }
-
-    private void Update(User user)
-    {
-        AccommodationsUserControl = new Accommodations(user);
-        MyReservationsUserControl = new MyReservations(user, _accommodationRepository, _accommodationReservationRepository, _accommodationReservationMovingRepository);
-        MyReservationsUserControl.ReviewClicked += ShowReviewPage;
-    }
-
-    private void ShowReviewPage(object sender, int reservationId)
-    {
-        GuestWindowFrame.Content = new ReservationReview(_user, _accommodationReservationRepository, _accommodationRepository, _accommodationReviewRepository, _reviewImageRepository, reservationId);
+        GuestViewModel.SeeMore_Click();
     }
 
     private void Logout_Click(object sender, RoutedEventArgs e)
     {
-        Close();
+        GuestViewModel.Logout_Click();
     }
 }

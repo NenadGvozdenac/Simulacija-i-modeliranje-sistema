@@ -1,6 +1,5 @@
-﻿using BookingApp.Model.MutualModels;
-using BookingApp.Model.PathfinderModels;
-using BookingApp.Repository.MutualRepositories;
+﻿using BookingApp.Model.PathfinderModels;
+using BookingApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

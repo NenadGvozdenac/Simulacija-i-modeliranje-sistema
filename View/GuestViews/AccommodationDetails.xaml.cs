@@ -1,8 +1,8 @@
-﻿using BookingApp.Miscellaneous;
+﻿using BookingApp.Domain.Miscellaneous;
+using BookingApp.Domain.Models;
 using BookingApp.Model.GuestModels;
-using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
+using BookingApp.Repositories;
+using BookingApp.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

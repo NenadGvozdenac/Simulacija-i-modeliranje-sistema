@@ -1,7 +1,4 @@
-﻿using BookingApp.Model.MutualModels;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -21,6 +18,8 @@ using System.Windows.Shapes;
 using BookingApp.View.GuestViews;
 using BookingApp.Model.PathfinderModels;
 using BookingApp.View.TouristViews;
+using BookingApp.Domain.Models;
+using BookingApp.Repositories;
 
 namespace BookingApp.View.PathfinderViews
 {

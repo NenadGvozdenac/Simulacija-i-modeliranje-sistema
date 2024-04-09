@@ -1,8 +1,6 @@
-﻿using BookingApp.Model.GuestModels;
-using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository.OwnerRepositories;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Model.GuestModels;
+using BookingApp.Repositories;
 using BookingApp.View.GuestViews.Components;
 using BookingApp.ViewModel.GuestViewModels;
 using System;

@@ -1,5 +1,5 @@
-﻿using BookingApp.Miscellaneous;
-using BookingApp.Model.MutualModels;
+﻿using BookingApp.Domain.Miscellaneous;
+using BookingApp.Domain.Models;
 using BookingApp.Resources.Types;
 using System;
 using System.Collections.Generic;

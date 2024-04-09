@@ -1,7 +1,4 @@
 ﻿using BookingApp.Model.GuestModels;
-using BookingApp.Model.MutualModels;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository;
 using BookingApp.View.GuestViews.Components;
 using System;
 using System.Collections.Generic;
@@ -10,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.View.GuestViews;
+using BookingApp.Domain.Models;
+using BookingApp.Repositories;
 
 namespace BookingApp.ViewModel.GuestViewModels;
 

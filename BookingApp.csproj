@@ -155,13 +155,6 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Model\TouristModels\" />
-    <Folder Include="Repository\GuestRepositories\" />
-    <Folder Include="Repository\PathfinderRepositories\" />
-    <Folder Include="Repository\TouristRepositories\" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<Content Include="Resources\Images\AccommodationImages\*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -172,6 +165,13 @@
 		<Content Include="Resources\Images\ReviewImages\*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Model\TouristModels\**" />
+	  <EmbeddedResource Remove="Model\TouristModels\**" />
+	  <None Remove="Model\TouristModels\**" />
+	  <Page Remove="Model\TouristModels\**" />
 	</ItemGroup>
 
 	<ItemGroup>

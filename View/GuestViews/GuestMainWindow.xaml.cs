@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
+using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Repositories;
 using BookingApp.ViewModel.GuestViewModels;
 
 namespace BookingApp.View.GuestViews;

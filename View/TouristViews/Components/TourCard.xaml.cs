@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.MutualModels;
+﻿using BookingApp.Domain.Models;
 using BookingApp.View.GuestViews;
 using System;
 using System.Collections.Generic;

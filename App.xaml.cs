@@ -1,11 +1,5 @@
-﻿using BookingApp.Model.MutualModels;
-using BookingApp.Model.OwnerModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository.OwnerRepositories;
-using BookingApp.Services;
-using BookingApp.Services.Mutual;
-using BookingApp.Services.Owner;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Repositories;
 using BookingApp.View;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,7 +7,7 @@ using System.Windows;
 
 namespace BookingApp;
 
-public partial class App : Application
+public partial class App
 {
     private static IServiceProvider _serviceProvider;
 

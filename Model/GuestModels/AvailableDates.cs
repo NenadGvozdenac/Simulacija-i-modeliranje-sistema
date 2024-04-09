@@ -1,4 +1,4 @@
-﻿using BookingApp.Miscellaneous;
+﻿using BookingApp.Domain.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;

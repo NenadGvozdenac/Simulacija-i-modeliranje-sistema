@@ -1,7 +1,4 @@
-﻿using BookingApp.Model.MutualModels;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Model.GuestModels;
+using BookingApp.Domain.Models;
+using BookingApp.Repositories;
 
 namespace BookingApp.View.GuestViews.Components
 {

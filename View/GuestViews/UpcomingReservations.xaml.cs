@@ -30,16 +30,6 @@ namespace BookingApp.View.GuestViews
     /// </summary>
     public partial class UpcomingReservations : UserControl
     {
-
-        public event EventHandler<int> RescheduleClicked;
-        public event EventHandler CancelClicked;
-
-        private User _user;
-        public AccommodationRepository _accommodationRepository;
-        public AccommodationReservationRepository _accommodationReservationRepository;
-        public AccommodationImageRepository _accommodationImageRepository { get; set; }
-        public LocationRepository _locationRepository { get; set; }
-        public ObservableCollection<UpcomingReservationsDTO> _upcomingReservations { get; set; }
         public UpcomingReservationsViewModel UpcomingReservationsViewModel { get; set; }
 
         public UpcomingReservations(User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
@@ -48,6 +38,7 @@ namespace BookingApp.View.GuestViews
             UpcomingReservationsViewModel = new UpcomingReservationsViewModel(this, user, accommodationRepository ,accommodationReservationRepository);
             DataContext = UpcomingReservationsViewModel;
         }
+
         private void UpcomingReservationsCard_RescheduleClicked(object sender, int reservationId)
         {
             UpcomingReservationsViewModel.UpcomingReservationsCard_RescheduleClicked(sender, reservationId);

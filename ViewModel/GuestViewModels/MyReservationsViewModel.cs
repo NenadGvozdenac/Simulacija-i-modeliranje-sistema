@@ -14,7 +14,6 @@ namespace BookingApp.ViewModel.GuestViewModels;
 public class MyReservationsViewModel
 {
     public EventHandler<int> ReviewClicked;
-
     public MyReservations MyReservationsWindow { get; set; }
 
     private User _user;
@@ -41,7 +40,7 @@ public class MyReservationsViewModel
         PastReservationsUserControl = new PastReservations(_user, _accommodationRepository, _accommodationReservationRepository);
         RescheduleRequestsUserControl = new RescheduleRequests(_user, _accommodationRepository, _accommodationReservationMovingRepository);
         UpcomingReservationsUserControl.UpcomingReservationsViewModel.RescheduleClicked += MyReservation_RescheduleClicked;
-        PastReservationsUserControl.ReviewClicked += MyReservation_ReviewClicked;
+        PastReservationsUserControl.PastReservationsViewModel.ReviewClicked += MyReservation_ReviewClicked;
     }
 
     public void Update()
@@ -62,7 +61,7 @@ public class MyReservationsViewModel
 
     public void RefreshRecheduleRequests()
     {
-        RescheduleRequestsUserControl.Update();
+        RescheduleRequestsUserControl.RescheduleRequestsViewModel.Update();
     }
 
     public void UpcomingReservations_Click()
@@ -82,8 +81,8 @@ public class MyReservationsViewModel
     {
         AccommodationReservation reservation = _accommodationReservationRepository.GetById(reservationId);
         var a = new RescheduleAccommodation(reservation, _accommodationRepository, _accommodationReservationMovingRepository);
-        a.ChangedMind += (sender, e) => RescheduleAccommodationChangedMind();
-        a.SendRequestRefresh += (sender, e) => RefreshRecheduleRequests();
+        a.RescheduleAccommodationViewModel.ChangedMind += (sender, e) => RescheduleAccommodationChangedMind();
+        a.RescheduleAccommodationViewModel.SendRequestRefresh += (sender, e) => RefreshRecheduleRequests();
         MyReservationsWindow.MyReservationFrame.Content = a;
     }
 
@@ -91,5 +90,4 @@ public class MyReservationsViewModel
     {
         ReviewClicked?.Invoke(sender, reservationId);
     }
-
 }

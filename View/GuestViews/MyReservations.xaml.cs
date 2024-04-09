@@ -25,7 +25,6 @@ namespace BookingApp.View.GuestViews;
 public partial class MyReservations : UserControl
 {
     public MyReservationsViewModel MyReservationsViewModel { get; set; }
-
     public MyReservations(User user, AccommodationRepository accommodationRepository , AccommodationReservationRepository accommodationReservationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
     {
         InitializeComponent();

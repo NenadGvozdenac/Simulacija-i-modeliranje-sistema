@@ -60,7 +60,7 @@ public class GuestMainWindowViewModel
     {
         Accommodation detailedAccommodation = _accommodationRepository.GetById(accommodationId);
         var a = new AccommodationDetails(detailedAccommodation, _user, _accommodationReviewRepository);
-        a.UpcomingReservationsChanged += (sender, e) =>
+        a.AccommodationDetailsViewModel.UpcomingReservationsChanged += (sender, e) =>
         {
             RefreshReservations();
         };

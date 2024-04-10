@@ -24,4 +24,14 @@ public class DetailedReservationMovingViewModel
         AccommodationReservationMovingRepository.GetInstance().Update(accommodationMoving);
         AccommodationReservationService.GetInstance().MoveReservation(accommodationMoving);
     }
+
+    public void Reject_Click(string comment)
+    {
+        var accommodationMoving = AccommodationReservationMovingDTO.AccommodationReservationMoving;
+        accommodationMoving.Comment = comment;
+        accommodationMoving.Status = ReschedulingStatus.Rejected;
+
+        AccommodationReservationMovingRepository.GetInstance().Update(accommodationMoving);
+
+    }
 }

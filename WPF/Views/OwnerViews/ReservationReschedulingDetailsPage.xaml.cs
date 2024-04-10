@@ -55,19 +55,13 @@ public partial class ReservationReschedulingDetailsPage : Page
 
     private void Reject_Click(object sender, RoutedEventArgs e)
     {
-        var accommodationMoving = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.AccommodationReservationMoving;
-        accommodationMoving.Comment = CommentTextbox.Text;
-        accommodationMoving.Status = ReschedulingStatus.Rejected;
-
-        AccommodationReservationMovingRepository.GetInstance().Update(accommodationMoving);
-
+        _detailedReservationMovingViewModel.Reject_Click(CommentTextbox.Text);
         NavigateBack();
     }
 
     private void Accept_Click(object sender, RoutedEventArgs e)
     {
         _detailedReservationMovingViewModel.Accept_Click();
-
         NavigateBack();
     }
 

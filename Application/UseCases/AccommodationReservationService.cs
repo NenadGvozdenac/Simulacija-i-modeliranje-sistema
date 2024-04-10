@@ -15,9 +15,11 @@ public class AccommodationReservationService
     private AccommodationRepository _accommodationRepository;
     private AccommodationReservationRepository _accommodationReservationRepository;
     private AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
+    private GuestRatingRepository _guestRatingRepository;
 
     public AccommodationReservationService()
     {
+        _guestRatingRepository = App.ServiceProvider.GetRequiredService<GuestRatingRepository>();
         _accommodationRepository = App.ServiceProvider.GetRequiredService<AccommodationRepository>();
         _accommodationReservationRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationRepository>();
         _accommodationReservationMovingRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationMovingRepository>();
@@ -73,7 +75,10 @@ public class AccommodationReservationService
 
         overlappingReservations.Remove(accommodationMoving.Reservation);
 
-        overlappingReservations.ForEach(reservation => Delete(reservation));
+        overlappingReservations.ForEach(reservation => {
+            Delete(reservation);
+            _guestRatingRepository.DeleteAll(guestRating => guestRating.ReservationId == reservation.Id);
+        });
 
         AccommodationReservation reservation = accommodationMoving.Reservation;
 
@@ -81,6 +86,7 @@ public class AccommodationReservationService
         reservation.LastDateOfStaying = wantedDatespan.End;
 
         _accommodationReservationRepository.Update(reservation);
+        
     }
 
     public List<AccommodationReservation> GetOverlappingReservations(DateSpan wantedDatespan, List<AccommodationReservation> reservations)

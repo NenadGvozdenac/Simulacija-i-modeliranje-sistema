@@ -32,6 +32,6 @@ public class DateSpan
 
     public bool Overlaps(DateSpan wantedDatespan)
     {
-        return Start < wantedDatespan.End && End > wantedDatespan.Start;
+        return Start <= wantedDatespan.End && End >= wantedDatespan.Start;
     }
 }

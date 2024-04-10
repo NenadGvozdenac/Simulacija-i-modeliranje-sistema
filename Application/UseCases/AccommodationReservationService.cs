@@ -67,6 +67,14 @@ public class AccommodationReservationService
     {
         DateSpan wantedDatespan = accommodationMoving.WantedReservationTimespan;
 
+        List<AccommodationReservation> reservations = GetByAccommodationId(accommodationMoving.AccommodationId);
+
+        List<AccommodationReservation> overlappingReservations = GetOverlappingReservations(wantedDatespan, reservations);
+
+        overlappingReservations.Remove(accommodationMoving.Reservation);
+
+        overlappingReservations.ForEach(reservation => Delete(reservation));
+
         AccommodationReservation reservation = accommodationMoving.Reservation;
 
         reservation.FirstDateOfStaying = wantedDatespan.Start;
@@ -75,10 +83,24 @@ public class AccommodationReservationService
         _accommodationReservationRepository.Update(reservation);
     }
 
+    public List<AccommodationReservation> GetOverlappingReservations(DateSpan wantedDatespan, List<AccommodationReservation> reservations)
+    {
+        return reservations.Where(reservation =>
+        {
+            DateSpan reservationDatespan = new DateSpan(reservation.FirstDateOfStaying, reservation.LastDateOfStaying);
+            return reservationDatespan.Overlaps(wantedDatespan);
+        }).ToList();
+    }
+
     public void CheckForCancelledReservations()
     {
         List<AccommodationReservationMoving> movingReservations = _accommodationReservationMovingRepository.GetAll();
 
         _accommodationReservationMovingRepository.DeleteAll(reservation => GetById(reservation.ReservationId) == null);
+    }
+
+    public List<AccommodationReservation> GetByAccommodationId(int accommodationId)
+    {
+        return _accommodationReservationRepository.GetByAccommodationId(accommodationId);
     }
 }

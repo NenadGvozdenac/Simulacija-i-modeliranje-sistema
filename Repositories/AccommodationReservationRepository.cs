@@ -161,8 +161,17 @@ public class AccommodationReservationRepository : IRepository<AccommodationReser
             {
                 return false;
             }
+            if (wantedReservationTimespan.Start <= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.End >= accommodationReservation.LastDateOfStaying)
+            {
+                return false;
+            }
         }
 
         return true;
+    }
+
+    public List<AccommodationReservation> GetByAccommodationId(int accommodationId)
+    {
+        return _accommodationreservation.Where(a => a.AccommodationId == accommodationId).ToList();
     }
 }

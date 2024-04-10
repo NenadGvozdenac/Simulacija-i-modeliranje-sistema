@@ -65,4 +65,18 @@ public partial class DetailedAccommodationPage : Page
     {
         NavigateToPreviousPage();
     }
+
+    private void CloseAccommodation_Click(object sender, RoutedEventArgs e)
+    {
+        bool success = _viewModel.CloseAccommodation();
+        if (success)
+        {
+            MessageBox.Show("Accommodation closed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigateToPreviousPage();
+        }
+        else
+        {
+            MessageBox.Show("Failed to close accommodation.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
 }

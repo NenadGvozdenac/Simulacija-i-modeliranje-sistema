@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Model;
 using System.Xml.Linq;
+using BookingApp.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
@@ -13,7 +14,7 @@ using BookingApp.Domain.Miscellaneous;
 
 namespace BookingApp.Repositories;
 
-public class AccommodationRepository : IRepository<Accommodation>, IAccommodationRepository
+public class AccommodationRepository : IRepository<Accommodation>
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
     private readonly Serializer<Accommodation> _serializer;
@@ -90,11 +91,5 @@ public class AccommodationRepository : IRepository<Accommodation>, IAccommodatio
     public List<Accommodation> GetAccommodationsByOwnerId(int id)
     {
         return _accommodations.Where(a => a.OwnerId == id).ToList();
-    }
-
-    public bool IsAccommodationDeletable(int id)
-    {
-        // TODO: Implement this method
-        return true;
     }
 }

@@ -21,12 +21,16 @@ public class AccommodationService
     private AccommodationRepository _accommodationRepository;
     private LocationRepository _locationRepository;
     private AccommodationImageRepository _accommodationImageRepository;
+    private AccommodationReservationService _accommodationReservationService;
+    private GuestRatingService _guestRatingService;
 
     public AccommodationService()
     {
         _accommodationRepository = AccommodationRepository.GetInstance();
         _locationRepository = LocationRepository.GetInstance();
         _accommodationImageRepository = AccommodationImageRepository.GetInstance();
+        _accommodationReservationService = AccommodationReservationService.GetInstance();
+        _guestRatingService = GuestRatingService.GetInstance();
     }
 
     public static AccommodationService GetInstance()
@@ -68,8 +72,20 @@ public class AccommodationService
         _accommodationRepository.Update(accommodation);
     }
 
-    public void Delete(Accommodation entity)
+    public bool Delete(Accommodation entity)
     {
+        if (_accommodationReservationService.GetByAccommodationId(entity.Id).Count > 0)
+        {
+            return false;
+        }
+
+        if(_guestRatingService.GetByAccommodationId(entity.Id).Count > 0)
+        {
+            return false;
+        }
+
+        _accommodationImageRepository.DeleteByAccommodationId(entity.Id);
         _accommodationRepository.Delete(entity.Id);
+        return true;
     }
 }

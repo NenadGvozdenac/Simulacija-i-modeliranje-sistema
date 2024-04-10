@@ -86,7 +86,7 @@
                 </Border>
             </Grid>
         </Grid>
-        <Button Grid.Row="3" x:Name="CloseAccommodation" Width="175" Height="30" FontSize="14" IsEnabled="False">
+        <Button Grid.Row="3" x:Name="CloseAccommodation" Width="175" Height="30" FontSize="14" IsEnabled="True" Click="CloseAccommodation_Click">
             <Button.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5" BlurRadius="5"/>
             </Button.Effect>

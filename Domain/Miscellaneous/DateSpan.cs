@@ -29,4 +29,9 @@ public class DateSpan
         string[] parts = value.Split(" - ");
         return new DateSpan(DateParser.Parse(parts[0]), DateParser.Parse(parts[1]));
     }
+
+    public bool Overlaps(DateSpan wantedDatespan)
+    {
+        return Start < wantedDatespan.End && End > wantedDatespan.Start;
+    }
 }

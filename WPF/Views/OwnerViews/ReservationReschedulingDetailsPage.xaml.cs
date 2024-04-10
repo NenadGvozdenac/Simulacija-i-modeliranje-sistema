@@ -66,11 +66,7 @@ public partial class ReservationReschedulingDetailsPage : Page
 
     private void Accept_Click(object sender, RoutedEventArgs e)
     {
-        var accommodationMoving = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.AccommodationReservationMoving;
-        accommodationMoving.Status = ReschedulingStatus.Accepted;
-
-        AccommodationReservationMovingRepository.GetInstance().Update(accommodationMoving);
-        AccommodationReservationService.GetInstance().MoveReservation(accommodationMoving);
+        _detailedReservationMovingViewModel.Accept_Click();
 
         NavigateBack();
     }

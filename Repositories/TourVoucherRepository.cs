@@ -1,7 +1,6 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
-using BookingApp.View.GuestViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;

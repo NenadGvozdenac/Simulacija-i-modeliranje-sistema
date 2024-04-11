@@ -5,11 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 
 using BookingApp.Resources.Types;
-using BookingApp.View.GuestViews;
 using BookingApp.View.PathfinderViews;
 using BookingApp.View.TouristViews;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.WPF.Views.GuestViews;
 
 namespace BookingApp.View;
 

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml.Linq;
 using BookingApp.Domain.Miscellaneous;
-using BookingApp.View.GuestViews;
 
 namespace BookingApp.Domain.Models
 {

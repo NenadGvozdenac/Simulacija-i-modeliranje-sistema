@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BookingApp.View.GuestViews;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 

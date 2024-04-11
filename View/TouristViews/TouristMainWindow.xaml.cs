@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
-using BookingApp.View.GuestViews;
 
 namespace BookingApp.View.TouristViews
 {

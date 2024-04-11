@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
-        xmlns:Components="clr-namespace:BookingApp.View.GuestViews.Components" x:Class="BookingApp.View.PathfinderViews.AddTourWindow"
+        xmlns:Components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components" x:Class="BookingApp.View.PathfinderViews.AddTourWindow"
         mc:Ignorable="d"
         Title="AddTourWindow" Height="450" Width="800">
     <Grid Margin="0,0,0,-16">

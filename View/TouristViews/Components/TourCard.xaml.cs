@@ -1,5 +1,4 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.View.GuestViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;

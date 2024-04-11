@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuestViews.RescheduleRequests"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="718" d:DesignWidth="774">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Pending requests-->
+        <Grid Grid.Row="0">
+            <TextBlock Text="Pending requests:" FontSize="30" Margin="20,10,511,305"/>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Margin="0,70,0,0">
+                <ItemsControl
+                    ItemsSource="{Binding _pendingRequests}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:PendingRescheduleCard/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        
+        <!--Reviewed requests-->
+        <Grid Grid.Row="1">
+            <TextBlock Text="Reviewed requests:" FontSize="30" Margin="20,10,501,305"/>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,59,0,0">
+                <ItemsControl
+                ItemsSource="{Binding _reviewedRequests}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:ReviewedRescheduleCard/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

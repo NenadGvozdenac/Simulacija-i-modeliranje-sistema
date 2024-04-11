@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Domain.Miscellaneous;
-using BookingApp.View.GuestViews;
 
 namespace BookingApp.Domain.Models;
 

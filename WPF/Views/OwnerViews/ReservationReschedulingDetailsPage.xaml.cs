@@ -28,7 +28,7 @@ public partial class ReservationReschedulingDetailsPage : Page
 
     public ReservationReschedulingDetailsPage(AccommodationReservationMoving accommodationReservationMoving)
     {
-        _detailedReservationMovingViewModel = new DetailedReservationMovingViewModel(new AccommodationReservationMovingDTO(accommodationReservationMoving));
+        _detailedReservationMovingViewModel = new DetailedReservationMovingViewModel(this, new AccommodationReservationMovingDTO(accommodationReservationMoving));
         DataContext = _detailedReservationMovingViewModel;
         InitializeComponent();
         StatusLabel.Foreground = _detailedReservationMovingViewModel.AccommodationReservationMovingDTO.GetLabelColor();
@@ -39,7 +39,7 @@ public partial class ReservationReschedulingDetailsPage : Page
         NavigateBack();
     }
 
-    private void NavigateBack()
+    public void NavigateBack()
     {
         if (NavigationService.CanGoBack)
         {
@@ -51,18 +51,6 @@ public partial class ReservationReschedulingDetailsPage : Page
     private void InvokePageClosed()
     {
         ReservationReschedulingDetailsPageClosed?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Reject_Click(object sender, RoutedEventArgs e)
-    {
-        _detailedReservationMovingViewModel.Reject_Click(CommentTextbox.Text);
-        NavigateBack();
-    }
-
-    private void Accept_Click(object sender, RoutedEventArgs e)
-    {
-        _detailedReservationMovingViewModel.Accept_Click();
-        NavigateBack();
     }
 
     private void CheckBox_Checked_Change(object sender, RoutedEventArgs e)

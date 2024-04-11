@@ -1,16 +1,20 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Commands;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.View.OwnerViews;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
 public class AddAccommodationViewModel : INotifyPropertyChanged
 {
     private User _user;
+    public User User { get => _user; set => _user = value; }
 
     private ObservableCollection<string> _accommodationTypes;
     public ObservableCollection<string> AccommodationTypes
@@ -188,84 +192,57 @@ public class AddAccommodationViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public AddAccommodationViewModel(User user)
+    public AddAccommodationPage Page;
+    public ICommand AddCommand => new AddAccommodationCommand(this);
+    public ICommand CancelCommand => new NavigateToPreviousPageCommand(Page);
+    public ICommand AddImageCommand => new AddImageCommand(this);
+
+    public AddAccommodationViewModel(AddAccommodationPage page, User user)
     {
-        _user = user;
+        User = user;
+        Page = page;
+
         Images = new ObservableCollection<AccommodationImage>();
+
         LoadTypesOfAccommodations();
         LoadCountries();
     }
 
-    private void LoadTypesOfAccommodations()
+    public void LoadTypesOfAccommodations()
     {
         AccommodationTypes = new ObservableCollection<string>(Enum.GetNames(typeof(AccommodationType)));
     }
 
-    private void LoadCountries()
+    public void LoadCountries()
     {
         Countries = new ObservableCollection<string>(LocationService.GetInstance().GetCountries());
     }
 
-    public bool AddAccommodation()
-    {
-        if (!IsDataValid())
-        {
-            return false;
-        }
-
-        Accommodation accommodation = new();
-        accommodation.Name = AccommodationName;
-        accommodation.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(City, Country).Id;
-        accommodation.Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), Type);
-        accommodation.MaxGuestNumber = MaximumNumberOfGuests;
-        accommodation.MinReservationDays = MinimumNumberOfDaysForReservation;
-        accommodation.CancellationPeriodDays = DaysBeforeReservationIsFinal;
-        accommodation.Price = AccommodationPrice;
-        accommodation.OwnerId = _user.Id;
-        accommodation.Images = Images.ToList();
-
-        AccommodationService.GetInstance().Add(accommodation);
-
-        return true;
-    }
-    private bool IsDataValid()
+    public bool IsDataValid()
     {
         return AreAllStringsFilled() && AreAllNumbersOK();
     }
 
-    private bool AreAllNumbersOK()
+    public bool AreAllNumbersOK()
     {
         return MaximumNumberOfGuests > 0
             && MinimumNumberOfDaysForReservation > 0
             && DaysBeforeReservationIsFinal > 0;
     }
 
-    private bool AreAllStringsFilled()
+    public bool AreAllStringsFilled()
     {
         return !string.IsNullOrEmpty(AccommodationName)
             && !string.IsNullOrEmpty(Country)
             && !string.IsNullOrEmpty(City)
             && !string.IsNullOrEmpty(Type);
     }
-
-    public void AddImage()
-    {
-        if (!IsImageValid())
-        {
-            return;
-        }
-
-        AccommodationImage image = new();
-        image.Path = ImageURL;
-        Images.Add(image);
-    }
-
-    private bool IsImageValid()
+    public bool IsImageValid()
     {
         return !(string.IsNullOrEmpty(ImageURL) || ImageAlreadyExists());
     }
 
-    private bool ImageAlreadyExists()
+    public bool ImageAlreadyExists()
     {
         foreach (AccommodationImage image in Images)
         {

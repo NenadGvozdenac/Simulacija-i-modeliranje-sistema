@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -17,5 +19,17 @@ public class DetailedGuestFeedbackViewModel
     {
         GuestFeedbackDTO = new GuestFeedbackDTO(accommodationReview);
         AccommodationReview = accommodationReview;
+    }
+
+    public void LoadImages(StackPanel images_StackPanel)
+    {
+        if (AccommodationReview.ReviewImages.Count > 0)
+        {
+            foreach (var reviewImage in AccommodationReview.ReviewImages)
+            {
+                Image image = ImageService.GetInstance().ReadImage(reviewImage.Path);
+                images_StackPanel.Children.Add(image);
+            }
+        }
     }
 }

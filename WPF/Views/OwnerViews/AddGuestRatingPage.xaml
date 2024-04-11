@@ -89,8 +89,8 @@
                 <TextBox x:Name="CommentTextBox" Text="{Binding Comment}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" Height="150" BorderThickness="1" FontSize="13" AcceptsReturn="True" TextWrapping="Wrap"/>
             </StackPanel>
 
-            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="ConfirmButtonClick"/>
-            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="CancelButtonClick"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddGuestRatingCommand}"/>
+            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding GoBackCommand}"/>
         </Grid>
     </Grid>
 </Page>

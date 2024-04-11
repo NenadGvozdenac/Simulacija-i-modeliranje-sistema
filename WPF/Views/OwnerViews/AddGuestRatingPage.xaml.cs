@@ -19,43 +19,17 @@ public partial class AddGuestRatingPage : Page
 
     public AddGuestRatingPage(GuestRating uncheckedGuestRating)
     {
-        _addGuestRatingViewModel = new AddGuestRatingViewModel(new(uncheckedGuestRating));
+        _addGuestRatingViewModel = new AddGuestRatingViewModel(this, uncheckedGuestRating);
 
         DataContext = _addGuestRatingViewModel;
 
         InitializeComponent();
     }
 
-    private void CancelButtonClick(object sender, RoutedEventArgs e)
-    {
-        NavigateToPreviousPage();
-    }
-
-    private void ConfirmButtonClick(object sender, RoutedEventArgs e)
-    {
-        bool successfullyUpdatedGuestRating = _addGuestRatingViewModel.UpdateGuestRating();
-
-        if(!successfullyUpdatedGuestRating)
-        {
-            return;
-        }
-
-        NavigateToPreviousPage();
-    }
-    private void OnNavigationCompleted()
+    public void OnNavigationCompleted()
     {
         NavigationCompleted?.Invoke(this, EventArgs.Empty);
     }
-
-    private void NavigateToPreviousPage()
-    {
-        if (NavigationService.CanGoBack)
-        {
-            OnNavigationCompleted();
-            NavigationService.GoBack();
-        }
-    }
-
 
     private void Back_MouseDown(object sender, MouseButtonEventArgs e)
     {

@@ -19,36 +19,10 @@ public partial class AddAccommodationPage : Page
 
     public AddAccommodationPage(User user)
     {
-        _addAccommodationViewModel = new AddAccommodationViewModel(user);
+        _addAccommodationViewModel = new AddAccommodationViewModel(this, user);
         DataContext = _addAccommodationViewModel;
 
         InitializeComponent();
-    }
-
-    private void ConfirmButtonClick(object sender, RoutedEventArgs e)
-    {
-        bool successfullyAddedAccommodation = _addAccommodationViewModel.AddAccommodation();
-
-        if (!successfullyAddedAccommodation)
-        {
-            return;
-        }
-
-        NavigateToPreviousPage();
-    }
-
-    private void CancelButtonClick(object sender, RoutedEventArgs e)
-    {
-        NavigateToPreviousPage();
-    }
-
-    private void NavigateToPreviousPage()
-    {
-        if (NavigationService.CanGoBack)
-        {
-            ClosePage();
-            NavigationService.GoBack();
-        }
     }
 
     private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -60,23 +34,14 @@ public partial class AddAccommodationPage : Page
         CityTextBox.IsEnabled = true;
     }
 
-    private void AddURLClick(object sender, RoutedEventArgs e)
-    {
-        _addAccommodationViewModel.AddImage();
-        ImageURLTextBox.Clear();
-    }
-
     private void ClosePage()
     {
         PageClosed?.Invoke(this, EventArgs.Empty);
     }
     private void BackButton_Click(object sender, MouseButtonEventArgs e)
     {
-        if (NavigationService.CanGoBack)
-        {
-            ClosePage();
-            NavigationService.GoBack();
-        }
+        ClosePage();
+        _addAccommodationViewModel.CancelCommand.Execute(null);
     }
 
     private void ImageURLTextBox_MouseDown(object sender, MouseButtonEventArgs e)

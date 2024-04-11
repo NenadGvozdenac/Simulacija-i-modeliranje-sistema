@@ -90,7 +90,7 @@
                     <TextBox Text="{Binding Path=ImageURL, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="ImageURLTextBox" Margin="5 0" PreviewMouseDown="ImageURLTextBox_MouseDown"/>
                 </StackPanel>
 
-                <Button Grid.Column="1" Content="+" Style="{StaticResource RoundedButtonStyle}" Width="45" Height="45" Margin="5 0" VerticalAlignment="Center"  HorizontalAlignment="Stretch" Click="AddURLClick"/>
+                <Button Grid.Column="1" Content="+" Style="{StaticResource RoundedButtonStyle}" Width="45" Height="45" Margin="5 0" VerticalAlignment="Center"  HorizontalAlignment="Stretch" Command="{Binding AddImageCommand}"/>
             </Grid>
             <DataGrid Grid.Column="0" SelectionMode="Single" IsReadOnly="True" Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="15 10" ItemsSource="{Binding Images, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
@@ -98,8 +98,8 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="ConfirmButtonClick"/>
-            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Click="CancelButtonClick"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </Page>

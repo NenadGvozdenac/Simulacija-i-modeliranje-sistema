@@ -29,16 +29,11 @@ public partial class DetailedGuestReviewPage : Page
         DataContext = _viewModel;
     }
 
-    private void NavigateBack()
+    private void BackArrowClick(object sender, MouseButtonEventArgs e)
     {
         if (NavigationService.CanGoBack)
         {
             NavigationService.GoBack();
         }
-    }
-
-    private void BackArrowClick(object sender, MouseButtonEventArgs e)
-    {
-        NavigateBack();
     }
 }

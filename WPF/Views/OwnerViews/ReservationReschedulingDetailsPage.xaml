@@ -98,8 +98,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Reject" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Red" Foreground="White" Click="Reject_Click"/>
-            <Button Grid.Column="1" Content="Accept" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Green" Foreground="White" Click="Accept_Click"/>
+            <Button Grid.Column="0" Content="Reject" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Red" Foreground="White" Command="{Binding RejectClick}"/>
+            <Button Grid.Column="1" Content="Accept" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Green" Foreground="White" Command="{Binding AcceptClick}"/>
         </Grid>
     </Grid>
 </Page>

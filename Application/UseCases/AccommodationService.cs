@@ -72,20 +72,9 @@ public class AccommodationService
         _accommodationRepository.Update(accommodation);
     }
 
-    public bool Delete(Accommodation entity)
+    public void Delete(Accommodation entity)
     {
-        if (_accommodationReservationService.GetByAccommodationId(entity.Id).Count > 0)
-        {
-            return false;
-        }
-
-        if(_guestRatingService.GetByAccommodationId(entity.Id).Count > 0)
-        {
-            return false;
-        }
-
         _accommodationImageRepository.DeleteByAccommodationId(entity.Id);
         _accommodationRepository.Delete(entity.Id);
-        return true;
     }
 }

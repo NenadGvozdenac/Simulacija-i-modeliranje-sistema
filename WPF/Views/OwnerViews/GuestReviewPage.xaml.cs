@@ -14,76 +14,49 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.ViewModels.OwnerViewModels;
 
 namespace BookingApp.View.OwnerViews
 {
     public partial class GuestReviewPage : Page
     {
-        private User _user;
-
-        private ReviewedGuestReviews _reviewedGuestReviews;
-        private PendingGuestReviews _pendingGuestReviews;
-
+        public GuestReviewsViewModel ViewModel { get; set; }
         public GuestReviewPage(User user)
         {
-            _user = user;
+            ReviewedGuestReviews _reviewedGuestReviews = new(user);
+            PendingGuestReviews _pendingGuestReviews = new(user);
 
-            _reviewedGuestReviews = new ReviewedGuestReviews(_user);
-            _pendingGuestReviews = new PendingGuestReviews(_user);
+            ViewModel = new GuestReviewsViewModel(this, _reviewedGuestReviews, _pendingGuestReviews);
 
             InitializeComponent();
 
             MainPanel.Content = _reviewedGuestReviews;
         }
 
-        private void ShowRightNavbar()
-        {
-            RightNavbar.Visibility = Visibility.Visible;
-            Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
-        }
-
-        private void HideRightNavbar()
-        {
-            RightNavbar.Visibility = Visibility.Collapsed;
-            Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-        }
-
-        public void ThreeDotsClick(object sender, MouseButtonEventArgs e)
-        {
-            if (RightNavbar.Visibility == Visibility.Collapsed)
-            {
-                ShowRightNavbar();
-            }
-            else
-            {
-                HideRightNavbar();
-            }
-        }
-
         private void PendingButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPanel.Content = _pendingGuestReviews;
+            MainPanel.Content = ViewModel.PendingGuestReviews;
             PendingButton.IsEnabled = false;
             ReviewedButton.IsEnabled = true;
         }
 
         private void ReviewedButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPanel.Content = _reviewedGuestReviews;
+            MainPanel.Content = ViewModel.ReviewedGuestReviews;
             PendingButton.IsEnabled = true;
             ReviewedButton.IsEnabled = false;
         }
 
         private void PendingButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            _reviewedGuestReviews.Update();
-            _pendingGuestReviews.Update();
+            ViewModel.ReviewedGuestReviews.Update();
+            ViewModel.PendingGuestReviews.Update();
         }
 
         private void ReviewedButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            _reviewedGuestReviews.Update();
-            _pendingGuestReviews.Update();
+            ViewModel.ReviewedGuestReviews.Update();
+            ViewModel.PendingGuestReviews.Update();
         }
 
         private void BackArrowClick(object sender, MouseButtonEventArgs e)
@@ -97,13 +70,6 @@ namespace BookingApp.View.OwnerViews
             {
                 NavigationService.GoBack();
             }
-        }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            Window.GetWindow(this).Close();
         }
     }
 }

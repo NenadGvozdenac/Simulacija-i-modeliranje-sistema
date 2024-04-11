@@ -16,37 +16,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews
+namespace BookingApp.View.OwnerViews;
+
+public partial class DetailedGuestFeedbackPage : Page
 {
-    public partial class DetailedGuestFeedbackPage : Page
+    public DetailedGuestFeedbackPage(DetailedGuestFeedbackViewModel detailedGuestFeedbackViewModel)
     {
-        private ImageService _imageService;
-        public DetailedGuestFeedbackPage(DetailedGuestFeedbackViewModel detailedGuestFeedbackViewModel)
-        {
-            DataContext = detailedGuestFeedbackViewModel;
-            _imageService = ImageService.GetInstance();
-            InitializeComponent();
-            LoadImages(detailedGuestFeedbackViewModel.AccommodationReview);
-        }
+        DataContext = detailedGuestFeedbackViewModel;
+        InitializeComponent();
+        detailedGuestFeedbackViewModel.LoadImages(images_StackPanel);
+    }
 
-        private void LoadImages(AccommodationReview accommodationReview)
+    private void BackArrowClick(object sender, MouseButtonEventArgs e)
+    {
+        if(NavigationService.CanGoBack)
         {
-            if (accommodationReview.ReviewImages.Count > 0)
-            {
-                foreach (var reviewImage in accommodationReview.ReviewImages)
-                {
-                    Image image = _imageService.ReadImage(reviewImage.Path);
-                    images_StackPanel.Children.Add(image);
-                }
-            }
-        }
-
-        private void BackArrowClick(object sender, MouseButtonEventArgs e)
-        {
-            if(NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
+            NavigationService.GoBack();
         }
     }
 }

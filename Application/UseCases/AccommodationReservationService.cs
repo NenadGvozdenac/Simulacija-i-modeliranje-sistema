@@ -109,4 +109,19 @@ public class AccommodationReservationService
     {
         return _accommodationReservationRepository.GetByAccommodationId(accommodationId);
     }
+
+    public List<AccommodationReservationMoving> GetMovingsByOwnerId(int ownerId)
+    {
+        List<Accommodation> ownerAccommodations = _accommodationRepository.GetAccommodationsByOwnerId(ownerId);
+        List< AccommodationReservationMoving > lista = _accommodationReservationMovingRepository.GetMovingsByAccommodations(ownerAccommodations);
+
+        lista.ForEach(moving =>
+        {
+            moving.Accommodation = ownerAccommodations.Find(accommodation => accommodation.Id == moving.AccommodationId);
+            moving.Guest = UserRepository.GetInstance().GetById(moving.GuestId);
+            moving.Reservation = GetById(moving.ReservationId);
+        });
+
+        return lista;
+    }
 }

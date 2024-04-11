@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.GuestViews;
 using System;
@@ -26,9 +27,6 @@ namespace BookingApp.WPF.ViewModels.GuestViewModels;
 public class AccommodationsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Accommodation> _accommodations { get; set; }
-    public AccommodationRepository accomodationRepository { get; set; }
-    public LocationRepository locationRepository { get; set; }
-    public AccommodationImageRepository accommodationImageRepository { get; set; }
     public Accommodations AccommodationView { get; set; }
 
     int minvalueGuestNumber = 1,
@@ -48,20 +46,16 @@ public class AccommodationsViewModel : INotifyPropertyChanged
         _accommodations = new ObservableCollection<Accommodation>();
         _filteredAccommodations = new ObservableCollection<Accommodation>();
 
-        //Repositories
-        accomodationRepository = new AccommodationRepository();
-        locationRepository = new LocationRepository();
-        accommodationImageRepository = new AccommodationImageRepository();
         Update();
 
     }
 
     public void Update()
     {
-        foreach (Accommodation accommodation in accomodationRepository.GetAll())
+        foreach (Accommodation accommodation in AccommodationService.GetInstance().GetAll())
         {
-            accommodation.Location = locationRepository.GetById(accommodation.LocationId);
-            accommodation.Images = accommodationImageRepository.GetImagesByAccommodationId(accommodation.Id);
+            accommodation.Location = LocationService.GetInstance().GetById(accommodation.LocationId);
+            accommodation.Images = ImageService.GetInstance().GetImagesByAccommodationId(accommodation.Id);
 
             _accommodations.Add(accommodation);
         }
@@ -165,7 +159,7 @@ public class AccommodationsViewModel : INotifyPropertyChanged
     //Countries
     private void LoadCountries()
     {
-        List<string> listOfCountries = locationRepository.GetCountries();
+        List<string> listOfCountries = LocationService.GetInstance().GetCountries();
         AccommodationView.CountryComboBox.ItemsSource = listOfCountries;
     }
 
@@ -176,7 +170,7 @@ public class AccommodationsViewModel : INotifyPropertyChanged
             FilterAccommodations();
             return;
         }
-        List<string> listOfCities = locationRepository.GetCitiesByCountry(AccommodationView.CountryComboBox.SelectedItem.ToString());
+        List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(AccommodationView.CountryComboBox.SelectedItem.ToString());
         AccommodationView.CityComboBox.ItemsSource = listOfCities;
         AccommodationView.CityComboBox.Focus();
         AccommodationView.CityComboBox.IsEnabled = true;

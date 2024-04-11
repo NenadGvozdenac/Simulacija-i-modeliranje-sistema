@@ -18,30 +18,22 @@ public class ReservationReviewViewModel
     public User _user;
     public AccommodationReservation reservation;
     public Accommodation accommodation;
-    public AccommodationReservationRepository _accommodationReservationRepository;
-    public AccommodationRepository _accommodationRepository;
-    public AccommodationReviewRepository _accommodationReviewRepository;
-    public ReviewImageRepository _reviewImageRepository;
     public List<ReviewImage> _reviewImages;
     public ReservationReview ReservationReview { get; set; }
 
-    public ReservationReviewViewModel(ReservationReview _ReservationReview, User user, AccommodationReservationRepository accommodationReservationRepository, AccommodationRepository accommodationRepository, AccommodationReviewRepository accommodationReviewRepository, ReviewImageRepository reviewImageRepository, int reservationId)
+    public ReservationReviewViewModel(ReservationReview _ReservationReview, User user, int reservationId)
     {
         ReservationReview = _ReservationReview;
         _user = user;
-        _accommodationReservationRepository = accommodationReservationRepository;
-        _accommodationRepository = accommodationRepository;
-        _accommodationReviewRepository = accommodationReviewRepository;
-        _reviewImageRepository = reviewImageRepository;
-        reservation = _accommodationReservationRepository.GetById(reservationId);
-        accommodation = _accommodationRepository.GetById(reservation.AccommodationId);
+        reservation = AccommodationReservationService.GetInstance().GetById(reservationId);
+        accommodation = AccommodationService.GetInstance().GetById(reservation.AccommodationId);
         SetUpReviewPage(reservationId);
     }
 
     private void SetUpReviewPage(int reservationId)
     {
-        reservation = _accommodationReservationRepository.GetById(reservationId);
-        accommodation = _accommodationRepository.GetById(reservation.AccommodationId);
+        reservation = AccommodationReservationService.GetInstance().GetById(reservationId);
+        accommodation = AccommodationService.GetInstance().GetById(reservation.AccommodationId);
         _reviewImages = new List<ReviewImage>();
         ReservationReview.accommodationName_TextBlock.Text = accommodation.Name;
         ReservationReview.dearUsername_TextBlock.Text = "Dear " + _user.Username + ",";
@@ -56,12 +48,12 @@ public class ReservationReviewViewModel
     public void FinishReview_Click()
     {
         AccommodationReview review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, false); // TODO: Dodao sam false kao polje za requires renovation. Promeni kad budes dodavao
-        _accommodationReviewRepository.Add(review);
+        AccommodationReviewService.GetInstance().Add(review);
 
         foreach (ReviewImage reviewImage in _reviewImages)
         {
             reviewImage.ReviewId = review.Id;
-            _reviewImageRepository.Add(reviewImage);
+            ImageService.GetInstance().AddReviewImage(reviewImage);
         }
         NavigationService.GetNavigationService(ReservationReview).GoBack();
     }

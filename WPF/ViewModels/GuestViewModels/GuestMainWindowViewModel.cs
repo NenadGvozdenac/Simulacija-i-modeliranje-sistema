@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.GuestViews;
@@ -22,11 +23,6 @@ public class GuestMainWindowViewModel
     public EventHandler<int> ReviewClicked;
 
     private readonly User _user;
-    public AccommodationRepository _accommodationRepository { get; set; }
-    public AccommodationReservationRepository _accommodationReservationRepository;
-    public AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
-    public AccommodationReviewRepository _accommodationReviewRepository;
-    public ReviewImageRepository _reviewImageRepository;
     public Accommodations AccommodationsUserControl;
     public MyReservations MyReservationsUserControl;
     public Frame GuestWindowFrame;
@@ -34,12 +30,6 @@ public class GuestMainWindowViewModel
 
     public GuestMainWindowViewModel(GuestMainWindow _guestMainWindow, User user, Frame _guestWindowFrame)
     {
-
-        _accommodationRepository = new AccommodationRepository();
-        _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
-        _accommodationReservationMovingRepository = new AccommodationReservationMovingRepository();
-        _accommodationReviewRepository = new AccommodationReviewRepository();
-        _reviewImageRepository = new ReviewImageRepository();
         _user = user;
         GuestWindowFrame = _guestWindowFrame;
         GuestMainWindow = _guestMainWindow;
@@ -57,8 +47,8 @@ public class GuestMainWindowViewModel
     }
     public void ShowAccommodationDetails(int accommodationId)
     {
-        Accommodation detailedAccommodation = _accommodationRepository.GetById(accommodationId);
-        var a = new AccommodationDetails(detailedAccommodation, _user, _accommodationReviewRepository);
+        Accommodation detailedAccommodation = AccommodationService.GetInstance().GetById(accommodationId);
+        var a = new AccommodationDetails(detailedAccommodation, _user);
         a.AccommodationDetailsViewModel.UpcomingReservationsChanged += (sender, e) =>
         {
             RefreshReservations();
@@ -74,13 +64,13 @@ public class GuestMainWindowViewModel
     private void Update(User user)
     {
         AccommodationsUserControl = new Accommodations(user);
-        MyReservationsUserControl = new MyReservations(user, _accommodationRepository, _accommodationReservationRepository, _accommodationReservationMovingRepository);
+        MyReservationsUserControl = new MyReservations(user);
         MyReservationsUserControl.MyReservationsViewModel.ReviewClicked += ShowReviewPage;
     }
 
     private void ShowReviewPage(object sender, int reservationId)
     {
-        GuestWindowFrame.Content = new ReservationReview(_user, _accommodationReservationRepository, _accommodationRepository, _accommodationReviewRepository, _reviewImageRepository, reservationId);
+        GuestWindowFrame.Content = new ReservationReview(_user, reservationId);
     }
 
     public void SeeMore_Click()

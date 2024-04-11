@@ -28,10 +28,10 @@ public partial class ReservationReview : UserControl
 {
     public ReservationReviewViewModel ReservationReviewViewModel { get; set; }
 
-    public ReservationReview(User user, AccommodationReservationRepository accommodationReservationRepository, AccommodationRepository accommodationRepository, AccommodationReviewRepository accommodationReviewRepository, ReviewImageRepository reviewImageRepository, int reservationId)
+    public ReservationReview(User user, int reservationId)
     {
         InitializeComponent();
-        ReservationReviewViewModel = new ReservationReviewViewModel(this, user, accommodationReservationRepository, accommodationRepository, accommodationReviewRepository, reviewImageRepository, reservationId);
+        ReservationReviewViewModel = new ReservationReviewViewModel(this, user, reservationId);
         DataContext = ReservationReviewViewModel;
     }
 

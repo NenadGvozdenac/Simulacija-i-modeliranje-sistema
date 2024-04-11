@@ -25,10 +25,10 @@ namespace BookingApp.WPF.Views.GuestViews;
 public partial class PastReservations : UserControl
 {
     public PastReservationsViewModel PastReservationsViewModel { get; set; }
-    public PastReservations(User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
+    public PastReservations(User user)
     {
         InitializeComponent();
-        PastReservationsViewModel = new PastReservationsViewModel(this, user, accommodationRepository, accommodationReservationRepository);
+        PastReservationsViewModel = new PastReservationsViewModel(this, user);
         DataContext = PastReservationsViewModel;
     }
 

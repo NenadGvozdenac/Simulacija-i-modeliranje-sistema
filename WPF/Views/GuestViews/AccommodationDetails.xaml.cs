@@ -26,10 +26,10 @@ namespace BookingApp.WPF.Views.GuestViews;
 public partial class AccommodationDetails : UserControl
 {
     public AccommodationDetailsViewModel AccommodationDetailsViewModel { get; set; }
-    public AccommodationDetails(Accommodation detailedaccomodation, User user,  AccommodationReviewRepository accommodationReviewRepository)
+    public AccommodationDetails(Accommodation detailedaccomodation, User user)
     {
         InitializeComponent();
-        AccommodationDetailsViewModel = new AccommodationDetailsViewModel(this, detailedaccomodation, user, accommodationReviewRepository);
+        AccommodationDetailsViewModel = new AccommodationDetailsViewModel(this, detailedaccomodation, user);
         DataContext = AccommodationDetailsViewModel;
     }
 

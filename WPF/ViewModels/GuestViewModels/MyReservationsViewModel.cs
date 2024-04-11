@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.GuestViews;
@@ -19,25 +20,19 @@ public class MyReservationsViewModel
     public UpcomingReservations UpcomingReservationsUserControl;
     public PastReservations PastReservationsUserControl;
     public RescheduleRequests RescheduleRequestsUserControl;
-    public AccommodationRepository _accommodationRepository;
-    public AccommodationReservationRepository _accommodationReservationRepository;
-    public AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
-    public MyReservationsViewModel(MyReservations _myReservationsWindow, User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
+    public MyReservationsViewModel(MyReservations _myReservationsWindow, User user)
     {
         MyReservationsWindow = _myReservationsWindow;
         _user = user;
-        _accommodationRepository = accommodationRepository;
-        _accommodationReservationRepository = accommodationReservationRepository;
-        _accommodationReservationMovingRepository = accommodationReservationMovingRepository;
         SetUpMyReservations();
         Update();
     }
 
     public void SetUpMyReservations()
     {
-        UpcomingReservationsUserControl = new UpcomingReservations(_user, _accommodationRepository, _accommodationReservationRepository);
-        PastReservationsUserControl = new PastReservations(_user, _accommodationRepository, _accommodationReservationRepository);
-        RescheduleRequestsUserControl = new RescheduleRequests(_user, _accommodationRepository, _accommodationReservationMovingRepository);
+        UpcomingReservationsUserControl = new UpcomingReservations(_user);
+        PastReservationsUserControl = new PastReservations(_user);
+        RescheduleRequestsUserControl = new RescheduleRequests(_user);
         UpcomingReservationsUserControl.UpcomingReservationsViewModel.RescheduleClicked += MyReservation_RescheduleClicked;
         PastReservationsUserControl.PastReservationsViewModel.ReviewClicked += MyReservation_ReviewClicked;
     }
@@ -78,8 +73,8 @@ public class MyReservationsViewModel
     }
     public void MyReservation_RescheduleClicked(object sender, int reservationId)
     {
-        AccommodationReservation reservation = _accommodationReservationRepository.GetById(reservationId);
-        var a = new RescheduleAccommodation(reservation, _accommodationRepository, _accommodationReservationMovingRepository);
+        AccommodationReservation reservation = AccommodationReservationService.GetInstance().GetById(reservationId);
+        var a = new RescheduleAccommodation(reservation);
         a.RescheduleAccommodationViewModel.ChangedMind += (sender, e) => RescheduleAccommodationChangedMind();
         a.RescheduleAccommodationViewModel.SendRequestRefresh += (sender, e) => RefreshRecheduleRequests();
         MyReservationsWindow.MyReservationFrame.Content = a;

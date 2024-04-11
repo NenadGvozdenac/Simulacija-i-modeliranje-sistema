@@ -9,32 +9,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.WPF.Views.GuestViews;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuestViewModels;
 
 public class RescheduleRequestsViewModel
 {
     public User _user;
-    public AccommodationRepository _accommodationRepository;
-    public AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
-    public LocationRepository _locationRepository;
 
     public ObservableCollection<AccommodationMovingDTO> _pendingRequests { get; set; }
     public ObservableCollection<AccommodationMovingDTO> _reviewedRequests { get; set; }
     public RescheduleRequests RescheduleRequests { get; set; }
-    public RescheduleRequestsViewModel(RescheduleRequests _RescheduleRequests, User user, AccommodationRepository accommodationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
+    public RescheduleRequestsViewModel(RescheduleRequests _RescheduleRequests, User user)
     {
         RescheduleRequests = _RescheduleRequests;
         _user = user;
-        _accommodationRepository = accommodationRepository;
-        _accommodationReservationMovingRepository = accommodationReservationMovingRepository;
         SetUpRescheduleRequests();
         Update();
     }
 
     private void SetUpRescheduleRequests()
     {
-        _locationRepository = new LocationRepository();
         _pendingRequests = new ObservableCollection<AccommodationMovingDTO>();
         _reviewedRequests = new ObservableCollection<AccommodationMovingDTO>();
     }
@@ -44,7 +39,7 @@ public class RescheduleRequestsViewModel
         _pendingRequests.Clear();
         _reviewedRequests.Clear();
 
-        foreach (AccommodationReservationMoving moving in _accommodationReservationMovingRepository.GetAll())
+        foreach (AccommodationReservationMoving moving in AccommodationReservationService.GetInstance().GetAllMoving())
         {
             if (IsPendingRequest(moving))
             {
@@ -99,14 +94,14 @@ public class RescheduleRequestsViewModel
     private void MarkAsTimedOut(AccommodationReservationMoving moving)
     {
         moving.Status = ReschedulingStatus.TimedOut;
-        _accommodationReservationMovingRepository.Update(moving);
+        AccommodationReservationService.GetInstance().UpdateMoving(moving);
     }
 
     private AccommodationMovingDTO CreateAccommodationMovingDTO(AccommodationReservationMoving moving)
     {
         AccommodationMovingDTO temp = new AccommodationMovingDTO(
-            _accommodationRepository.GetById(moving.AccommodationId), moving);
-        temp.Location = _locationRepository.GetById(_accommodationRepository.GetById(moving.AccommodationId).LocationId);
+            AccommodationService.GetInstance().GetById(moving.AccommodationId), moving);
+        temp.Location = LocationService.GetInstance().GetById(AccommodationService.GetInstance().GetById(moving.AccommodationId).LocationId);
         return temp;
     }
     private void ReverseCollections()

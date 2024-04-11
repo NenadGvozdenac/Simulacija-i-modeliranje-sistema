@@ -9,6 +9,7 @@ using BookingApp.Repositories;
 using BookingApp.WPF.DTOs.GuestDTOs;
 using BookingApp.WPF.Views.GuestViews;
 using BookingApp.WPF.Views.GuestViews.Components;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuestViewModels;
 
@@ -18,27 +19,19 @@ public class UpcomingReservationsViewModel
     public event EventHandler CancelClicked;
 
     private User _user;
-    public AccommodationRepository _accommodationRepository;
-    public AccommodationReservationRepository _accommodationReservationRepository;
-    public AccommodationImageRepository _accommodationImageRepository { get; set; }
-    public LocationRepository _locationRepository { get; set; }
     public UpcomingReservations UpcomingReservationsView { get; set; }
     public ObservableCollection<UpcomingReservationsDTO> _upcomingReservations { get; set; }
 
-    public UpcomingReservationsViewModel(UpcomingReservations _UpcomingReservations, User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
+    public UpcomingReservationsViewModel(UpcomingReservations _UpcomingReservations, User user)
     {
         _user = user;
         UpcomingReservationsView = _UpcomingReservations;
-        _accommodationRepository = accommodationRepository;
-        _accommodationReservationRepository = accommodationReservationRepository;
         SetUpUpcomingReservations();
         Update();
     }
 
     private void SetUpUpcomingReservations()
     {
-        _accommodationImageRepository = new AccommodationImageRepository();
-        _locationRepository = new LocationRepository();
         _upcomingReservations = new ObservableCollection<UpcomingReservationsDTO>();
     }
 
@@ -46,7 +39,7 @@ public class UpcomingReservationsViewModel
     {
         int NumberOfUpcomingReservation = 0;
         _upcomingReservations.Clear();
-        foreach (AccommodationReservation reservation in _accommodationReservationRepository.GetAll())
+        foreach (AccommodationReservation reservation in AccommodationReservationService.GetInstance().GetAll())
         {
             NumberOfUpcomingReservation = AddToCollection(reservation, NumberOfUpcomingReservation);
         }
@@ -58,11 +51,11 @@ public class UpcomingReservationsViewModel
     {
         if (reservation.FirstDateOfStaying > DateTime.Now && reservation.UserId == _user.Id)
         {
-            Accommodation acc = _accommodationRepository.GetById(reservation.AccommodationId);
-            AccommodationReservation accRes = _accommodationReservationRepository.GetById(reservation.Id);
+            Accommodation acc = AccommodationService.GetInstance().GetById(reservation.AccommodationId);
+            AccommodationReservation accRes = AccommodationReservationService.GetInstance().GetById(reservation.Id);
             UpcomingReservationsDTO temp = new UpcomingReservationsDTO(acc, accRes);
-            temp.Images = _accommodationImageRepository.GetImagesByAccommodationId(reservation.AccommodationId);
-            temp.Location = _locationRepository.GetById(acc.LocationId);
+            temp.Images = ImageService.GetInstance().GetImagesByAccommodationId(reservation.AccommodationId);
+            temp.Location = LocationService.GetInstance().GetById(acc.LocationId);
             _upcomingReservations.Add(temp);
             NumberOfUpcomingReservation++;
         }
@@ -84,8 +77,7 @@ public class UpcomingReservationsViewModel
     private void CancelTheReservation(int reservationId)
     {
         UpcomingReservationsView.UpcomingReservationsFrame.Content = null;
-        _accommodationReservationRepository.Delete(reservationId);
-        //GuestRatingRepository.GetInstance().Delete(reservationId); SONE GUSTER TODO
+        AccommodationReservationService.GetInstance().DeleteById(reservationId);
         Update();
     }
 
@@ -101,8 +93,8 @@ public class UpcomingReservationsViewModel
 
     public void UpcomingReservationsCard_CancelClicked(object sender, int reservationId)
     {
-        AccommodationReservation reservation = _accommodationReservationRepository.GetById(reservationId);
-        var a = new CancelReservation(reservation, _accommodationRepository);
+        AccommodationReservation reservation = AccommodationReservationService.GetInstance().GetById(reservationId);
+        var a = new CancelReservation(reservation);
         a.YesClicked += (sender, e) => CancelTheReservation(e);
         a.NoClicked += (sender, e) => NoClicked();
         UpcomingReservationsView.UpcomingReservationsFrame.Content = a;

@@ -28,10 +28,10 @@ public partial class UpcomingReservations : UserControl
 {
     public UpcomingReservationsViewModel UpcomingReservationsViewModel { get; set; }
 
-    public UpcomingReservations(User user, AccommodationRepository accommodationRepository, AccommodationReservationRepository accommodationReservationRepository)
+    public UpcomingReservations(User user)
     {
         InitializeComponent();            
-        UpcomingReservationsViewModel = new UpcomingReservationsViewModel(this, user, accommodationRepository ,accommodationReservationRepository);
+        UpcomingReservationsViewModel = new UpcomingReservationsViewModel(this, user);
         DataContext = UpcomingReservationsViewModel;
     }
 

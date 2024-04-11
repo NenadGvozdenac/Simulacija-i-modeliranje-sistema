@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace BookingApp.WPF.Views.GuestViews.Components;
 
-/// <summary>
-/// Interaction logic for PastReservationCard.xaml
-/// </summary>
 public partial class PastReservationCard : UserControl
 {
     public event EventHandler<int> ReviewHandler;

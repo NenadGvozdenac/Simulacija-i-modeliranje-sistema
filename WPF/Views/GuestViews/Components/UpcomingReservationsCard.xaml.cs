@@ -17,9 +17,6 @@ using BookingApp.WPF.DTOs.GuestDTOs;
 
 namespace BookingApp.WPF.Views.GuestViews.Components;
 
-/// <summary>
-/// Interaction logic for UpcomingReservationsCard.xaml
-/// </summary>
 public partial class UpcomingReservationsCard : UserControl
 {
     public event EventHandler<int> RescheduleClicked;

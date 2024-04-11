@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace BookingApp.WPF.Views.GuestViews.Components;
 
-/// <summary>
-/// Interaction logic for ReviewedRescheduleCard.xaml
-/// </summary>
 public partial class ReviewedRescheduleCard : UserControl
 {
     public ReviewedRescheduleCard()

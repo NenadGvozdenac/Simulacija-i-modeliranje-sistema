@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace BookingApp.WPF.Views.GuestViews.Components;
 
-/// <summary>
-/// Interaction logic for PendingRescheduleCard.xaml
-/// </summary>
 public partial class PendingRescheduleCard : UserControl
 {
     public PendingRescheduleCard()

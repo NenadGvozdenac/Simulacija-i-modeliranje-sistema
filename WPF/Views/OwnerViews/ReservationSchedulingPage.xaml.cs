@@ -23,7 +23,7 @@ namespace BookingApp.View.OwnerViews;
 public partial class ReservationReschedulingPage : Page
 {
 
-    public event EventHandler ReservationReschedulingPageClosed;
+    public event EventHandler PageClosed;
 
     public ReservationReschedulingViewModel ReservationReschedulingViewModel { get; set; }
     public ReservationReschedulingPage(User user)
@@ -34,7 +34,7 @@ public partial class ReservationReschedulingPage : Page
 
     private void InvokePageClosed()
     {
-        ReservationReschedulingPageClosed?.Invoke(this, EventArgs.Empty);
+        PageClosed?.Invoke(this, EventArgs.Empty);
     }
 
     private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)

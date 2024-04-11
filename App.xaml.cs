@@ -14,7 +14,7 @@ public partial class App
     public static IServiceProvider ServiceProvider => _serviceProvider;
 
     private void Application_Startup(object sender, StartupEventArgs e)
-   {
+    {
         IServiceCollection services = new ServiceCollection();
 
         ConfigureRepositories(services);

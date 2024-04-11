@@ -38,19 +38,19 @@
                 </StackPanel>
             </Grid>
             <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
-                <Button Content="Make accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Click="AddAccommodationClick"/>
-                <Button Content="Reschedule reservation" Style="{StaticResource ButtonStyle}" Margin="5" Click="RescheduleReservationClick"/>
+                <Button Content="Make accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateAddAccommodationPage}"/>
+                <Button Content="Reschedule reservation" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateReservationReschedulingPage}"/>
                 <Button Content="Schedule renovation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
-                <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestReviewsButtonClick"/>
+                <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestReviewPage}"/>
                 <Button Content="Statistics" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
-                <Button Content="Guest feedback" Style="{StaticResource ButtonStyle}" Margin="5" Click="GuestFeedbackButtonClick"/>
+                <Button Content="Guest feedback" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestFeedbackPage}"/>
             </StackPanel>
             <ScrollViewer Grid.Column="1" x:Name="MainPanel">
 
             </ScrollViewer>
             <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="Lavender" Visibility="Collapsed">
                 <Button Content="Notifications" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
-                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Settings_Click"/>
+                <Button Content="Settings" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Command="{Binding NavigateSettingsPage}"/>
                 <Button Content="PDF Report" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
                 <Button Content="Logout" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Logout_Click"/>
             </StackPanel>

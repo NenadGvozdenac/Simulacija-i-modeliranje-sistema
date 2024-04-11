@@ -27,7 +27,7 @@ public class AddAccommodationCommand : ICommand
 
     private void RaiseCanExecuteChanged()
     {
-        CanExecuteChanged.Invoke(this, EventArgs.Empty);
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void Execute(object parameter)
@@ -46,6 +46,7 @@ public class AddAccommodationCommand : ICommand
         AccommodationService.GetInstance().Add(accommodation);
 
         _addAccommodationViewModel.CancelCommand.Execute(null);
+        _addAccommodationViewModel.Page.ClosePage();
     }
 
     public bool CanExecute(object parameter)

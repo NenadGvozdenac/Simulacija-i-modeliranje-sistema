@@ -254,4 +254,19 @@ public class AddAccommodationViewModel : INotifyPropertyChanged
 
         return false;
     }
+
+    public void CountryChanged()
+    {
+        var cities = LocationService.GetInstance().GetCitiesByCountry(Page.CountryTextBox.SelectedItem.ToString());
+        Cities = new ObservableCollection<string>(cities);
+
+        Page.CityTextBox.IsDropDownOpen = true;
+        Page.CityTextBox.IsEnabled = true;
+    }
+
+    public void ImageSelected()
+    {
+        string imagePath = ImageService.GetInstance().GetImageFromUser();
+        ImageURL = imagePath;
+    }
 }

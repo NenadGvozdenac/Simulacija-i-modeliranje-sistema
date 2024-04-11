@@ -15,8 +15,6 @@ namespace BookingApp.View.OwnerViews
 {
     public partial class MainPage : Page
     {
-        private AccommodationWrapper _accommodationWrapper;
-        private AccommodationReservationWrapper _accommodationReservationWrapper;
 
         private MainPageViewModel _mainPageViewModel;
 
@@ -24,269 +22,37 @@ namespace BookingApp.View.OwnerViews
         {
             InitializeComponent();
 
-            _mainPageViewModel = new MainPageViewModel(user);
-
-            Update();
-
-            _accommodationWrapper = new AccommodationWrapper(_mainPageViewModel);
-            _accommodationReservationWrapper = new AccommodationReservationWrapper(_mainPageViewModel);
-
-            PrepareFirstPage();
-            AccommodationReviewService.GetInstance().CheckForCancelledReservations();
-            AccommodationReservationService.GetInstance().CheckForCancelledReservations();
-            OwnerService.GetInstance().CheckForSuperOwner(user);
-        }
-
-        private void PrepareFirstPage()
-        {
-            MainPanel.Content = _accommodationWrapper;
-            SetActiveButton(AccommodationsButton);
-        }
-
-        private void AddAllReservationsThatArentCheckedYet()
-        {
-            foreach(AccommodationReservation accommodationReservation in GetReservationsOfOwner(_mainPageViewModel.User.Id))
-            {
-                if (ReservationNotAlreadyAdded(accommodationReservation))
-                {
-                    AddGuestRating(accommodationReservation);
-                }
-            }
-        }
-
-        private void AddGuestRating(AccommodationReservation accommodationReservation)
-        {
-            GuestRatingService.GetInstance().Add(new GuestRating()
-            {
-                ReservationId = accommodationReservation.Id,
-                GuestId = accommodationReservation.UserId,
-                IsChecked = false,
-                AccommodationId = accommodationReservation.AccommodationId,
-                Respectfulness = 0,
-                Cleanliness = 0,
-                Comment = ""
-            });
-        }
-
-        private void CheckReservationsThatEnded()
-        {
-            foreach (GuestRating guestRating in GuestRatingService.GetInstance().GetAll())
-            {
-                if (IsGuestRatingValid(guestRating))
-                {
-                    ActivateVisibilityOfNotification();
-                }
-            }
-        }
-
-        private bool IsGuestRatingValid(GuestRating guestRating)
-        {
-            return IsOwnerValid(guestRating) && IsDateValid(GetLastDateOfStaying(guestRating), DateTime.Now.AddDays(-5)) && !guestRating.IsChecked;
-        }
-
-        private DateTime GetLastDateOfStaying(GuestRating guestRating)
-        {
-            return AccommodationReservationService.GetInstance().GetById(guestRating.ReservationId).LastDateOfStaying;
-        }
-
-        private bool IsOwnerValid(GuestRating guestRating)
-        {
-            return AccommodationService.GetInstance().GetById(guestRating.AccommodationId).OwnerId == _mainPageViewModel.User.Id;
-        }
-
-        private bool IsDateValid(DateTime lastDateOfStaying, DateTime fiveDaysAgo)
-        {
-            return lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
-        }
-
-        private void ActivateVisibilityOfNotification()
-        {
-            MessagePanel.Visibility = Visibility.Visible;
-        }
-
-        private void DeactivateVisibilityOfNotification()
-        {
-            MessagePanel.Visibility = Visibility.Collapsed;
-        }
-
-        private List<AccommodationReservation> GetReservationsOfOwner(int userId)
-        {
-            return AccommodationReservationService.GetInstance().GetReservationsByOwnerId(userId);
-        }
-
-        private bool ReservationNotAlreadyAdded(AccommodationReservation accommodationReservation)
-        {
-            return GuestRatingService.GetInstance().GetAll().Find(guestRating => guestRating.ReservationId == accommodationReservation.Id) == null;
-        }
-
-        public void Update()
-        {
-            HideLeftNavbar();
-            HideRightNavbar();
-            AddAllReservationsThatArentCheckedYet();
-            DeleteAllGuestRatingsThatDontHaveReservations();
-            CheckReservationsThatEnded();
-        }
-
-        private void DeleteAllGuestRatingsThatDontHaveReservations()
-        {
-            GuestRatingService.GetInstance().DeleteAll(GuestRating => ReservationDoesntExist(GuestRating));
-        }
-
-        public bool ReservationDoesntExist(GuestRating guestRating)
-        {
-            return AccommodationReservationService.GetInstance().GetAll().Find(reservation => reservation.Id == guestRating.ReservationId) == null;
-        }
-
-        public void Refresh()
-        {
-            RefreshReservations();
-            RefreshAccommodations();
-        }
-
-        private void RefreshAccommodations()
-        {
-            _accommodationWrapper.Refresh();
-            MainPanel.Content = _accommodationWrapper;
-            SetActiveButton(AccommodationsButton);
-        }
-
-        private void RefreshReservations()
-        {
-            _accommodationReservationWrapper.Refresh();
-            MainPanel.Content = _accommodationWrapper;
-            SetActiveButton(ReservationsButton);
-        }
-
-        private void ExitApplication(object sender, MouseButtonEventArgs e)
-        {
-            Window.GetWindow(this).Close();
+            _mainPageViewModel = new MainPageViewModel(this, user);
+            DataContext = _mainPageViewModel;
         }
 
         private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)
         {
-            if (LeftNavbar.Visibility == Visibility.Collapsed)
-            {
-                ShowLeftNavbar();
-            }
-            else
-            {
-                HideLeftNavbar();
-            }
+            _mainPageViewModel.HamburgerMenuClick();
         }
 
         private void ThreeDotsClick(object sender, MouseButtonEventArgs e)
         {
-            if (RightNavbar.Visibility == Visibility.Collapsed)
-            {
-                ShowRightNavbar();
-            }
-            else
-            {
-                HideRightNavbar();
-            }
-        }
-
-        private void ShowLeftNavbar()
-        {
-            LeftNavbar.Visibility = Visibility.Visible;
-            Navbar.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
-            RightNavbar.Visibility = Visibility.Collapsed;
-            Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-        }
-
-        private void HideLeftNavbar()
-        {
-            LeftNavbar.Visibility = Visibility.Collapsed;
-            Navbar.ColumnDefinitions[0].Width = new GridLength(0);
-        }
-
-        private void ShowRightNavbar()
-        {
-            RightNavbar.Visibility = Visibility.Visible;
-            Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
-            LeftNavbar.Visibility = Visibility.Collapsed;
-            Navbar.ColumnDefinitions[0].Width = new GridLength(0);
-        }
-
-        private void HideRightNavbar()
-        {
-            RightNavbar.Visibility = Visibility.Collapsed;
-            Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-        }
-
-        private void AddAccommodationClick(object sender, RoutedEventArgs e)
-        {
-            AddAccommodationPage addAccommodationPage = new AddAccommodationPage(_mainPageViewModel.User);
-            addAccommodationPage.PageClosed += (s, e) => Refresh();
-            NavigationService.Navigate(addAccommodationPage);
-        }
-
-        private void GuestReviewsButtonClick(object sender, RoutedEventArgs e)
-        {
-            GuestReviewPage guestReviewPage = new GuestReviewPage(_mainPageViewModel.User);
-            NavigationService.Navigate(guestReviewPage);
+            _mainPageViewModel.ThreeDotsClick();
         }
 
         private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
         {
-            GuestReviewPage guestReviewPage = new GuestReviewPage(_mainPageViewModel.User);
-            DeactivateVisibilityOfNotification();
-            NavigationService.Navigate(guestReviewPage);
+            _mainPageViewModel.ClickHere();
         }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            Window.GetWindow(this).Close();
-        }
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            HideLeftNavbar();
-            HideRightNavbar();
-
-            SettingsAndProfile settingsAndProfile = new SettingsAndProfile(_mainPageViewModel.User);
-            NavigationService.Navigate(settingsAndProfile);
-        }
-
         private void AccommodationsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPanel.Content = _accommodationWrapper;
-            SetActiveButton(AccommodationsButton);
-        }
-
-        private void RescheduleReservationClick(object sender, RoutedEventArgs e)
-        {
-            ReservationReschedulingPage reservationSchedulingPage = new ReservationReschedulingPage(_mainPageViewModel.User);
-            reservationSchedulingPage.ReservationReschedulingPageClosed += (s, e) => Refresh();
-            NavigationService.Navigate(reservationSchedulingPage);
+            _mainPageViewModel.AccommodationsClicked();
         }
 
         private void ReservationsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPanel.Content = _accommodationReservationWrapper;
-            SetActiveButton(ReservationsButton);
+            _mainPageViewModel.ReservationsClicked();
         }
 
-        private void MakeAllButtonsInactive()
+        private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            ReservationsButton.Style = (Style)FindResource("FooterButtonStyle");
-            AccommodationsButton.Style = (Style)FindResource("FooterButtonStyle");
-            RenovationsButton.Style = (Style)FindResource("FooterButtonStyle");
-        }
-
-        private void SetActiveButton(Button activeButton)
-        {
-            MakeAllButtonsInactive();
-            activeButton.Style = (Style)FindResource("ActiveFooterButtonStyle");
-        }
-
-        private void GuestFeedbackButtonClick(object sender, RoutedEventArgs e)
-        {
-            GuestFeedbackPage guestFeedbackPage = new GuestFeedbackPage(_mainPageViewModel.User);
-            NavigationService.Navigate(guestFeedbackPage);
+            _mainPageViewModel.Logout();
         }
     }
 }

@@ -15,7 +15,7 @@ public partial class AddAccommodationPage : Page
 {
     public event EventHandler PageClosed;
 
-    private AddAccommodationViewModel _addAccommodationViewModel;
+    public AddAccommodationViewModel _addAccommodationViewModel;
 
     public AddAccommodationPage(User user)
     {
@@ -27,17 +27,14 @@ public partial class AddAccommodationPage : Page
 
     private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var Cities = LocationService.GetInstance().GetCitiesByCountry(CountryTextBox.SelectedItem.ToString());
-        _addAccommodationViewModel.Cities = new ObservableCollection<string>(Cities);
-
-        CityTextBox.IsDropDownOpen = true;
-        CityTextBox.IsEnabled = true;
+        _addAccommodationViewModel.CountryChanged();
     }
 
-    private void ClosePage()
+    public void ClosePage()
     {
         PageClosed?.Invoke(this, EventArgs.Empty);
     }
+
     private void BackButton_Click(object sender, MouseButtonEventArgs e)
     {
         ClosePage();
@@ -46,7 +43,6 @@ public partial class AddAccommodationPage : Page
 
     private void ImageURLTextBox_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        string imagePath = ImageService.GetInstance().GetImageFromUser();
-        _addAccommodationViewModel.ImageURL = imagePath;
+        _addAccommodationViewModel.ImageSelected();
     }
 }

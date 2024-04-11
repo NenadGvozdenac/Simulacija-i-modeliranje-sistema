@@ -1,11 +1,11 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace BookingApp.View.OwnerViews;
+namespace BookingApp.WPF.Views.OwnerViews;
 public partial class GuestFeedbackPage : Page
 {
     public GuestFeedbackPage(User owner)

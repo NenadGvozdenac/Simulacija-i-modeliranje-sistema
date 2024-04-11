@@ -11,11 +11,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
-namespace BookingApp.View.OwnerViews;
+namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class DetailedAccommodationPage : Page
 {
     private DetailedAccommodationViewModel _viewModel;
+    public event EventHandler AccommodationClosed;
     public DetailedAccommodationPage(Accommodation accommodation)
     {
         InitializeComponent();
@@ -30,5 +31,10 @@ public partial class DetailedAccommodationPage : Page
         {
             NavigationService.GoBack();
         }
+    }
+
+    public void AccommodationClosedHandler(object sender, EventArgs e)
+    {
+        AccommodationClosed.Invoke(this, e);
     }
 }

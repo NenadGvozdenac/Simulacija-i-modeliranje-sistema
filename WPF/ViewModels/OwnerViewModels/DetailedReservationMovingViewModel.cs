@@ -3,7 +3,7 @@ using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.Resources.Types;
-using BookingApp.View.OwnerViews;
+using BookingApp.WPF.Views.OwnerViews;
 using BookingApp.WPF.DTOs.OwnerDTOs;
 using System;
 using System.Windows.Input;

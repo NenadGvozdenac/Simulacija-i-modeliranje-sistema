@@ -42,6 +42,7 @@ public class AccommodationService
     {
         List<Accommodation> accommodations = _accommodationRepository.GetAll();
         accommodations.ForEach(accommodation => accommodation.Location = _locationRepository.GetById(accommodation.LocationId));
+        accommodations.ForEach(accommodation => accommodation.Images = _accommodationImageRepository.GetByAccommodationId(accommodation.Id));
         return accommodations;
     }
 
@@ -57,6 +58,7 @@ public class AccommodationService
     {
         List<Accommodation> accommodations = _accommodationRepository.GetAccommodationsByOwnerId(ownerId);
         accommodations.ForEach(accommodation => accommodation.Location = _locationRepository.GetById(accommodation.LocationId));
+        accommodations.ForEach(accommodation => accommodation.Images = _accommodationImageRepository.GetByAccommodationId(accommodation.Id));
         return accommodations;
     }
 

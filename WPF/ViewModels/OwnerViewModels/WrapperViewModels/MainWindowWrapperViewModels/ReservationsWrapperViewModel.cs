@@ -1,8 +1,8 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Resources.Types;
-using BookingApp.View.OwnerViews.Components;
-using BookingApp.View.OwnerViews;
-using BookingApp.View.OwnerViews.MainWindowWrappers;
+using BookingApp.WPF.Views.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews;
+using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 using BookingApp.WPF.Views.GuestViews;
 using System;
 using System.Collections.Generic;
@@ -52,7 +52,7 @@ public class ReservationsWrapperViewModel
         {
             if (reservation.FirstDateOfStaying <= DateTime.Now && reservation.LastDateOfStaying >= DateTime.Now)
             {
-                ReservationControl component = new ReservationControl(reservation, ReservationType.Ongoing);
+                ReservationControl component = new ReservationControl(reservation);
                 component.Margin = new Thickness(15);
 
                 component.ReservationSeeMore += (sender, e) => InvokeSeeMore(e);
@@ -74,7 +74,7 @@ public class ReservationsWrapperViewModel
         {
             if (reservation.FirstDateOfStaying > DateTime.Now)
             {
-                ReservationControl component = new ReservationControl(reservation, ReservationType.Upcoming);
+                ReservationControl component = new ReservationControl(reservation);
                 component.Margin = new Thickness(15);
 
                 component.ReservationSeeMore += (sender, e) => InvokeSeeMore(e);
@@ -90,7 +90,7 @@ public class ReservationsWrapperViewModel
         {
             if (reservation.LastDateOfStaying < DateTime.Now)
             {
-                ReservationControl component = new ReservationControl(reservation, ReservationType.Finished);
+                ReservationControl component = new ReservationControl(reservation);
                 component.Margin = new Thickness(15);
 
                 component.ReservationSeeMore += (sender, e) => InvokeSeeMore(e);

@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews.Components;
+namespace BookingApp.WPF.Views.OwnerViews.Components;
 
 public partial class GuestFeedbackControl : UserControl
 {
@@ -30,7 +30,6 @@ public partial class GuestFeedbackControl : UserControl
 
     private void Card_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        DetailedGuestFeedbackPage detailedGuestFeedbackPage = new DetailedGuestFeedbackPage(DetailedGuestFeedbackViewModel);
-        NavigationService.GetNavigationService(this).Navigate(detailedGuestFeedbackPage);
+        DetailedGuestFeedbackViewModel.CardClicked(this);
     }
 }

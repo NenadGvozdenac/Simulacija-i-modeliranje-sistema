@@ -1,5 +1,5 @@
-﻿using BookingApp.View.OwnerViews;
-using BookingApp.View.OwnerViews.GuestReviewControls;
+﻿using BookingApp.WPF.Views.OwnerViews;
+using BookingApp.WPF.Views.OwnerViews.GuestReviewControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;

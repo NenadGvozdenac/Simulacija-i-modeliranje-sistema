@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using BookingApp.Application.UseCases;
+using BookingApp.WPF.Views.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews;
+using System.Windows.Navigation;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -31,5 +34,11 @@ public class DetailedGuestFeedbackViewModel
                 images_StackPanel.Children.Add(image);
             }
         }
+    }
+
+    public void CardClicked(GuestFeedbackControl guestFeedbackControl)
+    {
+        DetailedGuestFeedbackPage detailedGuestFeedbackPage = new DetailedGuestFeedbackPage(this);
+        NavigationService.GetNavigationService(guestFeedbackControl).Navigate(detailedGuestFeedbackPage);
     }
 }

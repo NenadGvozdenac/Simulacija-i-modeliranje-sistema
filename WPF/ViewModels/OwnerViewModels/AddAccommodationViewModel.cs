@@ -1,7 +1,7 @@
 ﻿using BookingApp.Application.Commands;
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
-using BookingApp.View.OwnerViews;
+using BookingApp.WPF.Views.OwnerViews;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

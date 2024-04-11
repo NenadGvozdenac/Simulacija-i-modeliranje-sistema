@@ -1,6 +1,6 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews.GuestReviewControls;
+namespace BookingApp.WPF.Views.OwnerViews.GuestReviewControls;
 
 public partial class ReviewedGuestReviews : UserControl
 {

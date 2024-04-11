@@ -1,7 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Model.PathfinderModels;
 using BookingApp.Repositories;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using BookingApp.View.PathfinderViews.Componentss;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.Resources.Types;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,14 @@ public class AccommodationReservationService
         reservation.LastDateOfStaying = wantedDatespan.End;
 
         _accommodationReservationRepository.Update(reservation);
-        
+
+        CheckForCancelledReservations();
+        DeleteAllReservationsReschedulingForReservation(reservation.Id);
+    }
+
+    private void DeleteAllReservationsReschedulingForReservation(int id)
+    {
+        _accommodationReservationMovingRepository.DeleteAll(reservation => reservation.ReservationId == id && reservation.Status == ReschedulingStatus.Pending);
     }
 
     public List<AccommodationReservation> GetOverlappingReservations(DateSpan wantedDatespan, List<AccommodationReservation> reservations)
@@ -100,7 +108,7 @@ public class AccommodationReservationService
 
     public void CheckForCancelledReservations()
     {
-        List<AccommodationReservationMoving> movingReservations = _accommodationReservationMovingRepository.GetAll();
+        List<AccommodationReservationMoving> movingReservations = _accommodationReservationMovingRepository.GetAll().Where(m => m.Status == ReschedulingStatus.Pending).ToList();
 
         _accommodationReservationMovingRepository.DeleteAll(reservation => GetById(reservation.ReservationId) == null);
     }

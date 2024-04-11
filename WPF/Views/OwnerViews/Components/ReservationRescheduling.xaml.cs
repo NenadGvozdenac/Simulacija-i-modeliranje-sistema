@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,91 +18,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews.Components;
+namespace BookingApp.WPF.Views.OwnerViews.Components;
 
-public partial class ReservationRescheduling : UserControl, INotifyPropertyChanged
+public partial class ReservationRescheduling : UserControl
 {
     public event EventHandler<AccommodationReservationMoving> ReservationReschedulingDetails;
-
-    private AccommodationReservationMoving accommodationReservationMoving;
-    public AccommodationReservationMoving AccommodationReservationMoving
-    {
-        get => accommodationReservationMoving;
-        set
-        {
-            accommodationReservationMoving = value;
-            OnPropertyChanged();
-        }
-    }
-    private string accommodationName;
-    public string AccommodationName
-    {
-        get => accommodationName;
-        set
-        {
-            accommodationName = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private string guestUsername;
-
-    public string GuestUsername
-    {
-        get => guestUsername;
-        set
-        {
-            guestUsername = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private DateSpan currentReservationTimespan;
-    public DateSpan CurrentReservationTimespan
-    {
-        get => currentReservationTimespan;
-        set
-        {
-            currentReservationTimespan = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private DateSpan wantedReservationTimespan;
-    public DateSpan WantedReservationTimespan
-    {
-        get => wantedReservationTimespan;
-        set
-        {
-            wantedReservationTimespan = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    public ReservationReschedulingCardViewModel ReservationReschedulingCardViewModel { get; set; }
     public ReservationRescheduling(AccommodationReservationMoving accommodationReservationMoving)
     {
-        DataContext = this;
-        AccommodationReservationMoving = accommodationReservationMoving;
-        AccommodationName = AccommodationReservationMoving.Accommodation.Name;
-        GuestUsername = AccommodationReservationMoving.Guest.Username;
-        CurrentReservationTimespan = AccommodationReservationMoving.CurrentReservationTimespan;
-        WantedReservationTimespan = AccommodationReservationMoving.WantedReservationTimespan;
         InitializeComponent();
+        ReservationReschedulingCardViewModel = new ReservationReschedulingCardViewModel(accommodationReservationMoving);
+        DataContext = ReservationReschedulingCardViewModel;
     }
 
     private void ReservationRescheduling_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        LoadReschedulingDetails();
-    }
-
-    private void LoadReschedulingDetails()
-    {
-        ReservationReschedulingDetails.Invoke(this, AccommodationReservationMoving);
-    }
+        ReservationReschedulingDetails.Invoke(this, ReservationReschedulingCardViewModel.AccommodationReservationMoving);
+    }  
 }

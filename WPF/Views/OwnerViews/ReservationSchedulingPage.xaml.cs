@@ -1,7 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.Resources.Types;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews;
+namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class ReservationReschedulingPage : Page
 {

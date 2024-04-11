@@ -5,54 +5,53 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using BookingApp.View.OwnerViews.MainWindowWrappers;
+using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 using Microsoft.Extensions.DependencyInjection;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 
-namespace BookingApp.View.OwnerViews
+namespace BookingApp.WPF.Views.OwnerViews;
+
+public partial class MainPage : Page
 {
-    public partial class MainPage : Page
+
+    private MainPageViewModel _mainPageViewModel;
+
+    public MainPage(User user)
     {
+        InitializeComponent();
 
-        private MainPageViewModel _mainPageViewModel;
+        _mainPageViewModel = new MainPageViewModel(this, user);
+        DataContext = _mainPageViewModel;
+    }
 
-        public MainPage(User user)
-        {
-            InitializeComponent();
+    private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)
+    {
+        _mainPageViewModel.HamburgerMenuClick();
+    }
 
-            _mainPageViewModel = new MainPageViewModel(this, user);
-            DataContext = _mainPageViewModel;
-        }
+    private void ThreeDotsClick(object sender, MouseButtonEventArgs e)
+    {
+        _mainPageViewModel.ThreeDotsClick();
+    }
 
-        private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)
-        {
-            _mainPageViewModel.HamburgerMenuClick();
-        }
+    private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
+    {
+        _mainPageViewModel.ClickHere();
+    }
+    private void AccommodationsButton_Click(object sender, RoutedEventArgs e)
+    {
+        _mainPageViewModel.AccommodationsClicked();
+    }
 
-        private void ThreeDotsClick(object sender, MouseButtonEventArgs e)
-        {
-            _mainPageViewModel.ThreeDotsClick();
-        }
+    private void ReservationsButton_Click(object sender, RoutedEventArgs e)
+    {
+        _mainPageViewModel.ReservationsClicked();
+    }
 
-        private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)
-        {
-            _mainPageViewModel.ClickHere();
-        }
-        private void AccommodationsButton_Click(object sender, RoutedEventArgs e)
-        {
-            _mainPageViewModel.AccommodationsClicked();
-        }
-
-        private void ReservationsButton_Click(object sender, RoutedEventArgs e)
-        {
-            _mainPageViewModel.ReservationsClicked();
-        }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            _mainPageViewModel.Logout();
-        }
+    private void Logout_Click(object sender, RoutedEventArgs e)
+    {
+        _mainPageViewModel.Logout();
     }
 }

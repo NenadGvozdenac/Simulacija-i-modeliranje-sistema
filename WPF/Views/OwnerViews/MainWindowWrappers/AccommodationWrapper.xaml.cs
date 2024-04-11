@@ -13,13 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels.WrapperViewModels.MainWindowWrapperViewModels;
 
-namespace BookingApp.View.OwnerViews.MainWindowWrappers;
+namespace BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 
 public partial class AccommodationWrapper : UserControl
 {

@@ -9,7 +9,7 @@ using System.Windows.Navigation;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using BookingApp.Domain.Models;
 
-namespace BookingApp.View.OwnerViews;
+namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class AddGuestRatingPage : Page
 {

@@ -19,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerViews;
+namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class ReservationReschedulingDetailsPage : Page
 {

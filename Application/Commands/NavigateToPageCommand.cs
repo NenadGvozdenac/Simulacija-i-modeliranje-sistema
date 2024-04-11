@@ -1,4 +1,4 @@
-﻿using BookingApp.View.OwnerViews;
+﻿using BookingApp.WPF.Views.OwnerViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;

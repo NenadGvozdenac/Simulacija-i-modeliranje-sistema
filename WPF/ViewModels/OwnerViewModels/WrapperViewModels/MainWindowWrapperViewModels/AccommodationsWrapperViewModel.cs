@@ -1,7 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Resources.Types;
-using BookingApp.View.OwnerViews.Components;
-using BookingApp.View.OwnerViews;
+using BookingApp.WPF.Views.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews;
 using BookingApp.WPF.Views.GuestViews;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 using System.Windows;
-using BookingApp.View.OwnerViews.MainWindowWrappers;
+using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 using BookingApp.Repositories;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels.WrapperViewModels.MainWindowWrapperViewModels;
@@ -40,10 +40,10 @@ public class AccommodationsWrapperViewModel
 
         foreach (Accommodation accommodation in _mainPageViewModel.Accommodations)
         {
-            AccommodationControl component = new AccommodationControl(accommodation, LocationRepository.GetInstance().GetById(accommodation.LocationId));
+            AccommodationControl component = new AccommodationControl(accommodation);
             component.Margin = new Thickness(15);
 
-            component.AccommodationSeeMore += (sender, e) => InvokeSeeMore(e);
+            component.AccommodationClosedEH += (s, e) => _mainPageViewModel.Refresh();
 
             accommodationWrapper.Accommodations.Children.Add(component);
         }

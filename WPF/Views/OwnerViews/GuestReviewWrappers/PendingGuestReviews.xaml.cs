@@ -12,12 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using System.Collections.ObjectModel;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 
-namespace BookingApp.View.OwnerViews.GuestReviewControls
+namespace BookingApp.WPF.Views.OwnerViews.GuestReviewControls
 {
     /// <summary>
     /// Interaction logic for PendingGuestReviews.xaml

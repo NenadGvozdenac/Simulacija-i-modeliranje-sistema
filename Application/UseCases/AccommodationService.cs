@@ -13,22 +13,25 @@ using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.Domain.RepositoryInterfaces;
 
 namespace BookingApp.Application.UseCases;
 
 public class AccommodationService
 {
-    private AccommodationRepository _accommodationRepository;
-    private LocationRepository _locationRepository;
-    private AccommodationImageRepository _accommodationImageRepository;
+    private IAccommodationRepository _accommodationRepository;
+    private ILocationRepository _locationRepository;
+    private IAccommodationImageRepository _accommodationImageRepository;
     private OwnerService _ownerService;
 
-    public AccommodationService()
+    public AccommodationService(IAccommodationRepository accommodationRepository, 
+        ILocationRepository locationRepository, 
+        IAccommodationImageRepository accommodationImageRepository)
     {
-        _accommodationRepository = AccommodationRepository.GetInstance();
-        _locationRepository = LocationRepository.GetInstance();
-        _accommodationImageRepository = AccommodationImageRepository.GetInstance();
         _ownerService = OwnerService.GetInstance();
+        _accommodationRepository = accommodationRepository;
+        _locationRepository = locationRepository;
+        _accommodationImageRepository = accommodationImageRepository;
     }
 
     public static AccommodationService GetInstance()

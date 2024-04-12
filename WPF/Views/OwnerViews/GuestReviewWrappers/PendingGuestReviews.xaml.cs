@@ -16,74 +16,65 @@ using BookingApp.WPF.Views.OwnerViews.Components;
 using System.Collections.ObjectModel;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.Application.UseCases;
 
-namespace BookingApp.WPF.Views.OwnerViews.GuestReviewControls
+namespace BookingApp.WPF.Views.OwnerViews.GuestReviewControls;
+
+public partial class PendingGuestReviews : UserControl
 {
-    /// <summary>
-    /// Interaction logic for PendingGuestReviews.xaml
-    /// </summary>
-    public partial class PendingGuestReviews : UserControl
+    private ObservableCollection<GuestRating> _guestRatings;
+    private User _user;
+    public PendingGuestReviews(User user)
     {
-        private GuestRatingRepository _guestRatingRepository;
-        private AccommodationRepository _accommodationRepository;
-        private ObservableCollection<GuestRating> _guestRatings;
-        private AccommodationReservationRepository _accommodationReservationRepository;
-        private User _user;
-        public PendingGuestReviews(User user)
+        _user = user;
+
+        _guestRatings = new ObservableCollection<GuestRating>();
+
+        InitializeComponent();
+        Update();
+    }
+
+    public void Update()
+    {
+        _guestRatings.Clear();
+
+        foreach (Accommodation accommodation in AccommodationService.GetInstance().GetByOwnerId(_user.Id))
         {
-            _user = user;
-            _guestRatingRepository = GuestRatingRepository.GetInstance();
-            _accommodationRepository = AccommodationRepository.GetInstance();
-            _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
-
-            _guestRatings = new ObservableCollection<GuestRating>();
-
-            InitializeComponent();
-            Update();
-        }
-
-        public void Update()
-        {
-            _guestRatings.Clear();
-
-            foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
+            foreach(GuestRating guestRating in GuestRatingService.GetInstance().GetByAccommodationId(accommodation.Id))
             {
-                foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
-                {
-                    AddGuestReviewIfSatisfiesConditions(guestRating);
-                }
-            }
-
-            AddReviews();
-        }
-
-        private void AddGuestReviewIfSatisfiesConditions(GuestRating guestRating)
-        {
-            if (SatisfiedConditions(guestRating, _accommodationReservationRepository.GetById(guestRating.ReservationId)))
-            {
-                guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
-                _guestRatings.Add(guestRating);
+                AddGuestReviewIfSatisfiesConditions(guestRating);
             }
         }
 
-        private bool SatisfiedConditions(GuestRating guestRating, AccommodationReservation accommodationReservation)
-        {
-            return guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying <= DateTime.Now;
-        }
+        AddReviews();
+    }
 
-        private void AddReviews()
+    private void AddGuestReviewIfSatisfiesConditions(GuestRating guestRating)
+    {
+        if (SatisfiedConditions(guestRating, AccommodationReservationService.GetInstance().GetById(guestRating.ReservationId)))
         {
-            Reviews.Children.Clear();
-            DateTime fiveDaysAgo = DateTime.Now.AddDays(-5);
-            foreach (GuestRating guestRating in _guestRatings)
-            {
-                DateTime lastDateOfStaying = guestRating.Reservation.LastDateOfStaying;
-                bool isEnabled = lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
-                GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, isEnabled);
-                reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
-                reviewedGuestReview.RefreshPage += (sender, e) => Update();
-                Reviews.Children.Add(reviewedGuestReview);
-            }
+            guestRating.Reservation = AccommodationReservationService.GetInstance().GetById(guestRating.ReservationId);
+            _guestRatings.Add(guestRating);
+        }
+    }
+
+    private bool SatisfiedConditions(GuestRating guestRating, AccommodationReservation accommodationReservation)
+    {
+        return guestRating.IsChecked == false && accommodationReservation.LastDateOfStaying <= DateTime.Now;
+    }
+
+    private void AddReviews()
+    {
+        Reviews.Children.Clear();
+        DateTime fiveDaysAgo = DateTime.Now.AddDays(-5);
+        foreach (GuestRating guestRating in _guestRatings)
+        {
+            DateTime lastDateOfStaying = guestRating.Reservation.LastDateOfStaying;
+            bool isEnabled = lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
+            GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, isEnabled);
+            reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
+            reviewedGuestReview.RefreshPage += (sender, e) => Update();
+            Reviews.Children.Add(reviewedGuestReview);
         }
     }
 }

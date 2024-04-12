@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Miscellaneous;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
@@ -39,7 +40,7 @@ public class AccommodationReservationMovingDTO
         DateSpan wantedSpan = AccommodationReservationMoving.WantedReservationTimespan;
         Accommodation accommodation = AccommodationReservationMoving.Accommodation;
 
-        if (AccommodationReservationRepository.GetInstance().IsTimespanFree(wantedSpan, accommodation, AccommodationReservationMoving))
+        if (AccommodationReservationService.GetInstance().IsTimespanFree(wantedSpan, accommodation, AccommodationReservationMoving))
         {
             StatusOfWantedTimespan = "Reservation can be moved to wanted timespan";
             _statusColor = Brushes.Green;

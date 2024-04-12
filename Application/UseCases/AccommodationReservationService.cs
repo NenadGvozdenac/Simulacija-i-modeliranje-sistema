@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using BookingApp.Resources.Types;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,17 +14,23 @@ namespace BookingApp.Application.UseCases;
 
 public class AccommodationReservationService
 {
-    private AccommodationRepository _accommodationRepository;
-    private AccommodationReservationRepository _accommodationReservationRepository;
-    private AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
-    private GuestRatingRepository _guestRatingRepository;
+    private IAccommodationRepository _accommodationRepository;
+    private IAccommodationReservationRepository _accommodationReservationRepository;
+    private IAccommodationReservationMovingRepository _accommodationReservationMovingRepository;
+    private IGuestRatingRepository _guestRatingRepository;
+    private IUserRepository _userRepository;
 
-    public AccommodationReservationService()
+    public AccommodationReservationService(IAccommodationRepository accommodationRepository, 
+        IAccommodationReservationRepository accommodationReservationRepository,
+        IAccommodationReservationMovingRepository accommodationReservationMovingRepository,
+        IGuestRatingRepository guestRatingRepository,
+        IUserRepository userRepository)
     {
-        _guestRatingRepository = App.ServiceProvider.GetRequiredService<GuestRatingRepository>();
-        _accommodationRepository = App.ServiceProvider.GetRequiredService<AccommodationRepository>();
-        _accommodationReservationRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationRepository>();
-        _accommodationReservationMovingRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationMovingRepository>();
+        _accommodationRepository = accommodationRepository;
+        _accommodationReservationRepository = accommodationReservationRepository;
+        _accommodationReservationMovingRepository = accommodationReservationMovingRepository;
+        _guestRatingRepository = guestRatingRepository;
+        _userRepository = userRepository;
     }
 
     public static AccommodationReservationService GetInstance()
@@ -126,10 +133,20 @@ public class AccommodationReservationService
         lista.ForEach(moving =>
         {
             moving.Accommodation = ownerAccommodations.Find(accommodation => accommodation.Id == moving.AccommodationId);
-            moving.Guest = UserRepository.GetInstance().GetById(moving.GuestId);
+            moving.Guest = _userRepository.GetById(moving.GuestId);
             moving.Reservation = GetById(moving.ReservationId);
         });
 
         return lista;
+    }
+
+    public bool IsTimespanFree(DateSpan wantedSpan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving)
+    {
+        return _accommodationReservationRepository.IsTimespanFree(wantedSpan, accommodation, accommodationReservationMoving);
+    }
+
+    public void UpdateMoving(AccommodationReservationMoving accommodationReservationMoving)
+    {
+        _accommodationReservationMovingRepository.Update(accommodationReservationMoving);
     }
 }

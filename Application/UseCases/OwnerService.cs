@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,12 +13,12 @@ namespace BookingApp.Application.UseCases;
 
 public class OwnerService
 {
-    private OwnerInfoRepository _ownerInfoRepository;
-    private UserRepository _userRepository;
-    public OwnerService()
+    private IOwnerInfoRepository _ownerInfoRepository;
+    private IUserRepository _userRepository;
+    public OwnerService(IOwnerInfoRepository ownerInfoRepository, IUserRepository userRepository)
     {
-        _ownerInfoRepository = OwnerInfoRepository.GetInstance();
-        _userRepository = UserRepository.GetInstance();
+        _ownerInfoRepository = ownerInfoRepository;
+        _userRepository = userRepository;
     }
 
     public static OwnerService GetInstance()

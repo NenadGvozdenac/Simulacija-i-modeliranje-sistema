@@ -96,7 +96,7 @@ public class AccommodationReservationDTO
     public AccommodationReservationDTO(AccommodationReservation reservation)
     {
         Owner = OwnerService.GetInstance().GetOwnerInfo(reservation.UserId).Item2;
-        Guest = UserRepository.GetInstance().GetById(reservation.UserId);
+        Guest = new User();
         AccommodationDTO = new(AccommodationService.GetInstance().GetById(reservation.AccommodationId));
         Reservation = reservation;
         NumberOfReviews = AccommodationReviewService.GetInstance().GetByAccommodationId(reservation.AccommodationId).Count.ToString();

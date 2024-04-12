@@ -269,4 +269,20 @@ public class AddAccommodationViewModel : INotifyPropertyChanged
         string imagePath = ImageService.GetInstance().GetImageFromUser();
         ImageURL = imagePath;
     }
+
+    public void ClearPage()
+    {
+        AccommodationName = "";
+        Page.CountryTextBox.SelectedIndex = 0;
+        Page.CityTextBox.SelectedIndex = 0;
+        Page.AccommodationType.SelectedIndex = 0;
+        AccommodationPrice = 0;
+        MaximumNumberOfGuests = 0;
+        MinimumNumberOfDaysForReservation = 0;
+        DaysBeforeReservationIsFinal = 0;
+        ImageURL = "";
+        Images.Clear();
+
+        Page.ClosePage();
+    }
 }

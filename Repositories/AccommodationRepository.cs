@@ -14,7 +14,7 @@ using BookingApp.Domain.Miscellaneous;
 
 namespace BookingApp.Repositories;
 
-public class AccommodationRepository : IRepository<Accommodation>
+public class AccommodationRepository : IRepository<Accommodation>, IAccommodationRepository
 {
     private const string FilePath = "../../../Resources/Data/accommodations.csv";
     private readonly Serializer<Accommodation> _serializer;

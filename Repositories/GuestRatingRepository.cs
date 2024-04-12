@@ -95,7 +95,7 @@ public class GuestRatingRepository : IRepository<GuestRating>, IGuestRatingRepos
         return _guestRatings.Any(guestRating => guestRating.GuestId == guest.Id && guestRating.AccommodationId == accommodation.Id && guestRating.IsChecked == isChecked);
     }
 
-    internal void DeleteAll(Func<GuestRating, bool> value)
+    public void DeleteAll(Func<GuestRating, bool> value)
     {
         _guestRatings.RemoveAll(value.Invoke);
         _serializer.ToCSV(FilePath, _guestRatings);

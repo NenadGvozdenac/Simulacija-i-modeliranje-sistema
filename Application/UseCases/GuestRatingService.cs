@@ -12,10 +12,12 @@ namespace BookingApp.Application.UseCases;
 
 public class GuestRatingService
 {
-    private GuestRatingRepository _guestRatingRepository;
-    public GuestRatingService()
+    private IGuestRatingRepository _guestRatingRepository;
+    private IAccommodationReservationRepository _accommodationReservationRepository;
+    public GuestRatingService(IGuestRatingRepository guestRatingRepository, IAccommodationReservationRepository accommodationReservationRepository)
     {
-        _guestRatingRepository = GuestRatingRepository.GetInstance();
+        _guestRatingRepository = guestRatingRepository;
+        _accommodationReservationRepository = accommodationReservationRepository;
     }
 
     public static GuestRatingService GetInstance()
@@ -26,14 +28,14 @@ public class GuestRatingService
     public List<GuestRating> GetAll()
     {
         List<GuestRating> guestRatings = _guestRatingRepository.GetAll();
-        guestRatings.ForEach(guestRating => guestRating.Reservation = AccommodationReservationRepository.GetInstance().GetById(guestRating.ReservationId));
+        guestRatings.ForEach(guestRating => guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId));
         return _guestRatingRepository.GetAll();
     }
 
     public List<GuestRating> GetByAccommodationId(int id)
     {
         List<GuestRating> guestRatings = _guestRatingRepository.GetGuestRatingsByAccommodationId(id);
-        guestRatings.ForEach(guestRating => guestRating.Reservation = AccommodationReservationRepository.GetInstance().GetById(guestRating.ReservationId));
+        guestRatings.ForEach(guestRating => guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId));
         return guestRatings;
     }
 

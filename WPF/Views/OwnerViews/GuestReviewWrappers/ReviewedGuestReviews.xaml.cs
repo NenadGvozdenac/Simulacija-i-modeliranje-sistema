@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.OwnerViews.Components;
 using System;
@@ -21,18 +22,12 @@ namespace BookingApp.WPF.Views.OwnerViews.GuestReviewControls;
 
 public partial class ReviewedGuestReviews : UserControl
 {
-    private GuestRatingRepository _guestRatingRepository;
-    private AccommodationRepository _accommodationRepository;
-    private AccommodationReservationRepository _accommodationReservationRepository;
     private ObservableCollection<GuestRating> _guestRatings;
 
     private User _user;
     public ReviewedGuestReviews(User user)
     {
         _user = user;
-        _guestRatingRepository = GuestRatingRepository.GetInstance();
-        _accommodationRepository = AccommodationRepository.GetInstance();
-        _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
 
         _guestRatings = new ObservableCollection<GuestRating>();
 
@@ -44,9 +39,9 @@ public partial class ReviewedGuestReviews : UserControl
     {
         _guestRatings.Clear();
 
-        foreach (Accommodation accommodation in _accommodationRepository.GetAccommodationsByOwnerId(_user.Id))
+        foreach (Accommodation accommodation in AccommodationService.GetInstance().GetByOwnerId(_user.Id))
         {
-            foreach(GuestRating guestRating in _guestRatingRepository.GetGuestRatingsByAccommodationId(accommodation.Id))
+            foreach(GuestRating guestRating in GuestRatingService.GetInstance().GetByAccommodationId(accommodation.Id))
             {
                 AddGuestRatingIfChecked(guestRating);
             }
@@ -59,7 +54,7 @@ public partial class ReviewedGuestReviews : UserControl
     {
         if (guestRating.IsChecked == true)
         {
-            guestRating.Reservation = _accommodationReservationRepository.GetById(guestRating.ReservationId);
+            guestRating.Reservation = AccommodationReservationService.GetInstance().GetById(guestRating.ReservationId);
             _guestRatings.Add(guestRating);
         }
     }

@@ -46,7 +46,7 @@ public class AddAccommodationCommand : ICommand
         AccommodationService.GetInstance().Add(accommodation);
 
         _addAccommodationViewModel.CancelCommand.Execute(null);
-        _addAccommodationViewModel.Page.ClosePage();
+        _addAccommodationViewModel.ClearPage();
     }
 
     public bool CanExecute(object parameter)

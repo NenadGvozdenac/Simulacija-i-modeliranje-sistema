@@ -12,6 +12,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         void Delete(int id);
         List<DateTime> FindTakenDates(int id);
         List<AccommodationReservation> GetAll();
+        List<AccommodationReservation> GetByAccommodationId(int accommodationId);
         AccommodationReservation GetById(int id);
         List<AccommodationReservation> GetReservationsByAccommodations(List<Accommodation> accommodations);
         bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving);

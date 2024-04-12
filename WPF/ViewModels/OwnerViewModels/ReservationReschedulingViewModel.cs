@@ -52,25 +52,10 @@ public class ReservationReschedulingViewModel
         }
     }
 
-    private void LoadReservation(AccommodationReservationMoving moving)
-    {
-        moving.Reservation = AccommodationReservationRepository.GetInstance().GetById(moving.ReservationId);
-    }
-
     private void ShowDetails(AccommodationReservationMoving e)
     {
         ReservationReschedulingDetailsPage reservationReschedulingDetailsPage = new ReservationReschedulingDetailsPage(e);
         reservationReschedulingDetailsPage.ReservationReschedulingDetailsPageClosed += (s, e) => Update();
         NavigationService.GetNavigationService(_reservationReschedulingPage).Navigate(reservationReschedulingDetailsPage);
-    }
-
-    private void LoadUser(AccommodationReservationMoving moving)
-    {
-        moving.Guest = UserRepository.GetInstance().GetById(moving.GuestId);
-    }
-
-    private void LoadAccommodation(AccommodationReservationMoving moving)
-    {
-        moving.Accommodation = AccommodationRepository.GetInstance().GetById(moving.AccommodationId);
     }
 }

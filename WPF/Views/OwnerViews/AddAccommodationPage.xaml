@@ -41,7 +41,7 @@
 
             <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=AccommodationName, Mode=OneWayToSource}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0"/>
+                <TextBox Text="{Binding Path=AccommodationName}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0"/>
             </StackPanel>
 
             <StackPanel Margin="10" Grid.Row="1" Grid.Column="0" >

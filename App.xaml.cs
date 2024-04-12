@@ -1,4 +1,5 @@
 ﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using BookingApp.View;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,16 +37,16 @@ public partial class App
     private void ConfigureRepositories(IServiceCollection services)
     {
         // Add repositories
-        services.AddSingleton<AccommodationRepository>();
-        services.AddSingleton<AccommodationReservationRepository>();
-        services.AddSingleton<LocationRepository>();
-        services.AddSingleton<OwnerInfoRepository>();
-        services.AddSingleton<GuestRatingRepository>();
-        services.AddSingleton<AccommodationReservationMovingRepository>();
-        services.AddSingleton<AccommodationImageRepository>();
-        services.AddSingleton<UserRepository>();
-        services.AddSingleton<AccommodationReviewRepository>();
-        services.AddSingleton<ReviewImageRepository>();
+        services.AddSingleton<IAccommodationRepository, AccommodationRepository>();
+        services.AddSingleton<IAccommodationReservationRepository, AccommodationReservationRepository>();
+        services.AddSingleton<ILocationRepository, LocationRepository>();
+        services.AddSingleton<IOwnerInfoRepository, OwnerInfoRepository>();
+        services.AddSingleton<IGuestRatingRepository, GuestRatingRepository>();
+        services.AddSingleton<IAccommodationReservationMovingRepository, AccommodationReservationMovingRepository>();
+        services.AddSingleton<IAccommodationImageRepository, AccommodationImageRepository>();
+        services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IAccommodationReviewRepository, AccommodationReviewRepository>();
+        services.AddSingleton<IReviewImageRepository, ReviewImageRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -59,5 +60,4 @@ public partial class App
         services.AddSingleton<ImageService>();
         services.AddSingleton<AccommodationReviewService>();
     }
-
 }

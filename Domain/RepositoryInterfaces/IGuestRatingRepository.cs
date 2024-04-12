@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace BookingApp.Domain.RepositoryInterfaces
@@ -7,6 +8,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
     {
         void Add(GuestRating guestRating);
         void Delete(int id);
+        void DeleteAll(Func<GuestRating, bool> value);
         bool ExistsReviewOfGuest(User guest, Accommodation accommodation, bool isChecked = true);
         List<GuestRating> GetAll();
         GuestRating GetById(int id);

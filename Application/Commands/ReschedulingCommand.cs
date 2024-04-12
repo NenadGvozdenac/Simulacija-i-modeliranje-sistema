@@ -41,7 +41,7 @@ public class ReschedulingCommand : ICommand
         if (ReschedulingStatus.Accepted == status)
         {
             accommodationReservationMoving.Status = ReschedulingStatus.Accepted;
-            AccommodationReservationMovingRepository.GetInstance().Update(accommodationReservationMoving);
+            AccommodationReservationService.GetInstance().UpdateMoving(accommodationReservationMoving);
             AccommodationReservationService.GetInstance().MoveReservation(accommodationReservationMoving);
         }
         else if (ReschedulingStatus.Rejected == status)
@@ -49,7 +49,7 @@ public class ReschedulingCommand : ICommand
             accommodationReservationMoving.Comment = comment;
             accommodationReservationMoving.Status = ReschedulingStatus.Rejected;
 
-            AccommodationReservationMovingRepository.GetInstance().Update(accommodationReservationMoving);
+            AccommodationReservationService.GetInstance().UpdateMoving(accommodationReservationMoving);
         }
 
         reservationReschedulingDetailsPage.NavigateBack();

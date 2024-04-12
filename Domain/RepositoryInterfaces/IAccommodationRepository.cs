@@ -10,7 +10,6 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<Accommodation> GetAccommodationsByOwnerId(int id);
         List<Accommodation> GetAll();
         Accommodation GetById(int id);
-        bool IsAccommodationDeletable(int id);
         int NextId();
         void Update(Accommodation accommodation);
     }

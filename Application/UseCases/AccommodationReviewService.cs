@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -11,18 +12,21 @@ namespace BookingApp.Application.UseCases;
 
 public class AccommodationReviewService
 {
-    private AccommodationReviewRepository _accommodationReviewRepository;
+    private IAccommodationReviewRepository _accommodationReviewRepository;
     private AccommodationService _accommodationService;
-    private UserRepository _userRepository;
-    private AccommodationReservationRepository _accommodationReservationRepository;
-    private ReviewImageRepository _reviewImageRepository;
-    public AccommodationReviewService()
+    private IUserRepository _userRepository;
+    private IAccommodationReservationRepository _accommodationReservationRepository;
+    private IReviewImageRepository _reviewImageRepository;
+    public AccommodationReviewService(IAccommodationReviewRepository accommodationReviewRepository, 
+        IUserRepository userRepository, 
+        IAccommodationReservationRepository accommodationReservationRepository,
+        IReviewImageRepository reviewImageRepository)
     {
-        _accommodationReviewRepository = AccommodationReviewRepository.GetInstance();
         _accommodationService = AccommodationService.GetInstance();
-        _userRepository = UserRepository.GetInstance();
-        _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
-        _reviewImageRepository = ReviewImageRepository.GetInstance();
+        _userRepository = userRepository;
+        _accommodationReviewRepository = accommodationReviewRepository;
+        _accommodationReservationRepository = accommodationReservationRepository;
+        _reviewImageRepository = reviewImageRepository;
     }
 
     public static AccommodationReviewService GetInstance()

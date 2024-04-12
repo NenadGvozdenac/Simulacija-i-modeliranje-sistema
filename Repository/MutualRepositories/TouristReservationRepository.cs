@@ -55,6 +55,7 @@ namespace BookingApp.Repository.MutualRepositories
             return _reservations.Where(a => a.Id_TourTime == id).ToList();
         }
 
+        
         public void Add(TouristReservation reservation)
         {
             _reservations.Add(reservation);

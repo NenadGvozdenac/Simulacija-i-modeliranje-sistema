@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.Resources.Types;
 using System;
@@ -111,7 +112,8 @@ public partial class SignUpForm : Window
         // Adds a copy for super owner
         if(user.Type == UserType.Owner)
         {
-            OwnerInfoRepository.GetInstance().Add(new OwnerInfo(user.Id, false, 0, 0, 0));
+            OwnerService ownerService = OwnerService.GetInstance();
+            ownerService.Add(user);
         }
     }
 

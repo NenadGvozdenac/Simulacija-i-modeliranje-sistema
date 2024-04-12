@@ -61,6 +61,12 @@ public class OwnerService
         _userRepository.Add(entity.Item2);
     }
 
+    public void Add(User user)
+    {
+        OwnerInfo ownerInfo = new(user.Id, false, 0, 0, 0);
+        _ownerInfoRepository.Add(ownerInfo);
+    }
+
     public void Delete((OwnerInfo, User) entity)
     {
         _ownerInfoRepository.Delete(entity.Item2.Id);

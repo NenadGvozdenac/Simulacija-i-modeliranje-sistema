@@ -21,16 +21,14 @@ public class AccommodationService
     private AccommodationRepository _accommodationRepository;
     private LocationRepository _locationRepository;
     private AccommodationImageRepository _accommodationImageRepository;
-    private AccommodationReservationService _accommodationReservationService;
-    private GuestRatingService _guestRatingService;
+    private OwnerService _ownerService;
 
     public AccommodationService()
     {
         _accommodationRepository = AccommodationRepository.GetInstance();
         _locationRepository = LocationRepository.GetInstance();
         _accommodationImageRepository = AccommodationImageRepository.GetInstance();
-        _accommodationReservationService = AccommodationReservationService.GetInstance();
-        _guestRatingService = GuestRatingService.GetInstance();
+        _ownerService = OwnerService.GetInstance();
     }
 
     public static AccommodationService GetInstance()
@@ -78,5 +76,16 @@ public class AccommodationService
     {
         _accommodationImageRepository.DeleteByAccommodationId(entity.Id);
         _accommodationRepository.Delete(entity.Id);
+    }
+
+    public List<Accommodation> GetAllAccommodationsFromSuperOwners()
+    {
+        List<int> superOwners = _ownerService.GetSuperOwners().Select(owner => owner.Id).ToList();
+        return GetAll().Where(accommodation => superOwners.Contains(accommodation.OwnerId)).ToList();
+    }
+
+    public List<Accommodation> GetAllAcommodationNotFromSuperOwners()
+    {
+        return GetAll().Except(GetAllAccommodationsFromSuperOwners()).ToList();
     }
 }

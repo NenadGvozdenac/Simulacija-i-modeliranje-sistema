@@ -117,4 +117,9 @@ public class OwnerService
             IsSuperOwner = ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore >= 4.5
         });
     }
+
+    public List<User> GetSuperOwners()
+    {
+       return GetAll().Where(items => items.Item1.IsSuperOwner).Select(owner => owner.Item2).ToList();
+    }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Domain.RepositoryInterfaces;
 
-public interface IRepository<T>
+public interface IRepository<T> where T : class
 {
     public void Add(T entity);
     public void Update(T entity);

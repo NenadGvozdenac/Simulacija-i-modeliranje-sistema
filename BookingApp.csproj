@@ -179,7 +179,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Resources\Data\accommodation_review.csv">
+	  <None Update="Resources\Data\accommodation_reviews.csv">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
 	</ItemGroup>

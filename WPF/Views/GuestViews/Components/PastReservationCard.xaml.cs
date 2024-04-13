@@ -1,4 +1,6 @@
-﻿using BookingApp.WPF.DTOs.GuestDTOs;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
+using BookingApp.WPF.DTOs.GuestDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,25 @@ public partial class PastReservationCard : UserControl
     public PastReservationCard()
     {
         InitializeComponent();
+    }
+    private void UpdateButtonState(object sender, DependencyPropertyChangedEventArgs e)
+    {
+
+        PastReservationsDTO reservation = (PastReservationsDTO)DataContext;
+
+        if (reservation.DaysSinceLastDateOfStaying > 5)
+        {
+            ReviewButton.IsEnabled = false;
+            ReviewButton.Content = "Can't leave a review";
+            RemainingDays_TextBlock.Text = "Remaining days to leave a review: 0";
+        }
+        else
+        {
+            ReviewButton.IsEnabled = true;
+            ReviewButton.Content = "Tap here to leave a review";
+            RemainingDays_TextBlock.Text = "Remaining days to leave a review: " + (5 - reservation.DaysSinceLastDateOfStaying);
+        }
+
     }
 
     private void Review_Click(object sender, RoutedEventArgs e)

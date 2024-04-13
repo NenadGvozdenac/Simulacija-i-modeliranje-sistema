@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
              mc:Ignorable="d" 
-            d:DesignHeight="194.486" d:DesignWidth="774" Margin="20 10 0 0">
+            d:DesignHeight="194.486" d:DesignWidth="774" Margin="20 10 0 0" DataContextChanged="UpdateButtonState">
     <Grid>
         <Border
             Height="150"
@@ -87,12 +87,12 @@
             Width="180"
             Margin="545,38,46,56">
             <Grid>
-                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" FontSize="15" TextWrapping="Wrap" Foreground="White" Text="Remaining days to leave a review: 5" VerticalAlignment="Top" Height="34" FontFamily="Bahnschrift Light" Margin="6,10,10,0">
+                <TextBlock x:Name="RemainingDays_TextBlock" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" FontSize="15" TextWrapping="Wrap" Foreground="White" Text="Remaining days to leave a review: 5" VerticalAlignment="Top" Height="34" FontFamily="Bahnschrift Light" Margin="6,10,10,0">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <Button Content="Tap here to leave a review" FontSize="11" Margin="16,55,16,15" Click="Review_Click"></Button>
+                <Button x:Name="ReviewButton" Content="Tap here to leave a review" FontSize="11" Margin="16,55,16,15" Click="Review_Click"></Button>
             </Grid>
         </Border>
         <Button Content="Download Reservation Details(PDF)" HorizontalAlignment="Left" Margin="342,165,0,0" VerticalAlignment="Top" Height="27"/>

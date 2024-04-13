@@ -26,8 +26,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             dailyToursWindow = _dailyToursWindow;
             var dailyToursControl = new DailyToursControl(user);
             dailyToursWindow.Content = dailyToursControl;
-            dailyToursControl.BeginButtonClickedControl += (s, e) => DailyTours_SomeEventHandler(s, e);
-            dailyToursControl.EndButtonClickedControl += (s, e) => DailyTours_EndEventHandler(s, e);
+            dailyToursControl.dailyToursControlViewModel.BeginButtonClickedControl += (s, e) => DailyTours_SomeEventHandler(s, e);
+            dailyToursControl.dailyToursControlViewModel.EndButtonClickedControl += (s, e) => DailyTours_EndEventHandler(s, e);
         }
 
         public void DailyTours_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)

@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="718" d:DesignWidth="1024">
 
-    <Grid Background="White">
+    <Grid Background="#FFF8F0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
@@ -131,7 +131,7 @@
                         <ColumnDefinition Width="0*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Reset filters" Style="{StaticResource RoundedButtonStyleGuest}" Click="ResetFilters_Click" Grid.Column="1" Height="25" Width="96"/>
+                    <Button Content="Reset filters" Style="{StaticResource RoundedButtonStyleGuest}" Click="ResetFilters_Click" Grid.Column="1" Height="25" Width="96" Margin="0,-1,0,0"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -150,7 +150,7 @@
                 <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Tap here to see a quick demo on how to use accommodation fildering!" Margin="344,24,212,39" FontSize="14"/>
                 <Button Content="Quick demo" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="81" HorizontalAlignment="Left" Margin="344,62,0,0" VerticalAlignment="Top"/>
 
-                <Label x:Name="username" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="687,62,10,10"/>
+                <Label x:Name="username" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="686,62,11,0"/>
                 <Image Source="../../../Resources/Assets/idcard.png"  RenderOptions.EdgeMode="Unspecified" Margin="724,24,47,32"/>
             </Grid>
 

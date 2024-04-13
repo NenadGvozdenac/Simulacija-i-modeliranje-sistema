@@ -14,6 +14,7 @@ namespace BookingApp.WPF.DTOs.GuestDTOs
         public int AccommodationId { get; set; }
         public int ReservationId { get; set; }
         public double AverageReviewScore { get; set; }
+        public int DaysSinceLastDateOfStaying { get; set; }
         public double Price { get; set; }
         public List<AccommodationImage> Images { get; set; }
 
@@ -24,6 +25,10 @@ namespace BookingApp.WPF.DTOs.GuestDTOs
             AccommodationId = accomm.Id;
             AverageReviewScore = accomm.AverageReviewScore;
             Price = accomm.Price;
+
+            TimeSpan difference = DateTime.Now - accommreservation.LastDateOfStaying;
+            DaysSinceLastDateOfStaying = difference.Days;
+
             ReservationId = accommreservation.Id;
         }
     }

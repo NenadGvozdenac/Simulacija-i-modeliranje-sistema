@@ -64,6 +64,7 @@ public class AccommodationsViewModel : INotifyPropertyChanged
         AccommodationView.GuestNumber.Text = startvalueGuestNumber.ToString();
         LoadCountries();
         FilteredAccommodations = new ObservableCollection<Accommodation>(_accommodations);
+        SortBySuperAccommodations();
     }
 
     public void ResetFilters_Click()
@@ -113,7 +114,34 @@ public class AccommodationsViewModel : INotifyPropertyChanged
                     IsDaysOfStayValid(accommodation, selectedDaysOfStay)
                 )
             );
+        SortBySuperAccommodations();
     }
+
+    private void SortBySuperAccommodations()
+    {
+        List<Accommodation> SuperAccommodations = new List<Accommodation>();
+        List<Accommodation> RegularAccommodations = new List<Accommodation>();
+
+        foreach(Accommodation accommodation in FilteredAccommodations)
+        {
+            if (OwnerService.GetInstance().GetById(accommodation.OwnerId).Item1.IsSuperOwner == true)
+            {
+                SuperAccommodations.Add(accommodation);
+            }
+            else
+            {
+                RegularAccommodations.Add(accommodation);
+            }
+        }
+
+        FilteredAccommodations.Clear();
+        foreach (Accommodation accommodation in SuperAccommodations.Concat(RegularAccommodations))
+        {
+            FilteredAccommodations.Add(accommodation);
+        }
+    }
+
+
 
     private bool IsAccommodationTypeValid(Accommodation accommodation, List<string> checkedTypes)
     {

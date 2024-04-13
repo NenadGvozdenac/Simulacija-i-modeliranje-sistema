@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         mc:Ignorable="d"
         Title="TourDemographics" Height="450" Width="800">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*"></ColumnDefinition>
@@ -24,10 +23,10 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column ="0">
-                    <DatePicker Height="25" Width="100"></DatePicker>
+                    <ComboBox x:Name="YearBox" Height="25" Width="100" ItemsSource="{Binding times}" SelectionChanged="yearSelectionChanged"></ComboBox>
                 </Grid>
                 <Grid Grid.Column ="1">
-                    <Button Height="25" Width="100" Content="All time"></Button>
+                    <Button Height="25" Width="100" Content="All time" Click="AllTime_Click"></Button>
                 </Grid>
             </Grid>
             

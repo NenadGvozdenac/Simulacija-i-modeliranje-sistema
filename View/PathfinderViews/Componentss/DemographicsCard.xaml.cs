@@ -30,7 +30,7 @@ namespace BookingApp.View.PathfinderViews.Componentss
 
         private void TourStats_Click(object sender, RoutedEventArgs e)
         {
-            OnStatsButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
+          OnStatsButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
         }
 
 

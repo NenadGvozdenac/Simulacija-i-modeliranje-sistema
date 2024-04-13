@@ -64,30 +64,9 @@ namespace BookingApp.View.PathfinderViews
 
         public void Update()
         {
-            foreach (TourStartTime time in tourStartTimeRepository.GetAll())
+            foreach (Tour tour in tourRepository.GetAll())
             {
-                Tour toura = tourRepository.GetById(time.TourId);
-                if (time.Status == "passed")
-                {
-                    Tour tour = new Tour();
-                    tour.Name = toura.Name;
-                    tour.Capacity = toura.Capacity;
-                    tour.CurrentDate = time.Time;
-                    tour.Location = locationRepository.GetById(toura.LocationId);
-                    tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                    tour.Language = languageRepository.GetById(toura.LanguageId);
-                    tour.Id = toura.Id;
-                    tour.LocationId = toura.LocationId;
-                    tour.LanguageId = toura.LanguageId;
-                    tour.Duration = toura.Duration;
-                    tour.Checkpoints = toura.Checkpoints;
-                    tour.Dates = toura.Dates;
-                    tour.Description = toura.Description;
-
-
-
-                    tours.Add(tour);
-                }
+                tours.Add(tour);
             }
         }
 

@@ -67,14 +67,18 @@ namespace BookingApp.View.PathfinderViews
         }
 
        
-
+        public List<int> times { get; set; }
         public TourStartTimeRepository timeRepository { get; set; }
 
         public TouristReservationRepository reservationRepository { get; set; }
 
         public TouristRepository touristRepository { get; set; }
 
+        public TourRepository tourRepository { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+ 
 
         // The method to invoke the property changed event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -91,10 +95,13 @@ namespace BookingApp.View.PathfinderViews
             timeRepository = new TourStartTimeRepository();
             reservationRepository = new TouristReservationRepository();
             touristRepository = new TouristRepository();
+            tourRepository = new TourRepository();
 
             Sub18 = FindSub18(FindMostReserved());
             Middle = FindMiddle(FindMostReserved());
             Above50 = FindAbove50(FindMostReserved());
+
+            times = FindYears();
 
             demographicsControl.StatsButtonClickedControl += (s, e) => OnStatsButtonClicked_Handler(s,e);
             Update();
@@ -106,37 +113,54 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        public TourStartTime FindMostReserved()
+        public Tour FindMostReserved()
         {
             List<TourStartTime> dates = new List<TourStartTime>();
-            dates = timeRepository.GetAll().Where(a => a.Status == "passed").ToList();
-            TourStartTime time = dates[0];
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.GetAll();
+            Tour tour = tours[0];
             int touristNumber = 0;
             int touristNumberTemp = 0;
 
-            foreach (TourStartTime date in dates)
+            foreach (Tour t in tours)
             {
-                foreach (TouristReservation reservation in reservationRepository.GetAll()){
-                        if(reservation.Id_TourTime == date.Id)
-                            {
-                                touristNumberTemp++;
-                            }
+                dates = timeRepository.GetByTourId(t.Id).Where(a => a.Status == "passed").ToList();
+
+                foreach (TourStartTime date in dates)
+                {
+                    foreach (TouristReservation reservation in reservationRepository.GetAll())
+                    {
+                        if (reservation.Id_TourTime == date.Id)
+                        {
+                            touristNumberTemp++;
                         }
-                if (touristNumberTemp > touristNumber) {
+                    }
+                  
+                }
+                if (touristNumberTemp > touristNumber)
+                {
                     touristNumber = touristNumberTemp;
-                    time = date;
+                    tour = t;
                 }
                 touristNumberTemp = 0;
             }
-            return time;
+            return tour;
         }
 
-        public List<Tourist> GroupTourists(TourStartTime date) {
+        public List<Tourist> GroupTourists(Tour t) {
 
-            TourStartTime time = new TourStartTime();
-            time = date;
+            Tour tour = new Tour();
+            tour = t;
+            List<TourStartTime> dates = new List<TourStartTime>();
+            dates = timeRepository.GetByTourId(t.Id).Where(a => a.Status == "passed").ToList();
+            List<TouristReservation> reservations = new List<TouristReservation>();
+            
+            foreach(TourStartTime time in dates)
+            {
+                reservations.AddRange(reservationRepository.GetByTimeId(time.Id));
+            }
 
-            List<TouristReservation> reservations = reservationRepository.GetByTimeId(time.Id);
+          
 
             List<Tourist> tourists = new List<Tourist>();
 
@@ -153,9 +177,9 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        public int FindSub18(TourStartTime time){
+        public int FindSub18(Tour t){
 
-            List<Tourist> tourists = GroupTourists(time);
+            List<Tourist> tourists = GroupTourists(t);
             int sub18 = 0;
             foreach (Tourist tourist in tourists) {
                 if(tourist.Age < 18)
@@ -164,10 +188,10 @@ namespace BookingApp.View.PathfinderViews
             return sub18;
         }
 
-        public int FindMiddle(TourStartTime time)
+        public int FindMiddle(Tour t)
         {
 
-            List<Tourist> tourists = GroupTourists(time);
+            List<Tourist> tourists = GroupTourists(t);
             int middle = 0;
             foreach (Tourist tourist in tourists)
             {
@@ -177,10 +201,10 @@ namespace BookingApp.View.PathfinderViews
             return middle;
         }
 
-        public int FindAbove50(TourStartTime time)
+        public int FindAbove50(Tour t)
         {
 
-            List<Tourist> tourists = GroupTourists(time);
+            List<Tourist> tourists = GroupTourists(t);
             int above50 = 0;
             foreach (Tourist tourist in tourists)
             {
@@ -190,6 +214,17 @@ namespace BookingApp.View.PathfinderViews
             return above50;
         }
 
+        public List<int> FindYears()
+        {
+            List<int> times = new List<int>();
+
+            foreach (TourStartTime time in timeRepository.GetAll()) 
+            {
+                if(!times.Contains(time.Time.Year) && time.Status == "passed")
+                    times.Add(time.Time.Year);
+            }
+            return times;
+        }
 
         public void OnStatsButtonClicked_Handler(object sender, BeginButtonClickedEventArgs e)
         {
@@ -199,15 +234,71 @@ namespace BookingApp.View.PathfinderViews
 
         public void OnStatsButtonClicked(BeginButtonClickedEventArgs e)
         {
-            TourStartTime time = timeRepository.GetByTourStartTimeAndId(e.StartTime, e.TourId);
-            Sub18 = FindSub18(time);
+            Tour t = tourRepository.GetById(e.TourId);
+            Sub18 = FindSub18(t);
             
-            Middle = FindMiddle(time);
+            Middle = FindMiddle(t);
             
-            Above50 = FindAbove50(time);
+            Above50 = FindAbove50(t);
             
            
         }
+
+        private void AllTime_Click(object sender, RoutedEventArgs e)
+        {
+            Sub18 = FindSub18(FindMostReserved());
+            Middle = FindMiddle(FindMostReserved());
+            Above50 = FindAbove50(FindMostReserved());
+        }
+
+        private void yearSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int year = (int)YearBox.SelectedItem;
+
+            Sub18 = FindSub18(FindMostReservedForYear(year));
+            Middle = FindMiddle(FindMostReservedForYear(year));
+            Above50 = FindAbove50(FindMostReservedForYear(year));
+        }
+
+
+        public Tour FindMostReservedForYear(int i)
+        {
+            List<TourStartTime> dates = new List<TourStartTime>();
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.GetAll();
+            Tour tour = tours[0];
+            int touristNumber = 0;
+            int touristNumberTemp = 0;
+
+            foreach (Tour t in tours)
+            {
+                dates = timeRepository.GetByTourId(t.Id).Where(a => a.Status == "passed" && a.Time.Year == i).ToList();
+
+                foreach (TourStartTime date in dates)
+                {
+                    foreach (TouristReservation reservation in reservationRepository.GetAll())
+                    {
+                        if (reservation.Id_TourTime == date.Id)
+                        {
+                            touristNumberTemp++;
+                        }
+                    }
+
+                }
+                if (touristNumberTemp > touristNumber)
+                {
+                    touristNumber = touristNumberTemp;
+                    tour = t;
+                }
+                touristNumberTemp = 0;
+            }
+            return tour;
+        }
+
+
+
+
+
 
     }
 }

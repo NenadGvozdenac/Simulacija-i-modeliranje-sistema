@@ -36,9 +36,6 @@ namespace BookingApp.View.PathfinderViews
             InitializeComponent();
             toursViewModel = new ToursViewModel(this);
             DataContext = toursViewModel;
-
-            Update();
-
         }
 
 

@@ -1,0 +1,104 @@
+﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.DetailedGuestFeedbackPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430" Background="Transparent">
+    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="16*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Lavender">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="11*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
+            <TextBlock Grid.Column="1" Text="Guest feedback" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="Navbar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Main portion of page -->
+            <Grid Grid.Column="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding GuestFeedbackDTO.User.Username}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" VerticalAlignment="Center"/>
+                </Grid>
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                    <Label Content="Accommodation name" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.Accommodation.Name}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                    <Label Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.Accommodation.Location}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
+                    <Label Content="Type of reservation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.Accommodation.Type}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                    <Label Content="Reservation timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.DateSpan}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
+                    <Label Content="Number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.Reservation.GuestsNumber}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Grid.Column="0" Margin="5">
+                    <Label Content="Cleanliness" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.Cleanliness}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Grid.Column="1" Margin="5">
+                    <Label Content="My courtesy" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.MyCourtesy}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Grid.Column="0" Margin="5" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <Label Content="Additional comment" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <TextBlock Text="{Binding GuestFeedbackDTO.Comment}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
+                        </Border>
+                    </ScrollViewer>
+                </StackPanel>
+                <StackPanel Grid.Row="8" Grid.Column="0" Margin="5" Grid.RowSpan="5" Grid.ColumnSpan="2">
+                    <Label Content="Images" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2" HorizontalAlignment="Center"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="225" Width="400">
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <StackPanel x:Name="images_StackPanel" >
+
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+

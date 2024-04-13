@@ -1,0 +1,96 @@
+﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.AddGuestRatingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+        mc:Ignorable="d"
+      d:DesignHeight="750" d:DesignWidth="430">
+    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="Lavender">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="Back_MouseDown"/>
+            <TextBlock Grid.Column="1" Text="Guest Rating" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Content="Guest username" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.Guest.Username}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+                <Label Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.Accommodation.Name}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Content="Accommodation location" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.Accommodation.Location}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1">
+                <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.Accommodation.Type}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1">
+                <Label Content="Reservation timespan" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.DateSpan}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="4" Grid.Column="0">
+                <Label Content="Number of guests" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.Reservation.GuestsNumber}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="4" Grid.Column="01">
+                <Label Content="Reservation days" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <Label Content="{Binding UncheckedGuestRatingDTO.Reservation.ReservationDays}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="5" Grid.Column="0">
+                <Label Content="Cleanliness" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <ComboBox x:Name="CleanlinessCombobox" Style="{StaticResource VerdanaComboBoxStyle}"  ItemsSource="{Binding Cleanliness}" SelectedItem="{Binding SelectedCleanliness}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13"/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="5" Grid.Column="1">
+                <Label Content="Respectfulness" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <ComboBox x:Name="RespectfulnessCombobox" Style="{StaticResource VerdanaComboBoxStyle}" ItemsSource="{Binding Respectfulness}" SelectedItem="{Binding SelectedRespectfulness}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13"/>
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Orientation="Vertical">
+                <Label Content="Comment" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
+                <TextBox x:Name="CommentTextBox" Text="{Binding Comment}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" Height="150" BorderThickness="1" FontSize="13" AcceptsReturn="True" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddGuestRatingCommand}"/>
+            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding GoBackCommand}"/>
+        </Grid>
+    </Grid>
+</Page>

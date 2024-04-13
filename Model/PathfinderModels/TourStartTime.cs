@@ -1,12 +1,12 @@
-﻿using BookingApp.Model.MutualModels;
+﻿using BookingApp.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using BookingApp.Serializer;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using BookingApp.Domain.Miscellaneous;
 
 namespace BookingApp.Model.PathfinderModels;
 

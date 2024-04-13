@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <UseWPF>True</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +31,7 @@
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
     <None Remove="Resources\Assets\users.png" />
+    <None Remove="Resources\Assets\user_profile_icon.png" />
     <None Remove="Resources\Assets\view.png" />
     <None Remove="Resources\Images\AccommodationImages\20221120_100611.jpg" />
     <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
@@ -42,6 +43,17 @@
     <None Remove="Resources\Images\AccommodationImages\sixth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\third.jpg" />
     <None Remove="Resources\Images\AccommodationImages\vanzemljoc.png" />
+    <None Remove="Resources\Images\ReviewImages\default_house.png" />
+    <None Remove="Resources\Images\ReviewImages\eighth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\fifth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\first.jpg" />
+    <None Remove="Resources\Images\ReviewImages\fourth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\images.jpg" />
+    <None Remove="Resources\Images\ReviewImages\ninth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\second.jpg" />
+    <None Remove="Resources\Images\ReviewImages\seventh.jpg" />
+    <None Remove="Resources\Images\ReviewImages\sixth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\third.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -108,6 +120,9 @@
     <Content Include="Resources\Assets\users.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\user_profile_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -140,16 +155,36 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Model\TouristModels\" />
-    <Folder Include="Repository\GuestRepositories\" />
-    <Folder Include="Repository\PathfinderRepositories\" />
-    <Folder Include="Repository\TouristRepositories\" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<Content Include="Resources\Images\AccommodationImages\*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources\Images\ReviewImages\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Model\TouristModels\**" />
+	  <EmbeddedResource Remove="Model\TouristModels\**" />
+	  <None Remove="Model\TouristModels\**" />
+	  <Page Remove="Model\TouristModels\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Resources\Data\accommodation_review.csv">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\" />
 	</ItemGroup>
 </Project>

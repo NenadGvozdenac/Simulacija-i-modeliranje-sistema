@@ -4,12 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookingApp.Model.MutualModels;
-using BookingApp.Serializer;
+using BookingApp.Domain.Miscellaneous;
 
 namespace BookingApp.Model.PathfinderModels;
-   
-    public class Checkpoint : ISerializable
+
+public class Checkpoint : ISerializable
     {
         public int Id { get; set; }
 

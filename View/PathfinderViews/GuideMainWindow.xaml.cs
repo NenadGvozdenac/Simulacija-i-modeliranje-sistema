@@ -1,9 +1,7 @@
-﻿using BookingApp.Model.MutualModels;
+﻿using BookingApp.Domain.Models;
 using BookingApp.Model.PathfinderModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.View.GuestViews;
-using BookingApp.View.OwnerViews.Components;
+using BookingApp.Repositories;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using BookingApp.View.PathfinderViews.Componentss;
 using System;
 using System.Collections.Generic;

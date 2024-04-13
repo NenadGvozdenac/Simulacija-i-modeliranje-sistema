@@ -23,7 +23,7 @@ public partial class AccommodationCard : UserControl
         InitializeComponent();
     }
 
-    private void SeeMore_Click(object sender, RoutedEventArgs e)
+    public void SeeMore_Click(object sender, RoutedEventArgs e)
     {
         if (this.DataContext is Accommodation accommodation)
         {
@@ -33,9 +33,8 @@ public partial class AccommodationCard : UserControl
 
             if (parentWindow is GuestMainWindow mainWindow)
             {
-                mainWindow.ShowAccommodationDetails(accommodationId);
+                mainWindow.GuestViewModel.ShowAccommodationDetails(accommodationId);
             }
         }
     }
-
 }

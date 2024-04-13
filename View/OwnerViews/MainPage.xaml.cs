@@ -34,38 +34,9 @@ namespace BookingApp.View.OwnerViews
             _accommodationReservationWrapper = new AccommodationReservationWrapper(_mainPageViewModel);
 
             PrepareFirstPage();
-            CheckForSuperOwner();
-        }
-
-        private void CheckForSuperOwner()
-        {
-            (OwnerInfo, User) ownerInfo = OwnerService.GetInstance().GetOwnerInfo(_mainPageViewModel.User.Id);
-
-            // TODO: Get all reviews of the owner
-
-            // TODO: Recalculate all reviews of the owner
-
-            // TODO: Recalculate number of accommodations of the owner
-
-            ownerInfo.Item1.Accommodations = new AccommodationService().GetByOwnerId(ownerInfo.Item1.OwnerId);
-
-            ownerInfo.Item1.NumberOfAccommodations = ownerInfo.Item1.Accommodations.Count;
-
-            // TODO: Get average review score of the owner
-
-            // If user is reviewed by at least 50 guests, and has average rating above 4.5, make him a super owner
-        
-            if(ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore >= 4.5)
-            {
-                OwnerService.GetInstance().UpdateOwnerInfo(new OwnerInfo()
-                {
-                    AverageReviewScore = ownerInfo.Item1.AverageReviewScore,
-                    NumberOfReviews = ownerInfo.Item1.NumberOfReviews,
-                    NumberOfAccommodations = ownerInfo.Item1.NumberOfAccommodations,
-                    OwnerId = ownerInfo.Item1.OwnerId,
-                    IsSuperOwner = true
-                });
-            }
+            AccommodationReviewService.GetInstance().CheckForCancelledReservations();
+            AccommodationReservationService.GetInstance().CheckForCancelledReservations();
+            OwnerService.GetInstance().CheckForSuperOwner(user);
         }
 
         private void PrepareFirstPage()
@@ -155,7 +126,18 @@ namespace BookingApp.View.OwnerViews
             HideLeftNavbar();
             HideRightNavbar();
             AddAllReservationsThatArentCheckedYet();
+            DeleteAllGuestRatingsThatDontHaveReservations();
             CheckReservationsThatEnded();
+        }
+
+        private void DeleteAllGuestRatingsThatDontHaveReservations()
+        {
+            GuestRatingService.GetInstance().DeleteAll(GuestRating => ReservationDoesntExist(GuestRating));
+        }
+
+        public bool ReservationDoesntExist(GuestRating guestRating)
+        {
+            return AccommodationReservationService.GetInstance().GetAll().Find(reservation => reservation.Id == guestRating.ReservationId) == null;
         }
 
         public void Refresh()
@@ -168,12 +150,14 @@ namespace BookingApp.View.OwnerViews
         {
             _accommodationWrapper.Refresh();
             MainPanel.Content = _accommodationWrapper;
+            SetActiveButton(AccommodationsButton);
         }
 
         private void RefreshReservations()
         {
             _accommodationReservationWrapper.Refresh();
             MainPanel.Content = _accommodationWrapper;
+            SetActiveButton(ReservationsButton);
         }
 
         private void ExitApplication(object sender, MouseButtonEventArgs e)

@@ -100,4 +100,10 @@ public class AccommodationReservationMovingRepository : IRepository<Accommodatio
     {
         return AccommodationReservationMovings.FirstOrDefault(a => a.Id == id);
     }
+
+    public void DeleteAll(Func<AccommodationReservationMoving, bool> value)
+    { 
+        AccommodationReservationMovings.RemoveAll(value.Invoke);
+        _serializer.ToCSV(FilePath, AccommodationReservationMovings);
+    }
 }

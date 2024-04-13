@@ -89,4 +89,15 @@ public class GuestRatingRepository : IRepository<GuestRating>
     {
         return _guestRatings.First(guestRating => guestRating.ReservationId == id);
     }
+
+    public bool ExistsReviewOfGuest(User guest, Accommodation accommodation, bool isChecked = true)
+    {
+        return _guestRatings.Any(guestRating => guestRating.GuestId == guest.Id && guestRating.AccommodationId == accommodation.Id && guestRating.IsChecked == isChecked);
+    }
+
+    internal void DeleteAll(Func<GuestRating, bool> value)
+    {
+        _guestRatings.RemoveAll(value.Invoke);
+        _serializer.ToCSV(FilePath, _guestRatings);
+    }
 }

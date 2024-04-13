@@ -22,21 +22,15 @@ namespace BookingApp.Repository.MutualRepositories
             _reviewImages = _serializer.FromCSV(FilePath);
         }
 
-        public static AccommodationImageRepository GetInstance()
+        public static ReviewImageRepository GetInstance()
         {
-            return App.ServiceProvider.GetRequiredService<AccommodationImageRepository>();
+            return App.ServiceProvider.GetRequiredService<ReviewImageRepository>();
         }
 
         public void Add(ReviewImage image)
         {
             image.Id = NextId();
             _reviewImages.Add(image);
-            _serializer.ToCSV(FilePath, _reviewImages);
-        }
-
-        public void Remove(ReviewImage accommodation)
-        {
-            _reviewImages.Remove(accommodation);
             _serializer.ToCSV(FilePath, _reviewImages);
         }
 
@@ -104,6 +98,17 @@ namespace BookingApp.Repository.MutualRepositories
         public ReviewImage GetById(int id)
         {
             return _reviewImages.FirstOrDefault(a => a.Id == id);
+        }
+
+        public List<ReviewImage> GetByReviewId(int id)
+        {
+            return _reviewImages.Where(a => a.ReviewId == id).ToList();
+        }
+
+        public void DeleteByReviewId(int id)
+        {
+            _reviewImages.RemoveAll(a => a.ReviewId == id);
+            _serializer.ToCSV(FilePath, _reviewImages);
         }
     }
 }

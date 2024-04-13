@@ -15,11 +15,13 @@ public class AccommodationReservationService : IService<AccommodationReservation
 {
     private AccommodationRepository _accommodationRepository;
     private AccommodationReservationRepository _accommodationReservationRepository;
+    private AccommodationReservationMovingRepository _accommodationReservationMovingRepository;
 
     public AccommodationReservationService()
     {
         _accommodationRepository = App.ServiceProvider.GetRequiredService<AccommodationRepository>();
         _accommodationReservationRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationRepository>();
+        _accommodationReservationMovingRepository = App.ServiceProvider.GetRequiredService<AccommodationReservationMovingRepository>();
     }
 
     public static AccommodationReservationService GetInstance()
@@ -72,5 +74,12 @@ public class AccommodationReservationService : IService<AccommodationReservation
         reservation.LastDateOfStaying = wantedDatespan.End;
 
         _accommodationReservationRepository.Update(reservation);
+    }
+
+    public void CheckForCancelledReservations()
+    {
+        List<AccommodationReservationMoving> movingReservations = _accommodationReservationMovingRepository.GetAll();
+
+        _accommodationReservationMovingRepository.DeleteAll(reservation => GetById(reservation.ReservationId) == null);
     }
 }

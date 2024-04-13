@@ -16,6 +16,7 @@
     <None Remove="Resources\Assets\edit.png" />
     <None Remove="Resources\Assets\eye.png" />
     <None Remove="Resources\Assets\hamburger_menu.png" />
+    <None Remove="Resources\Assets\home.256x245.png" />
     <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
     <None Remove="Resources\Assets\language-line.512x481.png" />
@@ -27,6 +28,10 @@
     <None Remove="Resources\Assets\plus-symbol-button.png" />
     <None Remove="Resources\Assets\reserve.png" />
     <None Remove="Resources\Assets\return.512x467.png" />
+    <None Remove="Resources\Assets\star-filled-rate-rating-bookmark-favourite-save-priority-important.256x243.png" />
+    <None Remove="Resources\Assets\star-outline.256x238.png" />
+    <None Remove="Resources\Assets\star-outline.512x490.png" />
+    <None Remove="Resources\Assets\star.512x488.png" />
     <None Remove="Resources\Assets\star.png" />
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
@@ -43,6 +48,17 @@
     <None Remove="Resources\Images\AccommodationImages\sixth.jpg" />
     <None Remove="Resources\Images\AccommodationImages\third.jpg" />
     <None Remove="Resources\Images\AccommodationImages\vanzemljoc.png" />
+    <None Remove="Resources\Images\ReviewImages\default_house.png" />
+    <None Remove="Resources\Images\ReviewImages\eighth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\fifth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\first.jpg" />
+    <None Remove="Resources\Images\ReviewImages\fourth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\images.jpg" />
+    <None Remove="Resources\Images\ReviewImages\ninth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\second.jpg" />
+    <None Remove="Resources\Images\ReviewImages\seventh.jpg" />
+    <None Remove="Resources\Images\ReviewImages\sixth.jpg" />
+    <None Remove="Resources\Images\ReviewImages\third.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +84,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\hamburger_menu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\home.256x245.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\hourglass.png">
@@ -98,6 +117,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\return.512x467.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\star-filled-rate-rating-bookmark-favourite-save-priority-important.256x243.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\star-outline.256x238.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\star-outline.512x490.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\star.512x488.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\three_dots.png">
@@ -149,7 +180,6 @@
     <Folder Include="Repository\GuestRepositories\" />
     <Folder Include="Repository\PathfinderRepositories\" />
     <Folder Include="Repository\TouristRepositories\" />
-    <Folder Include="Resources\Images\ReviewImages\" />
   </ItemGroup>
 
 	<ItemGroup>

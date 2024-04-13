@@ -36,9 +36,11 @@ namespace BookingApp.View.TouristViews
         public List<TourStartTime> tourStartTimes { get; set; }
         public TourStartTime selectedTourStartTime {  get; set; }
         public List<Tourist> tourists { get; set; }
-        public TourDatesUserControl(Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo)
+        public User user {  get; set; }
+        public TourDatesUserControl(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo)
         {
             InitializeComponent();
+            this.user = user;
             selectedTour = detailedTour;
             tourStartTimes = new List<TourStartTime>();
             selectedTourStartTime = new TourStartTime();
@@ -144,6 +146,7 @@ namespace BookingApp.View.TouristViews
             touristReservation.Id_Tourist = tourist.Id;
             touristReservation.Id_TourTime = tourStartTime.Id;
             touristReservation.CheckpointId = -1;
+            touristReservation.UserId = user.Id;
             touristReservationRepository.Add(touristReservation);
         }
         private void AddTourist(Tourist tourist)

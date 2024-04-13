@@ -34,12 +34,6 @@ public class AccommodationImageRepository : IRepository<AccommodationImage>
         _serializer.ToCSV(FilePath, _accommodationImages);
     }
 
-    public void Remove(AccommodationImage accommodation)
-    {
-        _accommodationImages.Remove(accommodation);
-        _serializer.ToCSV(FilePath, _accommodationImages);
-    }
-
     public List<AccommodationImage> GetAll()
     {
         return _accommodationImages;
@@ -64,12 +58,6 @@ public class AccommodationImageRepository : IRepository<AccommodationImage>
     {
         var index = _accommodationImages.FindIndex(a => a.Id == accommodation.Id);
         _accommodationImages[index] = accommodation;
-        _serializer.ToCSV(FilePath, _accommodationImages);
-    }
-
-    public void RemoveByAccommodationId(int accommodationId)
-    {
-        _accommodationImages.RemoveAll(a => a.AccommodationId == accommodationId);
         _serializer.ToCSV(FilePath, _accommodationImages);
     }
 

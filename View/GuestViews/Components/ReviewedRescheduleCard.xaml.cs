@@ -29,7 +29,6 @@ namespace BookingApp.View.GuestViews.Components
 
         private void UpdateStatus(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             AccommodationMovingDTO moving = (AccommodationMovingDTO)DataContext;
 
             if (moving.Status == ReschedulingStatus.Accepted)
@@ -48,7 +47,6 @@ namespace BookingApp.View.GuestViews.Components
                 Status_TextBlock.Text = "Rejected";
                 Status_TextBlock.Foreground = Brushes.Red;
             }
-
         }
     }
 }

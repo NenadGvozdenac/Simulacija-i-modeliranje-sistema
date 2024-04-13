@@ -49,7 +49,7 @@
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1   2   3   4   5" FontSize="20" Margin="876,96,0,0" Height="24" Width="120"/>
 
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please provide any additional comments or feedback:" FontSize="20" Margin="28,202,0,0" Height="59" Width="271"/>
-                    <TextBox x:Name="feedback_TextBox" Panel.ZIndex="2" Height="100" Width="200" Margin="323,202,501,62"/>
+                    <TextBox x:Name="feedback_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Height="100" Width="200" Margin="323,202,501,62"/>
 
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="We would greatly appreciate it if you could share one or more images of the accommodation!" FontSize="20" Margin="556,200,0,0" Height="113" Width="237"/>
                     <Button Content="Click here to add photo" Click="AddPhoto_Click" Margin="638,318,304,22"/>

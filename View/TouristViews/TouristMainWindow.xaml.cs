@@ -30,6 +30,7 @@ namespace BookingApp.View.TouristViews
         public TouristReservationRepository touristReservationRepository {get; set; }
         public TourStartTimeRepository tourStartTimeRepository { get; set; }
         public TouristDetails ToursDetailsUserControl { get; set; }
+        public VisitedTours ToursVisitedUserControl { get; set; }
 
         public TouristMainWindow(User user)
         {
@@ -54,7 +55,7 @@ namespace BookingApp.View.TouristViews
         public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists)
         {
             Tour detailedTour = tour;
-            TouristWindowFrame.Content = new TourDatesUserControl(detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepository);
+            TouristWindowFrame.Content = new TourDatesUserControl(_user, detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepository);
         }
         public void ShowAlternativeTours(int locationId, Tour tour)
         {
@@ -64,6 +65,21 @@ namespace BookingApp.View.TouristViews
         {
             ToursUserControl = new Tours(user);
 
+        }
+
+        private void MyTours_Click(object sender, RoutedEventArgs e)
+        {
+            TouristWindowFrame.Content = new VisitedTours(_user);
+        }
+
+        public void RateTour(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId)
+        {
+            TouristWindowFrame.Content = new RateTour(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
+        }
+
+        private void Home_Click(object sender, MouseButtonEventArgs e)
+        {
+            TouristWindowFrame.Content = ToursUserControl;
         }
     }
 }

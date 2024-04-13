@@ -20,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace BookingApp.View.OwnerViews
 {
-    /// <summary>
-    /// Interaction logic for ReservationSchedulingPage.xaml
-    /// </summary>
     public partial class ReservationReschedulingPage : Page
     {
         private readonly User _user;

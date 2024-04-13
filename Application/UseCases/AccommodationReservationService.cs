@@ -68,6 +68,11 @@ public class AccommodationReservationService
         _accommodationReservationRepository.Delete(reservation.Id);
     }
 
+    public void DeleteById(int id)
+    {
+        _accommodationReservationRepository.Delete(id);
+    }
+
     public AccommodationReservation GetById(int reservationId)
     {
         return _accommodationReservationRepository.GetById(reservationId);
@@ -102,6 +107,21 @@ public class AccommodationReservationService
     private void DeleteAllReservationsReschedulingForReservation(int id)
     {
         _accommodationReservationMovingRepository.DeleteAll(reservation => reservation.ReservationId == id && reservation.Status == ReschedulingStatus.Pending);
+    }
+
+    public void AddMoving(AccommodationReservationMoving accommodationReservationMoving)
+    {
+        _accommodationReservationMovingRepository.Add(accommodationReservationMoving);
+    }
+
+    public List<AccommodationReservationMoving> GetAllMoving()
+    {
+        return _accommodationReservationMovingRepository.GetAll();
+    }
+
+    public void UpdateMoving(AccommodationReservationMoving accommodationReservationMoving)
+    {
+        _accommodationReservationMovingRepository.Update(accommodationReservationMoving);
     }
 
     public List<AccommodationReservation> GetOverlappingReservations(DateSpan wantedDatespan, List<AccommodationReservation> reservations)
@@ -148,5 +168,10 @@ public class AccommodationReservationService
     public void UpdateMoving(AccommodationReservationMoving accommodationReservationMoving)
     {
         _accommodationReservationMovingRepository.Update(accommodationReservationMoving);
+    }
+
+    public List<DateTime> FindTakenDates(int id)
+    {
+        return _accommodationReservationRepository.FindTakenDates(id);
     }
 }

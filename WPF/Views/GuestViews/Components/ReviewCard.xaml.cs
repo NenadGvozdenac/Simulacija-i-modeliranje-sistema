@@ -22,12 +22,10 @@ namespace BookingApp.WPF.Views.GuestViews.Components;
 /// </summary>
 public partial class ReviewCard : UserControl
 {
-    public AccommodationRepository _accommodationRepository;
     public UserRepository _userRepository;
     public ReviewCard()
     {
         InitializeComponent();
-        _accommodationRepository = AccommodationRepository.GetInstance();
         _userRepository = UserRepository.GetInstance();
     }
 

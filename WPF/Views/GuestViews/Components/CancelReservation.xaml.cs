@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.Domain.Miscellaneous;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.Views.GuestViews.Components;
 
@@ -24,23 +25,19 @@ namespace BookingApp.WPF.Views.GuestViews.Components;
 public partial class CancelReservation : UserControl
 {
     public AccommodationReservation selectedReservation;
-    public AccommodationRepository _accommodationRepository;
-    public AccommodationReservationMovingRepository _accommodationMovingRepository;
 
     public EventHandler<int> YesClicked;
     public EventHandler NoClicked;
-    public CancelReservation(AccommodationReservation _selectedReservation, AccommodationRepository accommodationRepository)
+    public CancelReservation(AccommodationReservation _selectedReservation)
     {
         InitializeComponent();
         selectedReservation = _selectedReservation;
-        _accommodationRepository = accommodationRepository;
-        _accommodationMovingRepository = new AccommodationReservationMovingRepository();
         SetUpCancelReservation();
     }
 
     private void SetUpCancelReservation()
     {
-        Accommodation accommodation = _accommodationRepository.GetById(selectedReservation.AccommodationId);
+        Accommodation accommodation = AccommodationService.GetInstance().GetById(selectedReservation.AccommodationId);
         NameOfTheAccommodation_TextBlock.Text = accommodation.Name;
         AvailableDates temp = new AvailableDates(selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying);
         OriginalCheckInDate_TextBlock.Text = temp.ToString();

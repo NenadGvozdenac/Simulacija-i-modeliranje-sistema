@@ -10,30 +10,27 @@ using System.Windows.Input;
 using System.Windows;
 using BookingApp.WPF.Views.GuestViews;
 using BookingApp.Domain.Miscellaneous;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuestViewModels;
 
 public class RescheduleAccommodationViewModel
 {
     public AccommodationReservation selectedReservation;
-    public AccommodationRepository _accommodationRepository;
-    public AccommodationReservationMovingRepository _accommodationMovingRepository;
     public RescheduleAccommodation RescheduleAccommodation { get; set; }
 
     public event EventHandler ChangedMind;
     public event EventHandler SendRequestRefresh;
-    public RescheduleAccommodationViewModel(RescheduleAccommodation _RescheduleAcommodation, AccommodationReservation _selectedReservation, AccommodationRepository accommodationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
+    public RescheduleAccommodationViewModel(RescheduleAccommodation _RescheduleAcommodation, AccommodationReservation _selectedReservation)
     {
         RescheduleAccommodation = _RescheduleAcommodation;
         selectedReservation = _selectedReservation;
-        _accommodationRepository = accommodationRepository;
-        _accommodationMovingRepository = accommodationReservationMovingRepository;
         Update();
     }
 
     private void Update()
     {
-        Accommodation accommodation = _accommodationRepository.GetById(selectedReservation.AccommodationId);
+        Accommodation accommodation = AccommodationService.GetInstance().GetById(selectedReservation.AccommodationId);
         RescheduleAccommodation.NameOfTheAccommodation_TextBlock.Text = accommodation.Name;
         AvailableDates temp = new AvailableDates(selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying);
         RescheduleAccommodation.OriginalCheckInDate_TextBlock.Text = "Original Check-In Date: " + temp.ToString();
@@ -49,7 +46,7 @@ public class RescheduleAccommodationViewModel
     public void SendRequest_Click()
     {
 
-        _accommodationMovingRepository.Add(new AccommodationReservationMoving(selectedReservation.AccommodationId, selectedReservation.Id, selectedReservation.UserId, selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying, RescheduleAccommodation.firstDate.SelectedDate.Value, RescheduleAccommodation.lastDate.SelectedDate.Value));
+        AccommodationReservationService.GetInstance().AddMoving(new AccommodationReservationMoving(selectedReservation.AccommodationId, selectedReservation.Id, selectedReservation.UserId, selectedReservation.FirstDateOfStaying, selectedReservation.LastDateOfStaying, RescheduleAccommodation.firstDate.SelectedDate.Value, RescheduleAccommodation.lastDate.SelectedDate.Value));
         SendRequestRefresh?.Invoke(this, EventArgs.Empty);
         RescheduleAccommodation.NoButton.IsEnabled = false;
         RescheduleAccommodation.YesButton.IsEnabled = false;

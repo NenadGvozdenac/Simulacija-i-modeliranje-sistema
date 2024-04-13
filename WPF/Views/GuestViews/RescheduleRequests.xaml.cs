@@ -22,10 +22,10 @@ namespace BookingApp.WPF.Views.GuestViews;
 public partial class RescheduleRequests : UserControl
 {
     public RescheduleRequestsViewModel RescheduleRequestsViewModel { get; set; }
-    public RescheduleRequests(User user, AccommodationRepository accommodationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
+    public RescheduleRequests(User user)
     {
         InitializeComponent();
-        RescheduleRequestsViewModel = new RescheduleRequestsViewModel(this, user, accommodationRepository, accommodationReservationMovingRepository);
+        RescheduleRequestsViewModel = new RescheduleRequestsViewModel(this, user);
         DataContext = RescheduleRequestsViewModel;
     }
 }

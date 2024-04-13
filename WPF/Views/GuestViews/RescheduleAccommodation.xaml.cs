@@ -27,10 +27,10 @@ public partial class RescheduleAccommodation : UserControl
 
     public event EventHandler ChangedMind;
     public event EventHandler SendRequestRefresh;
-    public RescheduleAccommodation(AccommodationReservation _selectedReservation, AccommodationRepository accommodationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
+    public RescheduleAccommodation(AccommodationReservation _selectedReservation)
     {
         InitializeComponent();
-        RescheduleAccommodationViewModel = new RescheduleAccommodationViewModel(this, _selectedReservation, accommodationRepository, accommodationReservationMovingRepository);
+        RescheduleAccommodationViewModel = new RescheduleAccommodationViewModel(this, _selectedReservation);
         DataContext = RescheduleAccommodationViewModel;
     }
     private void ChangedMind_Click(object sender, RoutedEventArgs e)

@@ -24,10 +24,10 @@ namespace BookingApp.WPF.Views.GuestViews;
 public partial class MyReservations : UserControl
 {
     public MyReservationsViewModel MyReservationsViewModel { get; set; }
-    public MyReservations(User user, AccommodationRepository accommodationRepository , AccommodationReservationRepository accommodationReservationRepository, AccommodationReservationMovingRepository accommodationReservationMovingRepository)
+    public MyReservations(User user)
     {
         InitializeComponent();
-        MyReservationsViewModel = new MyReservationsViewModel(this, user, accommodationRepository, accommodationReservationRepository, accommodationReservationMovingRepository);
+        MyReservationsViewModel = new MyReservationsViewModel(this, user);
         DataContext = MyReservationsViewModel;
     }
 

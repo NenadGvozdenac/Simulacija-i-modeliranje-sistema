@@ -12,14 +12,13 @@ using System.Windows.Input;
 using System.Windows;
 using BookingApp.WPF.Views.GuestViews;
 using BookingApp.Domain.Models;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuestViewModels;
 
 public class AccommodationDetailsViewModel
 {
     public Accommodation selectedAccommodation { get; set; }
-    public AccommodationReservationRepository accomodationreservationrepository { get; set; }
-    public AccommodationReviewRepository _accommodationReviewRepository;
 
     public AccommodationReservation reservation;
     public ObservableCollection<string> _availableDates;
@@ -37,11 +36,10 @@ public class AccommodationDetailsViewModel
     maxvalueGuestNumber = 30,
     startvalueGuestNumber = 1;
     public User _user { get; set; }
-    public AccommodationDetailsViewModel(AccommodationDetails _AccommodationDetails, Accommodation detailedaccomodation, User user, AccommodationReviewRepository accommodationReviewRepository)
+    public AccommodationDetailsViewModel(AccommodationDetails _AccommodationDetails, Accommodation detailedaccomodation, User user)
     {
         AccommodationDetails = _AccommodationDetails;
         _reviews = new ObservableCollection<AccommodationReview>();
-        _accommodationReviewRepository = accommodationReviewRepository;
         SetAccommodation(detailedaccomodation, user);
     }
 
@@ -53,7 +51,6 @@ public class AccommodationDetailsViewModel
     public void SetAccommodation(Accommodation accommodation, User user)
     {
         _availableDates = new ObservableCollection<string>();
-        accomodationreservationrepository = AccommodationReservationRepository.GetInstance();
         reservation = new AccommodationReservation();
         selectedAccommodation = accommodation;
         _user = user;
@@ -86,7 +83,7 @@ public class AccommodationDetailsViewModel
     private void LoadReviews()
     {
         _reviews.Clear();
-        foreach (AccommodationReview review in _accommodationReviewRepository.GetAll())
+        foreach (AccommodationReview review in AccommodationReviewService.GetInstance().GetAll())
         {
             if (review.AccommodationId == selectedAccommodation.Id)
             {
@@ -119,7 +116,7 @@ public class AccommodationDetailsViewModel
     }
     public void FreeDatesCheck_Click()
     {
-        List<DateTime> takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
+        List<DateTime> takenDates = AccommodationReservationService.GetInstance().FindTakenDates(selectedAccommodation.Id);
 
         _availableDates.Clear();
         DateTime? whileDate = AccommodationDetails.firstDate.SelectedDate;
@@ -156,7 +153,7 @@ public class AccommodationDetailsViewModel
 
     private void FreeAlternativeDates()
     {
-        List<DateTime> takenDates = accomodationreservationrepository.FindTakenDates(selectedAccommodation.Id);
+        List<DateTime> takenDates = AccommodationReservationService.GetInstance().FindTakenDates(selectedAccommodation.Id);
 
         _availableDates.Clear();
         DateTime? whileDate = AccommodationDetails.firstDate.SelectedDate.Value;
@@ -237,7 +234,7 @@ public class AccommodationDetailsViewModel
 
             reservation = new AccommodationReservation(_user.Id, selectedAccommodation.Id, Convert.ToInt32(AccommodationDetails.GuestNumber.Text), firstDate, lastDate);
 
-            accomodationreservationrepository.Add(reservation);
+            AccommodationReservationService.GetInstance().Add(reservation);
 
             AccommodationDetails.ConfirmButton.IsEnabled = false;
             AccommodationDetails.ConfirmedReservationTextBox.Visibility = Visibility.Visible;

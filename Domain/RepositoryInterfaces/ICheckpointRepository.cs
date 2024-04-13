@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.PathfinderModels;
+﻿using BookingApp.Domain.Models;
 using System.Collections.Generic;
 
 namespace BookingApp.Domain.RepositoryInterfaces

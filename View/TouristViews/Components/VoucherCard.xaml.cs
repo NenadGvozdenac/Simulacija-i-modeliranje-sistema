@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
-using BookingApp.Repository.MutualRepositories;
+
 
 namespace BookingApp.View.TouristViews.Components
 {

@@ -1,6 +1,6 @@
-﻿using BookingApp.Model.MutualModels;
-using BookingApp.Model.PathfinderModels;
-using BookingApp.Repository.MutualRepositories;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Repositories;
+using BookingApp.View.PathfinderViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,22 +9,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace BookingApp.View.PathfinderViews
+namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for DemographicsControl.xaml
-    /// </summary>
-    public partial class DemographicsControl : UserControl
+    public class DemographicsControlViewModel
     {
         public ObservableCollection<Tour> tours { get; set; }
 
@@ -41,11 +29,11 @@ namespace BookingApp.View.PathfinderViews
 
         public EventHandler<BeginButtonClickedEventArgs> StatsButtonClickedControl { get; set; }
 
-        public DemographicsControl()
+        DemographicsControl demographicsControl { get; set; }
+        public DemographicsControlViewModel(DemographicsControl _demographicsControl)
         {
-            InitializeComponent();
-            DataContext = this;
-
+            
+            demographicsControl = _demographicsControl;
             tours = new ObservableCollection<Tour>();
             tourRepository = new TourRepository();
             locationRepository = new LocationRepository();
@@ -70,15 +58,16 @@ namespace BookingApp.View.PathfinderViews
             }
         }
 
-        private void demographicscard_TourStatsClicked(object sender, BeginButtonClickedEventArgs e) 
+        public void demographicscard_TourStatsClicked(object sender, BeginButtonClickedEventArgs e)
         {
-            onStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId,e.StartTime));
+            onStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
         }
 
-        private void onStatsButtonClicked(BeginButtonClickedEventArgs e)
+        public void onStatsButtonClicked(BeginButtonClickedEventArgs e)
         {
             StatsButtonClickedControl?.Invoke(this, e);
         }
+
 
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Domain.Miscellaneous;
-using BookingApp.Model.PathfinderModels;
 
 namespace BookingApp.Domain.Models;
 

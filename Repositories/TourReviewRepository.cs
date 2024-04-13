@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Domain.Miscellaneous;
 using BookingApp.Model.MutualModels;
-using BookingApp.Serializer;
 
-namespace BookingApp.Repository.MutualRepositories
+
+namespace BookingApp.Repositories
 {
     public class TourReviewRepository
     {

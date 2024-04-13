@@ -86,5 +86,10 @@ namespace BookingApp.View.TouristViews
         {
             TouristWindowFrame.Content = new TouristVouchers(_user.Id);
         }
+
+        internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

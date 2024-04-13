@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.PathfinderModels;
+﻿using BookingApp.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace BookingApp.View.PathfinderViews.Componentss
     /// <summary>
     /// Interaction logic for TourCard.xaml
     /// </summary>
-    
+
     public partial class TourCard : UserControl
     {
         public EventHandler<BeginButtonClickedEventArgs> CancelTourClicked { get; set; }

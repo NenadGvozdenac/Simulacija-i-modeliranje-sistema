@@ -13,14 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Model.MutualModels;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.View.PathfinderViews.Componentss;
 using BookingApp.View.TouristViews.Components;
+using BookingApp.Domain.Models;
+using BookingApp.Repositories;
 
 namespace BookingApp.View.TouristViews
 {

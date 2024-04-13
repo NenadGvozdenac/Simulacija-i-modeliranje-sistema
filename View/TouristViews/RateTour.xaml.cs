@@ -12,11 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Model.MutualModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Services.Mutual;
-using BookingApp.View.GuestViews;
+using BookingApp.Repositories;
+
 
 namespace BookingApp.View.TouristViews
 {

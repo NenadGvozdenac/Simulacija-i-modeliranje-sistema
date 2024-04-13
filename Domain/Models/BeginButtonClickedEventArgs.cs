@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Model.PathfinderModels
+namespace BookingApp.Domain.Models
 {
     public class BeginButtonClickedEventArgs : EventArgs
     {

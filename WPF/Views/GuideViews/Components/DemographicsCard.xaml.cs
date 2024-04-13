@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.PathfinderModels;
+﻿using BookingApp.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,43 +1,33 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using BookingApp.View.PathfinderViews;
 
-namespace BookingApp.View.PathfinderViews
+namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for CheckpointsView.xaml
-    /// </summary>
-    public partial class CheckpointsView : Window, INotifyPropertyChanged
+    public class CheckpointsViewModel
     {
-       public ObservableCollection<Checkpoint> checkpoints {  get; set; }
+        public ObservableCollection<Checkpoint> checkpoints { get; set; }
 
-       public ObservableCollection<Tourist> tourists { get; set; }
+        public ObservableCollection<Tourist> tourists { get; set; }
 
-       public ObservableCollection<Tourist> selectedTourists { get; set; }
-       public TourRepository tourRepository { get; set; }
+        public ObservableCollection<Tourist> selectedTourists { get; set; }
+        public TourRepository tourRepository { get; set; }
 
-       public CheckpointRepository checkpointRepository { get; set; }
+        public CheckpointRepository checkpointRepository { get; set; }
 
-       public TouristReservationRepository reservationRepository { get; set; }
+        public TouristReservationRepository reservationRepository { get; set; }
 
-       public TouristRepository touristRepository { get; set; }
+        public TouristRepository touristRepository { get; set; }
 
         public TourStartTimeRepository timeRepository { get; set; }
 
@@ -45,18 +35,19 @@ namespace BookingApp.View.PathfinderViews
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedMain { get; set; }
 
-        public string tourName {  get; set; } 
+        public string tourName { get; set; }
 
-       public int tourTimeId { get; set; }
+        public int tourTimeId { get; set; }
 
-       public int tourId {  get; set; }
+        public int tourId { get; set; }
 
-       public DateTime _currentDate { get; set; }
+        public DateTime _currentDate { get; set; }
 
-        public CheckpointsView(int TourId, DateTime currentDate)
+        CheckpointsView checkpointsView { get; set; }
+
+        public CheckpointsViewModel(CheckpointsView checkpointViews,int TourId, DateTime currentDate)
         {
-            InitializeComponent();
-            DataContext = this;
+            checkpointsView = checkpointViews;
             tourRepository = new TourRepository();
             touristRepository = new TouristRepository();
             checkpointRepository = new CheckpointRepository();
@@ -65,7 +56,7 @@ namespace BookingApp.View.PathfinderViews
             checkpoints = new ObservableCollection<Checkpoint>();
             tourists = new ObservableCollection<Tourist>();
             selectedTourists = new ObservableCollection<Tourist>();
-            CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
+            checkpointsView.CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
             tourName = "";
             tourTimeId = 0;
             tourId = TourId;
@@ -77,23 +68,24 @@ namespace BookingApp.View.PathfinderViews
         public void Update(int TourId, DateTime currentDate)
         {
             tourName = tourRepository.GetById(TourId).Name;
-            tourTimeId = timeRepository.GetByTourStartTimeAndId(currentDate,TourId).Id; //gets current time id
-            
+            tourTimeId = timeRepository.GetByTourStartTimeAndId(currentDate, TourId).Id; //gets current time id
+
             foreach (Checkpoint checkpoint in checkpointRepository.GetCheckpointsByTourId(TourId))
             {
                 checkpoints.Add(checkpoint);
             }
 
             //gets all reservations
-            foreach (TouristReservation reservation in reservationRepository.GetByTimeId(tourTimeId)) {
-                
+            foreach (TouristReservation reservation in reservationRepository.GetByTimeId(tourTimeId))
+            {
+
                 Tourist tourist_temp = new Tourist();
                 tourist_temp = touristRepository.GetById(reservation.Id_Tourist);
                 if (reservation.CheckpointId == -1)
                 {
                     tourists.Add(tourist_temp);
                 }
-            
+
             }
 
 
@@ -106,14 +98,14 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        public void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             // Access the first row
-            var row = CheckpointsDataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
+            var row = checkpointsView.CheckpointsDataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
             if (row != null)
             {
                 // Access the CheckBox in the first row
-                var checkBox = CheckpointsDataGrid.Columns[1].GetCellContent(row) as CheckBox;
+                var checkBox = checkpointsView.CheckpointsDataGrid.Columns[1].GetCellContent(row) as CheckBox;
                 if (checkBox != null)
                 {
                     // Set IsChecked to true
@@ -124,7 +116,7 @@ namespace BookingApp.View.PathfinderViews
 
         }
 
-        private void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
+        public void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
             var item1 = checkBox.DataContext as Checkpoint;
@@ -148,46 +140,48 @@ namespace BookingApp.View.PathfinderViews
                     TouristReservation reservationTemp = reservationRepository.GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
                     reservationTemp.CheckpointId = item1.Id;
                     reservationRepository.Update(reservationTemp);
-                   
+
                 }
                 selectedTourists.Clear();
 
-                if(CheckIfLast(checkBox) == 1)
+                if (CheckIfLast(checkBox) == 1)
                 {
                     OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
                     OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
-                    foreach(Checkpoint checkpoint in checkpoints)
+                    foreach (Checkpoint checkpoint in checkpoints)
                     {
                         checkpoint.Checked = false;
                         checkpointRepository.Update(checkpoint);
                     }
-                    Close();
+                    checkpointsView.Close();
                 }
             }
         }
 
-        
-        private int CheckIfLast(CheckBox checkbox)
+
+        public int CheckIfLast(CheckBox checkbox)
         {
             Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
 
-                if(checkpoints.Last() == checkpoint) {
-                    return 1;
-                }
-                return 0;
-        }
-
-        private int GoBackToCheckbox(CheckBox checkbox)
-        {
-            Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
-            TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
-            if (checkpoint.Id == timeTemp.CurrentCheckpoint) {
+            if (checkpoints.Last() == checkpoint)
+            {
                 return 1;
             }
             return 0;
         }
 
-        private void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
+        public int GoBackToCheckbox(CheckBox checkbox)
+        {
+            Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
+            TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
+            if (checkpoint.Id == timeTemp.CurrentCheckpoint)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        public void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
             if (checkBox.IsChecked == true)
@@ -206,9 +200,9 @@ namespace BookingApp.View.PathfinderViews
 
         public void EndTour_Click(object sender, RoutedEventArgs e)
         {
-            OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId,_currentDate));
+            OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
             OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
-            Close();
+            checkpointsView.Close();
         }
 
 

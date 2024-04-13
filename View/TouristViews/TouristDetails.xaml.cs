@@ -208,6 +208,11 @@ namespace BookingApp.View.TouristViews
                   }
             
             }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
+    }
 
     }

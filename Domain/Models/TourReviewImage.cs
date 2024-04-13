@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BookingApp.Domain.Miscellaneous;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookingApp.Serializer;
-using BookingApp.View.GuestViews;
+
 
 
 namespace BookingApp.Model.MutualModels

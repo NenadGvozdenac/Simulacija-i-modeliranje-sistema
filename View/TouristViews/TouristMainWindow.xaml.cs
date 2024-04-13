@@ -31,6 +31,7 @@ namespace BookingApp.View.TouristViews
         public TourStartTimeRepository tourStartTimeRepository { get; set; }
         public TouristDetails ToursDetailsUserControl { get; set; }
         public VisitedTours ToursVisitedUserControl { get; set; }
+        public TourVoucherRepository tourVoucherRepository {  get; set; }
 
         public TouristMainWindow(User user)
         {
@@ -43,6 +44,7 @@ namespace BookingApp.View.TouristViews
             touristRepository = new TouristRepository();
             touristReservationRepository = new TouristReservationRepository();
             tourStartTimeRepository = new TourStartTimeRepository();
+            tourVoucherRepository = new TourVoucherRepository();
         }
 
         
@@ -52,10 +54,10 @@ namespace BookingApp.View.TouristViews
             TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
-        public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists)
+        public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher tourVoucher)
         {
             Tour detailedTour = tour;
-            TouristWindowFrame.Content = new TourDatesUserControl(_user, detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepository);
+            TouristWindowFrame.Content = new TourDatesUserControl(_user, detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepository, tourVoucher, tourVoucherRepository);
         }
         public void ShowAlternativeTours(int locationId, Tour tour)
         {
@@ -80,6 +82,11 @@ namespace BookingApp.View.TouristViews
         private void Home_Click(object sender, MouseButtonEventArgs e)
         {
             TouristWindowFrame.Content = ToursUserControl;
+        }
+
+        private void MyVouchers_Click(object sender, RoutedEventArgs e)
+        {
+            TouristWindowFrame.Content = new TouristVouchers(_user.Id);
         }
     }
 }

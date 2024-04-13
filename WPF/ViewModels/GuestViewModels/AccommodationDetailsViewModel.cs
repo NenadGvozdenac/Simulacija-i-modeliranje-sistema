@@ -73,8 +73,6 @@ public class AccommodationDetailsViewModel
         minvalueDaysOfStay = accommodation.MinReservationDays;
         AccommodationDetails.DaysOfStay.Text = accommodation.MinReservationDays.ToString();
         AccommodationDetails.GuestNumber.Text = "1";
-        AccommodationDetails.MinDaysofStayTextBlock.Text = $"Choose how long would you like to stay here (minimum of {accommodation.MinReservationDays} days):";
-        AccommodationDetails.MaxGuestsNumberTextBlock.Text = $"Choose how many guests will there be (maximum {accommodation.MaxGuestNumber}):";
         maxvalueGuestNumber = accommodation.MaxGuestNumber;
         AccommodationDetails.accommodationName.Text = accommodation.Name;
         AccommodationDetails.accomodationAverageReviewScore.Text = $"{accommodation.AverageReviewScore}/10";
@@ -117,6 +115,8 @@ public class AccommodationDetailsViewModel
     public void FreeDatesCheck_Click()
     {
         List<DateTime> takenDates = AccommodationReservationService.GetInstance().FindTakenDates(selectedAccommodation.Id);
+        AccommodationDetails.PdfButton.Visibility = Visibility.Collapsed;
+        AccommodationDetails.ConfirmedReservationTextBox.Visibility = Visibility.Collapsed;
 
         _availableDates.Clear();
         DateTime? whileDate = AccommodationDetails.firstDate.SelectedDate;
@@ -236,6 +236,7 @@ public class AccommodationDetailsViewModel
 
             AccommodationReservationService.GetInstance().Add(reservation);
 
+            AccommodationDetails.PdfButton.Visibility = Visibility.Visible;
             AccommodationDetails.ConfirmButton.IsEnabled = false;
             AccommodationDetails.ConfirmedReservationTextBox.Visibility = Visibility.Visible;
             UpcomingReservationsChanged_Invoke();

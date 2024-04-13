@@ -29,6 +29,8 @@ public class AccommodationsViewModel : INotifyPropertyChanged
     public ObservableCollection<Accommodation> _accommodations { get; set; }
     public Accommodations AccommodationView { get; set; }
 
+    public User user { get; set; }
+
     int minvalueGuestNumber = 1,
     maxvalueGuestNumber = 30,
     startvalueGuestNumber = 1;
@@ -37,15 +39,15 @@ public class AccommodationsViewModel : INotifyPropertyChanged
     maxvalueDaysOfStay = 30,
     startvalueDaysOfStay = 0;
 
-    public AccommodationsViewModel(Accommodations _Accommodations, User user)
+    public AccommodationsViewModel(Accommodations _Accommodations, User _user)
     {
         AccommodationView = _Accommodations;
-
+        user = _user;
 
         //ObservableCollections
         _accommodations = new ObservableCollection<Accommodation>();
         _filteredAccommodations = new ObservableCollection<Accommodation>();
-
+        //AccommodationView.username.Text = user.Username;
         Update();
 
     }
@@ -60,6 +62,7 @@ public class AccommodationsViewModel : INotifyPropertyChanged
             _accommodations.Add(accommodation);
         }
 
+        AccommodationView.username.Content = user.Username;
         AccommodationView.DaysOfStay.Text = startvalueDaysOfStay.ToString();
         AccommodationView.GuestNumber.Text = startvalueGuestNumber.ToString();
         LoadCountries();

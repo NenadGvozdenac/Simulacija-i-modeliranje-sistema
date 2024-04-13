@@ -40,7 +40,7 @@
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="318,47,0,0" FontSize="14" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="Original Check-In-Date:" VerticalAlignment="Top" Width="150">
+                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="318,48,0,0" FontSize="14" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="Original Check-In-Date:" VerticalAlignment="Top" Width="150">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>
@@ -52,7 +52,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="318,89,0,0" FontSize="14" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="Rescheduled date:" VerticalAlignment="Top" Width="119">
+                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="318,90,0,0" FontSize="14" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="Rescheduled date:" VerticalAlignment="Top" Width="119">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>

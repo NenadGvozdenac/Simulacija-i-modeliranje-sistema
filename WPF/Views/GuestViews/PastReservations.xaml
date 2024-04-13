@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="774">
-    <Grid Background="White">
-        <TextBlock HorizontalAlignment="Left" FontSize="30" Margin="27,19,0,0" TextWrapping="Wrap" Text="Past reservations:" VerticalAlignment="Top" Width="232"/>
+    <Grid Background="#FFF8F0">
+        <TextBlock Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" FontSize="30" Margin="27,21,0,0" TextWrapping="Wrap" Text="Past reservations:" VerticalAlignment="Top" Width="316"/>
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="0,70,0,0">
             <ItemsControl
             ItemsSource="{Binding _pastReservations}">

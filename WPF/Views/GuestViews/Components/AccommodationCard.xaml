@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <TextBlock Foreground="White" FontFamily="Cascadia Mono SemiBold" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Korisnik nije&#10;prilozio sliku" VerticalAlignment="Center"/>
+                <TextBlock Foreground="White" FontFamily="Bahnschrift Light" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Korisnik nije&#10;prilozio sliku" VerticalAlignment="Center"/>
                 <Border Name="SideBorder" CornerRadius="25 0 0 25" BorderThickness="0 0 4 0" BorderBrush="#9DD9D2">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Images[0].Path}" Stretch="Fill"/>
@@ -33,11 +33,7 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="29" TextWrapping="Wrap" Foreground="White" Text="{Binding Name}" VerticalAlignment="Top" Height="37" Width="458" FontFamily="Bahnschrift Light">
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
-                    </TextBlock.Effect>
-                </TextBlock>
+                <TextBlock Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="29" Text="{Binding Name}" VerticalAlignment="Top" Height="37" Width="458"/>
 
                 <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="46,100,0,0" FontSize="17" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="264">
                     <TextBlock.Effect>
@@ -56,7 +52,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <Image Source="../../../Resources/Assets/star.png" Margin="482,13,67,112" RenderOptions.EdgeMode="Unspecified">
+                <Image Source="../../../../Resources/Assets/star.png" Margin="478,11,57,103" RenderOptions.EdgeMode="Unspecified">
                     <Image.Effect>
                         <DropShadowEffect Opacity="0.5"/>
                     </Image.Effect>
@@ -67,7 +63,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <Image Source="../../../Resources/Assets/location.png" Margin="10,103,534,13">
+                <Image Source="../../../../Resources/Assets/location.png" Margin="10,103,530,6">
                     <Image.Effect>
                         <DropShadowEffect Opacity="0.5"/>
                     </Image.Effect>

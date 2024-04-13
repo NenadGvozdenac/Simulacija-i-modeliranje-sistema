@@ -47,8 +47,8 @@ public partial class AccommodationCard : UserControl
 
         if (OwnerService.GetInstance().GetById(accommodation.OwnerId).Item1.IsSuperOwner == true)
         {
-            MainBorder.BorderBrush = Brushes.Gold;
-            SideBorder.BorderBrush = Brushes.Gold;
+            MainBorder.BorderBrush = Brushes.Orange;
+            SideBorder.BorderBrush = Brushes.Orange;
         }
     }
 }

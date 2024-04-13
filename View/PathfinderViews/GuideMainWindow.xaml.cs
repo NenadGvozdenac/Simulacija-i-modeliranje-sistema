@@ -105,7 +105,14 @@ namespace BookingApp.View.PathfinderViews
             _timeRepository.Update(startTime);
         }
 
+        private void Demographics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TourDemographics tourDemographics = new TourDemographics();
+            tourDemographics.Show();
+        }
 
+
+        // HANDLERS
         private void DailyToursWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
         {
             OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
@@ -138,5 +145,6 @@ namespace BookingApp.View.PathfinderViews
             ChangeTourStatusPassed(e.TourId, e.StartTime);
         }
 
+        
     }
 }

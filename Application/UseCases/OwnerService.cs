@@ -121,7 +121,7 @@ public class OwnerService
             NumberOfReviews = ownerInfo.Item1.NumberOfReviews,
             NumberOfAccommodations = ownerInfo.Item1.NumberOfAccommodations,
             OwnerId = ownerInfo.Item1.OwnerId,
-            IsSuperOwner = ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore >= 4.5
+            IsSuperOwner = true
         });
     }
 

@@ -24,11 +24,6 @@ public class AccommodationReviewRepository : IRepository<AccommodationReview>, I
         _accommodationReviews = _serializer.FromCSV(FilePath);
     }
 
-    public static AccommodationReviewRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<AccommodationReviewRepository>();
-    }
-
     public void Add(AccommodationReview accommodationReview)
     {
         accommodationReview.Id = NextId();

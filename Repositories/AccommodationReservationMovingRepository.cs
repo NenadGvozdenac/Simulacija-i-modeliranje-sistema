@@ -24,11 +24,6 @@ public class AccommodationReservationMovingRepository : IRepository<Accommodatio
         AccommodationReservationMovings = _serializer.FromCSV(FilePath);
     }
 
-    public static AccommodationReservationMovingRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<AccommodationReservationMovingRepository>();
-    }
-
     public void Add(AccommodationReservationMoving accommodationReservationMoving)
     {
         accommodationReservationMoving.Id = NextId();

@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,15 @@ namespace BookingApp.WPF.Views.GuestViews.Components;
 /// </summary>
 public partial class ReviewCard : UserControl
 {
-    public UserRepository _userRepository;
     public ReviewCard()
     {
         InitializeComponent();
-        _userRepository = UserRepository.GetInstance();
     }
 
     private void SetUpCard(object sender, DependencyPropertyChangedEventArgs e)
     {
         AccommodationReview review = (AccommodationReview)DataContext;
-        user_TextBlock.Text = "User: " + _userRepository.GetById(review.UserId).Username;
+        user_TextBlock.Text = "User: " + OwnerService.GetInstance().GetById(review.UserId).Item2.Username;   //_userRepository.GetById(review.UserId).Username;
         cleanliness_TextBlock.Text = "Cleanliness: " + review.Cleanliness.ToString() + "/5";
         ownerscourtesy_TextBlock.Text = "Owner's courtesy: " + review.OwnersCourtesy.ToString() + "/5";
 

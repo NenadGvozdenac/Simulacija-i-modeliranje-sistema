@@ -164,12 +164,6 @@ public class AccommodationReservationService
     {
         return _accommodationReservationRepository.IsTimespanFree(wantedSpan, accommodation, accommodationReservationMoving);
     }
-
-    public void UpdateMoving(AccommodationReservationMoving accommodationReservationMoving)
-    {
-        _accommodationReservationMovingRepository.Update(accommodationReservationMoving);
-    }
-
     public List<DateTime> FindTakenDates(int id)
     {
         return _accommodationReservationRepository.FindTakenDates(id);

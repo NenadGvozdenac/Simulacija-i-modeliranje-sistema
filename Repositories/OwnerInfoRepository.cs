@@ -22,12 +22,6 @@ public class OwnerInfoRepository : IRepository<OwnerInfo>, IOwnerInfoRepository
         _serializer = new Serializer<OwnerInfo>();
         OwnerInfos = _serializer.FromCSV(FilePath);
     }
-
-    public static OwnerInfoRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<OwnerInfoRepository>();
-    }
-
     public void Add(OwnerInfo ownerInfo)
     {
         OwnerInfos.Add(ownerInfo);

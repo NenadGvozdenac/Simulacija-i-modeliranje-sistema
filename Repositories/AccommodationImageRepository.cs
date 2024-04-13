@@ -24,11 +24,6 @@ public class AccommodationImageRepository : IRepository<AccommodationImage>, IAc
         _accommodationImages = _serializer.FromCSV(FilePath);
     }
 
-    public static AccommodationImageRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<AccommodationImageRepository>();
-    }
-
     public void Add(AccommodationImage accommodation)
     {
         _accommodationImages.Add(accommodation);

@@ -13,18 +13,20 @@ using Microsoft.Extensions.DependencyInjection;
 using BookingApp.Repositories;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.Miscellaneous;
+using BookingApp.Domain.RepositoryInterfaces;
 
 namespace BookingApp.Application.UseCases;
 
 public class ImageService
 {
-    private AccommodationImageRepository _accommodationimageRepository;
-    private ReviewImageRepository _reviewimageRepository;
 
-    public ImageService()
+    private IAccommodationImageRepository _accommodationImageRepository;
+    private IReviewImageRepository _reviewImageRepository;
+
+    public ImageService(IAccommodationImageRepository accommodationImageRepository, IReviewImageRepository reviewImageRepository)
     {
-        _accommodationimageRepository = AccommodationImageRepository.GetInstance();
-        _reviewimageRepository = ReviewImageRepository.GetInstance();
+        _accommodationImageRepository = accommodationImageRepository;
+        _reviewImageRepository = reviewImageRepository;
     }
 
     public static ImageService GetInstance()
@@ -80,11 +82,11 @@ public class ImageService
 
     public void AddReviewImage(ReviewImage image)
     {
-        _reviewimageRepository.Add(image);
+        _reviewImageRepository.Add(image);
     }
 
     public List<AccommodationImage> GetImagesByAccommodationId(int accommodationId)
     {
-        return _accommodationimageRepository.GetImagesByAccommodationId(accommodationId);
+        return _accommodationImageRepository.GetImagesByAccommodationId(accommodationId);
     }
 }

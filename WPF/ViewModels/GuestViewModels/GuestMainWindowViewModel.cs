@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.View;
 using BookingApp.WPF.Views.GuestViews;
 
 namespace BookingApp.WPF.ViewModels.GuestViewModels;
@@ -89,6 +90,8 @@ public class GuestMainWindowViewModel
     }
     public void Logout_Click()
     {
+        SignInForm signIn = new SignInForm();
+        signIn.Show();
         GuestMainWindow.Close();
     }
 }

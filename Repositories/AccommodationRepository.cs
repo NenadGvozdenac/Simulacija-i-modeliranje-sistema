@@ -28,11 +28,6 @@ public class AccommodationRepository : IRepository<Accommodation>, IAccommodatio
         _accommodations.Sort((a, b) => string.Compare(a.Name, b.Name));
     }
 
-    public static AccommodationRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<AccommodationRepository>();
-    }
-
     public List<Accommodation> GetAll()
     {
         return _accommodations;

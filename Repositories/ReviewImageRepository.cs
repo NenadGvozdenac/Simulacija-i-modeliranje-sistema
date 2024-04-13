@@ -23,11 +23,6 @@ public class ReviewImageRepository : IRepository<ReviewImage>, IReviewImageRepos
         _reviewImages = _serializer.FromCSV(FilePath);
     }
 
-    public static ReviewImageRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<ReviewImageRepository>();
-    }
-
     public void Add(ReviewImage image)
     {
         image.Id = NextId();

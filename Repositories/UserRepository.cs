@@ -22,11 +22,6 @@ public class UserRepository : IRepository<User>, IUserRepository
         _users = _serializer.FromCSV(FilePath);
     }
 
-    public static UserRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<UserRepository>();
-    }
-
     public User GetByUsername(string username)
     {
         _users = _serializer.FromCSV(FilePath);

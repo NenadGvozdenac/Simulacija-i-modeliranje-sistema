@@ -23,11 +23,6 @@ public class GuestRatingRepository : IRepository<GuestRating>, IGuestRatingRepos
         _guestRatings = _serializer.FromCSV(FilePath);
     }
 
-    public static GuestRatingRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<GuestRatingRepository>();
-    }
-
     public List<GuestRating> GetGuestRatingsByAccommodationId(int accommodationId)
     {
         return _guestRatings.Where(guestRating => guestRating.AccommodationId == accommodationId).ToList();

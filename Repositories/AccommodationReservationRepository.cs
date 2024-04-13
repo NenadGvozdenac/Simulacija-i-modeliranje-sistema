@@ -24,11 +24,6 @@ public class AccommodationReservationRepository : IRepository<AccommodationReser
         _accommodationreservation = _serializer.FromCSV(FilePath);
     }
 
-    public static AccommodationReservationRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<AccommodationReservationRepository>();
-    }
-
     public List<AccommodationReservation> GetAll()
     {
         return _accommodationreservation;

@@ -23,12 +23,6 @@ public class LocationRepository : IRepository<Location>, ILocationRepository
         _serializer = new Serializer<Location>();
         _locations = _serializer.FromCSV(FilePath);
     }
-
-    public static LocationRepository GetInstance()
-    {
-        return App.ServiceProvider.GetRequiredService<LocationRepository>();
-    }
-
     public List<Location> GetAll()
     {
         return _locations;

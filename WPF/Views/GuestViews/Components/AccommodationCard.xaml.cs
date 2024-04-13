@@ -1,5 +1,7 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.WPF.DTOs.GuestDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,18 @@ public partial class AccommodationCard : UserControl
             {
                 mainWindow.GuestViewModel.ShowAccommodationDetails(accommodationId);
             }
+        }
+    }
+
+    private void UpdateBorder(object sender, DependencyPropertyChangedEventArgs e)
+    {
+
+        Accommodation accommodation = (Accommodation)DataContext;
+
+        if (OwnerService.GetInstance().GetById(accommodation.OwnerId).Item1.IsSuperOwner == true)
+        {
+            MainBorder.BorderBrush = Brushes.Gold;
+            SideBorder.BorderBrush = Brushes.Gold;
         }
     }
 }

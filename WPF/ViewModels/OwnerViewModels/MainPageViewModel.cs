@@ -61,7 +61,7 @@ public class MainPageViewModel
         this.mainPage = mainPage;
         User = user;
 
-        Accommodations = new List<Accommodation>(AccommodationService.GetInstance().GetAll());
+        Accommodations = new List<Accommodation>(AccommodationService.GetInstance().GetByOwnerId(user.Id));
         AccommodationReservations = new List<AccommodationReservation>(AccommodationReservationService.GetInstance().GetReservationsByOwnerId(User.Id));
 
         AccommodationReviewService.GetInstance().CheckForCancelledReservations();

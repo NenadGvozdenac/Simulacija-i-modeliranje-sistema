@@ -1,9 +1,9 @@
 ﻿    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Channels;
+using System.Linq;
+using System.Text;
+using System.Threading.Channels;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
@@ -18,8 +18,10 @@
     using BookingApp.Repository;
     using BookingApp.Repository.MutualRepositories;
     using BookingApp.View.PathfinderViews;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
-    namespace BookingApp.View.TouristViews
+namespace BookingApp.View.TouristViews
     {
         /// <summary>
         /// Interaction logic for TouristDetails.xaml
@@ -33,8 +35,21 @@
             public ObservableCollection<Tourist> _tourists {  get; set; }
 
             public TouristRepository touristRepository;
+        private ObservableCollection<TourVoucher> _vouchers;
+        public ObservableCollection<TourVoucher> Vouchers
+        {
+            get { return _vouchers; }
+            set
+            {
+                if (_vouchers != value)
+                {
+                    _vouchers = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-            private int _guestNumber;
+        private int _guestNumber;
             private string name;
             private string surname;
             private int _guestAge;
@@ -74,12 +89,22 @@
             }
 
             public Tour selectedTour { get; set; }
+
+            public ObservableCollection<TourVoucher> vouchers { get; set; }
+            public TourVoucherRepository tourVoucherRepository { get; set; }
+
+            public TourVoucher selectedTourVoucher {  get; set; }
+
             public TouristDetails(Tour detailedTour, User user)
             {
                 InitializeComponent();
+            DataContext = this;
                 _user = user;
+            selectedTourVoucher = new TourVoucher();
                 locationRepository = new LocationRepository();
                 selectedTour = detailedTour;
+            tourVoucherRepository = new TourVoucherRepository();
+                vouchers = new ObservableCollection<TourVoucher>();
                 ToursUserControl = new Tours(user);
                 _tourists = new ObservableCollection<Tourist>();
                 touristRepository = new TouristRepository();
@@ -89,10 +114,35 @@
                 tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
 
                 HideMessages();
-
+            FindVouchers();
 
             }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox != null && comboBox.SelectedItem != null)
+            {
+                selectedTourVoucher = comboBox.SelectedItem as TourVoucher;
+                if (selectedTourVoucher != null)
+                {
+                    int selectedVoucherId = selectedTourVoucher.Id;
+                    DateTime selectedExpirationDate = selectedTourVoucher.ExpirationDate;
+
+                }
+            }
+        }
+        public void FindVouchers()
+        {
+            foreach (TourVoucher voucher in tourVoucherRepository.GetAll())
+            {
+                if (voucher.TouristId == _user.Id)
+                {
+                    vouchers.Add(voucher);
+                }
+            }
+            Vouchers = new ObservableCollection<TourVoucher>(vouchers);
+        }
         private void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
             {
                 if (!int.TryParse(GuestNumberText.Text, out int number) && GuestNumberText.Text!="")
@@ -178,6 +228,10 @@
 
         }
 
+        private void UseVoucher()
+        {
+            tourVoucherRepository.Delete(selectedTourVoucher.Id);
+        }
         private bool areFieldsEmpty()
         {
             return GuestNumberText.Text == "" || GuestName.Text == "" || GuestSurname.Text == "" || GuestAgeText.Text == "";
@@ -194,6 +248,12 @@
                     addTouristMessage.Visibility = Visibility.Visible;
                     return;
                 }
+
+                if(selectedTourVoucher != null)
+                {
+                UseVoucher();
+                }
+
                 List<Tourist> tourists = new List<Tourist>();
                 foreach(Tourist t in _tourists)
                 {
@@ -204,11 +264,15 @@
 
                 if (parentWindow is TouristMainWindow mainWindow)
                   {
-                      mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists);
+                      mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists, selectedTourVoucher);
                       _tourists.Clear();
                   }
             
             }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+    }
     }

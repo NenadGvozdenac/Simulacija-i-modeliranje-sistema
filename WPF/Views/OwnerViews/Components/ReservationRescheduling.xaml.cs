@@ -22,17 +22,18 @@ namespace BookingApp.WPF.Views.OwnerViews.Components;
 
 public partial class ReservationRescheduling : UserControl
 {
-    public event EventHandler<AccommodationReservationMoving> ReservationReschedulingDetails;
-    public ReservationReschedulingCardViewModel ReservationReschedulingCardViewModel { get; set; }
-    public ReservationRescheduling(AccommodationReservationMoving accommodationReservationMoving)
+    private ReservationReschedulingCardViewModel _reservationReschedulingCardViewModel;
+    private ReservationReschedulingPage _reservationReschedulingPage;
+    public ReservationRescheduling(ReservationReschedulingPage reservationReschedulingPage, AccommodationReservationMoving accommodationReservationMoving)
     {
         InitializeComponent();
-        ReservationReschedulingCardViewModel = new ReservationReschedulingCardViewModel(accommodationReservationMoving);
-        DataContext = ReservationReschedulingCardViewModel;
+        _reservationReschedulingPage = reservationReschedulingPage;
+        _reservationReschedulingCardViewModel = new ReservationReschedulingCardViewModel(accommodationReservationMoving);
+        DataContext = _reservationReschedulingCardViewModel;
     }
 
-    private void ReservationRescheduling_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        ReservationReschedulingDetails.Invoke(this, ReservationReschedulingCardViewModel.AccommodationReservationMoving);
-    }  
+        _reservationReschedulingCardViewModel.CardClicked(_reservationReschedulingPage);
+    }
 }

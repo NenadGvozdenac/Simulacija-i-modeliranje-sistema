@@ -1,45 +1,37 @@
-﻿using System;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Repositories;
+using BookingApp.View.TouristViews;
+using BookingApp.WPF.Views.TouristViews;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BookingApp.Domain.Models;
-using BookingApp.Repositories;
-using BookingApp.View.PathfinderViews;
+using System.Windows;
 
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    /// <summary>
-    /// Interaction logic for TourDatesUserControl.xaml
-    /// </summary>
-    public partial class TourDatesUserControl : UserControl
+    public class TourDatesUserControlViewModel
     {
-        private Tour selectedTour {  get; set; }
-        private int guestNumber {  get; set; }
+        private Tour selectedTour { get; set; }
+        private int guestNumber { get; set; }
         public TourStartTimeRepository tourStartTimeRepository { get; set; }
         public TouristRepository touristRepository { get; set; }
         public TouristReservationRepository touristReservationRepository { get; set; }
         public TourStartTimeRepository tourStarTimeRepository { get; set; }
         public List<TourStartTime> tourStartTimes { get; set; }
-        public TourStartTime selectedTourStartTime {  get; set; }
+        public TourStartTime selectedTourStartTime { get; set; }
         public List<Tourist> tourists { get; set; }
-        public User user {  get; set; }
-        public TourVoucher tourVoucher {  get; set; }
-        public TourVoucherRepository tourVoucherRepository {  get; set; }
-        public TourDatesUserControl(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo, TourVoucher voucher, TourVoucherRepository tourVoucherRepository)
+        public User user { get; set; }
+        public TourVoucher tourVoucher { get; set; }
+        public TourVoucherRepository tourVoucherRepository { get; set; }
+        public TourDatesUserControl TourDatesUserControl { get; set; }
+        public TourDatesUserControlViewModel(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo, TourVoucher voucher, TourVoucherRepository tourVoucherRepository, TourDatesUserControl tourDates)
         {
-            InitializeComponent();
+            TourDatesUserControl = tourDates;
             this.user = user;
             selectedTour = detailedTour;
             tourStartTimes = new List<TourStartTime>();
@@ -51,11 +43,11 @@ namespace BookingApp.View.TouristViews
             this.tourists = tourists;
             tourVoucher = voucher;
             this.tourVoucherRepository = tourVoucherRepository;
-            touristsAddedMessage.Visibility = Visibility.Hidden;
+            TourDatesUserControl.touristsAddedMessage.Visibility = Visibility.Hidden;
 
 
             findTourDates();
-            tourDatesDataGrid.ItemsSource = tourStartTimes;
+            TourDatesUserControl.tourDatesDataGrid.ItemsSource = tourStartTimes;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -74,73 +66,73 @@ namespace BookingApp.View.TouristViews
             }
         }
 
-        private void TourDatesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void TourDatesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tourDatesDataGrid.SelectedItem != null)
+            if (TourDatesUserControl.tourDatesDataGrid.SelectedItem != null)
             {
-                noFreeSpacesMessage.Visibility = Visibility.Hidden;
-                freeSpaces.Visibility = Visibility.Hidden;
-                alternativeTours.Visibility = Visibility.Hidden;
+                TourDatesUserControl.noFreeSpacesMessage.Visibility = Visibility.Hidden;
+                TourDatesUserControl.freeSpaces.Visibility = Visibility.Hidden;
+                TourDatesUserControl.alternativeTours.Visibility = Visibility.Hidden;
 
-                if (touristsAddedMessage.Visibility == Visibility.Visible)
+                if (TourDatesUserControl.touristsAddedMessage.Visibility == Visibility.Visible)
                 {
                     return;
                 }
-                selectedTourStartTime = (TourStartTime)tourDatesDataGrid.SelectedItem;
+                selectedTourStartTime = (TourStartTime)TourDatesUserControl.tourDatesDataGrid.SelectedItem;
                 TourReservation(selectedTourStartTime);
 
             }
         }
 
-        private void TourReservation(TourStartTime tourStartTime)
+        public void TourReservation(TourStartTime tourStartTime)
         {
             if (!isTourGuestNumberValid())
             {
                 return;
             }
             List<Tourist> touristList = new List<Tourist>();
-            foreach(Tourist t in tourists)
+            foreach (Tourist t in tourists)
             {
                 touristList.Add(t);
             }
-                foreach(Tourist tourist in touristList)
-                {
-                    tourist.Id = touristRepository.NextId();
-                    AddTourist(tourist);
+            foreach (Tourist tourist in touristList)
+            {
+                tourist.Id = touristRepository.NextId();
+                AddTourist(tourist);
 
-                    CreateReservation(tourist, tourStartTime);
+                CreateReservation(tourist, tourStartTime);
 
-                    UpdateTourStartTime(tourStartTime);
-                }
-            touristsAddedMessage.Visibility = Visibility.Visible;
+                UpdateTourStartTime(tourStartTime);
+            }
+            TourDatesUserControl.touristsAddedMessage.Visibility = Visibility.Visible;
             return;
         }
 
-        private bool isTourGuestNumberValid()
+        public bool isTourGuestNumberValid()
         {
-            if (tourists.Count() >= (selectedTour.Capacity - selectedTourStartTime.Guests)+1)
+            if (tourists.Count() >= (selectedTour.Capacity - selectedTourStartTime.Guests) + 1)
             {
-                noFreeSpacesMessage.Visibility = Visibility.Visible;
-                freeSpaces.Visibility = Visibility.Visible;
-                if(selectedTour.Capacity - selectedTourStartTime.Guests == 0)
+                TourDatesUserControl.noFreeSpacesMessage.Visibility = Visibility.Visible;
+                TourDatesUserControl.freeSpaces.Visibility = Visibility.Visible;
+                if (selectedTour.Capacity - selectedTourStartTime.Guests == 0)
                 {
-                    alternativeTours.Visibility = Visibility.Visible;
+                    TourDatesUserControl.alternativeTours.Visibility = Visibility.Visible;
 
                 }
-                touristsAddedMessage.Visibility = Visibility.Hidden;
-                freeSpaces.Text = (selectedTour.Capacity - selectedTourStartTime.Guests).ToString();
+                TourDatesUserControl.touristsAddedMessage.Visibility = Visibility.Hidden;
+                TourDatesUserControl.freeSpaces.Text = (selectedTour.Capacity - selectedTourStartTime.Guests).ToString();
                 return false;
 
             }
             return true;
         }
-        private void UpdateTourStartTime(TourStartTime tourStartTime)
+        public void UpdateTourStartTime(TourStartTime tourStartTime)
         {
             tourStartTime.Guests += tourists.Count();
             tourStartTimeRepository.Update(tourStartTime);
             tourists.Clear();
         }
-        private void CreateReservation(Tourist tourist, TourStartTime tourStartTime)
+        public void CreateReservation(Tourist tourist, TourStartTime tourStartTime)
         {
             TouristReservation touristReservation = new TouristReservation();
             touristReservation.Id = touristReservationRepository.NextId();
@@ -155,24 +147,24 @@ namespace BookingApp.View.TouristViews
             }
         }
 
-        private void UseVoucher()
+        public void UseVoucher()
         {
             tourVoucherRepository.Delete(tourVoucher.Id);
         }
-        private void AddTourist(Tourist tourist)
+        public void AddTourist(Tourist tourist)
         {
-            foreach(Tourist t in touristRepository.GetAll())
+            foreach (Tourist t in touristRepository.GetAll())
             {
-                if(t.Id == tourist.Id)
+                if (t.Id == tourist.Id)
                 {
                     return;
                 }
             }
             touristRepository.Add(tourist);
         }
-        private void BackToTouristDetails_Click(object sender, RoutedEventArgs e)
+        public void BackToTouristDetails_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
+            Window parentWindow = Window.GetWindow(TourDatesUserControl);
 
             if (parentWindow is TouristMainWindow mainWindow)
             {
@@ -180,9 +172,9 @@ namespace BookingApp.View.TouristViews
             }
         }
 
-        private void AlternativeTours_Click(object sender, RoutedEventArgs e)
+        public void AlternativeTours_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
+            Window parentWindow = Window.GetWindow(TourDatesUserControl);
 
             if (parentWindow is TouristMainWindow mainWindow)
             {

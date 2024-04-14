@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="BookingApp.View.TouristViews.TouristDetails"
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.TouristDetails"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookingApp.View.TouristViews"
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1000" Background="LightGray">
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
@@ -12,6 +12,7 @@
 
 
             <Grid Background="LightGray" Margin="0,0,0,0">
+                <Frame x:Name="TouristWindowFrame" NavigationUIVisibility="Hidden"/>
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -22,7 +23,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="156" Height="80" Margin="33,0,0,0"/>
-                        <Button Click="Return_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Height="42" Width="58" Margin="891,0,0,0">
                             <Image x:Name="Image" Source="../../Resources\Assets\return.512x467.png" Height="32" Width="39"/>
                         </Button>
                     </Grid>

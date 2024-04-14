@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Model.MutualModels;
 using BookingApp.Repositories;
+using BookingApp.WPF.Views.TouristViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;

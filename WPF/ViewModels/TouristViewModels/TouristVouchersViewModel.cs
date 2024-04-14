@@ -1,6 +1,6 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.Model.MutualModels;
 using BookingApp.Repositories;
+using BookingApp.WPF.Views.TouristViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,22 +9,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    /// <summary>
-    /// Interaction logic for TouristVouchers.xaml
-    /// </summary>
-    public partial class TouristVouchers : UserControl
+    public class TouristVouchersViewModel
     {
         private ObservableCollection<TourVoucher> _vouchers;
         public ObservableCollection<TourVoucher> Vouchers
@@ -42,20 +30,21 @@ namespace BookingApp.View.TouristViews
 
         public TourVoucherRepository tourVoucherRepository { get; set; }
         public ObservableCollection<TourVoucher> vouchers { get; set; }
-        public int userId {  get; set; }
-        public TouristVouchers(int userId)
+        public int userId { get; set; }
+        public TouristVouchers touristVouchers {  get; set; }
+        public TouristVouchersViewModel(int userId, TouristVouchers _touristVouchers)
         {
-            InitializeComponent();
-            DataContext = this;
+            touristVouchers = _touristVouchers;
             this.userId = userId;
             vouchers = new ObservableCollection<TourVoucher>();
             tourVoucherRepository = new TourVoucherRepository();
             Update();
         }
-       
+
         public void Update()
         {
-            foreach(TourVoucher voucher in tourVoucherRepository.GetAll())
+            vouchers.Clear();
+            foreach (TourVoucher voucher in tourVoucherRepository.GetAll())
             {
                 if (voucher.TouristId == userId)
                 {
@@ -70,6 +59,5 @@ namespace BookingApp.View.TouristViews
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

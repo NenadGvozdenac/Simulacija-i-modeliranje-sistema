@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Domain.Models;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
 
@@ -35,9 +34,13 @@ namespace BookingApp.View.TouristViews
         public List<TourStartTime> tourStartTimes { get; set; }
         public TourStartTime selectedTourStartTime {  get; set; }
         public List<Tourist> tourists { get; set; }
-        public TourDatesUserControl(Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo)
+        public User user {  get; set; }
+        public TourVoucher tourVoucher {  get; set; }
+        public TourVoucherRepository tourVoucherRepository {  get; set; }
+        public TourDatesUserControl(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo, TourVoucher voucher, TourVoucherRepository tourVoucherRepository)
         {
             InitializeComponent();
+            this.user = user;
             selectedTour = detailedTour;
             tourStartTimes = new List<TourStartTime>();
             selectedTourStartTime = new TourStartTime();
@@ -46,12 +49,13 @@ namespace BookingApp.View.TouristViews
             this.touristReservationRepository = touristReservationRepository;
             this.guestNumber = guestNumber;
             this.tourists = tourists;
+            tourVoucher = voucher;
+            this.tourVoucherRepository = tourVoucherRepository;
             touristsAddedMessage.Visibility = Visibility.Hidden;
 
 
             findTourDates();
             tourDatesDataGrid.ItemsSource = tourStartTimes;
-
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -143,7 +147,17 @@ namespace BookingApp.View.TouristViews
             touristReservation.Id_Tourist = tourist.Id;
             touristReservation.Id_TourTime = tourStartTime.Id;
             touristReservation.CheckpointId = -1;
+            touristReservation.UserId = user.Id;
             touristReservationRepository.Add(touristReservation);
+            if (tourVoucher != null)
+            {
+                UseVoucher();
+            }
+        }
+
+        private void UseVoucher()
+        {
+            tourVoucherRepository.Delete(tourVoucher.Id);
         }
         private void AddTourist(Tourist tourist)
         {

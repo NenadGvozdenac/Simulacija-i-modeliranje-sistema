@@ -17,17 +17,19 @@ namespace BookingApp.Domain.Models
 
         public int CheckpointId { get; set; }  //NEW
 
+        public int UserId {  get; set; } //NEW
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
             Id_TourTime = Convert.ToInt32(values[1]);
             Id_Tourist = Convert.ToInt32(values[2]);
             CheckpointId = Convert.ToInt32(values[3]);
+            UserId = Convert.ToInt32(values[4]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Id_TourTime.ToString(), Id_Tourist.ToString(), CheckpointId.ToString() };
+            string[] csvValues = { Id.ToString(), Id_TourTime.ToString(), Id_Tourist.ToString(), CheckpointId.ToString(), UserId.ToString()};
             return csvValues;
         }
     }

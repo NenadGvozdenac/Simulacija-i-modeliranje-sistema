@@ -1,6 +1,6 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.Repositories;
+using BookingApp.WPF.ViewModels.GuideViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,42 +25,33 @@ namespace BookingApp.View.PathfinderViews
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedWindow { get; set; }
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedWindow { get; set; }
-
-        public User _user {  get; set; }
-
+       
+        public DailyToursWindowViewModel dailyToursWindowViewModel { get; set; }
+        
         public DailyToursWindow(User user)
         {
             InitializeComponent();
-            _user = user;
-            var dailyToursControl = new DailyToursControl(user);
-            Content = dailyToursControl;
-            dailyToursControl.BeginButtonClickedControl += (s,e)=>DailyTours_SomeEventHandler(s,e);
-            dailyToursControl.EndButtonClickedControl = (s,e) => DailyTours_EndEventHandler(s,e);
+            dailyToursWindowViewModel = new DailyToursWindowViewModel(this,user);
         }
 
         private void DailyTours_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
         {
-            OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId,e.StartTime));
+            dailyToursWindowViewModel.DailyTours_SomeEventHandler(sender, e);
         }
 
         public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
         {
-            BeginButtonClickedWindow?.Invoke(this, e);
-            Close();
+            dailyToursWindowViewModel.OnBeginButtonClicked(e);
         }
-
-
 
         private void DailyTours_EndEventHandler(object sender, BeginButtonClickedEventArgs e)
         {
-            OnEndButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+            dailyToursWindowViewModel.DailyTours_EndEventHandler(sender, e);
         }
-
 
         public void OnEndButtonClicked(BeginButtonClickedEventArgs e)
         {
-            EndButtonClickedWindow?.Invoke(this, e);
-            Close();
+            dailyToursWindowViewModel.OnEndButtonClicked(e);
         }
 
     }

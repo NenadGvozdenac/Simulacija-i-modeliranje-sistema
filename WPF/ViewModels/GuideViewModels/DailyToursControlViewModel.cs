@@ -1,6 +1,6 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.Repositories;
+using BookingApp.View.PathfinderViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,22 +9,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace BookingApp.View.PathfinderViews
+namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for DailyToursControl.xaml
-    /// </summary>
-    public partial class DailyToursControl : UserControl
+    public class DailyToursControlViewModel
     {
         public ObservableCollection<Tour> dailyTours { get; set; }
 
@@ -42,54 +30,59 @@ namespace BookingApp.View.PathfinderViews
 
         private readonly User _user;
 
+        public DailyToursControl dailyToursControl { get; set; }
 
-        public DailyToursControl(User user)
+        public DailyToursControlViewModel(DailyToursControl _dailyToursControl,User user)
         {
-            InitializeComponent();
-            DataContext = this;
+            dailyToursControl = _dailyToursControl;
             dailyTours = new ObservableCollection<Tour>();
             tourRepository = new TourRepository();
             locationRepository = new LocationRepository();
             tourImageRepository = new TourImageRepository();
             languageRepository = new LanguageRepository();
             tourStartTimeRepository = new TourStartTimeRepository();
+
             _user = user;
             Update();
-        
+
         }
 
         public void Update()
         {
-            foreach (TourStartTime startTime in tourStartTimeRepository.GetAll()){
-                if (CheckIfPassed(startTime) == 1) {
+            foreach (TourStartTime startTime in tourStartTimeRepository.GetAll())
+            {
+                if (CheckIfPassed(startTime) == 1)
+                {
                     continue;
                 }
-                if (startTime.Time.Date == System.DateTime.Now.Date){     
+                if (startTime.Time.Date == System.DateTime.Now.Date)
+                {
                     Tour toura = tourRepository.GetById(startTime.TourId);
-                        if (toura.OwnerId == _user.Id){
-                            Tour tour = new Tour();
-                            tour.Capacity = toura.Capacity;
-                            tour.CurrentDate = startTime.Time;
-                            tour.Location = locationRepository.GetById(toura.LocationId);
-                            tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                            tour.Language = languageRepository.GetById(toura.LanguageId);
-                            tour.Id = toura.Id;
-                            tour.LocationId = toura.LocationId;
-                            tour.LanguageId = toura.LanguageId;
-                            tour.Duration = toura.Duration;
-                            tour.Checkpoints = toura.Checkpoints;
-                            tour.Dates = toura.Dates;
-                            tour.Description = toura.Description;
-                    
+                    if (toura.OwnerId == _user.Id)
+                    {
+                        Tour tour = new Tour();
+                        tour.Capacity = toura.Capacity;
+                        tour.CurrentDate = startTime.Time;
+                        tour.Location = locationRepository.GetById(toura.LocationId);
+                        tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
+                        tour.Language = languageRepository.GetById(toura.LanguageId);
+                        tour.Id = toura.Id;
+                        tour.LocationId = toura.LocationId;
+                        tour.LanguageId = toura.LanguageId;
+                        tour.Duration = toura.Duration;
+                        tour.Checkpoints = toura.Checkpoints;
+                        tour.Dates = toura.Dates;
+                        tour.Description = toura.Description;
 
 
-                            dailyTours.Add(tour);
-                        }
-                    } 
+
+                        dailyTours.Add(tour);
+                    }
+                }
             }
-         }
+        }
 
-       
+
         public int CheckIfPassed(TourStartTime startTime)
         {
             if (startTime.Status == "passed")
@@ -104,7 +97,7 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void DailyTourCard_BeginButtonClicked(object sender, BeginButtonClickedEventArgs e)
+        public void DailyTourCard_BeginButtonClicked(object sender, BeginButtonClickedEventArgs e)
         {
             OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
         }
@@ -115,7 +108,7 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        private void DailyTourCard_EndButtonClicked(object sender, BeginButtonClickedEventArgs e)
+        public void DailyTourCard_EndButtonClicked(object sender, BeginButtonClickedEventArgs e)
         {
             OnEndButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
         }
@@ -124,5 +117,7 @@ namespace BookingApp.View.PathfinderViews
         {
             EndButtonClickedControl?.Invoke(this, e);
         }
+
+
     }
 }

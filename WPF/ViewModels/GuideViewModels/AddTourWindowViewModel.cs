@@ -1,5 +1,4 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.Repositories;
 using Microsoft.Win32;
 using System;
@@ -10,22 +9,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
+using System.Windows;
+using BookingApp.View.PathfinderViews;
 
-namespace BookingApp.View.PathfinderViews
+namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for AddTourWindow.xaml
-    /// </summary>
-    public partial class AddTourWindow : Window
+    public class AddTourWindowViewModel
     {
         private User _user;
         private LocationRepository _locationRepository;
@@ -221,12 +211,12 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public AddTourWindow addTourWindow { get; set; }
 
 
-
-        public AddTourWindow(User user, TourRepository tourRepository, TourImageRepository tourImageRepository)
+        public AddTourWindowViewModel(AddTourWindow _addTourWindow, User user, TourRepository tourRepository, TourImageRepository tourImageRepository)
         {
-            InitializeComponent();
+            addTourWindow = _addTourWindow;
             _user = user;
             _locationRepository = new LocationRepository();
             _tourRepository = tourRepository;
@@ -237,38 +227,38 @@ namespace BookingApp.View.PathfinderViews
             Images = new ObservableCollection<TourImage>();
             TourDates = new ObservableCollection<TourStartTime>();
             Checkpoints = new ObservableCollection<Checkpoint>();
-            DataContext = this;
-            datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
+            addTourWindow.DataContext = this;
+            addTourWindow.datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
             LoadCountries();
             LoadLanguages();
 
 
         }
 
-        
 
-        private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        public void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> listOfCities = _locationRepository.GetCitiesByCountry(CountryTextBox.SelectedItem.ToString());
-            CityTextBox.ItemsSource = listOfCities;
-            CityTextBox.Focus();
-            CityTextBox.IsDropDownOpen = true;
-            CityTextBox.IsEnabled = true;
+            List<string> listOfCities = _locationRepository.GetCitiesByCountry(addTourWindow.CountryTextBox.SelectedItem.ToString());
+            addTourWindow.CityTextBox.ItemsSource = listOfCities;
+            addTourWindow.CityTextBox.Focus();
+            addTourWindow.CityTextBox.IsDropDownOpen = true;
+            addTourWindow.CityTextBox.IsEnabled = true;
         }
 
-        private void LoadCountries()
+        public void LoadCountries()
         {
             List<string> listOfCountries = _locationRepository.GetCountries();
-            CountryTextBox.ItemsSource = listOfCountries;
+            addTourWindow.CountryTextBox.ItemsSource = listOfCountries;
         }
 
-        private void LoadLanguages()
+        public void LoadLanguages()
         {
             List<string> listOfLanguages = _languageRepository.GetLanguages();
-            LanguageTextBox.ItemsSource = listOfLanguages;
+            addTourWindow.LanguageTextBox.ItemsSource = listOfLanguages;
         }
 
-        private void AddURLClick(object sender, RoutedEventArgs e)
+        public void AddURLClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(ImageURL))
             {
@@ -283,10 +273,10 @@ namespace BookingApp.View.PathfinderViews
             TourImage image = new();
             image.Path = ImageURL;
             Images.Add(image);
-            ImageURLTextBox.Clear();
+            addTourWindow.ImageURLTextBox.Clear();
         }
 
-        private bool ImageAlreadyExists()
+        public bool ImageAlreadyExists()
         {
             foreach (TourImage image in Images)
             {
@@ -299,7 +289,7 @@ namespace BookingApp.View.PathfinderViews
             return false;
         }
 
-        private void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
@@ -318,12 +308,12 @@ namespace BookingApp.View.PathfinderViews
                 System.IO.File.Copy(selectedImagePath, destinationPath, true);
 
                 // Update the text box with the destination path
-                ImageURLTextBox.Text = destinationPath;
+                addTourWindow.ImageURLTextBox.Text = destinationPath;
             }
         }
 
 
-        private void AddCheckpointClick(object sender, RoutedEventArgs e)
+        public void AddCheckpointClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(Checkpoint))
             {
@@ -338,10 +328,10 @@ namespace BookingApp.View.PathfinderViews
             Checkpoint checkpoint = new();
             checkpoint.Name = Checkpoint;
             Checkpoints.Add(checkpoint);
-            CheckpointTextBox.Clear();
+            addTourWindow.CheckpointTextBox.Clear();
         }
 
-        private bool CheckpointAlreadyExists()
+        public bool CheckpointAlreadyExists()
         {
             foreach (Checkpoint checkpoint in Checkpoints)
             {
@@ -350,18 +340,16 @@ namespace BookingApp.View.PathfinderViews
                     return true;
                 }
             }
-
             return false;
         }
-
-
-        private void AddDateClick(object sender, RoutedEventArgs e){
+        public void AddDateClick(object sender, RoutedEventArgs e)
+        {
             DateTime time;
 
             if (string.IsNullOrEmpty(Hours) || string.IsNullOrEmpty(Minutes))
                 return;
 
-            DateTime.TryParse(datePicker.SelectedDate.Value.Date.ToShortDateString() + " " + Hours.ToString() + ":" + Minutes.ToString(), out time);
+            DateTime.TryParse(addTourWindow.datePicker.SelectedDate.Value.Date.ToShortDateString() + " " + Hours.ToString() + ":" + Minutes.ToString(), out time);
 
             if (DateAlreadyExists(time))
             {
@@ -375,7 +363,7 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        private bool DateAlreadyExists(DateTime date)
+        public bool DateAlreadyExists(DateTime date)
         {
             foreach (TourStartTime startTime in TourDates)
             {
@@ -388,9 +376,9 @@ namespace BookingApp.View.PathfinderViews
             return false;
         }
 
-        private void ConfirmButtonClick(object sender, RoutedEventArgs e)
+        public void ConfirmButtonClick(object sender, RoutedEventArgs e)
         {
-           if (!IsDataValid())
+            if (!IsDataValid())
             {
                 return;
             }
@@ -398,14 +386,14 @@ namespace BookingApp.View.PathfinderViews
             Tour tour = new();
             tour.Id = _tourRepository.NextId();
             tour.OwnerId = _user.Id;
-            tour.Name = NameTextBox.Text;
+            tour.Name = addTourWindow.NameTextBox.Text;
             tour.LocationId = _locationRepository.GetLocationByCityAndCountry(City, Country).Id;
             tour.Description = Description;
             tour.Duration = Duration;
             tour.Capacity = Capacity;
             tour.Dates = TourDates.ToList();
             tour.Checkpoints = Checkpoints.ToList();
-            tour.LanguageId = _languageRepository.GetLanguageByName(LanguageTextBox.SelectedItem.ToString()).Id;
+            tour.LanguageId = _languageRepository.GetLanguageByName(addTourWindow.LanguageTextBox.SelectedItem.ToString()).Id;
             tour.Images = Images.ToList();
             _tourRepository.Add(tour);
 
@@ -416,10 +404,10 @@ namespace BookingApp.View.PathfinderViews
 
             SaveCheckpoints(Checkpoints, tour);
 
-            Close();
+            addTourWindow.Close();
         }
 
-        public void SaveImages(ObservableCollection<TourImage> images,Tour tour)
+        public void SaveImages(ObservableCollection<TourImage> images, Tour tour)
         {
             foreach (TourImage image in Images)
             {
@@ -429,7 +417,8 @@ namespace BookingApp.View.PathfinderViews
             }
         }
 
-        public void SaveCheckpoints(ObservableCollection<Checkpoint> checkpoints, Tour tour) {
+        public void SaveCheckpoints(ObservableCollection<Checkpoint> checkpoints, Tour tour)
+        {
 
             foreach (Checkpoint checkpoint in Checkpoints)
             {
@@ -441,7 +430,7 @@ namespace BookingApp.View.PathfinderViews
 
         }
 
-        public void SaveDates(ObservableCollection<TourStartTime> dates,Tour tour)
+        public void SaveDates(ObservableCollection<TourStartTime> dates, Tour tour)
         {
             foreach (TourStartTime time in TourDates)
             {
@@ -455,16 +444,14 @@ namespace BookingApp.View.PathfinderViews
 
         }
 
-        private bool IsDataValid()
+        public bool IsDataValid()
         {
-            return !string.IsNullOrEmpty(NameTextBox.Text)
+            return !string.IsNullOrEmpty(addTourWindow.NameTextBox.Text)
                 && !string.IsNullOrEmpty(Country)
                 && !string.IsNullOrEmpty(City)
-                && !string.IsNullOrEmpty(LanguageTextBox.SelectedItem.ToString())
+                && !string.IsNullOrEmpty(addTourWindow.LanguageTextBox.SelectedItem.ToString())
                 && Checkpoints.Count() >= 2;
         }
-
-
 
     }
 }

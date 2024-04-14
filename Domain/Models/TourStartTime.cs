@@ -1,5 +1,4 @@
-﻿using BookingApp.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using BookingApp.Domain.Miscellaneous;
 
-namespace BookingApp.Model.PathfinderModels;
+namespace BookingApp.Domain.Models;
 
 
 public class TourStartTime : ISerializable
@@ -21,7 +20,7 @@ public class TourStartTime : ISerializable
 
     public int Guests { get; set; }
 
-    public String Status { get; set; }
+    public string Status { get; set; }
 
     public int CurrentCheckpoint { get; set; }
 
@@ -37,7 +36,7 @@ public class TourStartTime : ISerializable
 
     public string[] ToCSV()
     {
-        string[] csvValues = { Id.ToString(), TourId.ToString(), Time.ToString(), Guests.ToString(), Status, CurrentCheckpoint.ToString()};
+        string[] csvValues = { Id.ToString(), TourId.ToString(), Time.ToString(), Guests.ToString(), Status, CurrentCheckpoint.ToString() };
         return csvValues;
     }
 

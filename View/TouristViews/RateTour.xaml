@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="BookingApp.View.TouristViews.RateTour"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.View.TouristViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1000">
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+            <Label Content="Rate the tour" FontSize="60" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,0,0,0"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Label Content="Guide's knowledge:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
+                    <Image x:Name="guideKnowledgeStar1" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="285,49,0,0"/>
+                    <Image x:Name="guideKnowledgeStar2" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="326,49,0,0"/>
+                    <Image x:Name="guideKnowledgeStar3" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="367,49,0,0"/>
+                    <Image x:Name="guideKnowledgeStar4" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="408,49,0,0"/>
+                    <Image x:Name="guideKnowledgeStar5" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="449,49,0,0"/>
+
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Label Content="Guide's language:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
+                    <Image x:Name="guideLanguageStar1" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="285,49,0,0"/>
+                    <Image x:Name="guideLanguageStar2" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="326,49,0,0"/>
+                    <Image x:Name="guideLanguageStar3" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="367,49,0,0"/>
+                    <Image x:Name="guideLanguageStar4" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="408,49,0,0"/>
+                    <Image x:Name="guideLanguageStar5" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="449,49,0,0"/>
+
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Label Content="Interestigness:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
+                    <Image x:Name="interestingnessStar1" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="285,49,0,0"/>
+                    <Image x:Name="interestingnessStar2" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="326,49,0,0"/>
+                    <Image x:Name="interestingnessStar3" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="367,49,0,0"/>
+                    <Image x:Name="interestingnessStar4" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="408,49,0,0"/>
+                    <Image x:Name="interestingnessStar5" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="449,49,0,0"/>
+
+                </Grid>
+                <Grid Grid.Row="3">
+
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Label Content="Your comment:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
+                    <TextBox x:Name="feedback" TextChanged="Feedback_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="463" Margin="10,98,0,0"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Label Content="Add image(s) url:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="8,108,235,58" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <ScrollViewer x:Name="reviewImages_ScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                            <StackPanel x:Name="reviewImages_StackPanel" Orientation="Vertical" Width="243"/>
+                        </ScrollViewer>
+                    </Border>
+                    <Button HorizontalAlignment="Left" Click="AddPhoto_Click"
+                            VerticalAlignment="Center" Height="44" Width="73" Margin="285,0,0,0">
+                        <Image Source="/Resources/Assets/plus-symbol-button.png" Height="50" Width="40"/>
+                    </Button>
+                    <Button Click="Finish_Click" Content="Finish" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="48" Width="106" Margin="363,202,0,0"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

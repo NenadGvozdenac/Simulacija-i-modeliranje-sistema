@@ -1,7 +1,6 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
-using BookingApp.Model.PathfinderModels;
 using BookingApp.View.PathfinderViews;
 using System;
 using System.Collections.Generic;

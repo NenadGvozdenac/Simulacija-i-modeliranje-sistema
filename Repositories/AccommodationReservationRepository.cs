@@ -75,33 +75,6 @@ public class AccommodationReservationRepository : BaseRepository<AccommodationRe
         }
     }
 
-    public bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving)
-    {
-        List<AccommodationReservation> accommodationReservations = GetAll().Where(a => a.AccommodationId == accommodation.Id).ToList();
-
-        foreach (AccommodationReservation accommodationReservation in accommodationReservations)
-        {
-            if (accommodationReservation.Id == accommodationReservationMoving.ReservationId)
-            {
-                continue;
-            }
-            if (wantedReservationTimespan.Start >= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.Start <= accommodationReservation.LastDateOfStaying)
-            {
-                return false;
-            }
-            if (wantedReservationTimespan.End >= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.End <= accommodationReservation.LastDateOfStaying)
-            {
-                return false;
-            }
-            if (wantedReservationTimespan.Start <= accommodationReservation.FirstDateOfStaying && wantedReservationTimespan.End >= accommodationReservation.LastDateOfStaying)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public List<AccommodationReservation> GetByAccommodationId(int accommodationId)
     {
         return GetAll().Where(a => a.AccommodationId == accommodationId).ToList();

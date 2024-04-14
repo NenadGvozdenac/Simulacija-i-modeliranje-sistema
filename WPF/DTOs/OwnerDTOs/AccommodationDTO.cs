@@ -61,7 +61,7 @@ public class AccommodationDTO
 
     public AccommodationDTO(Accommodation accommodation)
     {
-        Owner = OwnerService.GetInstance().GetOwnerInfo(accommodation.OwnerId).Item2;
+        Owner = OwnerService.GetInstance().GetById(accommodation.OwnerId).Item2;
         Name = accommodation.Name;
         Location = LocationService.GetInstance().GetById(accommodation.LocationId);
         Type = accommodation.Type;
@@ -70,7 +70,7 @@ public class AccommodationDTO
         CancellationPeriodDays = accommodation.CancellationPeriodDays.ToString();
         AverageReviewScore = accommodation.AverageReviewScore.ToString();
         Price = accommodation.Price.ToString();
-        NumberOfReviews = "0";        // TODO: Change when reviews are implemented
+        NumberOfReviews = "0";
         Images = accommodation.Images;
     }
 }

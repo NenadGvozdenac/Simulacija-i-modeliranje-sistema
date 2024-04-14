@@ -26,11 +26,6 @@ public class OwnerService
         return App.ServiceProvider.GetRequiredService<OwnerService>();
     }
 
-    public (OwnerInfo, User) GetOwnerInfo(int ownerId)
-    {
-        return (_ownerInfoRepository.GetById(ownerId), _userRepository.GetById(ownerId));
-    }
-
     public void UpdateOwnerInfo(OwnerInfo ownerInfo)
     {
         _ownerInfoRepository.Update(ownerInfo);
@@ -97,31 +92,25 @@ public class OwnerService
 
     public void CheckForSuperOwner(User user)
     {
-        (OwnerInfo, User) ownerInfo = GetInstance().GetOwnerInfo(user.Id);
+        (OwnerInfo, User) ownerInfo = GetById(user.Id);
 
-        // TODO: Get all reviews of the owner
         List<AccommodationReview> accommodationReviews = AccommodationReviewService.GetInstance().GetByOwnerId(ownerInfo.Item1.OwnerId);
 
-        // Put number of reviews in the owner info
         ownerInfo.Item1.NumberOfReviews = accommodationReviews.Count;
 
-        // Put accommodations of the owner in the owner info
         ownerInfo.Item1.Accommodations = AccommodationService.GetInstance().GetByOwnerId(ownerInfo.Item1.OwnerId);
 
-        // Put number of accommodations in the owner info
         ownerInfo.Item1.NumberOfAccommodations = ownerInfo.Item1.Accommodations.Count;
 
-        // TODO: Get average review score of the owner
         ownerInfo.Item1.AverageReviewScore = AccommodationReviewService.GetInstance().GetAverageReviewScore(ownerInfo.Item1.OwnerId);
 
         // If user is reviewed by at least 50 guests, and has average rating above 4.5, make him a super owner
-        UpdateOwnerInfo(new OwnerInfo()
-        {
+        UpdateOwnerInfo(new OwnerInfo() {
+            OwnerId = ownerInfo.Item1.OwnerId,
             AverageReviewScore = ownerInfo.Item1.AverageReviewScore,
             NumberOfReviews = ownerInfo.Item1.NumberOfReviews,
             NumberOfAccommodations = ownerInfo.Item1.NumberOfAccommodations,
-            OwnerId = ownerInfo.Item1.OwnerId,
-            IsSuperOwner = true
+            IsSuperOwner = ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore > 4.5
         });
     }
 

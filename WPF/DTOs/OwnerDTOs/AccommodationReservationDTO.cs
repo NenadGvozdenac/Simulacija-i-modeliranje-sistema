@@ -95,9 +95,9 @@ public class AccommodationReservationDTO
 
     public AccommodationReservationDTO(AccommodationReservation reservation)
     {
-        Owner = OwnerService.GetInstance().GetOwnerInfo(reservation.UserId).Item2;
         Guest = OwnerService.GetInstance().GetById(reservation.UserId).Item2;
         AccommodationDTO = new(AccommodationService.GetInstance().GetById(reservation.AccommodationId));
+        Owner = AccommodationDTO.Owner;
         Reservation = reservation;
         NumberOfReviews = AccommodationReviewService.GetInstance().GetByAccommodationId(reservation.AccommodationId).Count.ToString();
         ReservationDays = (reservation.LastDateOfStaying - reservation.FirstDateOfStaying).Days.ToString();

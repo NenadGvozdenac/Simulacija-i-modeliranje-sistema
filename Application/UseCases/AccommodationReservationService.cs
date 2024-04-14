@@ -84,14 +84,7 @@ public class AccommodationReservationService
 
         List<AccommodationReservation> reservations = GetByAccommodationId(accommodationMoving.AccommodationId);
 
-        List<AccommodationReservation> overlappingReservations = GetOverlappingReservations(wantedDatespan, reservations);
-
-        overlappingReservations.Remove(accommodationMoving.Reservation);
-
-        overlappingReservations.ForEach(reservation => {
-            Delete(reservation);
-            _guestRatingRepository.DeleteAll(guestRating => guestRating.ReservationId == reservation.Id);
-        });
+        DeleteOverlappingReservations(reservations, wantedDatespan, accommodationMoving);
 
         AccommodationReservation reservation = accommodationMoving.Reservation;
 
@@ -102,6 +95,18 @@ public class AccommodationReservationService
 
         CheckForCancelledReservations();
         DeleteAllReservationsReschedulingForReservation(reservation.Id);
+    }
+
+    private void DeleteOverlappingReservations(List<AccommodationReservation> reservations, DateSpan wantedDatespan, AccommodationReservationMoving accommodationMoving)
+    {
+        List<AccommodationReservation> overlappingReservations = GetOverlappingReservations(wantedDatespan, reservations);
+
+        overlappingReservations.Remove(accommodationMoving.Reservation);
+
+        overlappingReservations.ForEach(reservation => {
+            Delete(reservation);
+            _guestRatingRepository.DeleteAll(guestRating => guestRating.ReservationId == reservation.Id);
+        });
     }
 
     private void DeleteAllReservationsReschedulingForReservation(int id)
@@ -160,9 +165,24 @@ public class AccommodationReservationService
         return lista;
     }
 
-    public bool IsTimespanFree(DateSpan wantedSpan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving)
+    public bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving)
     {
-        return _accommodationReservationRepository.IsTimespanFree(wantedSpan, accommodation, accommodationReservationMoving);
+        List<AccommodationReservation> accommodationReservations = GetByAccommodationId(accommodation.Id);
+
+        foreach (AccommodationReservation accommodationReservation in accommodationReservations) 
+        {
+            if (accommodationReservation.Id == accommodationReservationMoving.ReservationId) 
+            {
+                continue;
+            }
+
+            if(DateSpan.IsOverlapping(new(accommodationReservation.FirstDateOfStaying, accommodationReservation.LastDateOfStaying), wantedReservationTimespan)) 
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
     public List<DateTime> FindTakenDates(int id)
     {

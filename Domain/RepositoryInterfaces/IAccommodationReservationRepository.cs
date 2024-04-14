@@ -15,7 +15,6 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<AccommodationReservation> GetByAccommodationId(int accommodationId);
         AccommodationReservation GetById(int id);
         List<AccommodationReservation> GetReservationsByAccommodations(List<Accommodation> accommodations);
-        bool IsTimespanFree(DateSpan wantedReservationTimespan, Accommodation accommodation, AccommodationReservationMoving accommodationReservationMoving);
         int NextId();
         void Update(AccommodationReservation accommodationres);
     }

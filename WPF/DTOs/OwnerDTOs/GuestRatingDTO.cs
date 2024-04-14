@@ -75,7 +75,7 @@ public class GuestRatingDTO
         IsChecked = guestRating.IsChecked;
         Accommodation = new AccommodationDTO(AccommodationService.GetInstance().GetById(guestRating.AccommodationId));
         Reservation = new AccommodationReservationDTO(guestRating.Reservation);
-        Guest = OwnerService.GetInstance().GetOwnerInfo(guestRating.GuestId).Item2;
+        Guest = OwnerService.GetInstance().GetById(guestRating.GuestId).Item2;
         Cleanliness = guestRating.Cleanliness.ToString();
         Respectfulness = guestRating.Respectfulness.ToString();
         Comment = guestRating.Comment;

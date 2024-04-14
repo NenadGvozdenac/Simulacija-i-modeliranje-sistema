@@ -34,6 +34,6 @@ public class OwnerUserDTO
     public OwnerUserDTO(User user)
     {
         User = user;
-        OwnerInfo = OwnerService.GetInstance().GetOwnerInfo(user.Id).Item1;
+        OwnerInfo = OwnerService.GetInstance().GetById(user.Id).Item1;
     }
 }

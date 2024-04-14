@@ -11,6 +11,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BookingApp.View.PathfinderViews;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -23,13 +24,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public ObservableCollection<Tourist> selectedTourists { get; set; }
         public TourRepository tourRepository { get; set; }
 
-        public CheckpointRepository checkpointRepository { get; set; }
+       
 
         public TouristReservationRepository reservationRepository { get; set; }
 
         public TouristRepository touristRepository { get; set; }
 
-        public TourStartTimeRepository timeRepository { get; set; }
+        
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClicked { get; set; }
 
@@ -50,9 +51,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             checkpointsView = checkpointViews;
             tourRepository = new TourRepository();
             touristRepository = new TouristRepository();
-            checkpointRepository = new CheckpointRepository();
-            reservationRepository = new TouristReservationRepository();
-            timeRepository = new TourStartTimeRepository();
+            reservationRepository = new TouristReservationRepository();           
             checkpoints = new ObservableCollection<Checkpoint>();
             tourists = new ObservableCollection<Tourist>();
             selectedTourists = new ObservableCollection<Tourist>();
@@ -68,9 +67,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public void Update(int TourId, DateTime currentDate)
         {
             tourName = tourRepository.GetById(TourId).Name;
-            tourTimeId = timeRepository.GetByTourStartTimeAndId(currentDate, TourId).Id; //gets current time id
+            tourTimeId = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(currentDate, TourId).Id; //gets current time id
 
-            foreach (Checkpoint checkpoint in checkpointRepository.GetCheckpointsByTourId(TourId))
+            foreach (Checkpoint checkpoint in CheckpointService.GetInstance().GetCheckpointsByTourId(TourId))
             {
                 checkpoints.Add(checkpoint);
             }
@@ -129,10 +128,10 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             if (checkBox.IsChecked == true)
             {
                 item1.Checked = true;
-                checkpointRepository.Update(item1);
-                TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
+                CheckpointService.GetInstance().Update(item1);
+                TourStartTime timeTemp = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(_currentDate, tourId);
                 timeTemp.CurrentCheckpoint = item1.Id;
-                timeRepository.Update(timeTemp);
+                TourStartTimeService.GetInstance().Update(timeTemp);
 
                 foreach (var tourist in selectedTourists.ToList())
                 {
@@ -151,7 +150,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     foreach (Checkpoint checkpoint in checkpoints)
                     {
                         checkpoint.Checked = false;
-                        checkpointRepository.Update(checkpoint);
+                        CheckpointService.GetInstance().Update(checkpoint);
                     }
                     checkpointsView.Close();
                 }
@@ -173,7 +172,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public int GoBackToCheckbox(CheckBox checkbox)
         {
             Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
-            TourStartTime timeTemp = timeRepository.GetByTourStartTimeAndId(_currentDate, tourId);
+            TourStartTime timeTemp = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(_currentDate, tourId);
             if (checkpoint.Id == timeTemp.CurrentCheckpoint)
             {
                 return 1;

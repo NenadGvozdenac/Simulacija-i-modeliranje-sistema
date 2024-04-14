@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
 using System;
@@ -15,17 +16,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
     public class DemographicsControlViewModel
     {
         public ObservableCollection<Tour> tours { get; set; }
-
-        public TourRepository tourRepository { get; set; }
-
-        public LocationRepository locationRepository { get; set; }
-        public TourImageRepository tourImageRepository { get; set; }
-
-        public TourStartTimeRepository tourStartTimeRepository { get; set; }
-
-        public LanguageRepository languageRepository { get; set; }
-
-        public TouristReservationRepository touristReservationRepository { get; set; }
+   
 
         public EventHandler<BeginButtonClickedEventArgs> StatsButtonClickedControl { get; set; }
 
@@ -35,12 +26,6 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             
             demographicsControl = _demographicsControl;
             tours = new ObservableCollection<Tour>();
-            tourRepository = new TourRepository();
-            locationRepository = new LocationRepository();
-            tourImageRepository = new TourImageRepository();
-            languageRepository = new LanguageRepository();
-            tourStartTimeRepository = new TourStartTimeRepository();
-            touristReservationRepository = new TouristReservationRepository();
             Update();
         }
 
@@ -52,7 +37,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void Update()
         {
-            foreach (Tour tour in tourRepository.GetAll())
+            foreach (Tour tour in TourService.GetInstance().GetAll())
             {
                 tours.Add(tour);
             }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -59,13 +60,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
 
         public List<int> times { get; set; }
-        public TourStartTimeRepository timeRepository { get; set; }
+        
 
         public TouristReservationRepository reservationRepository { get; set; }
 
         public TouristRepository touristRepository { get; set; }
 
-        public TourRepository tourRepository { get; set; }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -82,10 +83,10 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             tourDemographics = _tourDemographics;
 
-            timeRepository = new TourStartTimeRepository();
+            
             reservationRepository = new TouristReservationRepository();
             touristRepository = new TouristRepository();
-            tourRepository = new TourRepository();
+            
 
             Sub18 = FindSub18(FindMostReserved());
             Middle = FindMiddle(FindMostReserved());
@@ -108,14 +109,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             List<TourStartTime> dates = new List<TourStartTime>();
             List<Tour> tours = new List<Tour>();
-            tours = tourRepository.GetAll();
+            tours = TourService.GetInstance().GetAll();
             Tour tour = tours[0];
             int touristNumber = 0;
             int touristNumberTemp = 0;
 
             foreach (Tour t in tours)
             {
-                dates = timeRepository.GetByTourId(t.Id).Where(a => a.Status == "passed").ToList();
+                dates = TourStartTimeService.GetInstance().GetByTourId(t.Id).Where(a => a.Status == "passed").ToList();
 
                 foreach (TourStartTime date in dates)
                 {
@@ -144,7 +145,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Tour tour = new Tour();
             tour = t;
             List<TourStartTime> dates = new List<TourStartTime>();
-            dates = timeRepository.GetByTourId(t.Id).Where(a => a.Status == "passed").ToList();
+            dates = TourStartTimeService.GetInstance().GetByTourId(t.Id).Where(a => a.Status == "passed").ToList();
             List<TouristReservation> reservations = new List<TouristReservation>();
 
             foreach (TourStartTime time in dates)
@@ -213,7 +214,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             List<int> times = new List<int>();
 
-            foreach (TourStartTime time in timeRepository.GetAll())
+            foreach (TourStartTime time in TourStartTimeService.GetInstance().GetAll())
             {
                 if (!times.Contains(time.Time.Year) && time.Status == "passed")
                     times.Add(time.Time.Year);
@@ -229,7 +230,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void OnStatsButtonClicked(BeginButtonClickedEventArgs e)
         {
-            Tour t = tourRepository.GetById(e.TourId);
+            Tour t = TourService.GetInstance().GetById(e.TourId);
             Sub18 = FindSub18(t);
 
             Middle = FindMiddle(t);
@@ -260,14 +261,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             List<TourStartTime> dates = new List<TourStartTime>();
             List<Tour> tours = new List<Tour>();
-            tours = tourRepository.GetAll();
+            tours = TourService.GetInstance().GetAll();
             Tour tour = tours[0];
             int touristNumber = 0;
             int touristNumberTemp = 0;
 
             foreach (Tour t in tours)
             {
-                dates = timeRepository.GetByTourId(t.Id).Where(a => a.Status == "passed" && a.Time.Year == i).ToList();
+                dates = TourStartTimeService.GetInstance().GetByTourId(t.Id).Where(a => a.Status == "passed" && a.Time.Year == i).ToList();
 
                 foreach (TourStartTime date in dates)
                 {

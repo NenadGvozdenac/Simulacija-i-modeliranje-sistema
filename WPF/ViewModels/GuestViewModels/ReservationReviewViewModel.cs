@@ -37,7 +37,7 @@ public class ReservationReviewViewModel
         _reviewImages = new List<ReviewImage>();
         ReservationReview.accommodationName_TextBlock.Text = accommodation.Name;
         ReservationReview.dearUsername_TextBlock.Text = "Dear " + _user.Username + ",";
-        ReservationReview.username_TextBlock.Text = _user.Username;
+        ReservationReview.username_Label.Content = _user.Username;
     }
 
     public void GoBack_Click()

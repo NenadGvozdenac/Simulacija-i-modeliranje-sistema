@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="890" d:DesignWidth="1024">
-    <Grid Background="White">
+    <Grid Background="#FFF8F0">
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
@@ -18,17 +18,19 @@
 
                 <Grid Grid.Row="0">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
-                    <TextBlock x:Name="accommodationName_TextBlock" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Name of the accommodation" FontSize="50" Margin="10,4,0,0" />
-                    <TextBlock x:Name="dearUsername_TextBlock" Text="Dear username," FontSize="20" Margin="35,76,692,57"/>
-                    <TextBlock Text="we sincerely appreciate your time in providing this review!" FontSize="20" Margin="35,109,421,16"/>
-                    <TextBlock x:Name="username_TextBlock" Text="Username" TextAlignment="Center" FontSize="20" Margin="807,56,33,60"/>
-                    <Button Content="Go Back" Click="GoBack_Click" HorizontalAlignment="Left" Margin="899,112,0,0" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="accommodationName_TextBlock" Style="{StaticResource MainTextBlockGuest}" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Name of the accommodation" FontSize="50" Margin="30,15,0,0" />
+                    <TextBlock x:Name="dearUsername_TextBlock" Style="{StaticResource MainTextBlockGuest}" Text="Dear username," FontSize="20" Margin="30,78,697,55"/>
+                    <TextBlock Text="we sincerely appreciate your time in providing this review!" Style="{StaticResource MainTextBlockGuest}" FontSize="20" Margin="30,105,426,20"/>
+
+                    <Label x:Name="username_Label" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="916,62,51,55"/>
+                    <Image Source="../../../Resources/Assets/idcard.png"  RenderOptions.EdgeMode="Unspecified" Margin="936,22,71,96"/>
+                    <Button Content="Go Back" Click="GoBack_Click" Style="{StaticResource ClearButtonStyleGuest}" HorizontalAlignment="Left" Margin="937,105,0,0" VerticalAlignment="Top" Width="62"/>
                 </Grid>
 
                 <Grid Grid.Row="1">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
 
-                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please rate the cleanliness of accommodation using a scale of 1 to 5, where 1 represents 'unsatisfactory' and 5 represents 'exceptional'" FontSize="20" Margin="28,34,0,0" Height="135" Width="304"/>
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please rate the cleanliness of accommodation using a scale of 1 to 5, where 1 represents 'unsatisfactory' and 5 represents 'exceptional'" FontSize="20" Margin="28,34,0,0" Height="135" Width="304"/>
                     <Slider x:Name="cleanliness_Slider" HorizontalAlignment="Left" Margin="363,72,0,0" VerticalAlignment="Top" Width="120" 
                             Minimum="1"
                             Maximum="5"
@@ -36,9 +38,9 @@
                             IsSnapToTickEnabled="True"
                             TickFrequency="1"
                             TickPlacement="BottomRight" />
-                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1   2   3   4   5" FontSize="20" Margin="363,96,0,0" Height="24" Width="120"/>
+                    <TextBlock VerticalAlignment="Top"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="1   2   3   4   5" FontSize="20" Margin="363,96,0,0" Height="24" Width="120"/>
 
-                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please rate the owner's courtesy on a scale of 1 to 5, where 1 indicates 'poor courtesy' and 5 indicates 'excellent courtesy'" FontSize="20" Margin="550,34,0,0" Height="112" Width="304"/>
+                    <TextBlock VerticalAlignment="Top" Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please rate the owner's courtesy on a scale of 1 to 5, where 1 indicates 'poor courtesy' and 5 indicates 'excellent courtesy'" FontSize="20" Margin="550,34,0,0" Height="112" Width="304"/>
                     <Slider x:Name="ownersCourtesy_Slider" HorizontalAlignment="Left" Margin="876,72,0,0" VerticalAlignment="Top" Width="120" 
                             Minimum="1"
                             Maximum="5"
@@ -48,12 +50,12 @@
                             TickPlacement="BottomRight" />
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1   2   3   4   5" FontSize="20" Margin="876,96,0,0" Height="24" Width="120"/>
 
-                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please provide any additional comments or feedback:" FontSize="20" Margin="28,202,0,0" Height="59" Width="271"/>
-                    <TextBox x:Name="feedback_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Height="100" Width="200" Margin="323,202,501,62"/>
+                    <TextBlock VerticalAlignment="Top" Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please provide any additional comments or feedback:" FontSize="20" Margin="28,202,0,0" Height="59" Width="271"/>
+                    <TextBox x:Name="feedback_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Background="#FFF5EBDF" Height="100" Width="200" BorderBrush="Black" BorderThickness="2" Margin="335,202,536,62"/>
 
-                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" Text="We would greatly appreciate it if you could share one or more images of the accommodation!" FontSize="20" Margin="556,200,0,0" Height="113" Width="237"/>
-                    <Button Content="Click here to add photo" Click="AddPhoto_Click" Margin="638,318,304,22"/>
-                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Margin="792,187,56,33">
+                    <TextBlock VerticalAlignment="Top" Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" TextWrapping="Wrap" Text="We would greatly appreciate it if you could share one or more images of the accommodation!" FontSize="20" Margin="550,202,0,0" Height="113" Width="237"/>
+                    <Button Content="Click here to add photo" Style="{StaticResource ClearButtonStyleGuest}" Click="AddPhoto_Click" Margin="630,313,0,0" VerticalAlignment="Top" Width="140" HorizontalAlignment="Left" Height="25"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Background="#FFF5EBDF" CornerRadius="25" Margin="796,187,52,33">
                         <ScrollViewer x:Name="reviewImages_ScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
                             <StackPanel x:Name="reviewImages_StackPanel" Orientation="Vertical" Width="175"/>
                         </ScrollViewer>
@@ -65,8 +67,8 @@
                 </Grid>
 
                 <Grid Grid.Row="3">
-                    <TextBlock Text="Your feedback is invaluable to us!" FontSize="20" Margin="22,10,712,17" />
-                    <Button Content="Tap here to finish the review" HorizontalAlignment="Left" Click="FinishReview_Click" Margin="341,0,0,0" VerticalAlignment="Center" Width="162"/>
+                    <TextBlock Text="Your feedback is invaluable to us!" Style="{StaticResource MainTextBlockGuest}" FontSize="20" Margin="22,10,712,17" />
+                    <Button Content="Tap here to finish the review" Style="{StaticResource ClearButtonStyleGuest}" HorizontalAlignment="Left" Click="FinishReview_Click" Margin="348,10,0,0" VerticalAlignment="Top" Width="166" Height="25"/>
                 </Grid>
             </Grid>
         </ScrollViewer>

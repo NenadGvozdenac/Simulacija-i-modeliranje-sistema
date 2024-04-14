@@ -31,7 +31,7 @@ public partial class ReviewCard : UserControl
     private void SetUpCard(object sender, DependencyPropertyChangedEventArgs e)
     {
         AccommodationReview review = (AccommodationReview)DataContext;
-        user_TextBlock.Text = "User: " + OwnerService.GetInstance().GetById(review.UserId).Item2.Username;   //_userRepository.GetById(review.UserId).Username;
+        user_TextBlock.Text = "User : " + OwnerService.GetInstance().GetById(review.UserId).Item2.Username;   //_userRepository.GetById(review.UserId).Username;
         cleanliness_TextBlock.Text = "Cleanliness: " + review.Cleanliness.ToString() + "/5";
         ownerscourtesy_TextBlock.Text = "Owner's courtesy: " + review.OwnersCourtesy.ToString() + "/5";
 

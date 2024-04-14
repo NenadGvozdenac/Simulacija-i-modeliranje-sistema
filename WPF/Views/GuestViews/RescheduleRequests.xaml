@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="718" d:DesignWidth="774">
-    <Grid Background="White">
+    <Grid Background="#FFF8F0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -14,8 +14,9 @@
 
         <!--Pending requests-->
         <Grid Grid.Row="0">
-            <TextBlock Text="Pending requests:" FontSize="30" Margin="20,10,511,305"/>
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Margin="0,70,0,0">
+            
+            <TextBlock Text="Pending requests:" Style="{StaticResource MainTextBlockGuest}" FontSize="30" Margin="18,18,513,297"/>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Margin="0,62,0,0">
                 <ItemsControl
                     ItemsSource="{Binding _pendingRequests}">
                     <ItemsControl.ItemTemplate>
@@ -25,12 +26,13 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+            <Border BorderThickness=" 0 0 0 2" BorderBrush="Black"/>
         </Grid>
         
         <!--Reviewed requests-->
         <Grid Grid.Row="1">
-            <TextBlock Text="Reviewed requests:" FontSize="30" Margin="20,10,501,305"/>
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,59,0,0">
+            <TextBlock Text="Reviewed requests:" Style="{StaticResource MainTextBlockGuest}" FontSize="30" Margin="18,13,490,302"/>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,62,0,0">
                 <ItemsControl
                 ItemsSource="{Binding _reviewedRequests}">
                     <ItemsControl.ItemTemplate>

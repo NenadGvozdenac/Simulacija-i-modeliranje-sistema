@@ -40,19 +40,19 @@
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Center" Margin="0,54,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="You will be staying here between:" VerticalAlignment="Top" Width="224">
+                    <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="48,54,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="You will be staying here between:" VerticalAlignment="Top" Width="224">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <TextBlock x:Name="DateOfStaying_TextBlock" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Center" Margin="0,73,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding AvailableDatesString}" VerticalAlignment="Top" Width="224">
+                    <TextBlock x:Name="DateOfStaying_TextBlock" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="48,73,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding AvailableDatesString}" VerticalAlignment="Top" Width="224">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="8,95,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="288">
+                    <TextBlock TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" HorizontalAlignment="Left" Margin="9,95,0,0" FontSize="15" TextWrapping="Wrap" Foreground="White" FontFamily="Bahnschrift Light" Text="{Binding Location.Country}" VerticalAlignment="Top" Width="288">
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                         </TextBlock.Effect>
@@ -79,10 +79,10 @@
                         <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <Button x:Name="CancelReservationButton" Content="Tap here to cancel the reservation" FontSize="11" Margin="16,36,16,10" Click="CancelReservationButton_Click"></Button>
+                <Button x:Name="CancelReservationButton" Style="{StaticResource ClearButtonStyleGuest}" Content="Tap here to cancel the reservation" FontSize="11" Margin="13,34,0,0" Click="CancelReservationButton_Click" VerticalAlignment="Top" Width="180" Height="25" HorizontalAlignment="Left"/>
             </Grid>
         </Border>
-        <Button Content="Tap here to reschedule the reservation" Margin="537,117,28,55" Click="Reschedule_Click"></Button>
-        <Button Content="Download Reservation Details(PDF)" HorizontalAlignment="Left" Margin="342,165,0,0" VerticalAlignment="Top" Height="27"/>
+        <Button Content="Tap here to reschedule the reservation" Style="{StaticResource ClearButtonStyleGuest}" Click="Reschedule_Click" Height="29" Width="220" HorizontalAlignment="Left" Margin="538,118,0,0" VerticalAlignment="Top"/>
+        <Button Content="Download Reservation Details(PDF)" Style="{StaticResource ClearButtonStyleGuest}" HorizontalAlignment="Left" Margin="342,164,0,0" VerticalAlignment="Top" Height="27" Width="207"/>
     </Grid>
 </UserControl>

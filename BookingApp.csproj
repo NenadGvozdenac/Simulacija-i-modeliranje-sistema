@@ -8,9 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Assets\accommodations.png" />
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
     <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\chevron-left.293x512.png" />
+    <None Remove="Resources\Assets\chevron-right.295x512.png" />
     <None Remove="Resources\Assets\default_user.png" />
     <None Remove="Resources\Assets\delete.png" />
     <None Remove="Resources\Assets\edit.png" />
@@ -19,10 +22,12 @@
     <None Remove="Resources\Assets\home.256x245.png" />
     <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
+    <None Remove="Resources\Assets\idcard.png" />
     <None Remove="Resources\Assets\language-line.512x481.png" />
     <None Remove="Resources\Assets\language.png" />
     <None Remove="Resources\Assets\location.png" />
     <None Remove="Resources\Assets\map-marker.171x256.png" />
+    <None Remove="Resources\Assets\myreservations.png" />
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
     <None Remove="Resources\Assets\plus-symbol-button.png" />
@@ -35,6 +40,7 @@
     <None Remove="Resources\Assets\star.png" />
     <None Remove="Resources\Assets\three_dots.png" />
     <None Remove="Resources\Assets\trash_can.png" />
+    <None Remove="Resources\Assets\user.png" />
     <None Remove="Resources\Assets\users.png" />
     <None Remove="Resources\Assets\user_profile_icon.png" />
     <None Remove="Resources\Assets\view.png" />
@@ -71,6 +77,12 @@
     <Content Include="Resources\Assets\back_left_arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\chevron-left.293x512.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\chevron-right.295x512.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\default_user.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -101,9 +113,27 @@
     <Content Include="Resources\Assets\language.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Assets\location.png">
+    <Resource Include="Resources\Assets\accommodations.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
+    <Resource Include="Resources\Assets\hotel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\idcard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\myreservations.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\star.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\Assets\map-marker.171x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -175,13 +205,6 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Model\TouristModels\" />
-    <Folder Include="Repository\GuestRepositories\" />
-    <Folder Include="Repository\PathfinderRepositories\" />
-    <Folder Include="Repository\TouristRepositories\" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<Content Include="Resources\Images\AccommodationImages\*.*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -195,12 +218,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Resources\Data\accommodation_review.csv">
+	  <None Update="Resources\Data\accommodation_reviews.csv">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\" />
 	</ItemGroup>
 </Project>

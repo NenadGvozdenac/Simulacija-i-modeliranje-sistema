@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.TouristVouchers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
+             mc:Ignorable="d" 
+             xmlns:components="clr-namespace:BookingApp.View.TouristViews.Components"
+             d:DesignHeight="650" d:DesignWidth="1000">
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderThickness="0,0,0,1" BorderBrush="Black"/>
+            <Label Content="Here's a list of coupons you have:" FontSize="50" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <WrapPanel>
+                <ItemsControl ItemsSource="{Binding Vouchers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:VoucherCard x:Name="vouchercard"  Margin="5"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

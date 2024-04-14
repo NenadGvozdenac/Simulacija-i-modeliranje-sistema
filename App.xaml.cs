@@ -1,11 +1,6 @@
-﻿using BookingApp.Model.MutualModels;
-using BookingApp.Model.OwnerModels;
-using BookingApp.Repository;
-using BookingApp.Repository.MutualRepositories;
-using BookingApp.Repository.OwnerRepositories;
-using BookingApp.Services;
-using BookingApp.Services.Mutual;
-using BookingApp.Services.Owner;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Repositories;
 using BookingApp.View;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,14 +8,14 @@ using System.Windows;
 
 namespace BookingApp;
 
-public partial class App : Application
+public partial class App
 {
     private static IServiceProvider _serviceProvider;
 
     public static IServiceProvider ServiceProvider => _serviceProvider;
 
     private void Application_Startup(object sender, StartupEventArgs e)
-   {
+    {
         IServiceCollection services = new ServiceCollection();
 
         ConfigureRepositories(services);
@@ -42,16 +37,22 @@ public partial class App : Application
     private void ConfigureRepositories(IServiceCollection services)
     {
         // Add repositories
-        services.AddSingleton<AccommodationRepository>();
-        services.AddSingleton<AccommodationReservationRepository>();
-        services.AddSingleton<LocationRepository>();
-        services.AddSingleton<OwnerInfoRepository>();
-        services.AddSingleton<GuestRatingRepository>();
-        services.AddSingleton<AccommodationReservationMovingRepository>();
-        services.AddSingleton<AccommodationImageRepository>();
-        services.AddSingleton<UserRepository>();
-        services.AddSingleton<AccommodationReviewRepository>();
-        services.AddSingleton<ReviewImageRepository>();
+        services.AddSingleton<IAccommodationRepository, AccommodationRepository>();
+        services.AddSingleton<IAccommodationReservationRepository, AccommodationReservationRepository>();
+        services.AddSingleton<ILocationRepository, LocationRepository>();
+        services.AddSingleton<IOwnerInfoRepository, OwnerInfoRepository>();
+        services.AddSingleton<IGuestRatingRepository, GuestRatingRepository>();
+        services.AddSingleton<IAccommodationReservationMovingRepository, AccommodationReservationMovingRepository>();
+        services.AddSingleton<IAccommodationImageRepository, AccommodationImageRepository>();
+        services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IAccommodationReviewRepository, AccommodationReviewRepository>();
+        services.AddSingleton<IReviewImageRepository, ReviewImageRepository>();
+        services.AddSingleton<ITourRepository, TourRepository>();
+        services.AddSingleton<ITourStartTimeRepository, TourStartTimeRepository>();
+        services.AddSingleton<ICheckpointRepository, CheckpointRepository>();
+        services.AddSingleton<ITourVoucherRepository, TourVoucherRepository>();
+        services.AddSingleton<ITourImageRepository, TourImageRepository>();
+        services.AddSingleton<ILanguageRepository, LanguageRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -64,6 +65,11 @@ public partial class App : Application
         services.AddSingleton<GuestRatingService>();
         services.AddSingleton<ImageService>();
         services.AddSingleton<AccommodationReviewService>();
+        services.AddSingleton<TourService>();
+        services.AddSingleton<TourStartTimeService>();
+        services.AddSingleton<CheckpointService>();
+        services.AddSingleton<TourVoucherRepository>();
+        services.AddSingleton<TourImageService>();
+        services.AddSingleton<LanguageService>();
     }
-
 }

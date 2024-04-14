@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace BookingApp.WPF.Views.OwnerViews;
 
@@ -25,14 +27,19 @@ public partial class AddAccommodationPage : Page
         InitializeComponent();
     }
 
-    private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        _addAccommodationViewModel.CountryChanged();
-    }
-
     public void ClosePage()
     {
         PageClosed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void LocationTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        _addAccommodationViewModel.LocationTextBox_TextChanged();
+    }
+
+    private void LocationTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        _addAccommodationViewModel.LocationTextBox_PreviewKeyDown(e.Key);
     }
 
     private void BackButton_Click(object sender, MouseButtonEventArgs e)
@@ -41,8 +48,12 @@ public partial class AddAccommodationPage : Page
         _addAccommodationViewModel.CancelCommand.Execute(null);
     }
 
-    private void ImageURLTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+    private void LeftArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
-        _addAccommodationViewModel.ImageSelected();
+        _addAccommodationViewModel.LeftArrowClick();
+    }
+    private void RightArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        _addAccommodationViewModel.RightArrowClick();
     }
 }

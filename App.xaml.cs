@@ -45,7 +45,7 @@ public partial class App
         services.AddSingleton<IAccommodationReservationMovingRepository, AccommodationReservationMovingRepository>();
         services.AddSingleton<IAccommodationImageRepository, AccommodationImageRepository>();
         services.AddSingleton<IUserRepository, UserRepository>();
-        services.AddScoped<IAccommodationReviewRepository, AccommodationReviewRepository>();
+        services.AddSingleton<IAccommodationReviewRepository, AccommodationReviewRepository>();
         services.AddSingleton<IReviewImageRepository, ReviewImageRepository>();
         services.AddSingleton<ITourRepository, TourRepository>();
         services.AddSingleton<ITourStartTimeRepository, TourStartTimeRepository>();

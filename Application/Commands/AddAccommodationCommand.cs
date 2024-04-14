@@ -2,14 +2,8 @@
 using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace BookingApp.Application.Commands;
 
@@ -22,12 +16,6 @@ public class AddAccommodationCommand : ICommand
     public AddAccommodationCommand(AddAccommodationViewModel addAccommodationViewModel)
     {
         _addAccommodationViewModel = addAccommodationViewModel;
-        addAccommodationViewModel.PropertyChanged += (sender, args) => { RaiseCanExecuteChanged(); };
-    }
-
-    private void RaiseCanExecuteChanged()
-    {
-        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void Execute(object parameter)
@@ -51,6 +39,21 @@ public class AddAccommodationCommand : ICommand
 
     public bool CanExecute(object parameter)
     {
-        return _addAccommodationViewModel.IsDataValid();
+        return AreAllStringsFilled() && AreAllNumbersOK();
+    }
+
+    public bool AreAllNumbersOK()
+    {
+        return _addAccommodationViewModel.MaximumNumberOfGuests > 0
+            && _addAccommodationViewModel.MinimumNumberOfDaysForReservation > 0
+            && _addAccommodationViewModel.DaysBeforeReservationIsFinal > 0;
+    }
+
+    public bool AreAllStringsFilled()
+    {
+        return !string.IsNullOrEmpty(_addAccommodationViewModel.AccommodationName)
+            && !string.IsNullOrEmpty(_addAccommodationViewModel.Country)
+            && !string.IsNullOrEmpty(_addAccommodationViewModel.City)
+            && !string.IsNullOrEmpty(_addAccommodationViewModel.Type);
     }
 }

@@ -1,51 +1,31 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
-using BookingApp.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 using BookingApp.WPF.Views.OwnerViews;
 using System.Windows.Navigation;
 using BookingApp.View;
-using Microsoft.VisualBasic;
 using System.Windows.Input;
 using BookingApp.Application.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
-public class MainPageViewModel
+public partial class MainPageViewModel : ObservableObject
 {
+    [ObservableProperty]
     private List<Accommodation> _accommodations;
-    public List<Accommodation> Accommodations
-    {
-        get => _accommodations;
-        set => _accommodations = value;
-    }
 
+    [ObservableProperty]
     private List<AccommodationReservation> _accommodationReservations;
 
-    public List<AccommodationReservation> AccommodationReservations
-    {
-        get => _accommodationReservations;
-        set => _accommodationReservations = value;
-    }
-
+    [ObservableProperty]
     private User _user;
-    private MainPage mainPage;
 
-    public User User
-    {
-        get => _user;
-        set => _user = value;
-    }
+    private MainPage mainPage;
 
     private AccommodationWrapper _accommodationWrapper;
     private AccommodationReservationWrapper _accommodationReservationWrapper;
@@ -61,8 +41,7 @@ public class MainPageViewModel
         this.mainPage = mainPage;
         User = user;
 
-        Accommodations = new List<Accommodation>(AccommodationService.GetInstance().GetByOwnerId(user.Id));
-        AccommodationReservations = new List<AccommodationReservation>(AccommodationReservationService.GetInstance().GetReservationsByOwnerId(User.Id));
+        Load();
 
         AccommodationReviewService.GetInstance().CheckForCancelledReservations();
         AccommodationReservationService.GetInstance().CheckForCancelledReservations();
@@ -93,7 +72,6 @@ public class MainPageViewModel
         SetActiveButton(mainPage.AccommodationsButton);
         Update();
     }
-
 
     private void AddAllReservationsThatArentCheckedYet()
     {
@@ -173,8 +151,6 @@ public class MainPageViewModel
 
     public void Update()
     {
-        HideLeftNavbar();
-        HideRightNavbar();
         AddAllReservationsThatArentCheckedYet();
         DeleteAllGuestRatingsThatDontHaveReservations();
         CheckReservationsThatEnded();
@@ -216,57 +192,30 @@ public class MainPageViewModel
         SetActiveButton(mainPage.ReservationsButton);
     }
 
-    private void ShowLeftNavbar()
+    public void ToggleNavbar(StackPanel navbar)
     {
-        mainPage.LeftNavbar.Visibility = Visibility.Visible;
-        mainPage.Navbar.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
-        mainPage.RightNavbar.Visibility = Visibility.Collapsed;
-        mainPage.Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-    }
-
-    private void HideLeftNavbar()
-    {
-        mainPage.LeftNavbar.Visibility = Visibility.Collapsed;
-        mainPage.Navbar.ColumnDefinitions[0].Width = new GridLength(0);
-    }
-
-    private void ShowRightNavbar()
-    {
-        mainPage.RightNavbar.Visibility = Visibility.Visible;
-        mainPage.Navbar.ColumnDefinitions[2].Width = new GridLength(0.6, GridUnitType.Star);
-        mainPage.LeftNavbar.Visibility = Visibility.Collapsed;
-        mainPage.Navbar.ColumnDefinitions[0].Width = new GridLength(0);
-    }
-
-    private void HideRightNavbar()
-    {
-        mainPage.RightNavbar.Visibility = Visibility.Collapsed;
-        mainPage.Navbar.ColumnDefinitions[2].Width = new GridLength(0);
-    }
-
-    public void ThreeDotsClick()
-    {
-        if (mainPage.RightNavbar.Visibility == Visibility.Collapsed)
+        if (navbar.Visibility == Visibility.Collapsed)
         {
-            ShowRightNavbar();
-        }
-        else
+            ShowNavbar(navbar, navbar == mainPage.LeftNavbar ? 1 : 0.6);
+        } else if (navbar.Visibility == Visibility.Visible)
         {
-            HideRightNavbar();
+            HideNavbar(navbar);
         }
     }
 
-    public void HamburgerMenuClick()
+    private void ShowNavbar(StackPanel navbar, double v)
     {
-        if (mainPage.LeftNavbar.Visibility == Visibility.Collapsed)
-        {
-            ShowLeftNavbar();
-        }
-        else
-        {
-            HideLeftNavbar();
-        }
+        navbar.Visibility = Visibility.Visible;
+        mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2].Width = new GridLength(v, GridUnitType.Star);
+        HideNavbar(navbar == mainPage.LeftNavbar ? mainPage.RightNavbar : mainPage.LeftNavbar);
     }
+
+    private void HideNavbar(StackPanel navbar)
+    {
+        navbar.Visibility = Visibility.Collapsed;
+        mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2].Width = new GridLength(0, GridUnitType.Star);
+    }
+
     public void ClickHere()
     {
         GuestReviewPage guestReviewPage = new GuestReviewPage(User);

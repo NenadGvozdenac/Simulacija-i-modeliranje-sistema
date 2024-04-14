@@ -25,7 +25,7 @@ public class AddGuestRatingCommand : ICommand
 
     public bool CanExecute(object parameter)
     {
-        return addGuestRatingViewModel.IsDataValid();
+        return addGuestRatingViewModel.SelectedRespectfulness != 0 && addGuestRatingViewModel.SelectedCleanliness != 0;
     }
 
     public void Execute(object parameter)

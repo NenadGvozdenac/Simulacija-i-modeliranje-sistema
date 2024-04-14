@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace BookingApp.Application.Commands;
@@ -12,14 +13,18 @@ internal class AddImageCommand : ICommand
     public AddImageCommand(AddAccommodationViewModel addAccommodationViewModel)
     {
         this.addAccommodationViewModel = addAccommodationViewModel;
-        addAccommodationViewModel.PropertyChanged += (sender, args) => { CanExecuteChanged?.Invoke(this, EventArgs.Empty); };
     }
 
     public event EventHandler? CanExecuteChanged;
 
     public bool CanExecute(object? parameter)
     {
-        return addAccommodationViewModel.IsImageValid();
+        return !(string.IsNullOrEmpty(addAccommodationViewModel.ImageURL) || ImageAlreadyExists());
+    }
+
+    public bool ImageAlreadyExists()
+    {
+        return addAccommodationViewModel.Images.Any(image => image.Path.Equals(addAccommodationViewModel.ImageURL));
     }
 
     public void Execute(object? parameter)

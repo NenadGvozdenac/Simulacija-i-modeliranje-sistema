@@ -28,12 +28,12 @@ public partial class MainPage : Page
 
     private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)
     {
-        _mainPageViewModel.HamburgerMenuClick();
+        _mainPageViewModel.ToggleNavbar(LeftNavbar);
     }
 
     private void ThreeDotsClick(object sender, MouseButtonEventArgs e)
     {
-        _mainPageViewModel.ThreeDotsClick();
+        _mainPageViewModel.ToggleNavbar(RightNavbar);
     }
 
     private void ClickHere_TextBlockClick(object sender, MouseButtonEventArgs e)

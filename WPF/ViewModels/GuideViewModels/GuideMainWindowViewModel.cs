@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
 using BookingApp.View.PathfinderViews.Componentss;
@@ -16,9 +17,6 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
     {
 
         private readonly User _user;
-        private TourRepository _tourRepository;
-        private TourImageRepository _tourImageRepository;
-        private TourStartTimeRepository _timeRepository;
         private DailyTourCard dailyTourCard;
 
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
@@ -28,15 +26,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             window = mainWindow;
             _user = user;
-            _tourImageRepository = new TourImageRepository();
-            _tourRepository = new TourRepository();
-            _timeRepository = new TourStartTimeRepository();
             Update();
         }
 
         public void ScheduleTourClick(object sender, RoutedEventArgs e)
         {
-            AddTourWindow tourWindow = new AddTourWindow(_user, _tourRepository, _tourImageRepository);
+            AddTourWindow tourWindow = new AddTourWindow(_user);
             tourWindow.ShowDialog();
 
         }
@@ -58,7 +53,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public int ongoingTourCheck()
         {
-            foreach (TourStartTime time in _timeRepository.GetAll())
+            foreach (TourStartTime time in TourStartTimeService.GetInstance().GetAll())
             {
                 if (time.Status == "ongoing")
                 {
@@ -88,17 +83,17 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public void ChangeTourStatusOngoing(int tourId, DateTime dateTime)
         {
             TourStartTime startTime = new TourStartTime();
-            startTime = _timeRepository.GetByTourStartTimeAndId(dateTime, tourId);
+            startTime = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(dateTime, tourId);
             startTime.Status = "ongoing";
-            _timeRepository.Update(startTime);
+            TourStartTimeService.GetInstance().Update(startTime);
         }
 
         public void ChangeTourStatusPassed(int tourId, DateTime dateTime)
         {
             TourStartTime startTime = new TourStartTime();
-            startTime = _timeRepository.GetByTourStartTimeAndId(dateTime, tourId);
+            startTime = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(dateTime, tourId);
             startTime.Status = "passed";
-            _timeRepository.Update(startTime);
+            TourStartTimeService.GetInstance().Update(startTime);
         }
 
         public void Demographics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

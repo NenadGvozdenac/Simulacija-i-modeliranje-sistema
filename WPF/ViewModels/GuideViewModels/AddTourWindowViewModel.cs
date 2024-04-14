@@ -12,18 +12,14 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using BookingApp.View.PathfinderViews;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
     public class AddTourWindowViewModel
     {
         private User _user;
-        private LocationRepository _locationRepository;
-        private TourRepository _tourRepository;
-        private TourImageRepository _imageRepository;
-        private LanguageRepository _languageRepository;
-        private CheckpointRepository _checkpointRepository;
-        private TourStartTimeRepository _timeRepository;
+        
 
         private string name;
         public string Name
@@ -214,16 +210,10 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public AddTourWindow addTourWindow { get; set; }
 
 
-        public AddTourWindowViewModel(AddTourWindow _addTourWindow, User user, TourRepository tourRepository, TourImageRepository tourImageRepository)
+        public AddTourWindowViewModel(AddTourWindow _addTourWindow, User user)
         {
             addTourWindow = _addTourWindow;
             _user = user;
-            _locationRepository = new LocationRepository();
-            _tourRepository = tourRepository;
-            _imageRepository = tourImageRepository;
-            _languageRepository = new LanguageRepository();
-            _checkpointRepository = new CheckpointRepository();
-            _timeRepository = new TourStartTimeRepository();
             Images = new ObservableCollection<TourImage>();
             TourDates = new ObservableCollection<TourStartTime>();
             Checkpoints = new ObservableCollection<Checkpoint>();
@@ -231,7 +221,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             addTourWindow.datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
             LoadCountries();
             LoadLanguages();
-
+            
 
         }
 
@@ -239,7 +229,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> listOfCities = _locationRepository.GetCitiesByCountry(addTourWindow.CountryTextBox.SelectedItem.ToString());
+            List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(addTourWindow.CountryTextBox.SelectedItem.ToString());
             addTourWindow.CityTextBox.ItemsSource = listOfCities;
             addTourWindow.CityTextBox.Focus();
             addTourWindow.CityTextBox.IsDropDownOpen = true;
@@ -248,13 +238,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void LoadCountries()
         {
-            List<string> listOfCountries = _locationRepository.GetCountries();
+            List<string> listOfCountries = LocationService.GetInstance().GetCountries();
             addTourWindow.CountryTextBox.ItemsSource = listOfCountries;
         }
 
         public void LoadLanguages()
         {
-            List<string> listOfLanguages = _languageRepository.GetLanguages();
+            List<string> listOfLanguages = LanguageService.GetInstance().GetLanguages();
             addTourWindow.LanguageTextBox.ItemsSource = listOfLanguages;
         }
 
@@ -384,18 +374,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
 
             Tour tour = new();
-            tour.Id = _tourRepository.NextId();
+            tour.Id = TourService.GetInstance().NextId();
             tour.OwnerId = _user.Id;
             tour.Name = addTourWindow.NameTextBox.Text;
-            tour.LocationId = _locationRepository.GetLocationByCityAndCountry(City, Country).Id;
+            tour.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(City, Country).Id;
             tour.Description = Description;
             tour.Duration = Duration;
             tour.Capacity = Capacity;
             tour.Dates = TourDates.ToList();
             tour.Checkpoints = Checkpoints.ToList();
-            tour.LanguageId = _languageRepository.GetLanguageByName(addTourWindow.LanguageTextBox.SelectedItem.ToString()).Id;
+            tour.LanguageId = LanguageService.GetInstance().GetLanguageByName(addTourWindow.LanguageTextBox.SelectedItem.ToString()).Id;
             tour.Images = Images.ToList();
-            _tourRepository.Add(tour);
+            TourService.GetInstance().Add(tour);
 
 
             SaveImages(Images, tour);
@@ -411,9 +401,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             foreach (TourImage image in Images)
             {
-                image.Id = _imageRepository.NextId();
+                image.Id = TourImageService.GetInstance().NextId();
                 image.TourId = tour.Id;
-                _imageRepository.Add(image);
+                TourImageService.GetInstance().Add(image);
             }
         }
 
@@ -422,9 +412,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             foreach (Checkpoint checkpoint in Checkpoints)
             {
-                checkpoint.Id = _checkpointRepository.NextId();
+                checkpoint.Id = CheckpointService.GetInstance().NextId();
                 checkpoint.TourId = tour.Id;
-                _checkpointRepository.Add(checkpoint);
+                CheckpointService.GetInstance().Add(checkpoint);
 
             }
 
@@ -434,12 +424,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             foreach (TourStartTime time in TourDates)
             {
-                time.Id = _timeRepository.NextId();
+                time.Id = TourStartTimeService.GetInstance().NextId();
                 time.TourId = tour.Id;
                 time.Status = "scheduled";
                 time.Guests = 0;
                 time.CurrentCheckpoint = -1;
-                _timeRepository.Add(time);
+                TourStartTimeService.GetInstance().Add(time);
             }
 
         }

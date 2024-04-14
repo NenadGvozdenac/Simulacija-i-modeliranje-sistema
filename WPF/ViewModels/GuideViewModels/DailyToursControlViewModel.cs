@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
 using System;
@@ -15,15 +16,6 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
     public class DailyToursControlViewModel
     {
         public ObservableCollection<Tour> dailyTours { get; set; }
-
-        public TourRepository tourRepository { get; set; }
-        public LocationRepository locationRepository { get; set; }
-        public TourImageRepository tourImageRepository { get; set; }
-
-        public LanguageRepository languageRepository { get; set; }
-
-        public TourStartTimeRepository tourStartTimeRepository { get; set; }
-
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedControl { get; set; }
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedControl { get; set; }
@@ -36,20 +28,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             dailyToursControl = _dailyToursControl;
             dailyTours = new ObservableCollection<Tour>();
-            tourRepository = new TourRepository();
-            locationRepository = new LocationRepository();
-            tourImageRepository = new TourImageRepository();
-            languageRepository = new LanguageRepository();
-            tourStartTimeRepository = new TourStartTimeRepository();
-
-            _user = user;
+           _user = user;
             Update();
 
         }
 
         public void Update()
         {
-            foreach (TourStartTime startTime in tourStartTimeRepository.GetAll())
+            foreach (TourStartTime startTime in TourStartTimeService.GetInstance().GetAll())
             {
                 if (CheckIfPassed(startTime) == 1)
                 {
@@ -57,15 +43,15 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 }
                 if (startTime.Time.Date == System.DateTime.Now.Date)
                 {
-                    Tour toura = tourRepository.GetById(startTime.TourId);
+                    Tour toura = TourService.GetInstance().GetById(startTime.TourId);
                     if (toura.OwnerId == _user.Id)
                     {
                         Tour tour = new Tour();
                         tour.Capacity = toura.Capacity;
                         tour.CurrentDate = startTime.Time;
-                        tour.Location = locationRepository.GetById(toura.LocationId);
-                        tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                        tour.Language = languageRepository.GetById(toura.LanguageId);
+                        tour.Location = LocationService.GetInstance().GetById(toura.LocationId);
+                        tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
+                        tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId);  //fix
                         tour.Id = toura.Id;
                         tour.LocationId = toura.LocationId;
                         tour.LanguageId = toura.LanguageId;

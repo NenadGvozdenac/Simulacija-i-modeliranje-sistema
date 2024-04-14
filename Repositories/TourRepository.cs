@@ -92,18 +92,4 @@ public class TourRepository : ITourRepository
             _serializer.ToCSV(FilePath, _tours);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

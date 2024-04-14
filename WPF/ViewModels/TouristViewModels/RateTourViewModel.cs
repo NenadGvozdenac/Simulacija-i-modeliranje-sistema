@@ -1,48 +1,40 @@
-﻿using System;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
+using BookingApp.Model.MutualModels;
+using BookingApp.Repositories;
+using BookingApp.WPF.Views.TouristViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows;
+using BookingApp.WPF.Views.GuestViews;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BookingApp.Application.UseCases;
-using BookingApp.Domain.Models;
-using BookingApp.Model.MutualModels;
-using BookingApp.Repositories;
 
-
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    /// <summary>
-    /// Interaction logic for RateTour.xaml
-    /// </summary>
-    public partial class RateTour : UserControl
+    public class RateTourViewModel
     {
-        public Tour selectedTour {  get; set; }
-        public User _user {  get; set; }
+        public Tour selectedTour { get; set; }
+        public User _user { get; set; }
         public TouristReservation reservation { get; set; }
         public TouristReservationRepository _touristReservationRepository { get; set; }
         public TourRepository _tourRepository { get; set; }
         public TourReviewRepository _tourReviewRepository { get; set; }
         public TourReviewImageRepository _reviewImageRepository { get; set; }
-        public List<TourReviewImage> _reviewImages {  get; set; }
+        public List<TourReviewImage> _reviewImages { get; set; }
 
         private int guideKnowledgeRating = 0;
         private int guideLanguageRating = 0;
         private int interestingnessRating = 0;
         private string feedbackText = string.Empty;
-
-
-        public RateTour(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId)
+        public RateTour rateTour {  get; set; }
+        public RateTourViewModel(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId, RateTour rateTour)
         {
-            InitializeComponent();
             _user = user;
             _touristReservationRepository = touristReservationRepository;
             _tourRepository = tourRepository;
@@ -52,10 +44,11 @@ namespace BookingApp.View.TouristViews
             _tourRepository = new TourRepository();
             _reviewImages = new List<TourReviewImage>();
             selectedTour = _tourRepository.GetById(tourId);
+            this.rateTour = rateTour;
         }
 
 
-        private void Star_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void Star_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Image star = sender as Image;
             string starName = star.Name;
@@ -82,11 +75,11 @@ namespace BookingApp.View.TouristViews
             }
         }
 
-        private void UpdateStarRatingUI(string starPrefix, int rating)
+        public void UpdateStarRatingUI(string starPrefix, int rating)
         {
             for (int i = 1; i <= 5; i++)
             {
-                Image star = FindName($"{starPrefix}{i}") as Image;
+                Image star = rateTour.FindName($"{starPrefix}{i}") as Image;
                 if (i <= rating)
                 {
                     star.Source = new BitmapImage(new Uri("/Resources/Assets/star-filled-rate-rating-bookmark-favourite-save-priority-important.256x243.png", UriKind.RelativeOrAbsolute));
@@ -97,25 +90,25 @@ namespace BookingApp.View.TouristViews
                 }
             }
         }
-        private void Feedback_TextChanged(object sender, TextChangedEventArgs e)
+        public void Feedback_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
             feedbackText = textBox.Text;
         }
 
-        private void AddPhoto_Click(object sender, RoutedEventArgs e)
+        public void AddPhoto_Click(object sender, RoutedEventArgs e)
         {
             string imagePath = ImageService.GetInstance().GetImageFromUser("ReviewImages");
             Image image = ImageService.GetInstance().ReadImage(imagePath);
             TourReviewImage tourReviewImage = new TourReviewImage(selectedTour.Id, imagePath);
-            
+
             image.Width = 185;
             image.Height = 135;
 
             _reviewImages.Add(tourReviewImage);
-            reviewImages_StackPanel.Children.Add(image);
+            rateTour.reviewImages_StackPanel.Children.Add(image);
         }
-        private void Finish_Click(object sender, RoutedEventArgs e)
+        public void Finish_Click(object sender, RoutedEventArgs e)
         {
             if (guideKnowledgeRating.ToString() != "" || guideLanguageRating.ToString() != "" || _reviewImages.Count != 0)
             {
@@ -127,18 +120,18 @@ namespace BookingApp.View.TouristViews
                     reviewImage.ReviewId = tourReview.Id;
                     _reviewImageRepository.Add(reviewImage);
                 }
-                Window parentWindow = Window.GetWindow(this);
+                /*Window parentWindow = Window.GetWindow(rateTour);
                 if (parentWindow is TouristMainWindow mainWindow)
                 {
                     mainWindow.TouristWindowFrame.Content = mainWindow.ToursVisitedUserControl;
-                }
+                }*/
+                NavigationService.GetNavigationService(rateTour).GoBack();
+
             }
             else
             {
                 MessageBox.Show("Popunite sva polja!");
             }
         }
-
-        
     }
 }

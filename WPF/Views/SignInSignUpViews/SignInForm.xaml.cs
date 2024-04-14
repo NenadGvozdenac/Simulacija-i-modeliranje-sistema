@@ -10,6 +10,7 @@ using BookingApp.View.TouristViews;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.GuestViews;
+using BookingApp.WPF.Views.TouristViews;
 
 namespace BookingApp.View;
 

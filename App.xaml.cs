@@ -45,8 +45,14 @@ public partial class App
         services.AddSingleton<IAccommodationReservationMovingRepository, AccommodationReservationMovingRepository>();
         services.AddSingleton<IAccommodationImageRepository, AccommodationImageRepository>();
         services.AddSingleton<IUserRepository, UserRepository>();
-        services.AddScoped<IAccommodationReviewRepository, AccommodationReviewRepository>();
+        services.AddSingleton<IAccommodationReviewRepository, AccommodationReviewRepository>();
         services.AddSingleton<IReviewImageRepository, ReviewImageRepository>();
+        services.AddSingleton<ITourRepository, TourRepository>();
+        services.AddSingleton<ITourStartTimeRepository, TourStartTimeRepository>();
+        services.AddSingleton<ICheckpointRepository, CheckpointRepository>();
+        services.AddSingleton<ITourVoucherRepository, TourVoucherRepository>();
+        services.AddSingleton<ITourImageRepository, TourImageRepository>();
+        services.AddSingleton<ILanguageRepository, LanguageRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -59,5 +65,11 @@ public partial class App
         services.AddSingleton<GuestRatingService>();
         services.AddSingleton<ImageService>();
         services.AddSingleton<AccommodationReviewService>();
+        services.AddSingleton<TourService>();
+        services.AddSingleton<TourStartTimeService>();
+        services.AddSingleton<CheckpointService>();
+        services.AddSingleton<TourVoucherRepository>();
+        services.AddSingleton<TourImageService>();
+        services.AddSingleton<LanguageService>();
     }
 }

@@ -11,14 +11,17 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
-public class DetailedAccommodationViewModel
+public partial class DetailedAccommodationViewModel : ObservableObject
 {
     public AccommodationDTO Accommodation { get; set; }
     public Accommodation _accommodation { get; set; }
     public DetailedAccommodationPage Page { get; set; }
+    [ObservableProperty]
+    private string _imageURL;
     public ICommand CloseAccommodationCommand => new CloseAccommodationCommand(this);
 
     public DetailedAccommodationViewModel(DetailedAccommodationPage page, Accommodation accommodation)
@@ -26,34 +29,40 @@ public class DetailedAccommodationViewModel
         Page = page;
         Accommodation = new(accommodation);
         _accommodation = accommodation;
-
-        SetupProperties();
+        _imageURL = Accommodation.Images.Count > 0 ? Accommodation.Images[0].Path : "";
     }
 
-    public void SetupProperties()
+    public void LeftArrowClick()
     {
-        Page.ImagesPanel.Children.Clear();
-        LoadImages(Accommodation.Images);
-    }
+        var currentImage = _accommodation.Images.FirstOrDefault(image => image.Path == ImageURL);
+        var currentIndex = _accommodation.Images.IndexOf(currentImage);
 
-    private void LoadImages(List<AccommodationImage> images)
-    {
-        foreach (AccommodationImage image in images)
+        if (currentIndex == -1) { return; }
+
+        if (currentIndex == 0)
         {
-            AddImageToImagePanel(image);
+            ImageURL = _accommodation.Images.Last().Path;
+        }
+        else
+        {
+            ImageURL = _accommodation.Images[currentIndex - 1].Path;
         }
     }
 
-    private void AddImageToImagePanel(AccommodationImage image)
+    public void RightArrowClick()
     {
-        string relativeImagePath = image.Path;
-        string absoluteImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImagePath);
+        var currentImage = _accommodation.Images.FirstOrDefault(image => image.Path == ImageURL);
+        var currentIndex = _accommodation.Images.IndexOf(currentImage);
 
-        AddToPanel(absoluteImagePath);
-    }
+        if (currentIndex == -1) { return; }
 
-    private void AddToPanel(string absoluteImagePath)
-    {
-        Page.ImagesPanel.Children.Add(ImageService.GetInstance().ReadImage(absoluteImagePath));
+        if (currentIndex == _accommodation.Images.Count - 1)
+        {
+            ImageURL = _accommodation.Images.First().Path;
+        }
+        else
+        {
+            ImageURL = _accommodation.Images[currentIndex + 1].Path;
+        }
     }
 }

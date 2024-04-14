@@ -26,4 +26,6 @@ public class LanguageRepository : BaseRepository<Language>, ILanguageRepository
     {
         DeleteRange(GetAll().Where(l => l.Name == name).ToList());
     }
+
+
 }

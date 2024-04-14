@@ -168,8 +168,8 @@ public partial class MainPageViewModel : ObservableObject
 
     public void Load()
     {
-        Accommodations = new List<Accommodation>(AccommodationService.GetInstance().GetByOwnerId(User.Id));
-        AccommodationReservations = new List<AccommodationReservation>(AccommodationReservationService.GetInstance().GetReservationsByOwnerId(User.Id));
+        Accommodations = new(AccommodationService.GetInstance().GetByOwnerId(User.Id));
+        AccommodationReservations = new(AccommodationReservationService.GetInstance().GetReservationsByOwnerId(User.Id));
     }
 
     public void Refresh()

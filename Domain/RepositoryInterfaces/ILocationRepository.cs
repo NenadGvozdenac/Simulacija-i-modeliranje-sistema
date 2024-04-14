@@ -12,6 +12,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<string> GetCitiesByCountry(string country);
         List<string> GetCountries();
         Location GetLocationByCityAndCountry(string city, string country);
+        List<string> GetLocationsFormatted();
         void Update(Location location);
     }
 }

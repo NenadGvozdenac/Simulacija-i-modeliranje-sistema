@@ -30,4 +30,9 @@ public class LocationRepository : BaseRepository<Location>, ILocationRepository
     {
         return GetAll().Select(a => a.Country).Distinct().ToList();
     }
+
+    public List<string> GetLocationsFormatted()
+    {
+        return GetAll().Select(a => $"{a.City}, {a.Country}").ToList();
+    }
 }

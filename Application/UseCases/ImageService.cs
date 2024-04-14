@@ -19,7 +19,6 @@ namespace BookingApp.Application.UseCases;
 
 public class ImageService
 {
-
     private IAccommodationImageRepository _accommodationImageRepository;
     private IReviewImageRepository _reviewImageRepository;
 

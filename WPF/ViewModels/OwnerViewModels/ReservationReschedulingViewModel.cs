@@ -24,13 +24,11 @@ public class ReservationReschedulingViewModel
     public ReservationReschedulingViewModel(ReservationReschedulingPage reservationReschedulingPage, User user)
     {
         _user = user;
-
         _reservationReschedulingPage = reservationReschedulingPage;
-
         Update();
     }
 
-    private void Update()
+    public void Update()
     {
         _reservationsMoving = AccommodationReservationService.GetInstance().GetMovingsByOwnerId(_user.Id).Where(x => x.Status == ReschedulingStatus.Pending).ToList();
 
@@ -43,19 +41,10 @@ public class ReservationReschedulingViewModel
 
         foreach (AccommodationReservationMoving moving in _reservationsMoving)
         {
-            ReservationRescheduling reservationRescheduling = new ReservationRescheduling(moving);
+            ReservationRescheduling reservationRescheduling = new ReservationRescheduling(_reservationReschedulingPage, moving);
             reservationRescheduling.Margin = new Thickness(15);
-
-            reservationRescheduling.ReservationReschedulingDetails += (s, e) => ShowDetails(e);
 
             _reservationReschedulingPage.MainPanel.Children.Add(reservationRescheduling);
         }
-    }
-
-    private void ShowDetails(AccommodationReservationMoving e)
-    {
-        ReservationReschedulingDetailsPage reservationReschedulingDetailsPage = new ReservationReschedulingDetailsPage(e);
-        reservationReschedulingDetailsPage.ReservationReschedulingDetailsPageClosed += (s, e) => Update();
-        NavigationService.GetNavigationService(_reservationReschedulingPage).Navigate(reservationReschedulingDetailsPage);
     }
 }

@@ -26,20 +26,7 @@ namespace BookingApp.View.PathfinderViews
     /// </summary>
     public partial class CheckpointsView : Window, INotifyPropertyChanged
     {
-       public ObservableCollection<Checkpoint> checkpoints {  get; set; }
-
-       public ObservableCollection<Tourist> tourists { get; set; }
-
-       public ObservableCollection<Tourist> selectedTourists { get; set; }
-       public TourRepository tourRepository { get; set; }
-
-       public CheckpointRepository checkpointRepository { get; set; }
-
-       public TouristReservationRepository reservationRepository { get; set; }
-
-       public TouristRepository touristRepository { get; set; }
-
-        public TourStartTimeRepository timeRepository { get; set; }
+       
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClicked { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Linq;
@@ -22,7 +23,12 @@ public class AddAccommodationCommand : ICommand
     {
         Accommodation accommodation = new();
         accommodation.Name = _addAccommodationViewModel.AccommodationName;
-        accommodation.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(_addAccommodationViewModel.City, _addAccommodationViewModel.Country).Id;
+
+        string location = _addAccommodationViewModel.Location;
+        string city = location.Split(", ")[0];
+        string country = location.Split(", ")[1];
+
+        accommodation.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(city, country).Id;
         accommodation.Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), _addAccommodationViewModel.Type);
         accommodation.MaxGuestNumber = _addAccommodationViewModel.MaximumNumberOfGuests;
         accommodation.MinReservationDays = _addAccommodationViewModel.MinimumNumberOfDaysForReservation;
@@ -39,7 +45,16 @@ public class AddAccommodationCommand : ICommand
 
     public bool CanExecute(object parameter)
     {
-        return AreAllStringsFilled() && AreAllNumbersOK();
+        return AreAllStringsFilled() && AreAllNumbersOK() && IsLocationValid();
+    }
+
+    public bool IsLocationValid()
+    {
+        string location = _addAccommodationViewModel.Location;
+        string city = location.Split(", ")[0];
+        string country = location.Split(", ")[1];
+    
+        return LocationService.GetInstance().GetLocationByCityAndCountry(city, country) != null;
     }
 
     public bool AreAllNumbersOK()
@@ -52,8 +67,7 @@ public class AddAccommodationCommand : ICommand
     public bool AreAllStringsFilled()
     {
         return !string.IsNullOrEmpty(_addAccommodationViewModel.AccommodationName)
-            && !string.IsNullOrEmpty(_addAccommodationViewModel.Country)
-            && !string.IsNullOrEmpty(_addAccommodationViewModel.City)
+            && !string.IsNullOrEmpty(_addAccommodationViewModel.Location)
             && !string.IsNullOrEmpty(_addAccommodationViewModel.Type);
     }
 }

@@ -1,41 +1,30 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
-using BookingApp.Repositories;
 using BookingApp.Resources.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookingApp.WPF.DTOs.OwnerDTOs;
 
-public class AccommodationReservationDTO
+public partial class AccommodationReservationDTO : ObservableObject
 {
+    [ObservableProperty]
     private User _owner;
 
-    public User Owner
-    {
-        get => _owner;
-        set => _owner = value;
-    }
-
+    [ObservableProperty]
     private AccommodationDTO _accommodationDTO;
 
-    public AccommodationDTO AccommodationDTO
-    {
-        get => _accommodationDTO;
-        set => _accommodationDTO = value;
-    }
-
+    [ObservableProperty]
     private AccommodationReservation _reservation;
 
-    public AccommodationReservation Reservation
-    {
-        get => _reservation;
-        set => _reservation = value;
-    }
+    [ObservableProperty]
+    private User _guest;
+
+    [ObservableProperty]
+    private ReservationType _reservationType;
+
+    [ObservableProperty]
+    private DateSpan _dateSpan;
 
     private string _numberOfReviews;
     public string NumberOfReviews
@@ -54,7 +43,7 @@ public class AccommodationReservationDTO
     private string _guestRating;
     public string GuestRating
     {
-        get => string.Format("{0}/5", _guestRating);
+        get => string.Format("{0}/5.00", _guestRating);
         set => _guestRating = value;
     }
 
@@ -70,27 +59,6 @@ public class AccommodationReservationDTO
     {
         get => string.Format(_guestsNumber == "1" ? "{0} guest" : "{0} guests", _guestsNumber);
         set => _guestsNumber = value;
-    }
-
-    private User _guest;
-    public User Guest
-    {
-        get => _guest;
-        set => _guest = value;
-    }
-
-    private ReservationType _reservationType;
-    public ReservationType ReservationType
-    {
-        get => _reservationType;
-        set => _reservationType = value;
-    }
-
-    private DateSpan _dateSpan;
-    public DateSpan DateSpan
-    {
-        get => _dateSpan;
-        set => _dateSpan = value;
     }
 
     public AccommodationReservationDTO(AccommodationReservation reservation)

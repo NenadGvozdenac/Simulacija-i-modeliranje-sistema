@@ -37,4 +37,13 @@ public partial class DetailedAccommodationPage : Page
     {
         AccommodationClosed.Invoke(this, e);
     }
+
+    private void LeftArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        _viewModel.LeftArrowClick();
+    }
+    private void RightArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        _viewModel.RightArrowClick();
+    }
 }

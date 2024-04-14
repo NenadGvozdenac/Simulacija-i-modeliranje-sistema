@@ -24,6 +24,7 @@ public class GuestFeedbacksViewModel
 
     private void LoadFeedbacks()
     {
+        _page.MainPanel.Children.Clear();
         foreach (AccommodationReview review in AccommodationReviewService.GetInstance().GetByOwnerId(_owner.Id))
         {
             if (!GuestRatingService.GetInstance().ExistsReviewOfGuest(review.Guest, review.Accommodation))

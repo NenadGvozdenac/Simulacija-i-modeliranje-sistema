@@ -25,12 +25,15 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public TourReviewRepository tourReviewRepository { get; set; }
 
+        public UserRepository userRepository { get; set; }
+
         public ReviewsControlViewModel(ReviewsControl reviewsWindow, User user)
         {
             _reviewsControl = reviewsWindow;
             _user = user;
             tourReviews = new ObservableCollection<TourReview>();
             tourReviewRepository = new TourReviewRepository();
+            userRepository = new UserRepository();
             Update();
         }
 
@@ -51,6 +54,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     review_copy.GuideLanguage = review_temp.GuideLanguage;
                     review_copy.TourInterestingness = review_temp.TourInterestingness;
                     review_copy.Feedback = review_temp.Feedback;
+                    review_copy.UserName = userRepository.GetById(review_temp.UserId).Username;
+                    review_copy.Status = "valid";
 
                     tourReviews.Add(review_copy);
                 }

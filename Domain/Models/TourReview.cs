@@ -20,6 +20,8 @@ namespace BookingApp.Model.MutualModels
         public int GuideLanguage {  get; set; }
         public int TourInterestingness {  get; set; }
         public string Feedback {  get; set; }
+        public string UserName { get; set; }
+        public string Status { get; set; }
         public List<TourReviewImage> ReviewImages { get; set; }
 
         public TourReview() { }

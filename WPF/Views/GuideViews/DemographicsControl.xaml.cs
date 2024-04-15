@@ -36,7 +36,6 @@ namespace BookingApp.View.PathfinderViews
             InitializeComponent();
             demographicsControlViewModel = new DemographicsControlViewModel(this);
             DataContext = demographicsControlViewModel;
-            Update();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

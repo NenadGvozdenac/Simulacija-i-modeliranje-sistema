@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         mc:Ignorable="d"
-        Title="TourDemographics" Height="450" Width="800">
+        Title="TourDemographics" Height="450" Width="800" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*"></ColumnDefinition>
@@ -69,6 +69,9 @@
                     <Label Content="&#60;50" HorizontalAlignment="Center"></Label>
                     <TextBlock Text="{Binding Path=Above50, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center"></TextBlock>
                 </StackPanel>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Path=TourName ,UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}"></TextBlock>
             </Grid>
         </Grid>
         <Border Grid.Column="1" BorderBrush="Gray" Opacity="0.9" BorderThickness="1,0,0,0"/>

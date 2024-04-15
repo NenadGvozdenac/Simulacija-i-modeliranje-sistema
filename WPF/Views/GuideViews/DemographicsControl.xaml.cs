@@ -52,12 +52,12 @@ namespace BookingApp.View.PathfinderViews
 
         private void demographicscard_TourStatsClicked(object sender, BeginButtonClickedEventArgs e) 
         {
-            demographicsControlViewModel.demographicscard_TourStatsClicked(sender, e);
+            demographicsControlViewModel.demographicscard_TourStatsClicked(sender,e);
         }
 
         private void onStatsButtonClicked(BeginButtonClickedEventArgs e)
         {
-            demographicsControlViewModel?.onStatsButtonClicked(e);
+            demographicsControlViewModel.onStatsButtonClicked(e);
         }
 
     }

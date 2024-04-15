@@ -93,8 +93,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Above50 = FindAbove50(FindMostReserved());
 
             times = FindYears();
-
-            tourDemographics.demographicsControl.StatsButtonClickedControl += (s, e) => OnStatsButtonClicked_Handler(s, e);
+            
+            tourDemographics.demographicsControl.demographicsControlViewModel.StatsButtonClickedControl += (s,e) => OnStatsButtonClicked_Handler(s,e);
             Update();
             
         }
@@ -224,7 +224,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void OnStatsButtonClicked_Handler(object sender, BeginButtonClickedEventArgs e)
         {
-            OnStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+           OnStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
 
         }
 
@@ -248,6 +248,15 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         }
 
         public void yearSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int year = (int)tourDemographics.YearBox.SelectedItem;
+
+            Sub18 = FindSub18(FindMostReservedForYear(year));
+            Middle = FindMiddle(FindMostReservedForYear(year));
+            Above50 = FindAbove50(FindMostReservedForYear(year));
+        }
+
+        public void yearSelectionChanged_Click(object sender, RoutedEventArgs e)
         {
             int year = (int)tourDemographics.YearBox.SelectedItem;
 

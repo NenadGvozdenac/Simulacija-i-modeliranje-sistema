@@ -34,7 +34,10 @@ namespace BookingApp.Application.UseCases
            return _tourRepository.GetById(id);
         }
 
-
+        public List<Tour> GetByOwnerId(int ownerId)
+        {
+            return _tourRepository.GetByOwnerId(ownerId);
+        }
         public Tour GetByName(string name)
         {
             return _tourRepository.GetByName(name); 

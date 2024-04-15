@@ -33,7 +33,7 @@
                     <StackPanel >
                         <TextBlock Width="150" Text="Advanced options" TextAlignment="Center" TextDecorations="Underline" FontWeight="Bold"></TextBlock>
                         <Border Height="10"/>
-                        <TextBlock Width="150" Text="Your reviews (F4)" TextAlignment="Center"></TextBlock>
+                        <TextBlock Width="150" Text="Your reviews (F4)" TextAlignment="Center" MouseLeftButtonDown="Reviews_MouseLeftButtonDown" Cursor="Hand"></TextBlock>
                         <Border Height="10"/>
                         <TextBlock Width="150" Text="Tour demographics (F5)" TextAlignment="Center" MouseLeftButtonDown="Demographics_MouseLeftButtonDown" Cursor="Hand"></TextBlock>
                         <Border Height="10"/>

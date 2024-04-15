@@ -23,7 +23,11 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column ="0">
-                    <ComboBox x:Name="YearBox" Height="25" Width="100" ItemsSource="{Binding times}" SelectionChanged="yearSelectionChanged"></ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="YearBox" Height="25" Width="100" ItemsSource="{Binding times}" SelectionChanged="yearSelectionChanged"></ComboBox>
+                        <Border Margin="10,0,0,0"/>
+                        <Button Width="38" Height="24" Click="yearSelectionChanged_Click">o</Button>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Column ="1">
                     <Button Height="25" Width="100" Content="All time" Click="AllTime_Click"></Button>

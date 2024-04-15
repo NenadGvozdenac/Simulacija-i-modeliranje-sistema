@@ -12,11 +12,14 @@
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
     <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\book.224x256.png" />
     <None Remove="Resources\Assets\default_user.png" />
     <None Remove="Resources\Assets\delete.png" />
     <None Remove="Resources\Assets\edit.png" />
     <None Remove="Resources\Assets\eye.png" />
+    <None Remove="Resources\Assets\flag-red.255x256.png" />
     <None Remove="Resources\Assets\hamburger_menu.png" />
+    <None Remove="Resources\Assets\head-lightbulb-outline.232x256.png" />
     <None Remove="Resources\Assets\home.256x245.png" />
     <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
@@ -75,6 +78,9 @@
     <Content Include="Resources\Assets\back_left_arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\book.224x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\default_user.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -87,7 +93,13 @@
     <Content Include="Resources\Assets\eye.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\flag-red.255x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\hamburger_menu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\head-lightbulb-outline.232x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\home.256x245.png">

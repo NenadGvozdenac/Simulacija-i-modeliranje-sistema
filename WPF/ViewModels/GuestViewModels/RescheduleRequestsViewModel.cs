@@ -39,7 +39,9 @@ public class RescheduleRequestsViewModel
         _pendingRequests.Clear();
         _reviewedRequests.Clear();
 
-        foreach (AccommodationReservationMoving moving in AccommodationReservationService.GetInstance().GetAllMoving())
+        var movingList = AccommodationReservationService.GetInstance().GetAllMoving().ToList();
+
+        foreach (AccommodationReservationMoving moving in movingList)
         {
             if (IsPendingRequest(moving))
             {

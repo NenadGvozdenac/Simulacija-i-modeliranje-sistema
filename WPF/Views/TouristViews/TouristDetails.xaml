@@ -68,14 +68,14 @@
 
                             <TextBlock Text="Pick a coupon(optional)" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,97,0,0" Grid.Row="1"/>
                             <ComboBox ItemsSource="{Binding Vouchers}"
-                              DisplayMemberPath="ExpirationDate"
-                              SelectedValuePath="Id"
-                              HorizontalAlignment="Left"
-                              SelectionChanged="ComboBox_SelectionChanged"
-                              VerticalAlignment="Top"
-                              Margin="245,101,0,0"
-                              Width="200"
-                              Grid.Row="1"/>
+          DisplayMemberPath="ExpirationDate"
+          SelectedValuePath="Id"
+          SelectionChanged="ComboBox_SelectionChanged"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Margin="245,101,0,0"
+          Width="200"
+          Grid.Row="1"/>
 
                             <Button Click="AddTourist_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,27,0" Height="50" Width="59">
                                 <Image Source="../../Resources/Assets/plus-symbol-button.png" Height="40" Width="49"/>

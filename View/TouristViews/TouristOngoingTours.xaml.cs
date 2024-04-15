@@ -1,9 +1,4 @@
-﻿using BookingApp.Domain.Models;
-using BookingApp.Repositories;
-using BookingApp.View.TouristViews;
-using BookingApp.WPF.Views.TouristViews;
-using BookingApp.WPF.Views.TouristViews.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,15 +7,29 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using BookingApp.Domain.Models;
+using BookingApp.Repositories;
+using BookingApp.WPF.Views.TouristViews.Components;
 
-namespace BookingApp.WPF.ViewModels.TouristViewModels
+namespace BookingApp.View.TouristViews
 {
-    public class VisitedToursViewModel
+    /// <summary>
+    /// Interaction logic for TouristOngoingTours.xaml
+    /// </summary>
+    public partial class TouristOngoingTours : UserControl
     {
         public ObservableCollection<Tour> tours { get; set; }
 
         private ObservableCollection<Tour> _myTours;
-        public ObservableCollection<Tour> MyTours
+        public ObservableCollection<Tour> MyActiveTours
         {
             get { return _myTours; }
             set
@@ -39,10 +48,11 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public LanguageRepository languageRepository { get; set; }
         public TourRepository tourRepository { get; set; }
         public User _user { get; set; }
-        public VisitedTours visitedTours { get; set; }
-        public VisitedToursViewModel(User user, VisitedTours _visitedTours)
+
+        public TouristOngoingTours(User user)
         {
-            visitedTours = _visitedTours;
+            InitializeComponent();
+            DataContext = this;
             touristReservationRepository = new TouristReservationRepository();
             tourStartTimeRepository = new TourStartTimeRepository();
             tourRepository = new TourRepository();
@@ -52,7 +62,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             tours = new ObservableCollection<Tour>();
             _user = user;
             Update();
-
         }
 
         public void Update()
@@ -64,7 +73,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 {
                     foreach (TourStartTime tourStartTime in tourStartTimeRepository.GetAll())
                     {
-                        if (tourStartTime.Id == touristReservation.Id_TourTime)
+                        if (tourStartTime.Id == touristReservation.Id_TourTime && tourStartTime.Status == "active")
                         {
                             Tour tour = tourRepository.GetById(tourStartTime.TourId);
                             tour.Location = locationRepository.GetById(tour.LocationId);
@@ -75,22 +84,22 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                     }
                 }
             }
-            MyTours = new ObservableCollection<Tour>(tours);
+            MyActiveTours = new ObservableCollection<Tour>(tours);
         }
-
-        public void TourCardWithStar_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (sender is TourCardWithStar tourCard)
-            {
-                tourCard.DataContext = tourCard.DataContext;
-                tourCard.SetUser(_user);
-            }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void Ongoing_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is OngoingTourCard tourCard)
+            {
+                tourCard.DataContext = tourCard.DataContext;
+                tourCard.SetUser(_user);
+            }
+        }
+        
     }
 }

@@ -46,9 +46,12 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             vouchers.Clear();
             foreach (TourVoucher voucher in tourVoucherRepository.GetAll())
             {
-                if (voucher.TouristId == userId)
+                if (voucher.TouristId == userId && voucher.ExpirationDate > DateTime.Now)
                 {
                     vouchers.Add(voucher);
+                }else if(voucher.ExpirationDate < DateTime.Now)
+                {
+                    tourVoucherRepository.Delete(voucher.Id);
                 }
             }
             Vouchers = new ObservableCollection<TourVoucher>(vouchers);

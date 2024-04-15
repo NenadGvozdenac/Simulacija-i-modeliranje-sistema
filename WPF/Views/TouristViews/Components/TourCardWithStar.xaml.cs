@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.TouristViews.Components
+namespace BookingApp.WPF.Views.TouristViews.Components
 {
     /// <summary>
     /// Interaction logic for TourCardWithStar.xaml

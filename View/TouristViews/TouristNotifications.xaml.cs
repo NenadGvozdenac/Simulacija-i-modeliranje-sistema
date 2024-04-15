@@ -12,18 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BookingApp.Model.MutualModels;
 
-
-namespace BookingApp.WPF.Views.TouristViews.Components
+namespace BookingApp.View.TouristViews
 {
     /// <summary>
-    /// Interaction logic for VoucherCard.xaml
+    /// Interaction logic for TouristNotifications.xaml
     /// </summary>
-    public partial class VoucherCard : UserControl
+    public partial class TouristNotifications : UserControl
     {
-
-        public VoucherCard()
+        public TouristNotifications()
         {
             InitializeComponent();
         }

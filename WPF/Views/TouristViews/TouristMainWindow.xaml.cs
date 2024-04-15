@@ -71,9 +71,18 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.MyVouchers_Click(sender, e);
         }
 
-        internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
+        public void MyActiveTours_Click(object sender, RoutedEventArgs e)
+        {
+            touristMainWindowViewModel.MyActiveTours_Click(sender, e);
+        }
+        public void SeeCheckpoints(User user)
+        {
+            touristMainWindowViewModel.SeeCheckpoints(user);
+        }
+
+        /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {
             touristMainWindowViewModel.ShowTourDates(selectedTour, guestNumber, tourists);
-        }
+        }*/
     }
 }

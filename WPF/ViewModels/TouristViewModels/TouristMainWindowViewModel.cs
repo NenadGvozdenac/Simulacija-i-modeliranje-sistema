@@ -3,7 +3,6 @@ using BookingApp.Repositories;
 using BookingApp.View.TouristViews;
 using BookingApp.WPF.Views.TouristViews;
 using BookingApp.WPF.ViewModels.TouristViewModels;
-using BookingApp.View.TouristViews.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +74,10 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         {
             TouristWindowFrame.Content = new RateTour(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
         }
+        public void SeeCheckpoints(User user)
+        {
+            TouristWindowFrame.Content = new TouristCheckpoints(user);
+        }
 
         public void Home_Click(object sender, MouseButtonEventArgs e)
         {
@@ -85,10 +88,14 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         {
             TouristWindowFrame.Content = new TouristVouchers(_user.Id);
         }
+        public void MyActiveTours_Click(object sender, RoutedEventArgs e)
+        {
+            TouristWindowFrame.Content = new TouristOngoingTours(_user);
+        }
 
-        internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
+        /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

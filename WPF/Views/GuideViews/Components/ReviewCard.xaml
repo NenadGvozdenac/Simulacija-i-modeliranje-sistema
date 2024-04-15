@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuideViews.Components.ReviewCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews.Components"
+             mc:Ignorable="d"  Height="100" Width="500">
+    <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
+        <Grid Background="white">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Border BorderThickness="1" BorderBrush="Black"/>
+                <Image Source="{Binding ReviewImages[0].Path}" Stretch="Fill" Margin="17,15,17,13"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <Border Margin="10,0,0,0"></Border>
+                    <Image x:Name="knowImage" Source="..\..\..\..\Resources\Assets\book.224x256.png" Height="20" Width="36"/>
+                    <TextBlock Width="30" Text="{Binding GuideKnowledge}"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <Border Margin="10,0,0,0"></Border>
+                    <Image x:Name="languageImage" Source="..\..\..\..\Resources\Assets\language.png" Height="20" Width="36"/>
+                    <TextBlock Width="30" Text="{Binding GuideLanguage}"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                    <Border Margin="10,0,0,0"></Border>
+                    <Image x:Name="interestingImage" Source="..\..\..\..\Resources\Assets\head-lightbulb-outline.232x256.png" Height="20" Width="36"/>
+                    <TextBlock Width="30" Text="{Binding TourInterestingness}"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal">
+                    <Border Margin="50,0,0,0"></Border>
+                    <Image x:Name="reportImage" Source="..\..\..\..\Resources\Assets\flag-red.255x256.png" Height="20" Width="36" Cursor="Hand"  MouseLeftButtonDown="Report_click"/>
+                </StackPanel>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="{Binding Feedback}"></TextBlock>
+                <StackPanel Grid.Row="1" Grid.Column="3">
+                    <Border Margin="0,10,0,0"></Border>
+                    <TextBlock Text="{Binding UserName}"></TextBlock>
+                    <Border Margin="0,10,0,0"></Border>
+                    <TextBlock x:Name="statusTextblock" Text="valid"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

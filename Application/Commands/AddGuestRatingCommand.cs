@@ -18,7 +18,6 @@ public class AddGuestRatingCommand : ICommand
     public AddGuestRatingCommand(AddGuestRatingViewModel addGuestRatingViewModel)
     {
         this.addGuestRatingViewModel = addGuestRatingViewModel;
-        addGuestRatingViewModel.PropertyChanged += (sender, args) => { CanExecuteChanged.Invoke(this, EventArgs.Empty); };
     }
 
     public event EventHandler? CanExecuteChanged;

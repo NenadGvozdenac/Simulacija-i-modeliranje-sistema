@@ -18,14 +18,13 @@ public class AddGuestRatingCommand : ICommand
     public AddGuestRatingCommand(AddGuestRatingViewModel addGuestRatingViewModel)
     {
         this.addGuestRatingViewModel = addGuestRatingViewModel;
-        addGuestRatingViewModel.PropertyChanged += (sender, args) => { CanExecuteChanged.Invoke(this, EventArgs.Empty); };
     }
 
     public event EventHandler? CanExecuteChanged;
 
     public bool CanExecute(object parameter)
     {
-        return addGuestRatingViewModel.IsDataValid();
+        return addGuestRatingViewModel.SelectedRespectfulness != 0 && addGuestRatingViewModel.SelectedCleanliness != 0;
     }
 
     public void Execute(object parameter)

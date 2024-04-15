@@ -12,9 +12,7 @@ namespace BookingApp.Repositories;
 
 public class GuestRatingRepository : BaseRepository<GuestRating>, IGuestRatingRepository
 {
-    public GuestRatingRepository() : base("../../../Resources/Data/guest_ratings.csv")
-    {
-    }
+    public GuestRatingRepository() : base("../../../Resources/Data/guest_ratings.csv") {}
 
     public List<GuestRating> GetGuestRatingsByAccommodationId(int accommodationId)
     {

@@ -33,6 +33,11 @@ public class LocationService
         return _locationRepository.GetCitiesByCountry(country);
     }
 
+    public List<string> GetLocationsFormatted()
+    {
+        return _locationRepository.GetLocationsFormatted();
+    }
+
     public List<Location> GetCities()
     {
         return _locationRepository.GetAll();

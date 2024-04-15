@@ -1,57 +1,41 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookingApp.WPF.DTOs.OwnerDTOs;
 
-public class GuestRatingDTO
+public partial class GuestRatingDTO : ObservableObject
 {
-    public int Id;
+    [ObservableProperty]
+    private int _id;
 
+    [ObservableProperty]
     private bool _isChecked;
-    public bool IsChecked
-    {
-        get => _isChecked;
-        set => _isChecked = value;
-    }
 
+    [ObservableProperty]
     private AccommodationDTO _accommodation;
-    public AccommodationDTO Accommodation
-    {
-        get => _accommodation;
-        set => _accommodation = value;
-    }
 
+    [ObservableProperty]
     private AccommodationReservationDTO _reservation;
-    public AccommodationReservationDTO Reservation
-    {
-        get => _reservation;
-        set => _reservation = value;
-    }
 
+    [ObservableProperty]
     private User _guest;
-    public User Guest
-    {
-        get => _guest;
-        set => _guest = value;
-    }
+
+    [ObservableProperty]
+    private DateSpan _dateSpan;
 
     private string _cleanliness;
     public string Cleanliness
     {
-        get => string.Format("{0}/5", _cleanliness);
+        get => string.Format("{0}/5.00", _cleanliness);
         set => _cleanliness = value;
     }
 
     private string _respectfulness;
     public string Respectfulness
     {
-        get => string.Format("{0}/5", _respectfulness);
+        get => string.Format("{0}/5.00", _respectfulness);
         set => _respectfulness = value;
     }
 
@@ -60,13 +44,6 @@ public class GuestRatingDTO
     {
         get => _comment;
         set => _comment = value;
-    }
-
-    private DateSpan _dateSpan;
-    public DateSpan DateSpan
-    {
-        get => _dateSpan;
-        set => _dateSpan = value;
     }
 
     public GuestRatingDTO(GuestRating guestRating)

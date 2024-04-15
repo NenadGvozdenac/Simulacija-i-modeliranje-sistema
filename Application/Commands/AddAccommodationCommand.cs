@@ -1,15 +1,10 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace BookingApp.Application.Commands;
 
@@ -22,19 +17,18 @@ public class AddAccommodationCommand : ICommand
     public AddAccommodationCommand(AddAccommodationViewModel addAccommodationViewModel)
     {
         _addAccommodationViewModel = addAccommodationViewModel;
-        addAccommodationViewModel.PropertyChanged += (sender, args) => { RaiseCanExecuteChanged(); };
-    }
-
-    private void RaiseCanExecuteChanged()
-    {
-        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void Execute(object parameter)
     {
         Accommodation accommodation = new();
         accommodation.Name = _addAccommodationViewModel.AccommodationName;
-        accommodation.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(_addAccommodationViewModel.City, _addAccommodationViewModel.Country).Id;
+
+        string location = _addAccommodationViewModel.Location;
+        string city = location.Split(", ")[0];
+        string country = location.Split(", ")[1];
+
+        accommodation.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(city, country).Id;
         accommodation.Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), _addAccommodationViewModel.Type);
         accommodation.MaxGuestNumber = _addAccommodationViewModel.MaximumNumberOfGuests;
         accommodation.MinReservationDays = _addAccommodationViewModel.MinimumNumberOfDaysForReservation;
@@ -51,6 +45,29 @@ public class AddAccommodationCommand : ICommand
 
     public bool CanExecute(object parameter)
     {
-        return _addAccommodationViewModel.IsDataValid();
+        return AreAllStringsFilled() && AreAllNumbersOK() && IsLocationValid();
+    }
+
+    public bool IsLocationValid()
+    {
+        string location = _addAccommodationViewModel.Location;
+        string city = location.Split(", ")[0];
+        string country = location.Split(", ")[1];
+    
+        return LocationService.GetInstance().GetLocationByCityAndCountry(city, country) != null;
+    }
+
+    public bool AreAllNumbersOK()
+    {
+        return _addAccommodationViewModel.MaximumNumberOfGuests > 0
+            && _addAccommodationViewModel.MinimumNumberOfDaysForReservation > 0
+            && _addAccommodationViewModel.DaysBeforeReservationIsFinal > 0;
+    }
+
+    public bool AreAllStringsFilled()
+    {
+        return !string.IsNullOrEmpty(_addAccommodationViewModel.AccommodationName)
+            && !string.IsNullOrEmpty(_addAccommodationViewModel.Location)
+            && !string.IsNullOrEmpty(_addAccommodationViewModel.Type);
     }
 }

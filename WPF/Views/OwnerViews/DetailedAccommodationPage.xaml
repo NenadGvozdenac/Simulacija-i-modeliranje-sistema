@@ -77,13 +77,20 @@
                     <Label Content="{Binding Accommodation.NumberOfReviews}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <Label Content="Images" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2" Margin="5" Grid.Row="8" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                <Border Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" Margin="40 0">
-                    <ScrollViewer Margin="1">
-                        <StackPanel Orientation="Vertical" x:Name="ImagesPanel" HorizontalAlignment="Center">
-                            <!-- Adding images here -->
-                        </StackPanel>
-                    </ScrollViewer>
-                </Border>
+                <Grid Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\..\..\Resources\Assets\chevron-left.293x512.png" Grid.Column="0" PreviewMouseDown="LeftArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
+                    <Border BorderBrush="Black" Grid.Column="2" BorderThickness="1" Margin="5">
+                        <Image Source="{Binding ImageURL}" Stretch="Fill"/>
+                    </Border>
+                    <Image Source="..\..\..\Resources\Assets\chevron-right.295x512.png" Grid.Column="5" PreviewMouseDown="RightArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
+                </Grid>
             </Grid>
         </Grid>
         <Button Grid.Row="3" x:Name="CloseAccommodation" Width="175" Height="30" FontSize="14" IsEnabled="True" Command="{Binding CloseAccommodationCommand}">

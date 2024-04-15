@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.WPF.Views.TouristViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;

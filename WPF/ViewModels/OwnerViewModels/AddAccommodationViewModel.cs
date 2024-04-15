@@ -2,287 +2,157 @@
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.WPF.Views.OwnerViews;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
-public class AddAccommodationViewModel : INotifyPropertyChanged
+public partial class AddAccommodationViewModel : ObservableObject
 {
-    private User _user;
-    public User User { get => _user; set => _user = value; }
-
+    [ObservableProperty]
     private ObservableCollection<string> _accommodationTypes;
-    public ObservableCollection<string> AccommodationTypes
-    {
-        get { return _accommodationTypes; }
-        set
-        {
-            if (value != _accommodationTypes)
-            {
-                _accommodationTypes = value;
-                OnPropertyChanged(nameof(AccommodationTypes));
-            }
-        }
-    }
 
-    private ObservableCollection<string> countries;
-    public ObservableCollection<string> Countries
-    {
-        get { return countries; }
-        set
-        {
-            if (value != countries)
-            {
-                countries = value;
-                OnPropertyChanged(nameof(Countries));
-            }
-        }
-    }
+    [ObservableProperty]
+    private ObservableCollection<AccommodationImage> _images;
 
-    private ObservableCollection<string> cities;
-    public ObservableCollection<string> Cities
-    {
-        get { return cities; }
-        set
-        {
-            if (value != cities)
-            {
-                cities = value;
-                OnPropertyChanged(nameof(Cities));
-            }
-        }
-    }
+    [ObservableProperty]
+    private User _user;
 
-    private string name;
-    public string AccommodationName
-    {
-        get => name;
-        set
-        {
-            if (value != name)
-            {
-                name = value;
-                OnPropertyChanged(nameof(AccommodationName));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
+    private string _accommodationName;
 
-    private string country;
-    public string Country
-    {
-        get => country;
-        set
-        {
-            if (value != country)
-            {
-                country = value;
-                OnPropertyChanged(nameof(Country));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
+    private string _location;
 
-    private string city;
-    public string City
-    {
-        get => city;
-        set
-        {
-            if (value != city)
-            {
-                city = value;
-                OnPropertyChanged(nameof(City));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
+    private string _type;
 
-    private string type;
-    public string Type
-    {
-        get => type;
-        set
-        {
-            if (value != type)
-            {
-                type = value;
-                OnPropertyChanged(nameof(Type));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
+    private int _accommodationPrice;
 
-    private int accommodationPrice;
-    public int AccommodationPrice
-    {
-        get => accommodationPrice;
-        set
-        {
-            if (value != accommodationPrice)
-            {
-                accommodationPrice = value;
-                OnPropertyChanged(nameof(AccommodationPrice));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
+    private int _maximumNumberOfGuests;
 
-    private int maximumNumberOfGuests;
-    public int MaximumNumberOfGuests
-    {
-        get => maximumNumberOfGuests;
-        set
-        {
-            if (value != maximumNumberOfGuests)
-            {
-                maximumNumberOfGuests = value;
-                OnPropertyChanged(nameof(MaximumNumberOfGuests));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
+    private int _minimumNumberOfDaysForReservation;
 
-    private int minimumNumberOfDaysForReservation;
-    public int MinimumNumberOfDaysForReservation
-    {
-        get => minimumNumberOfDaysForReservation;
-        set
-        {
-            if (value != minimumNumberOfDaysForReservation)
-            {
-                minimumNumberOfDaysForReservation = value;
-                OnPropertyChanged(nameof(MinimumNumberOfDaysForReservation));
-            }
-        }
-    }
-
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AddCommand))]
     private int daysBeforeReservationIsFinal;
-    public int DaysBeforeReservationIsFinal
-    {
-        get => daysBeforeReservationIsFinal;
-        set
-        {
-            if (value != daysBeforeReservationIsFinal)
-            {
-                daysBeforeReservationIsFinal = value;
-                OnPropertyChanged(nameof(DaysBeforeReservationIsFinal));
-            }
-        }
-    }
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(RemoveImageCommand))]
     private string imageURL;
-    public string ImageURL
-    {
-        get => imageURL;
-        set
-        {
-            if (value != imageURL)
-            {
-                imageURL = value;
-                OnPropertyChanged(nameof(ImageURL));
-            }
-        }
-    }
-
-    public ObservableCollection<AccommodationImage> Images { get; set; }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     public AddAccommodationPage Page;
     public ICommand AddCommand => new AddAccommodationCommand(this);
     public ICommand CancelCommand => new NavigateToPreviousPageCommand(Page);
     public ICommand AddImageCommand => new AddImageCommand(this);
+    public ICommand RemoveImageCommand => new RemoveImageCommand(this);
 
     public AddAccommodationViewModel(AddAccommodationPage page, User user)
     {
         User = user;
         Page = page;
 
-        Images = new ObservableCollection<AccommodationImage>();
-
-        LoadTypesOfAccommodations();
-        LoadCountries();
-    }
-
-    public void LoadTypesOfAccommodations()
-    {
         AccommodationTypes = new ObservableCollection<string>(Enum.GetNames(typeof(AccommodationType)));
-    }
-
-    public void LoadCountries()
-    {
-        Countries = new ObservableCollection<string>(LocationService.GetInstance().GetCountries());
-    }
-
-    public bool IsDataValid()
-    {
-        return AreAllStringsFilled() && AreAllNumbersOK();
-    }
-
-    public bool AreAllNumbersOK()
-    {
-        return MaximumNumberOfGuests > 0
-            && MinimumNumberOfDaysForReservation > 0
-            && DaysBeforeReservationIsFinal > 0;
-    }
-
-    public bool AreAllStringsFilled()
-    {
-        return !string.IsNullOrEmpty(AccommodationName)
-            && !string.IsNullOrEmpty(Country)
-            && !string.IsNullOrEmpty(City)
-            && !string.IsNullOrEmpty(Type);
-    }
-    public bool IsImageValid()
-    {
-        return !(string.IsNullOrEmpty(ImageURL) || ImageAlreadyExists());
-    }
-
-    public bool ImageAlreadyExists()
-    {
-        foreach (AccommodationImage image in Images)
-        {
-            if (image.Path.Equals(ImageURL))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void CountryChanged()
-    {
-        var cities = LocationService.GetInstance().GetCitiesByCountry(Page.CountryTextBox.SelectedItem.ToString());
-        Cities = new ObservableCollection<string>(cities);
-
-        Page.CityTextBox.IsDropDownOpen = true;
-        Page.CityTextBox.IsEnabled = true;
-    }
-
-    public void ImageSelected()
-    {
-        string imagePath = ImageService.GetInstance().GetImageFromUser();
-        ImageURL = imagePath;
+        Images = new ObservableCollection<AccommodationImage>();
     }
 
     public void ClearPage()
     {
         AccommodationName = "";
-        Page.CountryTextBox.SelectedIndex = 0;
-        Page.CityTextBox.SelectedIndex = 0;
         Page.AccommodationType.SelectedIndex = 0;
         AccommodationPrice = 0;
         MaximumNumberOfGuests = 0;
         MinimumNumberOfDaysForReservation = 0;
         DaysBeforeReservationIsFinal = 0;
-        ImageURL = "";
         Images.Clear();
+        ImageURL = "";
 
         Page.ClosePage();
+    }
+
+    public void LeftArrowClick()
+    {
+        var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+        var currentIndex = Images.IndexOf(currentImage);
+
+        if(currentIndex == -1) { return; }
+
+        if (currentIndex == 0)
+        {
+            ImageURL = Images.Last().Path;
+        }
+        else
+        {
+            ImageURL = Images[currentIndex - 1].Path;
+        }
+    }
+
+    public void RightArrowClick()
+    {
+        var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+        var currentIndex = Images.IndexOf(currentImage);
+
+        if (currentIndex == -1) { return; }
+
+        if (currentIndex == Images.Count - 1)
+        {
+            ImageURL = Images.First().Path;
+        }
+        else
+        {
+            ImageURL = Images[currentIndex + 1].Path;
+        }
+    }
+
+    public void LocationTextBox_TextChanged()
+    {
+        string searchText = Page.LocationTextBox.Text.ToLower();
+
+        if (searchText.Length == 0)
+        {
+            Location = "";
+            return;
+        }
+
+        UpdateLocation(searchText);
+    }
+
+    public void LocationTextBox_PreviewKeyDown(Key key)
+    {
+        if (key == Key.Back)
+        {
+            Location = "";
+            return;
+        }
+
+        if (key == Key.Tab || key == Key.Enter)
+        {
+            string searchText = Page.LocationTextBox.Text.ToLower();
+
+            UpdateLocation(searchText);
+        }
+    }
+
+    private void UpdateLocation(string searchText)
+    {
+        string matchedLocation = LocationService.GetInstance().GetLocationsFormatted().FirstOrDefault(loc => loc.ToLower().StartsWith(searchText));
+
+        if (!string.IsNullOrEmpty(matchedLocation))
+        {
+            Location = matchedLocation;
+            Page.LocationTextBox.Select(searchText.Length, matchedLocation.Length - searchText.Length);
+        }
     }
 }

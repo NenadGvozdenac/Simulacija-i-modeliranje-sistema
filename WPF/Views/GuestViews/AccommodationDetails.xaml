@@ -27,7 +27,7 @@
 
                     </Border>
 
-                    <Button Content="Go Back" Margin="926,18,42,252" Click="GoBack_Click"/>
+                    <Button Content="Go Back" Style="{StaticResource ClearButtonStyleGuest}" Margin="929,22,0,0" Click="GoBack_Click" VerticalAlignment="Top" Width="64" Height="26" HorizontalAlignment="Left"/>
                     <TextBlock HorizontalAlignment="Left" Margin="64,21,0,0" FontSize="20" TextWrapping="Wrap" Text="reviews score" VerticalAlignment="Top" Width="124" FontWeight="DemiBold"/>
                     <TextBlock x:Name="accomodationAverageReviewScore" HorizontalAlignment="Left" Margin="64,44,0,0" TextWrapping="Wrap" Text="10.0/10" FontSize="20" FontWeight="DemiBold" VerticalAlignment="Top" Width="70"/>
                     <Rectangle Margin="64,94,544,47" Fill="SeaGreen"/>
@@ -98,7 +98,7 @@
                     <Button x:Name="PdfButton" Style="{StaticResource ClearButtonStyleGuest}" Content="Download Reservation Details(PDF)" Visibility="Collapsed" HorizontalAlignment="Left" Margin="376,370,0,0" VerticalAlignment="Top" Width="212" Click="ConfrimReservation_Click" Height="25"/>
 
                     <Grid Grid.Column="1">
-                        
+
                         <Border BorderBrush="Black" BorderThickness="2 0 0 0"/>
 
                         <TextBlock Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" Margin="24,18,0,0" FontSize="35" Text="Latest reviews:" VerticalAlignment="Top"/>

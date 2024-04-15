@@ -1,33 +1,33 @@
-﻿<UserControl x:Class="BookingApp.View.TouristViews.TouristVouchers"
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.VisitedTours"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookingApp.View.TouristViews"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
              xmlns:components="clr-namespace:BookingApp.View.TouristViews.Components"
-             d:DesignHeight="650" d:DesignWidth="1000">
-    <Grid Background="LightGray">
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1000" Background="LightGray">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Border BorderThickness="0,0,0,1" BorderBrush="Black"/>
-            <Label Content="Here's a list of coupons you have:" FontSize="50" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <Label Content="Tours you visited" FontSize="60" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-                <WrapPanel>
-                <ItemsControl ItemsSource="{Binding Vouchers}">
+                <ItemsControl ItemsSource="{Binding MyTours}" Margin="3,3,3,3">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <components:VoucherCard x:Name="vouchercard"  Margin="5"/>
+                            <components:TourCardWithStar DataContext="{Binding}" Loaded="TourCardWithStar_Loaded" x:Name="tourcard"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
+
                 </ItemsControl>
-            </WrapPanel>
             </ScrollViewer>
         </Grid>
+        
     </Grid>
 </UserControl>

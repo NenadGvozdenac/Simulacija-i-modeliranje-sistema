@@ -14,7 +14,6 @@ namespace BookingApp.Application.UseCases
     {
         private ILanguageRepository _languageRepository;
 
-
         public LanguageService(ILanguageRepository languageRepository)
         {
             _languageRepository = languageRepository;

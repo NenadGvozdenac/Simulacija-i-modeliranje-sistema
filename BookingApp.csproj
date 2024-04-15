@@ -12,6 +12,8 @@
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
     <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\chevron-left.293x512.png" />
+    <None Remove="Resources\Assets\chevron-right.295x512.png" />
     <None Remove="Resources\Assets\book.224x256.png" />
     <None Remove="Resources\Assets\default_user.png" />
     <None Remove="Resources\Assets\delete.png" />
@@ -76,6 +78,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\back_left_arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\chevron-left.293x512.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\chevron-right.295x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\book.224x256.png">
@@ -222,6 +230,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	</ItemGroup>
 

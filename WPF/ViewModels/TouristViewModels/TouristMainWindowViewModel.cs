@@ -1,42 +1,41 @@
-﻿using System;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Repositories;
+using BookingApp.View.TouristViews;
+using BookingApp.WPF.Views.TouristViews;
+using BookingApp.WPF.ViewModels.TouristViewModels;
+using BookingApp.View.TouristViews.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BookingApp.Domain.Models;
-using BookingApp.Repositories;
+using System.Windows.Controls;
 
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    /// <summary>
-    /// Interaction logic for TouristMainWindow.xaml
-    /// </summary>
-    public partial class TouristMainWindow : Window
+    public class TouristMainWindowViewModel
     {
         private readonly User _user;
         public TourRepository tourRepository { get; set; }
         public Tours ToursUserControl { get; set; }
-        public TouristRepository touristRepository {  get; set; }
-        public TouristReservationRepository touristReservationRepository {get; set; }
+        public TouristRepository touristRepository { get; set; }
+        public TouristReservationRepository touristReservationRepository { get; set; }
         public TourStartTimeRepository tourStartTimeRepository { get; set; }
         public TouristDetails ToursDetailsUserControl { get; set; }
         public VisitedTours ToursVisitedUserControl { get; set; }
-        public TourVoucherRepository tourVoucherRepository {  get; set; }
+        public TourVoucherRepository tourVoucherRepository { get; set; }
+        public TouristMainWindow touristMainWindow {  get; set; }
+        public Frame TouristWindowFrame;
 
-        public TouristMainWindow(User user)
+        public TouristMainWindowViewModel(User user, TouristMainWindow _touristMainWindow, Frame _touristWindowFrame)
         {
-            InitializeComponent();
+            touristMainWindow = _touristMainWindow;
             tourRepository = new TourRepository();
             _user = user;
             Update(_user);
+            TouristWindowFrame = _touristWindowFrame;
             ToursUserControl = new Tours(user);
             TouristWindowFrame.Content = ToursUserControl;
             touristRepository = new TouristRepository();
@@ -45,7 +44,7 @@ namespace BookingApp.View.TouristViews
             tourVoucherRepository = new TourVoucherRepository();
         }
 
-        
+
         public void ShowTourDetails(int tourId)
         {
             Tour detailedTour = tourRepository.GetById(tourId);
@@ -61,13 +60,13 @@ namespace BookingApp.View.TouristViews
         {
             TouristWindowFrame.Content = new AlternativeTours(locationId, tour);
         }
-        private void Update(User user)
+        public void Update(User user)
         {
             ToursUserControl = new Tours(user);
 
         }
 
-        private void MyTours_Click(object sender, RoutedEventArgs e)
+        public void MyTours_Click(object sender, RoutedEventArgs e)
         {
             TouristWindowFrame.Content = new VisitedTours(_user);
         }
@@ -77,12 +76,12 @@ namespace BookingApp.View.TouristViews
             TouristWindowFrame.Content = new RateTour(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
         }
 
-        private void Home_Click(object sender, MouseButtonEventArgs e)
+        public void Home_Click(object sender, MouseButtonEventArgs e)
         {
             TouristWindowFrame.Content = ToursUserControl;
         }
 
-        private void MyVouchers_Click(object sender, RoutedEventArgs e)
+        public void MyVouchers_Click(object sender, RoutedEventArgs e)
         {
             TouristWindowFrame.Content = new TouristVouchers(_user.Id);
         }

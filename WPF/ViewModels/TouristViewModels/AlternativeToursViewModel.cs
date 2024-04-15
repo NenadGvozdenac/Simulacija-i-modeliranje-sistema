@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.WPF.Views.TouristViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,21 +10,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    /// <summary>
-    /// Interaction logic for AlternativeTours.xaml
-    /// </summary>
-    public partial class AlternativeTours : UserControl, INotifyPropertyChanged
+    public class AlternativeToursViewModel
     {
         public ObservableCollection<Tour> tours { get; set; }
         private TourRepository tourRepository { get; set; }
@@ -33,11 +24,9 @@ namespace BookingApp.View.TouristViews
         private Location currentLocation { get; set; }
         private Tour currentTour { get; set; }
         private int currentLocationId { get; set; }
-
-        public AlternativeTours(int locationId, Tour tour)
+        public AlternativeTours alternativeTours {  get; set; }
+        public AlternativeToursViewModel(int locationId, Tour tour, AlternativeTours alternativeTours)
         {
-            InitializeComponent();
-            DataContext = this;
             tourRepository = new TourRepository();
             tours = new ObservableCollection<Tour>();
             locationRepository = new LocationRepository();
@@ -47,6 +36,7 @@ namespace BookingApp.View.TouristViews
             tourImageRepository = new TourImageRepository();
             languageRepository = new LanguageRepository();
             Update();
+            this.alternativeTours = alternativeTours;
         }
 
         private ObservableCollection<Tour> _filteredTours;
@@ -69,7 +59,7 @@ namespace BookingApp.View.TouristViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Update()
+        public void Update()
         {
             foreach (Tour tour in tourRepository.GetAll())
             {
@@ -81,7 +71,8 @@ namespace BookingApp.View.TouristViews
                         tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
                         tour.Language = languageRepository.GetById(tour.LanguageId);
                         tours.Add(tour);
-                    }else
+                    }
+                    else
                     {
                         continue;
                     }
@@ -91,13 +82,13 @@ namespace BookingApp.View.TouristViews
 
         }
 
-        private void FindToursWithLocation()
+        public void FindToursWithLocation()
         {
             Location location = locationRepository.GetById(currentLocationId);
 
             foreach (Tour tour in tourRepository.GetAll())
             {
-                if(locationRepository.GetById(tour.LocationId).Country == currentLocation.Country && locationRepository.GetById(tour.LocationId).City == currentLocation.City)
+                if (locationRepository.GetById(tour.LocationId).Country == currentLocation.Country && locationRepository.GetById(tour.LocationId).City == currentLocation.City)
                 {
                     FilteredTours.Add(tour);
                 }
@@ -106,14 +97,16 @@ namespace BookingApp.View.TouristViews
 
         }
 
-        private void Return_Click(object sender, RoutedEventArgs e)
+        public void Return_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
+            /*Window parentWindow = Window.GetWindow(this);
 
             if (parentWindow is TouristMainWindow mainWindow)
             {
                 mainWindow.ShowTourDetails(currentTour.Id);
-            }
+            }*/
+            NavigationService.GetNavigationService(alternativeTours).GoBack();
+
         }
     }
 }

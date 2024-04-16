@@ -16,15 +16,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
     public class ToursViewModel
     {
         public ObservableCollection<Tour> tours { get; set; }
-        public TouristReservationRepository touristReservationRepository { get; set; }
         public Tours _tours { get; set;} 
 
         public ToursViewModel(Tours tours_)
         {
             
             _tours = tours_;
-            tours = new ObservableCollection<Tour>();
-            touristReservationRepository = new TouristReservationRepository();
+            tours = new ObservableCollection<Tour>();            
             Update();
 
         }
@@ -76,7 +74,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 {
                     tours.Remove(tour);
                     List<TouristReservation> reservations = new List<TouristReservation>();
-                    reservations = touristReservationRepository.GetByTourStartTimeAndId(tour.CurrentDate, tour.Id);
+                    reservations = TourReservationService.GetInstance().GetByTourStartTimeAndId(tour.CurrentDate, tour.Id);
 
                     foreach (TouristReservation reservation in reservations)
                     {
@@ -85,7 +83,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                         voucher.TouristId = reservation.Id_Tourist;
                         voucher.ExpirationDate = DateTime.Now.AddDays(365);
                         TourVoucherService.GetInstance().Add(voucher);
-                        touristReservationRepository.Delete(reservation.Id);
+                        TourReservationService.GetInstance().Delete(reservation.Id);
                     }
 
 

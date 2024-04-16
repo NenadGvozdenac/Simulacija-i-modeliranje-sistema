@@ -76,12 +76,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public List<int> times { get; set; }
         
 
-        public TouristReservationRepository reservationRepository { get; set; }
 
-        public TouristRepository touristRepository { get; set; }
 
-        
-
+   
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TourDemographics tourDemographics { get; set; }  
@@ -98,8 +95,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourDemographics = _tourDemographics;
 
             
-            reservationRepository = new TouristReservationRepository();
-            touristRepository = new TouristRepository();
+            
 
             TourName = FindMostReserved().Name;
             Sub18 = FindSub18(FindMostReserved());
@@ -134,7 +130,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
                 foreach (TourStartTime date in dates)
                 {
-                    foreach (TouristReservation reservation in reservationRepository.GetAll())
+                    foreach (TouristReservation reservation in TourReservationService.GetInstance().GetAll())
                     {
                         if (reservation.Id_TourTime == date.Id)
                         {
@@ -164,7 +160,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             foreach (TourStartTime time in dates)
             {
-                reservations.AddRange(reservationRepository.GetByTimeId(time.Id));
+                reservations.AddRange(TourReservationService.GetInstance().GetByTimeId(time.Id));
             }
 
 
@@ -174,9 +170,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             foreach (TouristReservation reservation in reservations)
             {
                 Tourist tourist = new Tourist();
-                tourist.Name = touristRepository.GetById(reservation.Id_Tourist).Name;
-                tourist.Surname = touristRepository.GetById(reservation.Id_Tourist).Surname;
-                tourist.Age = touristRepository.GetById(reservation.Id_Tourist).Age;
+                tourist.Name = TouristService.GetInstance().GetById(reservation.Id_Tourist).Name;
+                tourist.Surname = TouristService.GetInstance().GetById(reservation.Id_Tourist).Surname;
+                tourist.Age = TouristService.GetInstance().GetById(reservation.Id_Tourist).Age;
                 tourists.Add(tourist);
             }
 
@@ -298,7 +294,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
                 foreach (TourStartTime date in dates)
                 {
-                    foreach (TouristReservation reservation in reservationRepository.GetAll())
+                    foreach (TouristReservation reservation in TourReservationService.GetInstance().GetAll())
                     {
                         if (reservation.Id_TourTime == date.Id)
                         {

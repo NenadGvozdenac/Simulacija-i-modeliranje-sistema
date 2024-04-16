@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
              mc:Ignorable="d" 
-             xmlns:components="clr-namespace:BookingApp.View.TouristViews.Components"
+             xmlns:components="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
              d:DesignHeight="650" d:DesignWidth="1000">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>

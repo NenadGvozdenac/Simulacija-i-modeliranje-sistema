@@ -17,46 +17,39 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
-using BookingApp.WPF.ViewModels.GuideViewModels;
+using BookingApp.WPF.ViewModels.TouristViewModels;
+using BookingApp.WPF.Views.TouristViews.Components;
 
-namespace BookingApp.View.PathfinderViews
+namespace BookingApp.WPF.Views.TouristViews
 {
     /// <summary>
-    /// Interaction logic for Tours.xaml
+    /// Interaction logic for TouristOngoingTours.xaml
     /// </summary>
-    public partial class Tours : UserControl
+    public partial class TouristOngoingTours : UserControl
     {
-      
-
-        public ToursViewModel toursViewModel { get; set; }  
-
-        public Tours()
+        TouristOngoingToursViewModel TouristOngoingToursViewModel { get; set; }
+        public TouristOngoingTours(User user)
         {
             InitializeComponent();
-            toursViewModel = new ToursViewModel(this);
-            DataContext = toursViewModel;
+            TouristOngoingToursViewModel = new TouristOngoingToursViewModel(user, this);
+            DataContext = TouristOngoingToursViewModel;
+            Update();
         }
 
-
+        public void Update()
+        {
+            TouristOngoingToursViewModel.Update();
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void Update()
+        public void Ongoing_Loaded(object sender, RoutedEventArgs e)
         {
-            toursViewModel.Update();
-            
+            TouristOngoingToursViewModel.Ongoing_Loaded(sender, e);
         }
-
-        private void tourcard_CancelTourClicked(object sender,  BeginButtonClickedEventArgs e){
-            toursViewModel.tourcard_CancelTourClicked(sender, e);
-        }
-   
-    
-    
-    
-    
+        
     }
 }

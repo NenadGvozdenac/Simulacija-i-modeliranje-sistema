@@ -13,6 +13,8 @@
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
     <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\bell.224x256.png" />
+    <None Remove="Resources\Assets\checkbox-checked.256x256.png" />
     <None Remove="Resources\Assets\chevron-left.293x512.png" />
     <None Remove="Resources\Assets\chevron-right.295x512.png" />
     <None Remove="Resources\Assets\book.224x256.png" />
@@ -32,6 +34,7 @@
     <None Remove="Resources\Assets\location.png" />
     <None Remove="Resources\Assets\map-marker.171x256.png" />
     <None Remove="Resources\Assets\myreservations.png" />
+    <None Remove="Resources\Assets\notifications-active.256x253.png" />
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
     <None Remove="Resources\Assets\plus-symbol-button.png" />
@@ -81,6 +84,12 @@
     <Content Include="Resources\Assets\back_left_arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\bell.224x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\checkbox-checked.256x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\chevron-left.293x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -124,6 +133,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\language.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\notifications-active.256x253.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Assets\accommodations.png">
@@ -243,6 +255,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="View\" />
 	  <Folder Include="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\" />
 	</ItemGroup>
 </Project>

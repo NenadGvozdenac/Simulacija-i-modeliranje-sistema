@@ -22,13 +22,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public ObservableCollection<Tourist> tourists { get; set; }
 
         public ObservableCollection<Tourist> selectedTourists { get; set; }
-        public TourRepository tourRepository { get; set; }
+        
 
        
 
         public TouristReservationRepository reservationRepository { get; set; }
 
-        public TouristRepository touristRepository { get; set; }
+        
 
         
 
@@ -48,9 +48,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public CheckpointsViewModel(CheckpointsView checkpointViews,int TourId, DateTime currentDate)
         {
-            checkpointsView = checkpointViews;
-            tourRepository = new TourRepository();
-            touristRepository = new TouristRepository();
+            checkpointsView = checkpointViews;            
             reservationRepository = new TouristReservationRepository();           
             checkpoints = new ObservableCollection<Checkpoint>();
             tourists = new ObservableCollection<Tourist>();
@@ -66,7 +64,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void Update(int TourId, DateTime currentDate)
         {
-            tourName = tourRepository.GetById(TourId).Name;
+            tourName = TourService.GetInstance().GetById(TourId).Name;
             tourTimeId = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(currentDate, TourId).Id; //gets current time id
 
             foreach (Checkpoint checkpoint in CheckpointService.GetInstance().GetCheckpointsByTourId(TourId))
@@ -79,7 +77,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             {
 
                 Tourist tourist_temp = new Tourist();
-                tourist_temp = touristRepository.GetById(reservation.Id_Tourist);
+                tourist_temp = TouristService.GetInstance().GetById(reservation.Id_Tourist);
                 if (reservation.CheckpointId == -1)
                 {
                     tourists.Add(tourist_temp);

@@ -55,6 +55,9 @@ public partial class App
         services.AddSingleton<ILanguageRepository, LanguageRepository>();
         services.AddSingleton<ITouristRepository, TouristRepository>();
         services.AddSingleton<ITouristReservationRepository, TouristReservationRepository>();
+        services.AddSingleton<ITourReviewRepository, TourReviewRepository>();
+        services.AddSingleton<ITourReviewImageRepository, TourReviewImageRepository>();
+
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -70,10 +73,14 @@ public partial class App
         services.AddSingleton<TourService>();
         services.AddSingleton<TourStartTimeService>();
         services.AddSingleton<CheckpointService>();
-        services.AddSingleton<TourVoucherRepository>();
+        services.AddSingleton<TourVoucherService>();
         services.AddSingleton<TourImageService>();
         services.AddSingleton<LanguageService>();
         services.AddSingleton<TouristService>();
         services.AddSingleton<TourReservationService>();
+        services.AddSingleton<TourReviewService>();
+        services.AddSingleton<TourReviewImageService>();
+
+
     }
 }

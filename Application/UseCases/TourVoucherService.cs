@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Application.UseCases
 {
-    internal class TourVoucherService
+    public class TourVoucherService
     {
         private ITourVoucherRepository _tourVoucherRepository;
 

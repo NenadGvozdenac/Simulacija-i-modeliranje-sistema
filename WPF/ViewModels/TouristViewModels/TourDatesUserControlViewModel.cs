@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -17,31 +18,22 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
     {
         private Tour selectedTour { get; set; }
         private int guestNumber { get; set; }
-        public TourStartTimeRepository tourStartTimeRepository { get; set; }
-        public TouristRepository touristRepository { get; set; }
-        public TouristReservationRepository touristReservationRepository { get; set; }
-        public TourStartTimeRepository tourStarTimeRepository { get; set; }
         public List<TourStartTime> tourStartTimes { get; set; }
         public TourStartTime selectedTourStartTime { get; set; }
         public List<Tourist> tourists { get; set; }
         public User user { get; set; }
         public TourVoucher tourVoucher { get; set; }
-        public TourVoucherRepository tourVoucherRepository { get; set; }
         public TourDatesUserControl TourDatesUserControl { get; set; }
-        public TourDatesUserControlViewModel(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo, TourVoucher voucher, TourVoucherRepository tourVoucherRepository, TourDatesUserControl tourDates)
+        public TourDatesUserControlViewModel(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourDatesUserControl tourDates)
         {
             TourDatesUserControl = tourDates;
             this.user = user;
             selectedTour = detailedTour;
             tourStartTimes = new List<TourStartTime>();
             selectedTourStartTime = new TourStartTime();
-            this.touristRepository = touristRepository;
-            this.tourStartTimeRepository = tourStartTimeRepo;
-            this.touristReservationRepository = touristReservationRepository;
             this.guestNumber = guestNumber;
             this.tourists = tourists;
             tourVoucher = voucher;
-            this.tourVoucherRepository = tourVoucherRepository;
             TourDatesUserControl.touristsAddedMessage.Visibility = Visibility.Hidden;
 
 
@@ -56,7 +48,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void findTourDates()
         {
-            foreach (TourStartTime tourStartTime in tourStartTimeRepository.GetAll())
+            foreach (TourStartTime tourStartTime in TourStartTimeService.GetInstance().GetAll())
             {
                 if (tourStartTime.TourId == selectedTour.Id)
                 {
@@ -96,7 +88,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             }
             foreach (Tourist tourist in touristList)
             {
-                tourist.Id = touristRepository.NextId();
+                tourist.Id = TouristService.GetInstance().NextId();
                 AddTourist(tourist);
 
                 CreateReservation(tourist, tourStartTime);
@@ -128,18 +120,18 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public void UpdateTourStartTime(TourStartTime tourStartTime)
         {
             tourStartTime.Guests += tourists.Count();
-            tourStartTimeRepository.Update(tourStartTime);
+            TourStartTimeService.GetInstance().Update(tourStartTime);
             tourists.Clear();
         }
         public void CreateReservation(Tourist tourist, TourStartTime tourStartTime)
         {
             TouristReservation touristReservation = new TouristReservation();
-            touristReservation.Id = touristReservationRepository.NextId();
+            touristReservation.Id = TourReservationService.GetInstance().NextId();
             touristReservation.Id_Tourist = tourist.Id;
             touristReservation.Id_TourTime = tourStartTime.Id;
             touristReservation.CheckpointId = -1;
             touristReservation.UserId = user.Id;
-            touristReservationRepository.Add(touristReservation);
+            TourReservationService.GetInstance().Add(touristReservation);
             if (tourVoucher != null)
             {
                 UseVoucher();
@@ -148,18 +140,18 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void UseVoucher()
         {
-            tourVoucherRepository.Delete(tourVoucher.Id);
+            TourVoucherService.GetInstance().Delete(tourVoucher.Id);
         }
         public void AddTourist(Tourist tourist)
         {
-            foreach (Tourist t in touristRepository.GetAll())
+            foreach (Tourist t in TouristService.GetInstance().GetAll())
             {
                 if (t.Id == tourist.Id)
                 {
                     return;
                 }
             }
-            touristRepository.Add(tourist);
+            TouristService.GetInstance().Add(tourist);
         }
         public void BackToTouristDetails_Click(object sender, RoutedEventArgs e)
         {

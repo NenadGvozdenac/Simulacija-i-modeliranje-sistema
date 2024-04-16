@@ -26,10 +26,10 @@ namespace BookingApp.WPF.Views.TouristViews
     public partial class RateTour : UserControl
     {
         public RateTourViewModel rateTourViewModel {  get; set; }
-        public RateTour(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId)
+        public RateTour(User user, int tourId)
         {
             InitializeComponent();
-            rateTourViewModel = new RateTourViewModel(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId, this);
+            rateTourViewModel = new RateTourViewModel(user, tourId, this);
             DataContext = rateTourViewModel;
         }
 

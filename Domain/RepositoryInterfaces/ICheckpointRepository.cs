@@ -5,6 +5,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
 {
     public interface ICheckpointRepository
     {
+        public List<Checkpoint> GetAll();
         void Add(Checkpoint checkpoint);
         void Delete(int id);
         void DeleteByAccommodationId(int id);

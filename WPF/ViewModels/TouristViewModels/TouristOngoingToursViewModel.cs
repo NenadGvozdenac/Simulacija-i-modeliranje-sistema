@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -31,24 +32,12 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 }
             }
         }
-        public TouristReservationRepository touristReservationRepository { get; set; }
-        public TourStartTimeRepository tourStartTimeRepository { get; set; }
-        public LocationRepository locationRepository { get; set; }
-        public TourImageRepository tourImageRepository { get; set; }
-        public LanguageRepository languageRepository { get; set; }
-        public TourRepository tourRepository { get; set; }
         public User _user { get; set; }
 
         public TouristOngoingTours touristOngoingTours { get; set; }
         public TouristOngoingToursViewModel(User user, TouristOngoingTours _touristOngoingTours)
         {
             touristOngoingTours = _touristOngoingTours;
-            touristReservationRepository = new TouristReservationRepository();
-            tourStartTimeRepository = new TourStartTimeRepository();
-            tourRepository = new TourRepository();
-            languageRepository = new LanguageRepository();
-            locationRepository = new LocationRepository();
-            tourImageRepository = new TourImageRepository();
             tours = new ObservableCollection<Tour>();
             _user = user;
             //Update();
@@ -57,18 +46,18 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public void Update()
         {
             tours.Clear();
-            foreach (TouristReservation touristReservation in touristReservationRepository.GetAll())
+            foreach (TouristReservation touristReservation in TourReservationService.GetInstance().GetAll())
             {
                 if (touristReservation.UserId == _user.Id)
                 {
-                    foreach (TourStartTime tourStartTime in tourStartTimeRepository.GetAll())
+                    foreach (TourStartTime tourStartTime in TourStartTimeService.GetInstance().GetAll())
                     {
                         if (tourStartTime.Id == touristReservation.Id_TourTime && tourStartTime.Status == "ongoing")
                         {
-                            Tour tour = tourRepository.GetById(tourStartTime.TourId);
-                            tour.Location = locationRepository.GetById(tour.LocationId);
-                            tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                            tour.Language = languageRepository.GetById(tour.LanguageId);
+                            Tour tour = TourService.GetInstance().GetById(tourStartTime.TourId);
+                            tour.Location = LocationService.GetInstance().GetById(tour.LocationId);
+                            tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
+                            tour.Language = LanguageService.GetInstance().GetById(tour.LanguageId);
                             tours.Add(tour);
                         }
                     }

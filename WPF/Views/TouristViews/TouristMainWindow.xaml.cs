@@ -56,9 +56,9 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.MyTours_Click(sender, e);
         }
 
-        public void RateTour(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId)
+        public void RateTour(User user, int tourId)
         {
-            touristMainWindowViewModel.RateTour(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
+            touristMainWindowViewModel.RateTour(user, tourId);
         }
 
         public void Home_Click(object sender, MouseButtonEventArgs e)

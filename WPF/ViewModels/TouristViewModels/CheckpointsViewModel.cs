@@ -9,13 +9,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
     public class CheckpointsViewModel
     {
         public User user { get; set; }
-        public CheckpointRepository checkpointRepository { get; set; }
         public ObservableCollection<Checkpoint> checkpoints { get; set; }
 
         private ObservableCollection<Checkpoint> _checkpoints;
@@ -37,7 +37,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         {
             tourId = _tourId;
             user = _user;
-            checkpointRepository = new CheckpointRepository();
             checkpoints = new ObservableCollection<Checkpoint>();
             //Update();
             Checkpoints = _checkpoints;
@@ -45,7 +44,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void Update()
         {
-            foreach (Checkpoint check in checkpointRepository.GetAll())
+            foreach (Checkpoint check in CheckpointService.GetInstance().GetAll())
             {
                 if (check.TourId == tourId)
                 {

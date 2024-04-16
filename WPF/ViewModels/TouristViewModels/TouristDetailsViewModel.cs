@@ -13,6 +13,7 @@ using BookingApp.WPF.Views.GuestViews;
 using BookingApp.Domain.RepositoryInterfaces;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -21,10 +22,8 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public Tours ToursUserControl;
         public event EventHandler ReturnRequest;
         public User _user;
-        public LocationRepository locationRepository;
         public ObservableCollection<Tourist> _tourists { get; set; }
 
-        public TouristRepository touristRepository;
         public TouristDetails TouristDetailsView {  get; set; }
 
         private int _guestNumber;
@@ -72,7 +71,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public Tour selectedTour { get; set; }
         public TourVoucher Voucher {  get; set; }
         public ObservableCollection<TourVoucher> vouchers { get; set; }
-        public TourVoucherRepository tourVoucherRepository { get; set; }
         private ObservableCollection<TourVoucher> _vouchers;
         public ObservableCollection<TourVoucher> Vouchers
         {
@@ -89,19 +87,16 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public TouristDetailsViewModel(Tour detailedTour, User user, TouristDetails touristDetails, Frame touristWindowFrame)
         {
             _user = user;
-            tourVoucherRepository = new TourVoucherRepository();
             vouchers = new ObservableCollection<TourVoucher>();
             TouristDetailsView = touristDetails;
             TouristWindowFrame = touristWindowFrame;
-            locationRepository = new LocationRepository();
             selectedTour = detailedTour;
             ToursUserControl = new Tours(user);
             _tourists = new ObservableCollection<Tourist>();
-            touristRepository = new TouristRepository();
 
             TouristDetailsView.tourNameTextBlock.Text = selectedTour.Name;
-            TouristDetailsView.tourCountryTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).Country;
-            TouristDetailsView.tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
+            TouristDetailsView.tourCountryTextBlock.Text = LocationService.GetInstance().GetById(selectedTour.LocationId).Country;
+            TouristDetailsView.tourCityTextBlock.Text = LocationService.GetInstance().GetById(selectedTour.LocationId).City;
 
             FindVouchers();
             HideMessages();
@@ -115,7 +110,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void FindVouchers()
         {
-            foreach (TourVoucher voucher in tourVoucherRepository.GetAll())
+            foreach (TourVoucher voucher in TourVoucherService.GetInstance().GetAll())
             {
                 if (voucher.TouristId == _user.Id)
                 {

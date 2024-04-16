@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -28,7 +29,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             }
         }
 
-        public TourVoucherRepository tourVoucherRepository { get; set; }
         public ObservableCollection<TourVoucher> vouchers { get; set; }
         public int userId { get; set; }
         public TouristVouchers touristVouchers {  get; set; }
@@ -37,21 +37,20 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             touristVouchers = _touristVouchers;
             this.userId = userId;
             vouchers = new ObservableCollection<TourVoucher>();
-            tourVoucherRepository = new TourVoucherRepository();
             Update();
         }
 
         public void Update()
         {
             vouchers.Clear();
-            foreach (TourVoucher voucher in tourVoucherRepository.GetAll())
+            foreach (TourVoucher voucher in TourVoucherService.GetInstance().GetAll())
             {
                 if (voucher.TouristId == userId && voucher.ExpirationDate > DateTime.Now)
                 {
                     vouchers.Add(voucher);
                 }else if(voucher.ExpirationDate < DateTime.Now)
                 {
-                    tourVoucherRepository.Delete(voucher.Id);
+                    TourVoucherService.GetInstance().Delete(voucher.Id);
                 }
             }
             Vouchers = new ObservableCollection<TourVoucher>(vouchers);

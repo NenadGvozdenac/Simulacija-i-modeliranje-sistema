@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.TouristViews;
+using BookingApp.Application.UseCases;
 
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
@@ -18,12 +19,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
     public class ToursViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Tour> tours { get; set; }
-
-        public TourRepository tourRepository { get; set; }
-        public LocationRepository locationRepository { get; set; }
-        public TourImageRepository tourImageRepository { get; set; }
-
-        public LanguageRepository languageRepository { get; set; }
 
         int minValueGuestNumber = 1,
             maxValueGuestNumber = 30,
@@ -41,10 +36,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
     ToursView = _tours;
             tours = new ObservableCollection<Tour>();
-            tourRepository = new TourRepository();
-            locationRepository = new LocationRepository();
-            tourImageRepository = new TourImageRepository();
-            languageRepository = new LanguageRepository();
             //Update();
         }
 
@@ -69,11 +60,11 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void Update()
         {
-            foreach (Tour tour in tourRepository.GetAll())
+            foreach (Tour tour in TourService.GetInstance().GetAll())
             {
-                tour.Location = locationRepository.GetById(tour.LocationId);
-                tour.Images = tourImageRepository.GetImagesByTourId(tour.Id);
-                tour.Language = languageRepository.GetById(tour.LanguageId);
+                tour.Location = LocationService.GetInstance().GetById(tour.LocationId);
+                tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
+                tour.Language = LanguageService.GetInstance().GetById(tour.LanguageId);
                 tours.Add(tour);
             }
             ToursView.DaysOfStay.Text = startValueDaysOfStay.ToString();
@@ -118,7 +109,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public bool IsLanguageValid(Tour tour, string selectedLanguage)
         {
-            return string.IsNullOrWhiteSpace(selectedLanguage) || languageRepository.GetById(tour.LanguageId).ToString() == selectedLanguage;
+            return string.IsNullOrWhiteSpace(selectedLanguage) || LanguageService.GetInstance().GetById(tour.LanguageId).ToString() == selectedLanguage;
         }
         public bool IsLocationValid(Tour tour, string selectedCountry, string selectedCity)
         {
@@ -137,12 +128,12 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void LoadCountries()
         {
-            List<string> listOfCountries = locationRepository.GetCountries();
+            List<string> listOfCountries = LocationService.GetInstance().GetCountries();
             ToursView.CountryComboBox.ItemsSource = listOfCountries;
         }
         public void LoadLanguages()
         {
-            List<string> listOfLanguages = languageRepository.GetLanguages();
+            List<string> listOfLanguages = LanguageService.GetInstance().GetLanguages();
             ToursView.LanguageComboBox.ItemsSource = listOfLanguages;
         }
 
@@ -152,7 +143,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> listOfCities = locationRepository.GetCitiesByCountry(ToursView.CountryComboBox.SelectedItem.ToString());
+            List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(ToursView.CountryComboBox.SelectedItem.ToString());
             ToursView.CityComboBox.ItemsSource = listOfCities;
             ToursView.CityComboBox.Focus();
             ToursView.CityComboBox.IsEnabled = true;

@@ -24,10 +24,6 @@ namespace BookingApp.WPF.Views.TouristViews.Components
     /// </summary>
     public partial class TourCardWithStar : UserControl
     {
-        public TouristReservationRepository touristReservationRepository {  get; set; }
-        public TourRepository tourRepository {  get; set; }
-        public TourReviewRepository tourReviewRepository { get; set; }
-        public TourReviewImageRepository tourReviewImageRepository {  get; set; }
         public User _user {  get; set; }
 
         public event EventHandler RateTourClicked;
@@ -35,10 +31,6 @@ namespace BookingApp.WPF.Views.TouristViews.Components
         public TourCardWithStar()
         {
             InitializeComponent();
-            touristReservationRepository = new TouristReservationRepository();
-            tourRepository = new TourRepository();
-            tourReviewRepository = new TourReviewRepository();
-            tourReviewImageRepository = new TourReviewImageRepository();
 
             
         }
@@ -52,7 +44,7 @@ namespace BookingApp.WPF.Views.TouristViews.Components
 
                     if (parentWindow is TouristMainWindow mainWindow)
                     {
-                        mainWindow.RateTour(_user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
+                        mainWindow.RateTour(_user, tourId);
                     }
                 }
         }

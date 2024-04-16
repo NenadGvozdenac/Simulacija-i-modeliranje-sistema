@@ -10,49 +10,40 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
     public class TouristMainWindowViewModel
     {
         private readonly User _user;
-        public TourRepository tourRepository { get; set; }
         public Tours ToursUserControl { get; set; }
-        public TouristRepository touristRepository { get; set; }
-        public TouristReservationRepository touristReservationRepository { get; set; }
-        public TourStartTimeRepository tourStartTimeRepository { get; set; }
         public TouristDetails ToursDetailsUserControl { get; set; }
         public VisitedTours ToursVisitedUserControl { get; set; }
-        public TourVoucherRepository tourVoucherRepository { get; set; }
         public TouristMainWindow touristMainWindow {  get; set; }
         public Frame TouristWindowFrame;
 
         public TouristMainWindowViewModel(User user, TouristMainWindow _touristMainWindow, Frame _touristWindowFrame)
         {
             touristMainWindow = _touristMainWindow;
-            tourRepository = new TourRepository();
             _user = user;
             Update(_user);
             TouristWindowFrame = _touristWindowFrame;
             ToursUserControl = new Tours(user);
             TouristWindowFrame.Content = ToursUserControl;
-            touristRepository = new TouristRepository();
-            touristReservationRepository = new TouristReservationRepository();
-            tourStartTimeRepository = new TourStartTimeRepository();
-            tourVoucherRepository = new TourVoucherRepository();
         }
 
 
         public void ShowTourDetails(int tourId)
         {
-            Tour detailedTour = tourRepository.GetById(tourId);
+            Tour detailedTour = TourService.GetInstance().GetById(tourId);
             TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
         public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher tourVoucher)
         {
             Tour detailedTour = tour;
-            TouristWindowFrame.Content = new TourDatesUserControl(_user, detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepository, tourVoucher, tourVoucherRepository);
+            TouristWindowFrame.Content = new TourDatesUserControl(_user, detailedTour, guestNumber, tourists, tourVoucher);
         }
         public void ShowAlternativeTours(int locationId, Tour tour)
         {
@@ -69,9 +60,9 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = new VisitedTours(_user);
         }
 
-        public void RateTour(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId)
+        public void RateTour(User user, int tourId)
         {
-            TouristWindowFrame.Content = new RateTour(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
+            TouristWindowFrame.Content = new RateTour(user, tourId);
         }
         public void SeeCheckpoints(User user, int tourId)
         {

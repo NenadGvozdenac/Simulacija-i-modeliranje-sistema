@@ -23,10 +23,5 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         }
 
-
-
-
-
-
     }
 }

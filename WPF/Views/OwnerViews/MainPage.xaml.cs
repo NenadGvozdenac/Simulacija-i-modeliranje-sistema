@@ -15,7 +15,6 @@ namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class MainPage : Page
 {
-
     private MainPageViewModel _mainPageViewModel;
 
     public MainPage(User user)
@@ -53,5 +52,10 @@ public partial class MainPage : Page
     private void Logout_Click(object sender, RoutedEventArgs e)
     {
         _mainPageViewModel.Logout();
+    }
+
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        _mainPageViewModel.Refresh();
     }
 }

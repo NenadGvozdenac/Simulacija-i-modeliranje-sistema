@@ -28,7 +28,6 @@ public class PendingGuestRatingCardViewModel
     public void EyeButtonClicked(GuestRatingControlPending guestRatingControlPending)
     {
         AddGuestRatingPage addGuestRating = new AddGuestRatingPage(guestRating);
-        addGuestRating.NavigationCompleted += (s, e) => guestRatingControlPending.Refresh();
         NavigationService.GetNavigationService(guestRatingControlPending).Navigate(addGuestRating);
     }
 }

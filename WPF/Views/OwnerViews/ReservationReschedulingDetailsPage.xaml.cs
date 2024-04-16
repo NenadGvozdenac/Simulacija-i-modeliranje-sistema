@@ -24,7 +24,6 @@ namespace BookingApp.WPF.Views.OwnerViews;
 public partial class ReservationReschedulingDetailsPage : Page
 {
     private DetailedReservationMovingViewModel _detailedReservationMovingViewModel;
-    public EventHandler ReservationReschedulingDetailsPageClosed { get; internal set; }
 
     public ReservationReschedulingDetailsPage(AccommodationReservationMoving accommodationReservationMoving)
     {
@@ -43,14 +42,8 @@ public partial class ReservationReschedulingDetailsPage : Page
     {
         if (NavigationService.CanGoBack)
         {
-            InvokePageClosed();
             NavigationService.GoBack();
         }
-    }
-
-    private void InvokePageClosed()
-    {
-        ReservationReschedulingDetailsPageClosed?.Invoke(this, EventArgs.Empty);
     }
 
     private void CheckBox_Checked_Change(object sender, RoutedEventArgs e)

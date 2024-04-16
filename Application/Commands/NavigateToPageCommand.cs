@@ -15,20 +15,10 @@ public class NavigateToPageCommand : ICommand
     public Page currentPage;
     public Page wantedPage { get; set; }
 
-    private Action refresh;
-
     public NavigateToPageCommand(Page currentPage, Page wantedPage)
     {
         this.currentPage = currentPage;
         this.wantedPage = wantedPage;
-        this.refresh = null;
-    }
-
-    public NavigateToPageCommand(Page currentPage, Page wantedPage, Action refreshAction)
-    {
-        this.currentPage = currentPage;
-        this.wantedPage = wantedPage;
-        this.refresh = refreshAction;
     }
 
     public event EventHandler? CanExecuteChanged;
@@ -41,20 +31,5 @@ public class NavigateToPageCommand : ICommand
     public void Execute(object? parameter)
     {
         NavigationService.GetNavigationService(currentPage)?.Navigate(wantedPage);
-        InvokeRefresh();
-    }
-
-    private void InvokeRefresh()
-    {
-        if (this.refresh == null) return;
-
-        if (this.wantedPage is AddAccommodationPage addAccommodationPage)
-        {
-            addAccommodationPage.PageClosed += (s, e) => refresh();
-        }
-        else if (this.wantedPage is ReservationReschedulingPage reservationReschedulingPage)
-        {
-            reservationReschedulingPage.PageClosed += (s, e) => refresh();
-        }
     }
 }

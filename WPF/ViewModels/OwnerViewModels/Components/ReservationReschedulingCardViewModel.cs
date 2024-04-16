@@ -22,7 +22,6 @@ public class ReservationReschedulingCardViewModel
     public void CardClicked(ReservationReschedulingPage reservationReschedulingPage)
     {
         ReservationReschedulingDetailsPage reservationReschedulingDetailsPage = new ReservationReschedulingDetailsPage(AccommodationReservationMoving);
-        reservationReschedulingDetailsPage.ReservationReschedulingDetailsPageClosed += (sender, e) => reservationReschedulingPage.UpdateReservations();
         NavigationService.GetNavigationService(reservationReschedulingPage).Navigate(reservationReschedulingDetailsPage);
     }
 }

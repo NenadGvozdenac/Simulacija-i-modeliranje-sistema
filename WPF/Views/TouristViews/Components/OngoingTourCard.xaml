@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="LocationIcon" Source="/Resources/Assets/location.png" Height="20" Width="27"/>
+                    <Image x:Name="LocationIcon" Source="/Resources/Assets/alternate-map-marker.384x512.png" Height="20" Width="27"/>
                     <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17"/>
                     <TextBlock  TextWrapping="Wrap" Text="," Height="19" Width="4" />
                     <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16"/>

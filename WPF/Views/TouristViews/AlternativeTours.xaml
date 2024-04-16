@@ -13,9 +13,6 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Button Click="Return_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Height="56" Width="72" Margin="728,0,0,0">
-                <Image Source="../../Resources/Assets/return.png"/>
-            </Button>
             <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
             <Label Content="Alternative tours" FontSize="40" FontStyle="Italic" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,8,0,0"/>
             <Label Content="Here are some alternative tours with the same location:" FontSize="20" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,66,0,0"/>

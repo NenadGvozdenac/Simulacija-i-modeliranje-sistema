@@ -30,21 +30,21 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="LocationIcon" Source="..\..\..\Resources\Assets\alternate-map-marker.384x512.png" Height="20" Width="27"/>
+                    <Image x:Name="LocationIcon" Source="/Resources/Assets/alternate-map-marker.384x512.png" Height="20" Width="27"/>
                     <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17"/>
                     <TextBlock  TextWrapping="Wrap" Text="," Height="19" Width="4" />
                     <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="LanguageIcon" Source="..\..\..\Resources\Assets\language-line.512x481.png" Height="23"/>
+                    <Image x:Name="LanguageIcon" Source="/Resources/Assets/language-line.512x481.png" Height="23"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="CapacityIcon" Source="..\..\..\Resources\Assets\users.png" Height="19" />
+                    <Image x:Name="CapacityIcon" Source="/Resources/Assets/users.png" Height="19" />
                     <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="DurationIcon" Source="..\..\..\Resources\Assets\clock.512x512.png" Height="20"/>
+                    <Image x:Name="DurationIcon" Source="/Resources/Assets/clock.512x512.png" Height="20"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="51" Height="19" TextAlignment="Center"/>
                     <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
                 </StackPanel>

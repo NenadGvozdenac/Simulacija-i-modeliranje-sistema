@@ -80,6 +80,11 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.SeeCheckpoints(user, tourId);
         }
 
+        public void Notifications_Click(object sender, MouseButtonEventArgs e)
+        {
+            touristMainWindowViewModel.Notifications_Click(sender, e);
+        }
+
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {
             touristMainWindowViewModel.ShowTourDates(selectedTour, guestNumber, tourists);

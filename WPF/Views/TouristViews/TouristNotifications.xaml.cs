@@ -1,8 +1,12 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.TouristViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,11 +26,24 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class TouristNotifications : UserControl
     {
+
         public TouristNotificationsViewModel TouristNotificationsViewModel { get; set; }
         public TouristNotifications(User user)
         {
             InitializeComponent();
             TouristNotificationsViewModel = new TouristNotificationsViewModel(user, this);
+            DataContext = TouristNotificationsViewModel;
+            Update();
+        }
+        public void Update()
+        {
+            TouristNotificationsViewModel.Update();
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

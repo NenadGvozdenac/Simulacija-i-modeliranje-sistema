@@ -13,9 +13,6 @@
             <RowDefinition Height="0.6*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="BackToTouristDetails_Click" Height="53" Width="51" Margin="739,14,0,0">
-                <Image Source="../../Resources/Assets/return.512x467.png"/>
-            </Button>
 
             <Label Content="Dates:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="DemiBold" FontStyle="Italic" Margin="10,-10,0,0"/>
             <Label Content="Select a date you would like to go on:" FontStyle="Oblique" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,49,0,0"/>

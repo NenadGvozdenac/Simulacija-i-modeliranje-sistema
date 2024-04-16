@@ -1,5 +1,4 @@
-﻿using BookingApp.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.WPF.Views.TouristViews
+namespace BookingApp.WPF.Views.TouristViews.Components
 {
     /// <summary>
-    /// Interaction logic for TouristCheckpoints.xaml
+    /// Interaction logic for NotificationCard.xaml
     /// </summary>
-    public partial class TouristCheckpoints : UserControl
+    public partial class NotificationCard : UserControl
     {
-        public User _user;
-        public TouristCheckpoints(User user)
+        public NotificationCard()
         {
             InitializeComponent();
-            _user = user;
         }
     }
 }

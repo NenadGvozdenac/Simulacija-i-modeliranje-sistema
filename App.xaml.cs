@@ -58,6 +58,7 @@ public partial class App
         services.AddSingleton<ITourReviewRepository, TourReviewRepository>();
         services.AddSingleton<ITourReviewImageRepository, TourReviewImageRepository>();
 
+        services.AddSingleton<IUserRepository, UserRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -82,5 +83,6 @@ public partial class App
         services.AddSingleton<TourReviewImageService>();
 
 
+        services.AddSingleton<UserService>();
     }
 }

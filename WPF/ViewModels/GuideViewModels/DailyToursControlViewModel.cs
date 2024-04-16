@@ -37,37 +37,32 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             foreach (TourStartTime startTime in TourStartTimeService.GetInstance().GetAll())
             {
-                if (CheckIfPassed(startTime) == 1)
+                if (CheckIfPassed(startTime) != 1)
                 {
-                    continue;
-                }
-                if (startTime.Time.Date == System.DateTime.Now.Date)
-                {
-                    Tour toura = TourService.GetInstance().GetById(startTime.TourId);
-                    if (toura.OwnerId == _user.Id)
+                   if (startTime.Time.Date == System.DateTime.Now.Date)
                     {
-                        Tour tour = new Tour();
-                        tour.Capacity = toura.Capacity;
-                        tour.CurrentDate = startTime.Time;
-                        tour.Location = LocationService.GetInstance().GetById(toura.LocationId);
-                        tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
-                        tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId);  //fix
-                        tour.Id = toura.Id;
-                        tour.LocationId = toura.LocationId;
-                        tour.LanguageId = toura.LanguageId;
-                        tour.Duration = toura.Duration;
-                        tour.Checkpoints = toura.Checkpoints;
-                        tour.Dates = toura.Dates;
-                        tour.Description = toura.Description;
-
-
-
-                        dailyTours.Add(tour);
+                        Tour toura = TourService.GetInstance().GetById(startTime.TourId);
+                        if (toura.OwnerId == _user.Id)
+                        {
+                            Tour tour = new Tour();
+                            tour.Capacity = toura.Capacity;
+                            tour.CurrentDate = startTime.Time;
+                            tour.Location = LocationService.GetInstance().GetById(toura.LocationId);
+                            tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
+                            tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId);  //fix
+                            tour.Id = toura.Id;
+                            tour.LocationId = toura.LocationId;
+                            tour.LanguageId = toura.LanguageId;
+                            tour.Duration = toura.Duration;
+                            tour.Checkpoints = toura.Checkpoints;
+                            tour.Dates = toura.Dates;
+                            tour.Description = toura.Description;
+                            dailyTours.Add(tour);
+                        }
                     }
                 }
             }
         }
-
 
         public int CheckIfPassed(TourStartTime startTime)
         {

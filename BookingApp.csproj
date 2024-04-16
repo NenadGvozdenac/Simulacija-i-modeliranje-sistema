@@ -243,6 +243,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="View\**" />
+	  <EmbeddedResource Remove="View\**" />
+	  <None Remove="View\**" />
+	  <Page Remove="View\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
@@ -255,7 +262,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="View\" />
 	  <Folder Include="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\" />
 	</ItemGroup>
 </Project>

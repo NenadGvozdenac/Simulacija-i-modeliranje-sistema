@@ -23,15 +23,6 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public ObservableCollection<Tourist> selectedTourists { get; set; }
         
-
-       
-
-        public TouristReservationRepository reservationRepository { get; set; }
-
-        
-
-        
-
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClicked { get; set; }
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedMain { get; set; }
@@ -48,8 +39,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public CheckpointsViewModel(CheckpointsView checkpointViews,int TourId, DateTime currentDate)
         {
-            checkpointsView = checkpointViews;            
-            reservationRepository = new TouristReservationRepository();           
+            checkpointsView = checkpointViews;                       
             checkpoints = new ObservableCollection<Checkpoint>();
             tourists = new ObservableCollection<Tourist>();
             selectedTourists = new ObservableCollection<Tourist>();
@@ -73,7 +63,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
 
             //gets all reservations
-            foreach (TouristReservation reservation in reservationRepository.GetByTimeId(tourTimeId))
+            foreach (TouristReservation reservation in TourReservationService.GetInstance().GetByTimeId(tourTimeId))
             {
 
                 Tourist tourist_temp = new Tourist();
@@ -119,10 +109,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             var item1 = checkBox.DataContext as Checkpoint;
 
             if (item1.Checked == true)
-            {
-                checkBox.IsChecked = true;
-            }
-
+               checkBox.IsChecked = true;
+           
             if (checkBox.IsChecked == true)
             {
                 item1.Checked = true;
@@ -134,10 +122,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 foreach (var tourist in selectedTourists.ToList())
                 {
                     tourists.Remove(tourist);
-                    TouristReservation reservationTemp = reservationRepository.GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
+                    TouristReservation reservationTemp = TourReservationService.GetInstance().GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
                     reservationTemp.CheckpointId = item1.Id;
-                    reservationRepository.Update(reservationTemp);
-
+                    TourReservationService.GetInstance().Update(reservationTemp);
                 }
                 selectedTourists.Clear();
 

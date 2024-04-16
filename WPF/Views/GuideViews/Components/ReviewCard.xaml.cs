@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Model.MutualModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +30,10 @@ namespace BookingApp.WPF.Views.GuideViews.Components
         private void Report_click(object sender, MouseButtonEventArgs e)
         {
             statusTextblock.Text = "Invalid";
+            TourReview review = TourReviewService.GetInstance().GetById(int.Parse(idTextblock.Text));
+            review.Status = "Invalid";
+            TourReviewService.GetInstance().Update(review);
+            
         }
     }
 }

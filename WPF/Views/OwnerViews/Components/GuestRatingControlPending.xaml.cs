@@ -20,7 +20,6 @@ namespace BookingApp.WPF.Views.OwnerViews.Components;
 
 public partial class GuestRatingControlPending : UserControl
 {
-    public EventHandler RefreshPage { get; internal set; }
     public PendingGuestRatingCardViewModel _pendingGuestRatingCardViewModel;
 
     public GuestRatingControlPending(GuestRating guestRating, bool isPencilEnabled)
@@ -34,10 +33,5 @@ public partial class GuestRatingControlPending : UserControl
     private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
     {
         _pendingGuestRatingCardViewModel.EyeButtonClicked(this);
-    }
-
-    public void Refresh()
-    {
-        RefreshPage.Invoke(this, EventArgs.Empty);
     }
 }

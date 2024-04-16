@@ -30,9 +30,9 @@ public partial class MainPageViewModel : ObservableObject
     private AccommodationWrapper _accommodationWrapper;
     private AccommodationReservationWrapper _accommodationReservationWrapper;
 
-    public ICommand NavigateAddAccommodationPage => new NavigateToPageCommand(mainPage, new AddAccommodationPage(User), Refresh);
+    public ICommand NavigateAddAccommodationPage => new NavigateToPageCommand(mainPage, new AddAccommodationPage(User));
     public ICommand NavigateGuestReviewPage => new NavigateToPageCommand(mainPage, new GuestReviewPage(User));
-    public ICommand NavigateReservationReschedulingPage => new NavigateToPageCommand(mainPage, new ReservationReschedulingPage(User), Refresh);
+    public ICommand NavigateReservationReschedulingPage => new NavigateToPageCommand(mainPage, new ReservationReschedulingPage(User));
     public ICommand NavigateSettingsPage => new NavigateToPageCommand(mainPage, new SettingsAndProfile(User));
     public ICommand NavigateGuestFeedbackPage => new NavigateToPageCommand(mainPage, new GuestFeedbackPage(User));
 
@@ -176,6 +176,8 @@ public partial class MainPageViewModel : ObservableObject
     {
         RefreshReservations();
         RefreshAccommodations();
+        HideNavbar(mainPage.LeftNavbar);
+        HideNavbar(mainPage.RightNavbar);
     }
 
     private void RefreshAccommodations()

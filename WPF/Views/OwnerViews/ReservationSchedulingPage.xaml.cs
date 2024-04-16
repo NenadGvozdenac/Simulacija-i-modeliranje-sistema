@@ -9,7 +9,6 @@ namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class ReservationReschedulingPage : Page
 {
-    public event EventHandler PageClosed;
     public ReservationReschedulingViewModel ReservationReschedulingViewModel { get; set; }
     public ReservationReschedulingPage(User user)
     {
@@ -18,21 +17,15 @@ public partial class ReservationReschedulingPage : Page
         DataContext = ReservationReschedulingViewModel;
     }
 
-    private void InvokePageClosed()
-    {
-        PageClosed?.Invoke(this, EventArgs.Empty);
-    }
-
     private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if(NavigationService.CanGoBack)
         {
-            InvokePageClosed();
             NavigationService.GoBack();
         }
     }
 
-    public void UpdateReservations()
+    private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
     {
         ReservationReschedulingViewModel.Update();
     }

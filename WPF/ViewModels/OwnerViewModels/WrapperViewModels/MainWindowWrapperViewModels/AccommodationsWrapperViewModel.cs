@@ -43,8 +43,6 @@ public class AccommodationsWrapperViewModel
             AccommodationControl component = new AccommodationControl(accommodation);
             component.Margin = new Thickness(15);
 
-            component.AccommodationClosedEH += (s, e) => _mainPageViewModel.Refresh();
-
             accommodationWrapper.Accommodations.Children.Add(component);
         }
     }

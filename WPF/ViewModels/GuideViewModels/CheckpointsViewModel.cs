@@ -109,10 +109,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             var item1 = checkBox.DataContext as Checkpoint;
 
             if (item1.Checked == true)
-            {
-                checkBox.IsChecked = true;
-            }
-
+               checkBox.IsChecked = true;
+           
             if (checkBox.IsChecked == true)
             {
                 item1.Checked = true;
@@ -127,7 +125,6 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     TouristReservation reservationTemp = TourReservationService.GetInstance().GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
                     reservationTemp.CheckpointId = item1.Id;
                     TourReservationService.GetInstance().Update(reservationTemp);
-
                 }
                 selectedTourists.Clear();
 

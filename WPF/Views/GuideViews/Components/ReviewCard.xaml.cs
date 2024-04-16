@@ -28,6 +28,7 @@ namespace BookingApp.WPF.Views.GuideViews.Components
         private void Report_click(object sender, MouseButtonEventArgs e)
         {
             statusTextblock.Text = "Invalid";
+            
         }
     }
 }

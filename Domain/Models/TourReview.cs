@@ -45,12 +45,13 @@ namespace BookingApp.Model.MutualModels
             GuideKnowledge = int.Parse(values[3]);
             GuideLanguage = int.Parse(values[4]);
             TourInterestingness = int.Parse(values[5]);
-            Feedback = values[6];  
+            Feedback = values[6];
+            Status = values[7];
         }
 
         public string[] ToCSV()
         {
-            return new string[] { Id.ToString(), UserId.ToString(), TourId.ToString(),/* ReservationId.ToString(),*/ GuideKnowledge.ToString(), GuideLanguage.ToString(), TourInterestingness.ToString(), Feedback };
+            return new string[] { Id.ToString(), UserId.ToString(), TourId.ToString(),/* ReservationId.ToString(),*/ GuideKnowledge.ToString(), GuideLanguage.ToString(), TourInterestingness.ToString(), Feedback, Status.ToString()};
         }
     }
 }

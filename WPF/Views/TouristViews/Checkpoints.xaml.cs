@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Repositories;
+using BookingApp.WPF.ViewModels.TouristViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,48 +18,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BookingApp.Domain.Models;
-using BookingApp.Repositories;
-using BookingApp.WPF.ViewModels.GuideViewModels;
 
-namespace BookingApp.View.PathfinderViews
+namespace BookingApp.WPF.Views.TouristViews
 {
     /// <summary>
-    /// Interaction logic for Tours.xaml
+    /// Interaction logic for Checkpoints.xaml
     /// </summary>
-    public partial class Tours : UserControl
+    public partial class Checkpoints : UserControl, INotifyPropertyChanged
     {
-      
-
-        public ToursViewModel toursViewModel { get; set; }  
-
-        public Tours()
+        public CheckpointsViewModel checkpointsView {  get; set; }
+        public Checkpoints(User _user, int _tourId)
         {
             InitializeComponent();
-            toursViewModel = new ToursViewModel(this);
-            DataContext = toursViewModel;
+            checkpointsView = new CheckpointsViewModel(_user, _tourId, this);
+            DataContext = checkpointsView;
+            Update();
         }
 
+        public void Update()
+        {
+            checkpointsView.Update();
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public void Update()
-        {
-            toursViewModel.Update();
-            
-        }
-
-        private void tourcard_CancelTourClicked(object sender,  BeginButtonClickedEventArgs e){
-            toursViewModel.tourcard_CancelTourClicked(sender, e);
-        }
-   
-    
-    
-    
-    
     }
 }

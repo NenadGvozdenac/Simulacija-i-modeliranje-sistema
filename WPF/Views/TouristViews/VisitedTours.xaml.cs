@@ -17,10 +17,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using BookingApp.View.PathfinderViews.Componentss;
-using BookingApp.View.TouristViews.Components;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.TouristViewModels;
+using BookingApp.WPF.Views;
 
 namespace BookingApp.WPF.Views.TouristViews
 {

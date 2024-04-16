@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using BookingApp.WPF.Views.GuestViews;
+using BookingApp.Domain.RepositoryInterfaces;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -18,10 +22,8 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public Tours ToursUserControl;
         public event EventHandler ReturnRequest;
         public User _user;
-        public LocationRepository locationRepository;
         public ObservableCollection<Tourist> _tourists { get; set; }
 
-        public TouristRepository touristRepository;
         public TouristDetails TouristDetailsView {  get; set; }
 
         private int _guestNumber;
@@ -67,26 +69,57 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public Frame TouristWindowFrame;
 
         public Tour selectedTour { get; set; }
+        public TourVoucher Voucher {  get; set; }
+        public ObservableCollection<TourVoucher> vouchers { get; set; }
+        private ObservableCollection<TourVoucher> _vouchers;
+        public ObservableCollection<TourVoucher> Vouchers
+        {
+            get { return _vouchers; }
+            set
+            {
+                if (_vouchers != value)
+                {
+                    _vouchers = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public TouristDetailsViewModel(Tour detailedTour, User user, TouristDetails touristDetails, Frame touristWindowFrame)
         {
             _user = user;
+            vouchers = new ObservableCollection<TourVoucher>();
             TouristDetailsView = touristDetails;
             TouristWindowFrame = touristWindowFrame;
-            locationRepository = new LocationRepository();
             selectedTour = detailedTour;
             ToursUserControl = new Tours(user);
             _tourists = new ObservableCollection<Tourist>();
-            touristRepository = new TouristRepository();
 
             TouristDetailsView.tourNameTextBlock.Text = selectedTour.Name;
-            TouristDetailsView.tourCountryTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).Country;
-            TouristDetailsView.tourCityTextBlock.Text = locationRepository.GetById(selectedTour.LocationId).City;
+            TouristDetailsView.tourCountryTextBlock.Text = LocationService.GetInstance().GetById(selectedTour.LocationId).Country;
+            TouristDetailsView.tourCityTextBlock.Text = LocationService.GetInstance().GetById(selectedTour.LocationId).City;
 
+            FindVouchers();
             HideMessages();
 
 
         }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public void FindVouchers()
+        {
+            foreach (TourVoucher voucher in TourVoucherService.GetInstance().GetAll())
+            {
+                if (voucher.TouristId == _user.Id)
+                {
+                    vouchers.Add(voucher);
+                }
+            }
+            Vouchers = new ObservableCollection<TourVoucher>(vouchers);
 
+        }
         public void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
         {
             if (!int.TryParse(TouristDetailsView.GuestNumberText.Text, out int number) && TouristDetailsView.GuestNumberText.Text != "")
@@ -134,16 +167,22 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristDetailsView.enterValidAgeMessage.Visibility = Visibility.Hidden;
 
         }
+
+        public bool areErrorMessagesVisible()
+        {
+            if (TouristDetailsView.increaseNumberText.Visibility == Visibility.Visible || TouristDetailsView.enterValidGuestNumber.Visibility == Visibility.Visible || TouristDetailsView.numberHigherMessage.Visibility == Visibility.Visible || TouristDetailsView.enterValidAgeMessage.Visibility == Visibility.Visible)
+            {
+                return true;
+            }
+            return false;
+        }
         public void AddTourist_Click(object sender, RoutedEventArgs e)
         {
-
-            if (TouristDetailsView.increaseNumberText.Visibility == Visibility.Visible || TouristDetailsView.enterValidGuestNumber.Visibility == Visibility.Visible || TouristDetailsView.numberHigherMessage.Visibility == Visibility.Visible || TouristDetailsView.enterValidAgeMessage.Visibility == Visibility.Visible)
+            if (areErrorMessagesVisible())
             {
                 return;
             }
-
             HideMessages();
-
             if (!areFieldsEmpty())
             {
                 name = TouristDetailsView.GuestName.Text;
@@ -159,6 +198,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 _tourists.Add(tourist);
                 TouristDetailsView.TouristDataGrid.ItemsSource = null;
                 TouristDetailsView.TouristDataGrid.ItemsSource = _tourists;
+                
                 TouristDetailsView.GuestName.Text = "";
                 TouristDetailsView.GuestSurname.Text = "";
                 TouristDetailsView.GuestAgeText.Text = "";
@@ -173,7 +213,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 TouristDetailsView.increaseNumberText.Visibility = Visibility.Visible;
                 return;
             }
-
         }
 
         public bool areFieldsEmpty()
@@ -182,17 +221,17 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void ReserveTour_Click(object sender, RoutedEventArgs e)
         {
-            if (_tourists.Count() == 0)
+            if (_tourists.Count() == 0 || _tourists.Count() < GuestNumber)
             {
                 TouristDetailsView.addTouristMessage.Visibility = Visibility.Visible;
                 return;
             }
 
-            if (_tourists.Count() < GuestNumber)
+            /*if (_tourists.Count() < GuestNumber)
             {
                 TouristDetailsView.addTouristMessage.Visibility = Visibility.Visible;
                 return;
-            }
+            }*/
             List<Tourist> tourists = new List<Tourist>();
             foreach (Tourist t in _tourists)
             {
@@ -204,15 +243,18 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
             if (parentWindow is TouristMainWindow mainWindow)
             {
-                mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists);
+                mainWindow.ShowTourDates(selectedTour, GuestNumber, tourists, Voucher);
                 _tourists.Clear();
             }
-
         }
 
         public void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox != null && comboBox.SelectedItem != null)
+            {
+                Voucher = comboBox.SelectedItem as TourVoucher;
+            }
         }
     }
 }

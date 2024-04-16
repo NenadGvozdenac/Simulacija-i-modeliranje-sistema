@@ -1,5 +1,5 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.WPF.Views.TouristViews;
+using BookingApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +18,21 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.Views.TouristViews.Components
 {
     /// <summary>
-    /// Interaction logic for TourCard.xaml
+    /// Interaction logic for OngoingTourCard.xaml
     /// </summary>
-    public partial class TourCard : UserControl
+    public partial class OngoingTourCard : UserControl
     {
-        public TourCard()
+        public User _user {  get; set; }
+        public OngoingTourCard()
         {
             InitializeComponent();
         }
+        public void SetUser(User user)
+        {
+            _user = user;
+        }
 
-        private void SeeTour_Click(object sender, RoutedEventArgs e)
+        private void SeeCheckpoints_Click(object sender, MouseButtonEventArgs e)
         {
             if (this.DataContext is Tour tour)
             {
@@ -37,10 +42,9 @@ namespace BookingApp.WPF.Views.TouristViews.Components
 
                 if (parentWindow is TouristMainWindow mainWindow)
                 {
-                    mainWindow.ShowTourDetails(tourId);
+                    mainWindow.SeeCheckpoints(_user, tourId);
                 }
             }
         }
-
     }
 }

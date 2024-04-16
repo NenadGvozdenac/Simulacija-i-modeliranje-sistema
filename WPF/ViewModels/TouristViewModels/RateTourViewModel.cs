@@ -22,10 +22,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public Tour selectedTour { get; set; }
         public User _user { get; set; }
         public TouristReservation reservation { get; set; }
-        public TouristReservationRepository _touristReservationRepository { get; set; }
-        public TourRepository _tourRepository { get; set; }
-        public TourReviewRepository _tourReviewRepository { get; set; }
-        public TourReviewImageRepository _reviewImageRepository { get; set; }
         public List<TourReviewImage> _reviewImages { get; set; }
 
         private int guideKnowledgeRating = 0;
@@ -33,17 +29,12 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         private int interestingnessRating = 0;
         private string feedbackText = string.Empty;
         public RateTour rateTour {  get; set; }
-        public RateTourViewModel(User user, TouristReservationRepository touristReservationRepository, TourRepository tourRepository, TourReviewRepository tourReviewRepository, TourReviewImageRepository tourReviewImageRepository, int tourId, RateTour rateTour)
+        public RateTourViewModel(User user, int tourId, RateTour rateTour)
         {
             _user = user;
-            _touristReservationRepository = touristReservationRepository;
-            _tourRepository = tourRepository;
-            _tourReviewRepository = tourReviewRepository;
-            _reviewImageRepository = tourReviewImageRepository;
             //reservation = _touristReservationRepository.GetById(reservationId);
-            _tourRepository = new TourRepository();
             _reviewImages = new List<TourReviewImage>();
-            selectedTour = _tourRepository.GetById(tourId);
+            selectedTour = TourService.GetInstance().GetById(tourId);
             this.rateTour = rateTour;
         }
 
@@ -113,12 +104,12 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             if (guideKnowledgeRating.ToString() != "" || guideLanguageRating.ToString() != "" || _reviewImages.Count != 0)
             {
                 TourReview tourReview = new TourReview(_user.Id, selectedTour.Id, guideKnowledgeRating, guideLanguageRating, interestingnessRating, feedbackText);
-                _tourReviewRepository.Add(tourReview);
+                TourReviewService.GetInstance().Add(tourReview);
 
                 foreach (TourReviewImage reviewImage in _reviewImages)
                 {
                     reviewImage.ReviewId = tourReview.Id;
-                    _reviewImageRepository.Add(reviewImage);
+                    TourReviewImageService.GetInstance().Add(reviewImage);
                 }
                 /*Window parentWindow = Window.GetWindow(rateTour);
                 if (parentWindow is TouristMainWindow mainWindow)

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.WPF.Views.TouristViews;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,10 @@ namespace BookingApp.Application.UseCases
             return App.ServiceProvider.GetRequiredService<CheckpointService>();
         }
 
+        public List<Checkpoint> GetAll()
+        {
+            return _checkpointRepository.GetAll();
+        }
         public void Add(Checkpoint checkpoint)
         {
             _checkpointRepository.Add(checkpoint);

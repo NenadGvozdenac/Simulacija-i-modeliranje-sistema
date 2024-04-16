@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Domain.Miscellaneous;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model.MutualModels;
 
 
 namespace BookingApp.Repositories
 {
-    public class TourReviewImageRepository
+    public class TourReviewImageRepository : ITourReviewImageRepository
     {
         private const string FilePath = "../../../Resources/Data/tour_review_images.csv";
         private readonly Serializer<TourReviewImage> _serializer;

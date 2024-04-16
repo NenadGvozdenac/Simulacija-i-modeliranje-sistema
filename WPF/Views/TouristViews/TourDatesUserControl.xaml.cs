@@ -27,10 +27,10 @@ namespace BookingApp.WPF.Views.TouristViews
     public partial class TourDatesUserControl : UserControl
     {
         public TourDatesUserControlViewModel tourDatesViewModel {  get; set; }
-        public TourDatesUserControl(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists, TouristRepository touristRepository, TouristReservationRepository touristReservationRepository, TourStartTimeRepository tourStartTimeRepo, TourVoucher voucher, TourVoucherRepository tourVoucherRepository)
+        public TourDatesUserControl(User user, Tour detailedTour, int guestNumber, List<Tourist> tourists,TourVoucher voucher)
         {
             InitializeComponent();
-            tourDatesViewModel = new TourDatesUserControlViewModel(user, detailedTour, guestNumber, tourists, touristRepository, touristReservationRepository, tourStartTimeRepo, voucher, tourVoucherRepository, this);
+            tourDatesViewModel = new TourDatesUserControlViewModel(user, detailedTour, guestNumber, tourists, voucher, this);
             DataContext = tourDatesViewModel;            
 
 

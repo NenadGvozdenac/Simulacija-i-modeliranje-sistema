@@ -1,6 +1,5 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
-using BookingApp.View.TouristViews;
 using BookingApp.WPF.Views.TouristViews;
 using BookingApp.WPF.ViewModels.TouristViewModels;
 using System;
@@ -74,9 +73,9 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         {
             TouristWindowFrame.Content = new RateTour(user, touristReservationRepository, tourRepository, tourReviewRepository, tourReviewImageRepository, tourId);
         }
-        public void SeeCheckpoints(User user)
+        public void SeeCheckpoints(User user, int tourId)
         {
-            TouristWindowFrame.Content = new TouristCheckpoints(user);
+            TouristWindowFrame.Content = new Checkpoints(user, tourId);
         }
 
         public void Home_Click(object sender, MouseButtonEventArgs e)

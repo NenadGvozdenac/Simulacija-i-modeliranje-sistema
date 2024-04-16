@@ -1,6 +1,5 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
-using BookingApp.View.TouristViews;
 using BookingApp.WPF.Views.TouristViews;
 using BookingApp.WPF.Views.TouristViews.Components;
 using System;

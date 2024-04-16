@@ -75,9 +75,9 @@ namespace BookingApp.WPF.Views.TouristViews
         {
             touristMainWindowViewModel.MyActiveTours_Click(sender, e);
         }
-        public void SeeCheckpoints(User user)
+        public void SeeCheckpoints(User user, int tourId)
         {
-            touristMainWindowViewModel.SeeCheckpoints(user);
+            touristMainWindowViewModel.SeeCheckpoints(user, tourId);
         }
 
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)

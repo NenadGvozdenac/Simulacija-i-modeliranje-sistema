@@ -71,8 +71,12 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.Demographics_MouseLeftButtonDown(sender, e);
         }
-        
-       
+
+        private void Reviews_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mainWindowViewModel.Reviews_MouseLeftButtonDown(sender, e);
+        }
+
         // HANDLERS
         private void DailyToursWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
         {
@@ -103,6 +107,6 @@ namespace BookingApp.View.PathfinderViews
             mainWindowViewModel.OnEndButtonClickedMain(e);
         }
 
-
+        
     }
 }

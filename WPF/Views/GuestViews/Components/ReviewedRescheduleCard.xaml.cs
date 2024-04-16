@@ -28,21 +28,20 @@ public partial class ReviewedRescheduleCard : UserControl
     {
         AccommodationMovingDTO moving = (AccommodationMovingDTO)DataContext;
 
-        if (moving.Status == ReschedulingStatus.Accepted)
+        switch (moving.Status)
         {
-            Status_TextBlock.Text = "Approved";
-            Status_TextBlock.Foreground = Brushes.LightGreen;
-        }
-        else if (moving.Status == ReschedulingStatus.TimedOut)
-        {
-            Status_TextBlock.Text = "Timed Out";
-            Status_TextBlock.Foreground = Brushes.Purple;
-
-        }
-        else 
-        {
-            Status_TextBlock.Text = "Rejected";
-            Status_TextBlock.Foreground = Brushes.Red;
+            case ReschedulingStatus.Accepted:
+                Status_TextBlock.Text = "Approved";
+                Status_TextBlock.Foreground = Brushes.LightGreen;
+                break;
+            case ReschedulingStatus.TimedOut:
+                Status_TextBlock.Text = "Timed Out";
+                Status_TextBlock.Foreground = Brushes.Purple;
+                break;
+            default:
+                Status_TextBlock.Text = "Rejected";
+                Status_TextBlock.Foreground = Brushes.Red;
+                break;
         }
     }
 }

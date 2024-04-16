@@ -33,6 +33,10 @@ public class TourRepository : ITourRepository
         return _tours.FirstOrDefault(a => a.Id == id);
     }
 
+    public List<Tour> GetByOwnerId(int ownerId)
+    {
+        return _tours.Where(a => a.OwnerId == ownerId).ToList();
+    }
 
     public Tour GetByName(string name)
     {

@@ -58,6 +58,20 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
+        private string tourName;
+
+        public string TourName
+        {
+            get => tourName;
+            set
+            {
+                if (value != tourName)
+                {
+                    tourName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public List<int> times { get; set; }
         
@@ -86,15 +100,15 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             
             reservationRepository = new TouristReservationRepository();
             touristRepository = new TouristRepository();
-            
 
+            TourName = FindMostReserved().Name;
             Sub18 = FindSub18(FindMostReserved());
             Middle = FindMiddle(FindMostReserved());
             Above50 = FindAbove50(FindMostReserved());
 
             times = FindYears();
-
-            tourDemographics.demographicsControl.StatsButtonClickedControl += (s, e) => OnStatsButtonClicked_Handler(s, e);
+            
+            tourDemographics.demographicsControl.demographicsControlViewModel.StatsButtonClickedControl += (s,e) => OnStatsButtonClicked_Handler(s,e);
             Update();
             
         }
@@ -173,7 +187,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public int FindSub18(Tour t)
         {
-
+            
             List<Tourist> tourists = GroupTourists(t);
             int sub18 = 0;
             foreach (Tourist tourist in tourists)
@@ -186,7 +200,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public int FindMiddle(Tour t)
         {
-
+            
             List<Tourist> tourists = GroupTourists(t);
             int middle = 0;
             foreach (Tourist tourist in tourists)
@@ -199,7 +213,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public int FindAbove50(Tour t)
         {
-
+            
             List<Tourist> tourists = GroupTourists(t);
             int above50 = 0;
             foreach (Tourist tourist in tourists)
@@ -224,7 +238,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void OnStatsButtonClicked_Handler(object sender, BeginButtonClickedEventArgs e)
         {
-            OnStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+           OnStatsButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
 
         }
 
@@ -237,7 +251,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             Above50 = FindAbove50(t);
 
-
+            TourName = TourService.GetInstance().GetById(e.TourId).Name;
         }
 
         public void AllTime_Click(object sender, RoutedEventArgs e)
@@ -245,6 +259,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Sub18 = FindSub18(FindMostReserved());
             Middle = FindMiddle(FindMostReserved());
             Above50 = FindAbove50(FindMostReserved());
+            TourName = FindMostReserved().Name;
         }
 
         public void yearSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -254,6 +269,17 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Sub18 = FindSub18(FindMostReservedForYear(year));
             Middle = FindMiddle(FindMostReservedForYear(year));
             Above50 = FindAbove50(FindMostReservedForYear(year));
+            TourName = FindMostReservedForYear(year).Name;  
+        }
+
+        public void yearSelectionChanged_Click(object sender, RoutedEventArgs e)
+        {
+            int year = (int)tourDemographics.YearBox.SelectedItem;
+
+            Sub18 = FindSub18(FindMostReservedForYear(year));
+            Middle = FindMiddle(FindMostReservedForYear(year));
+            Above50 = FindAbove50(FindMostReservedForYear(year));
+            TourName = FindMostReservedForYear(year).Name;
         }
 
 

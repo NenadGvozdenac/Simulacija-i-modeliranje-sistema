@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Repositories;
+using BookingApp.WPF.Views.TouristViews;
+using BookingApp.WPF.Views.TouristViews.Components;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -7,24 +11,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BookingApp.Domain.Models;
-using BookingApp.Repositories;
-using BookingApp.WPF.Views.TouristViews.Components;
 
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    /// <summary>
-    /// Interaction logic for TouristOngoingTours.xaml
-    /// </summary>
-    public partial class TouristOngoingTours : UserControl
+    public class TouristOngoingToursViewModel
     {
         public ObservableCollection<Tour> tours { get; set; }
 
@@ -49,10 +39,10 @@ namespace BookingApp.View.TouristViews
         public TourRepository tourRepository { get; set; }
         public User _user { get; set; }
 
-        public TouristOngoingTours(User user)
+        public TouristOngoingTours touristOngoingTours { get; set; }
+        public TouristOngoingToursViewModel(User user, TouristOngoingTours _touristOngoingTours)
         {
-            InitializeComponent();
-            DataContext = this;
+            touristOngoingTours = _touristOngoingTours;
             touristReservationRepository = new TouristReservationRepository();
             tourStartTimeRepository = new TourStartTimeRepository();
             tourRepository = new TourRepository();
@@ -61,7 +51,7 @@ namespace BookingApp.View.TouristViews
             tourImageRepository = new TourImageRepository();
             tours = new ObservableCollection<Tour>();
             _user = user;
-            Update();
+            //Update();
         }
 
         public void Update()
@@ -69,11 +59,11 @@ namespace BookingApp.View.TouristViews
             tours.Clear();
             foreach (TouristReservation touristReservation in touristReservationRepository.GetAll())
             {
-                if (touristReservation.UserId == _user.Id && touristReservation.CheckpointId != -1)
+                if (touristReservation.UserId == _user.Id)
                 {
                     foreach (TourStartTime tourStartTime in tourStartTimeRepository.GetAll())
                     {
-                        if (tourStartTime.Id == touristReservation.Id_TourTime && tourStartTime.Status == "active")
+                        if (tourStartTime.Id == touristReservation.Id_TourTime && tourStartTime.Status == "ongoing")
                         {
                             Tour tour = tourRepository.GetById(tourStartTime.TourId);
                             tour.Location = locationRepository.GetById(tour.LocationId);
@@ -100,6 +90,5 @@ namespace BookingApp.View.TouristViews
                 tourCard.SetUser(_user);
             }
         }
-        
     }
 }

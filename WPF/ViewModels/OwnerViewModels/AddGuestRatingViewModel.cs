@@ -9,7 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
-public partial class AddGuestRatingViewModel : ObservableObject, INotifyPropertyChanged
+public partial class AddGuestRatingViewModel : ObservableObject
 {
     [ObservableProperty]
     private ObservableCollection<int> _cleanliness;

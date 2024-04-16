@@ -42,7 +42,7 @@ namespace BookingApp.WPF.Views.TouristViews.Components
 
                 if (parentWindow is TouristMainWindow mainWindow)
                 {
-                    mainWindow.SeeCheckpoints(_user);
+                    mainWindow.SeeCheckpoints(_user, tourId);
                 }
             }
         }

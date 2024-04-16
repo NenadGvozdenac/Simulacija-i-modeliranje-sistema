@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Domain.Miscellaneous;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model.MutualModels;
 
 
 namespace BookingApp.Repositories
 {
-    public class TourReviewRepository
+    public class TourReviewRepository : ITourReviewRepository
     {
         private const string FilePath = "../../../Resources/Data/tour_review.csv";
 
@@ -35,7 +36,7 @@ namespace BookingApp.Repositories
             return _tourReviews;
         }
 
-        private int NextId()
+        public int NextId()
         {
             _tourReviews = _serializer.FromCSV(FilePath);
             if (_tourReviews.Count < 1)

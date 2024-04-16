@@ -12,8 +12,8 @@ namespace BookingApp.Application.Commands;
 
 public class NavigateToPageCommand : ICommand
 {
-    private readonly Page currentPage;
-    private readonly Page wantedPage;
+    public Page currentPage;
+    public Page wantedPage { get; set; }
 
     private Action refresh;
 

@@ -29,6 +29,10 @@ public class CheckpointRepository : ICheckpointRepository
         _serializer.ToCSV(FilePath, _checkpoints);
     }
 
+    public List<Checkpoint> GetAll()
+    {
+        return _checkpoints;
+    }
     public void Update(Checkpoint checkpoint)
     {
         var existingCheckpoint = _checkpoints.FirstOrDefault(c => c.Id == checkpoint.Id);

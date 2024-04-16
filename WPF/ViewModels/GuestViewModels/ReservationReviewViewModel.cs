@@ -61,14 +61,17 @@ public class ReservationReviewViewModel
     public void AddPhoto_Click()
     {
         string imagePath = ImageService.GetInstance().GetImageFromUser("ReviewImages");
-        Image slika = ImageService.GetInstance().ReadImage(imagePath);
-        ReviewImage reviewImage = new ReviewImage(reservation.Id, reservation.AccommodationId, imagePath);
+        if (imagePath != null)
+        {
+            Image slika = ImageService.GetInstance().ReadImage(imagePath);
+            ReviewImage reviewImage = new ReviewImage(reservation.Id, reservation.AccommodationId, imagePath);
 
-        slika.Width = 185;
-        slika.Height = 135;
+            slika.Width = 185;
+            slika.Height = 135;
 
-        _reviewImages.Add(reviewImage);
-        ReservationReview.reviewImages_StackPanel.Children.Add(slika);
+            _reviewImages.Add(reviewImage);
+            ReservationReview.reviewImages_StackPanel.Children.Add(slika);
+        }
     }
 }
 

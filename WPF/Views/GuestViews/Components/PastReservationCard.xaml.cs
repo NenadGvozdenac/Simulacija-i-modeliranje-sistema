@@ -30,7 +30,7 @@ public partial class PastReservationCard : UserControl
 
         PastReservationsDTO reservation = (PastReservationsDTO)DataContext;
 
-        if (reservation.DaysSinceLastDateOfStaying > 5)
+        if (reservation.DaysSinceLastDateOfStaying >= 5)
         {
             ReviewButton.IsEnabled = false;
             ReviewButton.Content = "Can't leave a review";

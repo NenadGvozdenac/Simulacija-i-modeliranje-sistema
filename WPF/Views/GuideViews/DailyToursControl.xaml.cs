@@ -45,7 +45,7 @@ namespace BookingApp.View.PathfinderViews
            
             
             _user = user;
-            Update();
+           
         
         }
 

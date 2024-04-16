@@ -122,23 +122,12 @@ public class AccommodationsViewModel : INotifyPropertyChanged
 
     private void SortBySuperAccommodations()
     {
-        List<Accommodation> SuperAccommodations = new List<Accommodation>();
-        List<Accommodation> RegularAccommodations = new List<Accommodation>();
-
-        foreach(Accommodation accommodation in FilteredAccommodations)
-        {
-            if (OwnerService.GetInstance().GetById(accommodation.OwnerId).Item1.IsSuperOwner == true)
-            {
-                SuperAccommodations.Add(accommodation);
-            }
-            else
-            {
-                RegularAccommodations.Add(accommodation);
-            }
-        }
+        var sortedAccommodations = FilteredAccommodations
+            .OrderByDescending(accommodation => OwnerService.GetInstance().GetById(accommodation.OwnerId).Item1.IsSuperOwner)
+            .ToList();
 
         FilteredAccommodations.Clear();
-        foreach (Accommodation accommodation in SuperAccommodations.Concat(RegularAccommodations))
+        foreach (var accommodation in sortedAccommodations)
         {
             FilteredAccommodations.Add(accommodation);
         }

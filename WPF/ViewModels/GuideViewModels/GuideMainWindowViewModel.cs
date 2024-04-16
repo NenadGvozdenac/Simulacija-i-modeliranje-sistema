@@ -3,6 +3,7 @@ using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
 using BookingApp.View.PathfinderViews.Componentss;
+using BookingApp.WPF.Views.GuideViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,6 +103,11 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourDemographics.Show();
         }
 
+        public void Reviews_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ReviewsWindow reviewsWindow = new ReviewsWindow(_user);
+            reviewsWindow.Show();
+        }
 
         // HANDLERS
         public  void DailyToursWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)

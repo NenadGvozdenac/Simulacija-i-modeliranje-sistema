@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.TouristViews
+namespace BookingApp.WPF.Views.TouristViews.Components
 {
     /// <summary>
-    /// Interaction logic for TouristNotifications.xaml
+    /// Interaction logic for CheckpointCard.xaml
     /// </summary>
-    public partial class TouristNotifications : UserControl
+    public partial class CheckpointCard : UserControl
     {
-        public TouristNotifications()
+        public CheckpointCard()
         {
             InitializeComponent();
         }

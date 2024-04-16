@@ -8,11 +8,11 @@ using System.Windows.Controls;
 namespace BookingApp.WPF.Views.OwnerViews;
 public partial class GuestFeedbackPage : Page
 {
+    private User owner;
     public GuestFeedbackPage(User owner)
     {
+        this.owner = owner;
         InitializeComponent();
-        GuestFeedbacksViewModel guestFeedbacksViewModel = new GuestFeedbacksViewModel(this, owner);
-        DataContext = guestFeedbacksViewModel;
     }
 
     private void BackButton_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -21,5 +21,11 @@ public partial class GuestFeedbackPage : Page
         {
             NavigationService.GoBack();
         }
+    }
+
+    private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        GuestFeedbacksViewModel guestFeedbacksViewModel = new GuestFeedbacksViewModel(this, owner);
+        DataContext = guestFeedbacksViewModel;
     }
 }

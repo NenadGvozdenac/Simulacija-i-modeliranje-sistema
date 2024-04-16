@@ -83,6 +83,11 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = new TouristOngoingTours(_user);
         }
 
+        public void Notifications_Click(object sender, MouseButtonEventArgs e)
+        {
+            TouristWindowFrame.Content = new TouristNotifications(_user);
+        }
+
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {
             throw new NotImplementedException();

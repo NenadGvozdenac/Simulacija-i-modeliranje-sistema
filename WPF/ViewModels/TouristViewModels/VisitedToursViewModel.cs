@@ -40,7 +40,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             tours = new ObservableCollection<Tour>();
             _user = user;
             Update();
-
         }
 
         public void Update()

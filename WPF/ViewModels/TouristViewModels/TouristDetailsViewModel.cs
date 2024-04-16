@@ -178,41 +178,42 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void AddTourist_Click(object sender, RoutedEventArgs e)
         {
-            if (areErrorMessagesVisible())
-            {
-                return;
-            }
+            if (areErrorMessagesVisible()) return;
+
             HideMessages();
-            if (!areFieldsEmpty())
-            {
-                name = TouristDetailsView.GuestName.Text;
-                surname = TouristDetailsView.GuestSurname.Text;
 
-                Tourist tourist = new Tourist
-                {
-                    Name = name,
-                    Surname = surname,
-                    Age = GuestAge
-                };
-
-                _tourists.Add(tourist);
-                TouristDetailsView.TouristDataGrid.ItemsSource = null;
-                TouristDetailsView.TouristDataGrid.ItemsSource = _tourists;
-                
-                TouristDetailsView.GuestName.Text = "";
-                TouristDetailsView.GuestSurname.Text = "";
-                TouristDetailsView.GuestAgeText.Text = "";
-            }
-            else
+            if (areFieldsEmpty())
             {
                 TouristDetailsView.enterAllFieldsMessage.Visibility = Visibility.Visible;
                 return;
             }
+
+            string name = TouristDetailsView.GuestName.Text;
+            string surname = TouristDetailsView.GuestSurname.Text;
+            int age = GuestAge;
+
+            _tourists.Add(new Tourist { Name = name, Surname = surname, Age = age });
+
+            RefreshTouristDataGrid();
+            ClearInputFields();
+
             if (GuestNumber < _tourists.Count() + 1)
             {
                 TouristDetailsView.increaseNumberText.Visibility = Visibility.Visible;
-                return;
             }
+        }
+
+        private void RefreshTouristDataGrid()
+        {
+            TouristDetailsView.TouristDataGrid.ItemsSource = null;
+            TouristDetailsView.TouristDataGrid.ItemsSource = _tourists;
+        }
+
+        private void ClearInputFields()
+        {
+            TouristDetailsView.GuestName.Text = "";
+            TouristDetailsView.GuestSurname.Text = "";
+            TouristDetailsView.GuestAgeText.Text = "";
         }
 
         public bool areFieldsEmpty()

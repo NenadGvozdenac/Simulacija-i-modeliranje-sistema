@@ -86,7 +86,7 @@
                             VerticalAlignment="Center" Height="44" Width="73" Margin="285,0,0,0">
                         <Image Source="/Resources/Assets/plus-symbol-button.png" Height="50" Width="40"/>
                     </Button>
-                    <Button Click="Finish_Click" Content="Finish" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="48" Width="106" Margin="363,202,0,0"/>
+                    <Button Click="Finish_Click" Content="Finish" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="48" Width="106" Margin="352,166,0,0"/>
                 </Grid>
             </Grid>
         </Grid>

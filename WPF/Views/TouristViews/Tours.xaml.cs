@@ -46,47 +46,6 @@ namespace BookingApp.WPF.Views.TouristViews
             toursViewModel.Update();
         }
 
-        public void FilterTours()
-        {
-            toursViewModel.FilterTours();
-        }
-
-        public void FilteringLogic(string selectedCountry, string selectedCity, int selectedGuestNumber, int selectedDaysOfStay, string selectedLanguage)
-        {
-            toursViewModel.FilteringLogic(selectedCountry, selectedCity, selectedGuestNumber, selectedDaysOfStay, selectedLanguage);
-        }
-
-        public bool IsTourValid(Tour tour, string selectedCountry, string selectedCity, int selectedGuestNumber, int selectedDaysOfStay, string selectedLanguage)
-        {
-            return toursViewModel.IsTourValid(tour, selectedCountry, selectedCity, selectedGuestNumber, selectedDaysOfStay, selectedLanguage);
-        }
-        public bool IsLanguageValid(Tour tour, string selectedLanguage)
-        {
-            return toursViewModel.IsLanguageValid(tour, selectedLanguage);
-        }
-        public bool IsLocationValid(Tour tour, string selectedCountry, string selectedCity)
-        {
-            return toursViewModel.IsLocationValid(tour, selectedCountry, selectedCity);
-        }
-        public bool IsGuestNumberValid(Tour tour, int selectedGuestNumber)
-        {
-            return toursViewModel.IsGuestNumberValid(tour, selectedGuestNumber);
-        }
-
-        public bool IsDaysOfStayValid(Tour tour, int selectedDaysOfStay)
-        {
-            return toursViewModel.IsDaysOfStayValid(tour, selectedDaysOfStay);
-        }
-
-        public void LoadCountries()
-        {
-            toursViewModel.LoadCountries();
-        }
-        public void LoadLanguages()
-        {
-            toursViewModel.LoadLanguages();
-        }
-
         public void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             toursViewModel.LanguageComboBox_SelectionChanged(sender, e);

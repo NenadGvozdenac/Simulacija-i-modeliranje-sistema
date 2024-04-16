@@ -37,6 +37,5 @@ public class AddGuestRatingCommand : ICommand
 
         GuestRatingService.GetInstance().Update(guestRating);
         addGuestRatingViewModel.GoBackCommand.Execute(null);
-        addGuestRatingViewModel.Page.OnNavigationCompleted();
     }
 }

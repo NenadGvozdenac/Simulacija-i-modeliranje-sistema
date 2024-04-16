@@ -15,8 +15,6 @@ namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class AddAccommodationPage : Page
 {
-    public event EventHandler PageClosed;
-
     public AddAccommodationViewModel _addAccommodationViewModel;
 
     public AddAccommodationPage(User user)
@@ -25,11 +23,6 @@ public partial class AddAccommodationPage : Page
         DataContext = _addAccommodationViewModel;
 
         InitializeComponent();
-    }
-
-    public void ClosePage()
-    {
-        PageClosed?.Invoke(this, EventArgs.Empty);
     }
 
     private void LocationTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,7 +37,6 @@ public partial class AddAccommodationPage : Page
 
     private void BackButton_Click(object sender, MouseButtonEventArgs e)
     {
-        ClosePage();
         _addAccommodationViewModel.CancelCommand.Execute(null);
     }
 

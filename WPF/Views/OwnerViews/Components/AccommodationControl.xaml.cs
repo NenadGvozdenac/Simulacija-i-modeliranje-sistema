@@ -24,7 +24,6 @@ namespace BookingApp.WPF.Views.OwnerViews.Components;
 
 public partial class AccommodationControl : UserControl
 {
-    public event EventHandler AccommodationClosedEH;
     public AccommodationCardViewModel AccommodationCardViewModel { get; set; }
     public AccommodationControl(Accommodation accommodation)
     {
@@ -36,10 +35,5 @@ public partial class AccommodationControl : UserControl
     private void AccommodationClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         AccommodationCardViewModel.NavigateToDetails();
-    }
-
-    public void AccommodationClosed()
-    {
-        AccommodationClosedEH.Invoke(this, new EventArgs());
     }
 }

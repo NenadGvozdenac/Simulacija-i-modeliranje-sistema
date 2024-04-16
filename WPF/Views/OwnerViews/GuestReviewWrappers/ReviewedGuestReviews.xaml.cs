@@ -32,7 +32,6 @@ public partial class ReviewedGuestReviews : UserControl
         _guestRatings = new ObservableCollection<GuestRating>();
 
         InitializeComponent();
-        Update();
     }
 
     public void Update()
@@ -68,5 +67,10 @@ public partial class ReviewedGuestReviews : UserControl
             reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
             Reviews.Children.Add(reviewedGuestReview);
         }
+    }
+
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    {
+        Update();
     }
 }

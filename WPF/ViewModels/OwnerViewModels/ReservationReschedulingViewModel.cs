@@ -30,7 +30,10 @@ public class ReservationReschedulingViewModel
 
     public void Update()
     {
-        _reservationsMoving = AccommodationReservationService.GetInstance().GetMovingsByOwnerId(_user.Id).Where(x => x.Status == ReschedulingStatus.Pending).ToList();
+        _reservationsMoving = AccommodationReservationService.GetInstance().GetMovingsByOwnerId(_user.Id)
+            .Where(x => x.Status == ReschedulingStatus.Pending)
+            .Where(x => x.Reservation.ReservationType == ReservationType.Upcoming)
+            .ToList();
 
         AddToPanel();
     }

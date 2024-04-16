@@ -40,7 +40,6 @@ public class AccommodationCardViewModel
     public void NavigateToDetails()
     {
         DetailedAccommodationPage detailedAccommodationPage = new(Accommodation);
-        detailedAccommodationPage.AccommodationClosed += (s, e) => accommodationControl.AccommodationClosed();
         NavigationService.GetNavigationService(accommodationControl).Navigate(detailedAccommodationPage);
     }
 }

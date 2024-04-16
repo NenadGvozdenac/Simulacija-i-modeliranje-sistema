@@ -73,8 +73,12 @@ public partial class PendingGuestReviews : UserControl
             bool isEnabled = lastDateOfStaying >= fiveDaysAgo && lastDateOfStaying <= DateTime.Now;
             GuestRatingControlPending reviewedGuestReview = new GuestRatingControlPending(guestRating, isEnabled);
             reviewedGuestReview.Margin = new Thickness(0, 15, 0, 0);
-            reviewedGuestReview.RefreshPage += (sender, e) => Update();
             Reviews.Children.Add(reviewedGuestReview);
         }
+    }
+
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    {
+        Update();
     }
 }

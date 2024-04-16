@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  
     <None Remove="Resources\Assets\accommodations.png" />
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />

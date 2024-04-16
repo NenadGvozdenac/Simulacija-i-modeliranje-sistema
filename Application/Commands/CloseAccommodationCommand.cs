@@ -34,7 +34,6 @@ public class CloseAccommodationCommand : ICommand
     public void Execute(object? parameter)
     {
         AccommodationService.GetInstance().Delete(detailedAccommodationViewModel._accommodation);
-        detailedAccommodationViewModel.Page.AccommodationClosedHandler(this, EventArgs.Empty);
         detailedAccommodationViewModel.Page.NavigationService.GoBack();
     }
 }

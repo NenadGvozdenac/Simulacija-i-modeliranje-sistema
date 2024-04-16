@@ -13,22 +13,13 @@ namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class AddGuestRatingPage : Page
 {
-    public event EventHandler NavigationCompleted;
-
     private AddGuestRatingViewModel _addGuestRatingViewModel;
-
     public AddGuestRatingPage(GuestRating uncheckedGuestRating)
     {
         _addGuestRatingViewModel = new AddGuestRatingViewModel(this, uncheckedGuestRating);
-
         DataContext = _addGuestRatingViewModel;
 
         InitializeComponent();
-    }
-
-    public void OnNavigationCompleted()
-    {
-        NavigationCompleted?.Invoke(this, EventArgs.Empty);
     }
 
     private void Back_MouseDown(object sender, MouseButtonEventArgs e)

@@ -78,8 +78,6 @@ public partial class AddAccommodationViewModel : ObservableObject
         DaysBeforeReservationIsFinal = 0;
         Images.Clear();
         ImageURL = "";
-
-        Page.ClosePage();
     }
 
     public void LeftArrowClick()

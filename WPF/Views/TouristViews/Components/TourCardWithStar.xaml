@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.Components.TourCardWithStar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="700">
+    <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
+
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Border BorderThickness="0 0 1 0" BorderBrush="Black"/>
+                <Image Source="{Binding Images[0].Path}" Stretch="Fill" Width="200" Height="150"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                    <Image x:Name="LocationIcon" Source="/Resources/Assets/alternate-map-marker.384x512.png" Height="20" Width="27"/>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17"/>
+                    <TextBlock  TextWrapping="Wrap" Text="," Height="19" Width="4" />
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                    <Image x:Name="LanguageIcon" Source="/Resources/Assets/language-line.512x481.png" Height="23"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+                    <Image x:Name="CapacityIcon" Source="/Resources/Assets/users.png" Height="19" />
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
+                    <Image x:Name="DurationIcon" Source="/Resources/Assets/clock.512x512.png" Height="20"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="51" Height="19" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3" >
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="454" Height="103"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="3" >
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="20" FontWeight="DemiBold" Width="400" VerticalAlignment="Top" Height="53"/>
+                </StackPanel>
+                
+                <Image MouseLeftButtonDown="RateTheTour_Click" Source="/Resources/Assets/star-outline.512x490.png" Height="42" Width="36" Grid.Column="3" Margin="56,4,10,7"/>
+                
+            </Grid>
+
+
+        </Grid>
+    </Border>
+</UserControl>

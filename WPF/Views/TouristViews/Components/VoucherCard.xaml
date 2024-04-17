@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.Components.VoucherCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
+             mc:Ignorable="d">
+    <Border Background="Wheat" CornerRadius="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Prilagodi visinu sadržaju -->
+                <RowDefinition Height="Auto"/>
+                <!-- Prilagodi visinu sadržaju -->
+            </Grid.RowDefinitions>
+            <Label Content="Coupon" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Label Content="Expires: " FontSize="30"/>
+                <TextBlock Text="{Binding ExpirationDate}" FontSize="30" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

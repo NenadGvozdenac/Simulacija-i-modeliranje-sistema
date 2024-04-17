@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuestViews.MyReservations"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" 
+             mc:Ignorable="d" 
+             d:DesignHeight="718" d:DesignWidth="1024">
+    <Grid Background="#FFF8F0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Column="0">
+            <Image Source="../../../Resources/Assets/user.png"  RenderOptions.EdgeMode="Unspecified" Margin="50,49,50,553">
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="0.5"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock x:Name="Username_TextBlock" Style="{StaticResource MainTextBlockGuest}" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,180,0,0" TextWrapping="Wrap" FontSize="30" Text="Username" VerticalAlignment="Top" Height="99" Width="198"/>
+            <Button Content="Upcoming Reservations" Style="{StaticResource RoundedButtonStyleGuest}"  Margin="0,300,0,0" Click="UpcomingReservations_Click" FontSize="17" Height="34" Width="198"/>
+            <Button Content="Past Reservations" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,354,0,0" Click="PastReservations_Click" FontSize="17" Height="34" Width="198"/>
+            <Button Content="Owner Feedback" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,406,0,0" FontSize="17" Height="34" Width="198"/>
+            <Button Content="Reschedule Requests" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,458,0,0" FontSize="17" Height="34" Width="198" Click="RescheduleRequests_Click"/>
+            <Button Content="What is super-guest?" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,510,0,0" FontSize="17" Height="34" Width="198"/>
+            <Button Content="Forums" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,560,0,0" FontSize="17" Height="34" Width="198"/>
+        </Grid>
+
+        <Grid x:Name="Container" Grid.Column="1">
+            <Frame x:Name="MyReservationFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</UserControl>

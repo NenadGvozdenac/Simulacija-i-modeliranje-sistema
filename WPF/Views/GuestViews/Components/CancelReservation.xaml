@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuestViews.Components.CancelReservation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="162" d:DesignWidth="291">
+    <Grid>
+
+        <Border Background="#FFF8F0" CornerRadius="25" BorderThickness="2" BorderBrush="Black">
+            <Grid>
+                <TextBlock Text="Are you sure you want to cancel this reservation?" Style="{StaticResource MainTextBlockGuest}" FontSize="20" TextAlignment="Center" TextWrapping="Wrap" Margin="10,10,10,102"/>
+                <TextBlock x:Name="NameOfTheAccommodation_TextBlock" Text="Name of the accommodation" Style="{StaticResource MainTextBlockGuest}" FontSize="14"  TextWrapping="Wrap" Margin="10,80,89,60"/>
+                <TextBlock x:Name="OriginalCheckInDate_TextBlock" Text="27.03.2024 - 05.04.2024." Style="{StaticResource MainTextBlockGuest}" FontSize="13"  TextWrapping="Wrap" Margin="12,108,130,32"/>
+                <Button Content="Yes" Click="Yes_Click" Style="{StaticResource RoundedButtonStyleGuest}" Margin="218,76,0,0" Height="23" Width="36" HorizontalAlignment="Left"/>
+                <Button Content="No,go back" Click="No_Click" Style="{StaticResource RoundedButtonStyleGuest}" Margin="196,104,0,0" Width="84" Height="25" HorizontalAlignment="Left"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

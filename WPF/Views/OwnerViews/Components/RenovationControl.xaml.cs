@@ -31,6 +31,7 @@ public partial class RenovationControl : UserControl
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-
+        DetailedRenovationView detailedRenovationView = new(renovationCardViewModel.Renovation);
+        NavigationService.GetNavigationService(this).Navigate(detailedRenovationView);
     }
 }

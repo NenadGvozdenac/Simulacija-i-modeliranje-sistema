@@ -66,7 +66,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="ReservationsButton" Grid.Column="0" Content="Reservations" Style="{StaticResource FooterButtonStyle}" Click="ReservationsButton_Click"/>
             <Button x:Name="AccommodationsButton"  Grid.Column="1" Content="Accommodations" Style="{StaticResource FooterButtonStyle}" Click="AccommodationsButton_Click"/>
-            <Button x:Name="RenovationsButton"  Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
+            <Button x:Name="RenovationsButton"  Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" Click="RenovationsButton_Click"/>
         </Grid>
     </Grid>
 </Page>

@@ -41,7 +41,7 @@
             <StackPanel x:Name="LeftNavbar" Grid.Column="0" Background="Lavender" Visibility="Collapsed">
                 <Button Content="Make accommodation" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateAddAccommodationPage}"/>
                 <Button Content="Reschedule reservation" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateReservationReschedulingPage}"/>
-                <Button Content="Schedule renovation" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
+                <Button Content="Schedule renovation" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateScheduleRenovationPage}"/>
                 <Button Content="Guest Reviews" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestReviewPage}"/>
                 <Button Content="Statistics" Style="{StaticResource ButtonStyle}" Margin="5" IsEnabled="False"/>
                 <Button Content="Guest feedback" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestFeedbackPage}"/>
@@ -66,7 +66,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="ReservationsButton" Grid.Column="0" Content="Reservations" Style="{StaticResource FooterButtonStyle}" Click="ReservationsButton_Click"/>
             <Button x:Name="AccommodationsButton"  Grid.Column="1" Content="Accommodations" Style="{StaticResource FooterButtonStyle}" Click="AccommodationsButton_Click"/>
-            <Button x:Name="RenovationsButton"  Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" IsEnabled="False"/>
+            <Button x:Name="RenovationsButton"  Grid.Column="2" Content="Renovations" Style="{StaticResource FooterButtonStyle}" Click="RenovationsButton_Click"/>
         </Grid>
     </Grid>
 </Page>

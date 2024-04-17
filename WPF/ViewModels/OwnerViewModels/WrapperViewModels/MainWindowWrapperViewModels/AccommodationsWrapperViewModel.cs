@@ -46,10 +46,4 @@ public class AccommodationsWrapperViewModel
             accommodationWrapper.Accommodations.Children.Add(component);
         }
     }
-
-    private void InvokeSeeMore(Accommodation e)
-    {
-        DetailedAccommodationPage detailedAccommodationPage = new DetailedAccommodationPage(e);
-        NavigationService.GetNavigationService(accommodationWrapper).Navigate(detailedAccommodationPage);
-    }
 }

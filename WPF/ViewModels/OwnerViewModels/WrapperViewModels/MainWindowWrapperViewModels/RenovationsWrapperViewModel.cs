@@ -1,9 +1,12 @@
-﻿using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
+﻿using BookingApp.Domain.Models;
+using BookingApp.WPF.Views.OwnerViews.Components;
+using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels.WrapperViewModels.MainWindowWrapperViewModels;
 
@@ -41,16 +44,43 @@ public class RenovationsWrapperViewModel
 
     private void AddOngoingRenovations()
     {
-        // TODO: Add
+        foreach(AccommodationRenovation renovation in mainPageViewModel.AccommodationRenovations)
+        {
+            if(renovation.DateSpan.Start <= DateTime.Now && renovation.DateSpan.End >= DateTime.Now)
+            {
+                RenovationControl component = new RenovationControl(accommodationRenovationWrapper, renovation);
+                component.Margin = new Thickness(15);
+
+                accommodationRenovationWrapper.Renovations.Children.Add(component);
+            }
+        }
     }
 
     private void AddUpcomingRenovations()
     {
-        // TODO: Add
+        foreach(AccommodationRenovation renovation in mainPageViewModel.AccommodationRenovations)
+        {
+            if(renovation.DateSpan.Start > DateTime.Now)
+            {
+                RenovationControl component = new RenovationControl(accommodationRenovationWrapper, renovation);
+                component.Margin = new Thickness(15);
+
+                accommodationRenovationWrapper.Renovations.Children.Add(component);
+            }
+        }
     }
 
     private void AddFinishedRenovations()
     {
-        // TODO: Add
+        foreach(AccommodationRenovation renovation in mainPageViewModel.AccommodationRenovations)
+        {
+            if(renovation.DateSpan.End < DateTime.Now)
+            {
+                RenovationControl component = new RenovationControl(accommodationRenovationWrapper, renovation);
+                component.Margin = new Thickness(15);
+
+                accommodationRenovationWrapper.Renovations.Children.Add(component);
+            }
+        }
     }
 }

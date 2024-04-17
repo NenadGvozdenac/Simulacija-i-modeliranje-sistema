@@ -1,0 +1,37 @@
+﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.ScheduleRenovationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430"
+      Loaded="Page_Loaded">
+    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="Lavender">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10*" />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="BackButton" Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
+            <TextBlock Grid.Column="1" Text="Schedule a renovation" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        </Grid>
+
+        <Label Grid.Row="1" Content="Choose an accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+
+        <ScrollViewer Grid.Row="2">
+            <StackPanel x:Name="MainPanel">
+                <!-- Reservation list -->
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="3" x:Name="AccommodationsButton" Content="Renovation scheduling" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
+    </Grid>
+</Page>

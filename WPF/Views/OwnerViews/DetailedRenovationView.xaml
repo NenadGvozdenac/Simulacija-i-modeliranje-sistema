@@ -98,7 +98,7 @@
                     <Label Content="Can you cancel the renovation?" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Content="{Binding RenovationDTO.CancelRenovationStatus}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <Button Grid.Row="12" x:Name="CancelRenovation" Grid.ColumnSpan="2" Width="175" Height="30" FontSize="14" IsEnabled="True">
+                <Button Grid.Row="12" x:Name="CancelRenovation" Grid.ColumnSpan="2" Width="175" Height="30" FontSize="14" Command="{Binding CancelRenovationCommand}">
                     <Button.Effect>
                         <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5" BlurRadius="5"/>
                     </Button.Effect>

@@ -98,6 +98,18 @@ public class AccommodationReviewService
         return sum / reviews.Count is double.NaN ? 0 : sum / reviews.Count;
     }
 
+    public double GetAverageReviewScoreByAccommodationId(int accommodationId)
+    {
+        LoadAll();
+        List<AccommodationReview> reviews = GetByAccommodationId(accommodationId);
+        double sum = 0;
+        foreach (var review in reviews)
+        {
+            sum += (review.Cleanliness + review.OwnersCourtesy) / (double)2;
+        }
+        return sum / reviews.Count is double.NaN ? 0 : sum / reviews.Count;
+    }
+
     public void CheckForCancelledReservations()
     {
         List<AccommodationReview> reviews = GetAll();

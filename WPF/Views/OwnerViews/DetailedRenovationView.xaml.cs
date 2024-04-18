@@ -19,9 +19,10 @@ namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class DetailedRenovationView : Page
 {
+    public DetailedRenovationViewModel viewModel { get; set; }
     public DetailedRenovationView(AccommodationRenovation renovation)
     {
-        DetailedRenovationViewModel viewModel = new(renovation);
+        viewModel = new(this, renovation);
         DataContext = viewModel;
         InitializeComponent();
     }

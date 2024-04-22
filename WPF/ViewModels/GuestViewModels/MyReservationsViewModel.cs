@@ -20,6 +20,7 @@ public class MyReservationsViewModel
     public UpcomingReservations UpcomingReservationsUserControl;
     public PastReservations PastReservationsUserControl;
     public RescheduleRequests RescheduleRequestsUserControl;
+    public OwnerFeedback OwnerFeedbackUserControl;
     public MyReservationsViewModel(MyReservations _myReservationsWindow, User user)
     {
         MyReservationsWindow = _myReservationsWindow;
@@ -33,6 +34,7 @@ public class MyReservationsViewModel
         UpcomingReservationsUserControl = new UpcomingReservations(_user);
         PastReservationsUserControl = new PastReservations(_user);
         RescheduleRequestsUserControl = new RescheduleRequests(_user);
+        OwnerFeedbackUserControl = new OwnerFeedback(_user);
         UpcomingReservationsUserControl.UpcomingReservationsViewModel.RescheduleClicked += MyReservation_RescheduleClicked;
         PastReservationsUserControl.PastReservationsViewModel.ReviewClicked += MyReservation_ReviewClicked;
     }
@@ -70,6 +72,11 @@ public class MyReservationsViewModel
     public void RescheduleRequests_Click()
     {
         MyReservationsWindow.MyReservationFrame.Content = RescheduleRequestsUserControl;
+    }
+
+    public void OwnerFeedback_Click()
+    {
+        MyReservationsWindow.MyReservationFrame.Content = OwnerFeedbackUserControl; 
     }
     public void MyReservation_RescheduleClicked(object sender, int reservationId)
     {

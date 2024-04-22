@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="890" d:DesignWidth="1024">
+             d:DesignHeight="1000" d:DesignWidth="1024">
     <Grid Background="#FFF8F0">
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="161"/>
                     <RowDefinition Height="364"/>
-                    <RowDefinition Height="311"/>
+                    <RowDefinition Height="430"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
@@ -64,6 +64,33 @@
 
                 <Grid Grid.Row="2">
                     <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
+
+                    <TextBlock VerticalAlignment="Top" Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                               Text="As part of our effort to continually improve our accommodations, we value your input. We kindly ask if you could provide us with recommendations for renovation. Please let us know what aspects (if there are any) of the accommodation could be improved and how urgently they need attention. To guide your response, we've outlined five levels of urgency:" 
+                               FontSize="20" Margin="19,20,0,0" Height="99" Width="990" TextDecorations="Underline"/>
+
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                      Text="Level 1 - Minor improvements that would enhance the experience but are not urgent.&#x0a;&#x0a;Level 2 - Small issues that, if addressed, would greatly improve the accommodation.&#x0a;&#x0a;Level 3 - Several noticeable issues that require renovation.&#x0a;&#x0a;Level 4 - Significant problems that urgently need renovation.&#x0a;&#x0a;Level 5 - The accommodation is in poor condition and requires immediate attention." 
+                               FontSize="16" Margin="50,139,0,0" Height="270" Width="377"/>
+
+                    <Viewbox Height="20" Width="20" Margin="25,147,1026,263">
+                       <RadioButton x:Name="Level1_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/> 
+                    </Viewbox>
+                    <Viewbox Height="20" Width="20" Margin="25,205,1026,205">
+                        <RadioButton x:Name="Level2_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Viewbox>
+                    <Viewbox Height="20" Width="20" Margin="25,264,1026,146">
+                        <RadioButton x:Name="Level3_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Viewbox>
+                    <Viewbox Height="20" Width="20" Margin="25,321,1026,89">
+                        <RadioButton x:Name="Level4_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Viewbox>
+                    <Viewbox Height="20" Width="20" Margin="25,379,1026,31">
+                        <RadioButton x:Name="Level5_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    </Viewbox>
+
+                    <TextBox x:Name="renovation_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Background="#FFF5EBDF" BorderBrush="Black" BorderThickness="2" Margin="666,119,81,27"/>
+                    
                 </Grid>
 
                 <Grid Grid.Row="3">

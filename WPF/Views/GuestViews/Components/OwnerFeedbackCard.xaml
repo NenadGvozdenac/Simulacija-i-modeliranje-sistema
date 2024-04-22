@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuestViews.Components.OwnerFeedbackCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="774" Margin="0 10 0 10" DataContextChanged="SetUpCard">
+    <Border
+        Width="760"
+        Height="150"
+        CornerRadius="25"
+        Background="#545E75"
+        BorderThickness="4" BorderBrush="#9DD9D2"
+        Cursor="Hand">
+        <Border.Effect>
+            <DropShadowEffect Opacity="0.5"/>
+        </Border.Effect>
+        <Grid>
+            <Grid x:Name ="FeedbackGrid" Visibility="Collapsed">
+                <TextBlock x:Name="AccommodationName" Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="25" Text="Name of the accommodation" VerticalAlignment="Top" Height="56" Width="364"/>
+                <TextBlock x:Name="ReservationDate" Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="382,12,0,0" FontSize="18" Text="Date of reservation: 19.03.2024 - 25.03.2024" VerticalAlignment="Top" Height="26" Width="360"/>
+
+                <TextBlock x:Name="Cleanliness" Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="10,0,0,0" FontSize="23" Text="cleanliness: 5/5" VerticalAlignment="Center" Height="30" Width="202"/>
+                <TextBlock x:Name="Respectfulness" Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="10,90,0,0" FontSize="23" Text="respectfulness: 5/5" VerticalAlignment="Top" Height="31" Width="253"/>
+
+                <TextBlock Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="326,56,0,0" FontSize="27" Text="Owner's feedback:" VerticalAlignment="Top" Height="67" Width="132"/>
+
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Margin="473,48,17,5" >
+                    <TextBlock x:Name="feedback_TextBlock" Text="{Binding Comment}" Foreground="White" TextWrapping="Wrap" Width="252">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="1.5" Opacity="0.5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </ScrollViewer>
+
+            </Grid>
+            <Grid x:Name="LeaveReviewGrid">
+                <TextBlock Style="{StaticResource SmallTextBlockGuest}" HorizontalAlignment="Left" Margin="28,0,0,0" FontSize="25" Text="You'll gain access to this feedback upon submitting your review for the reservation." VerticalAlignment="Center" Height="98" Width="374"/>
+                <Button Content="Leave a review" Style="{StaticResource ClearButtonStyleGuest}" Height="23" Width="174" HorizontalAlignment="Left" Margin="496,88,0,0" VerticalAlignment="Top" Click="LeaveReview_Click"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

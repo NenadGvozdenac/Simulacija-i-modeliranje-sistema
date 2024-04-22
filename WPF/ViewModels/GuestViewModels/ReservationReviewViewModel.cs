@@ -47,7 +47,23 @@ public class ReservationReviewViewModel
 
     public void FinishReview_Click()
     {
-        AccommodationReview review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, false); // TODO: Dodao sam false kao polje za requires renovation. Promeni kad budes dodavao
+        AccommodationReview review = new AccommodationReview();
+        if (ReservationReview.Level1_CheckBox.IsChecked == true || ReservationReview.Level2_CheckBox.IsChecked == true || ReservationReview.Level3_CheckBox.IsChecked == true || ReservationReview.Level4_CheckBox.IsChecked == true || ReservationReview.Level5_CheckBox.IsChecked == true)
+        {
+            int LevelOfUrgency = ReservationReview.Level1_CheckBox.IsChecked == true ? 1
+                    : ReservationReview.Level2_CheckBox.IsChecked == true ? 2
+                    : ReservationReview.Level3_CheckBox.IsChecked == true ? 3
+                    : ReservationReview.Level4_CheckBox.IsChecked == true ? 4
+                    : ReservationReview.Level5_CheckBox.IsChecked == true ? 5
+                    : 0;
+            review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, LevelOfUrgency, ReservationReview.renovation_TextBox.Text, true); 
+        }
+        else
+        {
+            review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, false);
+
+        }
+
         AccommodationReviewService.GetInstance().Add(review);
 
         foreach (ReviewImage reviewImage in _reviewImages)

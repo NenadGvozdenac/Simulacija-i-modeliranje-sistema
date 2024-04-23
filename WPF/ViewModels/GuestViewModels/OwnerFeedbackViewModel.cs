@@ -12,6 +12,7 @@ namespace BookingApp.WPF.ViewModels.GuestViewModels;
 
 public class OwnerFeedbackViewModel
 {
+    public event EventHandler<int> ReviewClicked;
     public OwnerFeedback OwnerFeedbackWindow { get; set; }
     public ObservableCollection<GuestRating> _ownerFeedbacks { get; set; }
     public OwnerFeedbackViewModel(OwnerFeedback ownerFeedback,User _user)
@@ -22,13 +23,19 @@ public class OwnerFeedbackViewModel
         SetUpOwnerFeedback(_user);
     }
 
-    private void SetUpOwnerFeedback(User user)
+    public void SetUpOwnerFeedback(User user)
     {
+        _ownerFeedbacks.Clear();
         var ratings = GuestRatingService.GetInstance().GetAll();
         foreach(GuestRating rating in ratings)
         {
             if (rating.GuestId == user.Id)
                 _ownerFeedbacks.Add(rating);
         }
+    }
+
+    public void ReviewHandling(object sender, int reservationId)
+    {
+        ReviewClicked?.Invoke(this, reservationId);
     }
 }

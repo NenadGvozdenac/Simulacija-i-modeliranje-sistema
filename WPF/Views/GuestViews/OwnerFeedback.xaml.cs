@@ -26,4 +26,9 @@ public partial class OwnerFeedback : UserControl
         DataContext = OwnerFeedbackViewModel;
     }
 
+    private void ReviewHandling(object sender, int reservationId)
+    {
+        OwnerFeedbackViewModel.ReviewHandling(sender, reservationId);
+    }
+
 }

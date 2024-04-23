@@ -12,7 +12,7 @@
                 ItemsSource="{Binding _ownerFeedbacks}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:OwnerFeedbackCard x:Name="OwnerFeedbackCards"/>
+                        <components:OwnerFeedbackCard x:Name="OwnerFeedbackCards" ReviewHandler="ReviewHandling"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

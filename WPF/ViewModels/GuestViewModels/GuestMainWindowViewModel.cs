@@ -71,7 +71,9 @@ public class GuestMainWindowViewModel
 
     private void ShowReviewPage(object sender, int reservationId)
     {
-        GuestWindowFrame.Content = new ReservationReview(_user, reservationId);
+        var a = new ReservationReview(_user, reservationId);
+        a.ReservationReviewViewModel.RefreshOwnerFeedback += (sender, e) => MyReservationsUserControl.MyReservationsViewModel.OwnerFeedbackUserControl.OwnerFeedbackViewModel.SetUpOwnerFeedback(_user);
+        GuestWindowFrame.Content = a;
     }
 
     public void SeeMore_Click()

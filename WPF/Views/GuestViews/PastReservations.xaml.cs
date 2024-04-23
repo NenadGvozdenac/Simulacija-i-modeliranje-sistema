@@ -19,9 +19,6 @@ using BookingApp.WPF.ViewModels.GuestViewModels;
 
 namespace BookingApp.WPF.Views.GuestViews;
 
-/// <summary>
-/// Interaction logic for PastReservations.xaml
-/// </summary>
 public partial class PastReservations : UserControl
 {
     public PastReservationsViewModel PastReservationsViewModel { get; set; }

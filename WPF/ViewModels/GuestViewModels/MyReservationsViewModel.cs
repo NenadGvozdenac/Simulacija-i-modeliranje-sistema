@@ -37,6 +37,7 @@ public class MyReservationsViewModel
         OwnerFeedbackUserControl = new OwnerFeedback(_user);
         UpcomingReservationsUserControl.UpcomingReservationsViewModel.RescheduleClicked += MyReservation_RescheduleClicked;
         PastReservationsUserControl.PastReservationsViewModel.ReviewClicked += MyReservation_ReviewClicked;
+        OwnerFeedbackUserControl.OwnerFeedbackViewModel.ReviewClicked += MyReservation_ReviewClicked;
     }
 
     public void Update()

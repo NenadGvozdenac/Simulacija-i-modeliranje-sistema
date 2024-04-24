@@ -40,5 +40,4 @@ public partial class ReviewCard : UserControl
             feedback_TextBlock.Text = "No comment from this user!";
         }
     }
-
 }

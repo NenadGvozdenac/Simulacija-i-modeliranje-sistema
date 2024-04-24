@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Domain.Models;
+using BookingApp.WPF.ViewModels.GuestViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,25 +14,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using BookingApp.Domain.Models;
-using BookingApp.Repositories;
-using BookingApp.WPF.ViewModels.GuestViewModels;
 
 namespace BookingApp.WPF.Views.GuestViews;
-
-public partial class PastReservations : UserControl
+public partial class OwnerFeedback : UserControl
 {
-    public PastReservationsViewModel PastReservationsViewModel { get; set; }
-    public PastReservations(User user)
+    public OwnerFeedbackViewModel OwnerFeedbackViewModel { get; set; }
+    public OwnerFeedback(User _user)
     {
         InitializeComponent();
-        PastReservationsViewModel = new PastReservationsViewModel(this, user);
-        DataContext = PastReservationsViewModel;
+        OwnerFeedbackViewModel = new OwnerFeedbackViewModel(this, _user);
+        DataContext = OwnerFeedbackViewModel;
     }
 
     private void ReviewHandling(object sender, int reservationId)
     {
-        PastReservationsViewModel.ReviewHandling(sender, reservationId);
+        OwnerFeedbackViewModel.ReviewHandling(sender, reservationId);
     }
+
 }

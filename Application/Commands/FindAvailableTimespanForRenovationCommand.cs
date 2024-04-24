@@ -20,6 +20,8 @@ internal class FindAvailableTimespanForRenovationCommand : ICommand
         return detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.StartDate != null
             && detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.EndDate != null
             && !string.IsNullOrEmpty(detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.TimePeriod)
+            && int.TryParse(detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.TimePeriod, out _)
+            && int.Parse(detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.TimePeriod) > 0
             && detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.StartDate.AddDays(int.Parse(detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.TimePeriod)) < detailedScheduleRenovationPage.DetailedScheduleRenovationViewModel.EndDate;
     }
 

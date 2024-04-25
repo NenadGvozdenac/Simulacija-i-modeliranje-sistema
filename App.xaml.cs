@@ -57,7 +57,7 @@ public partial class App
         services.AddSingleton<ITouristReservationRepository, TouristReservationRepository>();
         services.AddSingleton<ITourReviewRepository, TourReviewRepository>();
         services.AddSingleton<ITourReviewImageRepository, TourReviewImageRepository>();
-
+        services.AddSingleton<IAccommodationRenovationRepository, AccommodationRenovationRepository>();
         services.AddSingleton<IUserRepository, UserRepository>();
     }
 
@@ -81,8 +81,7 @@ public partial class App
         services.AddSingleton<TourReservationService>();
         services.AddSingleton<TourReviewService>();
         services.AddSingleton<TourReviewImageService>();
-
-
+        services.AddSingleton<AccommodationRenovationService>();
         services.AddSingleton<UserService>();
     }
 }

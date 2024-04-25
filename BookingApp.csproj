@@ -24,6 +24,7 @@
     <None Remove="Resources\Assets\eye.png" />
     <None Remove="Resources\Assets\flag-red.255x256.png" />
     <None Remove="Resources\Assets\hamburger_menu.png" />
+    <None Remove="Resources\Assets\hammer-and-wrench.512x512.png" />
     <None Remove="Resources\Assets\head-lightbulb-outline.232x256.png" />
     <None Remove="Resources\Assets\home.256x245.png" />
     <None Remove="Resources\Assets\hourglass.png" />
@@ -118,6 +119,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\hamburger_menu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\hammer-and-wrench.512x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\head-lightbulb-outline.232x256.png">
@@ -253,9 +257,13 @@
 
 	<ItemGroup>
 	  <Compile Remove="View\**" />
+	  <Compile Remove="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\**" />
 	  <EmbeddedResource Remove="View\**" />
+	  <EmbeddedResource Remove="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\**" />
 	  <None Remove="View\**" />
+	  <None Remove="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\**" />
 	  <Page Remove="View\**" />
+	  <Page Remove="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -271,12 +279,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="Resources\Data\accommodation_renovations.csv">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	  <None Update="Resources\Data\accommodation_reviews.csv">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="WPF\ViewModels\OwnerViewModels\WrapperViewModels\GuestReviewWrapperViewModels\" />
 	</ItemGroup>
 </Project>

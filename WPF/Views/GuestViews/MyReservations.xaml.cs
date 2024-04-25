@@ -45,4 +45,9 @@ public partial class MyReservations : UserControl
     {
         MyReservationsViewModel.RescheduleRequests_Click();
     }
+
+    private void OwnerFeedback_Click(object sender, RoutedEventArgs e)
+    {
+        MyReservationsViewModel.OwnerFeedback_Click();
+    }
 }

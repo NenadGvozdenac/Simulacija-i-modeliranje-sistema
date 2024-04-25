@@ -23,18 +23,23 @@ public partial class MainPageViewModel : ObservableObject
     private List<AccommodationReservation> _accommodationReservations;
 
     [ObservableProperty]
+    private List<AccommodationRenovation> _accommodationRenovations;
+
+    [ObservableProperty]
     private User _user;
 
     private MainPage mainPage;
 
     private AccommodationWrapper _accommodationWrapper;
     private AccommodationReservationWrapper _accommodationReservationWrapper;
+    private AccommodationRenovationWrapper _accommodationRenovationWrapper;
 
     public ICommand NavigateAddAccommodationPage => new NavigateToPageCommand(mainPage, new AddAccommodationPage(User));
     public ICommand NavigateGuestReviewPage => new NavigateToPageCommand(mainPage, new GuestReviewPage(User));
     public ICommand NavigateReservationReschedulingPage => new NavigateToPageCommand(mainPage, new ReservationReschedulingPage(User));
     public ICommand NavigateSettingsPage => new NavigateToPageCommand(mainPage, new SettingsAndProfile(User));
     public ICommand NavigateGuestFeedbackPage => new NavigateToPageCommand(mainPage, new GuestFeedbackPage(User));
+    public ICommand NavigateScheduleRenovationPage => new NavigateToPageCommand(mainPage, new ScheduleRenovationPage(User));
 
     public MainPageViewModel(MainPage mainPage, User user)
     {
@@ -49,6 +54,7 @@ public partial class MainPageViewModel : ObservableObject
 
         _accommodationWrapper = new AccommodationWrapper(this);
         _accommodationReservationWrapper = new AccommodationReservationWrapper(this);
+        _accommodationRenovationWrapper = new AccommodationRenovationWrapper(this);
 
         PrepareFirstPage();
     }
@@ -170,14 +176,23 @@ public partial class MainPageViewModel : ObservableObject
     {
         Accommodations = new(AccommodationService.GetInstance().GetByOwnerId(User.Id));
         AccommodationReservations = new(AccommodationReservationService.GetInstance().GetReservationsByOwnerId(User.Id));
+        AccommodationRenovations = new(AccommodationRenovationService.GetInstance().GetRenovationsByOwnerId(User.Id));
     }
 
     public void Refresh()
     {
         RefreshReservations();
+        RefreshRenovations();
         RefreshAccommodations();
         HideNavbar(mainPage.LeftNavbar);
         HideNavbar(mainPage.RightNavbar);
+    }
+
+    private void RefreshRenovations()
+    {
+        _accommodationRenovationWrapper.WrapperViewModel.Refresh();
+        mainPage.MainPanel.Content = _accommodationRenovationWrapper;
+        SetActiveButton(mainPage.RenovationsButton);
     }
 
     private void RefreshAccommodations()
@@ -242,5 +257,11 @@ public partial class MainPageViewModel : ObservableObject
     {
         mainPage.MainPanel.Content = _accommodationReservationWrapper;
         SetActiveButton(mainPage.ReservationsButton);
+    }
+
+    public void RenovationsClicked()
+    {
+        mainPage.MainPanel.Content = _accommodationRenovationWrapper;
+        SetActiveButton(mainPage.RenovationsButton);
     }
 }

@@ -11,6 +11,7 @@ public class DateSpan
 {
     public DateTime Start { get; set; }
     public DateTime End { get; set; }
+    public int Days { get => (End - Start).Days; }
 
     public DateSpan() { }
 

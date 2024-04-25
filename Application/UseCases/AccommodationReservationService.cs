@@ -188,4 +188,21 @@ public class AccommodationReservationService
     {
         return _accommodationReservationRepository.FindTakenDates(id);
     }
+
+    public bool HasActiveReservation(Accommodation accommodation, DateSpan dateSpan)
+    {
+        List<AccommodationReservation> reservations = GetByAccommodationId(accommodation.Id);
+
+        foreach (AccommodationReservation reservation in reservations)
+        {
+            DateSpan reservationDateSpan = new DateSpan(reservation.FirstDateOfStaying, reservation.LastDateOfStaying);
+
+            if (reservationDateSpan.Overlaps(dateSpan))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

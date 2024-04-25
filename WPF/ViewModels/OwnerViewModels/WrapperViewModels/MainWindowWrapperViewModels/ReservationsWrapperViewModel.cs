@@ -52,20 +52,12 @@ public class ReservationsWrapperViewModel
         {
             if (reservation.FirstDateOfStaying <= DateTime.Now && reservation.LastDateOfStaying >= DateTime.Now)
             {
-                ReservationControl component = new ReservationControl(reservation);
+                ReservationControl component = new ReservationControl(accommodationReservationWrapper, reservation);
                 component.Margin = new Thickness(15);
-
-                component.ReservationSeeMore += (sender, e) => InvokeSeeMore(e);
 
                 accommodationReservationWrapper.Reservations.Children.Add(component);
             }
         }
-    }
-
-    private void InvokeSeeMore(AccommodationReservation e)
-    {
-        DetailedReservationView detailedReservationView = new DetailedReservationView(e);
-        NavigationService.GetNavigationService(accommodationReservationWrapper).Navigate(detailedReservationView);
     }
 
     private void AddUpcomingReservations()
@@ -74,10 +66,8 @@ public class ReservationsWrapperViewModel
         {
             if (reservation.FirstDateOfStaying > DateTime.Now)
             {
-                ReservationControl component = new ReservationControl(reservation);
+                ReservationControl component = new ReservationControl(accommodationReservationWrapper, reservation);
                 component.Margin = new Thickness(15);
-
-                component.ReservationSeeMore += (sender, e) => InvokeSeeMore(e);
 
                 accommodationReservationWrapper.Reservations.Children.Add(component);
             }
@@ -90,10 +80,8 @@ public class ReservationsWrapperViewModel
         {
             if (reservation.LastDateOfStaying < DateTime.Now)
             {
-                ReservationControl component = new ReservationControl(reservation);
+                ReservationControl component = new ReservationControl(accommodationReservationWrapper, reservation);
                 component.Margin = new Thickness(15);
-
-                component.ReservationSeeMore += (sender, e) => InvokeSeeMore(e);
 
                 accommodationReservationWrapper.Reservations.Children.Add(component);
             }

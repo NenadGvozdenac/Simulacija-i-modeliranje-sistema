@@ -49,6 +49,11 @@ public partial class MainPage : Page
         _mainPageViewModel.ReservationsClicked();
     }
 
+    private void RenovationsButton_Click(object sender, RoutedEventArgs e)
+    {
+        _mainPageViewModel.RenovationsClicked();
+    }
+
     private void Logout_Click(object sender, RoutedEventArgs e)
     {
         _mainPageViewModel.Logout();

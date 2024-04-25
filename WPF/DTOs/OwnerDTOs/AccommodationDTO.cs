@@ -68,9 +68,9 @@ public class AccommodationDTO
         MaxGuestNumber = accommodation.MaxGuestNumber.ToString();
         MinReservationDays = accommodation.MinReservationDays.ToString();
         CancellationPeriodDays = accommodation.CancellationPeriodDays.ToString();
-        AverageReviewScore = accommodation.AverageReviewScore.ToString();
+        AverageReviewScore = AccommodationReviewService.GetInstance().GetAverageReviewScoreByAccommodationId(accommodation.Id).ToString("0.00");
         Price = accommodation.Price.ToString();
-        NumberOfReviews = "0";
+        NumberOfReviews = AccommodationReviewService.GetInstance().GetByAccommodationId(accommodation.Id).Count.ToString();
         Images = accommodation.Images;
     }
 }

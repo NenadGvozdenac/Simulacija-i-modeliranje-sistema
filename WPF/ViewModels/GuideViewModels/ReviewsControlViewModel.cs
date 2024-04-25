@@ -53,6 +53,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     review_copy.Feedback = review_temp.Feedback;
                     review_copy.UserName = UserService.GetInstance().GetById(review_temp.UserId).Username;
                     review_copy.Status = review_temp.Status;
+                    review_copy.ReservationId = 14;
+                    review_copy.Checkpoint = "Katedrala";
 
                     tourReviews.Add(review_copy);
                 }

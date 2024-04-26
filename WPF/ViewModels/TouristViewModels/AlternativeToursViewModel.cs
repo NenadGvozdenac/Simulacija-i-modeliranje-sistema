@@ -65,10 +65,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                         tour.Language = LanguageService.GetInstance().GetById(tour.LanguageId);
                         tours.Add(tour);
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
             }
             FilteredTours = new ObservableCollection<Tour>(tours);

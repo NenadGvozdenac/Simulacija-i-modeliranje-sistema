@@ -1,14 +1,16 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace BookingApp.WPF.DTOs.OwnerDTOs;
 
-public class GuestFeedbackDTO
+public partial class GuestFeedbackDTO : ObservableObject
 {
     private User _user;
     public User User
@@ -59,6 +61,40 @@ public class GuestFeedbackDTO
         set { _comment = value; }
     }
 
+    private List<ReviewImage> _images;
+    public List<ReviewImage> Images
+    {
+        get { return _images; }
+        set { _images = value; }
+    }
+
+    private int levelOfUrgency;
+    public int LevelOfUrgency
+    {
+        get { return levelOfUrgency; }
+        set { levelOfUrgency = value; }
+    }
+
+    private string requiresRenovation;
+    public string RequiresRenovation
+    {
+        get { return requiresRenovation == "True" ? "Yes, it does." : "No, it doesn't."; }
+        set { requiresRenovation = value; }
+    }
+
+    private string renovationFeedback;
+    public string RenovationFeedback
+    {
+        get { return renovationFeedback; }
+        set { renovationFeedback = value; }
+    }
+    public string RenovationRequiredThumbnail { get; set; }
+    public Brush RenovationRequiredColor { get; set; }
+
+    [ObservableProperty]
+
+    private string _imageURL;
+
     public GuestFeedbackDTO(AccommodationReview accommodationReview)
     {
         User = accommodationReview.Guest;
@@ -68,5 +104,12 @@ public class GuestFeedbackDTO
         Cleanliness = accommodationReview.Cleanliness.ToString();
         MyCourtesy = accommodationReview.OwnersCourtesy.ToString();
         Comment = accommodationReview.Feedback;
+        Images = accommodationReview.ReviewImages;
+        LevelOfUrgency = accommodationReview.LevelOfUrgency;
+        RequiresRenovation = accommodationReview.RequiresRenovation.ToString();
+        RenovationFeedback = accommodationReview.RenovationFeedback;
+        RenovationRequiredThumbnail = accommodationReview.RequiresRenovation ? "RENOVATION REQUIRED!" : "RENOVATION NOT REQUIRED!";
+        RenovationRequiredColor = accommodationReview.RequiresRenovation ? Brushes.Red : Brushes.Green;
+        ImageURL = Images.Count > 0 ? Images.First().Path : "";
     }
 }

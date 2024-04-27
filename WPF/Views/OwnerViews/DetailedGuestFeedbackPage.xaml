@@ -79,24 +79,40 @@
                     <Label Content="My courtesy" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Content="{Binding GuestFeedbackDTO.MyCourtesy}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <StackPanel Grid.Row="6" Grid.Column="0" Margin="5" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <StackPanel Grid.Row="7" Grid.Column="0" Margin="5" Grid.RowSpan="2">
                     <Label Content="Additional comment" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <Border BorderBrush="Black" BorderThickness="1">
-                            <TextBlock Text="{Binding GuestFeedbackDTO.Comment}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
-                        </Border>
+                        <TextBlock Text="{Binding GuestFeedbackDTO.Comment}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
                     </ScrollViewer>
                 </StackPanel>
-                <StackPanel Grid.Row="8" Grid.Column="0" Margin="5" Grid.RowSpan="5" Grid.ColumnSpan="2">
-                    <Label Content="Images" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2" HorizontalAlignment="Center"/>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="225" Width="400">
-                        <Border BorderBrush="Black" BorderThickness="1">
-                            <StackPanel x:Name="images_StackPanel" >
-
-                            </StackPanel>
-                        </Border>
+                <StackPanel Grid.Row="7" Grid.Column="1" Margin="5" Grid.RowSpan="2">
+                    <Label Content="Renovation feedback" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <TextBlock Text="{Binding GuestFeedbackDTO.RenovationFeedback}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
                     </ScrollViewer>
                 </StackPanel>
+                <StackPanel Grid.Row="6" Grid.Column="0" Margin="5">
+                    <Label Content="Requires renovation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.RequiresRenovation}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Grid.Column="1" Margin="5">
+                    <Label Content="Renovation urgency" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Content="{Binding GuestFeedbackDTO.LevelOfUrgency}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                </StackPanel>
+                <Grid Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\..\..\Resources\Assets\chevron-left.293x512.png" Grid.Column="0" PreviewMouseDown="LeftArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
+                    <Border BorderBrush="Black" Grid.Column="2" BorderThickness="1" Margin="5">
+                        <Image Source="{Binding GuestFeedbackDTO.ImageURL}" Stretch="Fill"/>
+                    </Border>
+                    <Image Source="..\..\..\Resources\Assets\chevron-right.295x512.png" Grid.Column="5" PreviewMouseDown="RightArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

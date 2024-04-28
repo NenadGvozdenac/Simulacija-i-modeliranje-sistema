@@ -10,5 +10,6 @@ public enum ReservationType
 {
     Ongoing,
     Upcoming,
-    Finished
+    Finished,
+    Cancelled
 }

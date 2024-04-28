@@ -40,6 +40,7 @@ public partial class MainPageViewModel : ObservableObject
     public ICommand NavigateSettingsPage => new NavigateToPageCommand(mainPage, new SettingsAndProfile(User));
     public ICommand NavigateGuestFeedbackPage => new NavigateToPageCommand(mainPage, new GuestFeedbackPage(User));
     public ICommand NavigateScheduleRenovationPage => new NavigateToPageCommand(mainPage, new ScheduleRenovationPage(User));
+    public ICommand NavigateStatisticsPage => new NavigateToPageCommand(mainPage, new AccommodationStatisticsPage(User));
 
     public MainPageViewModel(MainPage mainPage, User user)
     {

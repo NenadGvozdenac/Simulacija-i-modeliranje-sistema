@@ -60,6 +60,7 @@ public partial class App
         services.AddSingleton<IAccommodationRenovationRepository, AccommodationRenovationRepository>();
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<ITourRequestRepository, TourRequestRepository>();
+        services.AddSingleton<IMonthRepository, MonthRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -85,5 +86,6 @@ public partial class App
         services.AddSingleton<AccommodationRenovationService>();
         services.AddSingleton<UserService>();
         services.AddSingleton<TourRequestService>();
+        services.AddSingleton<MonthService>();
     }
 }

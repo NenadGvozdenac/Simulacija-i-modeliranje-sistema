@@ -24,15 +24,27 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(NumberOfCancelledReservations))]
     [NotifyPropertyChangedFor(nameof(NumberOfMovedReservations))]
     [NotifyPropertyChangedFor(nameof(NumberOfRenovationRecommendations))]
+    [NotifyPropertyChangedFor(nameof(NumberOfReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfCancelledReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfMovedReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfRenovationRecommendationsPerMonth))]
     private string _selectedYear;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(MostPopularMonthInYear))]
     private string _selectedYearDetails;
 
     [ObservableProperty]
-    private List<string> _months = new() { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+    private List<Month> _months = MonthService.GetInstance().GetAll();
 
     [ObservableProperty]
+    private List<string> _monthsNames = MonthService.GetInstance().GetAllNames();
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(NumberOfReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfCancelledReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfMovedReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfRenovationRecommendationsPerMonth))]
     private string _selectedMonth;
 
     [ObservableProperty]
@@ -43,6 +55,12 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(NumberOfCancelledReservations))]
     [NotifyPropertyChangedFor(nameof(NumberOfMovedReservations))]
     [NotifyPropertyChangedFor(nameof(NumberOfRenovationRecommendations))]
+    [NotifyPropertyChangedFor(nameof(NumberOfReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfCancelledReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfMovedReservationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(NumberOfRenovationRecommendationsPerMonth))]
+    [NotifyPropertyChangedFor(nameof(MostPopularYear))]
+    [NotifyPropertyChangedFor(nameof(MostPopularMonthInYear))]
     private Accommodation _selectedAccommodation;
 
     private readonly AccommodationStatisticsPage page;
@@ -50,6 +68,87 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
     public string NumberOfCancelledReservations => GetNumberOfCancelledReservations();
     public string NumberOfMovedReservations => GetNumberOfMovedReservations();
     public string NumberOfRenovationRecommendations => GetNumberOfRenovationRecommendations();
+    public string NumberOfReservationsPerMonth => GetNumberOfReservationsPerMonth();
+    public string NumberOfCancelledReservationsPerMonth => GetNumberOfCancelledReservationsPerMonth();
+    public string NumberOfMovedReservationsPerMonth => GetNumberOfMovedReservationsPerMonth();
+    public string NumberOfRenovationRecommendationsPerMonth => GetNumberOfRenovationRecommendationsPerMonth();
+    public string MostPopularYear => GetMostPopularYear();
+    public string MostPopularMonthInYear => GetMostPopularMonthInYear();
+
+    private string GetMostPopularMonthInYear()
+    {
+        if (SelectedAccommodation == null || SelectedYearDetails == null)
+            return string.Empty;
+
+        int month = Month.GetMostPopularMonthInYear(SelectedAccommodation.Id, SelectedYearDetails);
+
+        if(month == -1)
+            return "No reservations have been made for this year.";
+
+        return string.Format("Most popular month: {0}", MonthService.GetInstance().GetMonthByNumber(month).Name);
+    }
+
+    private string GetMostPopularYear()
+    {
+        if (SelectedAccommodation == null)
+            return string.Empty;
+
+        List<AccommodationReservation> accommodationReservations = AccommodationReservationService.GetInstance().GetByAccommodationId(SelectedAccommodation.Id);
+
+        if (accommodationReservations.Count == 0)
+            return string.Empty;
+
+        Dictionary<string, int> years = new();
+
+        foreach (var reservation in accommodationReservations)
+        {
+            if (years.ContainsKey(reservation.FirstDateOfStaying.Year.ToString()))
+                years[reservation.FirstDateOfStaying.Year.ToString()]++;
+            else
+                years.Add(reservation.FirstDateOfStaying.Year.ToString(), 1);
+        }
+
+        var year = years.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+
+        return string.Format("Most popular year: {0}", year);
+    }
+
+    private string GetNumberOfReservationsPerMonth()
+    {
+        if(SelectedAccommodation == null || SelectedYear == null || SelectedMonth == null)
+            return string.Empty;
+
+        int numberOfReservations = Month.GetNumberOfReservationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
+
+        return string.Format("{0} reservations", numberOfReservations);
+    }
+    private string GetNumberOfCancelledReservationsPerMonth()
+    {
+        if (SelectedAccommodation == null || SelectedYear == null || SelectedMonth == null)
+            return string.Empty;
+
+        int numberOfCancelledReservations = Month.GetNumberOfCancelledReservationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
+
+        return string.Format("{0} cancelled reservations", numberOfCancelledReservations);
+    }
+    private string GetNumberOfMovedReservationsPerMonth()
+    {
+        if (SelectedAccommodation == null || SelectedYear == null || SelectedMonth == null)
+            return string.Empty;
+
+        int numberOfMovedReservations = Month.GetNumberOfMovedReservationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
+
+        return string.Format("{0} moved reservations", numberOfMovedReservations);
+    }
+    private string GetNumberOfRenovationRecommendationsPerMonth()
+    {
+        if (SelectedAccommodation == null || SelectedYear == null || SelectedMonth == null)
+            return string.Empty;
+
+        int numberOfRenovationRecommendations = Month.GetNumberOfRenovationRecommendationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
+
+        return string.Format("{0} renovation recommendations", numberOfRenovationRecommendations);
+    }
 
     private string GetNumberOfRenovationRecommendations()
     {

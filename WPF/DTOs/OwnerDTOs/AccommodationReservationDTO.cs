@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Resources.Types;
@@ -29,14 +30,14 @@ public partial class AccommodationReservationDTO : ObservableObject
     private string _numberOfReviews;
     public string NumberOfReviews
     {
-        get => string.Format(_numberOfReviews == "1" ? "{0} review" : "{0} reviews", _numberOfReviews);
+        get => string.Format(_numberOfReviews == "1" ? "{0} {1}" : "{0} {2}", _numberOfReviews, TranslationSource.Instance["ReviewsLC"]);
         set => _numberOfReviews = value;
     }
 
     private string _reservationDays;
     public string ReservationDays
     {
-        get => string.Format(_reservationDays == "1" ? "{0} day" : "{0} days", _reservationDays);
+        get => string.Format(_reservationDays == "1" ? "{0} {1}" : "{0} {1}", _reservationDays, TranslationSource.Instance["DaysLC"]);
         set => _reservationDays = value;
     }
 
@@ -57,7 +58,7 @@ public partial class AccommodationReservationDTO : ObservableObject
     private string _guestsNumber;
     public string GuestsNumber
     {
-        get => string.Format(_guestsNumber == "1" ? "{0} guest" : "{0} guests", _guestsNumber);
+        get => string.Format(_guestsNumber == "1" ? "{0} {1}" : "{0} {1}", _guestsNumber, TranslationSource.Instance["GuestsLC"]);
         set => _guestsNumber = value;
     }
 

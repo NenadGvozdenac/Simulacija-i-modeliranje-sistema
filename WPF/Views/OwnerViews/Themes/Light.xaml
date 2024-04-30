@@ -15,5 +15,7 @@
     <SolidColorBrush x:Key="ButtonPressed" Color="Black"/>
     <SolidColorBrush x:Key="ButtonDisabled" Color="Gray"/>
     <SolidColorBrush x:Key="ButtonBorder" Color="Black"/>
-
+    <BitmapImage x:Key="BackArrow" UriSource="../../../../Resources/Assets/back_left_arrow_black.png" />
+    <BitmapImage x:Key="HamburgerMenu" UriSource="../../../../Resources/Assets/menu_black.png"/>
+    <BitmapImage x:Key="ThreeDots" UriSource="../../../../Resources/Assets/three_dots_black.png"/>
 </ResourceDictionary>

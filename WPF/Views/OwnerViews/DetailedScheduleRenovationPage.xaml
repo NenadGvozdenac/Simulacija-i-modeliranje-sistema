@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="Back_Click"/>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="Back_Click"/>
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Renovation scheduling" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">
@@ -120,7 +120,7 @@
                 </Button.Effect>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#128269;" VerticalAlignment="Center"/>
-                    <TextBlock Text=" Find available timespan" VerticalAlignment="Center"/>
+                    <TextBlock Text="Find available timespan" VerticalAlignment="Center"/>
                 </StackPanel>
                 <Button.Style>
                     <Style TargetType="Button">

@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -25,12 +26,16 @@ public class MonthService
 
     public List<Month> GetAll()
     {
-        return _monthRepository.GetAll();
+        List<Month> months = _monthRepository.GetAll();
+        months.ForEach(m => m.Name = TranslationSource.Instance[m.Name]);
+        return months;
     }
 
     public List<string> GetAllNames()
     {
-        return _monthRepository.GetAll().Select(m => m.Name).ToList();
+        List<string> months = _monthRepository.GetAll().Select(m => m.Name).ToList();
+        months.ForEach(m => m = TranslationSource.Instance[m]);
+        return months;
     }
 
     public Month GetById(int id)

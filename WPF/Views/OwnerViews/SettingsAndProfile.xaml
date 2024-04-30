@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Image x:Name="BackButton" Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
+            <Image x:Name="BackButton" Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
             <TextBlock Grid.Column="1" Foreground="{DynamicResource ForegroundBrush}" Text="Settings &amp; Profile" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 

@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Detailed renovation view" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">

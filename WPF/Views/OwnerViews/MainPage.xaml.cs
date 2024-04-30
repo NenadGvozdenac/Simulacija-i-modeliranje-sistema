@@ -23,6 +23,12 @@ public partial class MainPage : Page
 
         _mainPageViewModel = new MainPageViewModel(this, user);
         DataContext = _mainPageViewModel;
+
+        App app = (App)System.Windows.Application.Current;
+
+        OwnerInfo info = OwnerService.GetInstance().GetById(user.Id).Item1;
+
+        app.ChangeLanguage(info.PrefferedLanguage);
     }
 
     private void HamburgerMenuClick(object sender, MouseButtonEventArgs e)

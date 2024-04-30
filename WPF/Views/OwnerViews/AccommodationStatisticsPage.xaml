@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews" 
       xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls" 
       xmlns:local1="clr-namespace:BookingApp.WPF.Views.OwnerViews.Converters"
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization"
       mc:Ignorable="d"
       d:DesignHeight="750" d:DesignWidth="430">
     <Page.Resources>
@@ -22,8 +23,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
-            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Accommodation statistics" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc AccommodationStatistics}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -47,81 +48,81 @@
             <AdornerDecorator>
                 <TextBox x:Name="accommodationName_textbox" Text="{Binding AccommodationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="5" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="30" FontSize="16" VerticalContentAlignment="Center" TextChanged="AccommodationSearchBox_TextChanged" PreviewKeyDown="AccommodationSearchBox_PreviewKeyDown">
                     <controls:WatermarkService.Watermark>
-                        <TextBlock FontSize="16">🔍 Enter accommodation name...</TextBlock>
+                        <TextBlock FontSize="16" Text="{ns:Loc EnterAccommodationName}"/>
                     </controls:WatermarkService.Watermark>
                 </TextBox>
             </AdornerDecorator>
 
             <Grid Grid.Row="1">
-                <ComboBox x:Name="comboBox1" Margin="5" Text="Choose year for displaying statistics..." Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Padding="15 0"/>
+                <ComboBox x:Name="comboBox1" Margin="5" Text="{ns:Loc SelectYearToDisplayStatistics}" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Padding="15 0"/>
                 <TextBlock
                    Visibility="{Binding SelectedItem, ElementName=comboBox1, Converter={StaticResource NullToVisibilityConverter}}"
                    HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15"
                    IsHitTestVisible="False"
-                   Text="Select a year to display statistics..." />
+                   Text="{ns:Loc SelectYearToDisplayStatistics}" />
             </Grid>
 
 
             <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfReservations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of cancelled reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfCancelledReservations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfCancelledReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of moved reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfMovedReservations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfMovedReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of renovation recommendations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfRenovationRecommendations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfRenovationRecommendations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
 
             <Grid Grid.Row="6">
-                <ComboBox x:Name="comboBox2" Margin="5" Text="Choose month for displaying statistics..." Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding MonthsNames}" SelectedItem="{Binding SelectedMonth}" Padding="15 0" />
+                <ComboBox x:Name="comboBox2" Margin="5" Text="{ns:Loc SelectMonthToDisplayStatistics}" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding MonthsNames}" SelectedItem="{Binding SelectedMonth}" Padding="15 0" />
                 <TextBlock
                    Visibility="{Binding SelectedItem, ElementName=comboBox2, Converter={StaticResource NullToVisibilityConverter}}"
                    HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15"
                    IsHitTestVisible="False"
-                   Text="Select a month to display statistics..." />
+                   Text="{ns:Loc SelectMonthToDisplayStatistics}" />
             </Grid>
 
             <StackPanel Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfReservations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of cancelled reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfCancelledReservations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfCancelledReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of moved reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfMovedReservations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfMovedReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="10" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of renovation recommendations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc NumberOfRenovationRecommendations}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfRenovationRecommendationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="11" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Year the accommodation was most popular: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc YearAccommodationWasMostPopular}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding MostPopularYear}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
 
             <Line Grid.Row="12" X1="0" X2="430" Y1="0" Y2="0" Stroke="Black" StrokeThickness="2" Margin="2"/>
 
             <Grid Grid.Row="12">
-                <ComboBox x:Name="comboBox3" Margin="5" Text="Choose year for displaying statistics..." Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYearDetails}" Padding="15 0"/>
+                <ComboBox x:Name="comboBox3" Margin="5" Text="{ns:Loc SelectYearToDisplayStatistics}" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYearDetails}" Padding="15 0"/>
                 <TextBlock
                    Visibility="{Binding SelectedItem, ElementName=comboBox3, Converter={StaticResource NullToVisibilityConverter}}"
                    HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15"
                    IsHitTestVisible="False"
-                   Text="Select a year to display statistics..." />
+                   Text="{ns:Loc SelectYearToDisplayStatistics}" />
             </Grid>
 
             <StackPanel Grid.Row="13" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Most popular month in the year: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc MostPopularMonthInYear}" FontSize="18" FontFamily="{StaticResource Verdana}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding MostPopularMonthInYear}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
         </Grid>

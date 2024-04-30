@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -41,5 +42,10 @@ public partial class SettingsViewModel : ObservableObject
         OwnerInfo ownerInfo = OwnerService.GetInstance().GetById(user.Id).Item1;
         ownerInfo.PrefferedLanguage = SelectedLanguage;
         OwnerService.GetInstance().UpdateOwnerInfo(ownerInfo);
+        // Current application
+
+        App app = (App)System.Windows.Application.Current;
+
+        app.ChangeLanguage(ownerInfo.PrefferedLanguage);
     }
 }

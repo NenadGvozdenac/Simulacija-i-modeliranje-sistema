@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Resources.Types;
 using BookingApp.WPF.ViewModels.OwnerViewModels.WrapperViewModels.MainWindowWrapperViewModels;
@@ -83,9 +84,9 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
         int month = Month.GetMostPopularMonthInYear(SelectedAccommodation.Id, SelectedYearDetails);
 
         if(month == -1)
-            return "No reservations have been made for this year.";
+            return TranslationSource.Instance["NoReservationsInYear"];
 
-        return string.Format("Most popular month: {0}", MonthService.GetInstance().GetMonthByNumber(month).Name);
+        return string.Format("{0}: {1}", TranslationSource.Instance["MostPopularMonth"], MonthService.GetInstance().GetMonthByNumber(month).Name);
     }
 
     private string GetMostPopularYear()
@@ -110,7 +111,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
 
         var year = years.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
 
-        return string.Format("Most popular year: {0}", year);
+        return string.Format("{0}: {1}", TranslationSource.Instance["MostPopularYear"], year);
     }
 
     private string GetNumberOfReservationsPerMonth()
@@ -120,7 +121,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
 
         int numberOfReservations = Month.GetNumberOfReservationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
 
-        return string.Format("{0} reservations", numberOfReservations);
+        return string.Format("{0} {1}", numberOfReservations, TranslationSource.Instance["ReservationsLC"]);
     }
     private string GetNumberOfCancelledReservationsPerMonth()
     {
@@ -129,7 +130,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
 
         int numberOfCancelledReservations = Month.GetNumberOfCancelledReservationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
 
-        return string.Format("{0} cancelled reservations", numberOfCancelledReservations);
+        return string.Format("{0} {1}", numberOfCancelledReservations, TranslationSource.Instance["CancelledReservationsLC"]);
     }
     private string GetNumberOfMovedReservationsPerMonth()
     {
@@ -138,7 +139,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
 
         int numberOfMovedReservations = Month.GetNumberOfMovedReservationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
 
-        return string.Format("{0} moved reservations", numberOfMovedReservations);
+        return string.Format("{0} {1}", numberOfMovedReservations, TranslationSource.Instance["MovedReservationsLC"]);
     }
     private string GetNumberOfRenovationRecommendationsPerMonth()
     {
@@ -147,7 +148,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
 
         int numberOfRenovationRecommendations = Month.GetNumberOfRenovationRecommendationsPerMonth(SelectedAccommodation.Id, SelectedYear, SelectedMonth);
 
-        return string.Format("{0} renovation recommendations", numberOfRenovationRecommendations);
+        return string.Format("{0} {1}", numberOfRenovationRecommendations, TranslationSource.Instance["RenovationRecommendationsLC"]);
     }
 
     private string GetNumberOfRenovationRecommendations()
@@ -160,7 +161,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
             .Where(review => review.RequiresRenovation)
             .Where(review => review.Reservation.FirstDateOfStaying.Year.ToString() == SelectedYear).ToList();
 
-        return string.Format("{0} renovation recommendations", accommodationReviews.Count);
+        return string.Format("{0} {1}", accommodationReviews.Count, TranslationSource.Instance["RenovationRecommendationsLC"]);
     }
 
     private string GetNumberOfMovedReservations()
@@ -172,7 +173,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
             AccommodationReservationService.GetInstance().GetMovingsByOwnerId(User.Id)
             .Where(moving => moving.CurrentReservationTimespan.Start.Year.ToString() == SelectedYear).ToList();
 
-        return string.Format("{0} moved reservations", accommodationReservations.Count);
+        return string.Format("{0} {1}", accommodationReservations.Count, TranslationSource.Instance["MovedReservationsLC"]);
     }
 
     private string GetNumberOfReservations()
@@ -184,7 +185,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
             AccommodationReservationService.GetInstance().GetByAccommodationId(SelectedAccommodation.Id)
             .Where(res => res.FirstDateOfStaying.Year.ToString() == SelectedYear && res.ReservationType != ReservationType.Cancelled).ToList();
 
-        return string.Format("{0} reservations", accommodationReservations.Count);
+        return string.Format("{0} {1}", accommodationReservations.Count, TranslationSource.Instance["ReservationsLC"]);
     }
 
 
@@ -197,7 +198,7 @@ public partial class AccommodationStatisticsViewModel : ObservableObject
             AccommodationReservationService.GetInstance().GetByAccommodationId(SelectedAccommodation.Id)
             .Where(res => res.FirstDateOfStaying.Year.ToString() == SelectedYear && res.ReservationType == ReservationType.Cancelled).ToList();
 
-        return string.Format("{0} cancelled reservations", accommodationReservations.Count);
+        return string.Format("{0} {1}", accommodationReservations.Count, TranslationSource.Instance["CancelledReservationsLC"]);
     }
 
 

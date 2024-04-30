@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews" xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls"
       mc:Ignorable="d"
       d:DesignHeight="750" d:DesignWidth="430">
     <Grid ClipToBounds="True" Background="{StaticResource Creme}">
@@ -41,37 +41,74 @@
 
             <StackPanel Margin="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=AccommodationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0"/>
+                <AdornerDecorator>
+                    <TextBox FontSize="14" Text="{Binding Path=AccommodationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0" Height="30" VerticalContentAlignment="Center">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">🏠 Enter accommodation name...</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Location" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="LocationTextBox" Style="{StaticResource VerdanaTextBoxStyle}" Margin="5 0" PreviewKeyDown="LocationTextBox_PreviewKeyDown" TextChanged="LocationTextBox_TextChanged" HorizontalAlignment="Stretch"/>
+                <AdornerDecorator>
+                    <TextBox Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="LocationTextBox" Style="{StaticResource VerdanaTextBoxStyle}" Margin="5 0" PreviewKeyDown="LocationTextBox_PreviewKeyDown" TextChanged="LocationTextBox_TextChanged" HorizontalAlignment="Stretch" Height="30" VerticalContentAlignment="Center">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">📌 Enter desired location...</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
                 <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding Type}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0"/>
+                <ComboBox IsEditable="False" IsReadOnly="True" Text="Choose type..." ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding Type}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0" Height="30"  VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1">
                 <Label Content="Price per night ($)" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=AccommodationPrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0"/>
+                <AdornerDecorator>
+                    <TextBox Text="{Binding Path=AccommodationPrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0" Height="30"  VerticalContentAlignment="Center">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">$ Enter price...</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Maximum number of guests" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=MaximumNumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0"/>
+                
+                <AdornerDecorator>
+                    <TextBox Text="{Binding Path=MaximumNumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0" Height="30" VerticalContentAlignment="Center">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">🧑 Enter maximum number of guests...</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Minimum number of days for reservation" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=MinimumNumberOfDaysForReservation, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="MinNumberOfDaysForReservation" Margin="5 0"/>
+                <AdornerDecorator>
+                    <TextBox Text="{Binding Path=MinimumNumberOfDaysForReservation, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="MinNumberOfDaysForReservation" Margin="5 0" Height="30" VerticalContentAlignment="Center">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">📅 Enter required minimum days of stay...</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Days before reservation is final" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <TextBox Text="{Binding Path=DaysBeforeReservationIsFinal, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="DaysBeforeReservationIsFinalTextBox" Margin="5 0"/>
+                <AdornerDecorator>
+                    <TextBox Text="{Binding Path=DaysBeforeReservationIsFinal, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="DaysBeforeReservationIsFinalTextBox" Margin="5 0" Height="30" VerticalContentAlignment="Center">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">📅 Enter days before reservation is final...</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
             </StackPanel>
 
             <Grid Margin="5" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">

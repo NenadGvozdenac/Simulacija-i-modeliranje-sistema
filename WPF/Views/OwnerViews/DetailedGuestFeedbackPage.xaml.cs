@@ -20,11 +20,13 @@ namespace BookingApp.WPF.Views.OwnerViews;
 
 public partial class DetailedGuestFeedbackPage : Page
 {
+    private readonly DetailedGuestFeedbackViewModel detailedGuestFeedbackViewModel;
+
     public DetailedGuestFeedbackPage(DetailedGuestFeedbackViewModel detailedGuestFeedbackViewModel)
     {
         DataContext = detailedGuestFeedbackViewModel;
         InitializeComponent();
-        detailedGuestFeedbackViewModel.LoadImages(images_StackPanel);
+        this.detailedGuestFeedbackViewModel = detailedGuestFeedbackViewModel;
     }
 
     private void BackArrowClick(object sender, MouseButtonEventArgs e)
@@ -33,5 +35,13 @@ public partial class DetailedGuestFeedbackPage : Page
         {
             NavigationService.GoBack();
         }
+    }
+    private void LeftArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        detailedGuestFeedbackViewModel.LeftArrowClick();
+    }
+    private void RightArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        detailedGuestFeedbackViewModel.RightArrowClick();
     }
 }

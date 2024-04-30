@@ -34,7 +34,7 @@
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
 
-            <Label Content="NO RENOVATION REQUIRED!" Foreground="Orange" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Content="{Binding GuestFeedbackDTO.RenovationRequiredThumbnail}" Foreground="{Binding GuestFeedbackDTO.RenovationRequiredColor}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

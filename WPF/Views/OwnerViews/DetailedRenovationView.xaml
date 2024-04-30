@@ -11,18 +11,18 @@
     <Page.Resources>
         <local1:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
     </Page.Resources>
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
-            <TextBlock Grid.Column="1" Text="Detailed renovation view" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Detailed renovation view" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">
             <Grid.ColumnDefinitions>
@@ -49,54 +49,54 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationDTO.Name, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationDTO.Name, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
-                    <Label Content="Cost per night" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.Price}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Cost per night" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.Price}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch">
-                    <Label Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.Location}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.Location}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Type of accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.Type}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Type of accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.Type}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Minimum reservation days" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.MinReservationDays}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Minimum reservation days" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.MinReservationDays}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Maximum number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.MaxGuestNumber}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Maximum number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.MaxGuestNumber}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Current accommodation rating" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.AverageReviewScore}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Current accommodation rating" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.AverageReviewScore}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Number of reviews" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationDTO.NumberOfReviews}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Number of reviews" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationDTO.NumberOfReviews}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Renovation status" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding RenovationDTO.Status}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Renovation status" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding RenovationDTO.Status}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Last renovation cancellation day" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding RenovationDTO.LastCancellationDay, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Last renovation cancellation day" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding RenovationDTO.LastCancellationDay, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Renovation end" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding RenovationDTO.RenovationEnd, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Renovation end" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding RenovationDTO.RenovationEnd, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Renovation start" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding RenovationDTO.RenovationStart, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Renovation start" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding RenovationDTO.RenovationStart, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Can you cancel the renovation?" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding RenovationDTO.CancelRenovationStatus}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Can you cancel the renovation?" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding RenovationDTO.CancelRenovationStatus}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <Button Grid.Row="12" x:Name="CancelRenovation" Grid.ColumnSpan="2" Width="175" Height="30" FontSize="14" Command="{Binding CancelRenovationCommand}">
                     <Button.Effect>

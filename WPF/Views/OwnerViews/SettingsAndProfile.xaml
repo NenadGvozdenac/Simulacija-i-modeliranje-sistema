@@ -5,19 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <Image x:Name="BackButton" Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
-            <TextBlock Grid.Column="1" Text="Settings &amp; Profile" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Grid.Column="1" Foreground="{DynamicResource ForegroundBrush}" Text="Settings &amp; Profile" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="50">
@@ -27,21 +27,19 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <Image Source="..\..\..\Resources\Assets\user_profile_icon.png" Margin="70 10" Style="{StaticResource ImageHover}"/>
-                <Label Content="{Binding OwnerUserDTO.User.Username}" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
-                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="{StaticResource Verdana}" Content="{Binding OwnerUserDTO.Title}" Foreground="DarkOrange"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding OwnerUserDTO.User.Username}" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" HorizontalAlignment="Center" FontSize="20" FontFamily="{StaticResource Verdana}" Content="{Binding OwnerUserDTO.Title}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1">
-                <ComboBox x:Name="LanguageComboBox" Margin="10" Height="40" SelectionChanged="LanguageComboBox_SelectionChanged"  HorizontalAlignment="Stretch" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20">
-                    <ComboBoxItem Content="English" IsSelected="True"/>
-                    <ComboBoxItem Content="Serbian"/>
+                <ComboBox x:Name="LanguageComboBox" Margin="10" Height="40" SelectionChanged="LanguageComboBox_SelectionChanged"  HorizontalAlignment="Stretch" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
                 </ComboBox>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <RadioButton x:Name="DarkModeRadioButton" Grid.Column="0" Content="Dark Mode" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20" VerticalContentAlignment="Center" Checked="DarkModeRadioButton_Checked"/>
-                    <RadioButton x:Name="LightModeRadioButton"  Grid.Column="1" Content="Light Mode" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20"  VerticalContentAlignment="Center" IsChecked="True" Checked="LightModeRadioButton_Checked"/>
+                    <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="DarkModeRadioButton" Grid.Column="0" Content="Dark Mode" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20" VerticalContentAlignment="Center" Checked="DarkModeRadioButton_Checked"/>
+                    <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="LightModeRadioButton"  Grid.Column="1" Content="Light Mode" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20"  VerticalContentAlignment="Center" Checked="LightModeRadioButton_Checked"/>
                 </Grid>
             </StackPanel>
         </Grid>

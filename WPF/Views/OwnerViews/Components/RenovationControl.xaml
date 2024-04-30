@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="115" d:DesignWidth="365">
-    <Border Width="365" Height="115" CornerRadius="5" Background="{StaticResource Creme}" BorderThickness="2" BorderBrush="Black" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
@@ -17,19 +17,19 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="Black">
+            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="{DynamicResource CardBorder}">
                 <Image Source="../../../../Resources/Assets/hammer-and-wrench.512x512.png" Margin="15"/>
             </Border>
-            <Label Content="{Binding Renovation.Accommodation.Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding Renovation.Accommodation.Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label Content="{Binding Renovation.Status}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding Renovation.Status}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label Content="{Binding Renovation.DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding Renovation.DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

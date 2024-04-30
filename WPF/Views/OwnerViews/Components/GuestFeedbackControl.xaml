@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="115" d:DesignWidth="365">
-    <Border Width="365" Height="115" CornerRadius="5" Background="{StaticResource Creme}" BorderThickness="2" BorderBrush="Black" Cursor="Hand" MouseDown="Card_MouseDown">
+    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseDown="Card_MouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
@@ -20,16 +20,16 @@
             <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="Black">
                 <Image Source="../../../../Resources/Assets/user_profile_icon.png" Margin="15"/>
             </Border>
-            <Label Content="{Binding GuestFeedbackDTO.Accommodation.Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.Accommodation.Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label Content="{Binding GuestFeedbackDTO.User.Username}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.User.Username}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label Content="{Binding GuestFeedbackDTO.DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

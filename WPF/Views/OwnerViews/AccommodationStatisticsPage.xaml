@@ -11,19 +11,19 @@
     <Page.Resources>
         <local1:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
     </Page.Resources>
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
-            <TextBlock Grid.Column="1" Text="Accommodation statistics" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Accommodation statistics" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -63,20 +63,20 @@
 
 
             <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of cancelled reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfCancelledReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of cancelled reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfCancelledReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of moved reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfMovedReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of moved reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfMovedReservations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of renovation recommendations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfRenovationRecommendations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of renovation recommendations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfRenovationRecommendations}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
 
             <Grid Grid.Row="6">
@@ -89,24 +89,24 @@
             </Grid>
 
             <StackPanel Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of cancelled reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfCancelledReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of cancelled reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfCancelledReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of moved reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfMovedReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of moved reservations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfMovedReservationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="10" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Number of renovation recommendations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding NumberOfRenovationRecommendationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Number of renovation recommendations: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding NumberOfRenovationRecommendationsPerMonth}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
             <StackPanel Grid.Row="11" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Year the accommodation was most popular: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding MostPopularYear}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Year the accommodation was most popular: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding MostPopularYear}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
 
             <Line Grid.Row="12" X1="0" X2="430" Y1="0" Y2="0" Stroke="Black" StrokeThickness="2" Margin="2"/>
@@ -121,8 +121,8 @@
             </Grid>
 
             <StackPanel Grid.Row="13" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Margin="5">
-                <TextBlock Text="Most popular month in the year: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
-                <TextBlock Text="{Binding MostPopularMonthInYear}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="Most popular month in the year: " FontSize="18" FontFamily="{StaticResource Verdana}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding MostPopularMonthInYear}" FontSize="14" FontFamily="{StaticResource Verdana}"/>
             </StackPanel>
         </Grid>
     </Grid>

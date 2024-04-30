@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="115" d:DesignWidth="365">
-    <Border Width="365" Height="115" CornerRadius="5" Background="{StaticResource Creme}" BorderThickness="2" BorderBrush="Black" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
@@ -22,24 +22,24 @@
             <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="Black">
                 <Image Source="../../../../Resources/Assets/user_profile_icon.png" Margin="15"/>
             </Border>
-            <Label Content="{Binding AccommodationReservationMoving.Accommodation.Name}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMoving.Accommodation.Name}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label Content="{Binding AccommodationReservationMoving.Guest.Username}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMoving.Guest.Username}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
 
-            <Label Content="FROM: " Grid.Row="2" Grid.Column="1"/>
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="FROM: " Grid.Row="2" Grid.Column="1"/>
 
-            <Label Content="{Binding AccommodationReservationMoving.CurrentReservationTimespan}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMoving.CurrentReservationTimespan}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
 
-            <Label Content="TO:" Grid.Row="3" Grid.Column="1"/>
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="TO:" Grid.Row="3" Grid.Column="1"/>
 
             <Label Content="{Binding AccommodationReservationMoving.WantedReservationTimespan}" Foreground="Orange" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>

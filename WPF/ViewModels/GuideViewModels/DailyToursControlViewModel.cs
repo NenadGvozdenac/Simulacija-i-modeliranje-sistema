@@ -2,6 +2,8 @@
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
+using BookingApp.View.PathfinderViews.Componentss;
+using BookingApp.WPF.Views.TouristViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,15 +12,20 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
     public class DailyToursControlViewModel
     {
         public ObservableCollection<Tour> dailyTours { get; set; }
+
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedControl { get; set; }
 
         public EventHandler<BeginButtonClickedEventArgs> EndButtonClickedControl { get; set; }
+
+        
+
 
         private readonly User _user;
 
@@ -28,6 +35,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             dailyToursControl = _dailyToursControl;
             dailyTours = new ObservableCollection<Tour>();
+            
            _user = user;
             Update();
 
@@ -57,6 +65,15 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                             tour.Checkpoints = toura.Checkpoints;
                             tour.Dates = toura.Dates;
                             tour.Description = toura.Description;
+                            if(TourStartTimeService.GetInstance().GetAll().Find(a => a.Status == "ongoing") != null)
+                            {
+                                tour.Ongoing = false;
+                            }
+                            else
+                            {
+                                tour.Ongoing = true;
+                            }
+
                             dailyTours.Add(tour);
                         }
                     }
@@ -78,9 +95,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        
+
         public void DailyTourCard_BeginButtonClicked(object sender, BeginButtonClickedEventArgs e)
         {
-            OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+            TourStartTime startTime = new TourStartTime();
+            startTime = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(e.StartTime, e.TourId);
+            startTime.Status = "ongoing";
+            TourStartTimeService.GetInstance().Update(startTime);
+            foreach (var tour in dailyTours) { tour.Ongoing = false;}
+            //OnBeginButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
         }
 
         public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
@@ -91,7 +115,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void DailyTourCard_EndButtonClicked(object sender, BeginButtonClickedEventArgs e)
         {
-            OnEndButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+            TourStartTime startTime = new TourStartTime();
+            startTime = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(e.StartTime, e.TourId);
+            startTime.Status = "passed";
+            TourStartTimeService.GetInstance().Update(startTime);
+            Tour tour = dailyTours.FirstOrDefault(a => a.Id == e.TourId && a.CurrentDate == e.StartTime);
+            dailyTours.Remove(tour);
+            foreach (var _tour in dailyTours) { _tour.Ongoing = true;}
+            // OnEndButtonClicked(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
         }
 
         public void OnEndButtonClicked(BeginButtonClickedEventArgs e)

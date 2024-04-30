@@ -1,7 +1,9 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace BookingApp.View.PathfinderViews.Componentss
     /// <summary>
     /// Interaction logic for DailyTourCard.xaml
     /// </summary>
-    public partial class DailyTourCard : UserControl
+    public partial class DailyTourCard : UserControl, INotifyPropertyChanged
     {
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClicked { get; set; }
 
@@ -29,11 +31,32 @@ namespace BookingApp.View.PathfinderViews.Componentss
 
         public TourStartTimeRepository _timeRepository {  get; set; }
 
-        
+        private bool ongoing;
+
+        public bool Ongoing
+        {
+            get { return ongoing; }
+            set
+            {
+                if (ongoing != value)
+                {
+                    ongoing = value;
+                    OnPropertyChanged(nameof(Ongoing));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public DailyTourCard()
         {
             InitializeComponent();
+            Update();
             _timeRepository = new TourStartTimeRepository();
         }
 
@@ -42,15 +65,24 @@ namespace BookingApp.View.PathfinderViews.Componentss
         {
             OnBeginButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
             CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text));
-            checkpointsView.EndButtonClicked += (s,e)=>CheckpointsWindow_SomeEventHandler(s, e);
+            checkpointsView.checkpointsViewModel.EndButtonClicked += (s,e)=>CheckpointsWindow_SomeEventHandler(s, e);
             checkpointsView.ShowDialog();
         }    
 
-       
+       public void Update()
+        {
+            if (TourStartTimeService.GetInstance().GetAll().Find(a => a.Status == "ongoing") != null)
+            {
+                BeginButton.IsEnabled = false;
+                BeginButton.Opacity = 0.5;
+            }
+        }
 
         public void OnBeginButtonClicked(BeginButtonClickedEventArgs e)
         {
             BeginButtonClicked?.Invoke(this, e);
+            BeginButton.IsEnabled = false;
+            BeginButton.Opacity = 0.5;
         }
 
 

@@ -11,7 +11,7 @@
             <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick"></MenuItem>
 
 
-            <MenuItem Header="Daily tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick"></MenuItem>
+            <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick"></MenuItem>
 
 
             <MenuItem Header="Cancel tour (F3)" Foreground="#f2f6fa"></MenuItem>
@@ -51,11 +51,16 @@
                     <RowDefinition Height="15*" />
                     <!-- Second row within the second column -->
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1" x:Name="TourContainer">
-                    <local:Tours x:Name="tours"></local:Tours>
-
+                <Grid Grid.Row="1" x:Name="TourContainer"></Grid>
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Margin="15,0,0,0"></Border>
+                        <TextBox Text="Search" Width="400" Background="LightYellow"></TextBox>
+                        <Border Margin="0,0,80,0"></Border>
+                        <Button HorizontalAlignment="Right" Click="OngoingTour_Click">Track ongoing tour</Button>
+                    </StackPanel>
                 </Grid>
-        </Grid>
+            </Grid>
 
 
 

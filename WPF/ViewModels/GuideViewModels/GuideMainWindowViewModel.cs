@@ -22,11 +22,15 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
 
-        public GuideMainWindow window { get; set; }
-        public GuideMainWindowViewModel(GuideMainWindow mainWindow,User user)
+        public GuideMainWindow mainWindow { get; set; }
+
+        public DailyToursControl tours {  get; set; }
+        public GuideMainWindowViewModel(GuideMainWindow _mainWindow,User user)
         {
-            window = mainWindow;
+            mainWindow = _mainWindow;
             _user = user;
+            tours = new DailyToursControl(_user);
+            mainWindow.TourContainer.Children.Add(tours);
             Update();
         }
 
@@ -59,7 +63,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 if (time.Status == "ongoing")
                 {
                     CheckpointsView checkpointsWindow = new CheckpointsView(time.TourId, time.Time);
-                    checkpointsWindow.EndButtonClickedMain += (s, e) => DailyToursWindow_EndEventHandlerMain(s, e);
+                    checkpointsWindow.checkpointsViewModel.EndButtonClickedMain += (s, e) => DailyToursWindow_EndEventHandlerMain(s, e);
 
                     checkpointsWindow.ShowDialog();
                     return 1;
@@ -68,6 +72,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return 0;
         }
 
+        public void OngoingTour_Click(object sender, RoutedEventArgs e)
+        {
+            if(ongoingTourCheck() == 0)
+            {
+                MessageBox.Show("There are no ongoing tours currently");
+            }
+        }
 
         public void Update()
         {
@@ -109,6 +120,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             reviewsWindow.Show();
         }
 
+        
+
         // HANDLERS
         public  void DailyToursWindow_SomeEventHandler(object sender, BeginButtonClickedEventArgs e)
         {
@@ -134,12 +147,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void DailyToursWindow_EndEventHandlerMain(object sender, BeginButtonClickedEventArgs e)
         {
-            OnEndButtonClickedMain(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+            ChangeTourStatusPassed(e.TourId, e.StartTime);
+            tours.dailyToursControlViewModel.DailyTourCard_EndButtonClicked(sender, e);
         }
 
         public void OnEndButtonClickedMain(BeginButtonClickedEventArgs e)
         {
-            ChangeTourStatusPassed(e.TourId, e.StartTime);
+           
         }
 
 

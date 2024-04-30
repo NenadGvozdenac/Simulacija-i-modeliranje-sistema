@@ -107,6 +107,9 @@ namespace BookingApp.View.PathfinderViews
             mainWindowViewModel.OnEndButtonClickedMain(e);
         }
 
-        
+        private void OngoingTour_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.OngoingTour_Click(sender, e);
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         xmlns:Components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components" x:Class="BookingApp.View.PathfinderViews.AddTourWindow"
         mc:Ignorable="d"
-        Title="AddTourWindow" Height="450" Width="800">
+        Title="AddTourWindow" Height="485" Width="800">
     <Grid Margin="0,0,0,-16">
         <ComboBox HorizontalAlignment="Left" Margin="76,29,0,0" VerticalAlignment="Top" Width="96" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged">
 

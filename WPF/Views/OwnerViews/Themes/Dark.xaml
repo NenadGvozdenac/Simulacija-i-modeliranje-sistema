@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#2c3e50"/>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="#ecf0f1"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="#3498db"/>
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#bdc3c7"/>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#34495e"/>
+    <SolidColorBrush x:Key="Card" Color="#34495e"/>
+    <SolidColorBrush x:Key="CardBorder" Color="NavajoWhite"/>
+    <SolidColorBrush x:Key="Navbar" Color="#192e28"/>
+    <SolidColorBrush x:Key="ButtonBackground" Color="AntiqueWhite"/>
+    <SolidColorBrush x:Key="ButtonForeground" Color="Black"/>
+    <SolidColorBrush x:Key="ButtonBorder" Color="Black"/>
+    <SolidColorBrush x:Key="ButtonHover" Color="Gray"/>
+    <SolidColorBrush x:Key="ButtonPressed" Color="Black"/>
+    <SolidColorBrush x:Key="ButtonDisabled" Color="Gray"/>
+
+</ResourceDictionary>

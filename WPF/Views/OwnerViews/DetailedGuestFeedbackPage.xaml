@@ -5,18 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="Transparent">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
-            <TextBlock Grid.Column="1" Text="Guest feedback" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Guest feedback" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">
             <Grid.ColumnDefinitions>
@@ -49,55 +49,55 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding GuestFeedbackDTO.User.Username}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="0" Text="{Binding GuestFeedbackDTO.User.Username}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" VerticalAlignment="Center"/>
                 </Grid>
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
-                    <Label Content="Accommodation name" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.Accommodation.Name}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Accommodation name" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.Accommodation.Name}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
-                    <Label Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.Accommodation.Location}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.Accommodation.Location}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
-                    <Label Content="Type of reservation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.Accommodation.Type}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Type of reservation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.Accommodation.Type}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
-                    <Label Content="Reservation timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.DateSpan}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Reservation timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.DateSpan}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Grid.Column="0" Margin="5" Grid.ColumnSpan="2">
-                    <Label Content="Number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.Reservation.GuestsNumber}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.Reservation.GuestsNumber}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="0" Margin="5">
-                    <Label Content="Cleanliness" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.Cleanliness}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Cleanliness" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.Cleanliness}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="1" Margin="5">
-                    <Label Content="My courtesy" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.MyCourtesy}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="My courtesy" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.MyCourtesy}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Grid.Column="0" Margin="5" Grid.RowSpan="2">
-                    <Label Content="Additional comment" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Additional comment" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <TextBlock Text="{Binding GuestFeedbackDTO.Comment}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding GuestFeedbackDTO.Comment}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
                     </ScrollViewer>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Grid.Column="1" Margin="5" Grid.RowSpan="2">
-                    <Label Content="Renovation feedback" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Renovation feedback" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <TextBlock Text="{Binding GuestFeedbackDTO.RenovationFeedback}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundBrush}" Text="{Binding GuestFeedbackDTO.RenovationFeedback}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2" TextWrapping="Wrap" Height="65"/>
                     </ScrollViewer>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="0" Margin="5">
-                    <Label Content="Requires renovation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.RequiresRenovation}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Requires renovation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.RequiresRenovation}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="1" Margin="5">
-                    <Label Content="Renovation urgency" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding GuestFeedbackDTO.LevelOfUrgency}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Renovation urgency" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding GuestFeedbackDTO.LevelOfUrgency}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <Grid Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10 0">
                     <Grid.ColumnDefinitions>

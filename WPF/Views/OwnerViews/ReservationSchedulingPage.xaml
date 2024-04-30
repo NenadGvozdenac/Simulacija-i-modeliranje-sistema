@@ -6,20 +6,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430"
       Loaded="Page_Loaded">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <Image x:Name="BackButton" Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
-            <TextBlock Grid.Column="1" Text="Reservation rescheduling" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Reservation rescheduling" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1">
@@ -28,6 +28,6 @@
             </StackPanel>
         </ScrollViewer>
         
-        <Button Grid.Row="2" x:Name="AccommodationsButton" Content="Rescheduling" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
+        <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Row="2" x:Name="AccommodationsButton" Content="Rescheduling" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
     </Grid>
 </Page>

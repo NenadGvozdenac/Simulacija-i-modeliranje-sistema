@@ -6,20 +6,20 @@
       Loaded="Page_Loaded"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
-            <TextBlock Grid.Column="1" Text="Guest feedback" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Guest feedback" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1"  x:Name="Navbar">
@@ -36,7 +36,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="PendingButton" Content="My reviews" Style="{StaticResource FooterButtonStyle}" FontSize="22"/>
+            <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" x:Name="PendingButton" Content="My reviews" Style="{StaticResource FooterButtonStyle}" FontSize="22"/>
         </Grid>
     </Grid>
 </Page>

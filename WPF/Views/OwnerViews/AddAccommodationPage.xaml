@@ -6,19 +6,19 @@
       xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews" xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls"
       mc:Ignorable="d"
       d:DesignHeight="750" d:DesignWidth="430">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
-            <TextBlock Grid.Column="1" Text="Adding an accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Adding an accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="10">
@@ -40,7 +40,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Accommodation name" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <AdornerDecorator>
                     <TextBox FontSize="14" Text="{Binding Path=AccommodationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0" Height="30" VerticalContentAlignment="Center">
                         <controls:WatermarkService.Watermark>
@@ -51,7 +51,7 @@
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Location" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Location" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <AdornerDecorator>
                     <TextBox Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="LocationTextBox" Style="{StaticResource VerdanaTextBoxStyle}" Margin="5 0" PreviewKeyDown="LocationTextBox_PreviewKeyDown" TextChanged="LocationTextBox_TextChanged" HorizontalAlignment="Stretch" Height="30" VerticalContentAlignment="Center">
                         <controls:WatermarkService.Watermark>
@@ -62,12 +62,12 @@
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
-                <Label Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Accommodation type" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <ComboBox IsEditable="False" IsReadOnly="True" Text="Choose type..." ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding Type}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0" Height="30"  VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1">
-                <Label Content="Price per night ($)" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Price per night ($)" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <AdornerDecorator>
                     <TextBox Text="{Binding Path=AccommodationPrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0" Height="30"  VerticalContentAlignment="Center">
                         <controls:WatermarkService.Watermark>
@@ -78,7 +78,7 @@
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Maximum number of guests" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Maximum number of guests" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 
                 <AdornerDecorator>
                     <TextBox Text="{Binding Path=MaximumNumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" Margin="5 0" Height="30" VerticalContentAlignment="Center">
@@ -90,7 +90,7 @@
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Minimum number of days for reservation" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Minimum number of days for reservation" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <AdornerDecorator>
                     <TextBox Text="{Binding Path=MinimumNumberOfDaysForReservation, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="MinNumberOfDaysForReservation" Margin="5 0" Height="30" VerticalContentAlignment="Center">
                         <controls:WatermarkService.Watermark>
@@ -101,7 +101,7 @@
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Days before reservation is final" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Content="Days before reservation is final" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <AdornerDecorator>
                     <TextBox Text="{Binding Path=DaysBeforeReservationIsFinal, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource VerdanaTextBoxStyle}"  HorizontalAlignment="Stretch" x:Name="DaysBeforeReservationIsFinalTextBox" Margin="5 0" Height="30" VerticalContentAlignment="Center">
                         <controls:WatermarkService.Watermark>
@@ -119,10 +119,10 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Add image" Style="{StaticResource MainTextBlockGuest}" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <Button Grid.Column="1" Content="+" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding AddImageCommand}"/>
-                <Button Grid.Column="2" Content="-" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding RemoveImageCommand}"/>
-                <TextBlock Grid.Column="3" Text="Remove image" Style="{StaticResource MainTextBlockGuest}"  TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="0" Text="Add image" Style="{StaticResource MainTextBlockGuest}" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Column="1" Content="+" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding AddImageCommand}"/>
+                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Column="2" Content="-" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding RemoveImageCommand}"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="3" Text="Remove image" Style="{StaticResource MainTextBlockGuest}"  TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
             <Grid Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="40 0">
                 <Grid.ColumnDefinitions>
@@ -133,13 +133,13 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="..\..\..\Resources\Assets\chevron-left.293x512.png" Grid.Column="0" PreviewMouseDown="LeftArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
-                <Border BorderBrush="Black" Grid.Column="2" BorderThickness="1" Margin="5">
+                <Border BorderBrush="{DynamicResource CardBorder}" Grid.Column="2" BorderThickness="1" Margin="5">
                     <Image Source="{Binding ImageURL}" Stretch="Fill"/>
                 </Border>
                 <Image Source="..\..\..\Resources\Assets\chevron-right.295x512.png" Grid.Column="5" PreviewMouseDown="RightArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
             </Grid>
-            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddCommand}"/>
-            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding CancelCommand}"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="Confirm" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="9" Grid.Column="0" Content="Cancel" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </Page>

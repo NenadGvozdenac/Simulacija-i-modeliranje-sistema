@@ -33,7 +33,7 @@ public class OwnerService
 
     public void AddOwner(User user)
     {
-        OwnerInfo ownerInfo = new(user.Id, false, 0, 0, 0);
+        OwnerInfo ownerInfo = new(user.Id, false, 0, 0, 0, "Light", "English");
         _ownerInfoRepository.Add(ownerInfo);
         _userRepository.Add(user);
     }
@@ -58,7 +58,7 @@ public class OwnerService
 
     public void Add(User user)
     {
-        OwnerInfo ownerInfo = new(user.Id, false, 0, 0, 0);
+        OwnerInfo ownerInfo = new(user.Id, false, 0, 0, 0, "Light", "English");
         _ownerInfoRepository.Add(ownerInfo);
     }
 
@@ -110,7 +110,9 @@ public class OwnerService
             AverageReviewScore = ownerInfo.Item1.AverageReviewScore,
             NumberOfReviews = ownerInfo.Item1.NumberOfReviews,
             NumberOfAccommodations = ownerInfo.Item1.NumberOfAccommodations,
-            IsSuperOwner = ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore > 4.5
+            IsSuperOwner = ownerInfo.Item1.NumberOfReviews >= 50 && ownerInfo.Item1.AverageReviewScore > 4.5,
+            PrefferedLanguage = ownerInfo.Item1.PrefferedLanguage,
+            PrefferedTheme = ownerInfo.Item1.PrefferedTheme
         });
     }
 

@@ -12,6 +12,9 @@ using System.Windows.Input;
 using BookingApp.Application.Commands;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Media.Animation;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -76,7 +79,12 @@ public partial class MainPageViewModel : ObservableObject
 
     private void PrepareFirstPage()
     {
-        mainPage.MainPanel.Content = _accommodationWrapper;
+        mainPage.MainPanel.Children.Add(_accommodationWrapper);
+        _accommodationWrapper.Visibility = Visibility.Visible;
+        mainPage.MainPanel.Children.Add(_accommodationReservationWrapper);
+        _accommodationReservationWrapper.Visibility = Visibility.Collapsed;
+        mainPage.MainPanel.Children.Add(_accommodationRenovationWrapper);
+        _accommodationRenovationWrapper.Visibility = Visibility.Collapsed;
         SetActiveButton(mainPage.AccommodationsButton);
         Update();
     }
@@ -188,26 +196,24 @@ public partial class MainPageViewModel : ObservableObject
         RefreshAccommodations();
         HideNavbar(mainPage.LeftNavbar);
         HideNavbar(mainPage.RightNavbar);
+        AnimateIn(_accommodationWrapper);
     }
 
     private void RefreshRenovations()
     {
         _accommodationRenovationWrapper.WrapperViewModel.Refresh();
-        mainPage.MainPanel.Content = _accommodationRenovationWrapper;
         SetActiveButton(mainPage.RenovationsButton);
     }
 
     private void RefreshAccommodations()
     {
         _accommodationWrapper.WrapperViewModel.Refresh();
-        mainPage.MainPanel.Content = _accommodationWrapper;
         SetActiveButton(mainPage.AccommodationsButton);
     }
 
     private void RefreshReservations()
     {
         _accommodationReservationWrapper.WrapperViewModel.Refresh();
-        mainPage.MainPanel.Content = _accommodationWrapper;
         SetActiveButton(mainPage.ReservationsButton);
     }
 
@@ -266,19 +272,101 @@ public partial class MainPageViewModel : ObservableObject
 
     public void AccommodationsClicked()
     {
-        mainPage.MainPanel.Content = _accommodationWrapper;
+        AnimateIn(_accommodationWrapper);
         SetActiveButton(mainPage.AccommodationsButton);
     }
 
     public void ReservationsClicked()
     {
-        mainPage.MainPanel.Content = _accommodationReservationWrapper;
+        AnimateIn(_accommodationReservationWrapper);
         SetActiveButton(mainPage.ReservationsButton);
     }
 
     public void RenovationsClicked()
     {
-        mainPage.MainPanel.Content = _accommodationRenovationWrapper;
+        AnimateIn(_accommodationRenovationWrapper);
         SetActiveButton(mainPage.RenovationsButton);
+    }
+
+    // This method is not used, it's basic animation for opacity changing
+    //private void AnimateIn(UIElement wrapper)
+    //{
+    //    foreach (UIElement element in mainPage.MainPanel.Children)
+    //    {
+    //        if (element == wrapper)
+    //        {
+    //            element.Visibility = Visibility.Visible;
+    //            DoubleAnimation animation = new DoubleAnimation
+    //            {
+    //                From = 0,
+    //                To = 1,
+    //                Duration = new Duration(TimeSpan.FromSeconds(0.3))
+    //            };
+    //            element.BeginAnimation(UIElement.OpacityProperty, animation);
+    //        }
+    //        else
+    //        {
+    //            element.Visibility = Visibility.Collapsed;
+    //        }
+    //    }
+    //}
+
+    private async Task AnimateIn(UserControl wrapper)
+    {
+        // Find the currently activated wrapper which is visible
+        var visibleWrapper = mainPage.MainPanel.Children.Cast<UserControl>().FirstOrDefault(x => x.Visibility == Visibility.Visible);
+
+        if(visibleWrapper == wrapper)
+        {
+            return;
+        }
+
+        if (visibleWrapper != null)
+        {
+            await AnimateOut(visibleWrapper);
+            visibleWrapper.Visibility = Visibility.Collapsed;
+        }
+
+        wrapper.Visibility = Visibility.Visible;
+
+        var renderSize = wrapper.RenderSize;
+
+        var sb = new Storyboard();
+        var SlideAnimation = new ThicknessAnimation
+        {
+            From = new Thickness(mainPage.MainPanel.ActualWidth, 0, -mainPage.MainPanel.ActualWidth, 0),
+            To = new Thickness(0, 0, 0, 0),
+            Duration = new Duration(TimeSpan.FromSeconds(0.3)),
+            DecelerationRatio = 0.9
+        };
+        Storyboard.SetTargetProperty(SlideAnimation, new PropertyPath("Margin"));
+        sb.Children.Add(SlideAnimation);
+
+        sb.Begin(mainPage.MainPanel);
+
+        await Task.Delay(300);
+    }
+
+    private async Task AnimateOut(UserControl? visibleWrapper)
+    {
+        if (visibleWrapper == null)
+        {
+            return;
+        }
+
+        var sb = new Storyboard();
+        var SlideAnimation = new ThicknessAnimation
+        {
+            From = new Thickness(0, 0, 0, 0),
+            To = new Thickness(-mainPage.MainPanel.ActualWidth, 0, mainPage.MainPanel.ActualWidth, 0),
+            Duration = new Duration(TimeSpan.FromSeconds(0.2)),
+            DecelerationRatio = 0.9
+        };
+        Storyboard.SetTargetProperty(SlideAnimation, new PropertyPath("Margin"));
+        sb.Children.Add(SlideAnimation);
+
+        sb.Begin(mainPage.MainPanel);
+
+        await Task.Delay(200);
     }
 }

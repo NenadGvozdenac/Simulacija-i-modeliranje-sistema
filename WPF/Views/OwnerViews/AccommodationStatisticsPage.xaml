@@ -7,6 +7,7 @@
       xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls" 
       xmlns:local1="clr-namespace:BookingApp.WPF.Views.OwnerViews.Converters"
       xmlns:ns="clr-namespace:BookingApp.Application.Localization"
+      Loaded="Page_Loaded"
       mc:Ignorable="d"
       d:DesignHeight="750" d:DesignWidth="430">
     <Page.Resources>

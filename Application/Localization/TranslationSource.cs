@@ -25,6 +25,7 @@ class TranslationSource : INotifyPropertyChanged
     {
         get
         {
+            if (key == null) return "";
             string retVal = resourceManager.GetString(key, currentCulture);
             return retVal;
         }

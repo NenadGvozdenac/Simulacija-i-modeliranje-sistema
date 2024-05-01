@@ -30,6 +30,37 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!-- Shadow effect for label -->
+        <Style x:Key="ShadowLabel" TargetType="Label">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--Shadow effect for card-->
+        <Style x:Key="ShadowCard" TargetType="Border">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5" BlurRadius="5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--Animation for when the navbar is collapsing-->
+        <Style x:Key="NavBarCollapse" TargetType="Button">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width" From="200" To="50" Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
 
         <!-- Style for text box -->
         <Style x:Key="VerdanaComboBoxStyle" TargetType="ComboBox">

@@ -450,8 +450,14 @@
   <data name="RenovationFeedback" xml:space="preserve">
     <value>Komentar renovacije</value>
   </data>
+  <data name="RenovationNotRequired" xml:space="preserve">
+    <value>RENOVACIJA NIJE POTREBNA!</value>
+  </data>
   <data name="RenovationRecommendationsLC" xml:space="preserve">
     <value>preporuka za renovaciju</value>
+  </data>
+  <data name="RenovationRequired" xml:space="preserve">
+    <value>RENOVACIJA POTREBNA!</value>
   </data>
   <data name="Renovations" xml:space="preserve">
     <value>Renovacije</value>

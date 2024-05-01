@@ -11,6 +11,7 @@ using BookingApp.View;
 using System.Windows.Input;
 using BookingApp.Application.Commands;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Media.Animation;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -215,7 +216,8 @@ public partial class MainPageViewModel : ObservableObject
         if (navbar.Visibility == Visibility.Collapsed)
         {
             ShowNavbar(navbar, navbar == mainPage.LeftNavbar ? 1 : 0.6);
-        } else if (navbar.Visibility == Visibility.Visible)
+        }
+        else if (navbar.Visibility == Visibility.Visible)
         {
             HideNavbar(navbar);
         }
@@ -224,14 +226,28 @@ public partial class MainPageViewModel : ObservableObject
     private void ShowNavbar(StackPanel navbar, double v)
     {
         navbar.Visibility = Visibility.Visible;
-        mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2].Width = new GridLength(v, GridUnitType.Star);
+        ColumnDefinition column = mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2];
+        GridLengthAnimation animation = new GridLengthAnimation
+        {
+            From = new GridLength(0),
+            To = new GridLength(v, GridUnitType.Star),
+            Duration = new Duration(TimeSpan.FromSeconds(0.3)) // Adjust duration as needed
+        };
+        column.BeginAnimation(ColumnDefinition.WidthProperty, animation);
         HideNavbar(navbar == mainPage.LeftNavbar ? mainPage.RightNavbar : mainPage.LeftNavbar);
     }
 
     private void HideNavbar(StackPanel navbar)
     {
-        navbar.Visibility = Visibility.Collapsed;
-        mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2].Width = new GridLength(0, GridUnitType.Star);
+        ColumnDefinition column = mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2];
+        GridLengthAnimation animation = new GridLengthAnimation
+        {
+            From = column.Width,
+            To = new GridLength(0),
+            Duration = new Duration(TimeSpan.FromSeconds(0.3)) // Adjust duration as needed
+        };
+        animation.Completed += (sender, e) => navbar.Visibility = Visibility.Collapsed;
+        column.BeginAnimation(ColumnDefinition.WidthProperty, animation);
     }
 
     public void ClickHere()

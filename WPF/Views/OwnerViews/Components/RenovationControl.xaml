@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="115" d:DesignWidth="365">
-    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown" Style="{StaticResource ShadowCard}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>

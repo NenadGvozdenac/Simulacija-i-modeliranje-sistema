@@ -480,8 +480,14 @@
   <data name="RenovationFeedback" xml:space="preserve">
     <value>Renovation feedback</value>
   </data>
+  <data name="RenovationNotRequired" xml:space="preserve">
+    <value>RENOVATION NOT REQUIRED!</value>
+  </data>
   <data name="RenovationRecommendationsLC" xml:space="preserve">
     <value>renovation recommendations</value>
+  </data>
+  <data name="RenovationRequired" xml:space="preserve">
+    <value>RENOVATION REQUIRED</value>
   </data>
   <data name="Renovations" xml:space="preserve">
     <value>Renovations</value>

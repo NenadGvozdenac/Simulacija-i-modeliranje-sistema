@@ -1060,11 +1060,29 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RENOVACIJA NIJE POTREBNA!.
+        /// </summary>
+        internal static string RenovationNotRequired {
+            get {
+                return ResourceManager.GetString("RenovationNotRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to preporuka za renovaciju.
         /// </summary>
         internal static string RenovationRecommendationsLC {
             get {
                 return ResourceManager.GetString("RenovationRecommendationsLC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RENOVACIJA POTREBNA!.
+        /// </summary>
+        internal static string RenovationRequired {
+            get {
+                return ResourceManager.GetString("RenovationRequired", resourceCulture);
             }
         }
         

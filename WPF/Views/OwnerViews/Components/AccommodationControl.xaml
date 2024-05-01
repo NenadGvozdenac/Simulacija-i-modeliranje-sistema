@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
       xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
              d:DesignHeight="115" d:DesignWidth="365">
-    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="AccommodationClick_MouseLeftButtonDown">
+    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="AccommodationClick_MouseLeftButtonDown" Style="{StaticResource ShadowCard}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>

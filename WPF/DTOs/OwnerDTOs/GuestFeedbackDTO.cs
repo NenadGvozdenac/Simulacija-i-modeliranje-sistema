@@ -114,7 +114,7 @@ public partial class GuestFeedbackDTO : ObservableObject
         LevelOfUrgency = accommodationReview.LevelOfUrgency;
         RequiresRenovation = accommodationReview.RequiresRenovation.ToString();
         RenovationFeedback = accommodationReview.RenovationFeedback;
-        RenovationRequiredThumbnail = accommodationReview.RequiresRenovation ? "RENOVATION REQUIRED!" : "RENOVATION NOT REQUIRED!";
+        RenovationRequiredThumbnail = accommodationReview.RequiresRenovation ? TranslationSource.Instance["RenovationRequired"] : TranslationSource.Instance["RenovationNotRequired"];
         RenovationRequiredColor = accommodationReview.RequiresRenovation ? Brushes.Red : Brushes.Green;
         ImageURL = Images.Count > 0 ? Images.First().Path : "";
     }

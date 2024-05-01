@@ -15,7 +15,8 @@ public partial class SettingsViewModel : ObservableObject
 {
     private readonly User user;
 
-    public OwnerUserDTO OwnerUserDTO { get; set; }
+    [ObservableProperty]
+    private OwnerUserDTO _ownerUserDTO;
 
     [ObservableProperty]
     private List<string> _languages = new() { "English", "Serbian" };
@@ -47,5 +48,6 @@ public partial class SettingsViewModel : ObservableObject
         App app = (App)System.Windows.Application.Current;
 
         app.ChangeLanguage(ownerInfo.PrefferedLanguage);
+        OwnerUserDTO = new(user);
     }
 }

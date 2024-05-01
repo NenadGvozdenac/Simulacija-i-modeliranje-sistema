@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Miscellaneous;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -24,6 +25,11 @@ public partial class GuestFeedbackDTO : ObservableObject
     {
         get { return _accommodation; }
         set { _accommodation = value; }
+    }
+
+    public string AccommodationType
+    {
+        get { return TranslationSource.Instance[Accommodation.Type.ToString()]; }
     }
 
     private DateSpan _dateSpan;
@@ -78,7 +84,7 @@ public partial class GuestFeedbackDTO : ObservableObject
     private string requiresRenovation;
     public string RequiresRenovation
     {
-        get { return requiresRenovation == "True" ? "Yes, it does." : "No, it doesn't."; }
+        get { return requiresRenovation == "True" ? TranslationSource.Instance["DoesRequireRenovation"] : TranslationSource.Instance["DoesNotRequireRenovation"]; }
         set { requiresRenovation = value; }
     }
 

@@ -25,7 +25,7 @@
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding Renovation.Status}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding RenovationStatus}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

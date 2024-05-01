@@ -243,6 +243,12 @@
   <data name="DetailedReservationView" xml:space="preserve">
     <value>Detaljan prikaz rezervacije</value>
   </data>
+  <data name="DoesNotRequireRenovation" xml:space="preserve">
+    <value>Ne, ne zahteva.</value>
+  </data>
+  <data name="DoesRequireRenovation" xml:space="preserve">
+    <value>Da, zahteva.</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Krajnji datum</value>
   </data>
@@ -273,6 +279,12 @@
   <data name="FindAvailableTimespan" xml:space="preserve">
     <value>Pronađi termin</value>
   </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Završena</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>OD:</value>
+  </data>
   <data name="GuestFeedback" xml:space="preserve">
     <value>Recenzija od gosta</value>
   </data>
@@ -287,6 +299,9 @@
   </data>
   <data name="GuestReviews" xml:space="preserve">
     <value>Ocene gostiju</value>
+  </data>
+  <data name="GuestsFeedback" xml:space="preserve">
+    <value>Recenzije od gostiju</value>
   </data>
   <data name="GuestsLC" xml:space="preserve">
     <value>gost(iju)</value>
@@ -320,6 +335,9 @@
   </data>
   <data name="LastCancellationDay" xml:space="preserve">
     <value>Poslednji dan za otkazivanje</value>
+  </data>
+  <data name="LastRenovation" xml:space="preserve">
+    <value>Poslednja renovacija:</value>
   </data>
   <data name="LastRenovationCancellationDay" xml:space="preserve">
     <value>Poslednji dan za otkaz renovacije</value>
@@ -366,6 +384,9 @@
   <data name="MyReviews" xml:space="preserve">
     <value>Moje recenzije</value>
   </data>
+  <data name="NeverBeenRenovated" xml:space="preserve">
+    <value>Nikada renovirana!</value>
+  </data>
   <data name="NoReservationsInYear" xml:space="preserve">
     <value>Nema rezervacija za datu godinu.</value>
   </data>
@@ -396,8 +417,14 @@
   <data name="October" xml:space="preserve">
     <value>Oktobar</value>
   </data>
+  <data name="Ongoing" xml:space="preserve">
+    <value>U procesu</value>
+  </data>
   <data name="Owner" xml:space="preserve">
     <value>Vlasnik</value>
+  </data>
+  <data name="OwnerUC" xml:space="preserve">
+    <value>VLASNIK</value>
   </data>
   <data name="PDFReport" xml:space="preserve">
     <value>PDF izveštaj</value>
@@ -513,8 +540,23 @@
   <data name="Statistics" xml:space="preserve">
     <value>Statistike</value>
   </data>
+  <data name="StatusOfWantedReservationTimespan" xml:space="preserve">
+    <value>Status pomeranja rezervacije</value>
+  </data>
+  <data name="SuperOwnerUC" xml:space="preserve">
+    <value>SUPER VLASNIK</value>
+  </data>
   <data name="TapHere" xml:space="preserve">
     <value>Pritisnite ovde</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>DO:</value>
+  </data>
+  <data name="TypeOfReservation" xml:space="preserve">
+    <value>Tip rezervacije</value>
+  </data>
+  <data name="Upcoming" xml:space="preserve">
+    <value>Nadolazeća</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisničko ime</value>
@@ -524,6 +566,12 @@
   </data>
   <data name="YearAccommodationWasMostPopular" xml:space="preserve">
     <value>Godina kada je smeštaj bio najpopularniji:</value>
+  </data>
+  <data name="YouCanCancel" xml:space="preserve">
+    <value>Da, možete otkazati.</value>
+  </data>
+  <data name="YouCantCancel" xml:space="preserve">
+    <value>Ne, ne možete otkazati.</value>
   </data>
   <data name="YouHaveUnreviewedGuests" xml:space="preserve">
     <value>Imate neocenjene goste. Pritisnite ispod da bi ste ih ocenili.</value>

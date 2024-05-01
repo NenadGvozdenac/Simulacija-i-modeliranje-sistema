@@ -243,6 +243,12 @@
   <data name="DetailedReservationView" xml:space="preserve">
     <value>Detailed reservation view</value>
   </data>
+  <data name="DoesNotRequireRenovation" xml:space="preserve">
+    <value>No, it doesn't.</value>
+  </data>
+  <data name="DoesRequireRenovation" xml:space="preserve">
+    <value>Yes, it does.</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>End date</value>
   </data>
@@ -273,6 +279,12 @@
   <data name="FindAvailableTimespan" xml:space="preserve">
     <value>Find available timespan</value>
   </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>FROM:</value>
+  </data>
   <data name="GuestFeedback" xml:space="preserve">
     <value>Guest feedback</value>
   </data>
@@ -287,6 +299,9 @@
   </data>
   <data name="GuestReviews" xml:space="preserve">
     <value>Guest reviews</value>
+  </data>
+  <data name="GuestsFeedback" xml:space="preserve">
+    <value>Guests Feedback</value>
   </data>
   <data name="GuestsLC" xml:space="preserve">
     <value>guest(s)</value>
@@ -320,6 +335,9 @@
   </data>
   <data name="LastCancellationDay" xml:space="preserve">
     <value>Last cancellation day</value>
+  </data>
+  <data name="LastRenovation" xml:space="preserve">
+    <value>Last renovation:</value>
   </data>
   <data name="LastRenovationCancellationDay" xml:space="preserve">
     <value>Last renovation cancellation day</value>
@@ -366,6 +384,9 @@
   <data name="MyReviews" xml:space="preserve">
     <value>My reviews</value>
   </data>
+  <data name="NeverBeenRenovated" xml:space="preserve">
+    <value>Never been renovated!</value>
+  </data>
   <data name="NoReservationsInYear" xml:space="preserve">
     <value>No reservations have been made in the year</value>
   </data>
@@ -396,8 +417,14 @@
   <data name="October" xml:space="preserve">
     <value>October</value>
   </data>
+  <data name="Ongoing" xml:space="preserve">
+    <value>Ongoing</value>
+  </data>
   <data name="Owner" xml:space="preserve">
     <value>Owner</value>
+  </data>
+  <data name="OwnerUC" xml:space="preserve">
+    <value>OWNER</value>
   </data>
   <data name="PDFReport" xml:space="preserve">
     <value>PDF Report</value>
@@ -516,8 +543,23 @@
   <data name="Statistics" xml:space="preserve">
     <value>Statistics</value>
   </data>
+  <data name="StatusOfWantedReservationTimespan" xml:space="preserve">
+    <value>Status of rescheduling</value>
+  </data>
+  <data name="SuperOwnerUC" xml:space="preserve">
+    <value>SUPER OWNER</value>
+  </data>
   <data name="TapHere" xml:space="preserve">
     <value>Tap here</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>TO:</value>
+  </data>
+  <data name="TypeOfReservation" xml:space="preserve">
+    <value>Type of reservation</value>
+  </data>
+  <data name="Upcoming" xml:space="preserve">
+    <value>Upcoming</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
@@ -527,6 +569,12 @@
   </data>
   <data name="YearAccommodationWasMostPopular" xml:space="preserve">
     <value>Year accommodation was most popular</value>
+  </data>
+  <data name="YouCanCancel" xml:space="preserve">
+    <value>Yes, you can cancel.</value>
+  </data>
+  <data name="YouCantCancel" xml:space="preserve">
+    <value>No, you can not cancel.</value>
   </data>
   <data name="YouHaveUnreviewedGuests" xml:space="preserve">
     <value>You have unreviewed guests. Tap below to review them.</value>

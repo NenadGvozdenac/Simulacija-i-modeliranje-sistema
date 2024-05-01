@@ -45,7 +45,7 @@
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc ScheduleRenovation}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateScheduleRenovationPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc GuestReviews}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestReviewPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Statistics}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateStatisticsPage}"/>
-                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc GuestFeedback}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestFeedbackPage}"/>
+                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc GuestsFeedback}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestFeedbackPage}"/>
             </StackPanel>
             <ScrollViewer Grid.Column="1" x:Name="MainPanel">
 

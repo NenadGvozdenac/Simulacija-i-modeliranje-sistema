@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430">
     <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
@@ -17,7 +18,7 @@
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <Image x:Name="BackButton" Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
-            <TextBlock Grid.Column="1" Foreground="{DynamicResource ForegroundBrush}" Text="Settings &amp; Profile" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <TextBlock Grid.Column="1" Foreground="{DynamicResource ForegroundBrush}" Text="{ns:Loc SettingsAndProfile}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="50">
@@ -38,8 +39,8 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="DarkModeRadioButton" Grid.Column="0" Content="Dark Mode" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20" VerticalContentAlignment="Center" Checked="DarkModeRadioButton_Checked"/>
-                    <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="LightModeRadioButton"  Grid.Column="1" Content="Light Mode" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20"  VerticalContentAlignment="Center" Checked="LightModeRadioButton_Checked"/>
+                    <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="DarkModeRadioButton" Grid.Column="0" Content="{ns:Loc DarkMode}" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20" VerticalContentAlignment="Center" Checked="DarkModeRadioButton_Checked"/>
+                    <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="LightModeRadioButton"  Grid.Column="1" Content="{ns:Loc LightTheme}" Margin="10" Height="40" HorizontalAlignment="Stretch" FontSize="20"  VerticalContentAlignment="Center" Checked="LightModeRadioButton_Checked"/>
                 </Grid>
             </StackPanel>
         </Grid>

@@ -439,6 +439,24 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ne, ne zahteva..
+        /// </summary>
+        internal static string DoesNotRequireRenovation {
+            get {
+                return ResourceManager.GetString("DoesNotRequireRenovation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Da, zahteva..
+        /// </summary>
+        internal static string DoesRequireRenovation {
+            get {
+                return ResourceManager.GetString("DoesRequireRenovation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Krajnji datum.
         /// </summary>
         internal static string EndDate {
@@ -529,6 +547,24 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Završena.
+        /// </summary>
+        internal static string Finished {
+            get {
+                return ResourceManager.GetString("Finished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OD:.
+        /// </summary>
+        internal static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recenzija od gosta.
         /// </summary>
         internal static string GuestFeedback {
@@ -570,6 +606,15 @@ namespace BookingApp.Properties {
         internal static string GuestReviews {
             get {
                 return ResourceManager.GetString("GuestReviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recenzije od gostiju.
+        /// </summary>
+        internal static string GuestsFeedback {
+            get {
+                return ResourceManager.GetString("GuestsFeedback", resourceCulture);
             }
         }
         
@@ -669,6 +714,15 @@ namespace BookingApp.Properties {
         internal static string LastCancellationDay {
             get {
                 return ResourceManager.GetString("LastCancellationDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poslednja renovacija:.
+        /// </summary>
+        internal static string LastRenovation {
+            get {
+                return ResourceManager.GetString("LastRenovation", resourceCulture);
             }
         }
         
@@ -808,6 +862,15 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nikada renovirana!.
+        /// </summary>
+        internal static string NeverBeenRenovated {
+            get {
+                return ResourceManager.GetString("NeverBeenRenovated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nema rezervacija za datu godinu..
         /// </summary>
         internal static string NoReservationsInYear {
@@ -898,11 +961,29 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to U procesu.
+        /// </summary>
+        internal static string Ongoing {
+            get {
+                return ResourceManager.GetString("Ongoing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vlasnik.
         /// </summary>
         internal static string Owner {
             get {
                 return ResourceManager.GetString("Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VLASNIK.
+        /// </summary>
+        internal static string OwnerUC {
+            get {
+                return ResourceManager.GetString("OwnerUC", resourceCulture);
             }
         }
         
@@ -1249,11 +1330,56 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status pomeranja rezervacije.
+        /// </summary>
+        internal static string StatusOfWantedReservationTimespan {
+            get {
+                return ResourceManager.GetString("StatusOfWantedReservationTimespan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SUPER VLASNIK.
+        /// </summary>
+        internal static string SuperOwnerUC {
+            get {
+                return ResourceManager.GetString("SuperOwnerUC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pritisnite ovde.
         /// </summary>
         internal static string TapHere {
             get {
                 return ResourceManager.GetString("TapHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DO:.
+        /// </summary>
+        internal static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tip rezervacije.
+        /// </summary>
+        internal static string TypeOfReservation {
+            get {
+                return ResourceManager.GetString("TypeOfReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nadolazeća.
+        /// </summary>
+        internal static string Upcoming {
+            get {
+                return ResourceManager.GetString("Upcoming", resourceCulture);
             }
         }
         
@@ -1281,6 +1407,24 @@ namespace BookingApp.Properties {
         internal static string YearAccommodationWasMostPopular {
             get {
                 return ResourceManager.GetString("YearAccommodationWasMostPopular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Da, možete otkazati..
+        /// </summary>
+        internal static string YouCanCancel {
+            get {
+                return ResourceManager.GetString("YouCanCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ne, ne možete otkazati..
+        /// </summary>
+        internal static string YouCantCancel {
+            get {
+                return ResourceManager.GetString("YouCantCancel", resourceCulture);
             }
         }
         

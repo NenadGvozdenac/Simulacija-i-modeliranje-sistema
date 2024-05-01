@@ -4,21 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
+             xmlns:ns="clr-namespace:BookingApp.Application.Localization"
              mc:Ignorable="d" 
              d:DesignHeight="115" d:DesignWidth="365">
     <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" BorderBrush="Black">
+            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="Black">
                 <Border CornerRadius="5 0 0 5">
                     <Border.Background>
                         <ImageBrush x:Name="Image" Stretch="Fill"/>
@@ -34,8 +35,8 @@
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label Foreground="{DynamicResource ForegroundBrush}" Content="Last renovation: " Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding LastRenovationDate}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc LastRenovation}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding LastRenovationDate}" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

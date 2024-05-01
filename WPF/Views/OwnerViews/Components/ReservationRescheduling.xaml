@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="115" d:DesignWidth="365">
@@ -32,14 +33,14 @@
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
 
-            <Label Foreground="{DynamicResource ForegroundBrush}" Content="FROM: " Grid.Row="2" Grid.Column="1"/>
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc From}" Grid.Row="2" Grid.Column="1"/>
 
             <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMoving.CurrentReservationTimespan}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
 
-            <Label Foreground="{DynamicResource ForegroundBrush}" Content="TO:" Grid.Row="3" Grid.Column="1"/>
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc To}" Grid.Row="3" Grid.Column="1"/>
 
             <Label Content="{Binding AccommodationReservationMoving.WantedReservationTimespan}" Foreground="Orange" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>

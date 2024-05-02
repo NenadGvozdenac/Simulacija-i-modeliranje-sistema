@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
       d:DesignHeight="750" d:DesignWidth="430"
       Loaded="Page_Loaded">
     <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
@@ -18,8 +19,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Image x:Name="BackButton" Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
-            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Reservation rescheduling" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <Image x:Name="BackButton" Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc ReservationRescheduling}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1">
@@ -28,6 +29,6 @@
             </StackPanel>
         </ScrollViewer>
         
-        <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Row="2" x:Name="AccommodationsButton" Content="Rescheduling" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
+        <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Row="2" x:Name="AccommodationsButton" Content="{ns:Loc Rescheduling}" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
     </Grid>
 </Page>

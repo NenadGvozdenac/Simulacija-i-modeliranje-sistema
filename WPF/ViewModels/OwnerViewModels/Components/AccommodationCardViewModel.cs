@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.Views.OwnerViews;
@@ -23,6 +24,10 @@ public class AccommodationCardViewModel
     private AccommodationControl accommodationControl;
     private readonly string DEFAULT_HOUSE_PICTURE = "../../../Resources/Assets/default_house.png";
     public Accommodation Accommodation { get; set; }
+    public string AccommodationType
+    {
+        get => TranslationSource.Instance[Accommodation.Type.ToString()];
+    }
     public AccommodationCardViewModel(AccommodationControl accommodationControl, Accommodation accommodation)
     {
         this.accommodationControl = accommodationControl;

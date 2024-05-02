@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Domain.Models;
 using BookingApp.WPF.Views.OwnerViews.Components;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,10 @@ public class RenovationCardViewModel
 {
     private RenovationControl renovationControl;
     public AccommodationRenovation Renovation { get; set; }
+    public string RenovationStatus
+    {
+        get => TranslationSource.Instance[Renovation.Status.ToString()];
+    }
     public RenovationCardViewModel(RenovationControl renovationControl, AccommodationRenovation renovation)
     {
         this.renovationControl = renovationControl;

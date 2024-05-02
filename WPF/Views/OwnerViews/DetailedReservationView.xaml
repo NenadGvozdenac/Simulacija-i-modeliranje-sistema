@@ -1,6 +1,7 @@
 ﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.DetailedReservationView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local1="clr-namespace:BookingApp.WPF.Views.OwnerViews.Converters"
@@ -20,8 +21,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
-            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Detailed reservation view" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc DetailedReservationView}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">
             <Grid.ColumnDefinitions>
@@ -50,64 +51,64 @@
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationReservationDTO.AccommodationDTO.Name, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Cost per night" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc PricePerNight}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.Price, StringFormat={}{0:C} / night}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Location}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.Location, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Type of accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.Type, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AccommodationType}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.Type, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Reservation status" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.Reservation.ReservationType, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc TypeOfReservation}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.ReservationType, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Minimum reservation days" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc MinimumNumberOfDaysForReservation}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.MinReservationDays, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Last cancellation day" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc LastCancellationDay}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.LastCancellationDate, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Maximum number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc MaximumNumberOfGuests}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.MaxGuestNumber, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Current accommodation rating" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc CurrentAccommodationRating}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.AccommodationDTO.AverageReviewScore, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Number of reviews" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc NumberOfReviews}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.NumberOfReviews, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 
                 <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Reservation days" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc ReservationDays}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.ReservationDays, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="10" Grid.Column="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Reservation start" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc ReservationStart}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.Reservation.FirstDateOfStaying, Mode=TwoWay, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc NumberOfGuests}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.GuestsNumber, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="11" Grid.Column="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Reservation end" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc ReservationEnd}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.Reservation.LastDateOfStaying, Mode=TwoWay, Converter={StaticResource DateTimeToStringConverter}}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="12" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Guest username" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.Owner.Username, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc GuestUsername}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.Guest.Username, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="12" Grid.Column="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="Current guest rating" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc CurrentGuestRating}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                     <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationDTO.GuestRating, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
             </Grid>

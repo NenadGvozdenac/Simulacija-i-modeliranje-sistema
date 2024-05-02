@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
@@ -29,7 +30,7 @@ public class AddAccommodationCommand : ICommand
         string country = location.Split(", ")[1];
 
         accommodation.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(city, country).Id;
-        accommodation.Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), _addAccommodationViewModel.Type);
+        accommodation.Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), TranslationSource.Instance[_addAccommodationViewModel.Type]);
         accommodation.MaxGuestNumber = _addAccommodationViewModel.MaximumNumberOfGuests;
         accommodation.MinReservationDays = _addAccommodationViewModel.MinimumNumberOfDaysForReservation;
         accommodation.CancellationPeriodDays = _addAccommodationViewModel.DaysBeforeReservationIsFinal;
@@ -40,7 +41,6 @@ public class AddAccommodationCommand : ICommand
         AccommodationService.GetInstance().Add(accommodation);
 
         _addAccommodationViewModel.CancelCommand.Execute(null);
-        _addAccommodationViewModel.ClearPage();
     }
 
     public bool CanExecute(object parameter)

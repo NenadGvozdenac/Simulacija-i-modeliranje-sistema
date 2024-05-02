@@ -16,6 +16,7 @@ namespace BookingApp.WPF.Views.OwnerViews;
 public partial class AddAccommodationPage : Page
 {
     public AddAccommodationViewModel _addAccommodationViewModel;
+    private readonly User user;
 
     public AddAccommodationPage(User user)
     {
@@ -23,6 +24,7 @@ public partial class AddAccommodationPage : Page
         DataContext = _addAccommodationViewModel;
 
         InitializeComponent();
+        this.user = user;
     }
 
     private void LocationTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -47,5 +49,11 @@ public partial class AddAccommodationPage : Page
     private void RightArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
         _addAccommodationViewModel.RightArrowClick();
+    }
+
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        _addAccommodationViewModel = new AddAccommodationViewModel(this, user);
+        DataContext = _addAccommodationViewModel;
     }
 }

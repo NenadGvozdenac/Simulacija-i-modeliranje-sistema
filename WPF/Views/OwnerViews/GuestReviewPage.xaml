@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430">
     <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
@@ -17,8 +18,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
-            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Guest reviews" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackArrowClick"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc GuestReviews}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
         <!-- Content -->
@@ -34,8 +35,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" x:Name="PendingButton" Grid.Column="0" Content="Pending" Style="{StaticResource FooterButtonStyle}" Click="PendingButton_Click" IsEnabledChanged="PendingButton_IsEnabledChanged"/>
-            <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" x:Name="ReviewedButton" Grid.Column="1" Content="Reviewed" Style="{StaticResource FooterButtonStyle}" IsEnabled="False" Click="ReviewedButton_Click" IsEnabledChanged="ReviewedButton_IsEnabledChanged"/>
+            <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" x:Name="PendingButton" Grid.Column="0" Content="{ns:Loc Pending}" Style="{StaticResource FooterButtonStyle}" Click="PendingButton_Click" IsEnabledChanged="PendingButton_IsEnabledChanged"/>
+            <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" x:Name="ReviewedButton" Grid.Column="1" Content="{ns:Loc Reviewed}" Style="{StaticResource FooterButtonStyle}" IsEnabled="False" Click="ReviewedButton_Click" IsEnabledChanged="ReviewedButton_IsEnabledChanged"/>
         </Grid>
     </Grid>
 </Page>

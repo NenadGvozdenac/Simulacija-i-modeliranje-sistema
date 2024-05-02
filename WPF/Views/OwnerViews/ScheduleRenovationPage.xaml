@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430"
       Loaded="Page_Loaded">
@@ -20,11 +21,11 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Image x:Name="BackButton" Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
-            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Schedule a renovation" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <Image x:Name="BackButton" Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="BackButton_MouseDown"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc ScheduleARenovation}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
-        <Label Foreground="{DynamicResource ForegroundBrush}" Grid.Row="1" Content="Choose an accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        <Label Foreground="{DynamicResource ForegroundBrush}" Grid.Row="1" Content="{ns:Loc ChooseAnAccommodation}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
 
         <ScrollViewer Grid.Row="2">
             <StackPanel x:Name="MainPanel">
@@ -32,6 +33,6 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Row="3" x:Name="AccommodationsButton" Content="Renovation scheduling" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
+        <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Row="3" x:Name="AccommodationsButton" Content="{ns:Loc RenovationScheduling}" Style="{StaticResource FooterButtonStyle}" FontSize="20"/>
     </Grid>
 </Page>

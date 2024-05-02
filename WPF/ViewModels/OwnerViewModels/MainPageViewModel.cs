@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Xml.Linq;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -79,12 +80,15 @@ public partial class MainPageViewModel : ObservableObject
 
     private void PrepareFirstPage()
     {
-        mainPage.MainPanel.Children.Add(_accommodationWrapper);
-        _accommodationWrapper.Visibility = Visibility.Visible;
         mainPage.MainPanel.Children.Add(_accommodationReservationWrapper);
         _accommodationReservationWrapper.Visibility = Visibility.Collapsed;
+
+        mainPage.MainPanel.Children.Add(_accommodationWrapper);
+        _accommodationWrapper.Visibility = Visibility.Visible;
+        
         mainPage.MainPanel.Children.Add(_accommodationRenovationWrapper);
         _accommodationRenovationWrapper.Visibility = Visibility.Collapsed;
+
         SetActiveButton(mainPage.AccommodationsButton);
         Update();
     }
@@ -272,101 +276,27 @@ public partial class MainPageViewModel : ObservableObject
 
     public void AccommodationsClicked()
     {
-        AnimateIn(_accommodationWrapper);
+        _ = AnimateIn(_accommodationWrapper);
         SetActiveButton(mainPage.AccommodationsButton);
     }
 
     public void ReservationsClicked()
     {
-        AnimateIn(_accommodationReservationWrapper);
+        _ =AnimateIn(_accommodationReservationWrapper);
         SetActiveButton(mainPage.ReservationsButton);
     }
 
     public void RenovationsClicked()
     {
-        AnimateIn(_accommodationRenovationWrapper);
+        _ = AnimateIn(_accommodationRenovationWrapper);
         SetActiveButton(mainPage.RenovationsButton);
     }
 
-    // This method is not used, it's basic animation for opacity changing
-    //private void AnimateIn(UIElement wrapper)
-    //{
-    //    foreach (UIElement element in mainPage.MainPanel.Children)
-    //    {
-    //        if (element == wrapper)
-    //        {
-    //            element.Visibility = Visibility.Visible;
-    //            DoubleAnimation animation = new DoubleAnimation
-    //            {
-    //                From = 0,
-    //                To = 1,
-    //                Duration = new Duration(TimeSpan.FromSeconds(0.3))
-    //            };
-    //            element.BeginAnimation(UIElement.OpacityProperty, animation);
-    //        }
-    //        else
-    //        {
-    //            element.Visibility = Visibility.Collapsed;
-    //        }
-    //    }
-    //}
-
     private async Task AnimateIn(UserControl wrapper)
     {
-        // Find the currently activated wrapper which is visible
-        var visibleWrapper = mainPage.MainPanel.Children.Cast<UserControl>().FirstOrDefault(x => x.Visibility == Visibility.Visible);
+        List<UserControl> controls = mainPage.MainPanel.Children.OfType<UserControl>().ToList();
+        SlideHelper slideHelper = new SlideHelper(controls, mainPage.MainPanel);
 
-        if(visibleWrapper == wrapper)
-        {
-            return;
-        }
-
-        if (visibleWrapper != null)
-        {
-            await AnimateOut(visibleWrapper);
-            visibleWrapper.Visibility = Visibility.Collapsed;
-        }
-
-        wrapper.Visibility = Visibility.Visible;
-
-        var renderSize = wrapper.RenderSize;
-
-        var sb = new Storyboard();
-        var SlideAnimation = new ThicknessAnimation
-        {
-            From = new Thickness(mainPage.MainPanel.ActualWidth, 0, -mainPage.MainPanel.ActualWidth, 0),
-            To = new Thickness(0, 0, 0, 0),
-            Duration = new Duration(TimeSpan.FromSeconds(0.3)),
-            DecelerationRatio = 0.9
-        };
-        Storyboard.SetTargetProperty(SlideAnimation, new PropertyPath("Margin"));
-        sb.Children.Add(SlideAnimation);
-
-        sb.Begin(mainPage.MainPanel);
-
-        await Task.Delay(300);
-    }
-
-    private async Task AnimateOut(UserControl? visibleWrapper)
-    {
-        if (visibleWrapper == null)
-        {
-            return;
-        }
-
-        var sb = new Storyboard();
-        var SlideAnimation = new ThicknessAnimation
-        {
-            From = new Thickness(0, 0, 0, 0),
-            To = new Thickness(-mainPage.MainPanel.ActualWidth, 0, mainPage.MainPanel.ActualWidth, 0),
-            Duration = new Duration(TimeSpan.FromSeconds(0.2)),
-            DecelerationRatio = 0.9
-        };
-        Storyboard.SetTargetProperty(SlideAnimation, new PropertyPath("Margin"));
-        sb.Children.Add(SlideAnimation);
-
-        sb.Begin(mainPage.MainPanel);
-
-        await Task.Delay(200);
+        await slideHelper.AnimateIn(wrapper);
     }
 }

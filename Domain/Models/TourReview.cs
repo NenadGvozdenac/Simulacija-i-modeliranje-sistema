@@ -16,6 +16,8 @@ namespace BookingApp.Model.MutualModels
         public int UserId {  get; set; }
         public int TourId {  get; set; }
         public int ReservationId {  get; set; }
+
+        public string Checkpoint { get; set; }
         public int GuideKnowledge {  get; set; }
         public int GuideLanguage {  get; set; }
         public int TourInterestingness {  get; set; }

@@ -6,12 +6,20 @@
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         mc:Ignorable="d"
         Title="GuideMainWindow" Height="450" Width="800">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding ScheduleTourCommand}" Key="F1"/>
+        <KeyBinding Command="{Binding DailyToursCommand}" Key="F2"/>
+        <KeyBinding Command="{Binding ReviewsCommand}" Key="F4"/>
+        <KeyBinding Command="{Binding DemographicsCommand}" Key="F5"/>
+    </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background=" #003580" Height="23">
-            <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick"></MenuItem>
+            <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick">
+                
+            </MenuItem>
 
 
-            <MenuItem Header="Daily tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick"></MenuItem>
+            <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick"></MenuItem>
 
 
             <MenuItem Header="Cancel tour (F3)" Foreground="#f2f6fa"></MenuItem>
@@ -42,6 +50,60 @@
                         <TextBlock Width="150" Text="Tour requests statistics (F7)" TextAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="0.7*"></RowDefinition>
+                        <RowDefinition Height="0.7*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextDecorations="Underline" FontWeight="Bold">Search by criteria</TextBlock>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
+                        <Border Margin="5,0,0,0"></Border>
+                        <StackPanel>
+                            <TextBlock HorizontalAlignment="Center">Country:</TextBlock>
+                            <ComboBox Height="30" Width="85" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged"></ComboBox>
+                        </StackPanel>
+                        <Border Margin="5,0,5,0"></Border>
+                        <StackPanel>
+                            <TextBlock HorizontalAlignment="Center">City:</TextBlock>
+                            <ComboBox Height="30" Width="85" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" SelectionChanged="CityBox_SelectionChanged"></ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <Border Margin="0,0,10,0"></Border>
+                        <TextBlock VerticalAlignment="Center">capacity:</TextBlock>
+                        <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="20" Height="25" TextChanged="Capacity_TextChanged"/>
+                        <StackPanel VerticalAlignment="Center">
+                            <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CapacityUp_Click">5</RepeatButton>
+                            <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="CapacityDown_Click">6</RepeatButton>
+                        </StackPanel>
+                        <Border Margin="0,0,10,0"></Border>
+                        <TextBlock VerticalAlignment="Center">Duration:</TextBlock>
+                        <TextBox Name="Duration" FontSize="17"  TextAlignment="Right" Width="20" Height="25" TextChanged="Duration_TextChanged"/>
+                        <StackPanel VerticalAlignment="Center">
+                            <RepeatButton Name="durationNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DurationUp_Click">5</RepeatButton>
+                            <RepeatButton Name="durationDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="DurationDown_Click">6</RepeatButton>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
+                        <Border Margin="5,0,0,0"></Border>
+                        <StackPanel/>
+                        <Border Margin="5,0,5,0"></Border>
+                        <StackPanel/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center">Language:</TextBlock>
+                        <ComboBox Width="100" Height="30" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged"></ComboBox>
+                    </StackPanel>
+                </Grid>
             </Grid>   
         
         <Grid Grid.Column="1" x:Name="GridColumn2">
@@ -51,11 +113,16 @@
                     <RowDefinition Height="15*" />
                     <!-- Second row within the second column -->
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1" x:Name="TourContainer">
-                    <local:Tours x:Name="tours"></local:Tours>
-
+                <Grid Grid.Row="1" x:Name="TourContainer" Margin="10,0,0,0"></Grid>
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Margin="15,0,0,0"></Border>
+                        <TextBox  Width="400" Background="LightYellow" x:Name="searchBox" TextChanged="searchBox_TextChanged"></TextBox>
+                        <Border Margin="0,0,80,0"></Border>
+                        <Button HorizontalAlignment="Right" Click="OngoingTour_Click">Track ongoing tour</Button>
+                    </StackPanel>
                 </Grid>
-        </Grid>
+            </Grid>
 
 
 

@@ -10,8 +10,7 @@
     <Grid>
         <ScrollViewer>
             <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
-            <ItemsControl
-    ItemsSource="{Binding dailyTours}" Margin="3,3,3,3">
+            <ItemsControl ItemsSource="{Binding dailyTours}" Margin="3,3,3,3" x:Name="cardControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <components:DailyTourCard x:Name="dailyTourCard" BeginButtonClicked="DailyTourCard_BeginButtonClicked" EndButtonClicked="DailyTourCard_EndButtonClicked"/>

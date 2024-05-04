@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  
     <None Remove="Resources\Assets\accommodations.png" />
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
-    <None Remove="Resources\Assets\back_left_arrow.png" />
+    <None Remove="Resources\Assets\back_left_arrow_black.png" />
+    <None Remove="Resources\Assets\back_left_arrow_white.png" />
     <None Remove="Resources\Assets\bell.224x256.png" />
     <None Remove="Resources\Assets\checkbox-checked.256x256.png" />
     <None Remove="Resources\Assets\chevron-left.293x512.png" />
@@ -23,7 +23,6 @@
     <None Remove="Resources\Assets\edit.png" />
     <None Remove="Resources\Assets\eye.png" />
     <None Remove="Resources\Assets\flag-red.255x256.png" />
-    <None Remove="Resources\Assets\hamburger_menu.png" />
     <None Remove="Resources\Assets\hammer-and-wrench.512x512.png" />
     <None Remove="Resources\Assets\head-lightbulb-outline.232x256.png" />
     <None Remove="Resources\Assets\home.256x245.png" />
@@ -34,10 +33,13 @@
     <None Remove="Resources\Assets\language.png" />
     <None Remove="Resources\Assets\location.png" />
     <None Remove="Resources\Assets\map-marker.171x256.png" />
+    <None Remove="Resources\Assets\menu_black.png" />
+    <None Remove="Resources\Assets\menu_white.png" />
     <None Remove="Resources\Assets\myreservations.png" />
     <None Remove="Resources\Assets\notifications-active.256x253.png" />
     <None Remove="Resources\Assets\Owner.png" />
     <None Remove="Resources\Assets\pencil.png" />
+    <None Remove="Resources\Assets\phone_transparent_resized.png" />
     <None Remove="Resources\Assets\plus-symbol-button.png" />
     <None Remove="Resources\Assets\reserve.png" />
     <None Remove="Resources\Assets\return.512x467.png" />
@@ -46,7 +48,8 @@
     <None Remove="Resources\Assets\star-outline.512x490.png" />
     <None Remove="Resources\Assets\star.512x488.png" />
     <None Remove="Resources\Assets\star.png" />
-    <None Remove="Resources\Assets\three_dots.png" />
+    <None Remove="Resources\Assets\three_dots_black.png" />
+    <None Remove="Resources\Assets\three_dots_white.png" />
     <None Remove="Resources\Assets\trash_can.png" />
     <None Remove="Resources\Assets\user.png" />
     <None Remove="Resources\Assets\users.png" />
@@ -85,7 +88,10 @@
     <Content Include="Resources\Assets\alternate-map-marker.384x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Assets\back_left_arrow.png">
+    <Content Include="Resources\Assets\back_left_arrow_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\back_left_arrow_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\bell.224x256.png">
@@ -118,9 +124,6 @@
     <Content Include="Resources\Assets\flag-red.255x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Assets\hamburger_menu.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Assets\hammer-and-wrench.512x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -142,13 +145,19 @@
     <Content Include="Resources\Assets\language.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\menu_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\menu_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\notifications-active.256x253.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\TourImages\20221120_100611.jpg">
+    <Content Include="Resources\Assets\phone_transparent_resized.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\TourImages\IMG_1568.jpg">
+    <Content Include="Resources\Assets\three_dots_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Assets\accommodations.png">
@@ -199,7 +208,7 @@
     <Content Include="Resources\Assets\star.512x488.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Assets\three_dots.png">
+    <Content Include="Resources\Assets\three_dots_black.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\trash_can.png">
@@ -277,6 +286,31 @@
 	  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
 	  <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	  <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DependentUpon>Resources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
+	  <Compile Update="Properties\Resources.en-US.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.en-US.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Properties\Resources.en-US.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

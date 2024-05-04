@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
              mc:Ignorable="d" Height="115" Width="365">
     <Border BorderBrush="Black" BorderThickness="1">
-        <Grid Background="{StaticResource Creme}">
+        <Grid Background="{DynamicResource Card}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
                 <ColumnDefinition Width="4*"/>
@@ -21,20 +21,20 @@
             <Border BorderBrush="Lavender" BorderThickness="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Margin="5">
                 <Image x:Name="Image" Stretch="Fill" Source="../../../../Resources/Assets/default_user.png"/>
             </Border>
-            <Label x:Name="UserName" Content="{Binding GuestRatingDTO.Guest.Username}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Foreground="{DynamicResource ForegroundBrush}" x:Name="UserName" Content="{Binding GuestRatingDTO.Guest.Username}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label x:Name="AccommodationName" Content="{Binding GuestRatingDTO.Accommodation.Name}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Foreground="{DynamicResource ForegroundBrush}" x:Name="AccommodationName" Content="{Binding GuestRatingDTO.Accommodation.Name}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label x:Name="AccommodationLocation" Content="{Binding GuestRatingDTO.Accommodation.Location}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Foreground="{DynamicResource ForegroundBrush}" x:Name="AccommodationLocation" Content="{Binding GuestRatingDTO.Accommodation.Location}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label x:Name="ReservationTimespan" Content="{Binding GuestRatingDTO.DateSpan}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Foreground="{DynamicResource ForegroundBrush}" x:Name="ReservationTimespan" Content="{Binding GuestRatingDTO.DateSpan}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

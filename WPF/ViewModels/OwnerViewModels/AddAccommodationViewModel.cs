@@ -1,4 +1,5 @@
 ﻿using BookingApp.Application.Commands;
+using BookingApp.Application.Localization;
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.WPF.Views.OwnerViews;
@@ -64,20 +65,8 @@ public partial class AddAccommodationViewModel : ObservableObject
         User = user;
         Page = page;
 
-        AccommodationTypes = new ObservableCollection<string>(Enum.GetNames(typeof(AccommodationType)));
+        AccommodationTypes = new ObservableCollection<string>((Enum.GetNames(typeof(AccommodationType))).Select(a => TranslationSource.Instance[a]));
         Images = new ObservableCollection<AccommodationImage>();
-    }
-
-    public void ClearPage()
-    {
-        AccommodationName = "";
-        Page.AccommodationType.SelectedIndex = 0;
-        AccommodationPrice = 0;
-        MaximumNumberOfGuests = 0;
-        MinimumNumberOfDaysForReservation = 0;
-        DaysBeforeReservationIsFinal = 0;
-        Images.Clear();
-        ImageURL = "";
     }
 
     public void LeftArrowClick()

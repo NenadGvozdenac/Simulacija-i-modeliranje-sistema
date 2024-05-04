@@ -1,9 +1,11 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using BookingApp.View;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace BookingApp;
@@ -13,6 +15,12 @@ public partial class App
     private static IServiceProvider _serviceProvider;
 
     public static IServiceProvider ServiceProvider => _serviceProvider;
+
+    public static Dictionary<string, string> Languages = new Dictionary<string, string>
+    {
+        { "English", "en-US" },
+        { "Serbian", "sr-RS" }
+    };
 
     private void Application_Startup(object sender, StartupEventArgs e)
     {
@@ -26,6 +34,11 @@ public partial class App
 
         var signInForm = _serviceProvider.GetRequiredService<SignInForm>();
         signInForm.Show();
+    }
+
+    public void ChangeLanguage(string lang)
+    {
+        TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo(Languages[lang]);
     }
 
     private void ConfigureWindows(IServiceCollection services)

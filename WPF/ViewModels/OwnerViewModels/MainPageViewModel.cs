@@ -11,6 +11,11 @@ using BookingApp.View;
 using System.Windows.Input;
 using BookingApp.Application.Commands;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Media.Animation;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Xml.Linq;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -75,7 +80,15 @@ public partial class MainPageViewModel : ObservableObject
 
     private void PrepareFirstPage()
     {
-        mainPage.MainPanel.Content = _accommodationWrapper;
+        mainPage.MainPanel.Children.Add(_accommodationReservationWrapper);
+        _accommodationReservationWrapper.Visibility = Visibility.Collapsed;
+
+        mainPage.MainPanel.Children.Add(_accommodationWrapper);
+        _accommodationWrapper.Visibility = Visibility.Visible;
+        
+        mainPage.MainPanel.Children.Add(_accommodationRenovationWrapper);
+        _accommodationRenovationWrapper.Visibility = Visibility.Collapsed;
+
         SetActiveButton(mainPage.AccommodationsButton);
         Update();
     }
@@ -187,26 +200,24 @@ public partial class MainPageViewModel : ObservableObject
         RefreshAccommodations();
         HideNavbar(mainPage.LeftNavbar);
         HideNavbar(mainPage.RightNavbar);
+        AnimateIn(_accommodationWrapper);
     }
 
     private void RefreshRenovations()
     {
         _accommodationRenovationWrapper.WrapperViewModel.Refresh();
-        mainPage.MainPanel.Content = _accommodationRenovationWrapper;
         SetActiveButton(mainPage.RenovationsButton);
     }
 
     private void RefreshAccommodations()
     {
         _accommodationWrapper.WrapperViewModel.Refresh();
-        mainPage.MainPanel.Content = _accommodationWrapper;
         SetActiveButton(mainPage.AccommodationsButton);
     }
 
     private void RefreshReservations()
     {
         _accommodationReservationWrapper.WrapperViewModel.Refresh();
-        mainPage.MainPanel.Content = _accommodationWrapper;
         SetActiveButton(mainPage.ReservationsButton);
     }
 
@@ -215,7 +226,8 @@ public partial class MainPageViewModel : ObservableObject
         if (navbar.Visibility == Visibility.Collapsed)
         {
             ShowNavbar(navbar, navbar == mainPage.LeftNavbar ? 1 : 0.6);
-        } else if (navbar.Visibility == Visibility.Visible)
+        }
+        else if (navbar.Visibility == Visibility.Visible)
         {
             HideNavbar(navbar);
         }
@@ -224,14 +236,28 @@ public partial class MainPageViewModel : ObservableObject
     private void ShowNavbar(StackPanel navbar, double v)
     {
         navbar.Visibility = Visibility.Visible;
-        mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2].Width = new GridLength(v, GridUnitType.Star);
+        ColumnDefinition column = mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2];
+        GridLengthAnimation animation = new GridLengthAnimation
+        {
+            From = new GridLength(0),
+            To = new GridLength(v, GridUnitType.Star),
+            Duration = new Duration(TimeSpan.FromSeconds(0.3)) // Adjust duration as needed
+        };
+        column.BeginAnimation(ColumnDefinition.WidthProperty, animation);
         HideNavbar(navbar == mainPage.LeftNavbar ? mainPage.RightNavbar : mainPage.LeftNavbar);
     }
 
     private void HideNavbar(StackPanel navbar)
     {
-        navbar.Visibility = Visibility.Collapsed;
-        mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2].Width = new GridLength(0, GridUnitType.Star);
+        ColumnDefinition column = mainPage.Navbar.ColumnDefinitions[navbar == mainPage.LeftNavbar ? 0 : 2];
+        GridLengthAnimation animation = new GridLengthAnimation
+        {
+            From = column.Width,
+            To = new GridLength(0),
+            Duration = new Duration(TimeSpan.FromSeconds(0.3)) // Adjust duration as needed
+        };
+        animation.Completed += (sender, e) => navbar.Visibility = Visibility.Collapsed;
+        column.BeginAnimation(ColumnDefinition.WidthProperty, animation);
     }
 
     public void ClickHere()
@@ -250,19 +276,27 @@ public partial class MainPageViewModel : ObservableObject
 
     public void AccommodationsClicked()
     {
-        mainPage.MainPanel.Content = _accommodationWrapper;
+        _ = AnimateIn(_accommodationWrapper);
         SetActiveButton(mainPage.AccommodationsButton);
     }
 
     public void ReservationsClicked()
     {
-        mainPage.MainPanel.Content = _accommodationReservationWrapper;
+        _ =AnimateIn(_accommodationReservationWrapper);
         SetActiveButton(mainPage.ReservationsButton);
     }
 
     public void RenovationsClicked()
     {
-        mainPage.MainPanel.Content = _accommodationRenovationWrapper;
+        _ = AnimateIn(_accommodationRenovationWrapper);
         SetActiveButton(mainPage.RenovationsButton);
+    }
+
+    private async Task AnimateIn(UserControl wrapper)
+    {
+        List<UserControl> controls = mainPage.MainPanel.Children.OfType<UserControl>().ToList();
+        SlideHelper slideHelper = new SlideHelper(controls, mainPage.MainPanel);
+
+        await slideHelper.AnimateIn(wrapper);
     }
 }

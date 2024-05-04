@@ -20,12 +20,12 @@ namespace BookingApp.WPF.Views.OwnerViews;
 public partial class AccommodationStatisticsPage : Page
 {
     private AccommodationStatisticsViewModel _accommodationStatisticsViewModel;
+    private readonly User user;
+
     public AccommodationStatisticsPage(User user)
     {
         InitializeComponent();
-
-        _accommodationStatisticsViewModel = new AccommodationStatisticsViewModel(user, this);
-        DataContext = _accommodationStatisticsViewModel;
+        this.user = user;
     }
 
     public void BackButton_Click(object sender, RoutedEventArgs e)
@@ -41,5 +41,11 @@ public partial class AccommodationStatisticsPage : Page
     private void AccommodationSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         _accommodationStatisticsViewModel.AccommodationTextBox_PreviewKeyDown(e.Key);
+    }
+
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        _accommodationStatisticsViewModel = new AccommodationStatisticsViewModel(user, this);
+        DataContext = _accommodationStatisticsViewModel;
     }
 }

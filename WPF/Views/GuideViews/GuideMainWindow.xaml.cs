@@ -153,5 +153,15 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.DurationDown_Click(sender, e);
         }
+
+        private void CityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mainWindowViewModel.CityTextBox_SelectionChanged(sender, e);
+        }
+
+        private void LanguageTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mainWindowViewModel.LanguageTextBox_SelectionChanged(sender, e);
+        }
     }
 }

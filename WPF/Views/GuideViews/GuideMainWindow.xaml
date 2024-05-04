@@ -73,7 +73,7 @@
                         <Border Margin="5,0,5,0"></Border>
                         <StackPanel>
                             <TextBlock HorizontalAlignment="Center">City:</TextBlock>
-                            <ComboBox Height="30" Width="85" x:Name="CityTextBox" IsEditable="False" IsEnabled="False"></ComboBox>
+                            <ComboBox Height="30" Width="85" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" SelectionChanged="CityBox_SelectionChanged"></ComboBox>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
@@ -101,7 +101,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock HorizontalAlignment="Center">Language:</TextBlock>
-                        <ComboBox Width="100" Height="30" x:Name="LanguageTextBox"></ComboBox>
+                        <ComboBox Width="100" Height="30" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged"></ComboBox>
                     </StackPanel>
                 </Grid>
             </Grid>   

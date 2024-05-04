@@ -51,6 +51,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Update();
         }
 
+        
         public void LoadCountries()
         {
             List<string> listOfCountries = LocationService.GetInstance().GetCountries();
@@ -62,6 +63,17 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             mainWindow.LanguageTextBox.ItemsSource = listOfLanguages;
         }
 
+        public void CityTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(mainWindow.CityTextBox.SelectedItem != null)
+            tours.dailyToursControlViewModel.SearchByCity(mainWindow.CityTextBox.SelectedItem.ToString());
+        }
+
+        public void LanguageTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tours.dailyToursControlViewModel.SearchByLanguage(mainWindow.LanguageTextBox.SelectedItem.ToString());
+        }
+
         public void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(mainWindow.CountryTextBox.SelectedItem.ToString());
@@ -69,13 +81,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             mainWindow.CityTextBox.Focus();
             mainWindow.CityTextBox.IsDropDownOpen = true;
             mainWindow.CityTextBox.IsEnabled = true;
+            tours.dailyToursControlViewModel.SearchByCountry(mainWindow.CountryTextBox.SelectedItem.ToString());
         }
 
         public void Capacity_TextChanged(object sender, TextChangedEventArgs e) 
         {
-            if (Convert.ToInt32(mainWindow.Capacity.Text) < 0)
+            if(mainWindow.Capacity.Text == "")
                 mainWindow.Capacity.Text = "0";
-
+            else if (Convert.ToInt32(mainWindow.Capacity.Text) < 0)
+                mainWindow.Capacity.Text = "0";
+            tours.dailyToursControlViewModel.SearchByCapacity(Convert.ToInt32(mainWindow.Capacity.Text));
         }
 
         public void CapacityUp_Click(object sender, RoutedEventArgs e)
@@ -103,7 +118,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 mainWindow.Duration.Text = "0";
             else if (Convert.ToInt32(mainWindow.Duration.Text) < 0)
                 mainWindow.Duration.Text = "0";
-
+            tours.dailyToursControlViewModel.SearchByDuration(Convert.ToInt32(mainWindow.Duration.Text));
         }
 
         public void DurationUp_Click(object sender, RoutedEventArgs e)

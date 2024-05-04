@@ -151,5 +151,62 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
+        public void SearchByCountry(string country)
+        {
+            Update();
+            var toursToRemove = dailyTours.Where(tour => tour.Location.Country != country).ToList();
+            foreach (var tour in toursToRemove)
+            {
+                dailyTours.Remove(tour);
+            }
+        }
+    
+        public void SearchByCity(string city){
+            if(String.IsNullOrWhiteSpace(city)) { Update(); }
+
+            Update();
+            var toursToRemove = dailyTours.Where(tour => tour.Location.City != city).ToList();
+            foreach (var tour in toursToRemove)
+            {         
+                dailyTours.Remove(tour);
+            }
+        }
+    
+    
+        public void SearchByLanguage(string language) {
+
+            Update();
+            var toursToRemove = dailyTours.Where(tour => tour.Language.Name != language).ToList();
+            foreach (var tour in toursToRemove)
+            {
+                dailyTours.Remove(tour);
+            }
+
+
+        }
+    
+        public void SearchByCapacity(int capacity)
+        {
+            Update();
+            var toursToRemove = dailyTours.Where(tour => tour.Capacity != capacity).ToList();
+            foreach (var tour in toursToRemove)
+            {
+                dailyTours.Remove(tour);
+            }
+        }
+    
+        public void SearchByDuration(int duration)
+        {
+            Update();
+            var toursToRemove = dailyTours.Where(tour => tour.Duration != duration).ToList();
+            foreach (var tour in toursToRemove)
+            {
+                dailyTours.Remove(tour);
+            }
+        }
+
+    
+    
+    
     }
 }

@@ -43,6 +43,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void Update()
         {
+            dailyTours.Clear();
+
             foreach (TourStartTime startTime in TourStartTimeService.GetInstance().GetAll())
             {
                 if (CheckIfPassed(startTime) != 1)
@@ -65,6 +67,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                             tour.Checkpoints = toura.Checkpoints;
                             tour.Dates = toura.Dates;
                             tour.Description = toura.Description;
+                            tour.Name = toura.Name;                       
                             if(TourStartTimeService.GetInstance().GetAll().Find(a => a.Status == "ongoing") != null)
                             {
                                 tour.Ongoing = false;
@@ -74,7 +77,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                                 tour.Ongoing = true;
                             }
 
+                            
                             dailyTours.Add(tour);
+                            
                         }
                     }
                 }
@@ -130,6 +135,21 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             EndButtonClickedControl?.Invoke(this, e);
         }
 
+        public void SearchTourByName(string name){
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Update();
+            }
+            else
+            {
+                Update();
+                var toursToRemove = dailyTours.Where(tour => !tour.Name.ToLower().Contains(name.ToLower())).ToList();
+                foreach (var tour in toursToRemove)
+                {
+                    dailyTours.Remove(tour);
+                }
+            }
+        }
 
     }
 }

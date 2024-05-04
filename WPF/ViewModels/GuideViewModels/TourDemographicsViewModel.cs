@@ -120,7 +120,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             
             tourDemographics.demographicsControl.demographicsControlViewModel.StatsButtonClickedControl += (s,e) => OnStatsButtonClicked_Handler(s,e);
             UpdatePieChart();
-
+            
 
         }
 

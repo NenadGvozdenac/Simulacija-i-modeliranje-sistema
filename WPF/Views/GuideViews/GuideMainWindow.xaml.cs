@@ -24,7 +24,7 @@ namespace BookingApp.View.PathfinderViews
     /// </summary>
     public partial class GuideMainWindow : Window
     {
-        
+
 
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
 
@@ -32,19 +32,19 @@ namespace BookingApp.View.PathfinderViews
         public GuideMainWindow(User user)
         {
             InitializeComponent();
+            mainWindowViewModel = new GuideMainWindowViewModel(this, user);
             DataContext = mainWindowViewModel;
-            mainWindowViewModel = new GuideMainWindowViewModel(this,user);
             Update();
         }
 
         public void ScheduleTourClick(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.ScheduleTourClick(sender,e);
+            mainWindowViewModel.ScheduleTourClick(sender, e);
         }
 
         public void DailyToursClick(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.DailyToursClick(sender,e);
+            mainWindowViewModel.DailyToursClick(sender, e);
         }
 
         public int ongoingTourCheck()
@@ -110,6 +110,48 @@ namespace BookingApp.View.PathfinderViews
         private void OngoingTour_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.OngoingTour_Click(sender, e);
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            mainWindowViewModel.searchBox_TextChanged(sender, e);
+        }
+
+        private void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mainWindowViewModel.CountryTextBox_SelectionChanged(sender, e);
+        }
+
+        
+
+        private void Capacity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            mainWindowViewModel.Capacity_TextChanged(sender, e);
+        }
+
+        private void CapacityUp_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.CapacityUp_Click(sender,e);
+        }
+
+        private void CapacityDown_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.CapacityDown_Click(sender, e);
+        }
+
+        private void Duration_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            mainWindowViewModel.Duration_TextChanged(sender, e);
+        }
+
+        private void DurationUp_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.DurationUp_Click(sender, e);
+        }
+
+        private void DurationDown_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.DurationDown_Click(sender, e);
         }
     }
 }

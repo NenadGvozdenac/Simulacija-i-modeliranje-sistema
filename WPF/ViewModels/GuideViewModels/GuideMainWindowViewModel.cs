@@ -3,13 +3,16 @@ using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews;
 using BookingApp.View.PathfinderViews.Componentss;
+using BookingApp.WPF.Views.GuestViews;
 using BookingApp.WPF.Views.GuideViews;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
@@ -22,13 +25,120 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
 
-        public GuideMainWindow window { get; set; }
-        public GuideMainWindowViewModel(GuideMainWindow mainWindow,User user)
+        public GuideMainWindow mainWindow { get; set; }
+
+        public DailyToursControl tours {  get; set; }
+
+        public ICommand ScheduleTourCommand { get; }
+
+        public ICommand DailyToursCommand { get; }
+
+        public ICommand ReviewsCommand { get; }
+
+        public ICommand DemographicsCommand { get; }
+        public GuideMainWindowViewModel(GuideMainWindow _mainWindow,User user)
         {
-            window = mainWindow;
+            mainWindow = _mainWindow;
             _user = user;
+            tours = new DailyToursControl(_user);
+            mainWindow.TourContainer.Children.Add(tours);
+            ScheduleTourCommand = new RelayCommand(ScheduleTour_Accelerator);
+            DailyToursCommand = new RelayCommand(DailyTours_Accelerator);
+            ReviewsCommand = new RelayCommand(Reviews_Accelerator);
+            DemographicsCommand = new RelayCommand(Demographics_Accelerator);
+            LoadCountries();
+            LoadLanguages();
             Update();
         }
+
+        
+        public void LoadCountries()
+        {
+            List<string> listOfCountries = LocationService.GetInstance().GetCountries();
+            mainWindow.CountryTextBox.ItemsSource = listOfCountries;
+        }
+        public void LoadLanguages()
+        {
+            List<string> listOfLanguages = LanguageService.GetInstance().GetLanguages();
+            mainWindow.LanguageTextBox.ItemsSource = listOfLanguages;
+        }
+
+        public void CityTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(mainWindow.CityTextBox.SelectedItem != null)
+            tours.dailyToursControlViewModel.SearchByCity(mainWindow.CityTextBox.SelectedItem.ToString());
+        }
+
+        public void LanguageTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tours.dailyToursControlViewModel.SearchByLanguage(mainWindow.LanguageTextBox.SelectedItem.ToString());
+        }
+
+        public void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(mainWindow.CountryTextBox.SelectedItem.ToString());
+            mainWindow.CityTextBox.ItemsSource = listOfCities;
+            mainWindow.CityTextBox.Focus();
+            mainWindow.CityTextBox.IsDropDownOpen = true;
+            mainWindow.CityTextBox.IsEnabled = true;
+            tours.dailyToursControlViewModel.SearchByCountry(mainWindow.CountryTextBox.SelectedItem.ToString());
+        }
+
+        public void Capacity_TextChanged(object sender, TextChangedEventArgs e) 
+        {
+            if(mainWindow.Capacity.Text == "")
+                mainWindow.Capacity.Text = "0";
+            else if (Convert.ToInt32(mainWindow.Capacity.Text) < 0)
+                mainWindow.Capacity.Text = "0";
+            tours.dailyToursControlViewModel.SearchByCapacity(Convert.ToInt32(mainWindow.Capacity.Text));
+        }
+
+        public void CapacityUp_Click(object sender, RoutedEventArgs e)
+        {
+            int number;
+            if (mainWindow.Capacity.Text != "") number = Convert.ToInt32(mainWindow.Capacity.Text);
+            else number = 0;
+
+            mainWindow.Capacity.Text = Convert.ToString(number + 1);
+        }
+
+        public void CapacityDown_Click(object sender, RoutedEventArgs e)
+        {
+            int number;
+            if (mainWindow.Capacity.Text != "") number = Convert.ToInt32(mainWindow.Capacity.Text);
+            else number = 0;
+            
+            mainWindow.Capacity.Text = Convert.ToString(number - 1);
+        }
+
+
+        public void Duration_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (mainWindow.Duration.Text == "")
+                mainWindow.Duration.Text = "0";
+            else if (Convert.ToInt32(mainWindow.Duration.Text) < 0)
+                mainWindow.Duration.Text = "0";
+            tours.dailyToursControlViewModel.SearchByDuration(Convert.ToInt32(mainWindow.Duration.Text));
+        }
+
+        public void DurationUp_Click(object sender, RoutedEventArgs e)
+        {
+            int number;
+            if (mainWindow.Duration.Text != "") number = Convert.ToInt32(mainWindow.Duration.Text);
+            else number = 0;
+
+            mainWindow.Duration.Text = Convert.ToString(number + 1);
+        }
+
+        public void DurationDown_Click(object sender, RoutedEventArgs e)
+        {
+            int number;
+            if (mainWindow.Duration.Text != "") number = Convert.ToInt32(mainWindow.Duration.Text);
+            else number = 0;
+
+            mainWindow.Duration.Text = Convert.ToString(number - 1);
+        }
+
 
         public void ScheduleTourClick(object sender, RoutedEventArgs e)
         {
@@ -37,10 +147,29 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         }
 
+        public void ScheduleTour_Accelerator()
+        {
+            AddTourWindow tourWindow = new AddTourWindow(_user);
+            tourWindow.ShowDialog();
+        }
+
         public void DailyToursClick(object sender, RoutedEventArgs e)
         {
 
 
+            DailyToursWindow dailyWindow = new DailyToursWindow(_user);
+
+            if (ongoingTourCheck() == 0)
+            {
+
+                dailyWindow.dailyToursWindowViewModel.BeginButtonClickedWindow += (s, e) => DailyToursWindow_SomeEventHandler(s, e);
+                dailyWindow.dailyToursWindowViewModel.EndButtonClickedWindow += (s, e) => DailyToursWindow_EndEventHandlerDaily(s, e);
+                dailyWindow.ShowDialog();
+            }
+        }
+
+        public void DailyTours_Accelerator()
+        {
             DailyToursWindow dailyWindow = new DailyToursWindow(_user);
 
             if (ongoingTourCheck() == 0)
@@ -59,7 +188,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 if (time.Status == "ongoing")
                 {
                     CheckpointsView checkpointsWindow = new CheckpointsView(time.TourId, time.Time);
-                    checkpointsWindow.EndButtonClickedMain += (s, e) => DailyToursWindow_EndEventHandlerMain(s, e);
+                    checkpointsWindow.checkpointsViewModel.EndButtonClickedMain += (s, e) => DailyToursWindow_EndEventHandlerMain(s, e);
 
                     checkpointsWindow.ShowDialog();
                     return 1;
@@ -68,6 +197,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return 0;
         }
 
+        public void OngoingTour_Click(object sender, RoutedEventArgs e)
+        {
+            if(ongoingTourCheck() == 0)
+            {
+                MessageBox.Show("There are no ongoing tours currently");
+            }
+        }
 
         public void Update()
         {
@@ -103,7 +239,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourDemographics.Show();
         }
 
+        public void Demographics_Accelerator()
+        {
+            TourDemographics tourDemographics = new TourDemographics();
+            tourDemographics.Show();
+        }
         public void Reviews_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ReviewsWindow reviewsWindow = new ReviewsWindow(_user);
+            reviewsWindow.Show();
+        }
+
+        public void Reviews_Accelerator()
         {
             ReviewsWindow reviewsWindow = new ReviewsWindow(_user);
             reviewsWindow.Show();
@@ -134,16 +281,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void DailyToursWindow_EndEventHandlerMain(object sender, BeginButtonClickedEventArgs e)
         {
-            OnEndButtonClickedMain(new BeginButtonClickedEventArgs(e.TourId, e.StartTime));
+            ChangeTourStatusPassed(e.TourId, e.StartTime);
+            tours.dailyToursControlViewModel.DailyTourCard_EndButtonClicked(sender, e);
         }
 
         public void OnEndButtonClickedMain(BeginButtonClickedEventArgs e)
         {
-            ChangeTourStatusPassed(e.TourId, e.StartTime);
+           
         }
 
-
-
-
+        public void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tours.dailyToursControlViewModel.SearchTourByName(((TextBox)sender).Text);
+        }
     }
 }

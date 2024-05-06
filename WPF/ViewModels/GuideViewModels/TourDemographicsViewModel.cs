@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using BookingApp.Application.UseCases;
+using LiveCharts;
+using LiveCharts.Wpf;
+using System.Collections.ObjectModel;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -74,11 +77,20 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         }
 
         public List<int> times { get; set; }
-        
+
+        private SeriesCollection _pieSeriesCollection;
+        public SeriesCollection PieSeriesCollection
+        {
+            get { return _pieSeriesCollection; }
+            set
+            {
+                _pieSeriesCollection = value;
+                OnPropertyChanged();
+            }
+        }
 
 
 
-   
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TourDemographics tourDemographics { get; set; }  
@@ -102,11 +114,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Middle = FindMiddle(FindMostReserved());
             Above50 = FindAbove50(FindMostReserved());
 
+           
+
             times = FindYears();
             
             tourDemographics.demographicsControl.demographicsControlViewModel.StatsButtonClickedControl += (s,e) => OnStatsButtonClicked_Handler(s,e);
-            Update();
+            UpdatePieChart();
             
+
         }
 
         public void Update()
@@ -114,6 +129,27 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         }
 
+        private void UpdatePieChart()
+        {
+            PieSeriesCollection = new SeriesCollection
+        {
+            new PieSeries
+            {
+                Title = "Underage",
+                Values = new ChartValues<double> { Sub18 }
+            },
+            new PieSeries
+            {
+                Title = "Adult",
+                Values = new ChartValues<double> { Middle }
+            },
+            new PieSeries
+            {
+                Title = "Elderly",
+                Values = new ChartValues<double> { Above50 }
+            }
+        };
+        }
 
         public Tour FindMostReserved()
         {
@@ -248,6 +284,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Above50 = FindAbove50(t);
 
             TourName = TourService.GetInstance().GetById(e.TourId).Name;
+
+            UpdatePieChart();
         }
 
         public void AllTime_Click(object sender, RoutedEventArgs e)
@@ -256,6 +294,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Middle = FindMiddle(FindMostReserved());
             Above50 = FindAbove50(FindMostReserved());
             TourName = FindMostReserved().Name;
+            UpdatePieChart();
         }
 
         public void yearSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -266,6 +305,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Middle = FindMiddle(FindMostReservedForYear(year));
             Above50 = FindAbove50(FindMostReservedForYear(year));
             TourName = FindMostReservedForYear(year).Name;  
+            UpdatePieChart();
         }
 
         public void yearSelectionChanged_Click(object sender, RoutedEventArgs e)
@@ -276,6 +316,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Middle = FindMiddle(FindMostReservedForYear(year));
             Above50 = FindAbove50(FindMostReservedForYear(year));
             TourName = FindMostReservedForYear(year).Name;
+            UpdatePieChart();
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.View.PathfinderViews.Componentss;
 using BookingApp.WPF.ViewModels.GuideViewModels;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,8 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        
+
         private void DailyTourCard_BeginButtonClicked(object sender, BeginButtonClickedEventArgs e)
         {
             dailyToursControlViewModel.DailyTourCard_BeginButtonClicked(sender, e);
@@ -86,6 +89,7 @@ namespace BookingApp.View.PathfinderViews
         public void OnEndButtonClicked(BeginButtonClickedEventArgs e)
         {
             dailyToursControlViewModel.OnEndButtonClicked(e);
+          
         }
     }
 }

@@ -76,6 +76,9 @@
     <None Remove="Resources\Images\ReviewImages\seventh.jpg" />
     <None Remove="Resources\Images\ReviewImages\sixth.jpg" />
     <None Remove="Resources\Images\ReviewImages\third.jpg" />
+    <None Remove="Resources\Images\TourImages\20221120_100611.jpg" />
+    <None Remove="Resources\Images\TourImages\image1.jpg" />
+    <None Remove="Resources\Images\TourImages\IMG_1568.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -273,8 +276,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Resources\Images\TourImages\image1.jpg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+	  <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	  <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
 	</ItemGroup>

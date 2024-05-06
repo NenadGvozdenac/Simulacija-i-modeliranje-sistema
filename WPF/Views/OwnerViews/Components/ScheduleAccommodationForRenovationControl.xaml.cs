@@ -2,6 +2,7 @@
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,8 @@ public partial class ScheduleAccommodationForRenovationControl : UserControl
         Accommodation = accommodation;
         lastRenovationDate = AccommodationRenovationService.GetInstance().GetLastRenovationDate(accommodation.Id);
         LoadFirstImage();
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void LoadFirstImage()

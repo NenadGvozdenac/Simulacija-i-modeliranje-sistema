@@ -47,7 +47,7 @@
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Statistics}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateStatisticsPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc GuestsFeedback}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestFeedbackPage}"/>
             </StackPanel>
-            <ScrollViewer Grid.Column="1">
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
                 <Grid Grid.Column="1" x:Name="MainPanel">
 
                 </Grid>

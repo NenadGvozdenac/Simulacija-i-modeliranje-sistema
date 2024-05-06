@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,8 @@ public partial class ReservationRescheduling : UserControl
         _reservationReschedulingPage = reservationReschedulingPage;
         _reservationReschedulingCardViewModel = new ReservationReschedulingCardViewModel(accommodationReservationMoving);
         DataContext = _reservationReschedulingCardViewModel;
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

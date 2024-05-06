@@ -9,7 +9,10 @@
     <UserControl.Resources>
         <local:UppercaseReservationtypeConverter x:Key="UppercaseReservationtypeConverter"/>
     </UserControl.Resources>
-    <Border Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown" Style="{StaticResource ShadowCard}">
+    <Border x:Name="Border" Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown" Style="{StaticResource ShadowCard}" RenderTransformOrigin="0.5, 0.5">
+        <Border.RenderTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Border.RenderTransform>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>

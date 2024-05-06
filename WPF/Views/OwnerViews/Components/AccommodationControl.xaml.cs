@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,9 @@ public partial class AccommodationControl : UserControl
         InitializeComponent();
         AccommodationCardViewModel = new AccommodationCardViewModel(this, accommodation);
         DataContext = AccommodationCardViewModel;
+
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void AccommodationClick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

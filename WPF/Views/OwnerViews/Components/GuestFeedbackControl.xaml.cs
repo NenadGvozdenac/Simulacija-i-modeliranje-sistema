@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 
 namespace BookingApp.WPF.Views.OwnerViews.Components;
 
@@ -26,6 +27,8 @@ public partial class GuestFeedbackControl : UserControl
         DetailedGuestFeedbackViewModel = new DetailedGuestFeedbackViewModel(accommodationReview);
         DataContext = DetailedGuestFeedbackViewModel;
         InitializeComponent();
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void Card_MouseDown(object sender, MouseButtonEventArgs e)

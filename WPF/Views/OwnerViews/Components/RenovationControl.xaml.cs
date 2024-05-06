@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using BookingApp.WPF.Views.OwnerViews.MainWindowWrappers;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,6 +17,8 @@ public partial class RenovationControl : UserControl
 
         renovationCardViewModel = new(this, renovation);
         DataContext = renovationCardViewModel;
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

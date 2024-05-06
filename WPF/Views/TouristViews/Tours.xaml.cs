@@ -82,5 +82,10 @@ namespace BookingApp.WPF.Views.TouristViews
             toursViewModel.DaysOfStay_TextChanged(sender, e);
         }
 
+        public void ClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            toursViewModel.ClearFilter_Click();
+        }
+
     }
 }

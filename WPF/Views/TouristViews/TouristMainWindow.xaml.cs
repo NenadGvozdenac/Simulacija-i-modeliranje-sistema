@@ -31,7 +31,10 @@ namespace BookingApp.WPF.Views.TouristViews
             Update(user);
         }
 
-        
+        public void TourReservation(Tour tour, User user)
+        {
+            touristMainWindowViewModel.TourReservation(tour, user);
+        }
         public void ShowTourDetails(int tourId)
         {
             touristMainWindowViewModel.ShowTourDetails(tourId);

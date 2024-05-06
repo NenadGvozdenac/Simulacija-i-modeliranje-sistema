@@ -143,6 +143,11 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ToursView.CountryComboBox.SelectedItem == null)
+            {
+                FilterTours();
+                return;
+            }
             List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(ToursView.CountryComboBox.SelectedItem.ToString());
             ToursView.CityComboBox.ItemsSource = listOfCities;
             ToursView.CityComboBox.Focus();
@@ -203,6 +208,15 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             if (number < minValueDaysOfStay) ToursView.DaysOfStay.Text = minValueDaysOfStay.ToString();
             ToursView.DaysOfStay.SelectionStart = ToursView.DaysOfStay.Text.Length;
             FilterTours();
+        }
+        public void ClearFilter_Click()
+        {
+            ToursView.LanguageComboBox.Text = "";
+            ToursView.CountryComboBox.Text = "";
+            ToursView.CityComboBox.IsEnabled = false;
+            ToursView.CityComboBox.Text = "";
+            ToursView.DaysOfStay.Text = "0";
+            ToursView.GuestNumber.Text = "1";
         }
     }
 }

@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Label Content="Tour requests:" FontStyle="Italic" FontSize="50" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Image MouseLeftButtonDown="Add_MouseLeftButtonDown" Source="/Resources/Assets/plus-symbol-button.png" Margin="712,22,27,22"/>
         </Grid>
         <Grid Grid.Row="1">
             

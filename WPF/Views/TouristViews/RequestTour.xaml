@@ -23,23 +23,27 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock Text="Country:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0"/>
-                <ComboBox x:Name="CountryComboBox" IsEditable="False" Margin="118,26,0,461"/>
+                <ComboBox x:Name="CountryComboBox" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" Margin="118,26,0,461"/>
                 <TextBlock Text="City:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,74,0,0"/>
                 <ComboBox x:Name="CityComboBox" IsEditable="False" Margin="118,74,0,413"/>
                 <TextBlock Text="Language:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,129,0,0"/>
-                <ComboBox x:Name="LanguageComboBox" IsEditable="False" Margin="147,130,0,357"/>
-                <TextBlock Text="Description:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,190,0,0"/>
+                <ComboBox x:Name="LanguageComboBox" Margin="147,130,0,357"/>
+                <TextBlock Text="Description:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,220,0,0"/>
                 <TextBox x:Name="DescriptionBox" HorizontalAlignment="Center" VerticalAlignment="Top" Height="208" Width="283" Margin="0,260,0,0"/>
                 <Border BorderBrush="Black" BorderThickness="0,0,1,0"/>
             </Grid>
             <Grid Grid.Column="1">
                 <TextBlock Text="Guest number:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,29,0,0"/>
-
+                <TextBox x:Name="GuestNumberText" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" Margin="240,30,0,0"/>
                 <TextBlock Text="Name:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,97,0,0"/>
-                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,98,0,0"/>
+                <TextBox  x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,98,0,0"/>
                 <TextBlock Text="Last name:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,161,0,0"/>
-                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,162,0,0"/>
+                <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,162,0,0"/>
                 <TextBlock Text="Age:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,220,0,0"/>
+                <TextBox x:Name="GuestAgeText" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" Margin="112,221,0,0"/>
+                <Button Click="AddTourist_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="59" Margin="304,221,0,0">
+                    <Image Source="/Resources/Assets/plus-symbol-button.png"/>
+                </Button>
                 <DataGrid Name="TouristDataGrid" ItemsSource="{Binding _tourists}" CanUserAddRows="False" AutoGenerateColumns="False" Margin="10,291,25,26">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
@@ -48,6 +52,12 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
+            </Grid>
+            <Grid Grid.Column="2">
+                <TextBlock Text="Begin Date:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,29,0,0"/>
+                <DatePicker FontSize="15" x:Name="BeginDatePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="200" Margin="21,78,0,0"/>
+                <TextBlock Text="End Date:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,220,0,0"/>
+                <DatePicker FontSize="15" x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="200" Margin="22,285,0,0"/>
             </Grid>
         </Grid>
     </Grid>

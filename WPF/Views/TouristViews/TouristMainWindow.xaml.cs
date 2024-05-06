@@ -87,6 +87,14 @@ namespace BookingApp.WPF.Views.TouristViews
         {
             touristMainWindowViewModel.Notifications_Click(sender, e);
         }
+        public void Requests_Click(object sender, RoutedEventArgs e)
+        {
+            touristMainWindowViewModel.Requests_Click(sender, e);
+        }
+        public void AddRequest(User user)
+        {
+            touristMainWindowViewModel.AddRequest(user);
+        }
 
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {

@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.OwnerViews.Components.EnterNewLocationModal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ns="clr-namespace:BookingApp.Application.Localization" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components" 
+             xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="350">
+    <Border BorderBrush="{DynamicResource CardBorder}" Style="{StaticResource ShadowCard}">
+        <Grid Background="MintCream">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="15" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                <Label Content="{ns:Loc EnterCity}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <AdornerDecorator>
+                    <TextBox FontSize="14" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="NameTextBox" Margin="5 0" Height="30" VerticalContentAlignment="Center" Text="{Binding City}">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center" Text="{ns:Loc EnterCity}"/>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="15" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                <Label Content="{ns:Loc EnterCountry}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
+                <AdornerDecorator>
+                    <TextBox FontSize="14" Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" x:Name="CountryTextBox" Margin="5 0" Height="30" VerticalContentAlignment="Center" Text="{Binding Country}">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock FontSize="16" VerticalAlignment="Center" Text="{ns:Loc EnterCountry}"/>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+            </StackPanel>
+
+            <Button Grid.Row="2" Grid.Column="0" Margin="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="30" Content="{ns:Loc Cancel}" FontFamily="{StaticResource Verdana}" FontSize="15" Click="CancelButton_Click" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}"/>
+            
+            <Button Grid.Row="2" Grid.Column="1" Margin="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="30" Content="{ns:Loc Confirm}" FontFamily="{StaticResource Verdana}" FontSize="15" Click="AddButton_Click" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}"/>
+        </Grid>
+    </Border>
+</UserControl>

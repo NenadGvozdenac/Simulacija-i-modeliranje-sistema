@@ -255,8 +255,14 @@
   <data name="EnterAccommodationName" xml:space="preserve">
     <value>🔍 Ukucaj naziv smeštaja...</value>
   </data>
+  <data name="EnterCity" xml:space="preserve">
+    <value>Dodaj grad</value>
+  </data>
   <data name="EnterComment" xml:space="preserve">
     <value>📅 Ukucaj željeni komentar...</value>
+  </data>
+  <data name="EnterCountry" xml:space="preserve">
+    <value>Dodaj državu</value>
   </data>
   <data name="EnterDaysBeforeReservationIsFinal" xml:space="preserve">
     <value>📅 Ukucaj broj dana pred finalizaciju rezervacije...</value>

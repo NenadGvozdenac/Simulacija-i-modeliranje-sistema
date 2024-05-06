@@ -282,7 +282,7 @@ public partial class MainPageViewModel : ObservableObject
 
     public void ReservationsClicked()
     {
-        _ =AnimateIn(_accommodationReservationWrapper);
+        _ = AnimateIn(_accommodationReservationWrapper);
         SetActiveButton(mainPage.ReservationsButton);
     }
 

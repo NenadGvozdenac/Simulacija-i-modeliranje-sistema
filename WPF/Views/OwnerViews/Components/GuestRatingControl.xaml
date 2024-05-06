@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.Components"
              mc:Ignorable="d" Height="115" Width="365">
-    <Border BorderBrush="Black" BorderThickness="1">
+    <Border x:Name="Border"  Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="EyeButton_MouseDown"  Style="{StaticResource ShadowCard}" RenderTransformOrigin="0.5, 0.5">
+        <Border.RenderTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Border.RenderTransform>
         <Grid Background="{DynamicResource Card}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
@@ -18,10 +21,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderBrush="Lavender" BorderThickness="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Margin="5">
+            <Border BorderBrush="{DynamicResource CardBorder}" BorderThickness="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Margin="5">
                 <Image x:Name="Image" Stretch="Fill" Source="../../../../Resources/Assets/default_user.png"/>
             </Border>
-            <Label x:Name="UserName" Content="{Binding GuestRatingDTO.Guest.Username}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
+            <Label Foreground="{DynamicResource ForegroundBrush}" x:Name="UserName" Content="{Binding GuestRatingDTO.Guest.Username}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 0 0 0">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
@@ -38,7 +41,6 @@
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Image x:Name="EyeButton" Source="..\..\..\..\Resources\Assets\eye.png" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="10 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ImageHover}" MouseDown="EyeButton_MouseDown"/>
         </Grid>
     </Border>
 </UserControl>

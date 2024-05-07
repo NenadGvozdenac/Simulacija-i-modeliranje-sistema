@@ -16,6 +16,7 @@
     <None Remove="Resources\Assets\back_left_arrow_white.png" />
     <None Remove="Resources\Assets\bell.224x256.png" />
     <None Remove="Resources\Assets\checkbox-checked.256x256.png" />
+    <None Remove="Resources\Assets\checkmark.svg" />
     <None Remove="Resources\Assets\chevron-left.293x512.png" />
     <None Remove="Resources\Assets\chevron-right.295x512.png" />
     <None Remove="Resources\Assets\book.224x256.png" />
@@ -26,6 +27,7 @@
     <None Remove="Resources\Assets\flag-red.255x256.png" />
     <None Remove="Resources\Assets\hammer-and-wrench.512x512.png" />
     <None Remove="Resources\Assets\head-lightbulb-outline.232x256.png" />
+    <None Remove="Resources\Assets\heavy-check-mark.256x256.png" />
     <None Remove="Resources\Assets\home.256x245.png" />
     <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
@@ -56,6 +58,8 @@
     <None Remove="Resources\Assets\users.png" />
     <None Remove="Resources\Assets\user_profile_icon.png" />
     <None Remove="Resources\Assets\view.png" />
+    <None Remove="Resources\Assets\x-letter.256x256.png" />
+    <None Remove="Resources\Assets\x.svg" />
     <None Remove="Resources\Images\AccommodationImages\20221120_100611.jpg" />
     <None Remove="Resources\Images\AccommodationImages\bars.512x308.png" />
     <None Remove="Resources\Images\AccommodationImages\fifth.jpg" />
@@ -101,6 +105,9 @@
     <Content Include="Resources\Assets\checkbox-checked.256x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\checkmark.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\chevron-left.293x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -131,6 +138,9 @@
     <Content Include="Resources\Assets\head-lightbulb-outline.232x256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\heavy-check-mark.256x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\home.256x245.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -159,6 +169,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\three_dots_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\x-letter.256x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\x.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Assets\accommodations.png">

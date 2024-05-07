@@ -42,9 +42,9 @@
                 </AdornerDecorator>
             </StackPanel>
 
-            <Button Grid.Row="2" Grid.Column="0" Margin="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="30" Content="{ns:Loc Cancel}" FontFamily="{StaticResource Verdana}" FontSize="15" Click="CancelButton_Click" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}"/>
-            
-            <Button Grid.Row="2" Grid.Column="1" Margin="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="30" Content="{ns:Loc Confirm}" FontFamily="{StaticResource Verdana}" FontSize="15" Click="AddButton_Click" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}"/>
+            <Button Grid.Row="2" Grid.Column="0" Margin="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="30" Content="{ns:Loc Cancel}" FontFamily="{StaticResource Verdana}" FontSize="15" Command="{Binding CancelAddingLocationCommand}" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}"/>
+
+            <Button Grid.Row="2" Grid.Column="1" Margin="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="30" Content="{ns:Loc Confirm}" FontFamily="{StaticResource Verdana}" FontSize="15" Command="{Binding AddLocationCommand}" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}"/>
         </Grid>
     </Border>
 </UserControl>

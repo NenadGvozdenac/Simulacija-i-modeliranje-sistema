@@ -134,6 +134,7 @@ public partial class AddAccommodationViewModel : ObservableObject
 
             EnterNewLocationModal enterNewLocationModal = new EnterNewLocationModal(this);
 
+            Page.AddLocationModalPanel.Children.Clear();
             Page.AddLocationModalPanel.Children.Add(enterNewLocationModal);
             Page.AddLocationModalPanel.Visibility = Visibility.Visible;
 

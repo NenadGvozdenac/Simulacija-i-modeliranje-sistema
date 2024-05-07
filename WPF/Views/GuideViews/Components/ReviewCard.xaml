@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews.Components"
-             mc:Ignorable="d"  Height="100" Width="500">
+             mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="700">
     <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="5" Color="Gray" Opacity="0.5"/>
+        </Border.Effect>
         <Grid Background="white">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -13,7 +16,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Border BorderThickness="1" BorderBrush="Black"/>
-                <Image Source="{Binding ReviewImages[0].Path}" Stretch="Fill" Margin="17,15,17,13"/>
+                <Image Source="{Binding ReviewImages[0].Path}" Stretch="Fill"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -28,31 +31,31 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
                     <Border Margin="10,0,0,0"></Border>
-                    <Image x:Name="knowImage" Source="..\..\..\..\Resources\Assets\book.224x256.png" Height="20" Width="36"/>
-                    <TextBlock Width="30" Text="{Binding GuideKnowledge}"></TextBlock>
+                    <Image x:Name="knowImage" Source="..\..\..\..\Resources\Assets\book.224x256.png" Height="40" Width="70"/>
+                    <TextBlock Width="30" Text="{Binding GuideKnowledge}" VerticalAlignment="Center" FontSize="20"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                     <Border Margin="10,0,0,0"></Border>
-                    <Image x:Name="languageImage" Source="..\..\..\..\Resources\Assets\language.png" Height="20" Width="36"/>
-                    <TextBlock Width="30" Text="{Binding GuideLanguage}"></TextBlock>
+                    <Image x:Name="languageImage" Source="..\..\..\..\Resources\Assets\language.png" Height="40" Width="70"/>
+                    <TextBlock Width="30" Text="{Binding GuideLanguage}" FontSize="20" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                     <Border Margin="10,0,0,0"></Border>
-                    <Image x:Name="interestingImage" Source="..\..\..\..\Resources\Assets\head-lightbulb-outline.232x256.png" Height="20" Width="36"/>
-                    <TextBlock Width="30" Text="{Binding TourInterestingness}"></TextBlock>
+                    <Image x:Name="interestingImage" Source="..\..\..\..\Resources\Assets\head-lightbulb-outline.232x256.png" Height="40" Width="70"/>
+                    <TextBlock Width="30" Text="{Binding TourInterestingness}" FontSize="20" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal">
-                    <Border Margin="50,0,0,0"></Border>
-                    <Image x:Name="reportImage" Source="..\..\..\..\Resources\Assets\flag-red.255x256.png" Height="20" Width="36" Cursor="Hand"  MouseLeftButtonDown="Report_click"/>
+                    <Border Margin="120,0,0,0"></Border>
+                    <Image x:Name="reportImage" Source="..\..\..\..\Resources\Assets\flag-red.255x256.png" Height="40" Width="70" Cursor="Hand"  MouseLeftButtonDown="Report_click"/>
                 </StackPanel>
-                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="{Binding Feedback}"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="{Binding Feedback}" FontSize="20"></TextBlock>
                 <StackPanel Grid.Row="1" Grid.Column="3">
                     <Border Margin="0,10,0,0"></Border>
-                    <TextBlock Text="{Binding UserName}"></TextBlock>
+                    <TextBlock Text="{Binding UserName}" FontSize="20" Margin="100,0,0,0"></TextBlock>
                     <Border Margin="0,10,0,0"></Border>
-                    <TextBlock x:Name="statusTextblock" Text="{Binding Status}"></TextBlock>
+                    <TextBlock x:Name="statusTextblock" Text="{Binding Status}" FontSize="20" Margin="100,0,0,0"></TextBlock>
                     <TextBlock x:Name="idTextblock" Text="{Binding Id}" Visibility="Collapsed"></TextBlock>
-                    <TextBlock Text="{Binding Checkpoint}"></TextBlock>
+                    <TextBlock Text="{Binding Checkpoint}" FontSize="20" Margin="100,0,0,0"></TextBlock>
                 </StackPanel>
             </Grid>
         </Grid>

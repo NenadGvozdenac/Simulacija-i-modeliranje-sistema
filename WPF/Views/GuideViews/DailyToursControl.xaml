@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
              xmlns:components="clr-namespace:BookingApp.View.PathfinderViews.Componentss"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400" Background="White">
+             d:DesignHeight="400" d:DesignWidth="400" Background="#f2f6fa">
     <Grid>
         <ScrollViewer>
             <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->

@@ -38,6 +38,9 @@ public partial class GuestRatingControlPending : UserControl
             EyeButton.Visibility = Visibility.Visible;
             HoverAnimation hoverAnimation = new HoverAnimation();
             hoverAnimation.AnimateHover(this.Border);
+        } else
+        {
+            XImage.Visibility = Visibility.Visible;
         }
     }
 

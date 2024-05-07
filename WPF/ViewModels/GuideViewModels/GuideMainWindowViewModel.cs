@@ -65,13 +65,70 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void CityTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(mainWindow.CityTextBox.SelectedItem != null)
-            tours.dailyToursControlViewModel.SearchByCity(mainWindow.CityTextBox.SelectedItem.ToString());
+            string country = " ";
+            if (mainWindow.CountryTextBox.SelectedItem != null)
+            {
+                country = mainWindow.CountryTextBox.SelectedItem.ToString();
+            }
+
+            string city = " ";
+            if (mainWindow.CityTextBox.SelectedItem != null)
+            {
+                city = mainWindow.CityTextBox.SelectedItem.ToString();
+            }
+
+            string language = " ";
+            if (mainWindow.LanguageTextBox.SelectedItem != null)
+            {
+                language = mainWindow.LanguageTextBox.SelectedItem.ToString();
+            }
+
+            int capacity = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Capacity.Text))
+            {
+                capacity = Convert.ToInt32(mainWindow.Capacity.Text);
+            }
+            int duration = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Duration.Text))
+            {
+                duration = Convert.ToInt32(mainWindow.Duration.Text);
+            }
+            string search = mainWindow.searchBox.Text;
+            tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
 
         public void LanguageTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tours.dailyToursControlViewModel.SearchByLanguage(mainWindow.LanguageTextBox.SelectedItem.ToString());
+            string country = " ";
+            if (mainWindow.CountryTextBox.SelectedItem != null)
+            {
+                country = mainWindow.CountryTextBox.SelectedItem.ToString();
+            }
+
+            string city = " ";
+            if (mainWindow.CityTextBox.SelectedItem != null)
+            {
+                city = mainWindow.CityTextBox.SelectedItem.ToString();
+            }
+
+            string language = " ";
+            if (mainWindow.LanguageTextBox.SelectedItem != null)
+            {
+                language = mainWindow.LanguageTextBox.SelectedItem.ToString();
+            }
+
+            int capacity = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Capacity.Text))
+            {
+                capacity = Convert.ToInt32(mainWindow.Capacity.Text);
+            }
+            int duration = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Duration.Text))
+            {
+                duration = Convert.ToInt32(mainWindow.Duration.Text);
+            }
+            string search = mainWindow.searchBox.Text;
+            tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
 
         public void CountryTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,16 +138,71 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             mainWindow.CityTextBox.Focus();
             mainWindow.CityTextBox.IsDropDownOpen = true;
             mainWindow.CityTextBox.IsEnabled = true;
-            tours.dailyToursControlViewModel.SearchByCountry(mainWindow.CountryTextBox.SelectedItem.ToString());
+
+            string country = " ";
+            if (mainWindow.CountryTextBox.SelectedItem != null)
+            {
+                 country = mainWindow.CountryTextBox.SelectedItem.ToString();
+            }
+
+            string city = " ";
+            if (mainWindow.CityTextBox.SelectedItem != null)
+            {
+                city = mainWindow.CityTextBox.SelectedItem.ToString();
+            }
+
+            string language = " ";
+            if (mainWindow.LanguageTextBox.SelectedItem != null)
+            {
+                language = mainWindow.LanguageTextBox.SelectedItem.ToString();
+            }
+
+            int capacity = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Capacity.Text))
+            {
+                capacity = Convert.ToInt32(mainWindow.Capacity.Text);
+            }
+            int duration = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Duration.Text))
+            {
+                duration = Convert.ToInt32(mainWindow.Duration.Text);
+            }
+            string search = mainWindow.searchBox.Text;
+            tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
 
         public void Capacity_TextChanged(object sender, TextChangedEventArgs e) 
         {
-            if(mainWindow.Capacity.Text == "")
-                mainWindow.Capacity.Text = "0";
-            else if (Convert.ToInt32(mainWindow.Capacity.Text) < 0)
-                mainWindow.Capacity.Text = "0";
-            tours.dailyToursControlViewModel.SearchByCapacity(Convert.ToInt32(mainWindow.Capacity.Text));
+            string country = " ";
+            if (mainWindow.CountryTextBox.SelectedItem != null)
+            {
+                country = mainWindow.CountryTextBox.SelectedItem.ToString();
+            }
+
+            string city = " ";
+            if (mainWindow.CityTextBox.SelectedItem != null)
+            {
+                city = mainWindow.CityTextBox.SelectedItem.ToString();
+            }
+
+            string language = " ";
+            if (mainWindow.LanguageTextBox.SelectedItem != null)
+            {
+                language = mainWindow.LanguageTextBox.SelectedItem.ToString();
+            }
+
+            int capacity = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Capacity.Text))
+            {
+                capacity = Convert.ToInt32(mainWindow.Capacity.Text);
+            }
+            int duration = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Duration.Text))
+            {
+                duration = Convert.ToInt32(mainWindow.Duration.Text);
+            }
+            string search = mainWindow.searchBox.Text;
+            tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
 
         public void CapacityUp_Click(object sender, RoutedEventArgs e)
@@ -114,11 +226,36 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void Duration_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (mainWindow.Duration.Text == "")
-                mainWindow.Duration.Text = "0";
-            else if (Convert.ToInt32(mainWindow.Duration.Text) < 0)
-                mainWindow.Duration.Text = "0";
-            tours.dailyToursControlViewModel.SearchByDuration(Convert.ToInt32(mainWindow.Duration.Text));
+            string country = " ";
+            if (mainWindow.CountryTextBox.SelectedItem != null)
+            {
+                country = mainWindow.CountryTextBox.SelectedItem.ToString();
+            }
+
+            string city = " ";
+            if (mainWindow.CityTextBox.SelectedItem != null)
+            {
+                city = mainWindow.CityTextBox.SelectedItem.ToString();
+            }
+
+            string language = " ";
+            if (mainWindow.LanguageTextBox.SelectedItem != null)
+            {
+                language = mainWindow.LanguageTextBox.SelectedItem.ToString();
+            }
+
+            int capacity = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Capacity.Text))
+            {
+                capacity = Convert.ToInt32(mainWindow.Capacity.Text);
+            }
+            int duration = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Duration.Text))
+            {
+                duration = Convert.ToInt32(mainWindow.Duration.Text);
+            }
+            string search = mainWindow.searchBox.Text;
+            tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
 
         public void DurationUp_Click(object sender, RoutedEventArgs e)
@@ -292,7 +429,40 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void searchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            tours.dailyToursControlViewModel.SearchTourByName(((TextBox)sender).Text);
+            string country = " ";
+            if (mainWindow.CountryTextBox.SelectedItem != null)
+            {
+                country = mainWindow.CountryTextBox.SelectedItem.ToString();
+            }
+
+            string city = " ";
+            if (mainWindow.CityTextBox.SelectedItem != null)
+            {
+                city = mainWindow.CityTextBox.SelectedItem.ToString();
+            }
+
+            string language = " ";
+            if (mainWindow.LanguageTextBox.SelectedItem != null)
+            {
+                language = mainWindow.LanguageTextBox.SelectedItem.ToString();
+            }
+
+            int capacity = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Capacity.Text))
+            {
+                capacity = Convert.ToInt32(mainWindow.Capacity.Text);
+            }
+            int duration = 0;
+            if (!String.IsNullOrWhiteSpace(mainWindow.Duration.Text))
+            {
+                duration = Convert.ToInt32(mainWindow.Duration.Text);
+            }
+            string search = mainWindow.searchBox.Text;
+            tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
+
+
+
+
     }
 }

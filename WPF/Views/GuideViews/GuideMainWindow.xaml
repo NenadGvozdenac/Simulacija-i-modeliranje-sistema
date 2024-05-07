@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
+        xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls"
+        xmlns:ns="clr-namespace:BookingApp.Application.Localization"
         mc:Ignorable="d"
-        Title="GuideMainWindow" Height="450" Width="800">
+        Title="GuideMainWindow" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.InputBindings>
         <KeyBinding Command="{Binding ScheduleTourCommand}" Key="F1"/>
         <KeyBinding Command="{Binding DailyToursCommand}" Key="F2"/>
@@ -13,16 +15,16 @@
         <KeyBinding Command="{Binding DemographicsCommand}" Key="F5"/>
     </Window.InputBindings>
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Background=" #003580" Height="23">
-            <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick">
+        <Menu DockPanel.Dock="Top" Background=" #003580" Height="40">
+            <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick"  Height="40" FontSize="15" FontWeight="Bold">
                 
             </MenuItem>
 
 
-            <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick"></MenuItem>
+            <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick" FontSize="15" FontWeight="Bold"></MenuItem>
 
 
-            <MenuItem Header="Cancel tour (F3)" Foreground="#f2f6fa"></MenuItem>
+            <MenuItem Header="Cancel tour (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold"></MenuItem>
         </Menu>
        
     <Grid>
@@ -39,15 +41,15 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="1">
                     <StackPanel >
-                        <TextBlock Width="150" Text="Advanced options" TextAlignment="Center" TextDecorations="Underline" FontWeight="Bold"></TextBlock>
-                        <Border Height="10"/>
-                        <TextBlock Width="150" Text="Your reviews (F4)" TextAlignment="Center" MouseLeftButtonDown="Reviews_MouseLeftButtonDown" Cursor="Hand"></TextBlock>
-                        <Border Height="10"/>
-                        <TextBlock Width="150" Text="Tour demographics (F5)" TextAlignment="Center" MouseLeftButtonDown="Demographics_MouseLeftButtonDown" Cursor="Hand"></TextBlock>
-                        <Border Height="10"/>
-                        <TextBlock Width="150" Text="Complex tour requests (F6)" TextAlignment="Center"></TextBlock>
-                        <Border Height="10"/>
-                        <TextBlock Width="150" Text="Tour requests statistics (F7)" TextAlignment="Center"></TextBlock>
+                        <TextBlock Width="250" Text="Advanced options" TextAlignment="Center" TextDecorations="Underline" FontWeight="Bold" FontSize="25"></TextBlock>
+                        <Border Height="20"/>
+                        <TextBlock Width="150" Text="Your reviews (F4)" TextAlignment="Center" MouseLeftButtonDown="Reviews_MouseLeftButtonDown" Cursor="Hand" FontSize="20"></TextBlock>
+                        <Border Height="20"/>
+                        <TextBlock Width="250" Text="Tour demographics (F5)" TextAlignment="Center" MouseLeftButtonDown="Demographics_MouseLeftButtonDown" Cursor="Hand" FontSize="20"></TextBlock>
+                        <Border Height="20"/>
+                        <TextBlock Width="250" Text="Complex tour requests (F6)" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <Border Height="20"/>
+                        <TextBlock Width="250" Text="Tour requests statistics (F7)" TextAlignment="Center" FontSize="20"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="0">
@@ -63,33 +65,33 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextDecorations="Underline" FontWeight="Bold">Search by criteria</TextBlock>
+                    <TextBlock Width="210" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextDecorations="Underline" FontWeight="Bold" FontSize="25">Search by criteria</TextBlock>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
-                        <Border Margin="5,0,0,0"></Border>
+                        <Border Margin="10,0,0,0"></Border>
                         <StackPanel>
-                            <TextBlock HorizontalAlignment="Center">Country:</TextBlock>
-                            <ComboBox Height="30" Width="85" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged"></ComboBox>
+                            <TextBlock HorizontalAlignment="Center" FontSize="20">Country:</TextBlock>
+                            <ComboBox Height="50" Width="150" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged" FontSize="15"></ComboBox>
                         </StackPanel>
-                        <Border Margin="5,0,5,0"></Border>
+                        <Border Margin="10,0,30,0"></Border>
                         <StackPanel>
-                            <TextBlock HorizontalAlignment="Center">City:</TextBlock>
-                            <ComboBox Height="30" Width="85" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" SelectionChanged="CityBox_SelectionChanged"></ComboBox>
+                            <TextBlock HorizontalAlignment="Center" FontSize="20">City:</TextBlock>
+                            <ComboBox Height="50" Width="150" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" SelectionChanged="CityBox_SelectionChanged"></ComboBox>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Border Margin="0,0,10,0"></Border>
-                        <TextBlock VerticalAlignment="Center">capacity:</TextBlock>
-                        <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="20" Height="25" TextChanged="Capacity_TextChanged"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="20">capacity:</TextBlock>
+                        <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Capacity_TextChanged"/>
                         <StackPanel VerticalAlignment="Center">
-                            <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CapacityUp_Click">5</RepeatButton>
-                            <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="CapacityDown_Click">6</RepeatButton>
+                            <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CapacityUp_Click" Height="25">5</RepeatButton>
+                            <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="CapacityDown_Click" Height="25">6</RepeatButton>
                         </StackPanel>
-                        <Border Margin="0,0,10,0"></Border>
-                        <TextBlock VerticalAlignment="Center">Duration:</TextBlock>
-                        <TextBox Name="Duration" FontSize="17"  TextAlignment="Right" Width="20" Height="25" TextChanged="Duration_TextChanged"/>
+                        <Border Margin="0,0,75,0"></Border>
+                        <TextBlock VerticalAlignment="Center" FontSize="20">Duration:</TextBlock>
+                        <TextBox Name="Duration" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Duration_TextChanged"/>
                         <StackPanel VerticalAlignment="Center">
-                            <RepeatButton Name="durationNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DurationUp_Click">5</RepeatButton>
-                            <RepeatButton Name="durationDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="DurationDown_Click">6</RepeatButton>
+                            <RepeatButton Name="durationNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DurationUp_Click" Height="25">5</RepeatButton>
+                            <RepeatButton Name="durationDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="DurationDown_Click" Height="25">6</RepeatButton>
                         </StackPanel>
                     </StackPanel>
                     
@@ -100,8 +102,8 @@
                         <StackPanel/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Center">Language:</TextBlock>
-                        <ComboBox Width="100" Height="30" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged"></ComboBox>
+                        <TextBlock HorizontalAlignment="Center" FontSize="20">Language:</TextBlock>
+                        <ComboBox Width="150" Height="50" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged"></ComboBox>
                     </StackPanel>
                 </Grid>
             </Grid>   
@@ -117,9 +119,17 @@
                 <Grid Grid.Row="0">
                     <StackPanel Orientation="Horizontal">
                         <Border Margin="15,0,0,0"></Border>
-                        <TextBox  Width="400" Background="LightYellow" x:Name="searchBox" TextChanged="searchBox_TextChanged"></TextBox>
-                        <Border Margin="0,0,80,0"></Border>
-                        <Button HorizontalAlignment="Right" Click="OngoingTour_Click">Track ongoing tour</Button>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3">
+                            <AdornerDecorator>
+                                <TextBox  Width="1000" x:Name="searchBox" TextChanged="searchBox_TextChanged">
+                                <controls:WatermarkService.Watermark>
+                                    <TextBlock FontSize="16" VerticalAlignment="Center" Text="Search tours by name"/>
+                                </controls:WatermarkService.Watermark>
+                            </TextBox>
+                        </AdornerDecorator>
+                        </Border>
+                        <Border Margin="0,0,15,0"></Border>
+                        <Button HorizontalAlignment="Right" Click="OngoingTour_Click" Width="100" Margin="0,3,3,3">Ongoing tour</Button>
                     </StackPanel>
                 </Grid>
             </Grid>

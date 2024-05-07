@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="700">
     <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="5" Color="Gray" Opacity="0.5"/>
+        </Border.Effect>
         <Grid Background="#f2f6fa" Margin="10,20,10,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -14,7 +17,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Border BorderThickness="1" BorderBrush="Black"/>
-                <Image Source="{Binding Images[0].Path}" Stretch="Fill" Margin="39,33,17,22"/>
+                <Image Source="{Binding Images[0].Path}" Stretch="Fill"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -30,9 +33,10 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="27"/>
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17"/>
-                    <TextBlock  TextWrapping="Wrap" Text="," Height="19" Width="4" />
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16"/>
+                    <StackPanel>
+                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="104" Height="17" TextAlignment="Left"/>
+                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16"/>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="LanguageIcon" Source="..\..\..\..\Resources\Assets\language.png" Height="23"/>
@@ -40,21 +44,24 @@
                 </StackPanel>
                 <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="CapacityIcon" Source="..\..\..\..\Resources\Assets\users.png" Height="19" />
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Center"/>
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="DurationIcon" Source="..\..\..\..\Resources\Assets\hourglass.png" Height="20"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="51" Height="19" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="15" Height="20" TextAlignment="Center"/>
                     <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
+                    <Border Margin="10,0,0,0"></Border>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="387" Height="78"/>
-                    <Button Content="Stats" Height="26"  Width="58" VerticalAlignment="Center" HorizontalAlignment="Right" Click="TourStats_Click"/>
+                    <Button Content="Stats" Height="26"  Width="58" VerticalAlignment="Top" HorizontalAlignment="Right" Click="TourStats_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="369" VerticalAlignment="Top"/>
+                    <Border Margin="25,0,0,0"></Border>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="369" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"  TextAlignment="Right"  Width="102" VerticalAlignment="Top" x:Name="DateTextBlock" Visibility="Collapsed"/>
                     <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="IdTextBlock"></TextBlock>
                 </StackPanel>

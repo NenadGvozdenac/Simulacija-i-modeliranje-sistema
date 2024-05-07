@@ -322,6 +322,15 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2 - Može bolje.
+        /// </summary>
+        internal static string CouldBeBetterRB {
+            get {
+                return ResourceManager.GetString("CouldBeBetterRB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trenutna ocena smeštaja.
         /// </summary>
         internal static string CurrentAccommodationRating {
@@ -543,6 +552,15 @@ namespace BookingApp.Properties {
         internal static string EnterPrice {
             get {
                 return ResourceManager.GetString("EnterPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 - Odlično.
+        /// </summary>
+        internal static string ExcellentRB {
+            get {
+                return ResourceManager.GetString("ExcellentRB", resourceCulture);
             }
         }
         
@@ -979,6 +997,15 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 3 - OK.
+        /// </summary>
+        internal static string OKRB {
+            get {
+                return ResourceManager.GetString("OKRB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to U procesu.
         /// </summary>
         internal static string Ongoing {
@@ -1020,6 +1047,15 @@ namespace BookingApp.Properties {
         internal static string Pending {
             get {
                 return ResourceManager.GetString("Pending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 - Vrlo loše.
+        /// </summary>
+        internal static string PoorRB {
+            get {
+                return ResourceManager.GetString("PoorRB", resourceCulture);
             }
         }
         
@@ -1366,6 +1402,24 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rezervacije može da se pomeri.
+        /// </summary>
+        internal static string StatusCanBeMoved {
+            get {
+                return ResourceManager.GetString("StatusCanBeMoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rezervacije ne može da se pomeri.
+        /// </summary>
+        internal static string StatusCannotBeMoved {
+            get {
+                return ResourceManager.GetString("StatusCannotBeMoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status pomeranja rezervacije.
         /// </summary>
         internal static string StatusOfWantedReservationTimespan {
@@ -1425,6 +1479,15 @@ namespace BookingApp.Properties {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 - Vrlo dobro.
+        /// </summary>
+        internal static string VeryGoodRB {
+            get {
+                return ResourceManager.GetString("VeryGoodRB", resourceCulture);
             }
         }
         

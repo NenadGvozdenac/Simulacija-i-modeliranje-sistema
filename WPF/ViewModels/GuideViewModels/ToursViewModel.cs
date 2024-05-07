@@ -42,13 +42,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 if (time.Status == "scheduled" && DateTime.Now < time.Time)
                 {
                     Tour tour = new Tour();
+                    tour.Id = toura.Id;
                     tour.Name = toura.Name;
                     tour.Capacity = toura.Capacity;
                     tour.CurrentDate = time.Time;
                     tour.Location = LocationService.GetInstance().GetById(toura.LocationId);
-                    tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
-                    tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId); //fix
-                    tour.Id = toura.Id;
+                    tour.Images = new(TourImageService.GetInstance().GetImagesByTourId(tour.Id));
+                    tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId); //fix                    
                     tour.LocationId = toura.LocationId;
                     tour.LanguageId = toura.LanguageId;
                     tour.Duration = toura.Duration;

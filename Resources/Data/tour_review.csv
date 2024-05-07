@@ -1,3 +1,6 @@
 1|4|2|3|2|4|This tour was fantastic!|Valid
 2|4|2|4|2|4|This tour was not bad.|Invalid
 3|4|1|4|3|3|This tour was fantastic!|Invalid
+4|4|13|4|4|3|Tour was ok. I had a good time, but nothing special. |Invalid
+5|4|12|4|5|4|I had a fun time. Guide knew what he was talking about and i could understand him really well.|Invalid
+6|4|11|4|3|4|I enjoyed it. I just had a feeling guide was struggling with his language.|Invalid

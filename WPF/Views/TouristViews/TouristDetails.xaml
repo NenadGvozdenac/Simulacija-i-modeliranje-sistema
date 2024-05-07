@@ -32,8 +32,9 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Border BorderThickness="1,0,0,1" BorderBrush="Black" Margin="0,0,104,0"/>
-                    <Image Source="{Binding tourImage.Path}" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="198" Width="776" Margin="10,10,0,0"/>
+                    <Border BorderThickness="1,1,1,1" BorderBrush="Black" Margin="0,0,339,0">
+                        <Image Source="{Binding tourImage.Path}" Stretch="Fill" Margin="-1,-1,0,1"/>
+                    </Border>
                 </Grid>
                 <Grid Grid.Row="3">
                     <Image Source="/Resources/Assets/language.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="26" Margin="10,0,0,0"/>

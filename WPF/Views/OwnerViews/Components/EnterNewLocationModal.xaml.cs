@@ -1,6 +1,7 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
+using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,66 +24,14 @@ namespace BookingApp.WPF.Views.OwnerViews.Components;
 /// </summary>
 public partial class EnterNewLocationModal : UserControl
 {
-    private string _city;
-    public string City
-    {
-        get => _city;
-        set
-        {
-            if (value != null)
-            {
-                _city = value;
-            }
-        }
-    }
-
-    private string _country;
-    public string Country
-    {
-        get => _country;
-        set
-        {
-            if (value != null)
-            {
-                _country = value;
-            }
-        }
-    }
-
     private readonly AddAccommodationViewModel viewModel;
 
     public EnterNewLocationModal(AddAccommodationViewModel viewModel)
     {
         InitializeComponent();
-        DataContext = this;
         this.viewModel = viewModel;
-    }
 
-    private void AddButton_Click(object sender, RoutedEventArgs e)
-    {
-        this.viewModel.Location = string.Format("{0}, {1}", this.City, this.Country);
-
-        Location location = new Location
-        {
-            City = this.City,
-            Country = this.Country
-        };
-
-        LocationService.GetInstance().Add(location);
-
-        this.Visibility = Visibility.Collapsed;
-        Clear();
-    }
-
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        this.Visibility = Visibility.Collapsed;
-        Clear();
-    }
-
-    private void Clear()
-    {
-        this.City = "";
-        this.Country = "";
+        EnterLocationViewModel enterLocationViewModel = new EnterLocationViewModel(viewModel);
+        DataContext = enterLocationViewModel;
     }
 }

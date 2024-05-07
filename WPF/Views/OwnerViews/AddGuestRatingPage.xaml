@@ -14,13 +14,13 @@
     <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
         <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="11*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="Back_MouseDown"/>
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc GuestRating}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>

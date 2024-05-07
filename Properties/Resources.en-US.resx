@@ -600,6 +600,12 @@
   <data name="Statistics" xml:space="preserve">
     <value>Statistics</value>
   </data>
+  <data name="StatusCanBeMoved" xml:space="preserve">
+    <value>Reservation can be moved</value>
+  </data>
+  <data name="StatusCannotBeMoved" xml:space="preserve">
+    <value>Reservation can not be moved</value>
+  </data>
   <data name="StatusOfWantedReservationTimespan" xml:space="preserve">
     <value>Status of rescheduling</value>
   </data>

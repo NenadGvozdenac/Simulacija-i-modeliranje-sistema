@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
@@ -52,12 +53,12 @@ public class AccommodationReservationMovingDTO
 
         if (AccommodationReservationService.GetInstance().IsTimespanFree(wantedSpan, accommodation, AccommodationReservationMoving))
         {
-            StatusOfWantedTimespan = "Reservation can be moved to wanted timespan";
+            StatusOfWantedTimespan = TranslationSource.Instance["StatusCanBeMoved"];
             _statusColor = Brushes.Green;
         }
         else
         {
-            StatusOfWantedTimespan = "Reservation timespan is already reserved.";
+            StatusOfWantedTimespan = TranslationSource.Instance["StatusCannotBeMoved"];
             _statusColor = Brushes.Red;
         }
     }

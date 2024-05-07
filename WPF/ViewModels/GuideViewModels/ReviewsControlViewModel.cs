@@ -55,6 +55,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     review_copy.Status = review_temp.Status;
                     review_copy.ReservationId = 14;
                     review_copy.Checkpoint = "Katedrala";
+                    review_copy.ReviewImages = new(TourReviewImageService.GetInstance().GetImagesByTourId(review_copy.Id));
 
                     tourReviews.Add(review_copy);
                 }

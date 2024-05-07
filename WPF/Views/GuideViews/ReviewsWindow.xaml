@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews"
         mc:Ignorable="d"
-        Title="ReviewsWindow" Height="450" Width="700" SizeToContent="WidthAndHeight">
+        Title="ReviewsWindow" Height="820" Width="1500"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background=" #003580">
     <Grid>
         
     </Grid>

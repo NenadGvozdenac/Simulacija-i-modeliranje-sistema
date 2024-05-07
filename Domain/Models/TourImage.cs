@@ -9,6 +9,12 @@ namespace BookingApp.Domain.Models;
 
 public class TourImage : ISerializable
 {
+    public TourImage() { }  
+    public TourImage(string path)
+    {
+        Path = path;
+    }
+
     public int Id { get; set; }
     public int TourId { get; set; }
     public string Path { get; set; }

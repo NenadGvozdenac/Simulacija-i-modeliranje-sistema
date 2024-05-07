@@ -19,6 +19,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             _user = user;
             _reviewsWindow = reviewsWindow;
             var reviewsControl = new ReviewsControl(user);
+            reviewsControl.Width = 1200;
             _reviewsWindow.Content = reviewsControl;
 
         }

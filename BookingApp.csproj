@@ -79,6 +79,10 @@
     <None Remove="Resources\Images\TourImages\20221120_100611.jpg" />
     <None Remove="Resources\Images\TourImages\image1.jpg" />
     <None Remove="Resources\Images\TourImages\IMG_1568.jpg" />
+    <None Remove="Resources\Images\TourImages\laddu.png" />
+    <None Remove="Resources\Images\TourImages\majmun.jpg" />
+    <None Remove="Resources\Images\TourImages\rtrk.jpeg" />
+    <None Remove="Resources\Images\TourImages\vanzemljoc.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -158,6 +162,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\three_dots_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\laddu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\majmun.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\rtrk.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\vanzemljoc.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Assets\accommodations.png">

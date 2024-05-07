@@ -63,7 +63,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             foreach (Tour tour in TourService.GetInstance().GetAll())
             {
                 tour.Location = LocationService.GetInstance().GetById(tour.LocationId);
-                tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
+                tour.Images = new(TourImageService.GetInstance().GetImagesByTourId(tour.Id));
                 tour.Language = LanguageService.GetInstance().GetById(tour.LanguageId);
                 tours.Add(tour);
             }

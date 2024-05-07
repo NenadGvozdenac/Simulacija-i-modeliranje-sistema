@@ -5,9 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls" 
       xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
-      xmlns:ns="clr-namespace:BookingApp.Application.Localization"
-        mc:Ignorable="d"
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" xmlns:local1="clr-namespace:BookingApp.WPF.Views.OwnerViews.Converters"
+      mc:Ignorable="d"
       d:DesignHeight="750" d:DesignWidth="430">
+    <Page.Resources>
+        <local1:RadioButtonToIntConverter x:Key="RadioButtonToIntConverter"/>
+    </Page.Resources>
     <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -30,7 +33,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -41,55 +44,63 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Margin="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc GuestUsername}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.Guest.Username}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+            <StackPanel Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AccommodationName}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.Accommodation.Name}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Margin="5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AccommodationLocation}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.Accommodation.Location}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1">
+            <StackPanel Margin="5" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AccommodationType}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.Accommodation.Type}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1">
+            <StackPanel Margin="5" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc ReservationTimespan}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.DateSpan}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="4" Grid.Column="0">
+            <StackPanel Margin="5" Grid.Row="4" Grid.Column="0">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc NumberOfGuests}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.Reservation.GuestsNumber}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="4" Grid.Column="01">
+            <StackPanel Margin="5" Grid.Row="4" Grid.Column="01">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc ReservationDays}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding UncheckedGuestRatingDTO.Reservation.ReservationDays}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13" />
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="5" Grid.Column="0">
+            <StackPanel Margin="5" Grid.Row="5" Grid.Column="0">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Cleanliness}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox x:Name="CleanlinessCombobox" Style="{StaticResource VerdanaComboBoxStyle}"  ItemsSource="{Binding Cleanliness}" SelectedItem="{Binding SelectedCleanliness}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton1" Margin="5 2" Content="{ns:Loc PoorRB}" IsChecked="{Binding SelectedCleanliness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=1}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="CleanlinessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton2" Margin="5 2" Content="{ns:Loc CouldBeBetterRB}" IsChecked="{Binding SelectedCleanliness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=2}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="CleanlinessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton3" Margin="5 2" Content="{ns:Loc OKRB}" IsChecked="{Binding SelectedCleanliness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=3}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="CleanlinessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton4" Margin="5 2" Content="{ns:Loc VeryGoodRB}" IsChecked="{Binding SelectedCleanliness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=4}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="CleanlinessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton5" Margin="5 2" Content="{ns:Loc ExcellentRB}" IsChecked="{Binding SelectedCleanliness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=5}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="CleanlinessGroup"/>
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="5" Grid.Column="1">
+            <StackPanel Margin="5" Grid.Row="5" Grid.Column="1">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Respectfulness}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
-                <ComboBox x:Name="RespectfulnessCombobox" Style="{StaticResource VerdanaComboBoxStyle}" ItemsSource="{Binding Respectfulness}" SelectedItem="{Binding SelectedRespectfulness}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="13"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton6" Margin="5 2" Content="{ns:Loc PoorRB}" IsChecked="{Binding SelectedRespectfulness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=1}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="RespectfulnessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton7" Margin="5 2" Content="{ns:Loc CouldBeBetterRB}" IsChecked="{Binding SelectedRespectfulness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=2}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="RespectfulnessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton8" Margin="5 2" Content="{ns:Loc OKRB}" IsChecked="{Binding SelectedRespectfulness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=3}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="RespectfulnessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton9" Margin="5 2" Content="{ns:Loc VeryGoodRB}" IsChecked="{Binding SelectedRespectfulness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=4}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="RespectfulnessGroup"/>
+                <RadioButton Foreground="{DynamicResource ForegroundBrush}" x:Name="RadioButton10" Margin="5 2" Content="{ns:Loc ExcellentRB}" IsChecked="{Binding SelectedRespectfulness, Mode=TwoWay, Converter={StaticResource RadioButtonToIntConverter}, ConverterParameter=5}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15" GroupName="RespectfulnessGroup"/>
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Orientation="Vertical">
+            <StackPanel Margin="5" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Orientation="Vertical">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Comment}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="15"/>
                 <AdornerDecorator>
-                    <TextBox x:Name="CommentTextBox" Text="{Binding Comment}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" Height="150" BorderThickness="1" FontSize="13" AcceptsReturn="True" TextWrapping="Wrap" Padding="5">
+                    <TextBox x:Name="CommentTextBox" Text="{Binding Comment}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" Height="145" BorderThickness="1" FontSize="13" AcceptsReturn="True" TextWrapping="Wrap" Padding="5">
                         <controls:WatermarkService.Watermark>
                             <TextBlock FontSize="16" VerticalAlignment="Top" Text="{ns:Loc EnterComment}"/>
                         </controls:WatermarkService.Watermark>

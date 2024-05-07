@@ -1402,6 +1402,24 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rezervacije može da se pomeri.
+        /// </summary>
+        internal static string StatusCanBeMoved {
+            get {
+                return ResourceManager.GetString("StatusCanBeMoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rezervacije ne može da se pomeri.
+        /// </summary>
+        internal static string StatusCannotBeMoved {
+            get {
+                return ResourceManager.GetString("StatusCannotBeMoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status pomeranja rezervacije.
         /// </summary>
         internal static string StatusOfWantedReservationTimespan {

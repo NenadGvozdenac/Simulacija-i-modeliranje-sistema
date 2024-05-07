@@ -13,7 +13,6 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 public class DetailedReservationMovingViewModel
 {
     private ReservationReschedulingDetailsPage reservationReschedulingDetailsPage;
-
     public AccommodationReservationMovingDTO AccommodationReservationMovingDTO { get; set; }
 
     public ICommand AcceptClick => new ReschedulingCommand(reservationReschedulingDetailsPage, 

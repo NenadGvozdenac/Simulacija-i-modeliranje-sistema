@@ -564,6 +564,12 @@
   <data name="Statistics" xml:space="preserve">
     <value>Statistike</value>
   </data>
+  <data name="StatusCanBeMoved" xml:space="preserve">
+    <value>Rezervacije može da se pomeri</value>
+  </data>
+  <data name="StatusCannotBeMoved" xml:space="preserve">
+    <value>Rezervacije ne može da se pomeri</value>
+  </data>
   <data name="StatusOfWantedReservationTimespan" xml:space="preserve">
     <value>Status pomeranja rezervacije</value>
   </data>

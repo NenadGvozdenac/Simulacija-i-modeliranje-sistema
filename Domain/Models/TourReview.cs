@@ -28,7 +28,7 @@ namespace BookingApp.Model.MutualModels
         public ObservableCollection<TourReviewImage> ReviewImages { get; set; }
 
         public TourReview() { }
-        public TourReview(int userId, int tourId, int guideKnowledge, int guideLanguage, int interestingness, string feedback)
+        public TourReview(int userId, int tourId, int guideKnowledge, int guideLanguage, int interestingness, string feedback, string status)
         {
             UserId = userId;
             TourId = tourId;
@@ -37,6 +37,7 @@ namespace BookingApp.Model.MutualModels
             GuideLanguage = guideLanguage;
             TourInterestingness = interestingness;
             Feedback = feedback;
+            Status = status;
         }
 
         public void FromCSV(string[] values)

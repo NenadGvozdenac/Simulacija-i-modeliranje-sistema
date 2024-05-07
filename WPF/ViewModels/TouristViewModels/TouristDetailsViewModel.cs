@@ -44,6 +44,8 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 }
             }
         }
+        public List<TourImage> tourImages {  get; set; }
+        public TourImage tourImage {  get; set; }
         public TouristDetailsViewModel(Tour detailedTour, User user, TouristDetails touristDetails, Frame touristWindowFrame)
         {
             _user = user;
@@ -57,7 +59,15 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristDetailsView.tourCountryTextBlock.Text = LocationService.GetInstance().GetById(selectedTour.LocationId).Country + ", " + LocationService.GetInstance().GetById(selectedTour.LocationId).City;
             //TouristDetailsView.tourCityTextBlock.Text = LocationService.GetInstance().GetById(selectedTour.LocationId).City;
             TouristDetailsView.DescriptionTextBlock.Text = selectedTour.Description;
-
+            TouristDetailsView.LanguageText.Text = LanguageService.GetInstance().GetById(selectedTour.LanguageId).ToString();
+            TouristDetailsView.CapacityText.Text = selectedTour.Capacity.ToString();
+            TouristDetailsView.DurationText.Text = selectedTour.Duration.ToString();
+            tourImages = TourImageService.GetInstance().GetImagesByTourId(selectedTour.Id);
+            foreach(TourImage image in tourImages)
+            {
+                tourImage = image;
+                break;
+            }
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

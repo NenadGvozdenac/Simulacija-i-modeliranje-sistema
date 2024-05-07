@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class TourRequests : UserControl
     {
-        public TourRequests()
+        public User user {  get; set; }
+        public TourRequests(User _user)
         {
             InitializeComponent();
+            user = _user;
+        }
+
+        private void Add_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow is TouristMainWindow mainWindow)
+            {
+                mainWindow.AddRequest(user);
+            }
         }
     }
 }

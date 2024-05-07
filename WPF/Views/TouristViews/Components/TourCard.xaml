@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="700">
-    <Border BorderBrush="#666" BorderThickness="5" CornerRadius="10" Margin="0,16,10,0">
+    <Border BorderBrush="#666" BorderThickness="5" CornerRadius="9" Margin="0,16,10,0">
 
         <Grid Background="White">
             <Grid.ColumnDefinitions>
@@ -14,8 +14,9 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Border BorderThickness="0 0 3 0" CornerRadius="25 0 0 25" BorderBrush="#666"/>
-                <Image Source="{Binding Images[0].Path}" Stretch="Fill" Width="200" Height="150"/>
+                <Border BorderThickness="0 0 3 0" CornerRadius="25 0 0 25" BorderBrush="#666">
+                    <Image Source="{Binding Images[0].Path}" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="171" Width="220"/>
+                </Border>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -49,7 +50,7 @@
                     <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="454" Height="103"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Center" Width="437" Height="103"/>
                 </StackPanel>
 
 

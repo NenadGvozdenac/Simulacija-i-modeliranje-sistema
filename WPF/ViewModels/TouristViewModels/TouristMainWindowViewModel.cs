@@ -92,6 +92,15 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = new TouristNotifications(_user);
         }
 
+        public void Requests_Click(object sender, RoutedEventArgs e)
+        {
+            TouristWindowFrame.Content = new TourRequests(_user);
+        }
+        public void AddRequest(User user)
+        {
+            TouristWindowFrame.Content = new RequestTour(_user);
+        }
+
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {
             throw new NotImplementedException();

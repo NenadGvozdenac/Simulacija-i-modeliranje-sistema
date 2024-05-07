@@ -11,6 +11,7 @@
 	  
     <None Remove="Resources\Assets\accommodations.png" />
     <None Remove="Resources\Assets\add.png" />
+    <None Remove="Resources\Assets\alternate-map-marker.192x256.png" />
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
     <None Remove="Resources\Assets\back_left_arrow_black.png" />
     <None Remove="Resources\Assets\back_left_arrow_white.png" />
@@ -20,6 +21,8 @@
     <None Remove="Resources\Assets\chevron-left.293x512.png" />
     <None Remove="Resources\Assets\chevron-right.295x512.png" />
     <None Remove="Resources\Assets\book.224x256.png" />
+    <None Remove="Resources\Assets\clock.256x256.png" />
+    <None Remove="Resources\Assets\concierge-bell.256x193.png" />
     <None Remove="Resources\Assets\default_user.png" />
     <None Remove="Resources\Assets\delete.png" />
     <None Remove="Resources\Assets\edit.png" />
@@ -99,6 +102,9 @@
     <Content Include="Resources\Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\alternate-map-marker.192x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\alternate-map-marker.384x512.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -124,6 +130,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\book.224x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\clock.256x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Assets\concierge-bell.256x193.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\default_user.png">

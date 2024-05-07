@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1000">
-    <Grid Background="LightGray">
+             d:DesignHeight="585" d:DesignWidth="1000">
+    <Grid Background="GhostWhite">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
@@ -34,7 +34,7 @@
                     <Image x:Name="guideKnowledgeStar3" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="367,49,0,0"/>
                     <Image x:Name="guideKnowledgeStar4" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="408,49,0,0"/>
                     <Image x:Name="guideKnowledgeStar5" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="449,49,0,0"/>
-
+                    <Label Visibility="Hidden" x:Name="knowledgeMessage" Content="Rate guide's knowledge!" FontSize="18" FontWeight="DemiBold" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="283,87,0,0" Height="44"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Label Content="Guide's language:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
@@ -43,6 +43,7 @@
                     <Image x:Name="guideLanguageStar3" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="367,49,0,0"/>
                     <Image x:Name="guideLanguageStar4" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="408,49,0,0"/>
                     <Image x:Name="guideLanguageStar5" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="449,49,0,0"/>
+                    <Label Visibility="Hidden" x:Name="languageMessage" Content="Rate guide's language!" FontSize="18" FontWeight="DemiBold" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="283,87,0,0" Height="41"/>
 
                 </Grid>
                 <Grid Grid.Row="2">
@@ -52,6 +53,7 @@
                     <Image x:Name="interestingnessStar3" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="367,49,0,0"/>
                     <Image x:Name="interestingnessStar4" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="408,49,0,0"/>
                     <Image x:Name="interestingnessStar5" Source="/Resources/Assets/star-outline.256x238.png" MouseLeftButtonDown="Star_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="48" Margin="449,49,0,0"/>
+                    <Label Visibility="Hidden" x:Name="interestMessage" Content="Rate tour interestingess!" FontSize="18" FontWeight="DemiBold" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="283,87,0,0" Height="45"/>
 
                 </Grid>
                 <Grid Grid.Row="3">
@@ -63,30 +65,25 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Margin="0,0,0,203" Grid.RowSpan="2">
                     <Label Content="Your comment:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
-                    <TextBox x:Name="feedback" TextChanged="Feedback_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="463" Margin="10,98,0,0"/>
+                    <TextBox BorderThickness="4" BorderBrush="Gray" x:Name="feedback" FontSize="17" TextChanged="Feedback_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="463" Margin="10,98,0,0"/>
+                    <Label Visibility="Hidden" x:Name="feedbackMessage" Content="Write a feedback!" FontSize="18" FontWeight="DemiBold" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,59,0,0" Height="39"/>
+
                 </Grid>
                 <Grid Grid.Row="1">
                     <Label Content="Add image(s) url:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,43,0,0"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="8,108,235,58" RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
+                    <Border BorderBrush="Black" BorderThickness="2" Background="AliceBlue" CornerRadius="20" Margin="19,98,266,16">
                         <ScrollViewer x:Name="reviewImages_ScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
-                            <StackPanel x:Name="reviewImages_StackPanel" Orientation="Vertical" Width="243"/>
+                            <StackPanel x:Name="reviewImages_StackPanel" Orientation="Vertical" Width="175" Height="114"/>
                         </ScrollViewer>
                     </Border>
-                    <Button HorizontalAlignment="Left" Click="AddPhoto_Click"
-                            VerticalAlignment="Center" Height="44" Width="73" Margin="285,0,0,0">
-                        <Image Source="/Resources/Assets/plus-symbol-button.png" Height="50" Width="40"/>
+                    <TextBlock Visibility="Hidden" Text="Add image(s)" x:Name="imagesMessage" Foreground="Red" FontSize="17" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="236,195,0,0"/>
+                    <Button HorizontalAlignment="Left" Background="GhostWhite" Click="AddPhoto_Click"
+                            VerticalAlignment="Top" Height="44" Width="59" Margin="250,98,0,0">
+                        <Image Source="/Resources/Assets/plus-symbol-button.png" Height="38" Width="30"/>
                     </Button>
-                    <Button Click="Finish_Click" Content="Finish" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="48" Width="106" Margin="352,166,0,0"/>
+                    <Button Click="Finish_Click" Content="Finish" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="48" Width="106" Margin="363,155,0,0"/>
                 </Grid>
             </Grid>
         </Grid>

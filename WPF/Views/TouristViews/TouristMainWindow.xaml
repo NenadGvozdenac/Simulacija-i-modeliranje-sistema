@@ -13,12 +13,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="590"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="AntiqueWhite">
+        <Grid Grid.Row="0" Background="CadetBlue">
             <Image MouseLeftButtonDown="Home_Click" Source="/Resources/Assets/home.256x245.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,0,0,0" Height="66" Width="63"/>
-            <Button Content="My tours" Click="MyTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="98" Margin="812,28,0,0"/>
-            <Button Content="My vouchers" Click="MyVouchers_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="124" Margin="683,28,0,0"/>
-            <Button Content="My active tours" Click="MyActiveTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="148" Margin="530,28,0,0"/>
-            <Button Content="Requests" Click="Requests_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="109" Margin="414,28,0,0"/>
+            <Button Content="My tours" Click="MyTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="98" Margin="812,20,0,0"/>
+            <Button Content="My vouchers" Click="MyVouchers_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="124" Margin="683,20,0,0"/>
+            <Button Content="My active tours" Click="MyActiveTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="148" Margin="530,20,0,0"/>
+            <Button Content="Requests" Click="Requests_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="109" Margin="414,20,0,0"/>
             <Image MouseLeftButtonDown="Notifications_Click" Source="/Resources/Assets/bell.224x256.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="43" Width="42" Margin="936,0,0,0"/>
             <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
         </Grid>

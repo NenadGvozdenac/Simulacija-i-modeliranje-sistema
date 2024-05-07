@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="700">
-    <Border BorderBrush="#666" BorderThickness="5" CornerRadius="10" Margin="0,16,10,0">
+    <Border BorderBrush="#666" BorderThickness="5" CornerRadius="9" Margin="0,16,10,0">
 
         <Grid Background="White">
             <Grid.ColumnDefinitions>

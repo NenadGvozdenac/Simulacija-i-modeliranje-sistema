@@ -89,15 +89,15 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
-                        <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc ChooseStartingDate}" FontSize="12" FontFamily="{StaticResource Verdana}"  Padding="0 2"/>
+                        <Label Foreground="{DynamicResource ForegroundBrush}" Grid.Row="0" Grid.Column="0" Content="{ns:Loc ChooseStartingDate}" FontSize="12" FontFamily="{StaticResource Verdana}"  Padding="0 2"/>
                         <DatePicker Grid.Row="1" Grid.Column="0" x:Name="StartDatePicker" SelectedDate="{Binding StartDate, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Loaded="DatePicker_Loaded" SelectedDateChanged="StartDatePicker_SelectedDateChanged"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
-                        <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc ChooseEndingDate}" FontSize="12" FontFamily="{StaticResource Verdana}"  Padding="0 2"/>
+                        <Label Foreground="{DynamicResource ForegroundBrush}" Grid.Row="0" Grid.Column="0" Content="{ns:Loc ChooseEndingDate}" FontSize="12" FontFamily="{StaticResource Verdana}"  Padding="0 2"/>
                         <DatePicker Grid.Row="1" Grid.Column="0" x:Name="EndDatePicker" SelectedDate="{Binding EndDate, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Loaded="DatePicker_Loaded"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
-                        <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc ChooseTimePeriod}" FontSize="12" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                        <Label Foreground="{DynamicResource ForegroundBrush}" Grid.Row="0" Grid.Column="0" Content="{ns:Loc ChooseTimePeriod}" FontSize="12" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
                         <TextBox Style="{StaticResource VerdanaTextBoxStyle}" HorizontalAlignment="Stretch" Text="{Binding TimePeriod, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <DataGrid Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Margin="10 15" ItemsSource="{Binding Dates}" SelectedItem="{Binding SelectedDateSpan}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">

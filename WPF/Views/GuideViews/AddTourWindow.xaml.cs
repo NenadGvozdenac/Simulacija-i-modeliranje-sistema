@@ -64,20 +64,14 @@ namespace BookingApp.View.PathfinderViews
             addTourWindowViewModel.LoadLanguages();
         }
 
-        private void AddURLClick(object sender, RoutedEventArgs e)
-        {
-           addTourWindowViewModel.AddURLClick(sender, e);   
-        }
+        
 
         private bool ImageAlreadyExists()
         {
           return addTourWindowViewModel.ImageAlreadyExists();
         }
 
-        private void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            addTourWindowViewModel.ImageURLTextBox_MouseDown(sender, e);
-        }
+       
 
 
         private void AddCheckpointClick(object sender, RoutedEventArgs e)
@@ -127,7 +121,24 @@ namespace BookingApp.View.PathfinderViews
             return addTourWindowViewModel.IsDataValid();
         }
 
+        private void RightArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.RightArrow_Click();
+        }
 
+        private void LeftArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LeftArrow_Click();
+        }
 
+        private void AddImage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveImage_Click(object sender, RoutedEventArgs e)
+        {
+            addTourWindowViewModel.DeleteImageClick();
+        }
     }
 }

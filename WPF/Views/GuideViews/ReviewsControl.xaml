@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews" 
              xmlns:components="clr-namespace:BookingApp.WPF.Views.GuideViews.Components"
-             mc:Ignorable="d" Width="905" Height="423">
+             mc:Ignorable="d" Width="1500" Height="820" Background="White">
     <Grid>
         <ScrollViewer>
             <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
@@ -13,7 +13,7 @@
 ItemsSource="{Binding tourReviews}" Margin="3,3,3,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:ReviewCard x:Name="reviewCard"/>
+                        <components:ReviewCard x:Name="reviewCard"  Height="200" Width="1100"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

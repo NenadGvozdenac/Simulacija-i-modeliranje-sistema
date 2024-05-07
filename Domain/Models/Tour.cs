@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ public class Tour : ISerializable, INotifyPropertyChanged
     public List<Checkpoint> Checkpoints { get; set; }
     public List<TourStartTime> Dates { get; set; }
     public int Duration { get; set; }
-    public List<TourImage> Images { get; set; }
+    public ObservableCollection<TourImage> Images { get; set; }
 
     public DateTime CurrentDate { get; set; }
 

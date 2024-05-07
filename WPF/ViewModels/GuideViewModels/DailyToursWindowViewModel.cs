@@ -25,6 +25,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             _user = user;
             dailyToursWindow = _dailyToursWindow;
             var tours = new Tours();
+            tours.Width = 1200;
             dailyToursWindow.Content = tours;
             
         }

@@ -82,8 +82,17 @@
     <None Remove="Resources\Images\ReviewImages\sixth.jpg" />
     <None Remove="Resources\Images\ReviewImages\third.jpg" />
     <None Remove="Resources\Images\TourImages\20221120_100611.jpg" />
+    <None Remove="Resources\Images\TourImages\hrvatska1.jpg" />
     <None Remove="Resources\Images\TourImages\image1.jpg" />
     <None Remove="Resources\Images\TourImages\IMG_1568.jpg" />
+    <None Remove="Resources\Images\TourImages\japan1.jpg" />
+    <None Remove="Resources\Images\TourImages\kengur-Australija.jpg" />
+    <None Remove="Resources\Images\TourImages\laddu.png" />
+    <None Remove="Resources\Images\TourImages\majmun.jpg" />
+    <None Remove="Resources\Images\TourImages\noviSad1.jpg" />
+    <None Remove="Resources\Images\TourImages\rtrk.jpeg" />
+    <None Remove="Resources\Images\TourImages\sarajevo1.jpeg" />
+    <None Remove="Resources\Images\TourImages\vanzemljoc.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -175,6 +184,33 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Assets\x.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\hrvatska1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\japan1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\kengur-Australija.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\laddu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\majmun.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\noviSad1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\rtrk.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\sarajevo1.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourImages\vanzemljoc.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Assets\accommodations.png">

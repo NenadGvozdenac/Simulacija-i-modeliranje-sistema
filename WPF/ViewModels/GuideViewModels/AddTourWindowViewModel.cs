@@ -13,10 +13,14 @@ using System.Windows.Controls;
 using System.Windows;
 using BookingApp.View.PathfinderViews;
 using BookingApp.Application.UseCases;
+using BookingApp.Application.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Input;
+
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    public class AddTourWindowViewModel
+    public class AddTourWindowViewModel : INotifyPropertyChanged
     {
         private User _user;
         
@@ -189,7 +193,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
-
+        
 
 
         public ObservableCollection<TourImage> Images { get; set; }
@@ -197,6 +201,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public ObservableCollection<TourStartTime> TourDates { get; set; }
 
         public ObservableCollection<Checkpoint> Checkpoints { get; set; }
+
+        public ICommand AddImageCommand => new AddTourImageCommand(this);
+        public ICommand RemoveImageCommand => new RemoveTourImageCommand(this);
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -248,23 +255,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             addTourWindow.LanguageTextBox.ItemsSource = listOfLanguages;
         }
 
-        public void AddURLClick(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ImageURL))
-            {
-                return;
-            }
-
-            if (ImageAlreadyExists())
-            {
-                return;
-            }
-
-            TourImage image = new();
-            image.Path = ImageURL;
-            Images.Add(image);
-            addTourWindow.ImageURLTextBox.Clear();
-        }
+        
 
         public bool ImageAlreadyExists()
         {
@@ -279,29 +270,35 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return false;
         }
 
-        public void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        /*  public void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+          {
+              OpenFileDialog openFileDialog = new OpenFileDialog();
+              openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
+              if (openFileDialog.ShowDialog() == true)
+              {
+                  string selectedImagePath = openFileDialog.FileName;
+                  string destinationFolder = "../../../Resources/Images/TourImages/"; // Update this with your desired destination folder path
+
+                  // Extracting filename from the full path
+                  string fileName = System.IO.Path.GetFileName(selectedImagePath);
+
+                  // Constructing destination path
+                  string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
+
+                  // Copy the selected image file to the destination folder
+                  System.IO.File.Copy(selectedImagePath, destinationPath, true);
+
+                  // Update the text box with the destination path
+                  addTourWindow.ImageURLTextBox.Text = destinationPath;
+              }
+          }*/
+
+        public void DeleteImageClick()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string selectedImagePath = openFileDialog.FileName;
-                string destinationFolder = "../../../Resources/Images/TourImages/"; // Update this with your desired destination folder path
-
-                // Extracting filename from the full path
-                string fileName = System.IO.Path.GetFileName(selectedImagePath);
-
-                // Constructing destination path
-                string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
-
-                // Copy the selected image file to the destination folder
-                System.IO.File.Copy(selectedImagePath, destinationPath, true);
-
-                // Update the text box with the destination path
-                addTourWindow.ImageURLTextBox.Text = destinationPath;
-            }
+            var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+            Images.Remove(currentImage);
+            ImageURL = Images.FirstOrDefault()?.Path;
         }
-
 
         public void AddCheckpointClick(object sender, RoutedEventArgs e)
         {
@@ -384,7 +381,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tour.Dates = TourDates.ToList();
             tour.Checkpoints = Checkpoints.ToList();
             tour.LanguageId = LanguageService.GetInstance().GetLanguageByName(addTourWindow.LanguageTextBox.SelectedItem.ToString()).Id;
-            tour.Images = Images.ToList();
+            tour.Images = new(Images.ToList());
             TourService.GetInstance().Add(tour);
 
 
@@ -442,6 +439,42 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 && !string.IsNullOrEmpty(addTourWindow.LanguageTextBox.SelectedItem.ToString())
                 && Checkpoints.Count() >= 2;
         }
+
+        public void RightArrow_Click()
+        {
+            var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+            var currentIndex = Images.IndexOf(currentImage);
+
+            if (currentIndex == -1) { return; }
+
+            if (currentIndex == Images.Count - 1)
+            {
+                ImageURL = Images.First().Path;
+            }
+            else
+            {
+                ImageURL = Images[currentIndex + 1].Path;
+            }
+        }
+
+        public void LeftArrow_Click()
+        {
+            var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+            var currentIndex = Images.IndexOf(currentImage);
+
+            if (currentIndex == -1) { return; }
+
+            if (currentIndex == 0)
+            {
+                ImageURL = Images.Last().Path;
+            }
+            else
+            {
+                ImageURL = Images[currentIndex - 1].Path;
+            }
+        }
+
+
 
     }
 }

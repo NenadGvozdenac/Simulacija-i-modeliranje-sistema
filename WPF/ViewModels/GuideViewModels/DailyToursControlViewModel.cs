@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -58,9 +59,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                             tour.Capacity = toura.Capacity;
                             tour.CurrentDate = startTime.Time;
                             tour.Location = LocationService.GetInstance().GetById(toura.LocationId);
-                            tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
-                            tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId);  //fix
                             tour.Id = toura.Id;
+                            tour.Images = new(TourImageService.GetInstance().GetImagesByTourId(tour.Id));
+                            tour.Language = LanguageService.GetInstance().GetById(toura.LanguageId);  //fix                          
                             tour.LocationId = toura.LocationId;
                             tour.LanguageId = toura.LanguageId;
                             tour.Duration = toura.Duration;
@@ -136,13 +137,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         }
 
         public void SearchTourByName(string name){
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                Update();
-            }
-            else
-            {
-                Update();
+            if (!string.IsNullOrWhiteSpace(name))
+            {                
                 var toursToRemove = dailyTours.Where(tour => !tour.Name.ToLower().Contains(name.ToLower())).ToList();
                 foreach (var tour in toursToRemove)
                 {
@@ -153,59 +149,78 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void SearchByCountry(string country)
         {
-            Update();
-            var toursToRemove = dailyTours.Where(tour => tour.Location.Country != country).ToList();
-            foreach (var tour in toursToRemove)
+            if (!string.IsNullOrWhiteSpace(country))
             {
-                dailyTours.Remove(tour);
+                var toursToRemove = dailyTours.Where(tour => tour.Location.Country != country).ToList();
+                foreach (var tour in toursToRemove)
+                {
+                    dailyTours.Remove(tour);
+                }
             }
         }
     
         public void SearchByCity(string city){
-            if(String.IsNullOrWhiteSpace(city)) { Update(); }
+            if (!String.IsNullOrWhiteSpace(city))
+            {
 
-            Update();
-            var toursToRemove = dailyTours.Where(tour => tour.Location.City != city).ToList();
-            foreach (var tour in toursToRemove)
-            {         
-                dailyTours.Remove(tour);
+                var toursToRemove = dailyTours.Where(tour => tour.Location.City != city).ToList();
+                foreach (var tour in toursToRemove)
+                {
+                    dailyTours.Remove(tour);
+                }
+
             }
         }
     
     
         public void SearchByLanguage(string language) {
 
-            Update();
-            var toursToRemove = dailyTours.Where(tour => tour.Language.Name != language).ToList();
-            foreach (var tour in toursToRemove)
+            if (!String.IsNullOrWhiteSpace(language))
             {
-                dailyTours.Remove(tour);
+                var toursToRemove = dailyTours.Where(tour => tour.Language.Name != language).ToList();
+                foreach (var tour in toursToRemove)
+                {
+                    dailyTours.Remove(tour);
+                }
             }
-
 
         }
     
         public void SearchByCapacity(int capacity)
         {
-            Update();
-            var toursToRemove = dailyTours.Where(tour => tour.Capacity != capacity).ToList();
-            foreach (var tour in toursToRemove)
+            if (capacity != 0)
             {
-                dailyTours.Remove(tour);
+                var toursToRemove = dailyTours.Where(tour => tour.Capacity != capacity).ToList();
+                foreach (var tour in toursToRemove)
+                {
+                    dailyTours.Remove(tour);
+                }
             }
         }
     
         public void SearchByDuration(int duration)
         {
-            Update();
-            var toursToRemove = dailyTours.Where(tour => tour.Duration != duration).ToList();
-            foreach (var tour in toursToRemove)
+            if (duration != 0)
             {
-                dailyTours.Remove(tour);
+                var toursToRemove = dailyTours.Where(tour => tour.Duration != duration).ToList();
+                foreach (var tour in toursToRemove)
+                {
+                    dailyTours.Remove(tour);
+                }
             }
         }
 
-    
+        public void SearchByCriteria(string country, string city, string language, int capacity, int duration, string searchText) {
+        
+            Update();
+            SearchByCountry(country);
+            SearchByCity(city);
+            SearchByLanguage(language);
+            SearchByCapacity(capacity);
+            SearchByDuration(duration);
+            SearchTourByName(searchText);
+        
+        }
     
     
     }

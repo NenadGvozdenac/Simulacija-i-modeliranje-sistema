@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,9 @@ public partial class GuestRatingControl : UserControl
 
         _detailedGuestRatingViewModel = new(guestRating);
         DataContext = _detailedGuestRatingViewModel;
+
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)

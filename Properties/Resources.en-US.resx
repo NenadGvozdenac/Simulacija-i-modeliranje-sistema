@@ -207,6 +207,9 @@
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="CouldBeBetterRB" xml:space="preserve">
+    <value>2 - Could be better</value>
+  </data>
   <data name="CurrentAccommodationRating" xml:space="preserve">
     <value>Current accommodation rating</value>
   </data>
@@ -261,8 +264,14 @@
   <data name="EnterAccommodationName" xml:space="preserve">
     <value>🔍 Enter accommodation name...</value>
   </data>
+  <data name="EnterCity" xml:space="preserve">
+    <value>Enter city</value>
+  </data>
   <data name="EnterComment" xml:space="preserve">
     <value>📅 Enter comment....</value>
+  </data>
+  <data name="EnterCountry" xml:space="preserve">
+    <value>Enter country</value>
   </data>
   <data name="EnterDaysBeforeReservationIsFinal" xml:space="preserve">
     <value>📅 Enter days before reservation is final...</value>
@@ -278,6 +287,9 @@
   </data>
   <data name="EnterPrice" xml:space="preserve">
     <value>$ Enter price...</value>
+  </data>
+  <data name="ExcellentRB" xml:space="preserve">
+    <value>5 - Excellent</value>
   </data>
   <data name="Februar" xml:space="preserve">
     <value>February</value>
@@ -444,6 +456,9 @@
   <data name="October" xml:space="preserve">
     <value>October</value>
   </data>
+  <data name="OKRB" xml:space="preserve">
+    <value>3 - OK</value>
+  </data>
   <data name="Oktobar" xml:space="preserve">
     <value>October</value>
   </data>
@@ -461,6 +476,9 @@
   </data>
   <data name="Pending" xml:space="preserve">
     <value>Pending</value>
+  </data>
+  <data name="PoorRB" xml:space="preserve">
+    <value>1 - Poor</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>
@@ -602,6 +620,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="VeryGoodRB" xml:space="preserve">
+    <value>4 - Very good</value>
   </data>
   <data name="WantedReservationTimespan" xml:space="preserve">
     <value>Wanted reservation timespan</value>

@@ -28,7 +28,7 @@
             <!-- Main portion of page -->
             <Grid Grid.Column="1" Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>

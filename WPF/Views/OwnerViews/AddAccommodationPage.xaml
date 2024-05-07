@@ -28,7 +28,19 @@
             <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc AddingAnAccommodation}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="10">
+        <Grid Grid.Row="1" Margin="10" Panel.ZIndex="100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" x:Name="AddLocationModalPanel" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+                
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10" x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -71,7 +83,7 @@
             <StackPanel Margin="5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
                 <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AccommodationType}" FontFamily="{StaticResource Verdana}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15"/>
                 <Grid Grid.Row="6">
-                    <ComboBox IsEditable="False" IsReadOnly="True" Text="{ns:Loc ChooseType}" ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding Type}" Style="{StaticResource VerdanaComboBoxStyle}"  HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0" Height="30"  VerticalContentAlignment="Center"></ComboBox>
+                    <ComboBox IsEditable="False" IsReadOnly="True" Text="{ns:Loc ChooseType}" ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding Type}" Style="{StaticResource VerdanaComboBoxStyle}" HorizontalAlignment="Stretch" x:Name="AccommodationType" Margin="5 0" Height="30"  VerticalContentAlignment="Center"></ComboBox>
                     <TextBlock
                    Visibility="{Binding SelectedItem, ElementName=AccommodationType, Converter={StaticResource NullToVisibilityConverter}}"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -135,8 +147,8 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="0" Text="{ns:Loc AddImage}" Style="{StaticResource MainTextBlockGuest}" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Column="1" Content="+" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding AddImageCommand}"/>
-                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Grid.Column="2" Content="-" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding RemoveImageCommand}"/>
+                <Button Grid.Column="1" Content="+" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding AddImageCommand}"/>
+                <Button Grid.Column="2" Content="-" Style="{StaticResource CircleButtonStyle}" Width="45" Height="45" Command="{Binding RemoveImageCommand}"/>
                 <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="3" Text="{ns:Loc RemoveImage}" Style="{StaticResource MainTextBlockGuest}"  TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
             <Grid Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="40 0">
@@ -153,8 +165,8 @@
                 </Border>
                 <Image Source="..\..\..\Resources\Assets\chevron-right.295x512.png" Grid.Column="5" PreviewMouseDown="RightArrow_PreviewMouseDown" Style="{StaticResource ImageHover}"/>
             </Grid>
-            <Button Grid.Row="9" Grid.Column="1" Content="{ns:Loc Confirm}" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddCommand}"/>
-            <Button Grid.Row="9" Grid.Column="0" Content="{ns:Loc Cancel}" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding CancelCommand}"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="{ns:Loc Confirm}" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="9" Grid.Column="0" Content="{ns:Loc Cancel}" Style="{StaticResource RoundedButtonStyle}" Width="100" Height="30" VerticalAlignment="Center" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </Page>

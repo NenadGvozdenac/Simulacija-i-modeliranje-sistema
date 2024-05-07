@@ -204,6 +204,9 @@
   <data name="Confirm" xml:space="preserve">
     <value>Potvrdi</value>
   </data>
+  <data name="CouldBeBetterRB" xml:space="preserve">
+    <value>2 - Može bolje</value>
+  </data>
   <data name="CurrentAccommodationRating" xml:space="preserve">
     <value>Trenutna ocena smeštaja</value>
   </data>
@@ -255,8 +258,14 @@
   <data name="EnterAccommodationName" xml:space="preserve">
     <value>🔍 Ukucaj naziv smeštaja...</value>
   </data>
+  <data name="EnterCity" xml:space="preserve">
+    <value>Dodaj grad</value>
+  </data>
   <data name="EnterComment" xml:space="preserve">
     <value>📅 Ukucaj željeni komentar...</value>
+  </data>
+  <data name="EnterCountry" xml:space="preserve">
+    <value>Dodaj državu</value>
   </data>
   <data name="EnterDaysBeforeReservationIsFinal" xml:space="preserve">
     <value>📅 Ukucaj broj dana pred finalizaciju rezervacije...</value>
@@ -272,6 +281,9 @@
   </data>
   <data name="EnterPrice" xml:space="preserve">
     <value>$ Ukucaj cenu...</value>
+  </data>
+  <data name="ExcellentRB" xml:space="preserve">
+    <value>5 - Odlično</value>
   </data>
   <data name="February" xml:space="preserve">
     <value>Februar</value>
@@ -417,6 +429,9 @@
   <data name="October" xml:space="preserve">
     <value>Oktobar</value>
   </data>
+  <data name="OKRB" xml:space="preserve">
+    <value>3 - OK</value>
+  </data>
   <data name="Ongoing" xml:space="preserve">
     <value>U procesu</value>
   </data>
@@ -431,6 +446,9 @@
   </data>
   <data name="Pending" xml:space="preserve">
     <value>Neocenjeni</value>
+  </data>
+  <data name="PoorRB" xml:space="preserve">
+    <value>1 - Vrlo loše</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Cena</value>
@@ -566,6 +584,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisničko ime</value>
+  </data>
+  <data name="VeryGoodRB" xml:space="preserve">
+    <value>4 - Vrlo dobro</value>
   </data>
   <data name="WantedReservationTimespan" xml:space="preserve">
     <value>Hteli dani rezervacije</value>

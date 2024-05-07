@@ -475,11 +475,29 @@ namespace BookingApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj grad.
+        /// </summary>
+        internal static string EnterCity {
+            get {
+                return ResourceManager.GetString("EnterCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 📅 Ukucaj željeni komentar....
         /// </summary>
         internal static string EnterComment {
             get {
                 return ResourceManager.GetString("EnterComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj državu.
+        /// </summary>
+        internal static string EnterCountry {
+            get {
+                return ResourceManager.GetString("EnterCountry", resourceCulture);
             }
         }
         

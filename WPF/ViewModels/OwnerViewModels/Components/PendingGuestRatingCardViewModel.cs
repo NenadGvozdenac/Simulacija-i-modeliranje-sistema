@@ -13,14 +13,9 @@ public class PendingGuestRatingCardViewModel
 
     public GuestRatingDTO GuestRatingDTO { get; set; }
 
-    public PendingGuestRatingCardViewModel(GuestRatingControlPending guestRatingControlPending, GuestRating guestRating, bool isPencilEnabled)
+    public PendingGuestRatingCardViewModel(GuestRatingControlPending guestRatingControlPending, GuestRating guestRating)
     {
         this.guestRating = guestRating;
-
-        if (!isPencilEnabled)
-        {
-            guestRatingControlPending.EyeButton.Visibility = Visibility.Hidden;
-        }
 
         GuestRatingDTO = new(guestRating);
     }

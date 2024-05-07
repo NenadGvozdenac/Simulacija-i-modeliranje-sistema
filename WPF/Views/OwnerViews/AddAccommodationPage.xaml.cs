@@ -10,6 +10,7 @@ using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using System.Linq;
 using System.Collections.Generic;
+using BookingApp.WPF.Views.OwnerViews.Components;
 
 namespace BookingApp.WPF.Views.OwnerViews;
 
@@ -55,5 +56,11 @@ public partial class AddAccommodationPage : Page
     {
         _addAccommodationViewModel = new AddAccommodationViewModel(this, user);
         DataContext = _addAccommodationViewModel;
+
+        this.AddLocationModalPanel.Children.Clear();
+        EnterNewLocationModal enterNewLocationModal = new EnterNewLocationModal(_addAccommodationViewModel);
+
+        this.AddLocationModalPanel.Children.Add(enterNewLocationModal);
+        enterNewLocationModal.Visibility = Visibility.Collapsed;
     }
 }

@@ -70,10 +70,30 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Background" Value="{StaticResource Creme}"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MyComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="myBorder">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="myBorder" Property="Background" Value="Violet" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="myBorder" Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -171,8 +191,6 @@
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Background" Value="{StaticResource Creme}"/>
-            <Setter Property="Foreground" Value="{StaticResource RockiesPurple}"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="FontSize" Value="15"/>
@@ -187,6 +205,14 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="{StaticResource HallmarkPurple}"/>
                                 <Setter Property="Foreground" Value="{StaticResource Creme}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="{DynamicResource DisabledButtonBackground}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledButtonForeground}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -222,6 +248,14 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="{StaticResource HallmarkPurple}"/>
                                 <Setter Property="Foreground" Value="{StaticResource Creme}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="{DynamicResource DisabledButtonBackground}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledButtonForeground}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

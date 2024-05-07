@@ -10,7 +10,9 @@
     <SolidColorBrush x:Key="CardBorder" Color="NavajoWhite"/>
     <SolidColorBrush x:Key="Navbar" Color="#192e28"/>
     <SolidColorBrush x:Key="ButtonBackground" Color="AntiqueWhite"/>
+    <SolidColorBrush x:Key="DisabledButtonBackground" Color="#ecf0f1"/>
     <SolidColorBrush x:Key="ButtonForeground" Color="Black"/>
+    <SolidColorBrush x:Key="DisabledButtonForeground" Color="Gray"/>
     <SolidColorBrush x:Key="ButtonBorder" Color="Black"/>
     <SolidColorBrush x:Key="ButtonHover" Color="Gray"/>
     <SolidColorBrush x:Key="ButtonPressed" Color="Black"/>

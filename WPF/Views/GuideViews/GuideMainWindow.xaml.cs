@@ -163,5 +163,10 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.LanguageTextBox_SelectionChanged(sender, e);
         }
+
+        private void ClearFilters_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.ClearFilters_Click();
+        }
     }
 }

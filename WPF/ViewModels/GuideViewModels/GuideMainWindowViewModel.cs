@@ -461,7 +461,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tours.dailyToursControlViewModel.SearchByCriteria(country, city, language, capacity, duration, search);
         }
 
+       public void ClearFilters_Click()
+        {
+          
+            mainWindow.LanguageTextBox.Text = "";
+            mainWindow.Capacity.Text = "0";
+            mainWindow.Duration.Text = "0";
 
+        }
 
 
     }

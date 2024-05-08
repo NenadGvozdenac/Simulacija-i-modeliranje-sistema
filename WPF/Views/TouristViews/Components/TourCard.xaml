@@ -15,7 +15,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Border BorderThickness="0 0 3 0" CornerRadius="25 0 0 25" BorderBrush="#666">
-                    <Image Source="{Binding Images[0].Path}" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="171" Width="220"/>
+                    <Image Source="{Binding Images[0].Path}" Stretch="Fill"  Height="176" Width="220"/>
                 </Border>
             </Grid>
             <Grid Grid.Column="1">
@@ -50,7 +50,7 @@
                     <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Center" Width="437" Height="103"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="437" Height="103"/>
                 </StackPanel>
 
 

@@ -1,7 +1,12 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
+using BookingApp.WPF.Views.TouristViews.Components;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +26,41 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class TourRequests : UserControl
     {
+        public ObservableCollection<TourRequest> tourRequests { get; set; }
+
+        private ObservableCollection<TourRequest> _tourRequests;
+        public ObservableCollection<TourRequest> MyTourRequests
+        {
+            get { return _tourRequests; }
+            set
+            {
+                if (_tourRequests != value)
+                {
+                    _tourRequests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public User user {  get; set; }
         public TourRequests(User _user)
         {
             InitializeComponent();
+            DataContext = this;
             user = _user;
+            tourRequests = new ObservableCollection<TourRequest>();
+            Update();
+        }
+        public void Update()
+        {
+            tourRequests.Clear();
+            foreach(TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
+            {
+                TourRequest request = TourRequestService.GetInstance().GetById(tourRequest.Id);
+                request.Location = LocationService.GetInstance().GetById(tourRequest.LocationId);
+                request.Language = LanguageService.GetInstance().GetById(tourRequest.LanguageId);
+                tourRequests.Add(request);   
+            }
+            MyTourRequests = new ObservableCollection<TourRequest>(tourRequests);
         }
 
         private void Add_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -36,6 +71,11 @@ namespace BookingApp.WPF.Views.TouristViews
             {
                 mainWindow.AddRequest(user);
             }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

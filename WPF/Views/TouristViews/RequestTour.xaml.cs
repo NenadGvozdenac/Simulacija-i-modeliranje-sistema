@@ -67,15 +67,74 @@ namespace BookingApp.WPF.Views.TouristViews
                 }*/
             }
         }
+        private DateTime _beginDate;
+        private DateTime _endDate;
+
+        public DateTime BeginDate
+        {
+            get { return _beginDate; }
+            set
+            {
+                _beginDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get { return _endDate; }
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _selectedCountry;
+
+        public string SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set
+            {
+                _selectedCountry = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _selectedCity;
+        public string SelectedCity
+        {
+            get { return _selectedCity; }
+            set
+            {
+                _selectedCity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _selectedLanguage;
+        public string SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set
+            {
+                _selectedLanguage = value;
+                OnPropertyChanged();
+            }
+        }
+        public List<Tourist> Tourists { get; set; }
+        public string description {  get; set; }
         public User user {  get; set; }
         public RequestTour(User _user)
         {
             InitializeComponent();
             DataContext = this;
             _tourists = new ObservableCollection<Tourist>();
+            Tourists = new List<Tourist>();
             user = _user;
             LoadCountries();
             LoadLanguages();
+            BeginDate = DateTime.Now;
+            EndDate = DateTime.Now;
         }
 
         public void LoadCountries()
@@ -95,14 +154,24 @@ namespace BookingApp.WPF.Views.TouristViews
             CityComboBox.ItemsSource = listOfCities;
             CityComboBox.Focus();
             CityComboBox.IsEnabled = true;
+            SelectedCountry = CountryComboBox.SelectedItem?.ToString();
+
+        }
+        public void CityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedCity = CityComboBox.SelectedItem?.ToString();
+        }
+        public void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedLanguage = LanguageComboBox.SelectedItem?.ToString();
         }
 
         public void GetTourInfo()
         {
-            string selectedCountry = CountryComboBox.SelectedItem?.ToString();
-            string selectedCity = CityComboBox.SelectedItem?.ToString();
-            string selectedLanguage = LanguageComboBox.SelectedItem?.ToString();
-            string description = DescriptionBox.Text;
+            //selectedCountry = CountryComboBox.SelectedItem?.ToString();
+            //selectedCity = CityComboBox.SelectedItem?.ToString();
+            //selectedLanguage = LanguageComboBox.SelectedItem?.ToString();
+            description = DescriptionBox.Text;
 
         }
 
@@ -121,6 +190,10 @@ namespace BookingApp.WPF.Views.TouristViews
             _tourists.Add(new Tourist { Name = name, Surname = surname, Age = age });
             RefreshTouristDataGrid();
             ClearInputFields();
+            foreach(Tourist t in _tourists)
+            {
+                Tourists.Add(t);
+            }
         }
         private void RefreshTouristDataGrid()
         {
@@ -133,6 +206,26 @@ namespace BookingApp.WPF.Views.TouristViews
             GuestName.Text = "";
             GuestSurname.Text = "";
             GuestAgeText.Text = "";
+        }
+
+        private void Finish_Click(object sender, RoutedEventArgs e)
+        {
+            GetTourInfo();
+
+            //TourRequest tourRequest = new TourRequest(id, user.Id, LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id, description, LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id, BeginDate, EndDate);
+            TourRequest tourRequest = new TourRequest();
+            tourRequest.Id = TourRequestService.GetInstance().NextId();
+            tourRequest.UserId = user.Id;
+            tourRequest.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id;
+            tourRequest.Description = description;
+            tourRequest.LanguageId = LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id;
+            tourRequest.BeginDate = BeginDate;
+            tourRequest.EndDate = EndDate;
+            tourRequest.Tourists = Tourists;
+            tourRequest.Status = "Pending";
+
+            TourRequestService.GetInstance().Add(tourRequest);
+            MessageBox.Show("Uspesno");
         }
     }
 }

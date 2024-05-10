@@ -20,6 +20,7 @@ namespace BookingApp.Domain.Models
         public List<Tourist> Tourists { get; set; }
         public DateTime BeginDate {  get; set; }
         public DateTime EndDate { get; set; }
+        public string Status {  get; set; }
 
         public void FromCSV(string[] values)
         {
@@ -30,11 +31,12 @@ namespace BookingApp.Domain.Models
             LanguageId = Convert.ToInt32(values[4]);
             BeginDate = Convert.ToDateTime(values[5]);
             EndDate = Convert.ToDateTime(values[6]);
+            Status = values[7];
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), UserId.ToString(), LocationId.ToString(), Description, LanguageId.ToString(), BeginDate.ToString(), EndDate.ToString() };
+            string[] csvValues = { Id.ToString(), UserId.ToString(), LocationId.ToString(), Description, LanguageId.ToString(), BeginDate.ToString(), EndDate.ToString(), Status };
             return csvValues;
         }
     }

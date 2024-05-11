@@ -20,6 +20,8 @@
                     <TextBlock x:Name="accommodationName" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Name of the accommodation" Style="{StaticResource MainTextBlockGuest}" FontSize="50" Margin="27,0,0,0"/>
                     <Label x:Name="username" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="880,62,4,4"/>
                     <Image Source="../../../Resources/Assets/idcard.png"  RenderOptions.EdgeMode="Unspecified" Margin="922,24,45,32"/>
+                    <Image x:Name="crownImage" Source="../../../Resources/Assets/crown.png"  RenderOptions.EdgeMode="Unspecified" Margin="874,31,110,31"/>
+
                 </Grid>
 
                 <Grid Grid.Row="1">

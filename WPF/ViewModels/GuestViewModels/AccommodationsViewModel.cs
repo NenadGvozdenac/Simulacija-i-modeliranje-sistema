@@ -44,16 +44,24 @@ public class AccommodationsViewModel : INotifyPropertyChanged
         AccommodationView = _Accommodations;
         user = _user;
 
-        //ObservableCollections
         _accommodations = new ObservableCollection<Accommodation>();
         _filteredAccommodations = new ObservableCollection<Accommodation>();
-        //AccommodationView.username.Text = user.Username;
         Update();
 
     }
 
     public void Update()
     {
+
+        if (GuestService.GetInstance().GetByGuestId(user.Id).IsSuperGuest)
+        {
+            AccommodationView.crownImage.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            AccommodationView.crownImage.Visibility = Visibility.Hidden;
+        }
+
         foreach (Accommodation accommodation in AccommodationService.GetInstance().GetAll())
         {
             accommodation.Location = LocationService.GetInstance().GetById(accommodation.LocationId);

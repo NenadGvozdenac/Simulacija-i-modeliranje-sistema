@@ -40,19 +40,23 @@ namespace BookingApp.WPF.Views.TouristViews
 
             foreach(TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
             {
-                if(tourRequest.Status == "Valid")
-                {
-                    acceptedNum++;
-                }
-                if(tourRequest.Status == "Invalid")
+                if (tourRequest.Status == "Invalid")
                 {
                     invalidNum++;
                 }
+                if (tourRequest.Status == "Valid")
+                {
+                    acceptedNum++;
+                }
+                
             }
-            if (acceptedNum != 0 && invalidNum != 0)
+            if (acceptedNum != 0)
             {
                 acceptedPercentage = 100 * acceptedNum / TourRequestService.GetInstance().GetAll().Count();
                 acceptedMessage.Text = acceptedPercentage.ToString() + "%";
+            }
+            if(invalidNum != 0)
+            {
                 invalidPercentage = 100 * invalidNum / TourRequestService.GetInstance().GetAll().Count();
                 deniedMessage.Text = invalidPercentage.ToString() + "%";
             }

@@ -46,6 +46,17 @@ public class MyReservationsViewModel
     {
         MyReservationsWindow.Username_TextBlock.Text = _user.Username;
         MyReservationsWindow.MyReservationFrame.Content = UpcomingReservationsUserControl;
+
+        if (GuestService.GetInstance().GetByGuestId(_user.Id).IsSuperGuest)
+        {
+            MyReservationsWindow.crownImage.Visibility = Visibility.Visible;
+            MyReservationsWindow.superGuestTextBlock.Text = "super-guest";
+            MyReservationsWindow.superGuestTextBlock.Foreground = System.Windows.Media.Brushes.Gold;
+        }
+        else
+        {
+            MyReservationsWindow.crownImage.Visibility = Visibility.Hidden;
+        }
     }
 
     private void RescheduleAccommodationChangedMind()

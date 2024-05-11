@@ -32,12 +32,20 @@ public class GuestMainWindowViewModel
     public GuestMainWindowViewModel(GuestMainWindow _guestMainWindow, User user, Frame _guestWindowFrame)
     {
         _user = user;
+        CheckForSuperGuest();
         GuestWindowFrame = _guestWindowFrame;
         GuestMainWindow = _guestMainWindow;
         Update(_user);
         AccommodationsUserControl = new Accommodations(user);
         GuestWindowFrame.Content = AccommodationsUserControl;
     }
+
+    private void CheckForSuperGuest()
+    {
+        GuestInfo guestInfo = GuestService.GetInstance().GetByGuestId(_user.Id);
+        GuestService.GetInstance().SuperGuestCheck(guestInfo);
+    }
+
     public void Accommodations_Click()
     {
         GuestWindowFrame.Content = AccommodationsUserControl;

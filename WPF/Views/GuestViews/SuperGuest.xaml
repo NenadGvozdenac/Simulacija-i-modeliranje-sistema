@@ -28,8 +28,8 @@
             <Border CornerRadius="25" Background="#545E75" BorderThickness="4" BorderBrush="#9DD9D2" Margin="10,432,183,56">
                 <Grid>
                     <TextBlock Style="{StaticResource MainWhiteTextBlockGuest}"  TextAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="32" Text="What is Super-Guest?" VerticalAlignment="Top" Height="40" Width="333" Margin="8,11,0,0"/>
-                    <TextBlock Style="{StaticResource MainWhiteTextBlockGuest}"   HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="17" Text="Congratulations! You're now an esteemed member of our community!" VerticalAlignment="Top" Height="39" Width="553" Margin="20,56,0,0" TextDecorations="Underline"/>
-                    <TextBlock Style="{StaticResource MainWhiteTextBlockGuest}"   HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="17" Text="Remaining points for this year: Nan" VerticalAlignment="Top" Height="29" Width="463" Margin="20,96,0,0"/>
+                    <TextBlock x:Name="congratulationsTextBlock" Style="{StaticResource MainWhiteTextBlockGuest}"   HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="17" Text="Congratulations! You're now an esteemed member of our community!" VerticalAlignment="Top" Height="39" Width="553" Margin="20,56,0,0" TextDecorations="Underline"/>
+                    <TextBlock x:Name="pointsTextBlock" Style="{StaticResource MainWhiteTextBlockGuest}"   HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="17" Text="Remaining points for this year: Nan" VerticalAlignment="Top" Height="29" Width="463" Margin="20,96,0,0"/>
                 </Grid>
 
             </Border>

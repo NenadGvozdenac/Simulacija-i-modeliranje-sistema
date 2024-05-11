@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Miscellaneous;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Resources.Types;
@@ -42,6 +43,20 @@ public class AccommodationReservationRepository : BaseRepository<AccommodationRe
                 DateTime tempdate = res.FirstDateOfStaying;
 
                 while (tempdate != res.LastDateOfStaying.AddDays(1))
+                {
+                    result.Add(tempdate);
+                    tempdate = tempdate.AddDays(1);
+                }
+            }
+        }
+
+        foreach(AccommodationRenovation ren in AccommodationRenovationService.GetInstance().GetAllAccommodationRenovations())
+        {
+            if (ren.AccommodationId == id)
+            {
+                DateTime tempdate = ren.DateSpan.Start;
+
+                while (tempdate <= ren.DateSpan.End)
                 {
                     result.Add(tempdate);
                     tempdate = tempdate.AddDays(1);

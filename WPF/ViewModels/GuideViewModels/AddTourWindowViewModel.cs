@@ -193,8 +193,35 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
-        
+        private Location location;
 
+        public Location Location
+        {
+            get => location;
+            set
+            {
+                if(value != location)
+                {
+                    location = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+
+        private Language languageRec;
+        public Language LanguageRec
+        {
+            get => languageRec;
+            set
+            {
+                if (value != languageRec)
+                {
+                    languageRec = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public ObservableCollection<TourImage> Images { get; set; }
 
@@ -226,11 +253,74 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Checkpoints = new ObservableCollection<Checkpoint>();
             addTourWindow.DataContext = this;
             addTourWindow.datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
+            Location = FindMostRequestedLocation();
+            LanguageRec = FindMostRequestedLanguage();
             LoadCountries();
             LoadLanguages();
             
 
         }
+
+        public Location FindMostRequestedLocation()
+        {
+            List<TourRequest> requests = new List<TourRequest>();
+            requests = TourRequestService.GetInstance().GetAll();
+            List<Location> locations = new List<Location>();
+            locations = LocationService.GetInstance().GetAll();
+            int numberOfRequests = 0;
+            int numberOfRequests_temp = 0;
+            Location location = locations[0];
+
+            foreach(Location l in locations)
+            {
+                foreach (TourRequest request in requests)
+                {
+                    if(l.Id == request.LocationId)
+                    {
+                        numberOfRequests_temp++;
+                    }
+                }
+                if(numberOfRequests_temp > numberOfRequests)
+                {
+                    numberOfRequests = numberOfRequests_temp;
+                    location = l;
+                }
+                numberOfRequests_temp = 0;
+            }
+
+            return location;
+        }
+
+        public Language FindMostRequestedLanguage()
+        {
+            List<TourRequest> requests = new List<TourRequest>();
+            requests = TourRequestService.GetInstance().GetAll();
+            List<Language> languages = new List<Language>();
+            languages = LanguageService.GetInstance().GetAll();
+            int numberOfRequests = 0;
+            int numberOfRequests_temp = 0;
+            Language language = languages[0];
+
+            foreach (Language l in languages)
+            {
+                foreach (TourRequest request in requests)
+                {
+                    if (l.Id == request.LanguageId)
+                    {
+                        numberOfRequests_temp++;
+                    }
+                }
+                if (numberOfRequests_temp > numberOfRequests)
+                {
+                    numberOfRequests = numberOfRequests_temp;
+                    language = l;
+                }
+                numberOfRequests_temp = 0;
+            }
+
+            return language;
+        }
+
 
 
 
@@ -270,28 +360,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return false;
         }
 
-        /*  public void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-          {
-              OpenFileDialog openFileDialog = new OpenFileDialog();
-              openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
-              if (openFileDialog.ShowDialog() == true)
-              {
-                  string selectedImagePath = openFileDialog.FileName;
-                  string destinationFolder = "../../../Resources/Images/TourImages/"; // Update this with your desired destination folder path
-
-                  // Extracting filename from the full path
-                  string fileName = System.IO.Path.GetFileName(selectedImagePath);
-
-                  // Constructing destination path
-                  string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
-
-                  // Copy the selected image file to the destination folder
-                  System.IO.File.Copy(selectedImagePath, destinationPath, true);
-
-                  // Update the text box with the destination path
-                  addTourWindow.ImageURLTextBox.Text = destinationPath;
-              }
-          }*/
+        
 
         public void DeleteImageClick()
         {
@@ -474,7 +543,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
+        public  void LocationRecomendation_Click()
+        {
+            Country = Location.Country;
+            City = Location.City;
 
+        }
 
+        internal void LanguageRecomendation_Click()
+        {
+            Language = LanguageRec.Name;
+        }
     }
 }

@@ -140,5 +140,15 @@ namespace BookingApp.View.PathfinderViews
         {
             addTourWindowViewModel.DeleteImageClick();
         }
+
+        private void LocationRecomendation_Click(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LocationRecomendation_Click();
+        }
+
+        private void LanguageRecomendation_Click(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LanguageRecomendation_Click();
+        }
     }
 }

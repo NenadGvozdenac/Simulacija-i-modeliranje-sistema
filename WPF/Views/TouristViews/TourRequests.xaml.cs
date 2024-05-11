@@ -85,5 +85,15 @@ namespace BookingApp.WPF.Views.TouristViews
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow is TouristMainWindow mainWindow)
+            {
+                mainWindow.ShowTourRequestStatistics();
+            }
+        }
     }
 }

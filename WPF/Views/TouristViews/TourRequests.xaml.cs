@@ -48,13 +48,21 @@ namespace BookingApp.WPF.Views.TouristViews
             DataContext = this;
             user = _user;
             tourRequests = new ObservableCollection<TourRequest>();
+            
             Update();
         }
         public void Update()
         {
             tourRequests.Clear();
+            
             foreach(TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
             {
+                DateTime now = DateTime.Now;
+                TimeSpan difference = now - tourRequest.BeginDate;
+                if (difference.TotalHours < 48)
+                {
+                    tourRequest.Status = "Invalid";
+                }
                 TourRequest request = TourRequestService.GetInstance().GetById(tourRequest.Id);
                 request.Location = LocationService.GetInstance().GetById(tourRequest.LocationId);
                 request.Language = LanguageService.GetInstance().GetById(tourRequest.LanguageId);

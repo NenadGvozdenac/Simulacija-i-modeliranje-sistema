@@ -23,6 +23,7 @@
     <None Remove="Resources\Assets\book.224x256.png" />
     <None Remove="Resources\Assets\clock.256x256.png" />
     <None Remove="Resources\Assets\concierge-bell.256x193.png" />
+    <None Remove="Resources\Assets\crown.png" />
     <None Remove="Resources\Assets\default_user.png" />
     <None Remove="Resources\Assets\delete.png" />
     <None Remove="Resources\Assets\edit.png" />
@@ -228,6 +229,9 @@
     <Resource Include="Resources\Assets\accommodations.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Resources\Assets\crown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Assets\hotel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

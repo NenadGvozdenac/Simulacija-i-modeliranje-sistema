@@ -376,6 +376,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourDemographics.Show();
         }
 
+        internal void RequestsStatistics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            RequestStatistics requestStatistics = new RequestStatistics();
+            requestStatistics.Show();
+        }
+
+
         public void Demographics_Accelerator()
         {
             TourDemographics tourDemographics = new TourDemographics();
@@ -470,6 +477,6 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         }
 
-
+        
     }
 }

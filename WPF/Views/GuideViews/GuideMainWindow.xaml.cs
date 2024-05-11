@@ -72,6 +72,11 @@ namespace BookingApp.View.PathfinderViews
             mainWindowViewModel.Demographics_MouseLeftButtonDown(sender, e);
         }
 
+        private void RequestsStatistics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mainWindowViewModel.RequestsStatistics_MouseLeftButtonDown(sender, e);
+        }
+
         private void Reviews_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             mainWindowViewModel.Reviews_MouseLeftButtonDown(sender, e);
@@ -168,5 +173,7 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.ClearFilters_Click();
         }
+
+        
     }
 }

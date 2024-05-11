@@ -49,7 +49,7 @@
                         <Border Height="20"/>
                         <TextBlock Width="250" Text="Complex tour requests (F6)" TextAlignment="Center" FontSize="20"></TextBlock>
                         <Border Height="20"/>
-                        <TextBlock Width="250" Text="Tour requests statistics (F7)" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock Width="250" Text="Tour requests statistics (F7)" TextAlignment="Center" FontSize="20" MouseLeftButtonDown="RequestsStatistics_MouseLeftButtonDown" Cursor="Hand"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="0">

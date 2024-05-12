@@ -41,7 +41,14 @@ namespace BookingApp.WPF.Views.TouristViews
             {
                 if (tourRequest.Status == "Valid")
                 {
-                    numOfGuests += tourRequest.Tourists.Count();
+                    foreach(RequestedTourist rt in RequestedTouristService.GetInstance().GetAll())
+                    {
+                        if(rt.RequestId == tourRequest.Id)
+                        {
+                            numOfGuests++;
+                        }
+                    }
+                    //numOfGuests += tourRequest.Tourists.Count();
                     numOfAcceptedRequests++;
                 }
             }
@@ -62,7 +69,13 @@ namespace BookingApp.WPF.Views.TouristViews
                 {
                     if (tourRequest.Status == "Valid")
                     {
-                        numOfGuests += tourRequest.Tourists.Count();
+                        foreach (RequestedTourist rt in RequestedTouristService.GetInstance().GetAll())
+                        {
+                            if (rt.RequestId == tourRequest.Id)
+                            {
+                                numOfGuests++;
+                            }
+                        }
                         numOfAcceptedRequests++;
                     }
                 }
@@ -77,7 +90,7 @@ namespace BookingApp.WPF.Views.TouristViews
         }
         public void ComboBox2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (yearsComboBox.SelectedItem != "All time")
+            if (yearsComboBox2.SelectedItem != "All time")
             {
                 int selectedYear = (int)yearsComboBox2.SelectedItem;
                 GetAverageNumOfGuestsForYear(selectedYear);
@@ -122,9 +135,13 @@ namespace BookingApp.WPF.Views.TouristViews
         {
             yearsComboBox.Items.Clear();
             List<int> years = GetYears();
+            List<int> validYears=GetYearsWithValidRequests();
             foreach (int year in years)
             {
                 yearsComboBox.Items.Add(year);
+            }
+            foreach(int year in validYears)
+            {
                 yearsComboBox2.Items.Add(year);
             }
             yearsComboBox.Items.Add("All time");
@@ -142,7 +159,21 @@ namespace BookingApp.WPF.Views.TouristViews
             }
             return years;
         }
-
+        public List<int> GetYearsWithValidRequests()
+        {
+            List<int> years = new List<int>();
+            foreach (TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
+            {
+                if (tourRequest.Status == "Valid")
+                {
+                    if (!years.Contains(tourRequest.BeginDate.Year))
+                    {
+                        years.Add(tourRequest.BeginDate.Year);
+                    }
+                }
+            }
+            return years;
+        }
         public void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (yearsComboBox.SelectedItem != "All time")

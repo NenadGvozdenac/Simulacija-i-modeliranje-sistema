@@ -26,7 +26,7 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class RequestTour : UserControl, INotifyPropertyChanged
     {
-        public ObservableCollection<Tourist> _tourists { get; set; }
+        public ObservableCollection<RequestedTourist> _requestedTourists { get; set; }
 
         private int _guestNumber;
         private string name;
@@ -123,12 +123,14 @@ namespace BookingApp.WPF.Views.TouristViews
         }
         public List<Tourist> Tourists { get; set; }
         public string description {  get; set; }
+        public ObservableCollection<Tourist> _tourists {  get; set; }
         public User user {  get; set; }
         public RequestTour(User _user)
         {
             InitializeComponent();
             DataContext = this;
             _tourists = new ObservableCollection<Tourist>();
+            _requestedTourists = new ObservableCollection<RequestedTourist>();
             Tourists = new List<Tourist>();
             user = _user;
             LoadCountries();
@@ -181,13 +183,24 @@ namespace BookingApp.WPF.Views.TouristViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public void GuestAge_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(GuestAgeText.Text, out int result) && GuestAgeText.Text != "")
+            {
+                MessageBox.Show("Enter valid age");
+            }
+            else
+            {
+                GuestAge = result;
+            }
+        }
         public void AddTourist_Click(object sender, RoutedEventArgs e)
         {
             string name = GuestName.Text;
             string surname = GuestSurname.Text;
-            int age = GuestAge;
+            int age = (int)GuestAge;
 
-            _tourists.Add(new Tourist { Name = name, Surname = surname, Age = age });
+            _tourists.Add(new Tourist { Name = name ,Surname = surname, Age = age });
             RefreshTouristDataGrid();
             ClearInputFields();
             foreach(Tourist t in _tourists)
@@ -215,6 +228,16 @@ namespace BookingApp.WPF.Views.TouristViews
             //TourRequest tourRequest = new TourRequest(id, user.Id, LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id, description, LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id, BeginDate, EndDate);
             TourRequest tourRequest = new TourRequest();
             tourRequest.Id = TourRequestService.GetInstance().NextId();
+            foreach(Tourist t in Tourists)
+            {
+                RequestedTourist rt = new RequestedTourist();
+                rt.Id = RequestedTouristService.GetInstance().NextId();
+                rt.Name = t.Name;
+                rt.Age = t.Age;
+                rt.Surname = t.Surname;
+                rt.RequestId = tourRequest.Id;
+                RequestedTouristService.GetInstance().Add(rt);
+            }
             tourRequest.UserId = user.Id;
             tourRequest.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id;
             tourRequest.Description = description;

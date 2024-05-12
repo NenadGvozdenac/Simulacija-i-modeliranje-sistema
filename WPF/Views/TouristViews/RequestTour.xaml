@@ -41,7 +41,7 @@
                 <TextBlock Text="Last name:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,161,0,0"/>
                 <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,162,0,0"/>
                 <TextBlock Text="Age:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,220,0,0"/>
-                <TextBox x:Name="GuestAgeText" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" Margin="112,221,0,0"/>
+                <TextBox x:Name="GuestAgeText" TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" Margin="112,221,0,0"/>
                 <Button Click="AddTourist_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="59" Margin="304,221,0,0">
                     <Image Source="/Resources/Assets/plus-symbol-button.png"/>
                 </Button>

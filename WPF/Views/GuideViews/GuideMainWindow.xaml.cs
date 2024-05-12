@@ -3,6 +3,7 @@ using BookingApp.Model.MutualModels;
 using BookingApp.Repositories;
 using BookingApp.View.PathfinderViews.Componentss;
 using BookingApp.WPF.ViewModels.GuideViewModels;
+using BookingApp.WPF.Views.GuideViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -174,6 +175,9 @@ namespace BookingApp.View.PathfinderViews
             mainWindowViewModel.ClearFilters_Click();
         }
 
-        
+        private void TourRequest_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.TourRequest_Click();
+        }
     }
 }

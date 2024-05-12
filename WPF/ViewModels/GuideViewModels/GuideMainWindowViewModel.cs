@@ -20,7 +20,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
     public class GuideMainWindowViewModel
     {
 
-        private readonly User _user;
+        public  User _user {  get; set; }
+        
         private DailyTourCard dailyTourCard;
 
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
@@ -477,6 +478,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         }
 
-        
+        internal void TourRequest_Click()
+        {
+            TourRequestsWindow tourRequestsWindow = new TourRequestsWindow(_user);
+            tourRequestsWindow.Show();
+
+   
+        }
     }
 }

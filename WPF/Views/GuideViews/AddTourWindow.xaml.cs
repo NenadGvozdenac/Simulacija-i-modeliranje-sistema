@@ -37,7 +37,7 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        AddTourWindowViewModel addTourWindowViewModel { get; set; }
+        public AddTourWindowViewModel addTourWindowViewModel { get; set; }
 
         public AddTourWindow(User user)
         {

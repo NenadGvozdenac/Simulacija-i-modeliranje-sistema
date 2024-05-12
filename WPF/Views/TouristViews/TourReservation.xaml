@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
              mc:Ignorable="d" 
              d:DesignHeight="580" d:DesignWidth="1000">
-    <Grid Background="LightGray">
+    <Grid Background="GhostWhite">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
@@ -72,9 +72,9 @@ Width="162" Height="26"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Button Click="ReserveTour_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Height="43" Width="44" Margin="0,173,0,0">
-                        <Image Source="/Resources/Assets/reserve.512x511.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="30"/>
+                        <Image Source="/Resources/Assets/concierge-bell.256x193.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="30"/>
                     </Button>
-                    <Label FontSize="15" x:Name="addTouristMessage" Visibility="Hidden" FontWeight="DemiBold" Content="Add Tourists!" Foreground="Red" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,138,0,0"/>
+                    <Label FontSize="15" x:Name="addTouristMessage" Visibility="Hidden" FontWeight="DemiBold" Content="Add Tourists!" Foreground="Red" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,138,0,0" Width="99"/>
                 </Grid>
             </Grid>
 

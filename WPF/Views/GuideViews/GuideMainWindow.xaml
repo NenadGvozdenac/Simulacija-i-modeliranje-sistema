@@ -105,8 +105,13 @@
                         <TextBlock HorizontalAlignment="Center" FontSize="20">Language:</TextBlock>
                         <ComboBox Width="150" Height="50" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged"></ComboBox>
                     </StackPanel>
+                    <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <Border Margin="110,0,0,0"></Border>
+                        <Button Width="150" Height="70" Click="ClearFilters_Click">Clear filters</Button>
+                    </StackPanel>
                 </Grid>
             </Grid>   
+            
         
         <Grid Grid.Column="1" x:Name="GridColumn2">
                 <Grid.RowDefinitions>

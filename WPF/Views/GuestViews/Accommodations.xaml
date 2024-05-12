@@ -151,6 +151,8 @@
                 <Button Content="Quick demo" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="81" HorizontalAlignment="Left" Margin="344,62,0,0" VerticalAlignment="Top"/>
 
                 <Label x:Name="username" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="686,62,11,0"/>
+                <Image x:Name="crownImage" Source="../../../Resources/Assets/crown.png"  RenderOptions.EdgeMode="Unspecified" Margin="676,29,104,33"/>
+                
                 <Image Source="../../../Resources/Assets/idcard.png"  RenderOptions.EdgeMode="Unspecified" Margin="724,24,47,32"/>
             </Grid>
 

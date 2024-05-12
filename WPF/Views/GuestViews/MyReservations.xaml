@@ -19,6 +19,9 @@
                     <DropShadowEffect ShadowDepth="0.5"/>
                 </Image.Effect>
             </Image>
+
+            <Image x:Name="crownImage" Source="../../../Resources/Assets/crown.png"  RenderOptions.EdgeMode="Unspecified" Margin="12,25,192,657" />
+
             <TextBlock x:Name="Username_TextBlock" Style="{StaticResource MainTextBlockGuest}" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,180,0,0" TextWrapping="Wrap" FontSize="30" Text="Username" VerticalAlignment="Top" Height="99" Width="198"/>
             <Button Content="Upcoming Reservations" Style="{StaticResource RoundedButtonStyleGuest}"  Margin="0,300,0,0" Click="UpcomingReservations_Click" FontSize="17" Height="34" Width="198"/>
             <Button Content="Past Reservations" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,354,0,0" Click="PastReservations_Click" FontSize="17" Height="34" Width="198"/>
@@ -26,6 +29,10 @@
             <Button Content="Reschedule Requests" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,458,0,0" FontSize="17" Height="34" Width="198" Click="RescheduleRequests_Click"/>
             <Button Content="What is super-guest?" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,510,0,0" FontSize="17" Height="34" Width="198" Click="WhatIsSuperGuest_Click"/>
             <Button Content="Forums" Style="{StaticResource RoundedButtonStyleGuest}" Margin="0,560,0,0" FontSize="17" Height="34" Width="198"/>
+        
+            <!--textblock saying type of account-->
+            <TextBlock Style="{StaticResource MainTextBlockGuest}" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,650,0,0" TextWrapping="Wrap" FontSize="20" Text="Type of account" VerticalAlignment="Top" Height="28" Width="198"/>
+            <TextBlock x:Name="superGuestTextBlock" Style="{StaticResource MainTextBlockGuest}" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,678,0,0" TextWrapping="Wrap" FontSize="20" Text="normal" VerticalAlignment="Top" Height="28" Width="198" Foreground="Green"/>
         </Grid>
 
         <Grid x:Name="Container" Grid.Column="1">

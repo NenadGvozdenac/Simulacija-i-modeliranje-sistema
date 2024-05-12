@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Miscellaneous;
+using BookingApp.Resources.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;

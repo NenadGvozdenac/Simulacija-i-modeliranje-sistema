@@ -54,6 +54,7 @@ public partial class App
         services.AddSingleton<IAccommodationReservationRepository, AccommodationReservationRepository>();
         services.AddSingleton<ILocationRepository, LocationRepository>();
         services.AddSingleton<IOwnerInfoRepository, OwnerInfoRepository>();
+        services.AddSingleton<IGuestInfoRepository, GuestInfoRepository>();
         services.AddSingleton<IGuestRatingRepository, GuestRatingRepository>();
         services.AddSingleton<IAccommodationReservationMovingRepository, AccommodationReservationMovingRepository>();
         services.AddSingleton<IAccommodationImageRepository, AccommodationImageRepository>();
@@ -80,6 +81,7 @@ public partial class App
     {
         // Add services
         services.AddSingleton<OwnerService>();
+        services.AddSingleton<GuestService>();
         services.AddSingleton<AccommodationService>();
         services.AddSingleton<AccommodationReservationService>();
         services.AddSingleton<LocationService>();

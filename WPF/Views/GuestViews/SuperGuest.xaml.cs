@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,17 @@ public partial class SuperGuest : UserControl
     public SuperGuest(User _user)
     {
         InitializeComponent();
+
+        if (GuestService.GetInstance().GetByGuestId(_user.Id).IsSuperGuest)
+        {            
+            pointsTextBlock.Text = "Remaining points for this year: " + GuestService.GetInstance().GetByGuestId(_user.Id).NumberOfPoints;
+        }
+        else
+        {
+            congratulationsTextBlock.Text = "Sadly, you are still not super guest! Keep up the number of reservations to become one!";
+            pointsTextBlock.Visibility = Visibility.Hidden;
+        }
     }
+
+
 }

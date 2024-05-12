@@ -115,6 +115,11 @@ public partial class SignUpForm : Window
             OwnerService ownerService = OwnerService.GetInstance();
             ownerService.Add(user);
         }
+        else if (user.Type == UserType.Guest)
+        {
+            GuestService guestService = GuestService.GetInstance();
+            guestService.Add(user);
+        }
     }
 
     private bool IsBadPassword(User user)

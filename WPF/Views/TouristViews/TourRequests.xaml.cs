@@ -57,18 +57,13 @@ namespace BookingApp.WPF.Views.TouristViews
             
             foreach(TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
             {
-                /*DateTime now = DateTime.Now;
-                TimeSpan difference = now - tourRequest.BeginDate;
-                if (difference.TotalDays<=2 && difference.TotalHours < 48)
-                {
-                    tourRequest.Status = "Invalid";
-                }*/
+
                 TourRequest request = TourRequestService.GetInstance().GetById(tourRequest.Id);
                 request.Location = LocationService.GetInstance().GetById(tourRequest.LocationId);
                 request.Language = LanguageService.GetInstance().GetById(tourRequest.LanguageId);
                 DateTime now = DateTime.Now;
                 TimeSpan difference = tourRequest.BeginDate - now;
-
+                
                 if (difference.TotalDays <= 2 && difference.TotalHours < 48)
                 {
                     request.Status = "Invalid";

@@ -26,10 +26,18 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <TextBlock Text="Pick a year:" FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                    <ComboBox x:Name="yearsComboBox" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,24,0,0" Width="77"/>
                     <TextBlock Text="Percentage of accepted tour requests: " FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,51,0,0"/>
-                    <TextBlock x:Name="acceptedMessage" Text="Test" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="415,53,0,0"/>
+                    <TextBlock x:Name="acceptedMessage" Text="0%" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="415,53,0,0"/>
                     <TextBlock Text="Percentage of denied tour requests: " FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,96,0,0"/>
-                    <TextBlock x:Name="deniedMessage" Text="Test" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="395,96,0,0"/>
+                    <TextBlock x:Name="deniedMessage" Text="0%" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="395,96,0,0"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Pick a year:" FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                    <ComboBox x:Name="yearsComboBox2" SelectionChanged="ComboBox2_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,24,0,0" Width="77"/>
+                    <TextBlock Text="Average number of guests in accepted tours: " FontSize="21" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,51,0,0"/>
+                    <TextBlock x:Name="averageMessage" Text="0" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="442,50,0,0"/>
                 </Grid>
             </Grid>
         </Grid>

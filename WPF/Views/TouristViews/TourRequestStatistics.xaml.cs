@@ -28,10 +28,66 @@ namespace BookingApp.WPF.Views.TouristViews
         {
             InitializeComponent();
             DataContext = this;
-            Update();
+            GetPercentages();
+            PopulateYearsComboBox();
+            GetAverageNumOfGuests();
         }
 
-        public void Update()
+        public void GetAverageNumOfGuests()
+        {
+            int numOfGuests=0;
+            int numOfAcceptedRequests = 0;
+            foreach(TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
+            {
+                if (tourRequest.Status == "Valid")
+                {
+                    numOfGuests += tourRequest.Tourists.Count();
+                    numOfAcceptedRequests++;
+                }
+            }
+            if( numOfAcceptedRequests != 0 ) { 
+                averageMessage.Text = ((double)numOfGuests / numOfAcceptedRequests).ToString();
+            }else
+            {
+                averageMessage.Text = "0";
+            }
+        }
+        public void GetAverageNumOfGuestsForYear(int year)
+        {
+            int numOfGuests = 0;
+            int numOfAcceptedRequests = 0;
+            foreach (TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
+            {
+                if (tourRequest.BeginDate.Year == year)
+                {
+                    if (tourRequest.Status == "Valid")
+                    {
+                        numOfGuests += tourRequest.Tourists.Count();
+                        numOfAcceptedRequests++;
+                    }
+                }
+            }
+            if (numOfAcceptedRequests != 0)
+            {
+                averageMessage.Text = ((double)numOfGuests / numOfAcceptedRequests).ToString();
+            }else
+            {
+                averageMessage.Text = "0";
+            }
+        }
+        public void ComboBox2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (yearsComboBox.SelectedItem != "All time")
+            {
+                int selectedYear = (int)yearsComboBox2.SelectedItem;
+                GetAverageNumOfGuestsForYear(selectedYear);
+            }
+            else
+            {
+                GetAverageNumOfGuests();
+            }
+        }
+        public void GetPercentages()
         {
             int acceptedNum = 0;
             int invalidNum = 0;
@@ -62,6 +118,83 @@ namespace BookingApp.WPF.Views.TouristViews
             }
         }
 
+        public void PopulateYearsComboBox()
+        {
+            yearsComboBox.Items.Clear();
+            List<int> years = GetYears();
+            foreach (int year in years)
+            {
+                yearsComboBox.Items.Add(year);
+                yearsComboBox2.Items.Add(year);
+            }
+            yearsComboBox.Items.Add("All time");
+            yearsComboBox2.Items.Add("All time");
+        }
+        public List<int> GetYears()
+        {
+            List<int> years = new List<int>();
+            foreach (TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
+            {
+                if (!years.Contains(tourRequest.BeginDate.Year))
+                {
+                    years.Add(tourRequest.BeginDate.Year);
+                }
+            }
+            return years;
+        }
+
+        public void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (yearsComboBox.SelectedItem != "All time")
+            {
+                int selectedYear = (int)yearsComboBox.SelectedItem;
+                GetPercentagesForYear(selectedYear);
+            }else
+            {
+                GetPercentages();
+            }
+        }
+
+        public void GetPercentagesForYear(int year)
+        {
+            int acceptedNum = 0;
+            int invalidNum = 0;
+            double acceptedPercentage = 0;
+            double invalidPercentage = 0;
+
+            foreach (TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
+            {
+                if (tourRequest.BeginDate.Year == year)
+                {
+                    if (tourRequest.Status == "Invalid")
+                    {
+                        invalidNum++;
+                    }
+                    if (tourRequest.Status == "Valid")
+                    {
+                        acceptedNum++;
+                    }
+                }
+            }
+            if (acceptedNum != 0)
+            {
+                acceptedPercentage = 100 * acceptedNum / TourRequestService.GetInstance().GetByYear(year).Count();
+                acceptedMessage.Text = acceptedPercentage.ToString() + "%";
+            }else
+            {
+                acceptedMessage.Text = "0%";
+            }
+            if (invalidNum != 0)
+            {
+                invalidPercentage = 100 * invalidNum / TourRequestService.GetInstance().GetByYear(year).Count();
+                deniedMessage.Text = invalidPercentage.ToString() + "%";
+            }
+            else
+            {
+                deniedMessage.Text = "0%";
+            }
+
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

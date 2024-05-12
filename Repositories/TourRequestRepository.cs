@@ -32,6 +32,10 @@ namespace BookingApp.Repositories
             return _tourRequests.FirstOrDefault(a => a.Id == id);
         }
 
+        public List<TourRequest> GetByYear(int year)
+        {
+            return _tourRequests.Where(a => a.BeginDate.Year == year).ToList();
+        }
         public List<TourRequest> GetByUserId(int userId)
         {
             return _tourRequests.Where(a => a.UserId == userId).ToList();

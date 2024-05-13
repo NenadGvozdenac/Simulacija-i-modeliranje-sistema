@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace BookingApp.WPF.Views.TouristViews
 {
@@ -24,15 +26,128 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class TourRequestStatistics : UserControl, INotifyPropertyChanged
     {
+        public SeriesCollection SeriesCollection {  get; set; }
+        public string[] Labels {  get; set; }
+        public string[] LocationLabels {  get; set; }
+        public Func<double, string> LocationValues { get; set; }
+        public Func<double, string> Values { get; set; }
+        public SeriesCollection SeriesCollectionLocation {  get; set; }
         public TourRequestStatistics()
         {
             InitializeComponent();
             DataContext = this;
+            SeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title="Requests",
+                    Values = new ChartValues<int>()
+                }
+            };
+
+            Labels = GetLanguages();
+            Values = value => value.ToString("N");
+
+            GetTourRequestNumber();
+
+            SeriesCollectionLocation = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title="Requests",
+                    Values = new ChartValues<int>()
+                }
+            };
+            LocationLabels = GetLocations();
+            LocationValues = value => value.ToString("N");
+            GetTourRequestNumberForLocation();
+
             GetPercentages();
             PopulateYearsComboBox();
             GetAverageNumOfGuests();
         }
 
+        public void GetTourRequestNumber()
+        {
+            var requestCountsByLanguage = new Dictionary<string, int>(); // Rječnik za pohranu broja zahtjeva po jeziku
+
+            foreach (TourRequest tr in TourRequestService.GetInstance().GetAll())
+            {
+                var languageName = tr.Language.Name;
+                // Ako jezik nije već u rječniku, dodajemo ga i postavljamo brojač na 1
+                if (!requestCountsByLanguage.ContainsKey(languageName))
+                {
+                    requestCountsByLanguage[languageName] = 1;
+                }
+                else
+                {
+                    // Inače, povećavamo broj za 1
+                    requestCountsByLanguage[languageName]++;
+                }
+            }
+            // Popunjavamo Y os sa brojem zahtjeva za svaki jezik
+            foreach (var count in requestCountsByLanguage.Values)
+            {
+                ((ChartValues<int>)SeriesCollection[0].Values).Add(count); // Dodajemo broj zahtjeva u vrijednosti grafikona
+            }
+        }
+        public void GetTourRequestNumberForLocation()
+        {
+            var requestCountsByLocation = new Dictionary<string, int>(); // Rječnik za pohranu broja zahtjeva po jeziku
+
+            foreach (TourRequest tr in TourRequestService.GetInstance().GetAll())
+            {
+                var location = tr.Location.Country;
+                // Ako jezik nije već u rječniku, dodajemo ga i postavljamo brojač na 1
+                if (!requestCountsByLocation.ContainsKey(location))
+                {
+                    requestCountsByLocation[location] = 1;
+                }
+                else
+                {
+                    // Inače, povećavamo broj za 1
+                    requestCountsByLocation[location]++;
+                }
+            }
+            // Popunjavamo Y os sa brojem zahtjeva za svaki jezik
+            foreach (var count in requestCountsByLocation.Values)
+            {
+                ((ChartValues<int>)SeriesCollectionLocation[0].Values).Add(count); // Dodajemo broj zahtjeva u vrijednosti grafikona
+            }
+        }
+
+        public string[] GetLocations()
+        {
+            var locations = new List<string>();
+            foreach (TourRequest tr in TourRequestService.GetInstance().GetAll())
+            {
+                foreach (Location l in LocationService.GetInstance().GetAll())
+                {
+                    if (tr.Location.Country == l.Country && !locations.Contains(l.Country))
+                    {
+                        locations.Add(l.Country);
+                    }
+                }
+            }
+            return locations.ToArray();
+        }
+        public string[] GetLanguages()
+        {
+            var languages = new List<string>();
+
+            foreach (TourRequest tr in TourRequestService.GetInstance().GetAll())
+            {
+                foreach (Language l in LanguageService.GetInstance().GetAll())
+                {
+                    if(tr.LanguageId == l.Id)
+                    {
+                        languages.Add(l.Name);
+                    }
+                }
+            }
+            
+            return languages.ToArray();
+        }
         public void GetAverageNumOfGuests()
         {
             int numOfGuests=0;

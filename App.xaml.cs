@@ -75,6 +75,7 @@ public partial class App
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<ITourRequestRepository, TourRequestRepository>();
         services.AddSingleton<IMonthRepository, MonthRepository>();
+        services.AddSingleton<IRequestedTouristRepository, RequestedTouristRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -102,5 +103,7 @@ public partial class App
         services.AddSingleton<UserService>();
         services.AddSingleton<TourRequestService>();
         services.AddSingleton<MonthService>();
+        services.AddSingleton<RequestedTouristService>();
+
     }
 }

@@ -62,11 +62,12 @@ namespace BookingApp.WPF.Views.TouristViews
                 if (selectedTour != null && (_guestNumber > selectedTour.Capacity || _guestNumber <= 0))
                 {
                     numberHigherMessage.Visibility = Visibility.Visible;
+
                 }
                 else
                 {
                     numberHigherMessage.Visibility = Visibility.Hidden;
-                        enterValidGuestNumber.Visibility = Visibility.Hidden;
+                    enterValidGuestNumber.Visibility = Visibility.Hidden;
 
                 }
             }
@@ -152,8 +153,6 @@ namespace BookingApp.WPF.Views.TouristViews
             numberHigherMessage.Visibility = Visibility.Hidden;
             increaseNumberText.Visibility = Visibility.Hidden;
             addTouristMessage.Visibility = Visibility.Hidden;
-            enterValidAgeMessage.Visibility = Visibility.Hidden;
-
         }
 
         public bool areErrorMessagesVisible()

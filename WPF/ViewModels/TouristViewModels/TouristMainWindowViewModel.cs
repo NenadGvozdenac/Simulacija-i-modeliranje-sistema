@@ -40,6 +40,10 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
+        public void ShowTourRequestStatistics()
+        {
+            TouristWindowFrame.Content = new TourRequestStatistics();
+        }
         public void TourReservation(Tour tour, User user)
         {
             TouristWindowFrame.Content = new TourReservation(tour, user);

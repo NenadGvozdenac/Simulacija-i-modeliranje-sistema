@@ -8,6 +8,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         void Add(TourRequest tourRequest);
         void Delete(int id);
         List<TourRequest> GetAll();
+        List<TourRequest> GetByYear(int year);
         TourRequest GetById(int id);
         List<TourRequest> GetByUserId(int userId);
         int NextId();

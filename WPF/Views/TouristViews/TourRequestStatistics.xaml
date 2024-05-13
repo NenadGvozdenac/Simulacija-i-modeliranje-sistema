@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.TourRequestStatistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="585" d:DesignWidth="1000">
+    <Grid Background="GhostWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+            <TextBlock Text="Tour request statistics" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="60" FontWeight="DemiBold" FontStyle="Italic"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Border BorderBrush="Black" BorderThickness="0,0,1,1"/>
+                    <TextBlock Text="Pick a year:" FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                    <ComboBox x:Name="yearsComboBox" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,24,0,0" Width="77"/>
+                    <TextBlock Text="Percentage of accepted tour requests: " FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,51,0,0"/>
+                    <TextBlock x:Name="acceptedMessage" Text="0%" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="415,53,0,0"/>
+                    <TextBlock Text="Percentage of denied tour requests: " FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,96,0,0"/>
+                    <TextBlock x:Name="deniedMessage" Text="0%" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="395,96,0,0"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                    <TextBlock Text="Pick a year:" FontSize="23" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                    <ComboBox x:Name="yearsComboBox2" SelectionChanged="ComboBox2_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,24,0,0" Width="77"/>
+                    <TextBlock Text="Average number of guests in accepted tours: " FontSize="21" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,51,0,0"/>
+                    <TextBlock x:Name="averageMessage" Text="0" FontSize="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="442,50,0,0"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

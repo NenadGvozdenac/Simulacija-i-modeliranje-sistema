@@ -96,6 +96,11 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.AddRequest(user);
         }
 
+        public void ShowTourRequestStatistics()
+        {
+            touristMainWindowViewModel.ShowTourRequestStatistics();
+        }
+
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)
         {
             touristMainWindowViewModel.ShowTourDates(selectedTour, guestNumber, tourists);

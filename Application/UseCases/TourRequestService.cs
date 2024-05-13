@@ -30,6 +30,10 @@ namespace BookingApp.Application.UseCases
             return _tourRequestRepository.GetAll();
         }
 
+        public List<TourRequest> GetByYear(int year)
+        {
+            return _tourRequestRepository.GetByYear(year);
+        }
         public TourRequest GetById(int id)
         {
             return _tourRequestRepository.GetById(id);

@@ -35,8 +35,8 @@ namespace BookingApp.WPF.Views.GuideViews.Components
             addTourWindow.addTourWindowViewModel.Country = CountryBlock.Text;
             addTourWindow.addTourWindowViewModel.City = CityBlock.Text;
             addTourWindow.addTourWindowViewModel.Language = LanguageBlock.Text;
-
-
+            addTourWindow.addTourWindowViewModel.RequestId = Convert.ToInt32(RequestId_TextBlock.Text);
+            addTourWindow.addTourWindowViewModel.TouristId = Convert.ToInt32(TouristId_TextBlock.Text);
 
             TourStartTime startTime = new TourStartTime();
             startTime.Time = Convert.ToDateTime(StartBlock.Text);

@@ -36,5 +36,45 @@ namespace BookingApp.WPF.Views.GuideViews
         {
             tourRequestsWindowViewModel.Country_SelectionChanged();
         }
+
+        private void City_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tourRequestsWindowViewModel.City_SelectionChanged();
+        }
+
+        private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tourRequestsWindowViewModel.City_SelectionChanged();
+        }
+
+        private void CapacityUp_Click(object sender, RoutedEventArgs e)
+        {
+            tourRequestsWindowViewModel.CapacityUp_Click();
+        }
+
+        private void CapacityDown_Click(object sender, RoutedEventArgs e)
+        {
+            tourRequestsWindowViewModel.CapacityDown_Click();
+        }
+
+        private void Capacity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tourRequestsWindowViewModel.City_SelectionChanged();
+        }
+
+        private void Picker1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tourRequestsWindowViewModel.City_SelectionChanged();
+        }
+
+        private void Picker2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tourRequestsWindowViewModel.City_SelectionChanged();
+        }
+
+        private void ResetFilters_Click(object sender, RoutedEventArgs e)
+        {
+            tourRequestsWindowViewModel.ResetFilters_Click();
+        }
     }
 }

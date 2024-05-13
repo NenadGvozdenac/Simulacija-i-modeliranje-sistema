@@ -24,23 +24,31 @@
                 <ColumnDefinition Width="0.7*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                <Label FontSize="30">Country: </Label>
+                <Label FontSize="30">Country:</Label>
                 <ComboBox Width="174" Height="41" x:Name="CountryCombobox" SelectionChanged="Country_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></ComboBox>
                 <Border Margin="50"></Border>
                 <Label FontSize="30">City:</Label>
                 <ComboBox Width="174" Height="41" x:Name="CityCombobox" SelectionChanged="City_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></ComboBox>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                <Label FontSize="30">Number of requests with selected loation: </Label>
+                <Label FontSize="30">Number of requests with selected loation:</Label>
                 <TextBlock x:Name="LocationTextblock" Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="100" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                <Label FontSize="30">Language: </Label>
+                <Label FontSize="30">Language:</Label>
                 <ComboBox Width="174" Height="41" x:Name="LanguageCombobox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Language_SelectionChanged"></ComboBox>
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
                 <Label FontSize="30">Number of requests with selected language:</Label>
                 <TextBlock x:Name ="LanguageTextBlock" Text="{Binding Path=LanguageRec,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="100" VerticalAlignment="Center" FontSize="30" FontWeight="Bold"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.RowSpan="4">
+                <Label FontSize="30" HorizontalAlignment="Center">Specific year:</Label>
+                <ComboBox Height="30" Width="258" x:Name="YearCombobox" SelectionChanged="Year_SelectionChanged" IsEnabled="False" IsEditable="False"></ComboBox>
+                <Label FontSize="30" HorizontalAlignment="Center">Specific month:</Label>
+                <ComboBox Height="30" Width="258" x:Name="MonthCombobox" SelectionChanged="Month_SelectionChanged" IsEnabled="False" IsEditable="False"></ComboBox>
+                <Border Margin="0,15"></Border>
+                <Button Width="69" Height="30" Click="Reset_click">Reset</Button>
             </StackPanel>
         </Grid>
     </Grid>

@@ -49,6 +49,8 @@
             <StackPanel Grid.Row="1" Grid.Column="3">
                 <Button Click="AcceptRequest_Click">Accept request</Button>
                 <TextBlock Text="{Binding UserId}" Visibility="Collapsed" x:Name="Id_TextBlock"></TextBlock>
+                <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="RequestId_TextBlock"></TextBlock>
+                <TextBlock Text="{Binding UserId}" Visibility="Collapsed" x:Name="TouristId_TextBlock"></TextBlock>
             </StackPanel>
         </Grid>
     </Border>

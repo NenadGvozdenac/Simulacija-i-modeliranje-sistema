@@ -43,5 +43,20 @@ namespace BookingApp.WPF.Views.GuideViews
         {
             requestsViewModel.Language_SelectionChanged();
         }
+
+        private void Reset_click(object sender, RoutedEventArgs e)
+        {
+            requestsViewModel.Reset_click();
+        }
+
+        private void Year_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            requestsViewModel.Year_SelectionChanged();
+        }
+
+        private void Month_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            requestsViewModel.Month_SelectionChanged();
+        }
     }
 }

@@ -97,7 +97,7 @@ namespace BookingApp.View.PathfinderViews
 
         private void ConfirmButtonClick(object sender, RoutedEventArgs e)
         {
-            addTourWindowViewModel.ConfirmButtonClick(sender, e);
+            addTourWindowViewModel.ConfirmButtonClick();
         }
 
         public void SaveImages(ObservableCollection<TourImage> images,Tour tour)

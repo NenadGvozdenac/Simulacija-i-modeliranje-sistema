@@ -37,7 +37,7 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        AddTourWindowViewModel addTourWindowViewModel { get; set; }
+        public AddTourWindowViewModel addTourWindowViewModel { get; set; }
 
         public AddTourWindow(User user)
         {
@@ -139,6 +139,16 @@ namespace BookingApp.View.PathfinderViews
         private void RemoveImage_Click(object sender, RoutedEventArgs e)
         {
             addTourWindowViewModel.DeleteImageClick();
+        }
+
+        private void LocationRecomendation_Click(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LocationRecomendation_Click();
+        }
+
+        private void LanguageRecomendation_Click(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LanguageRecomendation_Click();
         }
     }
 }

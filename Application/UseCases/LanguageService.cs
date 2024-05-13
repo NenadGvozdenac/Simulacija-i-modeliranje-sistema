@@ -42,5 +42,10 @@ namespace BookingApp.Application.UseCases
         {
            return _languageRepository.GetById(languageId);
         }
+
+        public List<Language> GetAll()
+        {
+            return _languageRepository.GetAll();
+        }
     }
 }

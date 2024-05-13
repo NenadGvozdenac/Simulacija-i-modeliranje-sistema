@@ -18,7 +18,7 @@
         <ComboBox HorizontalAlignment="Left" Margin="574,83,0,0" VerticalAlignment="Top" Width="318" Height="50" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CityTextBox" IsEditable="False" IsEnabled="False"></ComboBox>
 
         <Label Content="Language:" HorizontalAlignment="Left" Margin="16,217,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white"></Label>
-        <ComboBox HorizontalAlignment="Left" Margin="162,217,0,0" VerticalAlignment="Top" Width="299" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Height="50"></ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="162,217,0,0" VerticalAlignment="Top" Width="299" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="50"></ComboBox>
         <Label Content="Dates:" HorizontalAlignment="Left" Margin="546,217,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white"></Label>
 
         <StackPanel Margin="656,217,437,389" RenderTransformOrigin="0.5,0.5">
@@ -92,6 +92,11 @@
         <Button Content="Confirm" HorizontalAlignment="Left" Margin="684,734,0,0" VerticalAlignment="Top" Click="ConfirmButtonClick" Width="98" Height="37"/>
         <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="54" Height="53" HorizontalAlignment="Left" Margin="194,339,0,0" Command="{Binding AddImageCommand}"/>
         <Button Content="-" Style="{StaticResource RoundedButtonStyle}" Width="56" Height="53" HorizontalAlignment="Left" Margin="274,339,0,0" Click="RemoveImage_Click" x:Name="RemoveImageButton"/>
+        <Label Content="Most requested location: " HorizontalAlignment="Left" Margin="24,142,0,0" VerticalAlignment="Top" Width="197" Foreground="White" FontSize="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="226,148,0,0" TextWrapping="Wrap" Text="{Binding Location.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" MouseLeftButtonDown="LocationRecomendation_Click" Cursor="Hand" FontSize="17" Width="235" Height="33"/>
+        <Label Content="Most requested language: " HorizontalAlignment="Left" Margin="21,272,0,0" VerticalAlignment="Top" Width="214" Foreground="White" FontSize="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="235,278,0,0" TextWrapping="Wrap" Text="{Binding LanguageRec.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" MouseLeftButtonDown="LanguageRecomendation_Click" Cursor="Hand" FontSize="17" Width="241" Height="27"/>
+
 
 
 

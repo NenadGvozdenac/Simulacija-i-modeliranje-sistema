@@ -13,7 +13,6 @@ using BookingApp.Repositories;
 using BookingApp.WPF.Views.TouristViews;
 using BookingApp.Application.UseCases;
 
-
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
     public class ToursViewModel : INotifyPropertyChanged

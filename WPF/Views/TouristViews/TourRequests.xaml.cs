@@ -1,5 +1,6 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.ViewModels.TouristViewModels;
 using BookingApp.WPF.Views.TouristViews.Components;
 using System;
 using System.Collections.Generic;
@@ -26,61 +27,22 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class TourRequests : UserControl
     {
-        public ObservableCollection<TourRequest> tourRequests { get; set; }
-
-        private ObservableCollection<TourRequest> _tourRequests;
-        public ObservableCollection<TourRequest> MyTourRequests
-        {
-            get { return _tourRequests; }
-            set
-            {
-                if (_tourRequests != value)
-                {
-                    _tourRequests = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public User user {  get; set; }
+        public TourRequestsViewModel tourRequestsViewModel { get; set; }
         public TourRequests(User _user)
         {
             InitializeComponent();
-            DataContext = this;
-            user = _user;
-            tourRequests = new ObservableCollection<TourRequest>();
-            
+            tourRequestsViewModel = new TourRequestsViewModel(_user, this);
+            DataContext = tourRequestsViewModel;
             Update();
         }
         public void Update()
         {
-            tourRequests.Clear();
-            
-            foreach(TourRequest tourRequest in TourRequestService.GetInstance().GetAll())
-            {
-
-                TourRequest request = TourRequestService.GetInstance().GetById(tourRequest.Id);
-                request.Location = LocationService.GetInstance().GetById(tourRequest.LocationId);
-                request.Language = LanguageService.GetInstance().GetById(tourRequest.LanguageId);
-                DateTime now = DateTime.Now;
-                TimeSpan difference = tourRequest.BeginDate - now;
-                
-                if (difference.TotalDays <= 2 && difference.TotalHours < 48)
-                {
-                    request.Status = "Invalid";
-                }
-                tourRequests.Add(request);   
-            }
-            MyTourRequests = new ObservableCollection<TourRequest>(tourRequests);
+            tourRequestsViewModel.Update();
         }
 
-        private void Add_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void Add_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
-
-            if (parentWindow is TouristMainWindow mainWindow)
-            {
-                mainWindow.AddRequest(user);
-            }
+            tourRequestsViewModel.Add_MouseLeftButtonDown(sender, e);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -90,12 +52,7 @@ namespace BookingApp.WPF.Views.TouristViews
 
         public void Statistics_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
-
-            if (parentWindow is TouristMainWindow mainWindow)
-            {
-                mainWindow.ShowTourRequestStatistics();
-            }
+            tourRequestsViewModel.Statistics_Click(sender, e);
         }
     }
 }

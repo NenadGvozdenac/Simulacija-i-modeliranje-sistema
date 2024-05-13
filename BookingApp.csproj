@@ -9,6 +9,10 @@
 
   <ItemGroup>
 	  
+    <None Remove="Diagrams\TouristDiagrams\Dijagram_Klasa_Aleksandar_Cvijetic_RA_140_2021_Strahinja_Galic_RA_156_2021.drawio.png" />
+	  
+    <None Remove="Diagrams\TouristDiagrams\Sequence_Diagram_RA_140_2021_Aleksandar_Cvijetic.png" />
+	  
     <None Remove="Resources\Assets\accommodations.png" />
     <None Remove="Resources\Assets\add.png" />
     <None Remove="Resources\Assets\alternate-map-marker.192x256.png" />
@@ -100,6 +104,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Diagrams\TouristDiagrams\Dijagram_Klasa_Aleksandar_Cvijetic_RA_140_2021_Strahinja_Galic_RA_156_2021.drawio.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Diagrams\TouristDiagrams\Sequence_Diagram_RA_140_2021_Aleksandar_Cvijetic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

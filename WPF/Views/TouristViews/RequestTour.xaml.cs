@@ -244,7 +244,8 @@ namespace BookingApp.WPF.Views.TouristViews
             tourRequest.LanguageId = LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id;
             tourRequest.BeginDate = BeginDate;
             tourRequest.EndDate = EndDate;
-            tourRequest.Tourists = Tourists;
+            //tourRequest.Tourists = Tourists;
+            tourRequest.RequestDate = DateTime.Now;
             tourRequest.Status = "Pending";
 
             TourRequestService.GetInstance().Add(tourRequest);

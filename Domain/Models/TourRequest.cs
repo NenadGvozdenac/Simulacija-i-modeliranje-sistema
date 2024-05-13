@@ -23,6 +23,8 @@ namespace BookingApp.Domain.Models
         public DateTime RequestDate {  get; set; }
         public string Status {  get; set; }
 
+        public int TouristNumber { get; set; }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);

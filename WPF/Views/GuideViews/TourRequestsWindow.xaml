@@ -24,25 +24,27 @@
                 <ComboBox Width="213" Height="57" x:Name="CountryBox" SelectionChanged="Country_SelectionChanged"></ComboBox>
                 <Border Margin="35,0,0,0"></Border>
                 <Label VerticalContentAlignment="Center" FontSize="30">City:</Label>
-                <ComboBox Width="213" Height="57" x:Name="CityBox"></ComboBox>
+                <ComboBox Width="213" Height="57" x:Name="CityBox" IsEnabled="False" SelectionChanged="City_SelectionChanged"></ComboBox>
                 <Border Margin="35,0,0,0"></Border>
                 <Label VerticalContentAlignment="Center" FontSize="30">Language:</Label>
-                <ComboBox Width="213" Height="57" x:Name="LanguageBox"></ComboBox>
+                <ComboBox Width="213" Height="57" x:Name="LanguageBox" SelectionChanged="Language_SelectionChanged"></ComboBox>
                 <Border Margin="35,0,0,0"></Border>
                 <Label VerticalContentAlignment="Center" FontSize="30">Number of guests:</Label>
-                <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="40" Height="50"/>
+                <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Capacity_TextChanged"/>
                 <StackPanel VerticalAlignment="Center">
-                    <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Height="25">5</RepeatButton>
-                    <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"  Height="25">6</RepeatButton>
+                    <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Height="25" Click="CapacityUp_Click">5</RepeatButton>
+                    <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"  Height="25" Click="CapacityDown_Click">6</RepeatButton>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Border Margin="100"></Border>
+                <Border Margin="50"></Border>
                 <Label VerticalContentAlignment="Center" FontSize="30">Start date:</Label>
-                <DatePicker Width="355" Height="43"></DatePicker>
+                <DatePicker Width="355" Height="43" x:Name="Picker1" SelectedDateChanged="Picker1_SelectionChanged"></DatePicker>
                 <Border Margin="20,0,0,0"></Border>
                 <Label VerticalContentAlignment="Center" FontSize="30">End date:</Label>
-                <DatePicker Width="355" Height="43"></DatePicker>
+                <DatePicker Width="355" Height="43" x:Name="Picker2" SelectedDateChanged="Picker2_SelectionChanged"></DatePicker>
+                <Border Margin="100,0,0,0"></Border>
+                <Button Width="100" Height="53" Click="ResetFilters_Click">Reset Filters</Button>
             </StackPanel>
         </Grid>
     </Grid>

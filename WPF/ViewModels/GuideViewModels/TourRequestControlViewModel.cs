@@ -44,9 +44,81 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 request_tmp.Location = LocationService.GetInstance().GetById(r.LocationId);
                 request_tmp.Description = r.Description;
                 request_tmp.UserId = user.Id;
+                request_tmp.TouristNumber = RequestedTouristService.GetInstance().GetAll().Where(t => t.RequestId == request_tmp.Id).ToList().Count();
                 requests.Add(request_tmp);
             }
         }
+
+        public void SearchByLocation(string city)
+        {
+            if (city != null)
+            {
+                List<TourRequest> removed_requests = new List<TourRequest>();
+                removed_requests = requests.Where(r => r.Location.City !=  city).ToList();
+                foreach(TourRequest request in removed_requests)
+                    requests.Remove(request);
+                
+            }
+        }
+
+        public void SearchByLanguage(string language) 
+        {
+            if (language != null)
+            {
+                List<TourRequest> removed_requests = new List<TourRequest>();
+                removed_requests = requests.Where(r => r.Language.Name != language).ToList();
+                foreach (TourRequest request in removed_requests)
+                    requests.Remove(request);
+            }
+        }
+
+        public void SearchByCapacity(int capacity)
+        {
+            if(capacity > 0)
+            {
+                List<TourRequest> removed_requests = new List<TourRequest>();
+                removed_requests = requests.Where(r => r.TouristNumber != capacity).ToList();
+                foreach (TourRequest request in removed_requests)
+                    requests.Remove(request);
+
+
+            }
+        }
+
+        public void SearchByStartDate(DateTime date)
+        {
+            if (date != new DateTime())
+            {
+                List<TourRequest> removed_requests = new List<TourRequest>();
+                removed_requests = requests.Where(r => r.BeginDate < date).ToList();
+                foreach (TourRequest request in removed_requests)
+                    requests.Remove(request);
+            }
+        }
+
+        public void SearchByEndDate(DateTime date) 
+        {
+            if (date != new DateTime())
+            {
+                List<TourRequest> removed_requests = new List<TourRequest>();
+                removed_requests = requests.Where(r => r.BeginDate > date).ToList();
+                foreach (TourRequest request in removed_requests)
+                    requests.Remove(request);
+            }
+        }
+
+        public void SearchByCriterias(string city, string language,int capacity ,DateTime date1, DateTime date2)
+        {
+            Update();
+            SearchByLocation(city);
+            SearchByLanguage(language);
+            SearchByCapacity(capacity);
+            SearchByStartDate(date1);
+            SearchByEndDate(date2);
+        }
+
+
+
 
 
 

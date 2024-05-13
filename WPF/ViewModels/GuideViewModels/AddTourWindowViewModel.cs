@@ -16,6 +16,7 @@ using BookingApp.Application.UseCases;
 using BookingApp.Application.Commands;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
+using BookingApp.WPF.Views.TouristViews;
 
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
@@ -243,11 +244,17 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public AddTourWindow addTourWindow { get; set; }
 
+        public int RequestId { get; set; }
+
+        public int TouristId { get; set; }
+
+       
 
         public AddTourWindowViewModel(AddTourWindow _addTourWindow, User user)
         {
             addTourWindow = _addTourWindow;
             _user = user;
+            RequestId = -1;
             Images = new ObservableCollection<TourImage>();
             TourDates = new ObservableCollection<TourStartTime>();
             Checkpoints = new ObservableCollection<Checkpoint>();
@@ -432,7 +439,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return false;
         }
 
-        public void ConfirmButtonClick(object sender, RoutedEventArgs e)
+        public void ConfirmButtonClick()
         {
             if (!IsDataValid())
             {
@@ -460,7 +467,50 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             SaveCheckpoints(Checkpoints, tour);
 
+            if(RequestId != -1)
+            {
+                List<RequestedTourist> tourists = new List<RequestedTourist>();
+                tourists = RequestedTouristService.GetInstance().GetAll().Where(t => t.RequestId ==  RequestId).ToList();
+                foreach(RequestedTourist tourist in tourists)
+                {
+                    Tourist t = new Tourist();
+                    t.Name = tourist.Name;
+                    t.Surname = tourist.Surname;
+                    t.Age = tourist.Age;
+                    t.Id = TouristService.GetInstance().NextId();
+                    TouristService.GetInstance().Add(t);
+
+                    Tourist t_temp = new Tourist();
+                    TourStartTime time_temp = new TourStartTime();
+                    
+                    var tourist_list = TouristService.GetInstance().GetAll();
+                    var time_list = TourStartTimeService.GetInstance().GetAll();
+                    if(tourist_list.Count > 0)
+                    {
+                        t_temp = tourist_list[tourist_list.Count - 1];
+                    }
+                    if(time_list.Count > 0)
+                    {
+                        time_temp = time_list[time_list.Count - TourDates.Count];
+                    }
+                    MakeReservation(time_temp.Id, t_temp.Id);
+                }
+
+            }
+
+
             addTourWindow.Close();
+        }
+
+        public void MakeReservation(int tourTime, int touristId)
+        {
+            TouristReservation reservation = new TouristReservation();
+            reservation.Id_Tourist = touristId;
+            reservation.Id_TourTime = tourTime;
+            reservation.Id = TourReservationService.GetInstance().NextId();
+            reservation.CheckpointId = -1;
+            
+            TourReservationService.GetInstance().Add(reservation);
         }
 
         public void SaveImages(ObservableCollection<TourImage> images, Tour tour)

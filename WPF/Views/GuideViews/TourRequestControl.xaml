@@ -7,7 +7,7 @@
              xmlns:components="clr-namespace:BookingApp.View.PathfinderViews.Componentss" 
              xmlns:components1="clr-namespace:BookingApp.WPF.Views.GuideViews.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Pink">
+             d:DesignHeight="450" d:DesignWidth="800" Background="#f2f6fa">
     <Grid>
         <ScrollViewer>
             <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
@@ -15,7 +15,7 @@
 ItemsSource="{Binding requests}" Margin="3,3,3,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components1:TourRequestCard  x:Name="requestCard" Height="200" Width="750"/>
+                        <components1:TourRequestCard  x:Name="requestCard" Height="200" Width="750" AcceptButtonClicked ="Request_AcceptClick"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

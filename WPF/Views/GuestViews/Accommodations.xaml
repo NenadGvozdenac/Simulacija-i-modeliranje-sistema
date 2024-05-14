@@ -6,171 +6,193 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
              mc:Ignorable="d"
              d:DesignHeight="718" d:DesignWidth="1024">
+    <Grid>
+        <Grid Background="#FFF8F0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid Background="#FFF8F0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-
-        <!--Left Column-->
-        <Grid Grid.Column="0" Background="#FFF8F0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Accommodation" Margin="14,24,0,43" FontSize="25"/>
-                <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="filters" Margin="38,58,86,9" FontSize="25"/>
-                <Image Source="../../../Resources/Assets/hotel.png"  RenderOptions.EdgeMode="Unspecified" Margin="93,50,19,7"/>
-            </Grid>
-
-            <Grid Grid.Row="1">
+            <!--Left Column-->
+            <Grid Grid.Column="0" Background="#FFF8F0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="94"/>
-                    <RowDefinition Height="126"/>
-                    <RowDefinition Height="151"/>
-                    <RowDefinition Height="104"/>
-                    <RowDefinition Height="107"/>
-                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!--<Border BorderBrush="Black" BorderThickness="0 0 1 0" Grid.RowSpan="5"></Border>-->
 
-                <Grid Grid.Row="0" Margin="0,0,0,1">
-                    <Grid.Effect>
-                        <DropShadowEffect Opacity="0.5"/>
-                    </Grid.Effect>
+                <Grid Grid.Row="0">
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Accommodation" Margin="14,24,0,43" FontSize="25"/>
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="filters" Margin="38,58,86,9" FontSize="25"/>
+                    <Image Source="../../../Resources/Assets/hotel.png"  RenderOptions.EdgeMode="Unspecified" Margin="93,50,19,7"/>
+                    <Rectangle x:Name="Sticker_transparent" Fill="#80000000" Visibility="Collapsed"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="94"/>
+                        <RowDefinition Height="126"/>
+                        <RowDefinition Height="151"/>
+                        <RowDefinition Height="104"/>
+                        <RowDefinition Height="107"/>
+                        <RowDefinition Height="39"/>
+                    </Grid.RowDefinitions>
+
+                    <!--<Border BorderBrush="Black" BorderThickness="0 0 1 0" Grid.RowSpan="5"></Border>-->
+
+                    <Grid Grid.Row="0" Margin="0,0,0,1">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.5"/>
+                        </Grid.Effect>
 
 
-                    <Border Margin="5 5 5 5" BorderThickness="3" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
+                        <Border Margin="5 5 5 5" BorderThickness="3" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
 
-                    <TextBox x:Name="SearchBox_TextBox" Background="#FFF8F0" FontFamily="Bahnschrift Light" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="0"
+                        <TextBox x:Name="SearchBox_TextBox" Background="#FFF8F0" FontFamily="Bahnschrift Light" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="0"
                         Text="{Binding SearchAccommodation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="21"/>
-                    <Label Content="Enter the name of &#x0a;the accommodation" HorizontalAlignment="Left" Style="{StaticResource SmallLabelGuest}" FontSize="13"  VerticalAlignment="Top" Margin="20,12,0,0"/>
-                </Grid>
+                        <Label Content="Enter the name of &#x0a;the accommodation" HorizontalAlignment="Left" Style="{StaticResource SmallLabelGuest}" FontSize="13"  VerticalAlignment="Top" Margin="20,12,0,0"/>
+                        <Rectangle x:Name="SearchBox_transparent" Fill="#80000000" Visibility="Collapsed"/>
+                    </Grid>
 
-                <Grid Grid.Row="1" Margin="0,0,0,150" Grid.RowSpan="2">
-                    <Grid.Effect>
-                        <DropShadowEffect Opacity="0.5"/>
-                    </Grid.Effect>
-                    <Border Margin="5 5 5 5" BorderThickness="3" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
-                    <Label Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="15" Content="Choose a location" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="16,15,0,0"/>
-                    <Label Content="Country" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,45,0,0" Height="31"/>
-                    <ComboBox x:Name="CountryComboBox" Background="#575E75" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" HorizontalAlignment="Left" Margin="80,49,0,0" VerticalAlignment="Top" Width="101"/>
-                    <Label Content="City" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,78,0,0" Height="30"/>
-                    <ComboBox x:Name="CityComboBox" Background="White" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" IsEnabled="False" HorizontalAlignment="Left" Margin="80,81,0,0" VerticalAlignment="Top" Width="101"/>
-                </Grid>
+                    <Grid Margin="0,93,0,150" Grid.RowSpan="3">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.5"/>
+                        </Grid.Effect>
+                        <Border Margin="5 5 5 5" BorderThickness="3" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
+                        <Label Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="15" Content="Choose a location" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="16,15,0,0"/>
+                        <Label Content="Country" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,45,0,0" Height="31"/>
+                        <ComboBox x:Name="CountryComboBox" Background="#575E75" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" HorizontalAlignment="Left" Margin="80,49,0,0" VerticalAlignment="Top" Width="101"/>
+                        <Label Content="City" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,78,0,0" Height="30"/>
+                        <ComboBox x:Name="CityComboBox" Background="White" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" IsEnabled="False" HorizontalAlignment="Left" Margin="80,81,0,0" VerticalAlignment="Top" Width="101"/>
 
-                <Grid Grid.Row="1" Margin="0,125,0,103" Grid.RowSpan="3">
-                    <Grid.Effect>
-                        <DropShadowEffect Opacity="0.5"/>
-                    </Grid.Effect>
-                    <Border Margin="5 5 5 5" BorderThickness="4" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
-                    <Label Content="Select the type or types&#x0a;of the accommodation" Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="15"  HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,16,0,0"/>
-                    <CheckBox x:Name="checkBoxApartment" Foreground="White" FontFamily="Bahnschrift Light" FontSize="14" Content="Apartment" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,69,0,0" VerticalAlignment="Top">
-                    </CheckBox>
-                    <CheckBox x:Name="checkBoxHouse"  Foreground="White" FontFamily="Bahnschrift Light" FontSize="14" Content="House" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,89,0,0" VerticalAlignment="Top">
-                    </CheckBox>
-                    <CheckBox x:Name="checkBoxShack" Foreground="White" FontFamily="Bahnschrift Light" FontSize="14" Content="Shack" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,109,0,0" VerticalAlignment="Top">
-                    </CheckBox>
-                </Grid>
+                        <Rectangle x:Name="Location_transparent" Fill="#80000000" Visibility="Collapsed"/>
+                    </Grid>
 
-                <Grid Grid.Row="2" Margin="0,150,0,0" Grid.RowSpan="2">
-                    <Grid.Effect>
-                        <DropShadowEffect Opacity="0.5"/>
-                    </Grid.Effect>
-                    <Border Margin="5 5 5 5" BorderThickness="4" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
-                    <Label Content="Number of guests" HorizontalAlignment="Left" FontFamily="Bahnschrift SemiBold" FontSize="15" Foreground="White" VerticalAlignment="Top" Margin="14,18,0,0"/>
-                    <Label Content="Set how many&#x0a;guests will there be" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,42,0,0"/>
-                    <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0,49,12,26">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="13" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="13" />
-                            <RowDefinition Height="13" />
-                        </Grid.RowDefinitions>
+                    <Grid Grid.Row="2" Margin="0,1,0,103" Grid.RowSpan="2">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.5"/>
+                        </Grid.Effect>
+                        <Border Margin="5 5 5 5" BorderThickness="4" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
+                        <Label Content="Select the type or types&#x0a;of the accommodation" Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="15"  HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="10,16,0,0"/>
+                        <CheckBox x:Name="checkBoxApartment" Foreground="White" FontFamily="Bahnschrift Light" FontSize="14" Content="Apartment" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,69,0,0" VerticalAlignment="Top">
+                        </CheckBox>
+                        <CheckBox x:Name="checkBoxHouse"  Foreground="White" FontFamily="Bahnschrift Light" FontSize="14" Content="House" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,89,0,0" VerticalAlignment="Top">
+                        </CheckBox>
+                        <CheckBox x:Name="checkBoxShack" Foreground="White" FontFamily="Bahnschrift Light" FontSize="14" Content="Shack" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Margin="19,109,0,0" VerticalAlignment="Top">
+                        </CheckBox>
 
-                        <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="GuestNumber_TextChanged"/>
-                        <RepeatButton Name="GuestNumberUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click">5</RepeatButton>
-                        <RepeatButton Name="GuestNumberDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="GuestNumberDown_Click">6</RepeatButton>
+                        <Rectangle x:Name="Type_transparent" Fill="#80000000" Visibility="Collapsed"/>
+                    </Grid>
 
+                    <Grid Grid.Row="3" Margin="0,1,0,0">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.5"/>
+                        </Grid.Effect>
+                        <Border Margin="5 5 5 5" BorderThickness="4" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
+                        <Label Content="Number of guests" HorizontalAlignment="Left" FontFamily="Bahnschrift SemiBold" FontSize="15" Foreground="White" VerticalAlignment="Top" Margin="14,18,0,0"/>
+                        <Label Content="Set how many&#x0a;guests will there be" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,42,0,0"/>
+                        <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0,49,12,26">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="13" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="13" />
+                                <RowDefinition Height="13" />
+                            </Grid.RowDefinitions>
+
+                            <TextBox Name="GuestNumber" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="GuestNumber_TextChanged"/>
+                            <RepeatButton Name="GuestNumberUp"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="GuestNumberUp_Click">5</RepeatButton>
+                            <RepeatButton Name="GuestNumberDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="GuestNumberDown_Click">6</RepeatButton>
+
+
+                        </Grid>
+                        <Rectangle x:Name="GuestsNumber_transparent" Fill="#80000000" Visibility="Collapsed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.5"/>
+                        </Grid.Effect>
+                        <Border Margin="5 5 5 5" BorderThickness="4" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
+                        <Label Content="Days of stay" FontFamily="Bahnschrift SemiBold" FontSize="15" Foreground="White" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="18,14,0,0"/>
+                        <Label Content="Set how many&#x0a;days will you stay" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,43,0,0"/>
+                        <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0 13 15 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="13" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="13" />
+                                <RowDefinition Height="13" />
+                            </Grid.RowDefinitions>
+
+                            <TextBox Name="DaysOfStay" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="DaysOfStay_TextChanged"/>
+                            <RepeatButton Name="DaysOfStayUp" Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DaysOfStayUp_Click">5</RepeatButton>
+                            <RepeatButton Name="DaysOfStayDown" Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="DaysOfStayDown_Click">6</RepeatButton>
+                        </Grid>
+                        <Rectangle x:Name="DaysOfStay_transparent" Fill="#80000000" Visibility="Collapsed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+
+                        <Button Content="Reset filters" Style="{StaticResource RoundedButtonStyleGuest}" Click="ResetFilters_Click" Grid.Column="1" Height="25" Width="96" Margin="0,3,0,0"/>
+                        <Rectangle x:Name="ResetFilters_transparent" Fill="#80000000" Visibility="Collapsed"/>
                     </Grid>
                 </Grid>
+            </Grid>
 
-                <Grid Grid.Row="4" Margin="0,4,0,7">
-                    <Grid.Effect>
-                        <DropShadowEffect Opacity="0.5"/>
-                    </Grid.Effect>
-                    <Border Margin="5 5 5 5" BorderThickness="4" BorderBrush="#9DD9D2" CornerRadius="20" Background="#575E75"/>
-                    <Label Content="Days of stay" FontFamily="Bahnschrift SemiBold" FontSize="15" Foreground="White" HorizontalAlignment="Left" FontWeight="DemiBold" VerticalAlignment="Top" Margin="18,14,0,0"/>
-                    <Label Content="Set how many&#x0a;days will you stay" Style="{StaticResource SmallLabelGuest}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,43,0,0"/>
-                    <Grid Width="35" Height="30" HorizontalAlignment="Right" Margin="0 13 15 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="13" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="13" />
-                            <RowDefinition Height="13" />
-                        </Grid.RowDefinitions>
+            <Rectangle x:Name="Filtering_transparent" Fill="#80000000" Visibility="Collapsed"/>
+            <!--Right Column-->
+            <Grid Grid.Column="1" Background="#FFF8F0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                        <TextBox Name="DaysOfStay" Grid.Column="0" Grid.Row="0" FontSize="17" Grid.RowSpan="2" TextAlignment="Right" TextChanged="DaysOfStay_TextChanged"/>
-                        <RepeatButton Name="DaysOfStayUp" Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DaysOfStayUp_Click">5</RepeatButton>
-                        <RepeatButton Name="DaysOfStayDown" Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="DaysOfStayDown_Click">6</RepeatButton>
+                <Grid Grid.Row="0">
 
-                    </Grid>
+
+
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Discover Your Perfect Getaway, Anywhere, Anytime! Try Our New Feature Today!" Margin="20,24,536,39" FontSize="14"/>
+                    <Button Content="Tap here to check it out!" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="163" HorizontalAlignment="Left" Margin="20,62,0,0" VerticalAlignment="Top"/>
+
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Tap here to see a quick demo on how to use accommodation filtering!" Margin="344,24,212,39" FontSize="14"/>
+                    <Button Click="StartDemoButton_Click" Content="Quick demo" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="81" HorizontalAlignment="Left" Margin="344,62,0,0" VerticalAlignment="Top"/>
+
+                    <Label x:Name="username" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="686,62,11,0"/>
+                    <Image x:Name="crownImage" Source="../../../Resources/Assets/crown.png"  RenderOptions.EdgeMode="Unspecified" Margin="676,29,104,33"/>
+
+                    <Image Source="../../../Resources/Assets/idcard.png"  RenderOptions.EdgeMode="Unspecified" Margin="724,24,47,32"/>
+
+                    <Rectangle x:Name="NavBar_transparent" Fill="#80000000" Visibility="Collapsed"/>
+
                 </Grid>
 
-                <Grid Grid.Row="5" Margin="0,4,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button Content="Reset filters" Style="{StaticResource RoundedButtonStyleGuest}" Click="ResetFilters_Click" Grid.Column="1" Height="25" Width="96" Margin="0,-1,0,0"/>
+                <Grid Grid.Row="1">
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" Margin="28,18,0,0" FontSize="35" Text="Search results:" VerticalAlignment="Top"/>
+                    <TextBlock Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" Margin="30,56,0,0" TextWrapping="Wrap" FontSize="25" Text="Tap on the accommodation for more information!" VerticalAlignment="Top"/>
+
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="0,101,0,0">
+                        <ItemsControl
+                        ItemsSource="{Binding FilteredAccommodations}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <components:AccommodationCard x:Name="accommodationcard"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <Rectangle x:Name="Search_transparent" Fill="#80000000" Visibility="Collapsed"/>
+
                 </Grid>
             </Grid>
         </Grid>
-
-        <!--Right Column-->
-        <Grid Grid.Column="1" Background="#FFF8F0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Discover Your Perfect Getaway, Anywhere, Anytime! Try Our New Feature Today!" Margin="20,24,536,39" FontSize="14"/>
-                <Button Content="Tap here to check it out!" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="163" HorizontalAlignment="Left" Margin="20,62,0,0" VerticalAlignment="Top"/>
-
-                <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Tap here to see a quick demo on how to use accommodation fildering!" Margin="344,24,212,39" FontSize="14"/>
-                <Button Content="Quick demo" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="81" HorizontalAlignment="Left" Margin="344,62,0,0" VerticalAlignment="Top"/>
-
-                <Label x:Name="username" Style="{StaticResource SmallLabelGuest}" Foreground="Black" FontFamily="Bahnschrift SemiLight" HorizontalContentAlignment="Center" Content="Username" Margin="686,62,11,0"/>
-                <Image x:Name="crownImage" Source="../../../Resources/Assets/crown.png"  RenderOptions.EdgeMode="Unspecified" Margin="676,29,104,33"/>
-                
-                <Image Source="../../../Resources/Assets/idcard.png"  RenderOptions.EdgeMode="Unspecified" Margin="724,24,47,32"/>
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <TextBlock Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" Margin="28,18,0,0" FontSize="35" Text="Search results:" VerticalAlignment="Top"/>
-                <TextBlock Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" Margin="30,56,0,0" TextWrapping="Wrap" FontSize="25" Text="Tap on the accommodation for more information!" VerticalAlignment="Top"/>
-
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="0,101,0,0">
-                    <ItemsControl
-                        ItemsSource="{Binding FilteredAccommodations}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <components:AccommodationCard x:Name="accommodationcard"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
+        <Grid x:Name="Overlay" Background="Transparent" Visibility="Collapsed" MouseLeftButtonDown="Overlay_MouseLeftButtonDown">
+            <Rectangle Fill="#9DD9D2" Margin="536,0,213,618"/>
+            <TextBlock Text="Tap anywhere to stop demonstration mode" Style="{StaticResource MainTextBlockGuest}" FontSize="24" Margin="557,21,227,634"/>
         </Grid>
     </Grid>
 </UserControl>

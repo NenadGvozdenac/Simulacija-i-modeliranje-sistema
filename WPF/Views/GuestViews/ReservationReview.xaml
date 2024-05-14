@@ -55,11 +55,16 @@
 
                     <TextBlock VerticalAlignment="Top" Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" TextWrapping="Wrap" Text="We would greatly appreciate it if you could share one or more images of the accommodation!" FontSize="20" Margin="550,202,0,0" Height="113" Width="237"/>
                     <Button Content="Click here to add photo" Style="{StaticResource ClearButtonStyleGuest}" Click="AddPhoto_Click" Margin="630,313,0,0" VerticalAlignment="Top" Width="140" HorizontalAlignment="Left" Height="25"/>
-                    <Border BorderBrush="Black" BorderThickness="2" Background="#FFF5EBDF" CornerRadius="25" Margin="796,187,52,33">
-                        <ScrollViewer x:Name="reviewImages_ScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
-                            <StackPanel x:Name="reviewImages_StackPanel" Orientation="Vertical" Width="175"/>
-                        </ScrollViewer>
-                    </Border>
+                    <Button Content="3" Style="{StaticResource ClearButtonStyleGuest}" Click="LeftImage" FontFamily="Marlett"  Margin="860,335,0,0" VerticalAlignment="Top" Width="34" HorizontalAlignment="Left" Height="25"/>
+                    <Button Content="4" Style="{StaticResource ClearButtonStyleGuest}" Click="RightImage" FontFamily="Marlett" Margin="929,335,0,0" VerticalAlignment="Top" Width="34" HorizontalAlignment="Left" Height="25"/>
+
+                    <Grid>
+                        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="25" Margin="796,187,52,33">
+                            <Border.Background>
+                                <ImageBrush x:Name="photo_Image" Stretch="Fill"/>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
                 </Grid>
 
                 <Grid Grid.Row="2">
@@ -74,7 +79,7 @@
                                FontSize="16" Margin="50,139,0,0" Height="270" Width="377"/>
 
                     <Viewbox Height="20" Width="20" Margin="25,147,1026,263">
-                       <RadioButton x:Name="Level1_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/> 
+                        <RadioButton x:Name="Level1_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Viewbox>
                     <Viewbox Height="20" Width="20" Margin="25,205,1026,205">
                         <RadioButton x:Name="Level2_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -90,7 +95,7 @@
                     </Viewbox>
 
                     <TextBox x:Name="renovation_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Background="#FFF5EBDF" BorderBrush="Black" BorderThickness="2" Margin="666,119,81,27"/>
-                    
+
                 </Grid>
 
                 <Grid Grid.Row="3">

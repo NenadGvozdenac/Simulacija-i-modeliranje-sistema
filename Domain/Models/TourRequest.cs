@@ -17,7 +17,7 @@ namespace BookingApp.Domain.Models
         public string Description {  get; set; }
         public Language Language { get; set; }
         public int LanguageId {  get; set; }
-        public List<Tourist> Tourists { get; set; }
+        public List<RequestedTourist> Tourists { get; set; }
         public DateTime BeginDate {  get; set; }
         public DateTime EndDate { get; set; }
         public DateTime RequestDate {  get; set; }

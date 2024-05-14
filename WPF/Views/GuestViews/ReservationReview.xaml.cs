@@ -50,4 +50,13 @@ public partial class ReservationReview : UserControl
         ReservationReviewViewModel.AddPhoto_Click();
     }
 
+    private void LeftImage(object sender, RoutedEventArgs e)
+    {
+        ReservationReviewViewModel.LeftImage();
+    }
+
+    private void RightImage(object sender, RoutedEventArgs e)
+    {
+        ReservationReviewViewModel.RightImage();
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Model.MutualModels;
+using BookingApp.WPF.ViewModels.TouristViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,155 +27,41 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class RequestTour : UserControl, INotifyPropertyChanged
     {
-        public ObservableCollection<RequestedTourist> _requestedTourists { get; set; }
-
-        private int _guestNumber;
-        private string name;
-        private string surname;
-        private int _guestAge;
-        public int GuestAge
-        {
-            get { return _guestAge; }
-            set
-            {
-                _guestAge = value;
-                /*if (_guestAge <= 0 || _guestAge > 150)
-                {
-                    enterValidAgeMessage.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    enterValidAgeMessage.Visibility = Visibility.Hidden;
-                }*/
-            }
-        }
-
-        public int GuestNumber
-        {
-            get { return _guestNumber; }
-            set
-            {
-                _guestNumber = value;
-                /*if (selectedTour != null && (_guestNumber > selectedTour.Capacity || _guestNumber <= 0))
-                {
-                    //numberHigherMessage.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    //numberHigherMessage.Visibility = Visibility.Hidden;
-                    //enterValidGuestNumber.Visibility = Visibility.Hidden;
-
-                }*/
-            }
-        }
-        private DateTime _beginDate;
-        private DateTime _endDate;
-
-        public DateTime BeginDate
-        {
-            get { return _beginDate; }
-            set
-            {
-                _beginDate = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public DateTime EndDate
-        {
-            get { return _endDate; }
-            set
-            {
-                _endDate = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _selectedCountry;
-
-        public string SelectedCountry
-        {
-            get { return _selectedCountry; }
-            set
-            {
-                _selectedCountry = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _selectedCity;
-        public string SelectedCity
-        {
-            get { return _selectedCity; }
-            set
-            {
-                _selectedCity = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _selectedLanguage;
-        public string SelectedLanguage
-        {
-            get { return _selectedLanguage; }
-            set
-            {
-                _selectedLanguage = value;
-                OnPropertyChanged();
-            }
-        }
-        public List<Tourist> Tourists { get; set; }
-        public string description {  get; set; }
-        public ObservableCollection<Tourist> _tourists {  get; set; }
-        public User user {  get; set; }
+        public RequestTourViewModel requestTourViewModel {  get; set; }
         public RequestTour(User _user)
         {
             InitializeComponent();
-            DataContext = this;
-            _tourists = new ObservableCollection<Tourist>();
-            _requestedTourists = new ObservableCollection<RequestedTourist>();
-            Tourists = new List<Tourist>();
-            user = _user;
-            LoadCountries();
-            LoadLanguages();
-            BeginDate = DateTime.Now;
-            EndDate = DateTime.Now;
+            requestTourViewModel = new RequestTourViewModel(_user, this);
+            DataContext = requestTourViewModel;
+            //LoadCountries();
+            //LoadLanguages();
         }
 
         public void LoadCountries()
         {
-            List<string> listOfCountries = LocationService.GetInstance().GetCountries();
-            CountryComboBox.ItemsSource = listOfCountries;
+            requestTourViewModel.LoadCountries();
         }
         public void LoadLanguages()
         {
-            List<string> listOfLanguages = LanguageService.GetInstance().GetLanguages();
-            LanguageComboBox.ItemsSource = listOfLanguages;
+            requestTourViewModel.LoadLanguages();
         }
 
         public void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(CountryComboBox.SelectedItem.ToString());
-            CityComboBox.ItemsSource = listOfCities;
-            CityComboBox.Focus();
-            CityComboBox.IsEnabled = true;
-            SelectedCountry = CountryComboBox.SelectedItem?.ToString();
-
+            requestTourViewModel.CountryComboBox_SelectionChanged(sender, e);
         }
         public void CityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedCity = CityComboBox.SelectedItem?.ToString();
+            requestTourViewModel.CityComboBox_SelectionChanged(sender, e);
         }
         public void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedLanguage = LanguageComboBox.SelectedItem?.ToString();
+            requestTourViewModel.LanguageComboBox_SelectionChanged(sender, e);
         }
 
         public void GetTourInfo()
         {
-            //selectedCountry = CountryComboBox.SelectedItem?.ToString();
-            //selectedCity = CityComboBox.SelectedItem?.ToString();
-            //selectedLanguage = LanguageComboBox.SelectedItem?.ToString();
-            description = DescriptionBox.Text;
-
+            requestTourViewModel.GetTourInfo();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -185,71 +72,29 @@ namespace BookingApp.WPF.Views.TouristViews
 
         public void GuestAge_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(GuestAgeText.Text, out int result) && GuestAgeText.Text != "")
-            {
-                MessageBox.Show("Enter valid age");
-            }
-            else
-            {
-                GuestAge = result;
-            }
+            requestTourViewModel.GuestAge_TextChanged(sender,e);
         }
         public void AddTourist_Click(object sender, RoutedEventArgs e)
         {
-            string name = GuestName.Text;
-            string surname = GuestSurname.Text;
-            int age = (int)GuestAge;
-
-            _tourists.Add(new Tourist { Name = name ,Surname = surname, Age = age });
-            RefreshTouristDataGrid();
-            ClearInputFields();
-            foreach(Tourist t in _tourists)
-            {
-                Tourists.Add(t);
-            }
+            requestTourViewModel.AddTourist_Click(sender, e);
         }
-        private void RefreshTouristDataGrid()
+        public void RefreshTouristDataGrid()
         {
-            TouristDataGrid.ItemsSource = null;
-            TouristDataGrid.ItemsSource = _tourists;
+            requestTourViewModel.RefreshTouristDataGrid();
         }
 
         private void ClearInputFields()
         {
-            GuestName.Text = "";
-            GuestSurname.Text = "";
-            GuestAgeText.Text = "";
+            requestTourViewModel.ClearInputFields();
         }
 
+        public void CheckAllFields()
+        {
+            requestTourViewModel.CheckAllFields();
+        }
         private void Finish_Click(object sender, RoutedEventArgs e)
         {
-            GetTourInfo();
-
-            //TourRequest tourRequest = new TourRequest(id, user.Id, LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id, description, LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id, BeginDate, EndDate);
-            TourRequest tourRequest = new TourRequest();
-            tourRequest.Id = TourRequestService.GetInstance().NextId();
-            foreach(Tourist t in Tourists)
-            {
-                RequestedTourist rt = new RequestedTourist();
-                rt.Id = RequestedTouristService.GetInstance().NextId();
-                rt.Name = t.Name;
-                rt.Age = t.Age;
-                rt.Surname = t.Surname;
-                rt.RequestId = tourRequest.Id;
-                RequestedTouristService.GetInstance().Add(rt);
-            }
-            tourRequest.UserId = user.Id;
-            tourRequest.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id;
-            tourRequest.Description = description;
-            tourRequest.LanguageId = LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id;
-            tourRequest.BeginDate = BeginDate;
-            tourRequest.EndDate = EndDate;
-            //tourRequest.Tourists = Tourists;
-            tourRequest.RequestDate = DateTime.Now;
-            tourRequest.Status = "Pending";
-
-            TourRequestService.GetInstance().Add(tourRequest);
-            MessageBox.Show("Uspesno");
+            requestTourViewModel.Finish_Click(sender, e);
         }
     }
 }

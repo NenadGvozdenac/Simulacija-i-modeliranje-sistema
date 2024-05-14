@@ -23,6 +23,7 @@ namespace BookingApp.WPF.Views.GuideViews.Components
     /// </summary>
     public partial class TourRequestCard : UserControl
     {
+        public EventHandler<BeginButtonClickedEventArgs> AcceptButtonClicked { get; set; }
         public TourRequestCard()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace BookingApp.WPF.Views.GuideViews.Components
 
         private void AcceptRequest_Click(object sender, RoutedEventArgs e)
         {
+            OnAcceptButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(RequestId_TextBlock.Text), Convert.ToDateTime(StartBlock.Text)));
             int id = Convert.ToInt32(Id_TextBlock.Text);
             AddTourWindow addTourWindow = new AddTourWindow(UserService.GetInstance().GetById(id));
             addTourWindow.addTourWindowViewModel.Country = CountryBlock.Text;
@@ -44,6 +46,11 @@ namespace BookingApp.WPF.Views.GuideViews.Components
             addTourWindow.addTourWindowViewModel.TourDates.Add(startTime);
 
             addTourWindow.Show();
+        }
+
+        public void OnAcceptButtonClicked(BeginButtonClickedEventArgs e)
+        {
+            AcceptButtonClicked?.Invoke(this, e);
         }
     }
 }

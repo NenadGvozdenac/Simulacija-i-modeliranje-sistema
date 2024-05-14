@@ -117,12 +117,25 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             SearchByEndDate(date2);
         }
 
-
-
-
-
-
-
-
+        public void Request_AcceptClick(BeginButtonClickedEventArgs e)
+        {
+            foreach(TourRequest request in requests)
+            {
+                if(request.Id == e.TourId)
+                {
+                    requests.Remove(request);
+                    request.Status = "Valid";
+                    TourRequestService.GetInstance().Update(request);
+                    break;
+                }
+            }
+        }
+    
+    
+    
+    
+    
+    
+    
     }
 }

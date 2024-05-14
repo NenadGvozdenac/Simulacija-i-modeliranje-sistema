@@ -22,6 +22,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourRequestsWindow = _tourRequestsWindow;
             user = _user;
             tourRequestControl = new TourRequestControl(user);
+            tourRequestControl.Width = 1200;
             tourRequestsWindow.RequestsContainer.Children.Add(tourRequestControl);
             LoadCountries();
             LoadLanguages();

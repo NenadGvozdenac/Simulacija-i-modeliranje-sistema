@@ -35,7 +35,10 @@ namespace BookingApp.WPF.Views.GuideViews
         }
 
 
-
+        public void Request_AcceptClick(object sender, BeginButtonClickedEventArgs e)
+        {
+            tourRequestControlViewModel.Request_AcceptClick(e);
+        }
 
 
 

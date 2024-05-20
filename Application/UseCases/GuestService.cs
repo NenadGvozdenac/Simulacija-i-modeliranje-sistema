@@ -73,6 +73,58 @@ public class GuestService
 
     public void SuperGuestCheck(GuestInfo guestInfo)
     {
-        _guestInfoRepository.SuperGuestCheck(guestInfo);
+        guestInfo = NewYearCheck(guestInfo);
+        guestInfo = NumberOfReservationsThisYearUpdate(guestInfo);
+
+        if (guestInfo.IsSuperGuest)
+        {
+            if (guestInfo.DateOfBecomingSuperGuest.AddYears(1) < DateOnly.FromDateTime(DateTime.UtcNow))
+            {
+                if (guestInfo.NumberOfReservationsThisYear >= 10)
+                {
+                    guestInfo.IsSuperGuest = true;
+                    guestInfo.NumberOfPoints = 5;
+                    guestInfo.DateOfBecomingSuperGuest = DateOnly.FromDateTime(DateTime.UtcNow);
+                    UpdateGuestInfo(guestInfo);
+                }
+                else
+                {
+                    guestInfo.IsSuperGuest = false;
+                    guestInfo.NumberOfPoints = 0;
+                    guestInfo.DateOfBecomingSuperGuest = DateOnly.FromDateTime(DateTime.UtcNow);
+                    UpdateGuestInfo(guestInfo);
+                }
+            }
+        }
+        else if(guestInfo.NumberOfReservationsThisYear >= 10)
+        {
+            guestInfo.IsSuperGuest = true;
+            guestInfo.NumberOfPoints = 5;
+            guestInfo.DateOfBecomingSuperGuest = DateOnly.FromDateTime(DateTime.UtcNow);
+            UpdateGuestInfo(guestInfo);
+        }
+    
+    }
+    public GuestInfo NewYearCheck(GuestInfo guestInfo)
+    {
+        if (guestInfo.DateOfBecomingSuperGuest.Year != DateOnly.FromDateTime(DateTime.UtcNow).Year)
+        {
+            guestInfo.NumberOfReservationsThisYear = 0;
+            UpdateGuestInfo(guestInfo);
+        }
+
+        return guestInfo;
+    }
+
+    public GuestInfo NumberOfReservationsThisYearUpdate(GuestInfo guestinfo)
+    {
+        List<AccommodationReservation> reservations = AccommodationReservationService.GetInstance().GetAll().FindAll(reservation => reservation.UserId == guestinfo.GuestId);
+
+        reservations = reservations.FindAll(reservation => reservation.LastDateOfStaying.Year == DateOnly.FromDateTime(DateTime.UtcNow).Year && reservation.LastDateOfStaying < DateTime.Now);
+
+        guestinfo.NumberOfReservationsThisYear = reservations.Count;
+        UpdateGuestInfo(guestinfo);
+
+        return guestinfo;
     }
 }

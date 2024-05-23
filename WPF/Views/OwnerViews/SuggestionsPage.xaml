@@ -1,0 +1,76 @@
+﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.SuggestionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430"
+      Background="White" Loaded="Page_Loaded">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="11*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="Back_Click"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Opening/Closing suggestions" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Margin="5 0" Grid.Row="0" Content="Recommended opening" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="1" Margin="5 0">
+                <Label Content="Recommended location" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="{Binding PopularLocation}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Margin="5 0">
+                <Label Content="Biggest number of reservations/location:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="{Binding PopularLocationText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Margin="5 0">
+                <Label Content="Biggest fullness percentage:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="{Binding PopularLocationFullnessText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button Grid.Row="4" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{Binding ButtonText}" Style="{StaticResource ButtonStyle}" FontSize="15" FontWeight="Bold" Width="Auto" Click="Button_Click"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3.5*"/>
+            </Grid.RowDefinitions>
+            <Label Margin="5 0" Grid.Row="0" Content="Recommended closing" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="1" Margin="5 0">
+                <Label Content="Recommended location" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="{Binding LeastPopularLocation}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Margin="5 0">
+                <Label Content="Lowest number of reservations/location:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="{Binding LeastPopularLocationText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Margin="5 0">
+                <Label Content="Lowest fullness percentage:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="{Binding LeastPopularLocationFullnessText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto" Margin="5" Padding="10 0">
+                <StackPanel x:Name="AccommodationsPanel" Margin="5 0">
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
+

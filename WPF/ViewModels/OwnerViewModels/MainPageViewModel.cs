@@ -46,7 +46,7 @@ public partial class MainPageViewModel : ObservableObject
     public ICommand NavigateGuestFeedbackPage => new NavigateToPageCommand(mainPage, new GuestFeedbackPage(User));
     public ICommand NavigateScheduleRenovationPage => new NavigateToPageCommand(mainPage, new ScheduleRenovationPage(User));
     public ICommand NavigateStatisticsPage => new NavigateToPageCommand(mainPage, new AccommodationStatisticsPage(User));
-
+    public ICommand NavigateSuggestionsPage => new NavigateToPageCommand(mainPage, new SuggestionsPage(User));
     public MainPageViewModel(MainPage mainPage, User user)
     {
         this.mainPage = mainPage;

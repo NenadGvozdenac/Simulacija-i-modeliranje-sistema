@@ -22,16 +22,19 @@ public class AccommodationService
     private IAccommodationRepository _accommodationRepository;
     private ILocationRepository _locationRepository;
     private IAccommodationImageRepository _accommodationImageRepository;
+    private IAccommodationReservationRepository _accommodationReservationRepository;
     private OwnerService _ownerService;
 
     public AccommodationService(IAccommodationRepository accommodationRepository, 
         ILocationRepository locationRepository, 
-        IAccommodationImageRepository accommodationImageRepository)
+        IAccommodationImageRepository accommodationImageRepository,
+        IAccommodationReservationRepository accommodationReservationRepository)
     {
         _ownerService = OwnerService.GetInstance();
         _accommodationRepository = accommodationRepository;
         _locationRepository = locationRepository;
         _accommodationImageRepository = accommodationImageRepository;
+        _accommodationReservationRepository = accommodationReservationRepository;
     }
 
     public static AccommodationService GetInstance()
@@ -44,6 +47,7 @@ public class AccommodationService
         List<Accommodation> accommodations = _accommodationRepository.GetAll();
         accommodations.ForEach(accommodation => accommodation.Location = _locationRepository.GetById(accommodation.LocationId));
         accommodations.ForEach(accommodation => accommodation.Images = _accommodationImageRepository.GetByAccommodationId(accommodation.Id));
+        accommodations.ForEach(accommodation => accommodation.Reservations = _accommodationReservationRepository.GetByAccommodationId(accommodation.Id));
         return accommodations;
     }
 
@@ -90,5 +94,48 @@ public class AccommodationService
     public List<Accommodation> GetAllAcommodationNotFromSuperOwners()
     {
         return GetAll().Except(GetAllAccommodationsFromSuperOwners()).ToList();
+    }
+
+    public Location GetMostPopularLocation()
+    {
+        return GetAll().GroupBy(accommodation => accommodation.LocationId)
+            .OrderByDescending(group => group.Count())
+            .Select(group => group.First().Location)
+            .First();
+    }
+    public Location GetLeastPopularLocation()
+    {
+        return GetAll().GroupBy(accommodation => accommodation.LocationId)
+            .OrderBy(group => group.Count())
+            .Select(group => group.First().Location)
+            .First();
+    }
+
+    public int GetLocationReservations(Location popularLocation)
+    {
+        return GetAll().Where(accommodation => accommodation.LocationId == popularLocation.Id).Count();
+    }
+
+    public double GetLocationFullness(Location Location, User ownerId)
+    {
+        List<Accommodation> accommodations = GetAll().Where(accommodation => accommodation.OwnerId == ownerId.Id && accommodation.LocationId == Location.Id).ToList();
+
+        if (accommodations.Count == 0)
+        {
+            return 0;
+        }
+
+        int totalReservations = accommodations.Sum(accommodation => accommodation.ReservationNumber);
+
+        if (totalReservations == 0) return 0;
+
+        int daysFull = accommodations.Sum(accommodation => accommodation.Reservations.Sum(reservation => (reservation.LastDateOfStaying - reservation.FirstDateOfStaying).Days));
+
+        return (double)daysFull / totalReservations;
+    }
+
+    public List<Accommodation> GetAccommodationsByLocation(Location leastPopularLocation)
+    {
+        return GetAll().Where(accommodation => accommodation.LocationId == leastPopularLocation.Id).ToList();
     }
 }

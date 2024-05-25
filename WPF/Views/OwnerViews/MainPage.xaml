@@ -47,6 +47,7 @@
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Statistics}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateStatisticsPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc GuestsFeedback}" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateGuestFeedbackPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="Suggestions" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateSuggestionsPage}"/>
+                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="Forums" Style="{StaticResource ButtonStyle}" Margin="5" Command="{Binding NavigateToForumsPage}"/>
             </StackPanel>
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
                 <Grid Grid.Column="1" x:Name="MainPanel">
@@ -55,7 +56,7 @@
             </ScrollViewer>
 
             <StackPanel x:Name="RightNavbar" Grid.Column="2" Background="{DynamicResource Navbar}" Visibility="Collapsed">
-                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Notifications}" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
+                <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Notifications}" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Command="{Binding NavigateToNotificationsPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Settings}" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Command="{Binding NavigateSettingsPage}"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc PDFReport}" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="False"/>
                 <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{ns:Loc Logout}" Style="{StaticResource ButtonStyle}" Width="100" Margin="5" IsEnabled="True" Click="Logout_Click"/>

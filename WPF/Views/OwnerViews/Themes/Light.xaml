@@ -7,6 +7,7 @@
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#bdc3c7"/>
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#f1f2f3"/>
     <SolidColorBrush x:Key="Card" Color="#fff"/>
+    <SolidColorBrush x:Key="ForumCardBackground" Color="#fff"/>
     <SolidColorBrush x:Key="CardBorder" Color="Black"/>
     <SolidColorBrush x:Key="Navbar" Color="Lavender"/>
     <SolidColorBrush x:Key="ButtonBackground" Color="Black"/>
@@ -18,4 +19,7 @@
     <BitmapImage x:Key="BackArrow" UriSource="../../../../Resources/Assets/back_left_arrow_black.png" />
     <BitmapImage x:Key="HamburgerMenu" UriSource="../../../../Resources/Assets/menu_black.png"/>
     <BitmapImage x:Key="ThreeDots" UriSource="../../../../Resources/Assets/three_dots_black.png"/>
+    <BitmapImage x:Key="Tree" UriSource="../../../../Resources/Assets/tree-black.png"/>
+    <BitmapImage x:Key="Herb" UriSource="../../../../Resources/Assets/herb-black.png"/>
+    <BitmapImage x:Key="Bell" UriSource="../../../../Resources/Assets/bell-black.png"/>
 </ResourceDictionary>

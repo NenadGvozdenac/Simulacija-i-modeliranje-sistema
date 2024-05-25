@@ -60,11 +60,6 @@ public class GuestRatingService
         return _guestRatingRepository.GetById(id);
     }
 
-    internal IEnumerable<GuestRating> GetByOwnerId()
-    {
-        throw new NotImplementedException();
-    }
-
     public bool ExistsReviewOfGuest(User guest, Accommodation accommodation)
     {
         return _guestRatingRepository.ExistsReviewOfGuest(guest, accommodation);
@@ -73,5 +68,12 @@ public class GuestRatingService
     internal void DeleteAll(Func<GuestRating, bool> value)
     {
         _guestRatingRepository.DeleteAll(value);
+    }
+
+    public int GetDaysRemainingToReview(int guestRatingId)
+    {
+        GuestRating guestRating = _guestRatingRepository.GetById(guestRatingId);
+
+        return guestRating.Reservation.LastDateOfStaying.AddDays(5).Subtract(DateTime.Now).Days;
     }
 }

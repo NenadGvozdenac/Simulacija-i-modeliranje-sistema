@@ -36,4 +36,9 @@ public partial class NotificationsPage : Page
             NavigationService.GoBack();
         }
     }
+
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        viewModel.AddNotifications();
+    }
 }

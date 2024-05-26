@@ -1,5 +1,6 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.Resources.Types;
 using BookingApp.WPF.Views.OwnerViews;
 using BookingApp.WPF.Views.OwnerViews.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -52,11 +53,16 @@ public partial class EnteredForumViewModel : ObservableObject
                 continue;
             }
 
-            ForumCommentControl forumCommentControl = new ForumCommentControl(comment);
+            ForumCommentControl forumCommentControl = new ForumCommentControl(comment, user, comment.User.Type == UserType.Guest && CanReport(comment, user));
             page.MainPanel.Children.Add(forumCommentControl);
         }
 
         page.ScrollViewerMainPanel.ScrollToBottom();
+    }
+
+    private bool CanReport(ForumComment comment, User user)
+    {
+        return ForumCommentReportService.GetInstance().GetWhetherUserAlreadyReported(user.Id, comment.Id) == null;
     }
 
     public void SendMessage()

@@ -78,6 +78,7 @@ public partial class App
         services.AddSingleton<IRequestedTouristRepository, RequestedTouristRepository>();
         services.AddSingleton<IForumRepository, ForumRepository>();
         services.AddSingleton<IForumCommentRepository, ForumCommentRepository>();
+        services.AddSingleton<IForumCommentReportRepository, ForumCommentReportRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -108,5 +109,6 @@ public partial class App
         services.AddSingleton<RequestedTouristService>();
         services.AddSingleton<ForumService>();
         services.AddSingleton<ForumCommentService>();
+        services.AddSingleton<ForumCommentReportService>();
     }
 }

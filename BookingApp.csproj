@@ -55,6 +55,7 @@
     <None Remove="Resources\Assets\pencil.png" />
     <None Remove="Resources\Assets\phone_transparent_resized.png" />
     <None Remove="Resources\Assets\plus-symbol-button.png" />
+    <None Remove="Resources\Assets\report-flag.png" />
     <None Remove="Resources\Assets\reserve.png" />
     <None Remove="Resources\Assets\return.512x467.png" />
     <None Remove="Resources\Assets\star-filled-rate-rating-bookmark-favourite-save-priority-important.256x243.png" />
@@ -269,6 +270,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Assets\myreservations.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\report-flag.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Assets\star.png">

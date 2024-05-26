@@ -40,6 +40,10 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.ShowTourDetails(tourId);
         }
 
+        public void ShowReservationReview(User user, Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourStartTime tourStartTime)
+        {
+            touristMainWindowViewModel.ShowReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);
+        }
         public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher tourVoucher)
         {
             touristMainWindowViewModel.ShowTourDates(tour, guestNumber, tourists, tourVoucher);

@@ -33,7 +33,10 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = ToursUserControl;
         }
 
-
+        public void ShowReservationReview(User user, Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourStartTime tourStartTime)
+        {
+            TouristWindowFrame.Content = new ReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);
+        }
         public void ShowTourDetails(int tourId)
         {
             Tour detailedTour = TourService.GetInstance().GetById(tourId);

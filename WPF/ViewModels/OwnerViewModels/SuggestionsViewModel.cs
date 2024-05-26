@@ -69,7 +69,7 @@ public partial class SuggestionsViewModel : ObservableObject
         LeastPopularLocationReservations = AccommodationService.GetInstance().GetLocationReservations(LeastPopularLocation);
         LeastPopularLocationFullness = AccommodationService.GetInstance().GetLocationFullness(LeastPopularLocation, user);
 
-        LeastPopularAccommodations = AccommodationService.GetInstance().GetAccommodationsByLocation(LeastPopularLocation);
+        LeastPopularAccommodations = AccommodationService.GetInstance().GetAccommodationsByLocation(LeastPopularLocation, user.Id);
 
         AddAccommodations();
     }

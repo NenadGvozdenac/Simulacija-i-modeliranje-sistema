@@ -134,8 +134,8 @@ public class AccommodationService
         return (double)daysFull / totalReservations;
     }
 
-    public List<Accommodation> GetAccommodationsByLocation(Location leastPopularLocation)
+    public List<Accommodation> GetAccommodationsByLocation(Location leastPopularLocation, int userId)
     {
-        return GetAll().Where(accommodation => accommodation.LocationId == leastPopularLocation.Id).ToList();
+        return GetAll().Where(accommodation => accommodation.LocationId == leastPopularLocation.Id && accommodation.OwnerId == userId).ToList();
     }
 }

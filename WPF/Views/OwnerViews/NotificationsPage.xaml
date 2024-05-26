@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
       d:DesignHeight="750" d:DesignWidth="430">
     <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>

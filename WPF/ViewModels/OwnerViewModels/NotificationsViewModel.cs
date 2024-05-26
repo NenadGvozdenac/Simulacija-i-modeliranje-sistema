@@ -25,7 +25,7 @@ public partial class NotificationsViewModel : ObservableObject
         AddNotifications();
     }
 
-    private void AddNotifications()
+    public void AddNotifications()
     {
         Notifications = OwnerService.GetInstance().GetNotificationsForOwner(user.Id);
         AddNotificationControls();

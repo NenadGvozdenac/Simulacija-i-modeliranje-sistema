@@ -15,5 +15,4 @@ public interface IGuestInfoRepository
     GuestInfo GetById(int id);
     void Update(GuestInfo guestInfo);
     GuestInfo GetByGuestId(int guestId);
-    void SuperGuestCheck(GuestInfo guestInfo);
 }

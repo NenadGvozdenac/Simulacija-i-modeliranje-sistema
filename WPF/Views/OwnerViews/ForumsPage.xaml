@@ -1,0 +1,43 @@
+﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.ForumsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+      Loaded="Page_Loaded"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="11*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="Forums" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        </Grid>
+
+        <Grid Grid.Row="1"  x:Name="Navbar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="MainPanel">
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" x:Name="PendingButton" Content="Active Forums" Style="{StaticResource FooterButtonStyle}" FontSize="22"/>
+        </Grid>
+    </Grid>
+</Page>

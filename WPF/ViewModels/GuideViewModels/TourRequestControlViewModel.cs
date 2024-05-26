@@ -33,19 +33,21 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             requests.Clear();
             foreach (TourRequest r in TourRequestService.GetInstance().GetAll()) 
             {
-                TourRequest request_tmp = new TourRequest();
-                request_tmp.Id = r.Id;
-                request_tmp.UserId = r.UserId;
-                request_tmp.BeginDate = r.BeginDate;
-                request_tmp.EndDate = r.EndDate;   
-                request_tmp.LanguageId = r.LanguageId;
-                request_tmp.LocationId = r.LocationId;
-                request_tmp.Language = LanguageService.GetInstance().GetById(r.LanguageId);
-                request_tmp.Location = LocationService.GetInstance().GetById(r.LocationId);
-                request_tmp.Description = r.Description;
-                request_tmp.UserId = user.Id;
-                request_tmp.TouristNumber = RequestedTouristService.GetInstance().GetAll().Where(t => t.RequestId == request_tmp.Id).ToList().Count();
-                requests.Add(request_tmp);
+                if (r.Status == "Pending") {
+                    TourRequest request_tmp = new TourRequest();
+                    request_tmp.Id = r.Id;
+                    request_tmp.UserId = r.UserId;
+                    request_tmp.BeginDate = r.BeginDate;
+                    request_tmp.EndDate = r.EndDate;
+                    request_tmp.LanguageId = r.LanguageId;
+                    request_tmp.LocationId = r.LocationId;
+                    request_tmp.Language = LanguageService.GetInstance().GetById(r.LanguageId);
+                    request_tmp.Location = LocationService.GetInstance().GetById(r.LocationId);
+                    request_tmp.Description = r.Description;
+                    request_tmp.UserId = user.Id;
+                    request_tmp.TouristNumber = RequestedTouristService.GetInstance().GetAll().Where(t => t.RequestId == request_tmp.Id).ToList().Count();
+                    requests.Add(request_tmp);
+                }
             }
         }
 
@@ -117,12 +119,25 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             SearchByEndDate(date2);
         }
 
-
-
-
-
-
-
-
+        public void Request_AcceptClick(BeginButtonClickedEventArgs e)
+        {
+            foreach(TourRequest request in requests)
+            {
+                if(request.Id == e.TourId)
+                {
+                    requests.Remove(request);
+                    request.Status = "Valid";
+                    TourRequestService.GetInstance().Update(request);
+                    break;
+                }
+            }
+        }
+    
+    
+    
+    
+    
+    
+    
     }
 }

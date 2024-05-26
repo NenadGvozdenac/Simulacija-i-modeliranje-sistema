@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,8 @@ public class AccommodationsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Accommodation> _accommodations { get; set; }
     public Accommodations AccommodationView { get; set; }
+    private bool isDemoModeActive = false;
+    private CancellationTokenSource demoCancellationTokenSource;
 
     public User user { get; set; }
 
@@ -76,6 +79,121 @@ public class AccommodationsViewModel : INotifyPropertyChanged
         LoadCountries();
         FilteredAccommodations = new ObservableCollection<Accommodation>(_accommodations);
         SortBySuperAccommodations();
+    }
+
+    public async Task StartDemoMode()
+    {
+        // Simulate user interactions to demonstrate functionality
+
+        demoCancellationTokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken = demoCancellationTokenSource.Token;
+
+        isDemoModeActive = true;
+
+        try
+        {
+
+            while (isDemoModeActive)
+            {
+                AccommodationView.Overlay.Visibility = Visibility.Visible;
+                AccommodationView.SearchBox_transparent.Visibility = Visibility.Hidden;
+                AccommodationView.NavBar_transparent.Visibility = Visibility.Visible;
+                AccommodationView.Search_transparent.Visibility = Visibility.Hidden;
+                AccommodationView.Sticker_transparent.Visibility = Visibility.Visible;
+                AccommodationView.Location_transparent.Visibility = Visibility.Visible;
+                AccommodationView.Type_transparent.Visibility = Visibility.Visible;
+                AccommodationView.GuestsNumber_transparent.Visibility = Visibility.Visible;
+                AccommodationView.DaysOfStay_transparent.Visibility = Visibility.Visible;
+                AccommodationView.ResetFilters_transparent.Visibility = Visibility.Visible;
+
+
+                SearchAccommodation = "K";
+                await Task.Delay(1000, cancellationToken); 
+                SearchAccommodation = "Ku";
+                await Task.Delay(1000, cancellationToken); 
+                SearchAccommodation = "Kuc";
+                await Task.Delay(1000, cancellationToken); 
+                SearchAccommodation = "Kuca";
+                await Task.Delay(2000, cancellationToken); // Wait for 3 seconds
+                AccommodationView.SearchBox_transparent.Visibility = Visibility.Visible;
+
+
+                AccommodationView.Location_transparent.Visibility = Visibility.Hidden;
+                await Task.Delay(2000, cancellationToken); // Wait for 2 seconds
+                AccommodationView.CountryComboBox.SelectedIndex = 0; // Select first country
+                await Task.Delay(2000, cancellationToken); // Wait for 2 seconds      
+                AccommodationView.CityComboBox.SelectedIndex = 5; // Select Sombor
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.Location_transparent.Visibility = Visibility.Visible;
+
+
+                AccommodationView.Type_transparent.Visibility = Visibility.Hidden;
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.checkBoxHouse.IsChecked = true; // Check apartment checkbox
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.Type_transparent.Visibility = Visibility.Visible;
+
+                AccommodationView.GuestsNumber_transparent.Visibility = Visibility.Hidden;
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.GuestNumber.Text = "3";
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.GuestsNumber_transparent.Visibility = Visibility.Visible;
+
+
+                AccommodationView.DaysOfStay_transparent.Visibility = Visibility.Hidden;
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.DaysOfStay.Text = "5";
+                await Task.Delay(2000, cancellationToken);
+                AccommodationView.DaysOfStay_transparent.Visibility = Visibility.Visible;
+
+                AccommodationView.ResetFilters_transparent.Visibility = Visibility.Hidden;
+                await Task.Delay(2000, cancellationToken);
+                ResetFilters_Click();
+                AccommodationView.ResetFilters_transparent.Visibility = Visibility.Visible;
+
+                cancellationToken.ThrowIfCancellationRequested();
+
+                // Delay before next iteration
+                await Task.Delay(1000, cancellationToken); // Wait for 1 second
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            ResetDemoMode();
+            isDemoModeActive = false;
+        }
+    }
+
+    private void ResetDemoMode()
+    {
+        ResetFilters_Click();
+        // Reset any changes made during demo mode
+        AccommodationView.Overlay.Visibility = Visibility.Collapsed;
+        // Hide other transparent elements
+        AccommodationView.SearchBox_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.NavBar_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.Search_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.Sticker_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.Location_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.Type_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.GuestsNumber_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.DaysOfStay_transparent.Visibility = Visibility.Collapsed;
+        AccommodationView.ResetFilters_transparent.Visibility = Visibility.Collapsed;
+    }
+
+    public void Overlay_MouseLeftButtonDown()
+    {
+            StopDemoMode();
+    }
+
+    public void StopDemoMode()
+    {
+        // Reset any changes made during demo mode
+        demoCancellationTokenSource?.Cancel();
+        
+        AccommodationView.Overlay.Visibility = Visibility.Collapsed;
+        // Set flag to indicate demo mode is inactive
+        isDemoModeActive = false;
     }
 
     public void ResetFilters_Click()
@@ -140,8 +258,6 @@ public class AccommodationsViewModel : INotifyPropertyChanged
             FilteredAccommodations.Add(accommodation);
         }
     }
-
-
 
     private bool IsAccommodationTypeValid(Accommodation accommodation, List<string> checkedTypes)
     {

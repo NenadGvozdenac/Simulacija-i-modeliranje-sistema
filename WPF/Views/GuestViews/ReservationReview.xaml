@@ -94,7 +94,9 @@
                         <RadioButton x:Name="Level5_CheckBox" GroupName="LevelsOfRenovation" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     </Viewbox>
 
-                    <TextBox x:Name="renovation_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Background="#FFF5EBDF" BorderBrush="Black" BorderThickness="2" Margin="666,119,81,27"/>
+                    <TextBlock VerticalAlignment="Top" Style="{StaticResource MainTextBlockGuest}" HorizontalAlignment="Left" TextWrapping="Wrap" Text="You can write your feedback here:" FontSize="20" Margin="480,200,0,0" Height="74" Width="181"/>
+
+                    <TextBox x:Name="renovation_TextBox" TextWrapping="Wrap" Panel.ZIndex="2" Background="#FFF5EBDF" BorderBrush="Black" Width="300" Height="250" BorderThickness="2" Margin="666,119,81,27"/>
 
                 </Grid>
 

@@ -24,6 +24,8 @@ public class Accommodation : ISerializable
     public double AverageReviewScore { get; set; }
     public double Price { get; set; }
     public List<AccommodationImage> Images { get; set; }
+    public List<AccommodationReservation> Reservations { get; set; }
+    public int ReservationNumber => Reservations.Count;
 
     public void FromCSV(string[] values)
     {

@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  
     <None Remove="Diagrams\TouristDiagrams\Dijagram_Klasa_Aleksandar_Cvijetic_RA_140_2021_Strahinja_Galic_RA_156_2021.drawio.png" />
 	  
     <None Remove="Diagrams\TouristDiagrams\Sequence_Diagram_RA_140_2021_Aleksandar_Cvijetic.png" />
@@ -19,6 +18,8 @@
     <None Remove="Resources\Assets\alternate-map-marker.384x512.png" />
     <None Remove="Resources\Assets\back_left_arrow_black.png" />
     <None Remove="Resources\Assets\back_left_arrow_white.png" />
+    <None Remove="Resources\Assets\bell-black.png" />
+    <None Remove="Resources\Assets\bell-white.png" />
     <None Remove="Resources\Assets\bell.224x256.png" />
     <None Remove="Resources\Assets\checkbox-checked.256x256.png" />
     <None Remove="Resources\Assets\checkmark.svg" />
@@ -36,6 +37,8 @@
     <None Remove="Resources\Assets\hammer-and-wrench.512x512.png" />
     <None Remove="Resources\Assets\head-lightbulb-outline.232x256.png" />
     <None Remove="Resources\Assets\heavy-check-mark.256x256.png" />
+    <None Remove="Resources\Assets\herb-black.png" />
+    <None Remove="Resources\Assets\herb-white.png" />
     <None Remove="Resources\Assets\home.256x245.png" />
     <None Remove="Resources\Assets\hourglass.png" />
     <None Remove="Resources\Assets\icon-exit.png" />
@@ -62,6 +65,8 @@
     <None Remove="Resources\Assets\three_dots_black.png" />
     <None Remove="Resources\Assets\three_dots_white.png" />
     <None Remove="Resources\Assets\trash_can.png" />
+    <None Remove="Resources\Assets\tree-black.png" />
+    <None Remove="Resources\Assets\tree-white.png" />
     <None Remove="Resources\Assets\user.png" />
     <None Remove="Resources\Assets\users.png" />
     <None Remove="Resources\Assets\user_profile_icon.png" />
@@ -242,6 +247,18 @@
     <Content Include="Resources\Assets\crown.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Assets\bell-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\bell-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\herb-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\herb-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Assets\hotel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -255,6 +272,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Assets\star.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\tree-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Assets\tree-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Assets\user.png">

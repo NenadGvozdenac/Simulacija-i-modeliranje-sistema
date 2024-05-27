@@ -33,7 +33,15 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = ToursUserControl;
         }
 
+        public void ShowReservationReview(User user, Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourStartTime tourStartTime)
+        {
+            TouristWindowFrame.Content = new ReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);
+        }
 
+        public void ShowComplexTourRequest(User user)
+        {
+            TouristWindowFrame.Content = new RequestComplexTour(_user);
+        }
         public void ShowTourDetails(int tourId)
         {
             Tour detailedTour = TourService.GetInstance().GetById(tourId);
@@ -99,6 +107,11 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public void Requests_Click(object sender, RoutedEventArgs e)
         {
             TouristWindowFrame.Content = new TourRequests(_user);
+        }
+
+        public void ComplexRequests_Click(object sender, RoutedEventArgs e)
+        {
+            TouristWindowFrame.Content = new ComplexTourRequests(_user);
         }
         public void AddRequest(User user)
         {

@@ -1,42 +1,37 @@
-﻿using System;
+﻿using BookingApp.Domain.Miscellaneous;
+using BookingApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookingApp.Domain.Miscellaneous;
-using BookingApp.Domain.Models;
-using BookingApp.Domain.RepositoryInterfaces;
 
 namespace BookingApp.Repositories
 {
-    public class TourRequestRepository : ITourRequestRepository
+    public class ComplexTourRequestsRepository : IComplexTourRequestsRepository
     {
-        private const string FilePath = "../../../Resources/Data/tour_requests.csv";
+        private const string FilePath = "../../../Resources/Data/complex_tour_requests.csv";
 
-        private readonly Serializer<TourRequest> _serializer;
+        private readonly Serializer<ComplexTourRequest> _serializer;
 
-        private List<TourRequest> _tourRequests;
+        private List<ComplexTourRequest> _tourRequests;
 
-        public TourRequestRepository()
+        public ComplexTourRequestsRepository()
         {
-            _serializer = new Serializer<TourRequest>();
+            _serializer = new Serializer<ComplexTourRequest>();
             _tourRequests = _serializer.FromCSV(FilePath);
         }
-        public List<TourRequest> GetAll()
+        public List<ComplexTourRequest> GetAll()
         {
             return _tourRequests;
         }
 
-        public TourRequest GetById(int id)
+        public ComplexTourRequest GetById(int id)
         {
             return _tourRequests.FirstOrDefault(a => a.Id == id);
         }
 
-        public List<TourRequest> GetByYear(int year)
-        {
-            return _tourRequests.Where(a => a.BeginDate.Year == year).ToList();
-        }
-        public List<TourRequest> GetByUserId(int userId)
+        public List<ComplexTourRequest> GetByUserId(int userId)
         {
             return _tourRequests.Where(a => a.UserId == userId).ToList();
         }
@@ -45,7 +40,7 @@ namespace BookingApp.Repositories
         /// Adds a tour to the repository
         /// </summary>
         /// <param name="tour"></param>
-        public void Add(TourRequest tourRequest)
+        public void Add(ComplexTourRequest tourRequest)
         {
             _tourRequests.Add(tourRequest);
             _serializer.ToCSV(FilePath, _tourRequests);
@@ -65,20 +60,14 @@ namespace BookingApp.Repositories
             return _tourRequests.Max(c => c.Id) + 1;
         }
 
-        public void Update(TourRequest tourRequest)
+        public void Update(ComplexTourRequest tourRequest)
         {
             var existingTourRequest = _tourRequests.FirstOrDefault(t => t.Id == tourRequest.Id);
             if (existingTourRequest != null)
             {
-                existingTourRequest.Tourists = tourRequest.Tourists;
-                existingTourRequest.Location = tourRequest.Location;
-                existingTourRequest.EndDate = tourRequest.EndDate;
-                existingTourRequest.BeginDate = tourRequest.BeginDate;
-                existingTourRequest.Description = tourRequest.Description;
-                existingTourRequest.Language = tourRequest.Language;
                 existingTourRequest.UserId = tourRequest.UserId;
                 existingTourRequest.Status = tourRequest.Status;
-                existingTourRequest.ComplexRequestId = tourRequest.ComplexRequestId;
+                existingTourRequest.TourRequestIds = tourRequest.TourRequestIds;
                 _serializer.ToCSV(FilePath, _tourRequests);
             }
         }

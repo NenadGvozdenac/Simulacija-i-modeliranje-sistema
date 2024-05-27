@@ -15,7 +15,7 @@ using BookingApp.Application.UseCases;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
-    public class RequestTourViewModel : INotifyPropertyChanged
+    public class RequestComplexTourViewModel
     {
         public ObservableCollection<RequestedTourist> _requestedTourists { get; set; }
 
@@ -112,12 +112,25 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 OnPropertyChanged();
             }
         }
+        private int _numOfRequests;
+        public int NumOfRequests
+        {
+            get { return _numOfRequests; }
+            set
+            {
+                _numOfRequests = value;
+                OnPropertyChanged();
+            }
+        }
         public List<Tourist> Tourists { get; set; }
         public string description { get; set; }
         public ObservableCollection<Tourist> _tourists { get; set; }
         public User user { get; set; }
-        public RequestTour requestTour {  get; set; }
-        public RequestTourViewModel(User _user, RequestTour _requestTour)
+        public RequestComplexTour requestTour { get; set; }
+
+        public List<RequestedTourist> requestedTourists { get; set; }
+        public List<TourRequest> tourRequests {  get; set; }
+        public RequestComplexTourViewModel(User _user, RequestComplexTour _requestTour)
         {
             requestTour = _requestTour;
             _tourists = new ObservableCollection<Tourist>();
@@ -128,6 +141,9 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             LoadLanguages();
             BeginDate = DateTime.Now;
             EndDate = DateTime.Now;
+            requestedTourists = new List<RequestedTourist>();
+            tourRequests = new List<TourRequest>();
+            NumOfRequests = 0;
         }
 
         public void LoadCountries()
@@ -219,42 +235,68 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 requestTour.enterAllFieldsMessage.Visibility = Visibility.Visible;
             }
         }
-        public void Finish_Click(object sender, RoutedEventArgs e)
+
+        public void AddRequest_Click(object sender, RoutedEventArgs e)
         {
             GetTourInfo();
             CheckAllFields();
-
-            if (requestTour.enterAllFieldsMessage.Visibility != Visibility.Visible)
-            {
-                TourRequest tourRequest = new TourRequest();
-                tourRequest.Id = TourRequestService.GetInstance().NextId();
-                foreach (Tourist t in Tourists)
-                {
-                    RequestedTourist rt = new RequestedTourist();
-                    rt.Id = RequestedTouristService.GetInstance().NextId();
-                    rt.Name = t.Name;
-                    rt.Age = t.Age;
-                    rt.Surname = t.Surname;
-                    rt.RequestId = tourRequest.Id;
-                    RequestedTouristService.GetInstance().Add(rt);
-                }
-                tourRequest.UserId = user.Id;
-                tourRequest.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id;
-                tourRequest.Description = description;
-                tourRequest.LanguageId = LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id;
-                tourRequest.BeginDate = BeginDate;
-                tourRequest.EndDate = EndDate;
-                //tourRequest.Tourists = Tourists;
-                tourRequest.RequestDate = DateTime.Now;
-                tourRequest.Status = "Pending";
+                        if (requestTour.enterAllFieldsMessage.Visibility != Visibility.Visible)
+                        {
+                            TourRequest tourRequest = new TourRequest();
+                            tourRequest.Id = TourRequestService.GetInstance().NextId();
+                            foreach (Tourist t in Tourists)
+                            {
+                                RequestedTourist rt = new RequestedTourist();
+                                rt.Id = RequestedTouristService.GetInstance().NextId();
+                                rt.Name = t.Name;
+                                rt.Age = t.Age;
+                                rt.Surname = t.Surname;
+                                rt.RequestId = tourRequest.Id;
+                                requestedTourists.Add(rt);  
+                            }
+                            tourRequest.UserId = user.Id;
+                            tourRequest.LocationId = LocationService.GetInstance().GetLocationByCityAndCountry(SelectedCity, SelectedCountry).Id;
+                            tourRequest.Description = description;
+                            tourRequest.LanguageId = LanguageService.GetInstance().GetLanguageByName(SelectedLanguage).Id;
+                            tourRequest.BeginDate = BeginDate;
+                            tourRequest.EndDate = EndDate;
+                            tourRequest.RequestDate = DateTime.Now;
+                            tourRequest.Status = "Pending";
                 tourRequest.ComplexRequestId = -1;
-
-                TourRequestService.GetInstance().Add(tourRequest);
-                MessageBox.Show("Uspesno");
+                            tourRequests.Add(tourRequest);
+                MessageBox.Show("Success!");
+                NumOfRequests++;
             }
             else
+                        {
+                            return;
+                        }
+        }
+        public void Finish_Click(object sender, RoutedEventArgs e)
+        {
+            if(tourRequests.Count > 1)
             {
-                return;
+                ComplexTourRequest complexTourRequest = new ComplexTourRequest();
+                int id = ComplexTourRequestService.GetInstance().NextId();
+                complexTourRequest.Id = id;
+                complexTourRequest.UserId = user.Id;
+                complexTourRequest.Status = "Pending";
+                ComplexTourRequestService.GetInstance().Add(complexTourRequest);
+                foreach (TourRequest tr in tourRequests)
+                {
+                    foreach(RequestedTourist rt in requestedTourists){
+                        RequestedTouristService.GetInstance().Add(rt);
+                    }
+                    TourRequestService.GetInstance().Add(tr);
+
+                    tr.ComplexRequestId = id;
+                    TourRequestService.GetInstance().Update(tr);
+                }
+                MessageBox.Show("RequestCreated!");
+                
+            }else
+            {
+                MessageBox.Show("Add requests!");
             }
         }
     }

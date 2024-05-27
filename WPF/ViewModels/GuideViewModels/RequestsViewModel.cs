@@ -2,6 +2,8 @@
 using BookingApp.Domain.Models;
 using BookingApp.View.PathfinderViews;
 using BookingApp.WPF.Views.GuideViews;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +47,61 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
+        public int selectedYear;
+
+        public int SelectedYear
+        {
+            get => selectedYear;
+            set
+            {
+                if (value != selectedYear)
+                {
+                    selectedYear = value;
+                    OnPropertyChanged();
+                    UpdateChartData();
+                    UpdateChartData_location();
+                }
+            }
+        }
+
+        public string selectedLanguage;
+
+        public string SelectedLanguage
+        {
+            get => selectedLanguage;
+            set
+            {
+                if (value != selectedLanguage)
+                {
+                    selectedLanguage = value;
+                    OnPropertyChanged();
+                    UpdateChartData();
+                }
+            }
+        }
+
+        public string selectedCity;
+
+        public string SelectedCity
+        {
+            get => selectedCity;
+            set
+            {
+                if (value != selectedCity)
+                {
+                    selectedCity = value;
+                    OnPropertyChanged();
+                    UpdateChartData_location();
+                }
+            }
+        }
+
+        public ChartValues<int> Requests { get; set; }
+        public List<string> Months { get; set; }
+
+        public ChartValues<int> Requests_location { get; set; }
+        public List<string> Months_1 { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         // The method to invoke the property changed event
@@ -53,8 +110,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-
+      
 
         public RequestStatistics requestStatisticsWindow { get; set; }
 
@@ -65,11 +121,64 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Location = 0;
             LanguageRec = 0;
 
+            Months = new List<string> { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            Requests = new ChartValues<int>(new int[12]);
+
+            Months_1 = new List<string> { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            Requests_location = new ChartValues<int>(new int[12]);
+
             LoadCountries();
             LoadLanguages();
             LoadYears();
             LoadMonths();
-        
+
+            requestStatisticsWindow.languageRequestsChart.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Requests",
+                    Values = Requests,
+                    PointGeometrySize = 10
+                }
+            };
+
+            requestStatisticsWindow.languageRequestsChart.AxisX.Add(new Axis
+            {
+                Title = "",
+                Labels = Months
+            });
+
+            requestStatisticsWindow.languageRequestsChart.AxisY.Add(new Axis
+            {
+                Title = "Number of Requests",
+                LabelFormatter = value => Math.Round(value).ToString(),
+                Separator = new LiveCharts.Wpf.Separator { Step = 1 }
+            });
+
+
+            requestStatisticsWindow.locationRequestsChart.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Requests",
+                    Values = Requests_location,
+                    PointGeometrySize = 10
+                }
+            };
+
+            requestStatisticsWindow.locationRequestsChart.AxisX.Add(new Axis
+            {
+                Title = "",
+                Labels = Months
+            });
+
+            requestStatisticsWindow.locationRequestsChart.AxisY.Add(new Axis
+            {
+                Title = "Number of Requests",
+                LabelFormatter = value => Math.Round(value).ToString(),
+                Separator = new LiveCharts.Wpf.Separator { Step = 1 }
+            });
+
         }
 
         public void LoadCountries()
@@ -127,6 +236,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             
             if (requestStatisticsWindow.CityCombobox.SelectedItem != null)
             {
+                SelectedCity = requestStatisticsWindow.CityCombobox.SelectedItem.ToString();
                 string city = requestStatisticsWindow.CityCombobox.SelectedItem.ToString();
                 List<TourRequest> requests = new List<TourRequest>();
                 requests = TourRequestService.GetInstance().GetAll();
@@ -150,6 +260,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             if (requestStatisticsWindow.LanguageCombobox.SelectedItem != null)
             {
+                SelectedLanguage = requestStatisticsWindow.LanguageCombobox.SelectedItem.ToString();
                 string language = requestStatisticsWindow.LanguageCombobox.SelectedItem.ToString();
                 List<TourRequest> requests = new List<TourRequest>();
                 requests = TourRequestService.GetInstance().GetAll();
@@ -174,6 +285,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             Language_SelectionChanged();
             if (requestStatisticsWindow.YearCombobox.SelectedIndex != -1)
             {
+                SelectedYear = Convert.ToInt32(requestStatisticsWindow.YearCombobox.SelectedItem);
                 List<TourRequest> requests = new List<TourRequest>();
                 requests = TourRequestService.GetInstance().GetAll();
 
@@ -200,6 +312,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 }
                 number_1 = 0;
                 number_2 = 0;
+             
             }
         }
 
@@ -248,6 +361,43 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             requestStatisticsWindow.MonthCombobox.SelectedIndex = -1;
         }
 
-        
+
+        public void UpdateChartData()
+        {
+            if (SelectedYear == 0 || string.IsNullOrEmpty(SelectedLanguage))
+                return;
+
+            var requests = TourRequestService.GetInstance().GetAll()
+                .Where(r => r.RequestDate.Year == SelectedYear && LanguageService.GetInstance().GetById(r.LanguageId).Name == SelectedLanguage)
+                .GroupBy(r => r.RequestDate.Month)
+                .Select(g => new { Month = g.Key, Count = g.Count() })
+                .ToList();
+
+            for (int i = 0; i < 12; i++)
+            {
+                var monthData = requests.FirstOrDefault(r => r.Month == i + 1);
+                Requests[i] = monthData?.Count ?? 0;
+            }
+        }
+
+        public void UpdateChartData_location()
+        {
+            if (SelectedYear == 0 || string.IsNullOrEmpty(SelectedCity))
+                return;
+
+            var requests = TourRequestService.GetInstance().GetAll()
+                .Where(r => r.RequestDate.Year == SelectedYear && LocationService.GetInstance().GetById(r.LocationId).City == SelectedCity)
+                .GroupBy(r => r.RequestDate.Month)
+                .Select(g => new { Month = g.Key, Count = g.Count() })
+                .ToList();
+
+            for (int i = 0; i < 12; i++)
+            {
+                var monthData = requests.FirstOrDefault(r => r.Month == i + 1);
+                Requests_location[i] = monthData?.Count ?? 0;
+            }
+        }
+
+
     }
 }

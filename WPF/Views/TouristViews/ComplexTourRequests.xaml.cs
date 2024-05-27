@@ -21,9 +21,12 @@ namespace BookingApp.WPF.Views.TouristViews
     /// </summary>
     public partial class ComplexTourRequests : UserControl
     {
-        public ComplexTourRequests()
+        public User user {  get; set; }
+        public ComplexTourRequests(User _user)
         {
             InitializeComponent();
+            DataContext = this;
+            user = _user;
         }
 
         public void Add_Click(object sender, RoutedEventArgs e)
@@ -32,7 +35,7 @@ namespace BookingApp.WPF.Views.TouristViews
 
             if (parentWindow is TouristMainWindow mainWindow)
             {
-                //mainWindow.ShowReservationReview(user, selectedTour, guestNumber, tourists, tourVoucher, tourStartTime);
+                mainWindow.ShowComplexTourRequest(user);
             }
         }
     }

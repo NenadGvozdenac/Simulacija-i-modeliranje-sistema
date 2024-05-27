@@ -44,6 +44,11 @@ namespace BookingApp.WPF.Views.TouristViews
         {
             touristMainWindowViewModel.ShowReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);
         }
+
+        public void ShowComplexTourRequest(User user)
+        {
+            touristMainWindowViewModel.ShowComplexTourRequest(user);
+        }
         public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher tourVoucher)
         {
             touristMainWindowViewModel.ShowTourDates(tour, guestNumber, tourists, tourVoucher);
@@ -100,6 +105,10 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.AddRequest(user);
         }
 
+        public void ComplexRequests_Click(object sender, RoutedEventArgs e)
+        {
+            touristMainWindowViewModel.ComplexRequests_Click(sender, e);
+        }
         public void ShowTourRequestStatistics()
         {
             touristMainWindowViewModel.ShowTourRequestStatistics();

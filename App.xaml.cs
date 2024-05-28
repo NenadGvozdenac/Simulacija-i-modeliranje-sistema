@@ -81,6 +81,7 @@ public partial class App
         services.AddSingleton<IForumCommentReportRepository, ForumCommentReportRepository>();
         services.AddSingleton<IComplexTourRequestsRepository, ComplexTourRequestsRepository>();
 
+        services.AddSingleton<IGuideInfoRepository, GuideInfoRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -114,5 +115,6 @@ public partial class App
         services.AddSingleton<ForumCommentReportService>();
         services.AddSingleton<ComplexTourRequestService>();
 
+        services.AddSingleton<GuideService>();
     }
 }

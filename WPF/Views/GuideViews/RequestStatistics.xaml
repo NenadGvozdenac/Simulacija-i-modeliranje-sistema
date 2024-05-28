@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="RequestStatistics" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -49,6 +50,38 @@
                 <ComboBox Height="30" Width="258" x:Name="MonthCombobox" SelectionChanged="Month_SelectionChanged" IsEnabled="False" IsEditable="False"></ComboBox>
                 <Border Margin="0,15"></Border>
                 <Button Width="69" Height="30" Click="Reset_click">Reset</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{Binding SelectedLanguage,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+                <lvc:CartesianChart Name="languageRequestsChart" Height="550" Background="#F4F4F4">
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries Title="Requests" Values="{Binding Requests}" PointGeometrySize="10">
+                            <lvc:LineSeries.LineSmoothness>0.5</lvc:LineSeries.LineSmoothness>
+                            <lvc:LineSeries.PointForeground>
+                                <SolidColorBrush Color="Red" />
+                            </lvc:LineSeries.PointForeground>
+                        </lvc:LineSeries>
+                    </lvc:CartesianChart.Series>
+                </lvc:CartesianChart>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding SelectedCity,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+                <lvc:CartesianChart Name="locationRequestsChart" Height="550" Background="#F4F4F4" Width="714">
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries Title="Requests" Values="{Binding Requests_location}" PointGeometrySize="10">
+                            <lvc:LineSeries.LineSmoothness>0.5</lvc:LineSeries.LineSmoothness>
+                            <lvc:LineSeries.PointForeground>
+                                <SolidColorBrush Color="Red" />
+                            </lvc:LineSeries.PointForeground>
+                        </lvc:LineSeries>
+                    </lvc:CartesianChart.Series>
+                </lvc:CartesianChart>
             </StackPanel>
         </Grid>
     </Grid>

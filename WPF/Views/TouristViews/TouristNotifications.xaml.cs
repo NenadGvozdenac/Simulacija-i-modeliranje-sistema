@@ -1,5 +1,6 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.View.PathfinderViews;
 using BookingApp.WPF.ViewModels.TouristViewModels;
 using System;
 using System.Collections.Generic;
@@ -34,12 +35,17 @@ namespace BookingApp.WPF.Views.TouristViews
             TouristNotificationsViewModel = new TouristNotificationsViewModel(user, this);
             DataContext = TouristNotificationsViewModel;
             Update();
+            FindTours();
         }
         public void Update()
         {
             TouristNotificationsViewModel.Update();
         }
 
+        public void FindTours()
+        {
+            TouristNotificationsViewModel.FindTours();
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

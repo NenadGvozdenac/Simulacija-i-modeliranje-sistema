@@ -29,14 +29,48 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 }
             }
         }
+        public ObservableCollection<Tour> tours { get; set; }
+
+        private ObservableCollection<Tour> _myTours;
+        public ObservableCollection<Tour> MyTours
+        {
+            get { return _myTours; }
+            set
+            {
+                if (_myTours != value)
+                {
+                    _myTours = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public TouristNotifications touristNotifications {  get; set; }
         public User user {  get; set; }
         public TouristNotificationsViewModel(User _user, TouristNotifications _touristNotifications) {
             touristNotifications = _touristNotifications;
             tourists = new ObservableCollection<Tourist>();
+            tours = new ObservableCollection<Tour>();
             user = _user;
         }
 
+        public void FindTours()
+        {
+            Tour tour = new Tour();
+            foreach(TourRequest tr in TourRequestService.GetInstance().GetAll())
+            {
+                if(tr.Status == "Valid")
+                {
+                    foreach(Tour t in TourService.GetInstance().GetAll())
+                    {
+                        if(tr.LanguageId == t.LanguageId && tr.LocationId == t.LocationId && tr.Description == t.Description)
+                        {
+                            tours.Add(t);
+                        }
+                    }
+                }
+            }
+            MyTours = new ObservableCollection<Tour>(tours);
+        }
         public void Update()
         {
             foreach (TouristReservation touristReservation in TourReservationService.GetInstance().GetAll())
@@ -54,5 +88,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }

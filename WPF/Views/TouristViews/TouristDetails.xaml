@@ -22,33 +22,38 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="512" Height="80" Margin="10,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="520" Height="55"/>
                     <Button Background="GhostWhite" FontSize="35" Click="Reserve_Click" Margin="882,0,41,10">
                         <Image Source="/Resources/Assets/concierge-bell.256x193.png" Height="32" Width="49"/>
                     </Button>
                 </Grid>
-                <Grid HorizontalAlignment="Left" Width="963" Margin="10,55,0,0" Grid.RowSpan="2">
+                <Grid HorizontalAlignment="Center" Width="963" Margin="10,55,0,0" Grid.RowSpan="2">
                     <Grid>
                         <TextBlock FontSize="40" Name="tourCountryTextBlock" TextWrapping="Wrap" Margin="0,0,10,0"/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Border BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,456,0">
-                        <Image Source="{Binding tourImage.Path}" Stretch="Fill" Margin="-1,-1,3,1"/>
+                    <Border BorderThickness="0,0,0,0" BorderBrush="Black" Margin="228,0,228,0">
+                        <Image Source="{Binding tourImage.Path}" Stretch="Fill" Margin="1,0,1,0"/>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <Image Source="/Resources/Assets/language.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="26" Margin="10,0,0,0"/>
-                    <TextBlock x:Name="LanguageText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="39,0,0,0"/>
-                    <Image Source="/Resources/Assets/users.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="35" Margin="181,0,0,0"/>
-                    <TextBlock x:Name="CapacityText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="219,0,0,0" Width="52"/>
-                    <Image Source="/Resources/Assets/clock.256x256.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Width="33" Margin="354,0,0,0"/>
-                    <TextBlock x:Name="DurationText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="397,0,0,0"/>
+                    <Image Source="/Resources/Assets/language.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="26" Margin="420,0,0,0"/>
+                    <TextBlock x:Name="LanguageText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="454,0,0,0"/>
+                    <Image Source="/Resources/Assets/users.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="35" Margin="520,0,0,0"/>
+                    <TextBlock x:Name="CapacityText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="558,0,0,0" Width="52"/>
+                    <Image Source="/Resources/Assets/clock.256x256.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="31" Width="33" Margin="354,0,0,0"/>
+                    <TextBlock x:Name="DurationText" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="397,0,0,0"/>
                     <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <Label Content="Description:" FontStyle="Italic" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ScrollViewer>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                    <Label Grid.Row="0" Content="Description:" FontStyle="Italic" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <ScrollViewer Grid.Row="1">
                         <TextBlock FontSize="30" TextWrapping="Wrap" FontWeight="DemiBold" x:Name="DescriptionTextBlock" Margin="0,50,0,0"/>
                     </ScrollViewer>
                 </Grid>

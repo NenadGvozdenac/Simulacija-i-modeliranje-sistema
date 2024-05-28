@@ -22,6 +22,7 @@ namespace BookingApp.Domain.Models
         public DateTime EndDate { get; set; }
         public DateTime RequestDate {  get; set; }
         public string Status {  get; set; }
+        public int ComplexRequestId {  get; set; }
 
         public int TouristNumber { get; set; }
 
@@ -36,11 +37,12 @@ namespace BookingApp.Domain.Models
             EndDate = Convert.ToDateTime(values[6]);
             RequestDate = Convert.ToDateTime(values[7]);
             Status = values[8];
+            ComplexRequestId = Convert.ToInt32(values[9]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), UserId.ToString(), LocationId.ToString(), Description, LanguageId.ToString(), BeginDate.ToString(), EndDate.ToString(), RequestDate.ToString(), Status };
+            string[] csvValues = { Id.ToString(), UserId.ToString(), LocationId.ToString(), Description, LanguageId.ToString(), BeginDate.ToString(), EndDate.ToString(), RequestDate.ToString(), Status, ComplexRequestId.ToString()};
             return csvValues;
         }
     }

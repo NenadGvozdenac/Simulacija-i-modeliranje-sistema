@@ -81,7 +81,13 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             {
                 return;
             }
-            List<Tourist> touristList = new List<Tourist>();
+            Window parentWindow = Window.GetWindow(TourDatesUserControl);
+
+            if (parentWindow is TouristMainWindow mainWindow)
+            {
+                mainWindow.ShowReservationReview(user, selectedTour, guestNumber, tourists, tourVoucher, tourStartTime);
+            }
+            /*List<Tourist> touristList = new List<Tourist>();
             foreach (Tourist t in tourists)
             {
                 touristList.Add(t);
@@ -96,7 +102,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 UpdateTourStartTime(tourStartTime);
             }
             TourDatesUserControl.touristsAddedMessage.Visibility = Visibility.Visible;
-            return;
+            return;*/
         }
 
         public bool isTourGuestNumberValid()

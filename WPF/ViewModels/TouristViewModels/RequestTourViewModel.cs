@@ -247,6 +247,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
                 //tourRequest.Tourists = Tourists;
                 tourRequest.RequestDate = DateTime.Now;
                 tourRequest.Status = "Pending";
+                tourRequest.ComplexRequestId = -1;
 
                 TourRequestService.GetInstance().Add(tourRequest);
                 MessageBox.Show("Uspesno");

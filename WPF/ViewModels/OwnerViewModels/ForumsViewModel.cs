@@ -36,7 +36,7 @@ public partial class ForumsViewModel : ObservableObject
     {
         page.MainPanel.Children.Clear();
 
-        foreach (Forum forum in Forums)
+        foreach (Forum forum in Forums.Where(forum => forum.ForumStatus == Resources.Types.ForumStatus.Open))
         {
             ForumControl forumControl = new ForumControl(forum, user);
             forumControl.Margin = new System.Windows.Thickness(0, 5, 0, 5);

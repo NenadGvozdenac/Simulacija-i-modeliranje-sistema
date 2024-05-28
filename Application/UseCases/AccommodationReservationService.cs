@@ -53,6 +53,11 @@ public class AccommodationReservationService
         return _accommodationReservationRepository.GetAll();
     }
 
+    public List<AccommodationReservation> GetByUserId(int userId)
+    {
+        return GetAll().Where(reservation => reservation.UserId == userId).ToList();
+    }
+
     public void Add(AccommodationReservation reservation)
     {
         _accommodationReservationRepository.Add(reservation);

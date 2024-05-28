@@ -77,6 +77,8 @@ namespace BookingApp.Repositories
                 existingTourRequest.Description = tourRequest.Description;
                 existingTourRequest.Language = tourRequest.Language;
                 existingTourRequest.UserId = tourRequest.UserId;
+                existingTourRequest.Status = tourRequest.Status;
+                existingTourRequest.ComplexRequestId = tourRequest.ComplexRequestId;
                 _serializer.ToCSV(FilePath, _tourRequests);
             }
         }

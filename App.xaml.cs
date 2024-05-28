@@ -79,6 +79,8 @@ public partial class App
         services.AddSingleton<IForumRepository, ForumRepository>();
         services.AddSingleton<IForumCommentRepository, ForumCommentRepository>();
         services.AddSingleton<IForumCommentReportRepository, ForumCommentReportRepository>();
+        services.AddSingleton<IComplexTourRequestsRepository, ComplexTourRequestsRepository>();
+
         services.AddSingleton<IGuideInfoRepository, GuideInfoRepository>();
     }
 
@@ -111,6 +113,8 @@ public partial class App
         services.AddSingleton<ForumService>();
         services.AddSingleton<ForumCommentService>();
         services.AddSingleton<ForumCommentReportService>();
+        services.AddSingleton<ComplexTourRequestService>();
+
         services.AddSingleton<GuideService>();
     }
 }

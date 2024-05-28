@@ -22,6 +22,8 @@ public class MyReservationsViewModel
     public RescheduleRequests RescheduleRequestsUserControl;
     public OwnerFeedback OwnerFeedbackUserControl;
     public SuperGuest SuperGuestUserControl;
+    public Forums ForumUserControl;
+    public ForumOpened ForumOpenedUserControl;
     public MyReservationsViewModel(MyReservations _myReservationsWindow, User user)
     {
         MyReservationsWindow = _myReservationsWindow;
@@ -37,6 +39,8 @@ public class MyReservationsViewModel
         RescheduleRequestsUserControl = new RescheduleRequests(_user);
         OwnerFeedbackUserControl = new OwnerFeedback(_user);
         SuperGuestUserControl = new SuperGuest(_user);
+        ForumUserControl = new Forums(_user);
+
         UpcomingReservationsUserControl.UpcomingReservationsViewModel.RescheduleClicked += MyReservation_RescheduleClicked;
         PastReservationsUserControl.PastReservationsViewModel.ReviewClicked += MyReservation_ReviewClicked;
         OwnerFeedbackUserControl.OwnerFeedbackViewModel.ReviewClicked += MyReservation_ReviewClicked;
@@ -97,6 +101,12 @@ public class MyReservationsViewModel
     {
         MyReservationsWindow.MyReservationFrame.Content = SuperGuestUserControl;
     }
+
+    public void Forums_Click()
+    {
+        MyReservationsWindow.MyReservationFrame.Content = ForumUserControl;
+    }
+
     public void MyReservation_RescheduleClicked(object sender, int reservationId)
     {
         AccommodationReservation reservation = AccommodationReservationService.GetInstance().GetById(reservationId);
@@ -104,6 +114,12 @@ public class MyReservationsViewModel
         a.RescheduleAccommodationViewModel.ChangedMind += (sender, e) => RescheduleAccommodationChangedMind();
         a.RescheduleAccommodationViewModel.SendRequestRefresh += (sender, e) => RefreshRecheduleRequests();
         MyReservationsWindow.MyReservationFrame.Content = a;
+    }
+
+    public void ForumOpened(int forumid)
+    {
+        ForumOpenedUserControl = new ForumOpened(forumid, _user);
+        MyReservationsWindow.MyReservationFrame.Content = ForumOpenedUserControl;
     }
 
     public void MyReservation_ReviewClicked(object sender, int reservationId)

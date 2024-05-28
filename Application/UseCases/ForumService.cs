@@ -66,4 +66,83 @@ public class ForumService
         List<Accommodation> accommodations = AccommodationService.GetInstance().GetByOwnerId(ownerId);
         return GetForumsForAccommodations(accommodations);
     }
+
+    public bool IsLocationTaken(int locationId)
+    {
+
+        List<Forum> forum = GetAll().Where(forum => forum.LocationId == locationId).ToList();
+
+        if (forum == null)
+        {
+            return false;
+        }
+
+        foreach (Forum f in forum)
+        {
+            if (f.ForumStatus == Resources.Types.ForumStatus.Open)
+            {
+                return true;
+            }
+
+        }
+
+        return false;     
+    }
+
+    public Forum GetByLocationId(int locationId)
+    {
+        List<Forum> forums = _forumRepository.GetByLocationId(locationId);
+        return forums.Where(forums => forums.ForumStatus == Resources.Types.ForumStatus.Open).FirstOrDefault();
+    }
+
+    public bool IsVisitedByUser(Forum forum, int userId)
+    {
+        List<Accommodation> accommodations = AccommodationService.GetInstance().GetAccommodationsByLocationId(forum.LocationId);
+        List<AccommodationReservation> reservations = AccommodationReservationService.GetInstance().GetByUserId(userId);
+
+        //check if any of accommodations is in reservations
+        foreach (Accommodation accommodation in accommodations)
+        {
+            if (reservations.Any(reservation => reservation.AccommodationId == accommodation.Id))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void CloseForum(Forum forum)
+    {
+        forum.ForumStatus = Resources.Types.ForumStatus.Closed;
+        _forumRepository.Update(forum);
+    }
+
+    public bool IsSpecialForum(Forum forum)
+    {
+        List<ForumComment> comments = _forumCommentRepository.GetByForumId(forum.Id);
+
+        int countGuest = 0;
+        int countSuperOwner = 0;
+
+        foreach (ForumComment comment in comments)
+        {
+            if (IsVisitedByUser(forum, comment.UserId))
+            {
+                countGuest++;
+            }
+            if(UserService.GetInstance().GetById(comment.UserId).Type == Resources.Types.UserType.Owner)
+            {
+                
+                countSuperOwner++;
+            }
+        }
+
+        if (countGuest >= 20 && countSuperOwner >=10)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

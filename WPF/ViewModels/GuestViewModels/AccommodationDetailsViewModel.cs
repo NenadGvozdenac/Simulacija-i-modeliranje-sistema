@@ -43,9 +43,45 @@ public class AccommodationDetailsViewModel
         SetAccommodation(detailedaccomodation, user);
     }
 
+    public AccommodationDetailsViewModel(AccommodationDetails _AccommodationDetails, Accommodation detailedaccomodation, User user, DateTime firstDate, DateTime lastDate)
+    {
+        AccommodationDetails = _AccommodationDetails;
+        _reviews = new ObservableCollection<AccommodationReview>();
+        AccommodationDetails.firstDate.SelectedDate = firstDate;
+        AccommodationDetails.lastDate.SelectedDate = lastDate;
+
+        AccommodationDetails.firstDate.IsEnabled = true;
+        AccommodationDetails.lastDate.IsEnabled = true;
+        AccommodationDetails.FreeDatesCheckButton.IsEnabled = true;
+        
+        SetAccommodationSecond(detailedaccomodation, user);
+        
+    }
+
     public void UpcomingReservationsChanged_Invoke()
     {
         UpcomingReservationsChanged.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetAccommodationSecond(Accommodation accommodation, User user)
+    {
+        _availableDates = new ObservableCollection<string>();
+        reservation = new AccommodationReservation();
+        selectedAccommodation = accommodation;
+        _user = user;
+        AccommodationDetails.username.Content = _user.Username;
+
+        if (GuestService.GetInstance().GetByGuestId(user.Id).IsSuperGuest)
+        {
+            AccommodationDetails.crownImage.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            AccommodationDetails.crownImage.Visibility = Visibility.Hidden;
+        }
+
+        SetDefaultValues(accommodation);
+        LoadReviews();
     }
 
     public void SetAccommodation(Accommodation accommodation, User user)

@@ -54,5 +54,10 @@ public partial class MyReservations : UserControl
     private void WhatIsSuperGuest_Click(object sender, RoutedEventArgs e)
     {
         MyReservationsViewModel.WhatIsSuperGuest_Click();
-    }   
+    }
+
+    private void Forums_Click(object sender, RoutedEventArgs e)
+    {
+        MyReservationsViewModel.Forums_Click();
+    }
 }

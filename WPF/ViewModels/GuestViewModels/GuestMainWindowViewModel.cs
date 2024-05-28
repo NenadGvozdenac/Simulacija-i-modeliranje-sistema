@@ -26,6 +26,7 @@ public class GuestMainWindowViewModel
     private readonly User _user;
     public Accommodations AccommodationsUserControl;
     public MyReservations MyReservationsUserControl;
+    public AnywhereAnytime AnywhereAnytimeUserControl { get; set; }
     public Frame GuestWindowFrame;
     public GuestMainWindow GuestMainWindow;
 
@@ -37,6 +38,8 @@ public class GuestMainWindowViewModel
         GuestMainWindow = _guestMainWindow;
         Update(_user);
         AccommodationsUserControl = new Accommodations(user);
+        AccommodationsUserControl.AccommodationsViewModel.AnywhereAnytimeClicked += (sender, e) => AnywhereAnytime_Click();
+        AnywhereAnytimeUserControl = new AnywhereAnytime(user);
         GuestWindowFrame.Content = AccommodationsUserControl;
     }
 
@@ -45,10 +48,13 @@ public class GuestMainWindowViewModel
         GuestInfo guestInfo = GuestService.GetInstance().GetByGuestId(_user.Id);
         GuestService.GetInstance().SuperGuestCheck(guestInfo);
     }
-
     public void Accommodations_Click()
     {
         GuestWindowFrame.Content = AccommodationsUserControl;
+    }
+    public void AnywhereAnytime_Click()
+    {
+        GuestWindowFrame.Content = AnywhereAnytimeUserControl;
     }
     public void MyReservations_Click()
     {
@@ -65,6 +71,24 @@ public class GuestMainWindowViewModel
         GuestWindowFrame.Content = a;
 
     }
+
+    public void ShowAccommodationDetailsAnywhere(int accommodationId, DateTime firstdate, DateTime lastdate)
+    {
+        Accommodation detailedAccommodation = AccommodationService.GetInstance().GetById(accommodationId);
+        var a = new AccommodationDetails(detailedAccommodation, _user, firstdate, lastdate);
+        a.AccommodationDetailsViewModel.UpcomingReservationsChanged += (sender, e) =>
+        {
+            RefreshReservations();
+        };
+        GuestWindowFrame.Content = a;
+
+    }
+
+    public void ShowForumPage(int forumid)
+    {
+        MyReservationsUserControl.MyReservationsViewModel.ForumOpened(forumid);
+    }
+
     private void RefreshReservations()
     {
         MyReservationsUserControl.MyReservationsViewModel.RefreshUpcomingReservations();

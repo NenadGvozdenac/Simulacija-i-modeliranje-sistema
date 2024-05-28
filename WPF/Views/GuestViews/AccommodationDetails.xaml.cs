@@ -33,6 +33,13 @@ public partial class AccommodationDetails : UserControl
         DataContext = AccommodationDetailsViewModel;
     }
 
+    public AccommodationDetails(Accommodation detailedaccomodation, User user, DateTime firstDate, DateTime lastDate)
+    {
+        InitializeComponent();
+        AccommodationDetailsViewModel = new AccommodationDetailsViewModel(this, detailedaccomodation, user, firstDate, lastDate);
+        DataContext = AccommodationDetailsViewModel;
+    }
+
     private void GoBack_Click(object sender, RoutedEventArgs e)
     {
         AccommodationDetailsViewModel.GoBack_Click(sender, e);
@@ -45,6 +52,7 @@ public partial class AccommodationDetails : UserControl
     {
         AccommodationDetailsViewModel.ConfrimReservation_Click();
     }
+
     //Design Functions
     private void DatePickerCantWrite(object sender, KeyEventArgs e)
     {
@@ -53,12 +61,12 @@ public partial class AccommodationDetails : UserControl
 
     private void FirstDateChanged(object sender, SelectionChangedEventArgs e)
     {
-        AccommodationDetailsViewModel.FirstDateChanged();
+        AccommodationDetailsViewModel?.FirstDateChanged();
     }
 
     private void LastDateChanged(object sender, SelectionChangedEventArgs e)
     {
-        AccommodationDetailsViewModel.LastDateChanged();
+        AccommodationDetailsViewModel?.LastDateChanged();
     }
 
     private void DaysOfStayUp_Click(object sender, RoutedEventArgs e)

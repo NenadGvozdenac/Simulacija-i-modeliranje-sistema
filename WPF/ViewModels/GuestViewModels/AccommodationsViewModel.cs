@@ -32,6 +32,8 @@ public class AccommodationsViewModel : INotifyPropertyChanged
     private bool isDemoModeActive = false;
     private CancellationTokenSource demoCancellationTokenSource;
 
+    public event EventHandler AnywhereAnytimeClicked;
+
     public User user { get; set; }
 
     int minvalueGuestNumber = 1,
@@ -51,6 +53,11 @@ public class AccommodationsViewModel : INotifyPropertyChanged
         _filteredAccommodations = new ObservableCollection<Accommodation>();
         Update();
 
+    }
+
+    public void AnywhereAnytime_Click()
+    {
+        AnywhereAnytimeClicked?.Invoke(this, EventArgs.Empty);
     }
 
     public void Update()

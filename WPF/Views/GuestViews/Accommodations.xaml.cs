@@ -34,6 +34,11 @@ public partial class Accommodations : UserControl
         Overlay.MouseLeftButtonDown += Overlay_MouseLeftButtonDown;
     }
 
+    public void AnywhereAnytime_Click(object sender, RoutedEventArgs e)
+    {
+        AccommodationsViewModel.AnywhereAnytime_Click();
+    }
+
     private async void StartDemoButton_Click(object sender, RoutedEventArgs e)
     {
         await AccommodationsViewModel.StartDemoMode();

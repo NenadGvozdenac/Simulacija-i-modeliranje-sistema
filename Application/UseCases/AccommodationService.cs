@@ -138,4 +138,9 @@ public class AccommodationService
     {
         return GetAll().Where(accommodation => accommodation.LocationId == leastPopularLocation.Id && accommodation.OwnerId == userId).ToList();
     }
+
+    public List<Accommodation> GetAccommodationsByLocationId(int locationid)
+    {
+        return GetAll().Where(accommodation => accommodation.LocationId == locationid).ToList();
+    }
 }

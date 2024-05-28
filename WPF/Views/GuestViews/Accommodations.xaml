@@ -156,7 +156,7 @@
 
 
                     <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Discover Your Perfect Getaway, Anywhere, Anytime! Try Our New Feature Today!" Margin="20,24,536,39" FontSize="14"/>
-                    <Button Content="Tap here to check it out!" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="163" HorizontalAlignment="Left" Margin="20,62,0,0" VerticalAlignment="Top"/>
+                    <Button Click="AnywhereAnytime_Click" Content="Tap here to check it out!" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="163" HorizontalAlignment="Left" Margin="20,62,0,0" VerticalAlignment="Top"/>
 
                     <TextBlock Style="{StaticResource MainTextBlockGuest}" Text="Tap here to see a quick demo on how to use accommodation filtering!" Margin="344,24,212,39" FontSize="14"/>
                     <Button Click="StartDemoButton_Click" Content="Quick demo" Style="{StaticResource ClearButtonStyleGuest}" Height="28" Width="81" HorizontalAlignment="Left" Margin="344,62,0,0" VerticalAlignment="Top"/>

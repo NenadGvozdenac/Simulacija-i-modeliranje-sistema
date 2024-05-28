@@ -22,6 +22,14 @@ public class ForumComment : ISerializable
         
     }
 
+    public ForumComment(int forumId, int userId, string content)
+    {
+        ForumId = forumId;
+        UserId = userId;
+        Content = content;
+        CreationDateTime = DateTime.Now;
+    }
+
     public string[] ToCSV()
     {
         return new string[] { Id.ToString(), ForumId.ToString(), UserId.ToString(), Content, DateParser.ToString(CreationDateTime) };

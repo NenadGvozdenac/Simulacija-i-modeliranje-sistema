@@ -44,12 +44,14 @@ public class ForumsViewModel
 
             int locationId = LocationService.GetInstance().GetLocationByCityAndCountry(Forums.CityComboBox.SelectedItem.ToString(), Forums.CountryComboBox.SelectedItem.ToString()).Id;
 
-            if (ForumService.GetInstance().IsLocationTaken(locationId))
+            int isUsed = ForumService.GetInstance().IsLocationTakenAndOpened(locationId);
+
+            if (isUsed == 2)
             {
                 Forums.usedTextBox.Visibility = System.Windows.Visibility.Visible;
                 Forums.successTextBox.Visibility = System.Windows.Visibility.Hidden;
             }
-            else
+            else if(isUsed == 1)
             {
                 ForumService.GetInstance().Add(new Forum(_user.Id, LocationService.GetInstance().GetLocationByCityAndCountry(Forums.CityComboBox.SelectedItem.ToString(), Forums.CountryComboBox.SelectedItem.ToString()).Id, ForumStatus.Open));
                 ForumCommentService.GetInstance().Add(new ForumComment(ForumService.GetInstance().GetByLocationId(locationId).Id, _user.Id, Forums.comment_TextBox.Text));
@@ -61,6 +63,12 @@ public class ForumsViewModel
                 {
                     _forums.Add(forum);
                 }
+            }
+            else if(isUsed == 3)
+            {
+                Forum forum = ForumService.GetInstance().GetOneByLocationId(locationId);
+                forum.ForumStatus = ForumStatus.Open;
+                ForumService.GetInstance().Update(forum);
             }
 
         }

@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model.MutualModels;
 using BookingApp.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -33,7 +34,7 @@ namespace BookingApp.Application.UseCases
 
         public void AddGuide(User user)
         {
-            GuideInfo guestInfo = new(-1, user.Id, false, 0, DateOnly.MinValue, "");
+            GuideInfo guestInfo = new(-1, user.Id, false, 0, 0, DateOnly.MinValue, "");
             _guideInfoRepository.Add(guestInfo);
             _userRepository.Add(user);
         }
@@ -58,7 +59,7 @@ namespace BookingApp.Application.UseCases
 
         public void Add(User user)
         {
-            GuideInfo guestInfo = new(-1, user.Id, false, 0, DateOnly.FromDateTime(DateTime.UtcNow), "");
+            GuideInfo guestInfo = new(-1, user.Id, false, 0, 0,DateOnly.FromDateTime(DateTime.UtcNow), "");
             _guideInfoRepository.Add(guestInfo);
         }
 
@@ -68,10 +69,68 @@ namespace BookingApp.Application.UseCases
             _userRepository.Delete(entity.Item2.Id);
         }
 
-        public GuideInfo GetByGuideId(int guestId)
+        public GuideInfo GetByGuideId(int guideId)
         {
-            return _guideInfoRepository.GetByGuideId(guestId);
+            return _guideInfoRepository.GetByGuideId(guideId);
         }
+
+        public void FindDominantLanguage(int guideId)
+        {
+            List<Language> languages = LanguageService.GetInstance().GetAll();
+            List<TourStartTime> dates = TourStartTimeService.GetInstance().GetAll();
+
+            Language language = languages[0];
+            int datesNumber = 0;
+            int datesNumber_tmp = 0;
+
+            foreach(Language l in languages)
+            {
+                foreach(TourStartTime t in dates)
+                {
+                    if(t.Status == "passed" && TourService.GetInstance().GetById(t.TourId).OwnerId == guideId && TourService.GetInstance().GetById(t.TourId).LanguageId == l.Id)
+                    {
+                        datesNumber_tmp++;
+                    }
+                }
+                if(datesNumber_tmp > datesNumber)
+                {
+                    language = l;
+                    datesNumber = datesNumber_tmp;
+                }
+                datesNumber_tmp = 0;
+            }
+
+            GuideInfo info = GetByGuideId(guideId);
+            info.Language = language.Name;
+            info.NumberOfToursThisYear = datesNumber;
+            info.AvrageGrade = FindAvgGrade(guideId, language);
+            if(FindAvgGrade(guideId, language) > 4 && datesNumber >=20)
+                info.IsSuperGuide = true;
+            _guideInfoRepository.Update(info);
+
+        }
+
+        public float FindAvgGrade(int guideId, Language language) 
+        {
+            List<TourReview> reviews = TourReviewService.GetInstance().GetAll();
+            float avgGrade = 0;
+            int numberOfReviews = 0;
+            int GradeSum = 0;
+            foreach(TourReview review in reviews)
+            {
+                if(TourService.GetInstance().GetById(review.TourId).OwnerId == guideId && TourService.GetInstance().GetById(review.TourId).LanguageId == language.Id)
+                {
+                    GradeSum += review.TourInterestingness + review.GuideLanguage + review.GuideKnowledge;
+                    numberOfReviews++;
+                }
+            }
+            avgGrade = GradeSum / numberOfReviews;
+            return avgGrade;
+        }
+
+
+
+
 
 
     }

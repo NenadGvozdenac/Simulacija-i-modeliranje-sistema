@@ -345,7 +345,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public void Update()
         {
-
+            GuideService.GetInstance().FindDominantLanguage(_user.Id);
         }
 
 

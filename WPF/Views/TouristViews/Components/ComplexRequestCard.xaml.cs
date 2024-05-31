@@ -18,18 +18,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.WPF.Views.TouristViews
+namespace BookingApp.WPF.Views.TouristViews.Components
 {
     /// <summary>
-    /// Interaction logic for ComplexTourRequests.xaml
+    /// Interaction logic for ComplexRequestCard.xaml
     /// </summary>
-    public partial class ComplexTourRequests : UserControl
+    public partial class ComplexRequestCard : UserControl
     {
-        public User user {  get; set; }
-        public ObservableCollection<ComplexTourRequest> requests { get; set; }
+        public ObservableCollection<TourRequest> requests {  get; set; }
 
-        private ObservableCollection<ComplexTourRequest> _myRequests;
-        public ObservableCollection<ComplexTourRequest> MyRequests
+        private ObservableCollection<TourRequest> _myRequests;
+        public ObservableCollection<TourRequest> MyRequests
         {
             get { return _myRequests; }
             set
@@ -41,34 +40,23 @@ namespace BookingApp.WPF.Views.TouristViews
                 }
             }
         }
-        public ComplexTourRequests(User _user)
+        public ComplexRequestCard()
         {
             InitializeComponent();
-            DataContext = this;
-            user = _user;
-            requests = new ObservableCollection<ComplexTourRequest>();
+            requests = new ObservableCollection<TourRequest>();
             Update();
         }
-
+        
         public void Update()
         {
-            requests.Clear();
-            foreach(ComplexTourRequest cr in ComplexTourRequestService.GetInstance().GetAll())
+            foreach(TourRequest tr in TourRequestService.GetInstance().GetAll())
             {
-                requests.Add(cr);
+                tr.Language = LanguageService.GetInstance().GetById(tr.LanguageId);
+                tr.Location = LocationService.GetInstance().GetById(tr.LocationId);
+                requests.Add(tr);
             }
-            MyRequests = new ObservableCollection<ComplexTourRequest>(requests);
+            MyRequests = new ObservableCollection<TourRequest>(requests);
         }
-        public void Add_Click(object sender, RoutedEventArgs e)
-        {
-            Window parentWindow = Window.GetWindow(this);
-
-            if (parentWindow is TouristMainWindow mainWindow)
-            {
-                mainWindow.ShowComplexTourRequest(user);
-            }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

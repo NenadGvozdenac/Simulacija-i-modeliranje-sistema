@@ -12,11 +12,29 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BookingApp.View.PathfinderViews;
 using BookingApp.Application.UseCases;
+using BookingApp.WPF.Views.TouristViews;
+using System.Windows.Input;
+using System.Linq;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    public class CheckpointsViewModel
+    public class CheckpointsViewModel : INotifyPropertyChanged
     {
+
+        private int _currentCheckpointIndex;
+        public int CurrentCheckpointIndex
+        {
+            get => _currentCheckpointIndex;
+            set
+            {
+                _currentCheckpointIndex = value;
+                OnPropertyChanged(nameof(CurrentCheckpointIndex));
+                OnPropertyChanged(nameof(CurrentCheckpoint));
+            }
+        }
+
+        public Checkpoint CurrentCheckpoint => checkpoints.ElementAtOrDefault(CurrentCheckpointIndex);
+
         public ObservableCollection<Checkpoint> checkpoints { get; set; }
 
         public ObservableCollection<Tourist> tourists { get; set; }
@@ -33,9 +51,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public int tourId { get; set; }
 
+        public Checkpoint currentChekpoint { get; set; }
+
         public DateTime _currentDate { get; set; }
 
         CheckpointsView checkpointsView { get; set; }
+
 
         public CheckpointsViewModel(CheckpointsView checkpointViews,int TourId, DateTime currentDate)
         {
@@ -43,11 +64,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             checkpoints = new ObservableCollection<Checkpoint>();
             tourists = new ObservableCollection<Tourist>();
             selectedTourists = new ObservableCollection<Tourist>();
-            checkpointsView.CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
+            //checkpointsView.CheckpointsDataGrid.Loaded += CheckpointsDataGrid_Loaded;
             tourName = "";
             tourTimeId = 0;
             tourId = TourId;
-            _currentDate = currentDate;
+            CurrentCheckpointIndex = 0;
+            _currentDate = currentDate;                      
             Update(TourId, currentDate);
 
         }
@@ -75,7 +97,23 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             }
 
+            TourStartTime time = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(currentDate, TourId);
+            int checkpointIdToFind = time.CurrentCheckpoint;
+            Checkpoint checkpoint_1 = checkpoints.FirstOrDefault(cp => cp.Id == checkpointIdToFind);
 
+            if (checkpoint_1 != null)
+            {
+                // Get the index of the found checkpoint
+                CurrentCheckpointIndex = checkpoints.IndexOf(checkpoint_1);
+                
+
+            }
+            else
+            {
+                CurrentCheckpointIndex = 0;
+            }
+
+            
 
         }
 
@@ -85,7 +123,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
+      /*  public void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             // Access the first row
             var row = checkpointsView.CheckpointsDataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
@@ -101,9 +139,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
 
 
-        }
+        }*/
 
-        public void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
+       /* public void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
             var item1 = checkBox.DataContext as Checkpoint;
@@ -115,18 +153,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             {
                 item1.Checked = true;
                 CheckpointService.GetInstance().Update(item1);
-                TourStartTime timeTemp = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(_currentDate, tourId);
+                TourStartTime timeTemp = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(_currentDate, tourId);  //updejtuje turu
                 timeTemp.CurrentCheckpoint = item1.Id;
                 TourStartTimeService.GetInstance().Update(timeTemp);
 
-                foreach (var tourist in selectedTourists.ToList())
+                foreach (var tourist in selectedTourists.ToList()) //updejtuje rezervacije
                 {
                     tourists.Remove(tourist);
                     TouristReservation reservationTemp = TourReservationService.GetInstance().GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
                     reservationTemp.CheckpointId = item1.Id;
                     TourReservationService.GetInstance().Update(reservationTemp);
                 }
-                selectedTourists.Clear();
+                selectedTourists.Clear(); //clearuje listu
 
                 if (CheckIfLast(checkBox) == 1)
                 {
@@ -140,10 +178,10 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     checkpointsView.Close();
                 }
             }
-        }
+        }*/
 
 
-        public int CheckIfLast(CheckBox checkbox)
+       /* public int CheckIfLast(CheckBox checkbox)
         {
             Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
 
@@ -152,9 +190,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 return 1;
             }
             return 0;
-        }
+        }*/
 
-        public int GoBackToCheckbox(CheckBox checkbox)
+       /* public int GoBackToCheckbox(CheckBox checkbox)
         {
             Checkpoint checkpoint = checkbox.DataContext as Checkpoint;
             TourStartTime timeTemp = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(_currentDate, tourId);
@@ -163,9 +201,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 return 1;
             }
             return 0;
-        }
+        }*/
 
-        public void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
+       /* public void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
             if (checkBox.IsChecked == true)
@@ -180,7 +218,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 var tourist = checkBox.DataContext as Tourist;
                 selectedTourists.Remove(tourist);
             }
-        }
+        }*/
 
         public void EndTour_Click(object sender, RoutedEventArgs e)
         {
@@ -199,6 +237,54 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             EndButtonClickedMain?.Invoke(this, e);
         }
+
+        internal void CheckpointsDataGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true; // Prevents the DataGrid from processing the mouse click
+        }
+
+        internal void NextCheckpoint_Click()
+        {
+            if(CurrentCheckpointIndex + 1 == checkpoints.Count - 1)
+            {
+                OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
+                OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
+                checkpointsView.Close();
+            }
+
+            foreach (var tourist in selectedTourists.ToList()) //updejtuje rezervacije
+            {
+                tourists.Remove(tourist);
+                TouristReservation reservationTemp = TourReservationService.GetInstance().GetByTimeId(tourTimeId).First(r => r.Id_Tourist == tourist.Id);
+                reservationTemp.CheckpointId = CurrentCheckpoint.Id;
+                TourReservationService.GetInstance().Update(reservationTemp);
+            }
+            selectedTourists.Clear(); //clearuje listu
+
+
+            if (CurrentCheckpointIndex < checkpoints.Count - 1)
+            {
+                CurrentCheckpointIndex++;
+            }
+                 
+            TourStartTime timeTemp = TourStartTimeService.GetInstance().GetByTourStartTimeAndId(_currentDate, tourId);  //updejtuje turu
+            timeTemp.CurrentCheckpoint = CurrentCheckpoint.Id;
+            TourStartTimeService.GetInstance().Update(timeTemp);
+        }
+
+        internal void TouristsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var added in e.AddedItems)
+            {
+                selectedTourists.Add((Tourist)added);
+            }
+
+            foreach (var removed in e.RemovedItems)
+            {
+                selectedTourists.Remove((Tourist)removed);
+            }
+        }
+
 
 
 

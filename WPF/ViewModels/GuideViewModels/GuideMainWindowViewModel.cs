@@ -19,7 +19,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
     public class GuideMainWindowViewModel
     {
-
+        public String username { get; set; }
         public  User _user {  get; set; }
         
         private DailyTourCard dailyTourCard;
@@ -41,6 +41,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             mainWindow = _mainWindow;
             _user = user;
+            username = user.Username;
             tours = new DailyToursControl(_user);
             mainWindow.TourContainer.Children.Add(tours);
             ScheduleTourCommand = new RelayCommand(ScheduleTour_Accelerator);

@@ -24,7 +24,18 @@
             <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick" FontSize="15" FontWeight="Bold"></MenuItem>
 
 
-            <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Click="TourRequest_Click"></MenuItem>
+            <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Click="TourRequest_Click">
+            </MenuItem>
+            <Separator Margin="920,0,0,0"/>
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding username}" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+                        <Border Margin="3,0,0,0"></Border>
+                        <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\GuideIcon.png" Height="20" Width="27" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
        
     <Grid>

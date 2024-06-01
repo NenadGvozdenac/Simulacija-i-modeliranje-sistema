@@ -30,7 +30,10 @@ namespace BookingApp.WPF.Views.TouristViews
             DataContext = touristMainWindowViewModel;
             Update(user);
         }
-
+        public void ShowMainWindow()
+        {
+            touristMainWindowViewModel.ShowMainWindow();
+        }
         public void TourReservation(Tour tour, User user)
         {
             touristMainWindowViewModel.TourReservation(tour, user);
@@ -40,6 +43,10 @@ namespace BookingApp.WPF.Views.TouristViews
             touristMainWindowViewModel.ShowTourDetails(tourId);
         }
 
+        public void ShowRequestsOnComplexTour(int requestId)
+        {
+            touristMainWindowViewModel.ShowRequestsOnComplexTour(requestId);
+        }
         public void ShowReservationReview(User user, Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourStartTime tourStartTime)
         {
             touristMainWindowViewModel.ShowReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);

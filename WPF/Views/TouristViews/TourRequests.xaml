@@ -7,7 +7,7 @@
              xmlns:components="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
              mc:Ignorable="d" 
              d:DesignHeight="585" d:DesignWidth="1000">
-    <Grid Background="LightGray">
+    <Grid Background="GhostWhite">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>

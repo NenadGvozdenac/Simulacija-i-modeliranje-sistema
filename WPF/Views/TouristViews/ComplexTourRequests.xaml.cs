@@ -1,5 +1,6 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,9 +56,24 @@ namespace BookingApp.WPF.Views.TouristViews
             requests.Clear();
             foreach(ComplexTourRequest cr in ComplexTourRequestService.GetInstance().GetAll())
             {
+                cr.Status = "Valid";
+                foreach (TourRequest tr in TourRequestService.GetInstance().GetAll())
+                {
+                    if (cr.Id == tr.ComplexRequestId)
+                    {
+                        if(tr.Status == "Pending")
+                        {
+                            cr.Status = "Pending";
+                        }
+
+                    }
+                }
                 requests.Add(cr);
             }
             MyRequests = new ObservableCollection<ComplexTourRequest>(requests);
+        }
+        public void UpdateStatus()
+        {
         }
         public void Add_Click(object sender, RoutedEventArgs e)
         {

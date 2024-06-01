@@ -44,23 +44,43 @@ namespace BookingApp.WPF.Views.TouristViews.Components
         {
             InitializeComponent();
             requests = new ObservableCollection<TourRequest>();
+            //DataContext = this;
             Update();
         }
         
         public void Update()
         {
+            /*var selected = DataContext as ComplexTourRequest;
             foreach(TourRequest tr in TourRequestService.GetInstance().GetAll())
             {
-                tr.Language = LanguageService.GetInstance().GetById(tr.LanguageId);
-                tr.Location = LocationService.GetInstance().GetById(tr.LocationId);
-                requests.Add(tr);
+                if (tr.ComplexRequestId == selected.Id)
+                {
+                    tr.Language = LanguageService.GetInstance().GetById(tr.LanguageId);
+                    tr.Location = LocationService.GetInstance().GetById(tr.LocationId);
+                    requests.Add(tr);
+                }
             }
-            MyRequests = new ObservableCollection<TourRequest>(requests);
+            MyRequests = new ObservableCollection<TourRequest>(requests);*/
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (this.DataContext is ComplexTourRequest request)
+            {
+                int requestId = request.Id;
+
+                Window parentWindow = Window.GetWindow(this);
+
+                if (parentWindow is TouristMainWindow mainWindow)
+                {
+                    mainWindow.ShowRequestsOnComplexTour(requestId);
+                }
+            }
         }
     }
 }

@@ -12,22 +12,17 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Complex request" FontWeight="DemiBold" FontStyle="Italic" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Complex request" FontWeight="DemiBold" FontStyle="Italic" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="77,0,0,0"/>
+                    <TextBlock Text="{Binding Id}" FontWeight="DemiBold" FontStyle="Italic" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="394,0,0,0" Width="36"/>
                     <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-                        <ItemsControl ItemsSource="{Binding MyRequests}" Margin="3,3,3,3" Width="455">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <components:TourRequestText/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                    <TextBlock Text="Status: " FontSize="35" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="93,12,0,0"/>
+                    <TextBlock Text="{Binding Status}" Foreground="DarkGoldenrod" FontSize="35" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,13,0,0"/>
+                    <TextBlock Text="Click for more info" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="Blue" FontWeight="DemiBold" FontStyle="Italic" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,59,0,0"/>
                 </Grid>
             </Grid>
         </Border>

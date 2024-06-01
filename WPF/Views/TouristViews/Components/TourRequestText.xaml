@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="50">
+             d:DesignHeight="50" d:DesignWidth="180">
     <Grid>
-        <TextBlock Text="Tour Request" FontWeight="DemiBold" FontSize="5" Foreground="Blue" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
-        <TextBlock Text="{Binding Id}" FontWeight="DemiBold" FontSize="5" Foreground="Blue" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,8,0,0"/>
+        <TextBlock Text="Tour Request" FontWeight="DemiBold" FontSize="20" Foreground="Blue" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+        <TextBlock Text="{Binding Id}" FontWeight="DemiBold" FontSize="20" Foreground="Blue" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="140,0,0,0"/>
     </Grid>
 </UserControl>

@@ -124,7 +124,9 @@ namespace BookingApp.Application.UseCases
                     numberOfReviews++;
                 }
             }
-            avgGrade = GradeSum / numberOfReviews;
+            if(GradeSum != 0 && numberOfReviews != 0)
+                 avgGrade = GradeSum / numberOfReviews;
+           
             return avgGrade;
         }
 

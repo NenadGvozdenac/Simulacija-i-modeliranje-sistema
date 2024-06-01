@@ -27,7 +27,7 @@
             <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Click="TourRequest_Click">
             </MenuItem>
             <Separator Margin="920,0,0,0"/>
-            <MenuItem>
+            <MenuItem Click="info_click">
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding username}" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>

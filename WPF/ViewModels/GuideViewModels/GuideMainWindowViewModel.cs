@@ -26,6 +26,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public EventHandler<BeginButtonClickedEventArgs> BeginButtonClickedMain { get; set; }
 
+        
+
         public GuideMainWindow mainWindow { get; set; }
 
         public DailyToursControl tours {  get; set; }
@@ -485,6 +487,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourRequestsWindow.Show();
 
    
+        }
+
+        internal void infoClick()
+        {
+           InfoWindow infoWindow = new InfoWindow(_user);
+           infoWindow.Show();
+           infoWindow.infoWindowViewModel.quitEvent += (s, e) => Quit_EventHandler(s, e);
+        }
+
+        private void Quit_EventHandler(object s, EventArgs e)
+        {
+            mainWindow.Close();
         }
     }
 }

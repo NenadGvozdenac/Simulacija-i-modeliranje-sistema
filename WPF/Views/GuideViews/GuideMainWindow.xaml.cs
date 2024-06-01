@@ -179,5 +179,10 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.TourRequest_Click();
         }
+
+        private void info_click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.infoClick();
+        }
     }
 }

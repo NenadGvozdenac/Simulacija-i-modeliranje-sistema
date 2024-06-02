@@ -67,32 +67,34 @@ public class ForumService
         return GetForumsForAccommodations(accommodations);
     }
 
-    public bool IsLocationTaken(int locationId)
+    public int IsLocationTakenAndOpened(int locationId)
     {
 
-        List<Forum> forum = GetAll().Where(forum => forum.LocationId == locationId).ToList();
+        Forum forum = GetAll().FirstOrDefault(forum => forum.LocationId == locationId);
 
         if (forum == null)
         {
-            return false;
+            return 1;
         }
 
-        foreach (Forum f in forum)
+        if(forum != null && forum.ForumStatus == Resources.Types.ForumStatus.Open)
         {
-            if (f.ForumStatus == Resources.Types.ForumStatus.Open)
-            {
-                return true;
-            }
-
+            return 2;
         }
 
-        return false;     
+        return 3;     
     }
 
     public Forum GetByLocationId(int locationId)
     {
         List<Forum> forums = _forumRepository.GetByLocationId(locationId);
         return forums.Where(forums => forums.ForumStatus == Resources.Types.ForumStatus.Open).FirstOrDefault();
+    }
+
+    public Forum GetOneByLocationId(int locationId)
+    {
+        List<Forum> forums = _forumRepository.GetByLocationId(locationId);
+        return forums.FirstOrDefault(forums => forums.LocationId == locationId);
     }
 
     public bool IsVisitedByUser(Forum forum, int userId)
@@ -144,5 +146,11 @@ public class ForumService
         }
 
         return false;
+    }
+
+    //update
+    public void Update(Forum forum)
+    {
+        _forumRepository.Update(forum);
     }
 }

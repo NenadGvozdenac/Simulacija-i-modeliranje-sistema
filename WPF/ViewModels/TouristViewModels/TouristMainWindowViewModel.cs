@@ -11,6 +11,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using BookingApp.Application.UseCases;
+using System.Security.RightsManagement;
+using System.Windows.Media;
+using LiveCharts.Dtos;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -31,8 +34,28 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame = _touristWindowFrame;
             ToursUserControl = new Tours(user);
             TouristWindowFrame.Content = ToursUserControl;
+            touristMainWindow.HomeRectangle.Fill = Brushes.LightGray;
         }
 
+        private void ResetButtonStyles()
+        {
+            touristMainWindow.MyToursButton.Style = (Style)touristMainWindow.FindResource("DefaultButtonStyle");
+            touristMainWindow.MyVouchersButton.Style = (Style)touristMainWindow.FindResource("DefaultButtonStyle");
+            touristMainWindow.MyActiveToursButton.Style = (Style)touristMainWindow.FindResource("DefaultButtonStyle");
+            touristMainWindow.RequestsButton.Style = (Style)touristMainWindow.FindResource("DefaultButtonStyle");
+            touristMainWindow.ComplexRequestsButton.Style = (Style)touristMainWindow.FindResource("DefaultButtonStyle");
+
+            touristMainWindow.HomeRectangle.Fill = Brushes.Transparent;
+
+        }
+        public void CheckVouchers()
+        {
+            
+        }
+        public void ShowMainWindow()
+        {
+            TouristWindowFrame.Content = ToursUserControl;
+        }
         public void ShowReservationReview(User user, Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourStartTime tourStartTime)
         {
             TouristWindowFrame.Content = new ReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);
@@ -48,6 +71,10 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             TouristWindowFrame.Content = new TouristDetails(detailedTour, _user);
         }
 
+        public void ShowRequestsOnComplexTour(int requestId)
+        {
+            TouristWindowFrame.Content = new RequestsOnComplexTourRequest(_user, requestId);
+        }
         public void ShowTourRequestStatistics()
         {
             TouristWindowFrame.Content = new TourRequestStatistics();
@@ -73,6 +100,8 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void MyTours_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonStyles();
+            touristMainWindow.MyToursButton.Style = (Style)touristMainWindow.FindResource("ActiveButtonStyle");
             TouristWindowFrame.Content = new VisitedTours(_user);
         }
 
@@ -87,15 +116,21 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void Home_Click(object sender, MouseButtonEventArgs e)
         {
+            ResetButtonStyles();
+            touristMainWindow.HomeRectangle.Fill = Brushes.LightGray;
             TouristWindowFrame.Content = ToursUserControl;
         }
 
         public void MyVouchers_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonStyles();
+            touristMainWindow.MyVouchersButton.Style = (Style)touristMainWindow.FindResource("ActiveButtonStyle");
             TouristWindowFrame.Content = new TouristVouchers(_user.Id);
         }
         public void MyActiveTours_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonStyles();
+            touristMainWindow.MyActiveToursButton.Style = (Style)touristMainWindow.FindResource("ActiveButtonStyle");
             TouristWindowFrame.Content = new TouristOngoingTours(_user);
         }
 
@@ -106,11 +141,15 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         public void Requests_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonStyles();
+            touristMainWindow.RequestsButton.Style = (Style)touristMainWindow.FindResource("ActiveButtonStyle");
             TouristWindowFrame.Content = new TourRequests(_user);
         }
 
         public void ComplexRequests_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonStyles();
+            touristMainWindow.ComplexRequestsButton.Style = (Style)touristMainWindow.FindResource("ActiveButtonStyle");
             TouristWindowFrame.Content = new ComplexTourRequests(_user);
         }
         public void AddRequest(User user)

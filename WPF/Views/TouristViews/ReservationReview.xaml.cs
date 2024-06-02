@@ -1,5 +1,6 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,6 +78,12 @@ namespace BookingApp.WPF.Views.TouristViews
                 UpdateTourStartTime(selectedTourStartTime);
             }
             MessageBox.Show("Tour succesfully reserved!");
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow is TouristMainWindow mainWindow)
+            {
+                mainWindow.ShowMainWindow();
+            }
         }
 
         public void UpdateTourStartTime(TourStartTime tourStartTime)

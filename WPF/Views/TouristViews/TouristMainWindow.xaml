@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="TouristMainWindow" WindowStartupLocation="CenterScreen" Height="700" Width="1000">
+    <Window.Resources>
+        <Style x:Key="DefaultButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        <Style x:Key="ActiveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightCyan"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,12 +22,15 @@
             <RowDefinition Height="590"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="CadetBlue">
-            <Image MouseLeftButtonDown="Home_Click" Source="/Resources/Assets/home.256x245.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,0,0,0" Height="66" Width="63"/>
-            <Button Content="My tours" Click="MyTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="98" Margin="812,20,0,0"/>
-            <Button Content="My vouchers" Click="MyVouchers_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="124" Margin="683,20,0,0"/>
-            <Button Content="My active tours" Click="MyActiveTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="148" Margin="530,20,0,0"/>
-            <Button Content="Requests" Click="Requests_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="109" Margin="414,20,0,0"/>
-            <Button Content="Complex requests" Click="ComplexRequests_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="168" Margin="241,20,0,0"/>
+            <Grid>
+                <Rectangle x:Name="HomeRectangle" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Height="66" Width="63" Margin="27,0,0,0"/>
+                <Image MouseLeftButtonDown="Home_Click" Source="/Resources/Assets/home.256x245.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,0,0,0" Height="66" Width="63"/>
+            </Grid>
+            <Button x:Name="MyToursButton" Style="{StaticResource DefaultButtonStyle}" Content="My tours" Click="MyTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="98" Margin="812,20,0,0"/>
+            <Button x:Name="MyVouchersButton" Style="{StaticResource DefaultButtonStyle}" Content="My vouchers" Click="MyVouchers_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="124" Margin="683,20,0,0"/>
+            <Button x:Name="MyActiveToursButton" Style="{StaticResource DefaultButtonStyle}" Content="My active tours" Click="MyActiveTours_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="148" Margin="530,20,0,0"/>
+            <Button x:Name="RequestsButton" Style="{StaticResource DefaultButtonStyle}" Content="Requests" Click="Requests_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="109" Margin="414,20,0,0"/>
+            <Button x:Name="ComplexRequestsButton" Style="{StaticResource DefaultButtonStyle}" Content="Complex requests" Click="ComplexRequests_Click" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="168" Margin="241,20,0,0"/>
             <Image MouseLeftButtonDown="Notifications_Click" Source="/Resources/Assets/bell.224x256.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="43" Width="42" Margin="936,0,0,0"/>
             <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
         </Grid>

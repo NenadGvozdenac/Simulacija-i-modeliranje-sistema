@@ -19,4 +19,6 @@ public class ForumRepository : BaseRepository<Forum>, IForumRepository
     {
         return GetAll().Where(forum => forum.LocationId == id).ToList();
     }
+
+    
 }

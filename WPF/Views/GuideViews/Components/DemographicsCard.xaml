@@ -11,6 +11,9 @@
             <DropShadowEffect ShadowDepth="5" Color="Gray" Opacity="0.5"/>
         </Border.Effect>
         <Grid Background="#f2f6fa" Margin="10,20,10,20">
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="0" Color="Transparent" Opacity="0"/>
+            </Grid.Effect>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -67,6 +70,26 @@
                 </StackPanel>
 
             </Grid>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.ShadowDepth" To="5" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Effect.Color" To="Black" Duration="0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0.5" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.ShadowDepth" To="0" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Effect.Color" To="Transparent" Duration="0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
         </Grid>
     </Border>
 </UserControl>

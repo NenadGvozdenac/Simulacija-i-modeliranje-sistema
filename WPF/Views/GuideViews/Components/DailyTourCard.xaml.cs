@@ -1,6 +1,7 @@
 ﻿using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,6 +59,7 @@ namespace BookingApp.View.PathfinderViews.Componentss
             InitializeComponent();
             Update();
             _timeRepository = new TourStartTimeRepository();
+            
         }
 
 

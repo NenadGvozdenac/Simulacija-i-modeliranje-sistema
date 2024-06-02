@@ -17,6 +17,7 @@ using BookingApp.Application.Commands;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
 using BookingApp.WPF.Views.TouristViews;
+using System.Text.RegularExpressions;
 
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
@@ -552,12 +553,17 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public bool IsDataValid()
         {
+
+            validationMessages();
+
             return !string.IsNullOrEmpty(addTourWindow.NameTextBox.Text)
                 && !string.IsNullOrEmpty(Country)
                 && !string.IsNullOrEmpty(City)
                 && !string.IsNullOrEmpty(addTourWindow.LanguageTextBox.SelectedItem.ToString())
                 && Checkpoints.Count() >= 2;
         }
+
+   
 
         public void RightArrow_Click()
         {
@@ -603,6 +609,115 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         internal void LanguageRecomendation_Click()
         {
             Language = LanguageRec.Name;
+        }
+
+        public void validationMessages()
+        {
+            if (string.IsNullOrEmpty(addTourWindow.NameTextBox.Text))
+            {
+                addTourWindow.nameErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.nameErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.CountryTextBox.SelectedIndex == -1)
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.CityTextBox.SelectedIndex == -1)
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.LanguageTextBox.SelectedIndex == -1)
+            {
+                addTourWindow.languageErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.languageErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (string.IsNullOrEmpty(addTourWindow.CapacityTextBox.Text) || Convert.ToInt32(addTourWindow.CapacityTextBox.Text) == 0)
+            {
+                addTourWindow.capacityErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.capacityErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (string.IsNullOrEmpty(addTourWindow.DurationTextBox.Text) || Convert.ToInt32(addTourWindow.DurationTextBox.Text) == 0)
+            {
+                addTourWindow.durationErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.durationErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.datesGrid.Items.Count == 0)
+            {
+                addTourWindow.dateErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.dateErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.checkpointGrid.Items.Count < 2)
+            {
+                addTourWindow.checkpointErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.checkpointErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            // Only allow numeric input
+            Regex regex = new Regex("^[0-9]+$");
+            return regex.IsMatch(text);
+        }
+
+        internal void DurationTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        internal void DurationTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        internal void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        internal void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -150,5 +150,25 @@ namespace BookingApp.View.PathfinderViews
         {
             addTourWindowViewModel.LanguageRecomendation_Click();
         }
+
+        private void DurationTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            addTourWindowViewModel.DurationTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void DurationTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            addTourWindowViewModel.DurationTextBox_PreviewKeyDown(sender, e);
+        }
+
+        private void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            addTourWindowViewModel.CapacityTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            addTourWindowViewModel.CapacityTextBox_PreviewKeyDown(sender,e);
+        }
     }
 }

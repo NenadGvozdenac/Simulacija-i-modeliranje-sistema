@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         xmlns:Components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components" x:Class="BookingApp.View.PathfinderViews.AddTourWindow"
         mc:Ignorable="d"
-        Title="AddTourWindow" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Background=" #003580">
+        Title="AddTourWindow" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Background="#f2f6fa">
     <Grid Margin="0,0,0,-16">
         <ComboBox HorizontalAlignment="Left" Margin="162,146,0,0" VerticalAlignment="Top" Width="493" Height="50" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged">
 
 
         </ComboBox>
-        <Label Content="Country:" HorizontalAlignment="Left" Margin="15,146,0,0" VerticalAlignment="Top" FontSize="30" Foreground="White"></Label>
+        <Label Content="Country:" HorizontalAlignment="Left" Margin="15,146,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
 
-        <Label Content="City:" HorizontalAlignment="Left" Margin="16,255,0,0" VerticalAlignment="Top" FontSize="30" Foreground="White" RenderTransformOrigin="0.477,-1.222"></Label>
+        <Label Content="City:" HorizontalAlignment="Left" Margin="16,255,0,0" VerticalAlignment="Top" FontSize="30" Foreground="black" RenderTransformOrigin="0.477,-1.222"></Label>
         <ComboBox HorizontalAlignment="Left" Margin="163,255,0,0" VerticalAlignment="Top" Width="492" Height="50" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
             <ComboBox.RenderTransform>
                 <TransformGroup>
@@ -26,9 +26,9 @@
             </ComboBox.RenderTransform>
         </ComboBox>
 
-        <Label Content="Language:" HorizontalAlignment="Left" Margin="16,360,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white" Width="162"></Label>
+        <Label Content="Language:" HorizontalAlignment="Left" Margin="16,360,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black" Width="162"></Label>
         <ComboBox HorizontalAlignment="Left" Margin="160,363,0,0" VerticalAlignment="Top" Width="493" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="50"></ComboBox>
-        <Label Content="Dates:" HorizontalAlignment="Left" Margin="864,10,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white"></Label>
+        <Label Content="Dates:" HorizontalAlignment="Left" Margin="864,10,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
 
         <StackPanel Margin="864,65,172,657" RenderTransformOrigin="0.5,0.5">
             <StackPanel.RenderTransform>
@@ -39,7 +39,7 @@
                     <TranslateTransform X="0"/>
                 </TransformGroup>
             </StackPanel.RenderTransform>
-            <DatePicker x:Name="datePicker" Height="42" FontSize="25" Width="468"/>
+            <DatePicker x:Name="datePicker" Height="42" FontSize="25" Width="453"/>
             <StackPanel Orientation="Horizontal" Height="38">
                 <ComboBox x:Name="hoursComboBox" SelectedIndex="0"  Text="{Binding Hours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="104">
                     <ComboBoxItem Content="9"/>
@@ -61,25 +61,25 @@
             <!-- Add AM/PM selector if needed -->
         </StackPanel>
 
-        <DataGrid Grid.Column="0" SelectionMode="Single" IsReadOnly="True" Margin="864,168,62,547" ItemsSource="{Binding TourDates , UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="0" SelectionMode="Single" IsReadOnly="True" Margin="864,168,62,547" ItemsSource="{Binding TourDates , UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" x:Name="datesGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Tour dates" Binding="{Binding Time}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Capacity:" HorizontalAlignment="Left" Margin="16,470,0,0" VerticalAlignment="Top" FontSize="30" Foreground="White"></Label>
-        <TextBox HorizontalAlignment="Left" Margin="162,470,0,0" TextWrapping="Wrap" Text="{Binding Capacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Capacity:" HorizontalAlignment="Left" Margin="16,470,0,0" VerticalAlignment="Top" FontSize="30" Foreground="black"></Label>
+        <TextBox HorizontalAlignment="Left" Margin="162,470,0,0" TextWrapping="Wrap" Text="{Binding Capacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="CapacityTextBox" PreviewTextInput="CapacityTextBox_PreviewTextInput" PreviewKeyDown="CapacityTextBox_PreviewKeyDown"/>
 
-        <Label Content="Duration:" HorizontalAlignment="Left" Margin="349,470,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white"></Label>
-        <TextBox  HorizontalAlignment="Left" Margin="493,470,0,0" TextWrapping="Wrap" Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="162" Height="50" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Duration:" HorizontalAlignment="Left" Margin="349,470,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
+        <TextBox  HorizontalAlignment="Left" Margin="493,470,0,0" TextWrapping="Wrap" Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="162" Height="50" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="DurationTextBox" PreviewTextInput="DurationTextBox_PreviewTextInput" PreviewKeyDown="DurationTextBox_PreviewKeyDown"/>
 
-        <Label Foreground="white" Content="Name :&#xD;&#xA;" HorizontalAlignment="Left" Margin="21,51,0,0" VerticalAlignment="Top" FontSize="30" Height="47"></Label>
+        <Label Foreground="black" Content="Name :&#xD;&#xA;" HorizontalAlignment="Left" Margin="21,51,0,0" VerticalAlignment="Top" FontSize="30" Height="47"></Label>
         <TextBox HorizontalAlignment="Left" Margin="160,51,0,0" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="495"  x:Name="NameTextBox" Height="50"></TextBox>
 
-        <Label Content="Checkpoint : " HorizontalAlignment="Left" Margin="864,292,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white"></Label>
+        <Label Content="Checkpoint : " HorizontalAlignment="Left" Margin="864,292,0,0" VerticalAlignment="Top" FontSize="30" Foreground="black"></Label>
         <TextBox HorizontalAlignment="Left" Margin="864,347,0,0" TextWrapping="Wrap" Text="{Binding Path=Checkpoint, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="454" Height="36" x:Name="CheckpointTextBox"></TextBox>
 
-        <DataGrid Grid.Column="0" SelectionMode="Single" IsReadOnly="True" Margin="864,417,58,310" ItemsSource="{Binding Checkpoints, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="0" SelectionMode="Single" IsReadOnly="True" Margin="864,417,58,310" ItemsSource="{Binding Checkpoints, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" x:Name="checkpointGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Checkpoints" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
@@ -87,9 +87,9 @@
 
         <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="54" Height="40" HorizontalAlignment="Left" Margin="1351,339,0,0"  Click="AddCheckpointClick"></Button>
 
-        <Label Content="Images:" HorizontalAlignment="Left" Margin="1027,522,0,0" VerticalAlignment="Top" FontSize="30" Foreground="White"></Label>
+        <Label Content="Images:" HorizontalAlignment="Left" Margin="1027,522,0,0" VerticalAlignment="Top" FontSize="30" Foreground="black"></Label>
         <Image Source="..\..\..\Resources\Assets\chevron-left.293x512.png" Style="{StaticResource ImageHover}" Margin="859,629,601,138" PreviewMouseDown="LeftArrow_PreviewMouseDown"/>
-        <Border BorderBrush="white" BorderThickness="2" Margin="918,584,95,93">
+        <Border BorderBrush="black" BorderThickness="2" Margin="918,584,95,93">
             <Image Source="{Binding ImageURL}" Stretch="Fill"/>
         </Border>
         <Image Source="..\..\..\Resources\Assets\chevron-right.295x512.png" Style="{StaticResource ImageHover}" Margin="1379,630,4,139" PreviewMouseDown="RightArrow_PreviewMouseDown" RenderTransformOrigin="0.637,-0.109"/>
@@ -97,16 +97,28 @@
 
 
         <Label Content="" HorizontalAlignment="Left" Margin="16,321,0,0" VerticalAlignment="Top"></Label>
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="16,541,0,0" VerticalAlignment="Top" FontSize="30" Foreground="white"></Label>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="16,541,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
         <TextBox HorizontalAlignment="Left" Margin="24,608,0,0" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="631" Height="97"></TextBox>
         <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="55" Height="36"  HorizontalAlignment="Left" Margin="1351,65,0,0"  Click="AddDateClick"/>
-        <Button Content="Confirm" HorizontalAlignment="Left" Margin="699,730,0,0" VerticalAlignment="Top" Click="ConfirmButtonClick" Width="142" Height="47"/>
+        <Button Content="Confirm" HorizontalAlignment="Left" Margin="699,730,0,0" VerticalAlignment="Top" Click="ConfirmButtonClick" Width="142" Height="47" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="2">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+            </Button.Effect>
+        </Button>
         <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="54" Height="34" HorizontalAlignment="Left" Margin="1162,536,0,0" Command="{Binding AddImageCommand}"/>
         <Button Content="-" Style="{StaticResource RoundedButtonStyle}" Width="56" Height="36" HorizontalAlignment="Left" Margin="1238,536,0,0" Click="RemoveImage_Click" x:Name="RemoveImageButton"/>
-        <Label Content="Most requested location: " HorizontalAlignment="Left" Margin="162,201,0,0" VerticalAlignment="Top" Width="197" Foreground="White" FontSize="17"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,206,0,0" TextWrapping="Wrap" Text="{Binding Location.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" MouseLeftButtonDown="LocationRecomendation_Click" Cursor="Hand" FontSize="17" Width="235" Height="33"/>
-        <Label Content="Most requested language: " HorizontalAlignment="Left" Margin="160,415,0,0" VerticalAlignment="Top" Width="214" Foreground="White" FontSize="17"/>
-        <TextBlock HorizontalAlignment="Left" Margin="379,421,0,0" TextWrapping="Wrap" Text="{Binding LanguageRec.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" MouseLeftButtonDown="LanguageRecomendation_Click" Cursor="Hand" FontSize="17" Width="241" Height="27"/>
+        <Label Content="Most requested location: " HorizontalAlignment="Left" Margin="162,201,0,0" VerticalAlignment="Top" Width="197" Foreground="Black" FontSize="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="364,206,0,0" TextWrapping="Wrap" Text="{Binding Location.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold" MouseLeftButtonDown="LocationRecomendation_Click" Cursor="Hand" FontSize="17" Width="235" Height="33"/>
+        <Label Content="Most requested language: " HorizontalAlignment="Left" Margin="160,415,0,0" VerticalAlignment="Top" Width="214" Foreground="Black" FontSize="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="379,421,0,0" TextWrapping="Wrap" Text="{Binding LanguageRec.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold" MouseLeftButtonDown="LanguageRecomendation_Click" Cursor="Hand" FontSize="17" Width="241" Height="27"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="162,106,0,0" TextWrapping="Wrap" Text="Insert tour name" VerticalAlignment="Top" Width="491" x:Name="nameErrorBox" Foreground="Red" Visibility="Collapsed"/>
+        <TextBlock HorizontalAlignment="Left" Margin="162,316,0,0" TextWrapping="Wrap" Text="Chose location" VerticalAlignment="Top" Width="481" Foreground="Red" x:Name="locationErrorBox" Visibility="Collapsed"/>
+        <TextBlock HorizontalAlignment="Left" Margin="166,448,0,0" TextWrapping="Wrap" Text="Chose language" VerticalAlignment="Top" Width="481" Foreground="Red" x:Name="languageErrorBox" Visibility="Collapsed"/>
+        <TextBlock HorizontalAlignment="Left" Margin="162,528,0,0" TextWrapping="Wrap" Text="Insert capacity" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="capacityErrorBox" Visibility="Collapsed"/>
+        <TextBlock HorizontalAlignment="Left" Margin="495,528,0,0" TextWrapping="Wrap" Text="Insert duration" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="durationErrorBox" Visibility="Collapsed"/>
+        <TextBlock HorizontalAlignment="Left" Margin="864,520,0,0" TextWrapping="Wrap" Text="Insert 2 checkpoints" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="checkpointErrorBox" Visibility="Collapsed"/>
+        <TextBlock HorizontalAlignment="Left" Margin="864,276,0,0" TextWrapping="Wrap" Text="Pick date" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="dateErrorBox" Visibility="Collapsed"/>
 
 
 

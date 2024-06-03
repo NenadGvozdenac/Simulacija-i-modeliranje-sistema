@@ -60,31 +60,31 @@ namespace BookingApp.View.PathfinderViews
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        /*private void CheckpointsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             checkpointsViewModel.CheckpointsDataGrid_Loaded(sender, e);
-        }
+        }*/
 
-        private void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
+       /* private void CheckpointCheckboxBox_Checked(object sender, RoutedEventArgs e)
         {
             checkpointsViewModel.CheckpointCheckboxBox_Checked(sender, e);
-        }
+        }*/
 
         
-        private int CheckIfLast(CheckBox checkbox)
+       /* private int CheckIfLast(CheckBox checkbox)
         {
            return checkpointsViewModel.CheckIfLast(checkbox);
-        }
+        }*/
 
-        private int GoBackToCheckbox(CheckBox checkbox)
+       /* private int GoBackToCheckbox(CheckBox checkbox)
         {
             return checkpointsViewModel.GoBackToCheckbox(checkbox);
-        }
+        }*/
 
-        private void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
+       /* private void TouristCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             checkpointsViewModel.TouristCheckBox_Checked(sender, e);
-        }
+        }*/
 
         public void EndTour_Click(object sender, RoutedEventArgs e)
         {
@@ -102,6 +102,20 @@ namespace BookingApp.View.PathfinderViews
             checkpointsViewModel.OnEndButtonClickedMain(e);
         }
 
+        private void CheckpointsDataGrid_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            checkpointsViewModel.CheckpointsDataGrid_PreviewMouseDown(sender,e);
+        }
+
+        private void NextCheckpoint_Click(object sender, RoutedEventArgs e)
+        {
+            checkpointsViewModel.NextCheckpoint_Click();
+        }
+
+        private void TouristsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            checkpointsViewModel.TouristsDataGrid_SelectionChanged(sender, e);
+        }
 
 
     }

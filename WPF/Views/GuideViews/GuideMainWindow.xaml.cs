@@ -179,5 +179,30 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.TourRequest_Click();
         }
+
+        private void info_click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.infoClick();
+        }
+
+        private void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            mainWindowViewModel.CapacityTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void DurationTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            mainWindowViewModel.DurationTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void DurationTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            mainWindowViewModel.DurationTextBox_PreviewKeyDown(sender, e);
+        }
+
+        private void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            mainWindowViewModel.CapacityTextBox_PreviewKeyDown(sender, e);
+        }
     }
 }

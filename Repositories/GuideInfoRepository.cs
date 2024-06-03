@@ -10,7 +10,7 @@ namespace BookingApp.Repositories
 {
     public class GuideInfoRepository : BaseRepository<GuideInfo>, IGuideInfoRepository
     {
-        public GuideInfoRepository() : base("../../../Resources/Data/guide_infos.csv", "Id") { }
+        public GuideInfoRepository() : base("../../../Resources/Data/guide_infos.csv") { }
 
         public GuideInfo GetByGuideId(int guideId)
         {

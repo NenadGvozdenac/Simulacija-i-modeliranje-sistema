@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -127,5 +129,26 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tourRequestsWindow.Picker1.SelectedDate = null;
             tourRequestsWindow.Picker2.SelectedDate = null;
         }
+
+        internal void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        internal void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            // Only allow numeric input
+            Regex regex = new Regex("^[0-9]+$");
+            return regex.IsMatch(text);
+        }
+
     }
 }

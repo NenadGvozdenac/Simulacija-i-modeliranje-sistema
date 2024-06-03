@@ -14,6 +14,7 @@ namespace BookingApp.Domain.Models
         public int GuideId { get; set; }
         public bool IsSuperGuide { get; set; }
         public int NumberOfToursThisYear { get; set; }
+        public float AvrageGrade { get; set; }
         public DateOnly DateOfBecomingSuperGuide { get; set; }
         public string Language { get; set; }
 
@@ -21,12 +22,13 @@ namespace BookingApp.Domain.Models
         {
         }
 
-        public GuideInfo(int id, int guideId, bool isSuperGuide, int numberOfToursThisYear, DateOnly dateOfBecomingSuperGuide, string language)
+        public GuideInfo(int id, int guideId, bool isSuperGuide, int numberOfToursThisYear,int avg ,DateOnly dateOfBecomingSuperGuide, string language)
         {
             Id = id;
             GuideId = guideId;
             IsSuperGuide = isSuperGuide;
             NumberOfToursThisYear = numberOfToursThisYear;
+            AvrageGrade = avg;
             DateOfBecomingSuperGuide = dateOfBecomingSuperGuide;
             Language = language;
         }
@@ -37,13 +39,14 @@ namespace BookingApp.Domain.Models
             GuideId = Convert.ToInt32(values[1]);
             IsSuperGuide = Convert.ToBoolean(values[2]);
             NumberOfToursThisYear = Convert.ToInt32(values[3]);
-            DateOfBecomingSuperGuide = DateOnly.Parse(values[4]);
-            Language = values[5];
+            AvrageGrade = float.Parse(values[4]);
+            DateOfBecomingSuperGuide = DateOnly.Parse(values[5]);
+            Language = values[6];
         }
 
         public string[] ToCSV()
         {
-            return new string[] { Id.ToString(), GuideId.ToString(), IsSuperGuide.ToString(), NumberOfToursThisYear.ToString(), DateOfBecomingSuperGuide.ToString(), Language};
+            return new string[] { Id.ToString(), GuideId.ToString(), IsSuperGuide.ToString(), NumberOfToursThisYear.ToString(), AvrageGrade.ToString(), DateOfBecomingSuperGuide.ToString(), Language};
         }
 
 

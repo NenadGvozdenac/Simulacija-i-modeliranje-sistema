@@ -5,19 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
         mc:Ignorable="d"
-        Title="CheckpointsView" Height="251" Width="560">
-    <Window.Resources>
-        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
-            <EventSetter Event="Checked" Handler="CheckpointCheckboxBox_Checked"/>
-        </Style>
-        <Style x:Key="TouristCheckBoxStyle" TargetType="{x:Type CheckBox}">
-            <EventSetter Event="Checked" Handler="TouristCheckBox_Checked"/>
-        </Style>
-    </Window.Resources>
-    <Grid Height="314" VerticalAlignment="Top">
+        Title="CheckpointsView" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.4*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="0.4*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -25,28 +19,39 @@
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}" Height="49" Width="306" TextAlignment="Center"/>
-            <Button Content="end tour" Width="59" Height="39" Click="EndTour_Click"></Button>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
+            <TextBlock  TextWrapping="Wrap" Text="{Binding tourName}"  TextAlignment="Center" FontSize="25" FontWeight="Bold"/>
+            <TextBlock Text="Select who appeared on selected checkpoint, click on next checkpoint when you have selected all the tourists that appeared on current one " FontSize="20" Margin="100,0,0,0"></TextBlock>
         </StackPanel>
-        <StackPanel  Grid.Column="1" Grid.Row="1">
-            <DataGrid Width="259" Height="143" ItemsSource="{Binding tourists}"  AutoGenerateColumns="False" CanUserAddRows="False" x:Name="TouristsDataGrid" SelectionMode="Extended">
+        <StackPanel  Grid.Row="2" Grid.ColumnSpan="2">
+            <Border Margin="0,20,0,0"></Border>
+            <DataGrid Width="1300" Height="270" ItemsSource="{Binding tourists}"  AutoGenerateColumns="False" CanUserAddRows="False" x:Name="TouristsDataGrid" SelectionMode="Extended" SelectionChanged="TouristsDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding TouristCheckBox_Checked}" Width="*" ElementStyle="{StaticResource TouristCheckBoxStyle}" EditingElementStyle="{StaticResource TouristCheckBoxStyle}"></DataGridCheckBoxColumn>
+                    <!--<DataGridCheckBoxColumn Header="Status" Binding="{Binding TouristCheckBox_Checked}" Width="*" ElementStyle="{StaticResource TouristCheckBoxStyle}" EditingElementStyle="{StaticResource TouristCheckBoxStyle}"></DataGridCheckBoxColumn>-->
                 </DataGrid.Columns>
         </DataGrid>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="1">
-            <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="256" Height="143" CanUserAddRows="False" x:Name="CheckpointsDataGrid">
+        <StackPanel  Grid.Row="1" Grid.ColumnSpan="2">
+            <Border Margin="0,20,0,0"></Border>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Current checkpoint : " Margin="100,0,0,0" FontSize="20" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="{Binding CurrentCheckpoint.Name, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold"></TextBlock>
+            </StackPanel>
+            <DataGrid ItemsSource="{Binding checkpoints}" AutoGenerateColumns="False" Width="1300" Height="270" CanUserAddRows="False" x:Name="CheckpointsDataGrid" IsReadOnly="True" SelectedIndex="{Binding CurrentCheckpointIndex}" PreviewMouseDown="CheckpointsDataGrid_PreviewMouseDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Checkpoint" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}" x:Name="CheckBoxInstance">
-                        
-                    </DataGridCheckBoxColumn>
+                   <!-- <DataGridCheckBoxColumn Header="Status" Binding="{Binding Checked}" ElementStyle="{StaticResource CheckBoxStyle}" EditingElementStyle="{StaticResource CheckBoxStyle}" x:Name="CheckBoxInstance">
+                    </DataGridCheckBoxColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Border Margin="500,0,0,0"></Border>
+            <Button Content="Next checkpoint" Width="150" Height="39" Click="NextCheckpoint_Click"></Button>
+            <Border Margin="200,0,0,0"></Border>
+            <Button Content="end tour" Width="150" Height="39" Click="EndTour_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

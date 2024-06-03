@@ -24,7 +24,18 @@
             <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick" FontSize="15" FontWeight="Bold"></MenuItem>
 
 
-            <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Click="TourRequest_Click"></MenuItem>
+            <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Click="TourRequest_Click">
+            </MenuItem>
+            <Separator Margin="920,0,0,0"/>
+            <MenuItem Click="info_click">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding username}" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+                        <Border Margin="3,0,0,0"></Border>
+                        <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\GuideIcon.png" Height="20" Width="27" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
        
     <Grid>
@@ -65,33 +76,68 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Width="210" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextDecorations="Underline" FontWeight="Bold" FontSize="25">Search by criteria</TextBlock>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
-                        <Border Margin="10,0,0,0"></Border>
-                        <StackPanel>
+                    <TextBlock Width="210" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextDecorations="Underline" FontWeight="Bold" FontSize="25" Margin="0,15,0,0">Search by criteria</TextBlock>
+                    <Border Margin="10" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#D0E0F0" CornerRadius="10">
+                        <StackPanel Grid.RowSpan="4" Grid.ColumnSpan="3" Margin="10" Grid.Row="1"  Background="#D0E0F0" Opacity="0.7"></StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3"  HorizontalAlignment="Center">
+                        <StackPanel Margin="10">
                             <TextBlock HorizontalAlignment="Center" FontSize="20">Country:</TextBlock>
-                            <ComboBox Height="50" Width="150" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged" FontSize="15"></ComboBox>
+                            <ComboBox Height="37" Width="123" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged" FontSize="15" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                                <ComboBox.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                                </ComboBox.Effect>
+                            </ComboBox>
                         </StackPanel>
-                        <Border Margin="10,0,30,0"></Border>
-                        <StackPanel>
+                        <StackPanel Margin="10">
                             <TextBlock HorizontalAlignment="Center" FontSize="20">City:</TextBlock>
-                            <ComboBox Height="50" Width="150" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" SelectionChanged="CityBox_SelectionChanged"></ComboBox>
+                            <ComboBox Height="37" Width="123" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" SelectionChanged="CityBox_SelectionChanged" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15">
+                                <ComboBox.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                                </ComboBox.Effect>
+                            </ComboBox>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
-                        <Border Margin="0,0,10,0"></Border>
-                        <TextBlock VerticalAlignment="Center" FontSize="20">capacity:</TextBlock>
-                        <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Capacity_TextChanged"/>
+                    <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,30,0,0">
+                        <Border Margin="0,0,15,0"></Border>
+                        <TextBlock VerticalAlignment="Center" FontSize="20">Capacity:</TextBlock>
+                        <Border Margin="3,0,0,0"></Border>
+                        <TextBox Name="Capacity" FontSize="25"  TextAlignment="Right" Width="40" Height="50" TextChanged="Capacity_TextChanged" PreviewTextInput="CapacityTextBox_PreviewTextInput" PreviewKeyDown="CapacityTextBox_PreviewKeyDown" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                            <TextBox.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                            </TextBox.Effect>
+                        </TextBox>
                         <StackPanel VerticalAlignment="Center">
-                            <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CapacityUp_Click" Height="25">5</RepeatButton>
-                            <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="CapacityDown_Click" Height="25">6</RepeatButton>
+                            <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CapacityUp_Click" Height="25"  Background="#f0f0f0" Foreground="#003580" BorderBrush="Black" BorderThickness="2" FontWeight="Bold">
+                                <RepeatButton.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                                </RepeatButton.Effect>
+                                5</RepeatButton>
+                            <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="CapacityDown_Click" Height="25"   Background="#f0f0f0" Foreground="#003580" BorderBrush="Black" BorderThickness="2" FontWeight="Bold">
+                                <RepeatButton.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                                </RepeatButton.Effect>
+                                6</RepeatButton>
                         </StackPanel>
-                        <Border Margin="0,0,75,0"></Border>
+                        <Border Margin="0,0,30,0"></Border>
                         <TextBlock VerticalAlignment="Center" FontSize="20">Duration:</TextBlock>
-                        <TextBox Name="Duration" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Duration_TextChanged"/>
-                        <StackPanel VerticalAlignment="Center">
-                            <RepeatButton Name="durationNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DurationUp_Click" Height="25">5</RepeatButton>
-                            <RepeatButton Name="durationDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="DurationDown_Click" Height="25">6</RepeatButton>
+                        <Border Margin="3,0,0,0"></Border>
+                        <TextBox Name="Duration" FontSize="25"  TextAlignment="Right" Width="40" Height="50" TextChanged="Duration_TextChanged" PreviewTextInput="DurationTextBox_PreviewTextInput" PreviewKeyDown="DurationTextBox_PreviewKeyDown" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                            <TextBox.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                            </TextBox.Effect>
+                        </TextBox>
+                            <StackPanel VerticalAlignment="Center">
+                            <RepeatButton Name="durationNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DurationUp_Click" Height="25" Background="#f0f0f0" Foreground="#003580" BorderBrush="Black" BorderThickness="2" FontWeight="Bold">
+                                <RepeatButton.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                                </RepeatButton.Effect>
+                                5</RepeatButton>
+                            <RepeatButton Name="durationDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Click="DurationDown_Click" Height="25"  Background="#f0f0f0" Foreground="#003580" BorderBrush="Black" BorderThickness="2" FontWeight="Bold">
+                                <RepeatButton.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                                </RepeatButton.Effect>
+                                6</RepeatButton>
                         </StackPanel>
                     </StackPanel>
                     
@@ -103,11 +149,19 @@
                     </StackPanel>
                     <StackPanel Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock HorizontalAlignment="Center" FontSize="20">Language:</TextBlock>
-                        <ComboBox Width="150" Height="50" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged"></ComboBox>
+                        <ComboBox Width="123" Height="37" x:Name="LanguageTextBox" SelectionChanged="LanguageTextBox_SelectionChanged" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15">
+                            <ComboBox.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                            </ComboBox.Effect>
+                        </ComboBox>
                     </StackPanel>
-                    <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
                         <Border Margin="110,0,0,0"></Border>
-                        <Button Width="150" Height="70" Click="ClearFilters_Click">Clear filters</Button>
+                        <Button Width="150" Height="48" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="2" Click="ClearFilters_Click">
+                            <Button.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                            </Button.Effect>
+                            Clear filters</Button>
                     </StackPanel>
                 </Grid>
             </Grid>   
@@ -125,16 +179,23 @@
                     <StackPanel Orientation="Horizontal">
                         <Border Margin="15,0,0,0"></Border>
                         <Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" Direction="270" ShadowDepth="5" Opacity="0.5"/>
+                            </Border.Effect>
                             <AdornerDecorator>
-                                <TextBox  Width="1000" x:Name="searchBox" TextChanged="searchBox_TextChanged">
+                                <TextBox  Width="1000" x:Name="searchBox" TextChanged="searchBox_TextChanged" FontSize="25" Foreground="#003580" TextAlignment="Center">
                                 <controls:WatermarkService.Watermark>
-                                    <TextBlock FontSize="16" VerticalAlignment="Center" Text="Search tours by name"/>
+                                        <TextBlock FontSize="25" VerticalAlignment="Center" Text="  🔎 Search tours by name" TextAlignment="Center" />
                                 </controls:WatermarkService.Watermark>
                             </TextBox>
                         </AdornerDecorator>
                         </Border>
                         <Border Margin="0,0,15,0"></Border>
-                        <Button HorizontalAlignment="Right" Click="OngoingTour_Click" Width="100" Margin="0,3,3,3">Ongoing tour</Button>
+                        <Button HorizontalAlignment="Right" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="10" BorderBrush="Black" BorderThickness="2" Click="OngoingTour_Click" Width="80" Margin="0,3,3,3">
+                            <Button.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                            </Button.Effect>
+                            Ongoing tour</Button>
                     </StackPanel>
                 </Grid>
             </Grid>

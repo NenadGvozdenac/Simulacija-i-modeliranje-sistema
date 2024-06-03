@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Application.UseCases;
+using BookingApp.Domain.Models;
 using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
 using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
@@ -36,6 +37,16 @@ public partial class ForumControl : UserControl
         
         HoverAnimation hoverAnimation = new HoverAnimation();
         hoverAnimation.AnimateHover(this.Border);
+
+        if(ForumService.GetInstance().IsSpecialForum(forum))
+        {
+            this.ImportantLabel.Visibility = Visibility.Visible;
+            this.ImportantLabel2.Visibility = Visibility.Hidden;
+        } else
+        {
+            this.ImportantLabel.Visibility = Visibility.Hidden;
+            this.ImportantLabel2.Visibility = Visibility.Visible;
+        }
     }
 
     private void CommentClick(object sender, MouseButtonEventArgs e)

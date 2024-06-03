@@ -18,20 +18,24 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
-            <Image Margin="5" Grid.RowSpan="2" Source="{DynamicResource Tree}"/>
-            <Label Padding="0 20 0 0" Foreground="{DynamicResource ForegroundBrush}" Content="{Binding City}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <TextBlock Grid.Column="1" x:Name="ImportantLabel" Text="IMPORTANT FORUM" TextDecorations="Underline" Foreground="{DynamicResource ForegroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Verdana" FontSize="14" FontWeight="Normal" Visibility="Hidden"/>
+            <TextBlock Grid.Column="1" x:Name="ImportantLabel2" Text="FORUM" TextDecorations="Underline" Foreground="{DynamicResource ForegroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Verdana" FontSize="14" FontWeight="Normal" Visibility="Hidden"/>
+            
+            <Image Margin="5" Grid.RowSpan="3" Source="{DynamicResource Tree}"/>
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding City}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>18</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label Padding="0 0 0 20" Foreground="{DynamicResource ForegroundBrush}" Content="{Binding Country}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding Country}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>18</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Image Grid.Column="2" Margin="5" Grid.RowSpan="2" Source="{DynamicResource Herb}"/>
+            <Image Grid.Column="2" Margin="5" Grid.RowSpan="3" Source="{DynamicResource Herb}"/>
         </Grid>
     </Border>
 </UserControl>

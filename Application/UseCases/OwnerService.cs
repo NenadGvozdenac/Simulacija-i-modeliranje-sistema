@@ -134,6 +134,7 @@ public class OwnerService
     private List<Notification<Forum>> GetNewlyOpenForumsForOwner(int id)
     {
         return ForumService.GetInstance().GetForumsByOwnerId(id)
+            .Where(forum => forum.ForumStatus == Resources.Types.ForumStatus.Open)
             .Select(forum => new Notification<Forum>("Forum Notification", "A new forum opened up!", forum.Location.ToString(), forum.CreationDate, forum))
             .ToList();
     }

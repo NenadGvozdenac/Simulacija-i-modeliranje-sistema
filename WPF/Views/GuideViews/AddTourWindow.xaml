@@ -99,7 +99,7 @@
         <Label Content="" HorizontalAlignment="Left" Margin="16,321,0,0" VerticalAlignment="Top"></Label>
         <Label Content="Description:" HorizontalAlignment="Left" Margin="16,541,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
         <TextBox HorizontalAlignment="Left" Margin="24,608,0,0" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="631" Height="97"></TextBox>
-        <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="55" Height="36"  HorizontalAlignment="Left" Margin="1351,65,0,0"  Click="AddDateClick"/>
+        <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="55" Height="36"  HorizontalAlignment="Left" Margin="1351,65,0,0"  Click="AddDateClick" x:Name="dateButton"/>
         <Button Content="Confirm" HorizontalAlignment="Left" Margin="699,730,0,0" VerticalAlignment="Top" Click="ConfirmButtonClick" Width="142" Height="47" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="2">
             <Button.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>

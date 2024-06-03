@@ -13,6 +13,12 @@ namespace BookingApp.Domain.Models
         public int UserId {  get; set; }
         public List<int> TourRequestIds { get; set; }
         public string Status {  get; set; }
+
+        public string tourist { get; set; }
+
+        public int guideId { get; set; }
+
+        public int numberOfParts { get; set; }
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);

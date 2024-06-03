@@ -409,5 +409,11 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 e.Handled = true; 
             }
         }
+
+        internal void ComplexRequests_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ComplexRequests complexRequests = new ComplexRequests(_user);
+            complexRequests.Show();
+        }
     }
 }

@@ -204,5 +204,12 @@ namespace BookingApp.View.PathfinderViews
         {
             mainWindowViewModel.CapacityTextBox_PreviewKeyDown(sender, e);
         }
+
+        private void ComplexRequests_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mainWindowViewModel.ComplexRequests_MouseLeftButtonDown(sender, e);
+
+        }
+
     }
 }

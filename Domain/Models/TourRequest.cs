@@ -26,6 +26,10 @@ namespace BookingApp.Domain.Models
 
         public int TouristNumber { get; set; }
 
+        public bool accepted {  get; set; }
+
+        public int GuideId { get; set; }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -38,11 +42,12 @@ namespace BookingApp.Domain.Models
             RequestDate = Convert.ToDateTime(values[7]);
             Status = values[8];
             ComplexRequestId = Convert.ToInt32(values[9]);
+            GuideId = Convert.ToInt32(values[10]);  
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), UserId.ToString(), LocationId.ToString(), Description, LanguageId.ToString(), BeginDate.ToString(), EndDate.ToString(), RequestDate.ToString(), Status, ComplexRequestId.ToString()};
+            string[] csvValues = { Id.ToString(), UserId.ToString(), LocationId.ToString(), Description, LanguageId.ToString(), BeginDate.ToString(), EndDate.ToString(), RequestDate.ToString(), Status, ComplexRequestId.ToString(), GuideId.ToString()};
             return csvValues;
         }
     }

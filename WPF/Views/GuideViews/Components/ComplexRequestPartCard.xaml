@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuideViews.Components.ComplexRequestPartCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="700">
+    <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Margin="10" Padding="10">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FFFFFF" Offset="0.0"/>
+                <GradientStop Color="#F0F0F0" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="2" Color="Gray" Opacity="0.2" BlurRadius="4"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect ShadowDepth="4" Color="Gray" Opacity="0.4" BlurRadius="8"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="1.01" ScaleY="1.01"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="20"/>
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock x:Name="CountryBlock" TextWrapping="Wrap" Text="{Binding Location.Country}" Width="120" TextAlignment="Left" Foreground="#333" FontSize="12"/>
+                    <TextBlock x:Name="CityBlock" TextWrapping="Wrap" Text="{Binding Location.City}" Width="120" Foreground="#333" FontSize="12"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                <Image x:Name="LanguageIcon" Source="..\..\..\..\Resources\Assets\language.png" Height="23"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center" x:Name="LanguageBlock" Foreground="#333" FontSize="12"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+                <Label FontSize="15" Foreground="#003580" FontWeight="Bold">Start:</Label>
+                <TextBlock Text="{Binding BeginDate, StringFormat ={}{0:dd.MM.yyyy HH:mm}}" VerticalAlignment="Center" FontWeight="Bold" x:Name="StartBlock" Foreground="#333"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
+                <Label FontSize="15" Foreground="#003580" FontWeight="Bold">End:</Label>
+                <TextBlock Text="{Binding EndDate, StringFormat ={}{0:dd.MM.yyyy HH:mm}}" VerticalAlignment="Center" FontWeight="Bold" x:Name="EndBlock" Foreground="#333"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
+                <Border Margin="15,0,0,0"></Border>
+                <TextBlock Text="{Binding Description}" Foreground="#333" FontSize="12"/>
+                <Border Margin="0,0,15,0"></Border>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="2" Height="40" Width="150" Click="Accept_Click" Padding="5">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                    </Button.Effect>
+                    Accept request
+                </Button>
+                <TextBlock Text="{Binding UserId}" Visibility="Collapsed" x:Name="Id_TextBlock"/>
+                <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="RequestId_TextBlock"/>
+                <TextBlock Text="{Binding UserId}" Visibility="Collapsed" x:Name="TouristId_TextBlock"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

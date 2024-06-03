@@ -76,5 +76,15 @@ namespace BookingApp.WPF.Views.GuideViews
         {
             tourRequestsWindowViewModel.ResetFilters_Click();
         }
+
+        private void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            tourRequestsWindowViewModel.CapacityTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            tourRequestsWindowViewModel.CapacityTextBox_PreviewKeyDown(sender, e);
+        }
     }
 }

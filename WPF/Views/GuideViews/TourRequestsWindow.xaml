@@ -30,7 +30,7 @@
                 <ComboBox Width="213" Height="57" x:Name="LanguageBox" SelectionChanged="Language_SelectionChanged"></ComboBox>
                 <Border Margin="35,0,0,0"></Border>
                 <Label VerticalContentAlignment="Center" FontSize="30">Number of guests:</Label>
-                <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Capacity_TextChanged"/>
+                <TextBox Name="Capacity" FontSize="17"  TextAlignment="Right" Width="40" Height="50" TextChanged="Capacity_TextChanged"  PreviewTextInput="CapacityTextBox_PreviewTextInput" PreviewKeyDown="CapacityTextBox_PreviewKeyDown"/>
                 <StackPanel VerticalAlignment="Center">
                     <RepeatButton Name="capacityNumberUp"  FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Height="25" Click="CapacityUp_Click">5</RepeatButton>
                     <RepeatButton Name="capacityDown" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"  Height="25" Click="CapacityDown_Click">6</RepeatButton>

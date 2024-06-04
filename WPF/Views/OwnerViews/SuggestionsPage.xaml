@@ -39,7 +39,7 @@
                 <Label Content="{Binding PopularLocationText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Margin="5 0">
-                <Label Content="Biggest fullness percentage:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="Biggest fullness percentage of your accommodations:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
                 <Label Content="{Binding PopularLocationFullnessText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
             </StackPanel>
             <Button Grid.Row="4" Background="{DynamicResource ButtonBackground}" Foreground="{DynamicResource ButtonForeground}" Content="{Binding ButtonText}" Style="{StaticResource ButtonStyle}" FontSize="15" FontWeight="Bold" Width="Auto" Click="Button_Click"/>
@@ -62,7 +62,7 @@
                 <Label Content="{Binding LeastPopularLocationText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Margin="5 0">
-                <Label Content="Lowest fullness percentage:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
+                <Label Content="Lowest fullness percentage of your accommodations:" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
                 <Label Content="{Binding LeastPopularLocationFullnessText}" FontSize="15" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"/>
             </StackPanel>
             <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto" Margin="5" Padding="10 0">

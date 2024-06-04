@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Diagnostics;
+using Notifications.Wpf;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -65,41 +66,55 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         internal void quit_Click()
         {
-            List<TourStartTime> dates = TourStartTimeService.GetInstance().GetAll();
-            List<TouristReservation> reservations = TourReservationService.GetInstance().GetAll();
-            foreach (TourStartTime date in dates)
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete your account?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                Tour tour = TourService.GetInstance().GetById(date.TourId);
-                if (tour.OwnerId == user.Id && date.Status == "scheduled")
+                List<TourStartTime> dates = TourStartTimeService.GetInstance().GetAll();
+                List<TouristReservation> reservations = TourReservationService.GetInstance().GetAll();
+                foreach (TourStartTime date in dates)
                 {
-                    date.Status = "canceled";
-                    TourStartTimeService.GetInstance().Update(date);
-
-                    foreach(TouristReservation reservation in reservations)
+                    Tour tour = TourService.GetInstance().GetById(date.TourId);
+                    if (tour.OwnerId == user.Id && date.Status == "scheduled")
                     {
-                        if(reservation.Id_TourTime == date.Id)
-                        {
-                           TourVoucher voucher = new TourVoucher();
-                            voucher.TouristId = reservation.Id_Tourist;
-                            voucher.ExpirationDate = DateTime.Now.AddDays(365);
-                            TourVoucherService.GetInstance().Add(voucher);
+                        date.Status = "canceled";
+                        TourStartTimeService.GetInstance().Update(date);
 
+                        foreach (TouristReservation reservation in reservations)
+                        {
+                            if (reservation.Id_TourTime == date.Id)
+                            {
+                                TourVoucher voucher = new TourVoucher();
+                                voucher.TouristId = reservation.Id_Tourist;
+                                voucher.ExpirationDate = DateTime.Now.AddDays(365);
+                                TourVoucherService.GetInstance().Add(voucher);
+
+                            }
                         }
                     }
-                }
-                
-            }
-            GuideService.GetInstance().DeleteGuide(user.Id);
-            quitEvent?.Invoke(this, EventArgs.Empty);
-            infoWindow.Close();
 
+                }
+                GuideService.GetInstance().DeleteGuide(user.Id);
+                quitEvent?.Invoke(this, EventArgs.Empty);
+                infoWindow.Close();
+
+            }
         }
 
         internal void GeneratePdfReport_Click(DateTime? startDate, DateTime? endDate)
         {
             if (startDate == null || endDate == null)
             {
-                MessageBox.Show("Please select both start and end dates.");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Carefull",
+                    Message = "Please choose both dates carefully",
+                    Type = NotificationType.Error
+                });
                 return;
             }
 
@@ -112,7 +127,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             if (dates == null || dates.Count == 0)
             {
-                MessageBox.Show("No tours found in the selected date range.");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "No data",
+                    Message = "There are no tours in given timespan",
+                    Type = NotificationType.Error
+                });
                 return;
             }
 
@@ -216,7 +240,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             {
                 // Save document
                 File.WriteAllBytes(dlg.FileName, pdfBytes);
-                MessageBox.Show("PDF file downloaded successfully.");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Success",
+                    Message = "PDF created successfuly",
+                    Type = NotificationType.Success
+                });
             }
         }
 

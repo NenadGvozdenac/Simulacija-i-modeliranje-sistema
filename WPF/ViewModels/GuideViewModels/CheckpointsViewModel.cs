@@ -15,6 +15,7 @@ using BookingApp.Application.UseCases;
 using BookingApp.WPF.Views.TouristViews;
 using System.Windows.Input;
 using System.Linq;
+using Notifications.Wpf;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -225,6 +226,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
             OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
             checkpointsView.Close();
+            var notificationManager = new NotificationManager();
+
+
+
+            notificationManager.Show(new NotificationContent
+            {
+                Title = "Finish",
+                Message = "Tour is finished.",
+                Type = NotificationType.Information
+            });
         }
 
 
@@ -250,6 +261,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 OnEndButtonClicked(new BeginButtonClickedEventArgs(tourId, _currentDate));
                 OnEndButtonClickedMain(new BeginButtonClickedEventArgs(tourId, _currentDate));
                 checkpointsView.Close();
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Finis",
+                    Message = "Tour is finished.",
+                    Type = NotificationType.Information
+                });
             }
 
             foreach (var tourist in selectedTourists.ToList()) //updejtuje rezervacije

@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:BookingApp.WPF.Views.GuideViews"
         mc:Ignorable="d"
         Title="ComplexTourPartsWindow" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding confirmCommand}" Key="F1"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -21,7 +24,7 @@
                     <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
                 </ListBox.Effect>
             </ListBox>
-            <Button Width="109" Visibility="Collapsed" x:Name="confirmButton" Click="confirmClick" Background="White" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="1">
+            <Button Width="109" Visibility="Collapsed" x:Name="confirmButton" Command="{Binding confirmCommand}" Background="White" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="1">
                 <Button.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
                 </Button.Effect>

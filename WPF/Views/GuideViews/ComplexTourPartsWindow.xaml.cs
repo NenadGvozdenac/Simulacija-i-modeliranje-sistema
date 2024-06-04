@@ -34,10 +34,5 @@ namespace BookingApp.WPF.Views.GuideViews
             DataContext = complexTourPartsWindowViewModel;
         }
 
-        private void confirmClick(object sender, RoutedEventArgs e)
-        {
-            complexTourPartsWindowViewModel.confirmClick();
-        }
-       
     }
 }

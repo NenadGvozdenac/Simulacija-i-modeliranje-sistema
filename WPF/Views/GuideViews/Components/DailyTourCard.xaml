@@ -61,31 +61,31 @@
                 <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="27"/>
                     <StackPanel VerticalAlignment="Bottom">
-                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17" TextAlignment="Left" HorizontalAlignment="Left"/>
-                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16" TextAlignment="Left" HorizontalAlignment="Left"/>
+                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold"/>
                         <Border Margin="0,5,0,0"></Border>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="LanguageIcon" Source="..\..\..\..\Resources\Assets\language.png" Height="23"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="CapacityIcon" Source="..\..\..\..\Resources\Assets\users.png" Height="19" />
                     <Border Margin="5,0,0,0"></Border>
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Left"/>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Left" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="DurationIcon" Source="..\..\..\..\Resources\Assets\hourglass.png" Height="20"/>
                     <Border Margin="5,0,0,0"></Border>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="14" Height="19" TextAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="14" Height="19" TextAlignment="Left" FontWeight="Bold"/>
                     <Border Margin="5,0,0,0"></Border>
-                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="22" TextAlignment="Left"  FontSize="15" Foreground="#003580" FontWeight="Bold"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
                     <Border Margin="10,0,0,0"></Border>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="331" Height="108" FontSize="20" FontStyle="Italic"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="524" Height="108" FontSize="20" FontStyle="Italic"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
@@ -96,7 +96,11 @@
                     <!--<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDate}" TextAlignment="Center" FontSize="12" Width="365" VerticalAlignment="Top"/>-->
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="3">
-                    <Button Height="25" Content="Begin" Click="BeginButton_Click" x:Name="BeginButton" IsEnabled="{Binding Ongoing, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></Button>
+                    <Button Height="30" Content="Begin" Click="BeginButton_Click" x:Name="BeginButton" IsEnabled="{Binding Ongoing, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="2" Padding="5">
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                        </Button.Effect>
+                    </Button>
                     <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="IdTextBlock"></TextBlock>
                 </StackPanel>
             </Grid>

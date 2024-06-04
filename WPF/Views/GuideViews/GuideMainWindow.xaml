@@ -12,19 +12,22 @@
         <KeyBinding Command="{Binding ScheduleTourCommand}" Key="F1"/>
         <KeyBinding Command="{Binding DailyToursCommand}" Key="F2"/>
         <KeyBinding Command="{Binding ReviewsCommand}" Key="F4"/>
+        <KeyBinding Command="{Binding RequestsCommand}" Key="F3"/>
         <KeyBinding Command="{Binding DemographicsCommand}" Key="F5"/>
+        <KeyBinding Command="{Binding ComplexCommand}" Key="F6"/>
+        <KeyBinding Command="{Binding RequestStatsCommand}" Key="F7"/>
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background=" #003580" Height="40">
-            <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa" Click="ScheduleTourClick"  Height="40" FontSize="15" FontWeight="Bold">
+            <MenuItem Header="_Schedule tour (F1)" Foreground="#f2f6fa"  Command="{Binding ScheduleTourCommand}" Height="40" FontSize="15" FontWeight="Bold">
                 
             </MenuItem>
 
 
-            <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Click="DailyToursClick" FontSize="15" FontWeight="Bold"></MenuItem>
+            <MenuItem Header="Your tours (F2)" Foreground="#f2f6fa" Command="{Binding DailyToursCommand}" FontSize="15" FontWeight="Bold"></MenuItem>
 
 
-            <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Click="TourRequest_Click">
+            <MenuItem Header="Tour requests (F3)" Foreground="#f2f6fa" FontSize="15" FontWeight="Bold" Command="{Binding RequestsCommand}">
             </MenuItem>
             <Separator Margin="920,0,0,0"/>
             <MenuItem Click="info_click">

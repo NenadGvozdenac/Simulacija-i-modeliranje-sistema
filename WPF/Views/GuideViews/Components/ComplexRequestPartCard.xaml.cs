@@ -31,7 +31,9 @@ namespace BookingApp.WPF.Views.GuideViews.Components
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
+            
             OnAcceptButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(RequestId_TextBlock.Text), Convert.ToDateTime(DateTime.Now)));
+            
         }
 
         private void OnAcceptButtonClicked(BeginButtonClickedEventArgs e)

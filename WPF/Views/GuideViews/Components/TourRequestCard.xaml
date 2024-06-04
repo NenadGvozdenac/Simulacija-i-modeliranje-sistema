@@ -45,23 +45,23 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,72,167,0" Grid.RowSpan="2">
                 <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="27"/>
-                <StackPanel>
+                <StackPanel Height="39">
                     <TextBlock  x:Name="CountryBlock" TextWrapping="Wrap" Text="{Binding Location.Country}" Width="104" Height="17" TextAlignment="Left"/>
-                    <TextBlock  x:Name="CityBlock" TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="11"/>
+                    <TextBlock  x:Name="CityBlock" TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="17"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0,72,0,0" Grid.RowSpan="2">
                 <Image x:Name="LanguageIcon" Source="..\..\..\..\Resources\Assets\language.png" Height="23"/>
                 <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center" x:Name="LanguageBlock"/>
             </StackPanel>
-            <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
-                <Label FontSize="15">Start:</Label>
-                <TextBlock Text="{Binding BeginDate, StringFormat ={}{0:dd.MM.yyyy HH:mm}}" VerticalAlignment="Center" FontWeight="Bold" x:Name="StartBlock"></TextBlock>
+            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0,79,0,0" Grid.RowSpan="2">
+                <Label FontSize="15" Foreground="#003580" FontWeight="Bold" Height="36">Start:</Label>
+                <TextBlock Text="{Binding BeginDate, StringFormat ={}{0:dd.MM.yyyy HH:mm}}"  FontWeight="Bold" x:Name="StartBlock" Height="17" Width="100" TextAlignment="Justify"></TextBlock>
             </StackPanel>
-            <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
-                <Label FontSize="15">End:</Label>
+            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="167,79,0,0" Grid.RowSpan="2">
+                <Label FontSize="15" Foreground="#003580" FontWeight="Bold" Height="35">End:</Label>
                 <TextBlock Text="{Binding EndDate, StringFormat ={}{0:dd.MM.yyyy HH:mm}}" VerticalAlignment="Center" FontWeight="Bold" x:Name="EndBlock"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
@@ -70,7 +70,7 @@
                 <Border Margin="0,0,15,0"></Border>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="3">
-                <Button Click="AcceptRequest_Click">Accept request</Button>
+                <Button Click="AcceptRequest_Click"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="2" Height="40" Width="150" Padding="5">Accept request</Button>
                 <TextBlock Text="{Binding UserId}" Visibility="Collapsed" x:Name="Id_TextBlock"></TextBlock>
                 <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="RequestId_TextBlock"></TextBlock>
                 <TextBlock Text="{Binding UserId}" Visibility="Collapsed" x:Name="TouristId_TextBlock"></TextBlock>

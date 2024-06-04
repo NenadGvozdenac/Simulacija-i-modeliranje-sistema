@@ -58,8 +58,8 @@
                 <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="27"/>
                     <StackPanel Height="38" VerticalAlignment="Top">
-                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="107" Height="17" TextAlignment="Left" FontWeight="Bold" />
-                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="20" TextAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="208" Height="17" TextAlignment="Left" FontWeight="Bold" />
+                        <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="206" Height="20" TextAlignment="Left" FontWeight="Bold"/>
                         <Border Margin="0,5,0,0"></Border>
                     </StackPanel>
                 </StackPanel>
@@ -69,19 +69,26 @@
                 </StackPanel>
                 <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="CapacityIcon" Source="..\..\..\..\Resources\Assets\users.png" Height="19" />
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Center" FontWeight="Bold"/>
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Left" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
                     <Image x:Name="DurationIcon" Source="..\..\..\..\Resources\Assets\hourglass.png" Height="20"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="51" Height="19" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="9" Height="19" TextAlignment="Center" FontWeight="Bold" RenderTransformOrigin="0.453,0.607"/>
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="23" TextAlignment="Left" FontSize="15" Foreground="#003580" FontWeight="Bold" RenderTransformOrigin="0.501,0.484" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
                     <Border Margin="15,0,0,0"></Border>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="387" Height="78"/>
-                    <Border Margin="250,0,0,0"></Border>
-                    <Button Content="Cancel" Height="26" Click="CancelTour_Click" Width="58" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="469" Height="71"/>
+                    <Border Margin="154,0,0,0"></Border>
+                    <Button Content="Cancel" Height="40" Click="CancelTour_Click" Width="70" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="2" Padding="5">
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5" />
+                        </Button.Effect>
+                    </Button>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >

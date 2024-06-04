@@ -85,7 +85,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="54" Height="40" HorizontalAlignment="Left" Margin="1351,339,0,0"  Click="AddCheckpointClick"></Button>
+        <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Width="48" Height="40" HorizontalAlignment="Left" Margin="1330,339,0,0"  Click="AddCheckpointClick"></Button>
 
         <Label Content="Images:" HorizontalAlignment="Left" Margin="1027,522,0,0" VerticalAlignment="Top" FontSize="30" Foreground="black"></Label>
         <Image Source="..\..\..\Resources\Assets\chevron-left.293x512.png" Style="{StaticResource ImageHover}" Margin="859,629,601,138" PreviewMouseDown="LeftArrow_PreviewMouseDown"/>
@@ -119,6 +119,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="495,528,0,0" TextWrapping="Wrap" Text="Insert duration" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="durationErrorBox" Visibility="Collapsed"/>
         <TextBlock HorizontalAlignment="Left" Margin="864,520,0,0" TextWrapping="Wrap" Text="Insert 2 checkpoints" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="checkpointErrorBox" Visibility="Collapsed"/>
         <TextBlock HorizontalAlignment="Left" Margin="864,276,0,0" TextWrapping="Wrap" Text="Pick date" VerticalAlignment="Top" Width="152" Foreground="Red" x:Name="dateErrorBox" Visibility="Collapsed"/>
+        <Button Content="-" Style="{StaticResource RoundedButtonStyle}" Width="49" Height="38" HorizontalAlignment="Left" Margin="1389,341,0,0" Click="RemoveCheckpoint_Click" x:Name="RemoveCheckpointClick_Copy"/>
+        <Button Content="-" Style="{StaticResource RoundedButtonStyle}" Width="49" Height="38" HorizontalAlignment="Left" Margin="1423,65,0,0" Click="RemoveDate_Click" x:Name="RemoveDateClick_Copy1"/>
 
 
 

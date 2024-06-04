@@ -170,5 +170,15 @@ namespace BookingApp.View.PathfinderViews
         {
             addTourWindowViewModel.CapacityTextBox_PreviewKeyDown(sender,e);
         }
+
+        private void RemoveCheckpoint_Click(object sender, RoutedEventArgs e)
+        {
+            addTourWindowViewModel.RemoveCheckpoint_Click();
+        }
+
+        private void RemoveDate_Click(object sender, RoutedEventArgs e)
+        {
+            addTourWindowViewModel.RemoveDate_Click();
+        }
     }
 }

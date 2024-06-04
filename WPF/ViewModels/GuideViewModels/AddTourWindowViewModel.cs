@@ -732,5 +732,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 e.Handled = true;
             }
         }
+
+        internal void RemoveCheckpoint_Click()
+        {
+            var selectedItem = addTourWindow.checkpointGrid.SelectedItem as Checkpoint;
+            Checkpoints.Remove(selectedItem);
+        }
+
+        internal void RemoveDate_Click()
+        {
+            var selectedItem = addTourWindow.datesGrid.SelectedItem as TourStartTime;
+            TourDates.Remove(selectedItem);
+
+        }
     }
 }

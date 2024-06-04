@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-06-04T11:42:07.351Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="B-zIFtAWO9yr3unnL04A" version="24.2.5" type="device" pages="13">
+<mxfile host="app.diagrams.net" modified="2024-05-31T20:22:20.003Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0" etag="TnsDyGP9xK435T8QIh0f" version="24.4.0" type="device" pages="13">
   <diagram name="Page-1" id="2cKE2zheifnGF8K5AM1y">
-    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="1161" dy="638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -300,28 +300,28 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-1" value="Posledica" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-1" value="Posledica" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="100" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-2" value="Preduslov" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-2" value="Preduslov" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="60" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-3" value="Alternativni tok" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-3" value="Alternativni tok" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="220" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-4" value="Osnovni tok" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-4" value="Osnovni tok" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="150" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-5" value="Korisnik je gost i nalazi se na prozoru bilo kuda, bilo kada&amp;nbsp;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-5" value="Korisnik je gost i nalazi se na prozoru bilo kuda, bilo kada&amp;nbsp;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="110" y="60" width="720" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-6" value="&lt;div style=&quot;text-align: justify;&quot;&gt;Prikazuju se smestaji koji odgovaraju unetim parametrima&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-6" value="&lt;div style=&quot;text-align: justify;&quot;&gt;Prikazuju se smestaji koji odgovaraju unetim parametrima&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="110" y="100" width="720" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-7" value="&lt;div style=&quot;text-align: justify;&quot;&gt;1. Gost unosi datum&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;2. Gost unosi broj gostiju i dane ostajanja&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;3. Gost pokrece proces pronalaska smestaja za date podatke&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;4. Sistem vrsi pretragu smestaja koji odgovaraju unetim parametrima&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-7" value="&lt;div style=&quot;text-align: justify;&quot;&gt;1. Gost unosi datum&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;2. Gost unosi broj gostiju i dane ostajanja&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;3. Gost pokrece proces pronalaska smestaja za date podatke&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;4. Sistem vrsi pretragu smestaja koji odgovaraju unetim parametrima&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="110" y="135" width="720" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="hxw5cwsSaJZIxCylvvQ9-8" value="2a: Gost ne unosi datume(opciono)&lt;div&gt;.1:&amp;nbsp;&lt;span style=&quot;text-align: justify; background-color: initial;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: justify; background-color: initial;&quot;&gt;Gost pokrece proces pronalaska smestaja za date podatke&lt;/span&gt;&lt;/div&gt;&lt;div&gt;.2: Sistem pronalazi smestaje koji odgovaraju datom broju gostiju i dana ostajanja&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="hxw5cwsSaJZIxCylvvQ9-8" value="2a: Gost ne unosi broj gostiju i dane ostajanja(opciono)&lt;div&gt;.1:&amp;nbsp;&lt;span style=&quot;text-align: justify; background-color: initial;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: justify; background-color: initial;&quot;&gt;Gost pokrece proces pronalaska smestaja za date podatke&lt;/span&gt;&lt;/div&gt;&lt;div&gt;.2: Sistem pronalazi smestaje koji odgovaraju datim datumima&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="110" y="210" width="720" height="60" as="geometry" />
         </mxCell>
       </root>

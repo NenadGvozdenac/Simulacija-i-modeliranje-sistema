@@ -4,6 +4,7 @@ using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using BookingApp.View;
 using Microsoft.Extensions.DependencyInjection;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -80,7 +81,6 @@ public partial class App
         services.AddSingleton<IForumCommentRepository, ForumCommentRepository>();
         services.AddSingleton<IForumCommentReportRepository, ForumCommentReportRepository>();
         services.AddSingleton<IComplexTourRequestsRepository, ComplexTourRequestsRepository>();
-
         services.AddSingleton<IGuideInfoRepository, GuideInfoRepository>();
     }
 
@@ -116,5 +116,6 @@ public partial class App
         services.AddSingleton<ComplexTourRequestService>();
 
         services.AddSingleton<GuideService>();
+        
     }
 }

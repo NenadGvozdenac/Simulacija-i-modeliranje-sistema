@@ -6,6 +6,7 @@ using BookingApp.View.PathfinderViews.Componentss;
 using BookingApp.WPF.Views.GuestViews;
 using BookingApp.WPF.Views.GuideViews;
 using CommunityToolkit.Mvvm.Input;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         public ICommand ReviewsCommand { get; }
 
         public ICommand DemographicsCommand { get; }
+
+        public ICommand RequestsCommand { get; }
+
+        public ICommand ComplexCommand { get; }
+
+        public ICommand RequestStatsCommand { get; }
         public GuideMainWindowViewModel(GuideMainWindow _mainWindow,User user)
         {
             mainWindow = _mainWindow;
@@ -51,6 +58,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             DailyToursCommand = new RelayCommand(DailyTours_Accelerator);
             ReviewsCommand = new RelayCommand(Reviews_Accelerator);
             DemographicsCommand = new RelayCommand(Demographics_Accelerator);
+            RequestsCommand = new RelayCommand(Requests_Accelerator);
+            ComplexCommand = new RelayCommand(Complex_Accelerator);
+            RequestStatsCommand = new RelayCommand(RequestStat_Accelerator);
             LoadCountries();
             LoadLanguages();
             Update();
@@ -210,7 +220,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             if(ongoingTourCheck() == 0)
             {
-                MessageBox.Show("There are no ongoing tours currently");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Nothing for now",
+                    Message = "Currently there are no ongoing tours.",
+                    Type = NotificationType.Warning
+                });
             }
         }
 
@@ -249,6 +268,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         }
 
         internal void RequestsStatistics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            RequestStatistics requestStatistics = new RequestStatistics();
+            requestStatistics.Show();
+        }
+
+        public void RequestStat_Accelerator()
         {
             RequestStatistics requestStatistics = new RequestStatistics();
             requestStatistics.Show();
@@ -329,6 +354,13 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
    
         }
+
+        public void Requests_Accelerator()
+        {
+            TourRequestsWindow tourRequestsWindow = new TourRequestsWindow(_user);
+            tourRequestsWindow.Show();
+        }
+
 
         internal void infoClick()
         {
@@ -415,5 +447,12 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             ComplexRequests complexRequests = new ComplexRequests(_user);
             complexRequests.Show();
         }
+
+        public void Complex_Accelerator()
+        {
+            ComplexRequests complexRequests = new ComplexRequests(_user);
+            complexRequests.Show();
+        }
+
     }
 }

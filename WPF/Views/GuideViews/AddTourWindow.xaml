@@ -8,14 +8,14 @@
         mc:Ignorable="d"
         Title="AddTourWindow" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  Background="#f2f6fa">
     <Grid Margin="0,0,0,-16">
-        <ComboBox HorizontalAlignment="Left" Margin="162,146,0,0" VerticalAlignment="Top" Width="493" Height="50" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged">
+        <ComboBox HorizontalAlignment="Left" Margin="162,146,0,0" VerticalAlignment="Top" Width="493" Height="50" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CountryTextBox" SelectionChanged="CountryTextBox_SelectionChanged"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15">
 
 
         </ComboBox>
         <Label Content="Country:" HorizontalAlignment="Left" Margin="15,146,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
 
         <Label Content="City:" HorizontalAlignment="Left" Margin="16,255,0,0" VerticalAlignment="Top" FontSize="30" Foreground="black" RenderTransformOrigin="0.477,-1.222"></Label>
-        <ComboBox HorizontalAlignment="Left" Margin="163,255,0,0" VerticalAlignment="Top" Width="492" Height="50" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
+        <ComboBox HorizontalAlignment="Left" Margin="163,255,0,0" VerticalAlignment="Top" Width="492" Height="50" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="CityTextBox" IsEditable="False" IsEnabled="False" RenderTransformOrigin="0.5,0.5"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,7 +27,7 @@
         </ComboBox>
 
         <Label Content="Language:" HorizontalAlignment="Left" Margin="16,360,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black" Width="162"></Label>
-        <ComboBox HorizontalAlignment="Left" Margin="160,363,0,0" VerticalAlignment="Top" Width="493" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="50"></ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="160,363,0,0" VerticalAlignment="Top" Width="493" x:Name="LanguageTextBox" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="50"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15"></ComboBox>
         <Label Content="Dates:" HorizontalAlignment="Left" Margin="864,10,0,0" VerticalAlignment="Top" FontSize="30" Foreground="Black"></Label>
 
         <StackPanel Margin="864,65,172,657" RenderTransformOrigin="0.5,0.5">
@@ -40,8 +40,8 @@
                 </TransformGroup>
             </StackPanel.RenderTransform>
             <DatePicker x:Name="datePicker" Height="42" FontSize="25" Width="453"/>
-            <StackPanel Orientation="Horizontal" Height="38">
-                <ComboBox x:Name="hoursComboBox" SelectedIndex="0"  Text="{Binding Hours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="104">
+            <StackPanel Orientation="Horizontal" Height="94" >
+                <ComboBox x:Name="hoursComboBox" SelectedIndex="0"  Text="{Binding Hours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="104"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15" VerticalAlignment="Top">
                     <ComboBoxItem Content="9"/>
                     <ComboBoxItem Content="12"/>
                     <ComboBoxItem Content="15"/>
@@ -50,7 +50,7 @@
                     <ComboBoxItem Content="24"/>
                     <!-- Add more hours as needed -->
                 </ComboBox>
-                <ComboBox x:Name="minutesComboBox" SelectedIndex="0"  Text="{Binding Minutes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="100">
+                <ComboBox x:Name="minutesComboBox" SelectedIndex="0"  Text="{Binding Minutes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="100"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15" VerticalAlignment="Top">
                     <ComboBoxItem Content="00"/>
                     <ComboBoxItem Content="15"/>
                     <ComboBoxItem Content="30"/>

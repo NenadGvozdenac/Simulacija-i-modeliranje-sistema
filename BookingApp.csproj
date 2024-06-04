@@ -410,6 +410,7 @@
 	  <PackageReference Include="iTextSharp" Version="5.5.13.3" />
 	  <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	  <PackageReference Include="Notifications.Wpf" Version="0.1.1" />
 	  <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
 	</ItemGroup>
 

@@ -33,7 +33,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             requests.Clear();
             foreach (TourRequest r in TourRequestService.GetInstance().GetAll()) 
             {
-                if (r.Status == "Pending") {
+                if (r.Status == "Pending" && r.ComplexRequestId == -1) {
                     TourRequest request_tmp = new TourRequest();
                     request_tmp.Id = r.Id;
                     request_tmp.UserId = r.UserId;

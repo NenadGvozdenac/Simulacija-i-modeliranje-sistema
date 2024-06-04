@@ -120,7 +120,7 @@ namespace BookingApp.Application.UseCases
             {
                 if(TourService.GetInstance().GetById(review.TourId).OwnerId == guideId && TourService.GetInstance().GetById(review.TourId).LanguageId == language.Id)
                 {
-                    GradeSum += review.TourInterestingness + review.GuideLanguage + review.GuideKnowledge;
+                    GradeSum += (review.TourInterestingness + review.GuideLanguage + review.GuideKnowledge)/3;
                     numberOfReviews++;
                 }
             }

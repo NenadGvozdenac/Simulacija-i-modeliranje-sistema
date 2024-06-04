@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Diagnostics;
+using Notifications.Wpf;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -99,7 +100,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
         {
             if (startDate == null || endDate == null)
             {
-                MessageBox.Show("Please select both start and end dates.");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Carefull",
+                    Message = "Please choose both dates carefully",
+                    Type = NotificationType.Error
+                });
                 return;
             }
 
@@ -112,7 +122,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             if (dates == null || dates.Count == 0)
             {
-                MessageBox.Show("No tours found in the selected date range.");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "No data",
+                    Message = "There are no tours in given timespan",
+                    Type = NotificationType.Error
+                });
                 return;
             }
 
@@ -216,7 +235,16 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             {
                 // Save document
                 File.WriteAllBytes(dlg.FileName, pdfBytes);
-                MessageBox.Show("PDF file downloaded successfully.");
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Success",
+                    Message = "PDF created successfuly",
+                    Type = NotificationType.Success
+                });
             }
         }
 

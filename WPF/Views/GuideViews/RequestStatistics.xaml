@@ -24,30 +24,30 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="0.7*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="#D0E0F0">
                 <Label FontSize="30">Country:</Label>
-                <ComboBox Width="174" Height="41" x:Name="CountryCombobox" SelectionChanged="Country_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></ComboBox>
+                <ComboBox Width="174" Height="41" x:Name="CountryCombobox" SelectionChanged="Country_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"   FontSize="15"></ComboBox>
                 <Border Margin="50"></Border>
                 <Label FontSize="30">City:</Label>
-                <ComboBox Width="174" Height="41" x:Name="CityCombobox" SelectionChanged="City_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></ComboBox>
+                <ComboBox Width="174" Height="41" x:Name="CityCombobox" SelectionChanged="City_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"    FontSize="15"></ComboBox>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal"  Background="#D0E0F0">
                 <Label FontSize="30">Number of requests with selected loation:</Label>
                 <TextBlock x:Name="LocationTextblock" Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="100" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal"  Background="#D0E0F0">
                 <Label FontSize="30">Language:</Label>
-                <ComboBox Width="174" Height="41" x:Name="LanguageCombobox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Language_SelectionChanged"></ComboBox>
+                <ComboBox Width="174" Height="41" x:Name="LanguageCombobox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Language_SelectionChanged"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"   FontSize="15"></ComboBox>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal"  Background="#D0E0F0">
                 <Label FontSize="30">Number of requests with selected language:</Label>
                 <TextBlock x:Name ="LanguageTextBlock" Text="{Binding Path=LanguageRec,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="100" VerticalAlignment="Center" FontSize="30" FontWeight="Bold"></TextBlock>
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.RowSpan="4">
+            <StackPanel Grid.Column="1" Grid.RowSpan="4"  Background="#D0E0F0">
                 <Label FontSize="30" HorizontalAlignment="Center">Specific year:</Label>
-                <ComboBox Height="30" Width="258" x:Name="YearCombobox" SelectionChanged="Year_SelectionChanged" IsEnabled="False" IsEditable="False"></ComboBox>
+                <ComboBox Height="30" Width="258" x:Name="YearCombobox" SelectionChanged="Year_SelectionChanged" IsEnabled="False" IsEditable="False"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15"></ComboBox>
                 <Label FontSize="30" HorizontalAlignment="Center">Specific month:</Label>
-                <ComboBox Height="30" Width="258" x:Name="MonthCombobox" SelectionChanged="Month_SelectionChanged" IsEnabled="False" IsEditable="False"></ComboBox>
+                <ComboBox Height="30" Width="258" x:Name="MonthCombobox" SelectionChanged="Month_SelectionChanged" IsEnabled="False" IsEditable="False"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15"></ComboBox>
                 <Border Margin="0,15"></Border>
                 <Button Width="69" Height="30" Click="Reset_click">Reset</Button>
             </StackPanel>
@@ -57,9 +57,9 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="0"  Background="White">
                 <TextBlock Text="{Binding SelectedLanguage,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
-                <lvc:CartesianChart Name="languageRequestsChart" Height="550" Background="#F4F4F4">
+                <lvc:CartesianChart Name="languageRequestsChart" Height="485" Background="#F4F4F4" Width="699">
                     <lvc:CartesianChart.Series>
                         <lvc:LineSeries Title="Requests" Values="{Binding Requests}" PointGeometrySize="10">
                             <lvc:LineSeries.LineSmoothness>0.5</lvc:LineSeries.LineSmoothness>
@@ -70,9 +70,9 @@
                     </lvc:CartesianChart.Series>
                 </lvc:CartesianChart>
             </StackPanel>
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1"  Background="white">
                 <TextBlock Text="{Binding SelectedCity,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
-                <lvc:CartesianChart Name="locationRequestsChart" Height="550" Background="#F4F4F4" Width="714">
+                <lvc:CartesianChart Name="locationRequestsChart" Height="485" Background="#F4F4F4" Width="707">
                     <lvc:CartesianChart.Series>
                         <lvc:LineSeries Title="Requests" Values="{Binding Requests_location}" PointGeometrySize="10">
                             <lvc:LineSeries.LineSmoothness>0.5</lvc:LineSeries.LineSmoothness>

@@ -18,6 +18,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
 using BookingApp.WPF.Views.TouristViews;
 using System.Text.RegularExpressions;
+using Notifications.Wpf;
 
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
@@ -501,6 +502,18 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
 
             addTourWindow.Close();
+
+            var notificationManager = new NotificationManager();
+
+
+
+            notificationManager.Show(new NotificationContent
+            {
+                Title = "Success",
+                Message = "Tour created successfully.",
+                Type = NotificationType.Information
+            });
+
         }
 
         public void MakeReservation(int tourTime, int touristId)

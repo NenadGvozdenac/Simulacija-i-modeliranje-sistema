@@ -163,6 +163,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     Title = "Requests",
                     Values = Requests_location,
                     PointGeometrySize = 10
+                    
                 }
             };
 
@@ -297,7 +298,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                         if(location.City == requestStatisticsWindow.CityCombobox.Text && request.RequestDate.Year != Convert.ToInt32(requestStatisticsWindow.YearCombobox.SelectedItem))
                             number_1++;
                     }
-                    Location -= number_1;
+                    if (Location - number_1 >= 0)
+                    {
+                        Location -= number_1;
+                    }
+                    else
+                    {
+                        Location = 0;
+                    }
                 }
                 
                 if (requestStatisticsWindow.LanguageCombobox.SelectedIndex != -1)
@@ -308,7 +316,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                         if (language.Name == requestStatisticsWindow.LanguageCombobox.Text && request.RequestDate.Year != Convert.ToInt32(requestStatisticsWindow.YearCombobox.SelectedItem))
                             number_2++;
                     }
-                    LanguageRec -= number_2;
+                    if (LanguageRec - number_2 >= 0)
+                    {
+                        LanguageRec -= number_2;
+                    }
+                    else
+                    {
+                        LanguageRec = 0;
+                    }
                 }
                 number_1 = 0;
                 number_2 = 0;
@@ -336,7 +351,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                         if (location.City == requestStatisticsWindow.CityCombobox.Text && request.RequestDate.Month != Convert.ToInt32(requestStatisticsWindow.MonthCombobox.SelectedItem))
                             number_1++;
                     }
-                    Location -= number_1;
+                    if (Location - number_1 >= 0)
+                    {
+                        Location -= number_1;
+                    }
+                    else
+                    {
+                        Location = 0;
+                    }
                 }
 
                 if (requestStatisticsWindow.LanguageCombobox.SelectedIndex != -1)
@@ -347,7 +369,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                         if (language.Name == requestStatisticsWindow.LanguageCombobox.Text && request.RequestDate.Month != Convert.ToInt32(requestStatisticsWindow.MonthCombobox.SelectedItem))
                             number_2++;
                     }
-                    LanguageRec -= number_2;
+                    if (LanguageRec - number_2 >= 0)
+                    {
+                        LanguageRec -= number_2;
+                    }
+                    else
+                    {
+                        LanguageRec = 0;
+                    }
                 }
                 number_1 = 0;
                 number_2 = 0;

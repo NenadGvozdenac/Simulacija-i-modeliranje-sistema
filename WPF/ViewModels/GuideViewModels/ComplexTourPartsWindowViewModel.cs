@@ -2,6 +2,7 @@
 using BookingApp.Domain.Models;
 using BookingApp.View.PathfinderViews;
 using BookingApp.WPF.Views.GuideViews;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
@@ -26,6 +28,8 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public EventHandler<EventArgs> disableView_Handler { get; set; }
 
+        public ICommand confirmCommand { get; }
+
         public ComplexTourPartsWindowViewModel(ComplexTourPartsWindow _complexTourPartsWindow, int id, User _user)
         {
             complexTourPartsWindow = _complexTourPartsWindow;
@@ -33,6 +37,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             complexTourPartsControl = new ComplexTourPartsControl(id);
             dates = new ObservableCollection<DateTime>();
             request = new TourRequest();
+            confirmCommand = new RelayCommand(confirmClick);
             complexTourPartsWindow.container.Children.Add(complexTourPartsControl);
             complexTourPartsControl.complexTourPartsControlViewModel.BeginButtonClickedControl += (s, e) => AceptHandler(s, e);
 

@@ -31,21 +31,27 @@ namespace BookingApp.WPF.Views.GuideViews.Components
 
         private void AcceptRequest_Click(object sender, RoutedEventArgs e)
         {
-            OnAcceptButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(RequestId_TextBlock.Text), Convert.ToDateTime(StartBlock.Text)));
-            int id = Convert.ToInt32(Id_TextBlock.Text);
-            AddTourWindow addTourWindow = new AddTourWindow(UserService.GetInstance().GetById(id));
-            addTourWindow.addTourWindowViewModel.Country = CountryBlock.Text;
-            addTourWindow.addTourWindowViewModel.City = CityBlock.Text;
-            addTourWindow.addTourWindowViewModel.Language = LanguageBlock.Text;
-            addTourWindow.addTourWindowViewModel.RequestId = Convert.ToInt32(RequestId_TextBlock.Text);
-            addTourWindow.addTourWindowViewModel.TouristId = Convert.ToInt32(TouristId_TextBlock.Text);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to accept this request", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            TourStartTime startTime = new TourStartTime();
-            startTime.Time = Convert.ToDateTime(StartBlock.Text);
-            startTime.Guests = 0;
-            addTourWindow.addTourWindowViewModel.TourDates.Add(startTime);
 
-            addTourWindow.Show();
+            if (result == MessageBoxResult.Yes)
+            {
+                OnAcceptButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(RequestId_TextBlock.Text), Convert.ToDateTime(StartBlock.Text)));
+                int id = Convert.ToInt32(Id_TextBlock.Text);
+                AddTourWindow addTourWindow = new AddTourWindow(UserService.GetInstance().GetById(id));
+                addTourWindow.addTourWindowViewModel.Country = CountryBlock.Text;
+                addTourWindow.addTourWindowViewModel.City = CityBlock.Text;
+                addTourWindow.addTourWindowViewModel.Language = LanguageBlock.Text;
+                addTourWindow.addTourWindowViewModel.RequestId = Convert.ToInt32(RequestId_TextBlock.Text);
+                addTourWindow.addTourWindowViewModel.TouristId = Convert.ToInt32(TouristId_TextBlock.Text);
+
+                TourStartTime startTime = new TourStartTime();
+                startTime.Time = Convert.ToDateTime(StartBlock.Text);
+                startTime.Guests = 0;
+                addTourWindow.addTourWindowViewModel.TourDates.Add(startTime);
+
+                addTourWindow.Show();
+            }
         }
 
         public void OnAcceptButtonClicked(BeginButtonClickedEventArgs e)

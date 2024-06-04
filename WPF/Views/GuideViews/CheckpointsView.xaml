@@ -49,9 +49,9 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Border Margin="500,0,0,0"></Border>
-            <Button Content="Next checkpoint" Width="150" Height="39" Click="NextCheckpoint_Click"></Button>
+            <Button Content="Next checkpoint" Width="150" Height="48" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="2" Click="NextCheckpoint_Click"></Button>
             <Border Margin="200,0,0,0"></Border>
-            <Button Content="end tour" Width="150" Height="39" Click="EndTour_Click"></Button>
+            <Button Content="end tour" Width="150" Height="48" Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="2" Click="EndTour_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -65,10 +65,16 @@ namespace BookingApp.View.PathfinderViews.Componentss
 
       public void BeginButton_Click  (object sender, RoutedEventArgs e) 
         {
-            OnBeginButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
-            CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text));
-            checkpointsView.checkpointsViewModel.EndButtonClicked += (s,e)=>CheckpointsWindow_SomeEventHandler(s, e);
-            checkpointsView.ShowDialog();
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to start this tour", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                OnBeginButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
+                CheckpointsView checkpointsView = new CheckpointsView(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text));
+                checkpointsView.checkpointsViewModel.EndButtonClicked += (s, e) => CheckpointsWindow_SomeEventHandler(s, e);
+                checkpointsView.ShowDialog();
+            }
+
         }    
 
        public void Update()

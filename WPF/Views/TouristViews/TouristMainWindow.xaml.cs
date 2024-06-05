@@ -30,13 +30,32 @@ namespace BookingApp.WPF.Views.TouristViews
             DataContext = touristMainWindowViewModel;
             Update(user);
         }
-
-        
+        public void ShowMainWindow()
+        {
+            touristMainWindowViewModel.ShowMainWindow();
+        }
+        public void TourReservation(Tour tour, User user)
+        {
+            touristMainWindowViewModel.TourReservation(tour, user);
+        }
         public void ShowTourDetails(int tourId)
         {
             touristMainWindowViewModel.ShowTourDetails(tourId);
         }
 
+        public void ShowRequestsOnComplexTour(int requestId)
+        {
+            touristMainWindowViewModel.ShowRequestsOnComplexTour(requestId);
+        }
+        public void ShowReservationReview(User user, Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher voucher, TourStartTime tourStartTime)
+        {
+            touristMainWindowViewModel.ShowReservationReview(user, tour, guestNumber, tourists, voucher, tourStartTime);
+        }
+
+        public void ShowComplexTourRequest(User user)
+        {
+            touristMainWindowViewModel.ShowComplexTourRequest(user);
+        }
         public void ShowTourDates(Tour tour, int guestNumber, List<Tourist> tourists, TourVoucher tourVoucher)
         {
             touristMainWindowViewModel.ShowTourDates(tour, guestNumber, tourists, tourVoucher);
@@ -83,6 +102,23 @@ namespace BookingApp.WPF.Views.TouristViews
         public void Notifications_Click(object sender, MouseButtonEventArgs e)
         {
             touristMainWindowViewModel.Notifications_Click(sender, e);
+        }
+        public void Requests_Click(object sender, RoutedEventArgs e)
+        {
+            touristMainWindowViewModel.Requests_Click(sender, e);
+        }
+        public void AddRequest(User user)
+        {
+            touristMainWindowViewModel.AddRequest(user);
+        }
+
+        public void ComplexRequests_Click(object sender, RoutedEventArgs e)
+        {
+            touristMainWindowViewModel.ComplexRequests_Click(sender, e);
+        }
+        public void ShowTourRequestStatistics()
+        {
+            touristMainWindowViewModel.ShowTourRequestStatistics();
         }
 
         /*internal void ShowTourDates(Tour selectedTour, int guestNumber, List<Tourist> tourists)

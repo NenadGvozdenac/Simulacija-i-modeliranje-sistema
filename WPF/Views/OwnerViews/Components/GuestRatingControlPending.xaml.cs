@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Repositories;
 using BookingApp.WPF.ViewModels.OwnerViewModels.Components;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,32 @@ namespace BookingApp.WPF.Views.OwnerViews.Components;
 
 public partial class GuestRatingControlPending : UserControl
 {
+    private readonly bool isPencilEnabled;
     public PendingGuestRatingCardViewModel _pendingGuestRatingCardViewModel;
 
     public GuestRatingControlPending(GuestRating guestRating, bool isPencilEnabled)
     {
+        this.isPencilEnabled = isPencilEnabled;
         InitializeComponent();
 
-        _pendingGuestRatingCardViewModel = new(this, guestRating, isPencilEnabled);
+        _pendingGuestRatingCardViewModel = new(this, guestRating);
         DataContext = _pendingGuestRatingCardViewModel;
+
+        if(isPencilEnabled)
+        {
+            Border.Cursor = Cursors.Hand;
+            EyeButton.Visibility = Visibility.Visible;
+            HoverAnimation hoverAnimation = new HoverAnimation();
+            hoverAnimation.AnimateHover(this.Border);
+        } else
+        {
+            XImage.Visibility = Visibility.Visible;
+        }
     }
 
     private void EyeButton_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        _pendingGuestRatingCardViewModel.EyeButtonClicked(this);
+        if(isPencilEnabled)
+            _pendingGuestRatingCardViewModel.EyeButtonClicked(this);
     }
 }

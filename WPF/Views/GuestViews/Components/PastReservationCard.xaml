@@ -101,6 +101,6 @@
                 <Button x:Name="ReviewButton" Style="{StaticResource ClearButtonStyleGuest}" Content="Tap here to leave a review" FontSize="11" Click="Review_Click" Height="25" HorizontalAlignment="Left" Margin="9,59,0,0" VerticalAlignment="Top" Width="146"/>
             </Grid>
         </Border>
-        <Button Content="Download Reservation Details(PDF)" Style="{StaticResource ClearButtonStyleGuest}" HorizontalAlignment="Left" Margin="341,164,0,0" VerticalAlignment="Top" Height="27" Width="202"/>
+        <Button Click="DownloadPdf_Click" Content="Download Reservation Details(PDF)" Style="{StaticResource ClearButtonStyleGuest}" HorizontalAlignment="Left" Margin="341,164,0,0" VerticalAlignment="Top" Height="27" Width="202"/>
     </Grid>
 </UserControl>

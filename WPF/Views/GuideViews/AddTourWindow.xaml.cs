@@ -37,7 +37,7 @@ namespace BookingApp.View.PathfinderViews
         }
 
 
-        AddTourWindowViewModel addTourWindowViewModel { get; set; }
+        public AddTourWindowViewModel addTourWindowViewModel { get; set; }
 
         public AddTourWindow(User user)
         {
@@ -64,20 +64,14 @@ namespace BookingApp.View.PathfinderViews
             addTourWindowViewModel.LoadLanguages();
         }
 
-        private void AddURLClick(object sender, RoutedEventArgs e)
-        {
-           addTourWindowViewModel.AddURLClick(sender, e);   
-        }
+        
 
         private bool ImageAlreadyExists()
         {
           return addTourWindowViewModel.ImageAlreadyExists();
         }
 
-        private void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            addTourWindowViewModel.ImageURLTextBox_MouseDown(sender, e);
-        }
+       
 
 
         private void AddCheckpointClick(object sender, RoutedEventArgs e)
@@ -103,7 +97,7 @@ namespace BookingApp.View.PathfinderViews
 
         private void ConfirmButtonClick(object sender, RoutedEventArgs e)
         {
-            addTourWindowViewModel.ConfirmButtonClick(sender, e);
+            addTourWindowViewModel.ConfirmButtonClick();
         }
 
         public void SaveImages(ObservableCollection<TourImage> images,Tour tour)
@@ -127,7 +121,64 @@ namespace BookingApp.View.PathfinderViews
             return addTourWindowViewModel.IsDataValid();
         }
 
+        private void RightArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.RightArrow_Click();
+        }
 
+        private void LeftArrow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LeftArrow_Click();
+        }
 
+        private void AddImage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveImage_Click(object sender, RoutedEventArgs e)
+        {
+            addTourWindowViewModel.DeleteImageClick();
+        }
+
+        private void LocationRecomendation_Click(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LocationRecomendation_Click();
+        }
+
+        private void LanguageRecomendation_Click(object sender, MouseButtonEventArgs e)
+        {
+            addTourWindowViewModel.LanguageRecomendation_Click();
+        }
+
+        private void DurationTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            addTourWindowViewModel.DurationTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void DurationTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            addTourWindowViewModel.DurationTextBox_PreviewKeyDown(sender, e);
+        }
+
+        private void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            addTourWindowViewModel.CapacityTextBox_PreviewTextInput(sender, e);
+        }
+
+        private void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            addTourWindowViewModel.CapacityTextBox_PreviewKeyDown(sender,e);
+        }
+
+        private void RemoveCheckpoint_Click(object sender, RoutedEventArgs e)
+        {
+            addTourWindowViewModel.RemoveCheckpoint_Click();
+        }
+
+        private void RemoveDate_Click(object sender, RoutedEventArgs e)
+        {
+            addTourWindowViewModel.RemoveDate_Click();
+        }
     }
 }

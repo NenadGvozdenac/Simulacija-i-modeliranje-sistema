@@ -4,41 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="TourDemographics" Height="450" Width="800" SizeToContent="WidthAndHeight">
+        Title="TourDemographics" Height="820" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="394.582"></RowDefinition>
+                <RowDefinition />
+                <RowDefinition Height="700.582"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column ="0">
-                    <StackPanel Orientation="Horizontal">
-                        <ComboBox x:Name="YearBox" Height="25" Width="100" ItemsSource="{Binding times}" SelectionChanged="yearSelectionChanged"></ComboBox>
+                    <StackPanel Orientation="Horizontal" Background=" #003580">
+                        <Border Margin="50"></Border>
+                        <ComboBox x:Name="YearBox" Height="50" Width="150" ItemsSource="{Binding times}" SelectionChanged="yearSelectionChanged"   Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15"></ComboBox>
                         <Border Margin="10,0,0,0"/>
-                        <Button Width="38" Height="24" Click="yearSelectionChanged_Click">o</Button>
+                        <Button Width="100" Height="50" Click="yearSelectionChanged_Click"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="12">Search by year</Button>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column ="1">
-                    <Button Height="25" Width="100" Content="All time" Click="AllTime_Click"></Button>
+                    <StackPanel Background=" #003580">
+                        <Border Margin="0,0,0,15"></Border>
+                        <Button Height="45" Width="154" Content="All time" Click="AllTime_Click"  Background="#f0f0f0" Foreground="#003580" FontWeight="Bold" BorderBrush="Black" BorderThickness="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="15"/>
+                        
+                    </StackPanel>
                 </Grid>
             </Grid>
-            
+
             <Grid Grid.Row="1">
                 <local:DemographicsControl x:Name="demographicsControl"></local:DemographicsControl>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="#f3f3f3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="5*"></RowDefinition>
@@ -54,24 +60,27 @@
             </Grid>
             <Grid Grid.Row="2" Grid.Column="0">
                 <StackPanel>
-                    <Label Content="&#60;18" HorizontalAlignment="Center"></Label>
-                    <TextBlock Text="{Binding Path=Sub18, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center"></TextBlock>
+                    <Label Content="&#60;18" HorizontalAlignment="Center" FontWeight="bold" FontSize="30"></Label>
+                    <TextBlock Text="{Binding Path=Sub18, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" FontSize="20"></TextBlock>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="1">
                 <StackPanel>
-                <Label Content="18 &#60; xx &#60; 50" HorizontalAlignment="Center"></Label>
-                    <TextBlock Text="{Binding Path=Middle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center"></TextBlock>
+                    <Label Content="18 &#60; xx &#60; 50" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"></Label>
+                    <TextBlock Text="{Binding Path=Middle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontSize="20"></TextBlock>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="2">
                 <StackPanel>
-                    <Label Content="&#60;50" HorizontalAlignment="Center"></Label>
-                    <TextBlock Text="{Binding Path=Above50, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center"></TextBlock>
+                    <Label Content="&#60;50" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"></Label>
+                    <TextBlock Text="{Binding Path=Above50, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontSize="20"></TextBlock>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding Path=TourName ,UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}"></TextBlock>
+            <Grid Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0,0,0,574" Grid.RowSpan="2" Width="750">
+                <TextBlock Text="{Binding Path=TourName ,UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                <lvc:PieChart x:Name="pieChart" Series="{Binding PieSeriesCollection}" Margin="10,-47,0,10"/>
             </Grid>
         </Grid>
         <Border Grid.Column="1" BorderBrush="Gray" Opacity="0.9" BorderThickness="1,0,0,0"/>

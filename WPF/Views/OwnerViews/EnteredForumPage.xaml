@@ -1,0 +1,49 @@
+﻿<Page x:Class="BookingApp.WPF.Views.OwnerViews.EnteredForumPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="11*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5 10" Style="{StaticResource ImageHover}" MouseDown="BackButton_Click"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{Binding ForumName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+        </Grid>
+
+        <Grid Grid.Row="1"  x:Name="Navbar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="ScrollViewerMainPanel">
+                <StackPanel x:Name="MainPanel">
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="MessageTextBox" Grid.Column="0" Margin="5" TextWrapping="Wrap" Text="{Binding NewComment}" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextAlignment="Left" FontSize="16" FontFamily="{StaticResource Verdana}" Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource BackgroundBrush}" BorderBrush="{DynamicResource ForegroundBrush}" BorderThickness="1" Padding="5" />
+                <Button x:Name="SendButton" Grid.Column="1" Content="Send" Margin="5" Click="SendButton_Click"  Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource BackgroundBrush}" FontSize="16" FontFamily="{StaticResource Verdana}" BorderBrush="{DynamicResource ForegroundBrush}" BorderThickness="1" Padding="5" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

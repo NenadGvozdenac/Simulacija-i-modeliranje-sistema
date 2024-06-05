@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.View.PathfinderViews"
              xmlns:components="clr-namespace:BookingApp.View.PathfinderViews.Componentss"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="#f2f6fa">
     <Grid>
         <ScrollViewer>
             <!--HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"-->
@@ -14,7 +14,7 @@
         ItemsSource="{Binding tours}" Margin="3,3,3,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:TourCard x:Name="tourcard" CancelTourClicked = "tourcard_CancelTourClicked"/>
+                        <components:TourCard x:Name="tourcard" CancelTourClicked = "tourcard_CancelTourClicked" Height="200" Width="1100"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

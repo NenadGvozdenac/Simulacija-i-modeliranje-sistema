@@ -6,60 +6,95 @@
              xmlns:local="clr-namespace:BookingApp.View.PathfinderViews.Componentss"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="700">
-    <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
+    <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0" CornerRadius="10">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="3" Color="Gray" Opacity="0.4"/>
+        </Border.Effect>
         <Grid Background="#f2f6fa" Margin="10,20,10,20">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect ShadowDepth="3" Color="Gray" Opacity="0.4"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="5" Color="Gray" Opacity="0.6"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.02" ScaleY="1.02"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Border BorderThickness="1" BorderBrush="Black"/>
-                <Image Source="{Binding Images[0].Path}" Stretch="Fill" Margin="39,33,17,22"/>
+            <Grid Grid.Column="0" ClipToBounds="True">
+                <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10"/>
+                <Image Source="{Binding Images[0].Path}" Stretch="Fill"/>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="10,0,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="4*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="4*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="LocationIcon" Source="..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="27"/>
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Location.Country}" Width="49" Height="17"/>
-                    <TextBlock  TextWrapping="Wrap" Text="," Height="19" Width="4" />
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Location.City}"  Width="106" Height="16"/>
+                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                    <Image x:Name="LocationIcon" Source="..\..\..\..\Resources\Assets\map-marker.171x256.png" Height="20" Width="27"/>
+                    <StackPanel VerticalAlignment="Top">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Location.Country}" Width="201" Height="17" TextAlignment="Left" Foreground="#333" FontSize="10" FontWeight="Bold" />
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Location.City}" Width="201" Height="16" Foreground="#333" FontSize="10" />
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="LanguageIcon" Source="..\..\..\Resources\Assets\language.png" Height="23"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center"/>
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                    <Image x:Name="LanguageIcon" Source="..\..\..\..\Resources\Assets\language.png" Height="23" />
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Language}" Width="54" Height="18" TextAlignment="Center" Foreground="#333" FontSize="12" FontWeight="Bold" />
                 </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="CapacityIcon" Source="..\..\..\Resources\Assets\users.png" Height="19" />
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Center"/>
+                <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                    <Image x:Name="CapacityIcon" Source="..\..\..\..\Resources\Assets\users.png" Height="19" />
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Capacity}" Width="71" Height="16" TextAlignment="Left" Foreground="#333" FontSize="12" FontWeight="Bold" />
                 </StackPanel>
-                <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
-                    <Image x:Name="DurationIcon" Source="..\..\..\Resources\Assets\hourglass.png" Height="20"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="51" Height="19" TextAlignment="Center"/>
-                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="19" TextAlignment="Left"/>
+                <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                    <Image x:Name="DurationIcon" Source="..\..\..\..\Resources\Assets\hourglass.png" Height="20" />
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Duration}" Width="15" Height="20" TextAlignment="Center" Foreground="#333" FontSize="12" FontWeight="Bold" />
+                    <Border Margin="5,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="hours" Width="51" Height="26" TextAlignment="Left"  FontSize="15" Foreground="#003580" FontWeight="Bold"/>
                 </StackPanel>
-
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="387" Height="78"/>
-                    <Button Content="Stats" Height="26"  Width="58" VerticalAlignment="Center" HorizontalAlignment="Right" Click="TourStats_Click"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="4" Margin="0,10,0,0">
+                    <Border Margin="10,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="387" Height="78" Foreground="#333" FontSize="12" />
+                    <Button Content="Stats" Height="26" Width="58" VerticalAlignment="Top" HorizontalAlignment="Right" Click="TourStats_Click" Background="White" Foreground="#003580" FontWeight="Bold" FontSize="12" BorderBrush="Black" BorderThickness="1">
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5" />
+                        </Button.Effect>
+                    </Button>
                 </StackPanel>
-
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" >
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding Name}"  TextAlignment="Center" FontSize="15" Width="369" VerticalAlignment="Top"/>
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"  TextAlignment="Right"  Width="102" VerticalAlignment="Top" x:Name="DateTextBlock" Visibility="Collapsed"/>
-                    <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="IdTextBlock"></TextBlock>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="4" Margin="0,5,0,0">
+                    <Border Margin="25,0,0,0"></Border>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Name}" TextAlignment="Center" FontSize="15" Width="369" VerticalAlignment="Top" FontWeight="Bold" Foreground="#333" />
+                    <TextBlock TextWrapping="Wrap" Text="{Binding CurrentDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}" TextAlignment="Right" Width="102" VerticalAlignment="Top" x:Name="DateTextBlock" Visibility="Collapsed" Foreground="#333" />
+                    <TextBlock Text="{Binding Id}" Visibility="Collapsed" x:Name="IdTextBlock" />
                 </StackPanel>
-
             </Grid>
         </Grid>
     </Border>
 </UserControl>
+
+

@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.RequestTour"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="585" d:DesignWidth="1000">
+    <Grid Background="GhostWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Label Content="Create a tour request:" FontStyle="Italic" FontSize="50" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock Text="Country:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0"/>
+                <ComboBox x:Name="CountryComboBox" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" SelectionChanged="CountryComboBox_SelectionChanged" IsEditable="False" Margin="118,26,19,410"/>
+                <TextBlock Text="City:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,74,0,0"/>
+                <ComboBox x:Name="CityComboBox" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEditable="False" Margin="118,74,19,361"/>
+                <TextBlock Text="Language:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,129,0,0"/>
+                <ComboBox x:Name="LanguageComboBox" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" Margin="147,130,10,306"/>
+                <TextBlock Text="Description:" FontSize="25" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,220,0,0"/>
+                <TextBox x:Name="DescriptionBox" HorizontalAlignment="Center" VerticalAlignment="Top" Height="169" Width="283" Margin="0,260,0,0"/>
+                <Border BorderBrush="Black" BorderThickness="0,0,1,0"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Border BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                <TextBlock Text="Guest number:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,29,0,0"/>
+                <TextBox x:Name="GuestNumberText" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" Margin="240,30,0,0"/>
+                <TextBlock Text="Name:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,97,0,0"/>
+                <TextBox  x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,98,0,0"/>
+                <TextBlock Text="Last name:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,161,0,0"/>
+                <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="172" Margin="197,162,0,0"/>
+                <TextBlock Text="Age:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,220,0,0"/>
+                <TextBox x:Name="GuestAgeText" TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" Margin="112,221,0,0"/>
+                <Button Click="AddTourist_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="59" Margin="304,221,0,0">
+                    <Image Source="/Resources/Assets/plus-symbol-button.png"/>
+                </Button>
+                <DataGrid Name="TouristDataGrid" ItemsSource="{Binding _tourists}" CanUserAddRows="False" AutoGenerateColumns="False" Margin="10,291,25,26">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="*" />
+                        <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+            <Grid Grid.Column="2">
+                <TextBlock Text="Begin Date:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,29,0,0"/>
+                <DatePicker FontSize="15" x:Name="BeginDatePicker" SelectedDate="{Binding BeginDate, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="200" Margin="21,78,0,0"/>
+                <TextBlock Text="End Date:" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,220,0,0"/>
+                <DatePicker FontSize="15" x:Name="EndDatePicker" SelectedDate="{Binding EndDate, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="200" Margin="22,285,0,0"/>
+                <Button Content="FINISH" Click="Finish_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Height="51" Width="139" Margin="0,394,0,0"/>
+                <Label Visibility="Hidden" x:Name="enterAllFieldsMessage" Content="Enter all fields!" FontSize="20" Foreground="Red" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,352,0,0"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

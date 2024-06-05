@@ -42,7 +42,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 if(TourService.GetInstance().GetByOwnerId(_user.Id).Contains(TourService.GetInstance().GetById(review_temp.TourId))) 
                 {
                     TourReview review_copy = new TourReview();
-                    review_copy.TourId = review_temp.Id;
+                    review_copy.TourId = review_temp.TourId;
                     review_copy.UserId = review_temp.UserId;
                     review_copy.Id = review_temp.Id;
                     review_copy.ReservationId = review_temp.ReservationId;
@@ -53,6 +53,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                     review_copy.Feedback = review_temp.Feedback;
                     review_copy.UserName = UserService.GetInstance().GetById(review_temp.UserId).Username;
                     review_copy.Status = review_temp.Status;
+                    review_copy.ReservationId = 14;
+                    review_copy.Checkpoint = "Katedrala";
+                    review_copy.ReviewImages = new(TourReviewImageService.GetInstance().GetImagesByTourId(review_copy.TourId));
 
                     tourReviews.Add(review_copy);
                 }

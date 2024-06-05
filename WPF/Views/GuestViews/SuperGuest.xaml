@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuestViews.SuperGuest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="718" d:DesignWidth="774">
+    <Grid Background="#FFF8F0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock x:Name="Title_TextBlock" Style="{StaticResource MainTextBlockGuest}" TextAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="35" Text="What is Super-Guest?" VerticalAlignment="Center" Height="44" Width="357" Margin="30,0,0,0"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Border CornerRadius="25" Background="#545E75" BorderThickness="4" BorderBrush="#9DD9D2" Margin="10,10,10,486">
+                <TextBlock Style="{StaticResource MainWhiteTextBlockGuest}" Text="Welcome to the Super-Guest club! Ever wondered what it takes to become a Super-Guest? It's simple – just rack up at least 10 bookings over the past year, and voilà, you're in! Once you've earned your Super-Guest status, you'll enjoy perks like exclusive discounts and priority treatment. Plus, we'll even throw in 5 bonus points to sweeten the deal. But here's the catch – to maintain your Super-Guest title, you'll need to keep up the good work and continue making those bookings. Otherwise, your status and bonus points will bid you adieu. So go ahead, book your next adventure and start reaping the rewards of being a Super-Guest!" 
+                           TextWrapping="Wrap" FontSize="15"  Margin="12,6,6,6"/>
+            </Border>
+
+            <TextBlock Text="Super-Guest Status: Earned with a minimum of 10 bookings in the past year.&#x0a;&#x0a;Duration: Super-Guest title lasts for one year.&#x0a;&#x0a;Renewal: Maintain status by meeting the 10-booking requirement annually.&#x0a;&#x0a;Benefits: Super-Guests receive 5 bonus points valid for one year, which can be used towards future bookings for discounts.&#x0a;&#x0a;Point Reset: Bonus points reset to 0 if Super-Guest status is not maintained.&#x0a;&#x0a;Usage: One bonus point is redeemed per booking, providing discounts."
+                       TextWrapping="Wrap" Margin="18,164,143,202" FontSize="17" Style="{StaticResource MainTextBlockGuest}"/>
+
+            <Border CornerRadius="25" Background="#545E75" BorderThickness="4" BorderBrush="#9DD9D2" Margin="10,432,183,56">
+                <Grid>
+                    <TextBlock Style="{StaticResource MainWhiteTextBlockGuest}"  TextAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="32" Text="What is Super-Guest?" VerticalAlignment="Top" Height="40" Width="333" Margin="8,11,0,0"/>
+                    <TextBlock x:Name="congratulationsTextBlock" Style="{StaticResource MainWhiteTextBlockGuest}"   HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="17" Text="Congratulations! You're now an esteemed member of our community!" VerticalAlignment="Top" Height="39" Width="553" Margin="20,56,0,0" TextDecorations="Underline"/>
+                    <TextBlock x:Name="pointsTextBlock" Style="{StaticResource MainWhiteTextBlockGuest}"   HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="17" Text="Remaining points for this year: Nan" VerticalAlignment="Top" Height="29" Width="463" Margin="20,96,0,0"/>
+                </Grid>
+
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
+

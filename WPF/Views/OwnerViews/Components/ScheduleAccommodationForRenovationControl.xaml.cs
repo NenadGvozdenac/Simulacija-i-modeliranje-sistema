@@ -1,6 +1,8 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.Views.OwnerViews.AnimatorHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +23,12 @@ namespace BookingApp.WPF.Views.OwnerViews.Components;
 public partial class ScheduleAccommodationForRenovationControl : UserControl
 {
     public Accommodation Accommodation { get; }
-    private DateTime? lastRenovationDate;
+    private DateSpan lastRenovationDate;
     private readonly string DEFAULT_HOUSE_PICTURE = "../../../Resources/Assets/default_house.png";
 
     public string LastRenovationDate
     {
-        get => lastRenovationDate.HasValue ? DateParser.ToString((DateTime)lastRenovationDate) : "Never been renovated!";
+        get => lastRenovationDate != null ? lastRenovationDate.ToString() : TranslationSource.Instance["NeverBeenRenovated"];
     }
 
     public ScheduleAccommodationForRenovationControl(Accommodation accommodation)
@@ -36,6 +38,8 @@ public partial class ScheduleAccommodationForRenovationControl : UserControl
         Accommodation = accommodation;
         lastRenovationDate = AccommodationRenovationService.GetInstance().GetLastRenovationDate(accommodation.Id);
         LoadFirstImage();
+        HoverAnimation hoverAnimation = new HoverAnimation();
+        hoverAnimation.AnimateHover(this.Border);
     }
 
     private void LoadFirstImage()

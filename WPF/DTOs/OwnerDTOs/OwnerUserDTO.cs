@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 
 namespace BookingApp.WPF.DTOs.OwnerDTOs;
@@ -22,7 +23,7 @@ public class OwnerUserDTO
     private string _title;
     public string Title
     {
-        get => OwnerInfo.IsSuperOwner ? "SUPER OWNER" : "OWNER";
+        get => OwnerInfo.IsSuperOwner ? TranslationSource.Instance["SuperOwnerUC"] : TranslationSource.Instance["OwnerUC"];
         set => _title = value;
     }
 

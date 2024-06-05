@@ -52,17 +52,20 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             {
                 guideKnowledgeRating = starNumber;
                 UpdateStarRatingUI("guideKnowledgeStar", guideKnowledgeRating);
+                rateTour.knowledgeMessage.Visibility = Visibility.Hidden;
             }
             else if (starName.StartsWith("guideLanguageStar"))
             {
                 guideLanguageRating = starNumber;
                 UpdateStarRatingUI("guideLanguageStar", guideLanguageRating);
+                rateTour.languageMessage.Visibility = Visibility.Hidden;
             }
             // Ocenjivanje Interestigness
             else if (starName.StartsWith("interestingnessStar"))
             {
                 interestingnessRating = starNumber;
                 UpdateStarRatingUI("interestingnessStar", interestingnessRating);
+                rateTour.interestMessage.Visibility = Visibility.Hidden;
             }
         }
 
@@ -85,6 +88,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         {
             TextBox textBox = sender as TextBox;
             feedbackText = textBox.Text;
+            rateTour.feedbackMessage.Visibility = Visibility.Hidden;
         }
 
         public void AddPhoto_Click(object sender, RoutedEventArgs e)
@@ -98,12 +102,71 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
             _reviewImages.Add(tourReviewImage);
             rateTour.reviewImages_StackPanel.Children.Add(image);
+            rateTour.imagesMessage.Visibility = Visibility.Hidden;
+        }
+
+        public bool CheckLanguage()
+        {
+            if(guideLanguageRating < 1 || guideLanguageRating > 5)
+            {
+                rateTour.languageMessage.Visibility = Visibility.Visible;
+                return true;
+            }
+            return false;
+        }
+        public void CheckKnowledge()
+        {
+            if(guideKnowledgeRating < 1 || guideKnowledgeRating > 5)
+            {
+                rateTour.knowledgeMessage.Visibility = Visibility.Visible;
+            }
+        }
+        public void CheckInterestingness()
+        {
+            if(interestingnessRating < 1 || interestingnessRating > 5)
+            {
+                rateTour.interestMessage.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void CheckFeedback()
+        {
+            if(feedbackText == "")
+            {
+                rateTour.feedbackMessage.Visibility = Visibility.Visible;
+            }
+        }
+        public void CheckImages()
+        {
+            if (_reviewImages.Count == 0)
+            {
+                rateTour.imagesMessage.Visibility = Visibility.Visible;
+            }
+        }
+        public bool CheckVisibility()
+        {
+            if (rateTour.languageMessage.Visibility == Visibility.Visible|| rateTour.feedbackMessage.Visibility == Visibility.Visible || rateTour.imagesMessage.Visibility==Visibility.Visible || rateTour.knowledgeMessage.Visibility == Visibility.Visible || rateTour.interestMessage.Visibility == Visibility.Visible)
+            {
+                return true;
+            }
+            return false;
         }
         public void Finish_Click(object sender, RoutedEventArgs e)
         {
-            if (guideKnowledgeRating.ToString() != "" || guideLanguageRating.ToString() != "" || _reviewImages.Count != 0)
+            CheckInterestingness();
+            CheckKnowledge();
+            CheckLanguage();
+            CheckImages();
+            CheckFeedback();
+
+            if (CheckVisibility()) {
+                return;
+            }
+
+            //if (guideKnowledgeRating.ToString() != "" || guideLanguageRating.ToString() != "" || _reviewImages.Count != 0)
+            if(!CheckVisibility())
             {
-                TourReview tourReview = new TourReview(_user.Id, selectedTour.Id, guideKnowledgeRating, guideLanguageRating, interestingnessRating, feedbackText);
+                TourReview tourReview = new TourReview(_user.Id, selectedTour.Id, guideKnowledgeRating, guideLanguageRating, interestingnessRating, feedbackText, "Invalid");
                 TourReviewService.GetInstance().Add(tourReview);
 
                 foreach (TourReviewImage reviewImage in _reviewImages)
@@ -121,7 +184,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             }
             else
             {
-                MessageBox.Show("Popunite sva polja!");
+                //MessageBox.Show("Popunite sva polja!");
             }
         }
     }

@@ -4,22 +4,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local1="clr-namespace:BookingApp.WPF.Views.OwnerViews.Converters"
+      xmlns:ns="clr-namespace:BookingApp.Application.Localization" xmlns:controls="clr-namespace:BookingApp.WPF.Views.OwnerViews.CustomControls"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430"
         Background="Transparent">
-    <Grid ClipToBounds="True" Background="{StaticResource Creme}">
+    <Grid ClipToBounds="True" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="Lavender">
+        <Grid Grid.Row="0" Background="{DynamicResource Navbar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="..\..\..\Resources\Assets\back_left_arrow.png" Margin="5" Style="{StaticResource ImageHover}" MouseDown="Back_Click"/>
-            <TextBlock Grid.Column="1" Text="Reservation rescheduling" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
+            <Image Grid.Column="0" Source="{DynamicResource BackArrow}" Margin="5" Style="{StaticResource ImageHover}" MouseDown="Back_Click"/>
+            <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="1" Text="{ns:Loc ReservationRescheduling}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}"/>
         </Grid>
         <Grid Grid.Row="1" x:Name="Navbar">
             <Grid.ColumnDefinitions>
@@ -44,53 +45,59 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Guest.Username, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Foreground="{DynamicResource ForegroundBrush}" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Guest.Username, Mode=TwoWay}" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource Verdana}" TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
-                    <Label Content="Accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Name, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Accommodation}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Name, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch">
-                    <Label Content="Location" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Location, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Location}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Location, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Type of accommodation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Type, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AccommodationType}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Type, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Days of reservation" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.DaysOfReservation, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc ReservationDays}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.DaysOfReservation, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Number of guests" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Reservation.GuestsNumber, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc NumberOfGuests}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Reservation.GuestsNumber, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Current reservation timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.CurrentReservationTimespan, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc CurrentReservationTimespan}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.CurrentReservationTimespan, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Wanted reservation timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.WantedReservationTimespan, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc WantedReservationTimespan}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.WantedReservationTimespan, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Status of wanted reservation timespan" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label x:Name="StatusLabel" Content="{Binding AccommodationReservationMovingDTO.StatusOfWantedTimespan, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc StatusOfWantedReservationTimespan}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" x:Name="StatusLabel" Content="{Binding AccommodationReservationMovingDTO.StatusOfWantedTimespan, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Day before cancellation is final" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.DayBeforeCancellationIsFinal, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc DayBeforeCancellationIsFinal}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.DayBeforeCancellationIsFinal, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
                 <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                    <Label Content="Price" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
-                    <Label Content="{Binding AccommodationReservationMovingDTO.AccommodationReservationMoving.Accommodation.Price, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc Price}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2"/>
+                    <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding AccommodationReservationMovingDTO.Price, Mode=OneWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="0 2"/>
                 </StackPanel>
-                <Label Grid.Row="9" Grid.Column="0" Content="Additional comment" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2" VerticalAlignment="Bottom"/>
-                <CheckBox Grid.Row="9" Grid.Column="1" Content="Add comment?" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="5 2" Margin="10 0" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Checked="CheckBox_Checked_Change" Unchecked="CheckBox_Checked_Change"/>
+                <Label Foreground="{DynamicResource ForegroundBrush}" Grid.Row="9" Grid.Column="0" Content="{ns:Loc AdditionalComment}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="0 2" VerticalAlignment="Bottom"/>
+                <CheckBox Grid.Row="9" Grid.Column="1" Foreground="{DynamicResource ForegroundBrush}" Content="{ns:Loc AddComment}" FontSize="16" FontFamily="{StaticResource Verdana}" Padding="5 2" Margin="10 0" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Checked="CheckBox_Checked_Change" Unchecked="CheckBox_Checked_Change"/>
 
                 <ScrollViewer Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBox x:Name="CommentTextbox" Text="{Binding AccommodationReservationMovingDTO.Comment, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsEnabled="False"/>
-                </ScrollViewer>
+                    <AdornerDecorator>
+                        <TextBox x:Name="CommentTextbox" Text="{Binding AccommodationReservationMovingDTO.Comment, Mode=TwoWay}" FontFamily="{StaticResource Verdana}" FontSize="13" Padding="5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsEnabled="False">
+                            <controls:WatermarkService.Watermark>
+                                <TextBlock FontSize="16" Text="{ns:Loc EnterComment}"/>
+                            </controls:WatermarkService.Watermark>
+                        </TextBox>
+                    </AdornerDecorator>
+                 </ScrollViewer>
             </Grid>
         </Grid>
         <Grid Grid.Row="3">
@@ -98,8 +105,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Reject" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Red" Foreground="White" Command="{Binding RejectClick}"/>
-            <Button Grid.Column="1" Content="Accept" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Green" Foreground="White" Command="{Binding AcceptClick}"/>
+            <Button Grid.Column="0" Content="{ns:Loc Reject}" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Red" Foreground="White" Command="{Binding RejectClick}"/>
+            <Button Grid.Column="1" Content="{ns:Loc Accept}" FontSize="16" Style="{StaticResource RoundedButtonStyle}" Background="Green" Foreground="White" Command="{Binding AcceptClick}"/>
         </Grid>
     </Grid>
 </Page>

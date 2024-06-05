@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Repositories;
@@ -18,7 +19,16 @@ public class AccommodationReservationMovingDTO
     public int DaysOfReservation { get; set; }
     public string Comment { get; set; }
     public string StatusOfWantedTimespan { get; set; }
-    public DateTime DayBeforeCancellationIsFinal { get; set; }
+    private DateTime _dayBeforeCancellationIsFinal;
+    public string DayBeforeCancellationIsFinal {
+        get => DateParser.ToString(_dayBeforeCancellationIsFinal); 
+    }
+
+    private double _price;
+    public string Price
+    {
+        get => _price.ToString() + " $";
+    }
 
     private Brush _statusColor;
 
@@ -26,7 +36,8 @@ public class AccommodationReservationMovingDTO
     {
         AccommodationReservationMoving = accommodationReservationMoving;
         DaysOfReservation = (accommodationReservationMoving.CurrentReservationTimespan.End - accommodationReservationMoving.CurrentReservationTimespan.Start).Days;
-        DayBeforeCancellationIsFinal = accommodationReservationMoving.CurrentReservationTimespan.Start.AddDays(-accommodationReservationMoving.Accommodation.CancellationPeriodDays);
+        _dayBeforeCancellationIsFinal = accommodationReservationMoving.CurrentReservationTimespan.Start.AddDays(-accommodationReservationMoving.Accommodation.CancellationPeriodDays);
+        _price = accommodationReservationMoving.Accommodation.Price;
         CalculateStatus();
     }
 
@@ -42,12 +53,12 @@ public class AccommodationReservationMovingDTO
 
         if (AccommodationReservationService.GetInstance().IsTimespanFree(wantedSpan, accommodation, AccommodationReservationMoving))
         {
-            StatusOfWantedTimespan = "Reservation can be moved to wanted timespan";
+            StatusOfWantedTimespan = TranslationSource.Instance["StatusCanBeMoved"];
             _statusColor = Brushes.Green;
         }
         else
         {
-            StatusOfWantedTimespan = "Reservation timespan is already reserved.";
+            StatusOfWantedTimespan = TranslationSource.Instance["StatusCannotBeMoved"];
             _statusColor = Brushes.Red;
         }
     }

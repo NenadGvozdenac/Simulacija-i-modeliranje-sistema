@@ -1,9 +1,12 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repositories;
 using BookingApp.View;
 using Microsoft.Extensions.DependencyInjection;
+using Notifications.Wpf;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace BookingApp;
@@ -13,6 +16,12 @@ public partial class App
     private static IServiceProvider _serviceProvider;
 
     public static IServiceProvider ServiceProvider => _serviceProvider;
+
+    public static Dictionary<string, string> Languages = new Dictionary<string, string>
+    {
+        { "English", "en-US" },
+        { "Serbian", "sr-RS" }
+    };
 
     private void Application_Startup(object sender, StartupEventArgs e)
     {
@@ -28,6 +37,11 @@ public partial class App
         signInForm.Show();
     }
 
+    public void ChangeLanguage(string lang)
+    {
+        TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo(Languages[lang]);
+    }
+
     private void ConfigureWindows(IServiceCollection services)
     {
         // Register the form
@@ -41,6 +55,7 @@ public partial class App
         services.AddSingleton<IAccommodationReservationRepository, AccommodationReservationRepository>();
         services.AddSingleton<ILocationRepository, LocationRepository>();
         services.AddSingleton<IOwnerInfoRepository, OwnerInfoRepository>();
+        services.AddSingleton<IGuestInfoRepository, GuestInfoRepository>();
         services.AddSingleton<IGuestRatingRepository, GuestRatingRepository>();
         services.AddSingleton<IAccommodationReservationMovingRepository, AccommodationReservationMovingRepository>();
         services.AddSingleton<IAccommodationImageRepository, AccommodationImageRepository>();
@@ -59,12 +74,21 @@ public partial class App
         services.AddSingleton<ITourReviewImageRepository, TourReviewImageRepository>();
         services.AddSingleton<IAccommodationRenovationRepository, AccommodationRenovationRepository>();
         services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<ITourRequestRepository, TourRequestRepository>();
+        services.AddSingleton<IMonthRepository, MonthRepository>();
+        services.AddSingleton<IRequestedTouristRepository, RequestedTouristRepository>();
+        services.AddSingleton<IForumRepository, ForumRepository>();
+        services.AddSingleton<IForumCommentRepository, ForumCommentRepository>();
+        services.AddSingleton<IForumCommentReportRepository, ForumCommentReportRepository>();
+        services.AddSingleton<IComplexTourRequestsRepository, ComplexTourRequestsRepository>();
+        services.AddSingleton<IGuideInfoRepository, GuideInfoRepository>();
     }
 
     private void ConfigureServices(IServiceCollection services)
     {
         // Add services
         services.AddSingleton<OwnerService>();
+        services.AddSingleton<GuestService>();
         services.AddSingleton<AccommodationService>();
         services.AddSingleton<AccommodationReservationService>();
         services.AddSingleton<LocationService>();
@@ -83,5 +107,15 @@ public partial class App
         services.AddSingleton<TourReviewImageService>();
         services.AddSingleton<AccommodationRenovationService>();
         services.AddSingleton<UserService>();
+        services.AddSingleton<TourRequestService>();
+        services.AddSingleton<MonthService>();
+        services.AddSingleton<RequestedTouristService>();
+        services.AddSingleton<ForumService>();
+        services.AddSingleton<ForumCommentService>();
+        services.AddSingleton<ForumCommentReportService>();
+        services.AddSingleton<ComplexTourRequestService>();
+
+        services.AddSingleton<GuideService>();
+        
     }
 }

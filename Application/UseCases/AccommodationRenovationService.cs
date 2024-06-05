@@ -67,9 +67,18 @@ public class AccommodationRenovationService
         return renovations;
     }
 
-    public DateTime? GetLastRenovationDate(int id)
+    public DateSpan GetLastRenovationDate(int id)
     {
-        return null;
+        List<AccommodationRenovation> renovations = GetAccommodationRenovationsByAccommodationId(id).Where(d => d.DateSpan.End <= DateTime.Now).ToList();
+        
+        if (renovations.Count == 0)
+        {
+            return null;
+        }
+
+        AccommodationRenovation lastRenovation = renovations.OrderByDescending(r => r.DateSpan.End).First();
+
+        return lastRenovation.DateSpan;
     }
 
     public List<DateSpan> FindAvailableTimespanForRenovation(Accommodation accommodation, DateTime startDate, DateTime endDate, int number)

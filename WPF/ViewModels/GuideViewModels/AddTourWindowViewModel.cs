@@ -13,10 +13,17 @@ using System.Windows.Controls;
 using System.Windows;
 using BookingApp.View.PathfinderViews;
 using BookingApp.Application.UseCases;
+using BookingApp.Application.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Input;
+using BookingApp.WPF.Views.TouristViews;
+using System.Text.RegularExpressions;
+using Notifications.Wpf;
+
 
 namespace BookingApp.WPF.ViewModels.GuideViewModels
 {
-    public class AddTourWindowViewModel
+    public class AddTourWindowViewModel : INotifyPropertyChanged
     {
         private User _user;
         
@@ -189,14 +196,44 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             }
         }
 
+        private Location location;
 
+        public Location Location
+        {
+            get => location;
+            set
+            {
+                if(value != location)
+                {
+                    location = value;
+                    OnPropertyChanged();
+                }
+            }
 
+        }
+
+        private Language languageRec;
+        public Language LanguageRec
+        {
+            get => languageRec;
+            set
+            {
+                if (value != languageRec)
+                {
+                    languageRec = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public ObservableCollection<TourImage> Images { get; set; }
 
         public ObservableCollection<TourStartTime> TourDates { get; set; }
 
         public ObservableCollection<Checkpoint> Checkpoints { get; set; }
+
+        public ICommand AddImageCommand => new AddTourImageCommand(this);
+        public ICommand RemoveImageCommand => new RemoveTourImageCommand(this);
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -209,21 +246,90 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public AddTourWindow addTourWindow { get; set; }
 
+        public int RequestId { get; set; }
+
+        public int TouristId { get; set; }
+
+       
 
         public AddTourWindowViewModel(AddTourWindow _addTourWindow, User user)
         {
             addTourWindow = _addTourWindow;
             _user = user;
+            RequestId = -1;
             Images = new ObservableCollection<TourImage>();
             TourDates = new ObservableCollection<TourStartTime>();
             Checkpoints = new ObservableCollection<Checkpoint>();
             addTourWindow.DataContext = this;
             addTourWindow.datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
+            Location = FindMostRequestedLocation();
+            LanguageRec = FindMostRequestedLanguage();
             LoadCountries();
             LoadLanguages();
             
 
         }
+
+        public Location FindMostRequestedLocation()
+        {
+            List<TourRequest> requests = new List<TourRequest>();
+            requests = TourRequestService.GetInstance().GetAll();
+            List<Location> locations = new List<Location>();
+            locations = LocationService.GetInstance().GetAll();
+            int numberOfRequests = 0;
+            int numberOfRequests_temp = 0;
+            Location location = locations[0];
+
+            foreach(Location l in locations)
+            {
+                foreach (TourRequest request in requests)
+                {
+                    if(l.Id == request.LocationId)
+                    {
+                        numberOfRequests_temp++;
+                    }
+                }
+                if(numberOfRequests_temp > numberOfRequests)
+                {
+                    numberOfRequests = numberOfRequests_temp;
+                    location = l;
+                }
+                numberOfRequests_temp = 0;
+            }
+
+            return location;
+        }
+
+        public Language FindMostRequestedLanguage()
+        {
+            List<TourRequest> requests = new List<TourRequest>();
+            requests = TourRequestService.GetInstance().GetAll();
+            List<Language> languages = new List<Language>();
+            languages = LanguageService.GetInstance().GetAll();
+            int numberOfRequests = 0;
+            int numberOfRequests_temp = 0;
+            Language language = languages[0];
+
+            foreach (Language l in languages)
+            {
+                foreach (TourRequest request in requests)
+                {
+                    if (l.Id == request.LanguageId)
+                    {
+                        numberOfRequests_temp++;
+                    }
+                }
+                if (numberOfRequests_temp > numberOfRequests)
+                {
+                    numberOfRequests = numberOfRequests_temp;
+                    language = l;
+                }
+                numberOfRequests_temp = 0;
+            }
+
+            return language;
+        }
+
 
 
 
@@ -248,23 +354,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             addTourWindow.LanguageTextBox.ItemsSource = listOfLanguages;
         }
 
-        public void AddURLClick(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ImageURL))
-            {
-                return;
-            }
-
-            if (ImageAlreadyExists())
-            {
-                return;
-            }
-
-            TourImage image = new();
-            image.Path = ImageURL;
-            Images.Add(image);
-            addTourWindow.ImageURLTextBox.Clear();
-        }
+        
 
         public bool ImageAlreadyExists()
         {
@@ -279,29 +369,14 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return false;
         }
 
-        public void ImageURLTextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        
+
+        public void DeleteImageClick()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif)|*.png;*.jpeg;*.jpg;*.gif|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string selectedImagePath = openFileDialog.FileName;
-                string destinationFolder = "../../../Resources/Images/TourImages/"; // Update this with your desired destination folder path
-
-                // Extracting filename from the full path
-                string fileName = System.IO.Path.GetFileName(selectedImagePath);
-
-                // Constructing destination path
-                string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
-
-                // Copy the selected image file to the destination folder
-                System.IO.File.Copy(selectedImagePath, destinationPath, true);
-
-                // Update the text box with the destination path
-                addTourWindow.ImageURLTextBox.Text = destinationPath;
-            }
+            var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+            Images.Remove(currentImage);
+            ImageURL = Images.FirstOrDefault()?.Path;
         }
-
 
         public void AddCheckpointClick(object sender, RoutedEventArgs e)
         {
@@ -366,7 +441,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             return false;
         }
 
-        public void ConfirmButtonClick(object sender, RoutedEventArgs e)
+        public void ConfirmButtonClick()
         {
             if (!IsDataValid())
             {
@@ -384,7 +459,7 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
             tour.Dates = TourDates.ToList();
             tour.Checkpoints = Checkpoints.ToList();
             tour.LanguageId = LanguageService.GetInstance().GetLanguageByName(addTourWindow.LanguageTextBox.SelectedItem.ToString()).Id;
-            tour.Images = Images.ToList();
+            tour.Images = new(Images.ToList());
             TourService.GetInstance().Add(tour);
 
 
@@ -394,7 +469,62 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
             SaveCheckpoints(Checkpoints, tour);
 
+            if(RequestId != -1)
+            {
+                List<RequestedTourist> tourists = new List<RequestedTourist>();
+                tourists = RequestedTouristService.GetInstance().GetAll().Where(t => t.RequestId ==  RequestId).ToList();
+                foreach(RequestedTourist tourist in tourists)
+                {
+                    Tourist t = new Tourist();
+                    t.Name = tourist.Name;
+                    t.Surname = tourist.Surname;
+                    t.Age = tourist.Age;
+                    t.Id = TouristService.GetInstance().NextId();
+                    TouristService.GetInstance().Add(t);
+
+                    Tourist t_temp = new Tourist();
+                    TourStartTime time_temp = new TourStartTime();
+                    
+                    var tourist_list = TouristService.GetInstance().GetAll();
+                    var time_list = TourStartTimeService.GetInstance().GetAll();
+                    if(tourist_list.Count > 0)
+                    {
+                        t_temp = tourist_list[tourist_list.Count - 1];
+                    }
+                    if(time_list.Count > 0)
+                    {
+                        time_temp = time_list[time_list.Count - TourDates.Count];
+                    }
+                    MakeReservation(time_temp.Id, t_temp.Id);
+                }
+
+            }
+
+
             addTourWindow.Close();
+
+            var notificationManager = new NotificationManager();
+
+
+
+            notificationManager.Show(new NotificationContent
+            {
+                Title = "Success",
+                Message = "Tour created successfully.",
+                Type = NotificationType.Information
+            });
+
+        }
+
+        public void MakeReservation(int tourTime, int touristId)
+        {
+            TouristReservation reservation = new TouristReservation();
+            reservation.Id_Tourist = touristId;
+            reservation.Id_TourTime = tourTime;
+            reservation.Id = TourReservationService.GetInstance().NextId();
+            reservation.CheckpointId = -1;
+            
+            TourReservationService.GetInstance().Add(reservation);
         }
 
         public void SaveImages(ObservableCollection<TourImage> images, Tour tour)
@@ -436,6 +566,9 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
 
         public bool IsDataValid()
         {
+
+            validationMessages();
+
             return !string.IsNullOrEmpty(addTourWindow.NameTextBox.Text)
                 && !string.IsNullOrEmpty(Country)
                 && !string.IsNullOrEmpty(City)
@@ -443,5 +576,174 @@ namespace BookingApp.WPF.ViewModels.GuideViewModels
                 && Checkpoints.Count() >= 2;
         }
 
+   
+
+        public void RightArrow_Click()
+        {
+            var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+            var currentIndex = Images.IndexOf(currentImage);
+
+            if (currentIndex == -1) { return; }
+
+            if (currentIndex == Images.Count - 1)
+            {
+                ImageURL = Images.First().Path;
+            }
+            else
+            {
+                ImageURL = Images[currentIndex + 1].Path;
+            }
+        }
+
+        public void LeftArrow_Click()
+        {
+            var currentImage = Images.FirstOrDefault(image => image.Path == ImageURL);
+            var currentIndex = Images.IndexOf(currentImage);
+
+            if (currentIndex == -1) { return; }
+
+            if (currentIndex == 0)
+            {
+                ImageURL = Images.Last().Path;
+            }
+            else
+            {
+                ImageURL = Images[currentIndex - 1].Path;
+            }
+        }
+
+        public  void LocationRecomendation_Click()
+        {
+            Country = Location.Country;
+            City = Location.City;
+
+        }
+
+        internal void LanguageRecomendation_Click()
+        {
+            Language = LanguageRec.Name;
+        }
+
+        public void validationMessages()
+        {
+            if (string.IsNullOrEmpty(addTourWindow.NameTextBox.Text))
+            {
+                addTourWindow.nameErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.nameErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.CountryTextBox.SelectedIndex == -1)
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.CityTextBox.SelectedIndex == -1)
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.locationErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.LanguageTextBox.SelectedIndex == -1)
+            {
+                addTourWindow.languageErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.languageErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (string.IsNullOrEmpty(addTourWindow.CapacityTextBox.Text) || Convert.ToInt32(addTourWindow.CapacityTextBox.Text) == 0)
+            {
+                addTourWindow.capacityErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.capacityErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (string.IsNullOrEmpty(addTourWindow.DurationTextBox.Text) || Convert.ToInt32(addTourWindow.DurationTextBox.Text) == 0)
+            {
+                addTourWindow.durationErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.durationErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.datesGrid.Items.Count == 0)
+            {
+                addTourWindow.dateErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.dateErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+            if (addTourWindow.checkpointGrid.Items.Count < 2)
+            {
+                addTourWindow.checkpointErrorBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                addTourWindow.checkpointErrorBox.Visibility = Visibility.Collapsed;
+            }
+
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            // Only allow numeric input
+            Regex regex = new Regex("^[0-9]+$");
+            return regex.IsMatch(text);
+        }
+
+        internal void DurationTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        internal void DurationTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        internal void CapacityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        internal void CapacityTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        internal void RemoveCheckpoint_Click()
+        {
+            var selectedItem = addTourWindow.checkpointGrid.SelectedItem as Checkpoint;
+            Checkpoints.Remove(selectedItem);
+        }
+
+        internal void RemoveDate_Click()
+        {
+            var selectedItem = addTourWindow.datesGrid.SelectedItem as TourStartTime;
+            TourDates.Remove(selectedItem);
+
+        }
     }
 }

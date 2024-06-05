@@ -1,12 +1,18 @@
 ﻿using BookingApp.Application.Commands;
+using BookingApp.Application.Localization;
 using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
+using BookingApp.Resources.Types;
 using BookingApp.WPF.Views.OwnerViews;
+using BookingApp.WPF.Views.OwnerViews.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using Xceed.Wpf.AvalonDock.Controls;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels;
 
@@ -64,20 +70,8 @@ public partial class AddAccommodationViewModel : ObservableObject
         User = user;
         Page = page;
 
-        AccommodationTypes = new ObservableCollection<string>(Enum.GetNames(typeof(AccommodationType)));
+        AccommodationTypes = new ObservableCollection<string>((Enum.GetNames(typeof(AccommodationType))).Select(a => TranslationSource.Instance[a]));
         Images = new ObservableCollection<AccommodationImage>();
-    }
-
-    public void ClearPage()
-    {
-        AccommodationName = "";
-        Page.AccommodationType.SelectedIndex = 0;
-        AccommodationPrice = 0;
-        MaximumNumberOfGuests = 0;
-        MinimumNumberOfDaysForReservation = 0;
-        DaysBeforeReservationIsFinal = 0;
-        Images.Clear();
-        ImageURL = "";
     }
 
     public void LeftArrowClick()
@@ -135,11 +129,66 @@ public partial class AddAccommodationViewModel : ObservableObject
             return;
         }
 
-        if (key == Key.Tab || key == Key.Enter)
+        if (key == Key.Enter)
+        {
+            this.DisableAll();
+
+            EnterNewLocationModal enterNewLocationModal = new EnterNewLocationModal(this);
+
+            Page.AddLocationModalPanel.Children.Clear();
+            Page.AddLocationModalPanel.Children.Add(enterNewLocationModal);
+            Page.AddLocationModalPanel.Visibility = Visibility.Visible;
+
+            this.Page.MainGrid.Opacity = 0.5;
+
+            enterNewLocationModal.IsVisibleChanged += (s, e) => EnableAll(e);
+        }
+
+        if (key == Key.Tab)
         {
             string searchText = Page.LocationTextBox.Text.ToLower();
 
             UpdateLocation(searchText);
+        }
+    }
+
+    private void EnableAll(DependencyPropertyChangedEventArgs e)
+    {
+        if(e.NewValue is Visibility visibility && visibility == Visibility.Collapsed) { return; }
+
+        this.Page.MainGrid.Opacity = 1;
+
+        foreach (TextBox t in Page.FindLogicalChildren<TextBox>())
+        {
+            t.IsEnabled = true;
+        }
+
+        foreach (Button button in Page.FindLogicalChildren<Button>())
+        {
+            button.IsEnabled = true;
+        }
+
+        foreach (ComboBox comboBox in Page.FindLogicalChildren<ComboBox>())
+        {
+            comboBox.IsEnabled = true;
+        }
+    }
+
+    public void DisableAll()
+    {
+        foreach (TextBox t in Page.FindLogicalChildren<TextBox>())
+        {
+            t.IsEnabled = false;
+        }
+
+        foreach (Button button in Page.FindLogicalChildren<Button>())
+        {
+            button.IsEnabled = false;
+        }
+
+        foreach (ComboBox comboBox in Page.FindLogicalChildren<ComboBox>())
+        {
+            comboBox.IsEnabled = false;
         }
     }
 

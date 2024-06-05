@@ -9,7 +9,10 @@
     <UserControl.Resources>
         <local:UppercaseReservationtypeConverter x:Key="UppercaseReservationtypeConverter"/>
     </UserControl.Resources>
-    <Border Width="365" Height="115" CornerRadius="5" Background="{StaticResource Creme}" BorderThickness="2" BorderBrush="Black" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border x:Name="Border" Width="365" Height="115" CornerRadius="5" Background="{DynamicResource Card}" BorderThickness="2" BorderBrush="{DynamicResource CardBorder}" Cursor="Hand" MouseLeftButtonDown="Border_MouseLeftButtonDown" Style="{StaticResource ShadowCard}" RenderTransformOrigin="0.5, 0.5">
+        <Border.RenderTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Border.RenderTransform>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>
@@ -21,24 +24,24 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="Black">
+            <Border BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BorderBrush="{DynamicResource CardBorder}">
                 <Image Source="../../../../Resources/Assets/user_profile_icon.png" Margin="15"/>
             </Border>
-            <Label Content="{Binding ReservationDTO.AccommodationDTO.Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding ReservationDTO.AccommodationDTO.Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>14</Label.FontSize>
                 <Label.FontWeight>Bold</Label.FontWeight>
             </Label>
-            <Label Content="{Binding ReservationDTO.Guest.Username}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding ReservationDTO.Guest.Username}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
-            <Label Content="{Binding ReservationDTO.DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding ReservationDTO.DateSpan}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>
 
-            <Label Content="{Binding ReservationDTO.ReservationType, Converter={StaticResource UppercaseReservationtypeConverter}}" Foreground="Orange" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Foreground="{DynamicResource ForegroundBrush}" Content="{Binding ReservationDTO.ReservationType, Converter={StaticResource UppercaseReservationtypeConverter}}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.FontFamily>Verdana</Label.FontFamily>
                 <Label.FontSize>11.5</Label.FontSize>
             </Label>

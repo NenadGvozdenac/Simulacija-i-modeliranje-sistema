@@ -1,8 +1,8 @@
-1|1|ww|True
+1|1|ww|False
 2|1|2222|False
 3|2|jedan|True
 4|2|dva|False
-5|3|1|False
+5|3|1|True
 6|3|2|False
 7|3|3|False
 8|4|1|False
@@ -25,3 +25,21 @@
 25|9|3|False
 26|10|1|True
 27|10|2|False
+28|10|sone|False
+29|10|guster|False
+30|11|carsija|False
+31|11|autobuska|False
+32|12|Katedrala|False
+33|12|Univerzitet|False
+34|12|Promenada|False
+35|12|Petrovaradin|False
+36|13|Centar|False
+37|13|Katedrala|False
+38|14|las vegas|False
+39|14|vegas las |False
+40|15|1|True
+41|15|2|False
+42|17|1|False
+43|17|2|False
+44|18|test1|False
+45|18|test2|False

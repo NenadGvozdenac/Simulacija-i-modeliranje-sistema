@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Miscellaneous;
 using BookingApp.Domain.Models;
 using BookingApp.Resources.Types;
@@ -20,8 +21,8 @@ public partial class AccommodationReservationDTO : ObservableObject
     [ObservableProperty]
     private User _guest;
 
-    [ObservableProperty]
     private ReservationType _reservationType;
+    public string ReservationType => TranslationSource.Instance[_reservationType.ToString()];
 
     [ObservableProperty]
     private DateSpan _dateSpan;
@@ -29,14 +30,14 @@ public partial class AccommodationReservationDTO : ObservableObject
     private string _numberOfReviews;
     public string NumberOfReviews
     {
-        get => string.Format(_numberOfReviews == "1" ? "{0} review" : "{0} reviews", _numberOfReviews);
+        get => string.Format("{0} {1}", _numberOfReviews, TranslationSource.Instance["ReviewsLC"]);
         set => _numberOfReviews = value;
     }
 
     private string _reservationDays;
     public string ReservationDays
     {
-        get => string.Format(_reservationDays == "1" ? "{0} day" : "{0} days", _reservationDays);
+        get => string.Format("{0} {1}", _reservationDays, TranslationSource.Instance["DaysLC"]);
         set => _reservationDays = value;
     }
 
@@ -57,7 +58,7 @@ public partial class AccommodationReservationDTO : ObservableObject
     private string _guestsNumber;
     public string GuestsNumber
     {
-        get => string.Format(_guestsNumber == "1" ? "{0} guest" : "{0} guests", _guestsNumber);
+        get => string.Format("{0} {1}", _guestsNumber, TranslationSource.Instance["GuestsLC"]);
         set => _guestsNumber = value;
     }
 
@@ -72,7 +73,7 @@ public partial class AccommodationReservationDTO : ObservableObject
         GuestsNumber = reservation.GuestsNumber.ToString();
         GuestRating = "0";
         DateSpan = new(reservation.FirstDateOfStaying, reservation.LastDateOfStaying);
-        ReservationType = reservation.ReservationType;
+        _reservationType = reservation.ReservationType;
         LastCancellationDate = DateParser.ToString(reservation.FirstDateOfStaying.AddDays(-AccommodationService.GetInstance().GetById(reservation.AccommodationId).CancellationPeriodDays));
     }
 }

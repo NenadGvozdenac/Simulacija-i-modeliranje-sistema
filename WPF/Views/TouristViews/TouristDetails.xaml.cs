@@ -35,57 +35,11 @@ namespace BookingApp.WPF.Views.TouristViews
             {
                 InitializeComponent();
                 touristDetailsViewModel = new TouristDetailsViewModel(detailedTour, user, this, TouristWindowFrame);
-            DataContext = touristDetailsViewModel;
-                HideMessages();
-
-
+                DataContext = touristDetailsViewModel;
             }
-
-        public void GuestNumber_TextChanged(object sender, RoutedEventArgs e)
-            {
-            touristDetailsViewModel.GuestNumber_TextChanged(sender, e);
-        }
-
-        /*private void Return_Click(object sender, RoutedEventArgs e)
+        public void Reserve_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
-            if (parentWindow is TouristMainWindow mainWindow)
-            {
-                mainWindow.TouristWindowFrame.Content = mainWindow.ToursUserControl;
-            }
-        }*/
-
-        private void GuestAge_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            touristDetailsViewModel.GuestAge_TextChanged(sender, e);
-        }
-
-        private void HideMessages()
-        {
-            touristDetailsViewModel.HideMessages();
-
-        }
-        private void AddTourist_Click(object sender, RoutedEventArgs e)
-        {
-
-            touristDetailsViewModel.AddTourist_Click(sender, e);
-
-        }
-
-        private bool areFieldsEmpty()
-        {
-            return touristDetailsViewModel.areFieldsEmpty();
-        }
-            private void ReserveTour_Click(object sender, RoutedEventArgs e)
-            {
-            touristDetailsViewModel.ReserveTour_Click(sender, e);
-
-
-            }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            touristDetailsViewModel.ComboBox_SelectionChanged(sender, e);
+            touristDetailsViewModel.Reserve_Click(sender, e);
         }
     }
 

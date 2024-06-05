@@ -29,10 +29,15 @@ namespace BookingApp.WPF.Views.GuideViews.Components
 
         private void Report_click(object sender, MouseButtonEventArgs e)
         {
-            statusTextblock.Text = "Invalid";
-            TourReview review = TourReviewService.GetInstance().GetById(int.Parse(idTextblock.Text));
-            review.Status = "Invalid";
-            TourReviewService.GetInstance().Update(review);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to report account?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                statusTextblock.Text = "Invalid";
+                TourReview review = TourReviewService.GetInstance().GetById(int.Parse(idTextblock.Text));
+                review.Status = "Invalid";
+                TourReviewService.GetInstance().Update(review);
+            }
             
         }
     }

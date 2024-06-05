@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.TouristViews.RequestsOnComplexTourRequest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
+             xmlns:components="clr-namespace:BookingApp.WPF.Views.TouristViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="585" d:DesignWidth="1000">
+    <Grid Background="GhostWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Here are requests on this complex request" FontSize="50" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding MyTourRequests}" Margin="3,3,3,3">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:TourRequestCard x:Name="Card"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

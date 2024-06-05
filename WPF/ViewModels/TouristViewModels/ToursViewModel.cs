@@ -13,7 +13,6 @@ using BookingApp.Repositories;
 using BookingApp.WPF.Views.TouristViews;
 using BookingApp.Application.UseCases;
 
-
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
     public class ToursViewModel : INotifyPropertyChanged
@@ -63,7 +62,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             foreach (Tour tour in TourService.GetInstance().GetAll())
             {
                 tour.Location = LocationService.GetInstance().GetById(tour.LocationId);
-                tour.Images = TourImageService.GetInstance().GetImagesByTourId(tour.Id);
+                tour.Images = new(TourImageService.GetInstance().GetImagesByTourId(tour.Id));
                 tour.Language = LanguageService.GetInstance().GetById(tour.LanguageId);
                 tours.Add(tour);
             }
@@ -143,6 +142,11 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public void CountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ToursView.CountryComboBox.SelectedItem == null)
+            {
+                FilterTours();
+                return;
+            }
             List<string> listOfCities = LocationService.GetInstance().GetCitiesByCountry(ToursView.CountryComboBox.SelectedItem.ToString());
             ToursView.CityComboBox.ItemsSource = listOfCities;
             ToursView.CityComboBox.Focus();
@@ -203,6 +207,15 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             if (number < minValueDaysOfStay) ToursView.DaysOfStay.Text = minValueDaysOfStay.ToString();
             ToursView.DaysOfStay.SelectionStart = ToursView.DaysOfStay.Text.Length;
             FilterTours();
+        }
+        public void ClearFilter_Click()
+        {
+            ToursView.LanguageComboBox.Text = "";
+            ToursView.CountryComboBox.Text = "";
+            ToursView.CityComboBox.IsEnabled = false;
+            ToursView.CityComboBox.Text = "";
+            ToursView.DaysOfStay.Text = "0";
+            ToursView.GuestNumber.Text = "1";
         }
     }
 }

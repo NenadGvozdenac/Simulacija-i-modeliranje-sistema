@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Miscellaneous;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,16 +17,18 @@ namespace BookingApp.Model.MutualModels
         public int UserId {  get; set; }
         public int TourId {  get; set; }
         public int ReservationId {  get; set; }
+
+        public string Checkpoint { get; set; }
         public int GuideKnowledge {  get; set; }
         public int GuideLanguage {  get; set; }
         public int TourInterestingness {  get; set; }
         public string Feedback {  get; set; }
         public string UserName { get; set; }
         public string Status { get; set; }
-        public List<TourReviewImage> ReviewImages { get; set; }
+        public ObservableCollection<TourReviewImage> ReviewImages { get; set; }
 
         public TourReview() { }
-        public TourReview(int userId, int tourId, int guideKnowledge, int guideLanguage, int interestingness, string feedback)
+        public TourReview(int userId, int tourId, int guideKnowledge, int guideLanguage, int interestingness, string feedback, string status)
         {
             UserId = userId;
             TourId = tourId;
@@ -34,6 +37,7 @@ namespace BookingApp.Model.MutualModels
             GuideLanguage = guideLanguage;
             TourInterestingness = interestingness;
             Feedback = feedback;
+            Status = status;
         }
 
         public void FromCSV(string[] values)

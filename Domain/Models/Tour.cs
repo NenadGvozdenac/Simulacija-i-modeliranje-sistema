@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +9,7 @@ using BookingApp.Domain.Miscellaneous;
 
 namespace BookingApp.Domain.Models;
 
-public class Tour : ISerializable
+public class Tour : ISerializable, INotifyPropertyChanged
 {
 
     public int Id { get; set; }
@@ -28,9 +30,31 @@ public class Tour : ISerializable
     public List<Checkpoint> Checkpoints { get; set; }
     public List<TourStartTime> Dates { get; set; }
     public int Duration { get; set; }
-    public List<TourImage> Images { get; set; }
+    public ObservableCollection<TourImage> Images { get; set; }
 
     public DateTime CurrentDate { get; set; }
+
+    private bool _ongoing;
+
+    public bool Ongoing
+    {
+        get { return _ongoing; }
+        set
+        {
+            if (_ongoing != value)
+            {
+                _ongoing = value;
+                OnPropertyChanged(nameof(Ongoing));
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     public void FromCSV(string[] values)
     {

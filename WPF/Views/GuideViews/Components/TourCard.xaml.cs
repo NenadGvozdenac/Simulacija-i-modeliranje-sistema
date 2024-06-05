@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +33,33 @@ namespace BookingApp.View.PathfinderViews.Componentss
         {
             if (Convert.ToDateTime(DateTextBlock.Text) < DateTime.Now.AddHours(48))
             {
-                MessageBox.Show("Selected tour cant be canceled (less then 48 hours until tour comences)");
+
+                var notificationManager = new NotificationManager();
+
+
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Carefull",
+                    Message = "Selected tour cant be canceled (less then 48 hours until tour comences)",
+                    Type = NotificationType.Error
+                });
+
+
+               
             }
             else {
                 OnCancelButtonClicked(new BeginButtonClickedEventArgs(Convert.ToInt32(IdTextBlock.Text), Convert.ToDateTime(DateTextBlock.Text)));
+
+                var notificationManager = new NotificationManager();
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "Canceled",
+                    Message = "Tour has been canceled",
+                    Type = NotificationType.Success
+                });
+
             }
         }
 

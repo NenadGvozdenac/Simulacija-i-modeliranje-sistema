@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="BookingApp.WPF.Views.GuestViews.OwnerFeedback"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.Views.GuestViews" xmlns:components="clr-namespace:BookingApp.WPF.Views.GuestViews.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="718" d:DesignWidth="774">
+    <Grid Background="#FFF8F0">
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl
+                ItemsSource="{Binding _ownerFeedbacks}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <components:OwnerFeedbackCard x:Name="OwnerFeedbackCards" ReviewHandler="ReviewHandling"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

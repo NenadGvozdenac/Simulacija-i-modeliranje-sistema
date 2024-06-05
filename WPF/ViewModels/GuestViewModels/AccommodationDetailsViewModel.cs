@@ -43,9 +43,45 @@ public class AccommodationDetailsViewModel
         SetAccommodation(detailedaccomodation, user);
     }
 
+    public AccommodationDetailsViewModel(AccommodationDetails _AccommodationDetails, Accommodation detailedaccomodation, User user, DateTime firstDate, DateTime lastDate)
+    {
+        AccommodationDetails = _AccommodationDetails;
+        _reviews = new ObservableCollection<AccommodationReview>();
+        AccommodationDetails.firstDate.SelectedDate = firstDate;
+        AccommodationDetails.lastDate.SelectedDate = lastDate;
+
+        AccommodationDetails.firstDate.IsEnabled = true;
+        AccommodationDetails.lastDate.IsEnabled = true;
+        AccommodationDetails.FreeDatesCheckButton.IsEnabled = true;
+        
+        SetAccommodationSecond(detailedaccomodation, user);
+        
+    }
+
     public void UpcomingReservationsChanged_Invoke()
     {
         UpcomingReservationsChanged.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetAccommodationSecond(Accommodation accommodation, User user)
+    {
+        _availableDates = new ObservableCollection<string>();
+        reservation = new AccommodationReservation();
+        selectedAccommodation = accommodation;
+        _user = user;
+        AccommodationDetails.username.Content = _user.Username;
+
+        if (GuestService.GetInstance().GetByGuestId(user.Id).IsSuperGuest)
+        {
+            AccommodationDetails.crownImage.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            AccommodationDetails.crownImage.Visibility = Visibility.Hidden;
+        }
+
+        SetDefaultValues(accommodation);
+        LoadReviews();
     }
 
     public void SetAccommodation(Accommodation accommodation, User user)
@@ -55,6 +91,16 @@ public class AccommodationDetailsViewModel
         selectedAccommodation = accommodation;
         _user = user;
         AccommodationDetails.username.Content = _user.Username;
+
+        if (GuestService.GetInstance().GetByGuestId(user.Id).IsSuperGuest)
+        {
+            AccommodationDetails.crownImage.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            AccommodationDetails.crownImage.Visibility = Visibility.Hidden;
+        }
+
         HideElements();
         SetDefaultValues(accommodation);
         LoadReviews();
@@ -235,6 +281,14 @@ public class AccommodationDetailsViewModel
             reservation = new AccommodationReservation(_user.Id, selectedAccommodation.Id, Convert.ToInt32(AccommodationDetails.GuestNumber.Text), firstDate, lastDate);
 
             AccommodationReservationService.GetInstance().Add(reservation);
+
+            //take one point if super guest
+            GuestInfo guestInfo = GuestService.GetInstance().GetByGuestId(_user.Id);
+            if (guestInfo.IsSuperGuest && guestInfo.NumberOfPoints > 0)
+            {
+                guestInfo.NumberOfPoints--;
+                GuestService.GetInstance().UpdateGuestInfo(guestInfo);
+            }
 
             AccommodationDetails.PdfButton.Visibility = Visibility.Visible;
             AccommodationDetails.ConfirmButton.IsEnabled = false;

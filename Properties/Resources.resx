@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accept" xml:space="preserve">
+    <value>Prihvati</value>
+  </data>
+  <data name="Accommodation" xml:space="preserve">
+    <value>Smeštaj</value>
+  </data>
+  <data name="AccommodationLocation" xml:space="preserve">
+    <value>Lokacija smeštaja</value>
+  </data>
+  <data name="AccommodationName" xml:space="preserve">
+    <value>Naziv smeštaja</value>
+  </data>
+  <data name="Accommodations" xml:space="preserve">
+    <value>Smeštaji</value>
+  </data>
+  <data name="AccommodationStatistics" xml:space="preserve">
+    <value>Statistika o smeštajima</value>
+  </data>
+  <data name="AccommodationType" xml:space="preserve">
+    <value>Tip smeštaja</value>
+  </data>
+  <data name="AddComment" xml:space="preserve">
+    <value>Dodaj komentar?</value>
+  </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Dodaj sliku</value>
+  </data>
+  <data name="AddingAnAccommodation" xml:space="preserve">
+    <value>Dodavanje smeštaja</value>
+  </data>
+  <data name="AdditionalComment" xml:space="preserve">
+    <value>Dodatan komentar</value>
+  </data>
+  <data name="Apartman" xml:space="preserve">
+    <value>Apartment</value>
+  </data>
+  <data name="Apartment" xml:space="preserve">
+    <value>Apartman</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>April</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Avgust</value>
+  </data>
+  <data name="Belgrade" xml:space="preserve">
+    <value>Beograd</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Odustani</value>
+  </data>
+  <data name="CancelledReservationsLC" xml:space="preserve">
+    <value>otkazanih rezervacija</value>
+  </data>
+  <data name="CancelRenovation" xml:space="preserve">
+    <value>Otkaži renovaciju</value>
+  </data>
+  <data name="CanYouCancelTheRenovation" xml:space="preserve">
+    <value>Možete li otkazati renovaciju?</value>
+  </data>
+  <data name="ChooseAnAccommodation" xml:space="preserve">
+    <value>Izaberi smeštaj</value>
+  </data>
+  <data name="ChooseEndingDate" xml:space="preserve">
+    <value>Izaberite kraj</value>
+  </data>
+  <data name="ChooseStartingDate" xml:space="preserve">
+    <value>Izaberite početak</value>
+  </data>
+  <data name="ChooseTimePeriod" xml:space="preserve">
+    <value>Izaberite broj dana</value>
+  </data>
+  <data name="ChooseType" xml:space="preserve">
+    <value>Izaberite tip</value>
+  </data>
+  <data name="Cleanliness" xml:space="preserve">
+    <value>Čistoća</value>
+  </data>
+  <data name="CloseAccommodation" xml:space="preserve">
+    <value>Zatvori smeštaj</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Komentar</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Potvrdi</value>
+  </data>
+  <data name="CouldBeBetterRB" xml:space="preserve">
+    <value>2 - Može bolje</value>
+  </data>
+  <data name="CurrentAccommodationRating" xml:space="preserve">
+    <value>Trenutna ocena smeštaja</value>
+  </data>
+  <data name="CurrentGuestRating" xml:space="preserve">
+    <value>Trenutna ocena gosta</value>
+  </data>
+  <data name="CurrentReservationTimespan" xml:space="preserve">
+    <value>Trenutni dani rezervacije</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Tamna tema</value>
+  </data>
+  <data name="DayBeforeCancellationIsFinal" xml:space="preserve">
+    <value>Dan kada je rezervacija finalizirana</value>
+  </data>
+  <data name="DayLC" xml:space="preserve">
+    <value>dan</value>
+  </data>
+  <data name="DaysBeforeReservationIsFinal" xml:space="preserve">
+    <value>Broj dana pred finalizaciju rezervacije</value>
+  </data>
+  <data name="DaysLC" xml:space="preserve">
+    <value>dan(a)</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Decembar</value>
+  </data>
+  <data name="DetailedAccommodationView" xml:space="preserve">
+    <value>Detaljan prikaz smeštaja</value>
+  </data>
+  <data name="DetailedGuestReview" xml:space="preserve">
+    <value>Detaljna ocena gosta</value>
+  </data>
+  <data name="DetailedRenovationView" xml:space="preserve">
+    <value>Detaljan prikaz renovacije</value>
+  </data>
+  <data name="DetailedReservationView" xml:space="preserve">
+    <value>Detaljan prikaz rezervacije</value>
+  </data>
+  <data name="DoesNotRequireRenovation" xml:space="preserve">
+    <value>Ne, ne zahteva.</value>
+  </data>
+  <data name="DoesRequireRenovation" xml:space="preserve">
+    <value>Da, zahteva.</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Krajnji datum</value>
+  </data>
+  <data name="EnterAccommodationName" xml:space="preserve">
+    <value>🔍 Ukucaj naziv smeštaja...</value>
+  </data>
+  <data name="EnterCity" xml:space="preserve">
+    <value>Dodaj grad</value>
+  </data>
+  <data name="EnterComment" xml:space="preserve">
+    <value>📅 Ukucaj željeni komentar...</value>
+  </data>
+  <data name="EnterCountry" xml:space="preserve">
+    <value>Dodaj državu</value>
+  </data>
+  <data name="EnterDaysBeforeReservationIsFinal" xml:space="preserve">
+    <value>📅 Ukucaj broj dana pred finalizaciju rezervacije...</value>
+  </data>
+  <data name="EnterDesiredLocation" xml:space="preserve">
+    <value>📌Ukucaj naziv lokacije...</value>
+  </data>
+  <data name="EnterMaximumNumberOfGuests" xml:space="preserve">
+    <value>🧑Ukucaj najveći broj gostiju...</value>
+  </data>
+  <data name="EnterMinimumNumberOfDaysForReservation" xml:space="preserve">
+    <value>📅 Ukucaj najmanji broj dana za rezervaciju...</value>
+  </data>
+  <data name="EnterPrice" xml:space="preserve">
+    <value>$ Ukucaj cenu...</value>
+  </data>
+  <data name="ExcellentRB" xml:space="preserve">
+    <value>5 - Odlično</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Februar</value>
+  </data>
+  <data name="FindAvailableTimespan" xml:space="preserve">
+    <value>Pronađi termin</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Završena</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>OD:</value>
+  </data>
+  <data name="GuestFeedback" xml:space="preserve">
+    <value>Recenzija od gosta</value>
+  </data>
+  <data name="GuestLC" xml:space="preserve">
+    <value>gost</value>
+  </data>
+  <data name="GuestNumber" xml:space="preserve">
+    <value>Broj gostiju</value>
+  </data>
+  <data name="GuestRating" xml:space="preserve">
+    <value>Oceni gosta</value>
+  </data>
+  <data name="GuestReviews" xml:space="preserve">
+    <value>Ocene gostiju</value>
+  </data>
+  <data name="GuestsFeedback" xml:space="preserve">
+    <value>Recenzije od gostiju</value>
+  </data>
+  <data name="GuestsLC" xml:space="preserve">
+    <value>gost(iju)</value>
+  </data>
+  <data name="GuestUsername" xml:space="preserve">
+    <value>Korisničko ime gosta</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="House" xml:space="preserve">
+    <value>Kuća</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Slike</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Januar</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Jul</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Jun</value>
+  </data>
+  <data name="Koliba" xml:space="preserve">
+    <value>Shack</value>
+  </data>
+  <data name="Kuća" xml:space="preserve">
+    <value>House</value>
+  </data>
+  <data name="LastCancellationDay" xml:space="preserve">
+    <value>Poslednji dan za otkazivanje</value>
+  </data>
+  <data name="LastRenovation" xml:space="preserve">
+    <value>Poslednja renovacija:</value>
+  </data>
+  <data name="LastRenovationCancellationDay" xml:space="preserve">
+    <value>Poslednji dan za otkaz renovacije</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Svetla tema</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Lokacija</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Izloguj se</value>
+  </data>
+  <data name="MakeAccommodation" xml:space="preserve">
+    <value>Napravi smeštaj</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Mart</value>
+  </data>
+  <data name="MaximumNumberOfGuests" xml:space="preserve">
+    <value>Najveći broj gostiju</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Maj</value>
+  </data>
+  <data name="MinimumNumberOfDaysForReservation" xml:space="preserve">
+    <value>Najmanji broj dana rezervacije</value>
+  </data>
+  <data name="MostPopularMonth" xml:space="preserve">
+    <value>Najpopularniji mesec</value>
+  </data>
+  <data name="MostPopularMonthInYear" xml:space="preserve">
+    <value>Najpopularniji mesec u godini:</value>
+  </data>
+  <data name="MostPopularYear" xml:space="preserve">
+    <value>Najpopularnija godina</value>
+  </data>
+  <data name="MovedReservationsLC" xml:space="preserve">
+    <value>pomerenih rezervacija</value>
+  </data>
+  <data name="MyCourtesy" xml:space="preserve">
+    <value>Moje poštovanje</value>
+  </data>
+  <data name="MyReviews" xml:space="preserve">
+    <value>Moje recenzije</value>
+  </data>
+  <data name="NeverBeenRenovated" xml:space="preserve">
+    <value>Nikada renovirana!</value>
+  </data>
+  <data name="NoReservationsInYear" xml:space="preserve">
+    <value>Nema rezervacija za datu godinu.</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Obaveštenja</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Novembar</value>
+  </data>
+  <data name="NumberOfCancelledReservations" xml:space="preserve">
+    <value>Broj otkazanih rezervacija:</value>
+  </data>
+  <data name="NumberOfGuests" xml:space="preserve">
+    <value>Broj gostiju</value>
+  </data>
+  <data name="NumberOfMovedReservations" xml:space="preserve">
+    <value>Broj pomerenih rezervacija:</value>
+  </data>
+  <data name="NumberOfRenovationRecommendations" xml:space="preserve">
+    <value>Broj preporuka za renovaciju:</value>
+  </data>
+  <data name="NumberOfReservations" xml:space="preserve">
+    <value>Broj rezervacija:</value>
+  </data>
+  <data name="NumberOfReviews" xml:space="preserve">
+    <value>Broj ocena</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Oktobar</value>
+  </data>
+  <data name="OKRB" xml:space="preserve">
+    <value>3 - OK</value>
+  </data>
+  <data name="Ongoing" xml:space="preserve">
+    <value>U procesu</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Vlasnik</value>
+  </data>
+  <data name="OwnerUC" xml:space="preserve">
+    <value>VLASNIK</value>
+  </data>
+  <data name="PDFReport" xml:space="preserve">
+    <value>PDF izveštaj</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Neocenjeni</value>
+  </data>
+  <data name="PoorRB" xml:space="preserve">
+    <value>1 - Vrlo loše</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="PricePerNight" xml:space="preserve">
+    <value>Cena noćenja ($)</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Odbij</value>
+  </data>
+  <data name="RemoveImage" xml:space="preserve">
+    <value>Obriši sliku</value>
+  </data>
+  <data name="RenovationEnd" xml:space="preserve">
+    <value>Kraj renovacije</value>
+  </data>
+  <data name="RenovationFeedback" xml:space="preserve">
+    <value>Komentar renovacije</value>
+  </data>
+  <data name="RenovationNotRequired" xml:space="preserve">
+    <value>RENOVACIJA NIJE POTREBNA!</value>
+  </data>
+  <data name="RenovationRecommendationsLC" xml:space="preserve">
+    <value>preporuka za renovaciju</value>
+  </data>
+  <data name="RenovationRequired" xml:space="preserve">
+    <value>RENOVACIJA POTREBNA!</value>
+  </data>
+  <data name="Renovations" xml:space="preserve">
+    <value>Renovacije</value>
+  </data>
+  <data name="RenovationScheduling" xml:space="preserve">
+    <value>Zakazivanje renovacije</value>
+  </data>
+  <data name="RenovationStart" xml:space="preserve">
+    <value>Početak renovacije</value>
+  </data>
+  <data name="RenovationStatus" xml:space="preserve">
+    <value>Status renovacije</value>
+  </data>
+  <data name="RenovationUrgency" xml:space="preserve">
+    <value>Urgentnost renovacije</value>
+  </data>
+  <data name="RequiresRenovation" xml:space="preserve">
+    <value>Zahteva renovaciju</value>
+  </data>
+  <data name="RescheduleReservation" xml:space="preserve">
+    <value>Pomeri rezervaciju</value>
+  </data>
+  <data name="Rescheduling" xml:space="preserve">
+    <value>Pomeranje</value>
+  </data>
+  <data name="ReservationDays" xml:space="preserve">
+    <value>Broj dana rezervacije</value>
+  </data>
+  <data name="ReservationEnd" xml:space="preserve">
+    <value>Kraj rezervacije</value>
+  </data>
+  <data name="ReservationRescheduling" xml:space="preserve">
+    <value>Pomeranje rezervacije</value>
+  </data>
+  <data name="Reservations" xml:space="preserve">
+    <value>Rezervacije</value>
+  </data>
+  <data name="ReservationsLC" xml:space="preserve">
+    <value>rezervacija</value>
+  </data>
+  <data name="ReservationStart" xml:space="preserve">
+    <value>Početak rezervacije</value>
+  </data>
+  <data name="ReservationTimespan" xml:space="preserve">
+    <value>Vremenski period</value>
+  </data>
+  <data name="Respectfulness" xml:space="preserve">
+    <value>Poštovanje</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Ocenjieni</value>
+  </data>
+  <data name="ReviewsLC" xml:space="preserve">
+    <value>ocena</value>
+  </data>
+  <data name="ScheduleARenovation" xml:space="preserve">
+    <value>Zakaži renovaciju</value>
+  </data>
+  <data name="ScheduleRenovation" xml:space="preserve">
+    <value>Zakaži renovaciju</value>
+  </data>
+  <data name="SelectMonthToDisplayStatistics" xml:space="preserve">
+    <value>Izaberi mesec za prikaz statistika</value>
+  </data>
+  <data name="SelectYearToDisplayStatistics" xml:space="preserve">
+    <value>Izaberi godinu za prikaz statistika</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Septembar</value>
+  </data>
+  <data name="Serbia" xml:space="preserve">
+    <value>Srbija</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Podešavanja</value>
+  </data>
+  <data name="SettingsAndProfile" xml:space="preserve">
+    <value>Podešavanja i profil</value>
+  </data>
+  <data name="Shack" xml:space="preserve">
+    <value>Koliba</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Početni datum</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistike</value>
+  </data>
+  <data name="StatusCanBeMoved" xml:space="preserve">
+    <value>Rezervacije može da se pomeri</value>
+  </data>
+  <data name="StatusCannotBeMoved" xml:space="preserve">
+    <value>Rezervacije ne može da se pomeri</value>
+  </data>
+  <data name="StatusOfWantedReservationTimespan" xml:space="preserve">
+    <value>Status pomeranja rezervacije</value>
+  </data>
+  <data name="SuperOwnerUC" xml:space="preserve">
+    <value>SUPER VLASNIK</value>
+  </data>
+  <data name="TapHere" xml:space="preserve">
+    <value>Pritisnite ovde</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>DO:</value>
+  </data>
+  <data name="TypeOfReservation" xml:space="preserve">
+    <value>Tip rezervacije</value>
+  </data>
+  <data name="Upcoming" xml:space="preserve">
+    <value>Nadolazeća</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Korisničko ime</value>
+  </data>
+  <data name="VeryGoodRB" xml:space="preserve">
+    <value>4 - Vrlo dobro</value>
+  </data>
+  <data name="WantedReservationTimespan" xml:space="preserve">
+    <value>Hteli dani rezervacije</value>
+  </data>
+  <data name="YearAccommodationWasMostPopular" xml:space="preserve">
+    <value>Godina kada je smeštaj bio najpopularniji:</value>
+  </data>
+  <data name="YouCanCancel" xml:space="preserve">
+    <value>Da, možete otkazati.</value>
+  </data>
+  <data name="YouCantCancel" xml:space="preserve">
+    <value>Ne, ne možete otkazati.</value>
+  </data>
+  <data name="YouHaveUnreviewedGuests" xml:space="preserve">
+    <value>Imate neocenjene goste. Pritisnite ispod da bi ste ih ocenili.</value>
+  </data>
+</root>

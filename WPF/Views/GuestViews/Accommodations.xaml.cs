@@ -31,6 +31,22 @@ public partial class Accommodations : UserControl
         InitializeComponent();
         AccommodationsViewModel = new AccommodationsViewModel(this, user);
         DataContext = AccommodationsViewModel;
+        Overlay.MouseLeftButtonDown += Overlay_MouseLeftButtonDown;
+    }
+
+    public void AnywhereAnytime_Click(object sender, RoutedEventArgs e)
+    {
+        AccommodationsViewModel.AnywhereAnytime_Click();
+    }
+
+    private async void StartDemoButton_Click(object sender, RoutedEventArgs e)
+    {
+        await AccommodationsViewModel.StartDemoMode();
+    }
+
+    private void Overlay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        AccommodationsViewModel.Overlay_MouseLeftButtonDown();
     }
 
     private void ResetFilters_Click(object sender, RoutedEventArgs e)
@@ -42,7 +58,6 @@ public partial class Accommodations : UserControl
     {
         AccommodationsViewModel.CountryComboBox_SelectionChanged();
     }
-
 
     //Accommodation Types CheckBoxes
     public void CheckBox_Checked(object sender, RoutedEventArgs e)

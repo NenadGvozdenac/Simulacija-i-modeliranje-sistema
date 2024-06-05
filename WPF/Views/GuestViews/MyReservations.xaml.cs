@@ -45,4 +45,19 @@ public partial class MyReservations : UserControl
     {
         MyReservationsViewModel.RescheduleRequests_Click();
     }
+
+    private void OwnerFeedback_Click(object sender, RoutedEventArgs e)
+    {
+        MyReservationsViewModel.OwnerFeedback_Click();
+    }
+
+    private void WhatIsSuperGuest_Click(object sender, RoutedEventArgs e)
+    {
+        MyReservationsViewModel.WhatIsSuperGuest_Click();
+    }
+
+    private void Forums_Click(object sender, RoutedEventArgs e)
+    {
+        MyReservationsViewModel.Forums_Click();
+    }
 }

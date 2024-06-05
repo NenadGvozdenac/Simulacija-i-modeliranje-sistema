@@ -19,8 +19,12 @@ public class ReservationReviewViewModel
     public AccommodationReservation reservation;
     public Accommodation accommodation;
     public List<ReviewImage> _reviewImages;
+    public List<Image> _images;
+    private int numberOfPictures;
+    private int currentPictureindex;
     public ReservationReview ReservationReview { get; set; }
 
+    public event EventHandler RefreshOwnerFeedback;
     public ReservationReviewViewModel(ReservationReview _ReservationReview, User user, int reservationId)
     {
         ReservationReview = _ReservationReview;
@@ -35,6 +39,8 @@ public class ReservationReviewViewModel
         reservation = AccommodationReservationService.GetInstance().GetById(reservationId);
         accommodation = AccommodationService.GetInstance().GetById(reservation.AccommodationId);
         _reviewImages = new List<ReviewImage>();
+        _images = new List<Image>();
+        numberOfPictures = -1;
         ReservationReview.accommodationName_TextBlock.Text = accommodation.Name;
         ReservationReview.dearUsername_TextBlock.Text = "Dear " + _user.Username + ",";
         ReservationReview.username_Label.Content = _user.Username;
@@ -47,8 +53,24 @@ public class ReservationReviewViewModel
 
     public void FinishReview_Click()
     {
-        AccommodationReview review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, false); // TODO: Dodao sam false kao polje za requires renovation. Promeni kad budes dodavao
+        AccommodationReview review = new AccommodationReview();
+        if (ReservationReview.Level1_CheckBox.IsChecked == true || ReservationReview.Level2_CheckBox.IsChecked == true || ReservationReview.Level3_CheckBox.IsChecked == true || ReservationReview.Level4_CheckBox.IsChecked == true || ReservationReview.Level5_CheckBox.IsChecked == true)
+        {
+            int LevelOfUrgency = ReservationReview.Level1_CheckBox.IsChecked == true ? 1
+                    : ReservationReview.Level2_CheckBox.IsChecked == true ? 2
+                    : ReservationReview.Level3_CheckBox.IsChecked == true ? 3
+                    : ReservationReview.Level4_CheckBox.IsChecked == true ? 4
+                    : ReservationReview.Level5_CheckBox.IsChecked == true ? 5
+                    : 0;
+            review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, LevelOfUrgency, ReservationReview.renovation_TextBox.Text, true);
+        }
+        else
+        {
+            review = new AccommodationReview(_user.Id, reservation.AccommodationId, reservation.Id, (int)ReservationReview.cleanliness_Slider.Value, (int)ReservationReview.ownersCourtesy_Slider.Value, ReservationReview.feedback_TextBox.Text, false);
+        }
+
         AccommodationReviewService.GetInstance().Add(review);
+        RefreshOwnerFeedback?.Invoke(this, EventArgs.Empty);
 
         foreach (ReviewImage reviewImage in _reviewImages)
         {
@@ -69,9 +91,34 @@ public class ReservationReviewViewModel
             slika.Width = 185;
             slika.Height = 135;
 
+            _images.Add(slika);
+            numberOfPictures++;
+            currentPictureindex = numberOfPictures;
+
+            ReservationReview.photo_Image.ImageSource = _images[numberOfPictures].Source;
+
             _reviewImages.Add(reviewImage);
-            ReservationReview.reviewImages_StackPanel.Children.Add(slika);
+            
         }
     }
+
+    public void LeftImage()
+    {
+        if (numberOfPictures > 0 && currentPictureindex!=0)
+        {
+            currentPictureindex--;
+            ReservationReview.photo_Image.ImageSource = _images[currentPictureindex].Source;
+        }
+    }
+
+    public void RightImage()
+    {
+        if (numberOfPictures > 0 && currentPictureindex != numberOfPictures)
+        {
+            currentPictureindex++;
+            ReservationReview.photo_Image.ImageSource = _images[currentPictureindex].Source;
+        }
+    }
+
 }
 

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookingApp.WPF.Views.OwnerViews.GuestReviewControls"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded">
-    <Grid Background="{StaticResource Creme}">
+    <Grid Background="{DynamicResource BackgroundBrush}">
         <StackPanel x:Name="Reviews">
             <!-- Your content here -->
         </StackPanel>

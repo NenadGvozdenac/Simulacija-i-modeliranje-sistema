@@ -5,108 +5,60 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookingApp.WPF.Views.TouristViews"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1000" Background="LightGray">
-    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-
-        <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
+             d:DesignHeight="700" d:DesignWidth="1000" Background="GhostWhite">
+    <Border BorderBrush="#666" BorderThickness="0" Margin="0,16,10,0">
 
 
-            <Grid Background="LightGray" Margin="0,0,0,0">
-                <Frame x:Name="TouristWindowFrame" NavigationUIVisibility="Hidden"/>
+        <Grid Background="GhostWhite" Margin="0,0,0,0">
+            <Frame x:Name="TouristWindowFrame" NavigationUIVisibility="Hidden"/>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="3*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="512" Height="80" Margin="33,0,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <TextBlock FontSize="40" Name="tourCountryTextBlock" TextWrapping="Wrap" Margin="10,25,871,26"/>
-                        <TextBlock  TextWrapping="Wrap" Text="," FontSize="40" Margin="181,33,776,39" />
-                        <TextBlock FontSize="40" Name="tourCityTextBlock" TextWrapping="Wrap" Margin="213,25,658,45"/>
-
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Border BorderThickness="0,0,0,1" BorderBrush="Black"/>
-                        <Image Source="{Binding Images[0].Path}" Stretch="Fill" Margin="39,33,17,22"/>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="500"/>
-                            <ColumnDefinition Width="500"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="65*"/>
-                                <RowDefinition Height="62*"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Reservations:" FontSize="25" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,0,0,0"/>
-                            <TextBlock Text="Choose a number of guests" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,49,0,0" Height="45" Width="463"/>
-                            <TextBox x:Name="GuestNumberText" TextChanged="GuestNumber_TextChanged" Margin="285,49,188,84"/>
-                            <Label Visibility="Hidden" x:Name="numberHigherMessage" Foreground="Red" FontWeight="DemiBold" FontSize="13" Content="The number you entered is higher that tour's capacity!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,73,0,0"/>
-                            <Label Visibility="Hidden" x:Name="increaseNumberText" Foreground="Red" FontSize="13" FontWeight="DemiBold" Content="Number of guests is filled!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="323,77,0,0"/>
-                            <Label Visibility="Hidden" x:Name="enterValidGuestNumber" Foreground="Red" FontSize="14" FontWeight="DemiBold" Content="Enter valid guest number!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="223,20,0,0"/>
-
-                            <TextBlock Text="Enter guest's name" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,94,0,0"/>
-                            <TextBox x:Name="GuestName" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,94,0,0" Height="25" Width="113"/>
-
-                            <TextBlock Text="Enter guest's surname" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,2,0,0" Height="26" Width="213" Grid.Row="1"/>
-                            <TextBox x:Name="GuestSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="214" Margin="250,2,0,0" Grid.Row="1"/>
-
-                            <TextBlock Text="Enter guest's age" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,43,0,0" Grid.Row="1"/>
-                            <TextBox x:Name="GuestAgeText"  TextChanged="GuestAge_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="38" Margin="194,0,0,0" Height="23" Grid.Row="1"/>
-                            <Label x:Name="enterValidAgeMessage" Visibility="Hidden" FontSize="15" FontWeight="DemiBold" Foreground="Red" Content="Enter valid age!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="234,82,0,0" Grid.Row="1"/>
-
-
-
-                            <TextBlock Text="Pick a coupon(optional)" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,85,0,0" Grid.Row="1"/>
-                            <ComboBox ItemsSource="{Binding Vouchers}"
-          DisplayMemberPath="ExpirationDate"
-          SelectedValuePath="Id"
-          SelectionChanged="ComboBox_SelectionChanged"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          Margin="245,90,0,0"
-          Width="200"
-          Grid.Row="1"/>
-
-                            <Button Click="AddTourist_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,27,0" Height="50" Width="59">
-                                <Image Source="/Resources/Assets/plus-symbol-button.png" Height="40" Width="49"/>
-                            </Button>
-                            <Label x:Name="enterAllFieldsMessage" Visibility="Hidden" Content="Enter all fields!" FontWeight="DemiBold" FontSize="15" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,72,0,0"/>
-
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="0.3*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <DataGrid Name="TouristDataGrid" ItemsSource="{Binding _tourists}" CanUserAddRows="False" AutoGenerateColumns="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                                        <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="*" />
-                                        <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="*"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <Button Click="ReserveTour_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="43" Width="44" Margin="14,10,0,0">
-                                    <Image Source="/Resources/Assets/reception.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="30"/>
-                                </Button>
-                                <Label FontSize="15" x:Name="addTouristMessage" Visibility="Hidden" Content="Add Tourists!" Foreground="Red" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-3,58,0,0"/>
-                            </Grid>
-                        </Grid>
-
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Name="tourNameTextBlock" TextWrapping="Wrap" FontSize="50" FontWeight="DemiBold" Width="520" Height="55"/>
+                    <Button Background="GhostWhite" FontSize="35" Click="Reserve_Click" Margin="882,0,41,10">
+                        <Image Source="/Resources/Assets/concierge-bell.256x193.png" Height="32" Width="49"/>
+                    </Button>
+                </Grid>
+                <Grid HorizontalAlignment="Center" Width="963" Margin="10,55,0,0" Grid.RowSpan="2">
+                    <Grid>
+                        <TextBlock FontSize="40" Name="tourCountryTextBlock" TextWrapping="Wrap" Margin="0,0,10,0"/>
                     </Grid>
                 </Grid>
-
+                <Grid Grid.Row="2">
+                    <Border BorderThickness="0,0,0,0" BorderBrush="Black" Margin="228,0,228,0">
+                        <Image Source="{Binding tourImage.Path}" Stretch="Fill" Margin="1,0,1,0"/>
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Image Source="/Resources/Assets/language.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="26" Margin="420,0,0,0"/>
+                    <TextBlock x:Name="LanguageText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="454,0,0,0"/>
+                    <Image Source="/Resources/Assets/users.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="35" Margin="520,0,0,0"/>
+                    <TextBlock x:Name="CapacityText" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="558,0,0,0" Width="52"/>
+                    <Image Source="/Resources/Assets/clock.256x256.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="31" Width="33" Margin="354,0,0,0"/>
+                    <TextBlock x:Name="DurationText" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="397,0,0,0"/>
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                    <Label Grid.Row="0" Content="Description:" FontStyle="Italic" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <ScrollViewer Grid.Row="1">
+                        <TextBlock FontSize="30" TextWrapping="Wrap" FontWeight="DemiBold" x:Name="DescriptionTextBlock" Margin="0,50,0,0"/>
+                    </ScrollViewer>
+                </Grid>
             </Grid>
-        </Border>
-    </ScrollViewer>
 
+        </Grid>
+    </Border>
 </UserControl>

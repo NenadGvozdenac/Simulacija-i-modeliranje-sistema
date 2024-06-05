@@ -1,4 +1,5 @@
-﻿using BookingApp.Application.UseCases;
+﻿using BookingApp.Application.Localization;
+using BookingApp.Application.UseCases;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using System;
@@ -14,25 +15,30 @@ public class AccommodationDTO
     public User Owner { get; set; }
     public string Name { get; set; }
     public Location Location { get; set; }
-    public AccommodationType Type { get; set; }
+    private string _type;
+    public string Type
+    {
+        get => TranslationSource.Instance[_type];
+        set => _type = value;
+    }
     private string _maxGuestNumber;
     public string MaxGuestNumber
     {
-        get => string.Format(_maxGuestNumber == "1" ? "{0} guest" : "{0} guests", _maxGuestNumber);
+        get => string.Format(_maxGuestNumber == "1" ? "{0} {1}" : "{0} {1}", _maxGuestNumber, TranslationSource.Instance["GuestsLC"]);
         set => _maxGuestNumber = value;
     }
 
     private string _minReservationDays;
     public string MinReservationDays
     {
-        get => string.Format(_minReservationDays == "1" ? "{0} day" : "{0} days", _minReservationDays);
+        get => string.Format(_minReservationDays == "1" ? "{0} {1}" : "{0} {1}", _minReservationDays, TranslationSource.Instance["DaysLC"]);
         set => _minReservationDays = value;
     }
 
     private string _cancellationPeriodDays;
     public string CancellationPeriodDays
     {
-        get => string.Format(_cancellationPeriodDays == "1" ? "{0} day" : "{0} days", _cancellationPeriodDays);
+        get => string.Format(_cancellationPeriodDays == "1" ? "{0} {1" : "{0} {1}", _cancellationPeriodDays, TranslationSource.Instance["DaysLC"]);
         set => _cancellationPeriodDays = value;
     }
 
@@ -53,7 +59,7 @@ public class AccommodationDTO
     private string _numberOfReviews;
     public string NumberOfReviews
     {
-        get => string.Format(_numberOfReviews == "1" ? "{0} review" : "{0} reviews", _numberOfReviews);
+        get => string.Format(_numberOfReviews == "1" ? "{0} {1}" : "{0} {1}", _numberOfReviews, TranslationSource.Instance["ReviewsLC"]);
         set => _numberOfReviews = value;
     }
 
@@ -64,13 +70,13 @@ public class AccommodationDTO
         Owner = OwnerService.GetInstance().GetById(accommodation.OwnerId).Item2;
         Name = accommodation.Name;
         Location = LocationService.GetInstance().GetById(accommodation.LocationId);
-        Type = accommodation.Type;
+        Type = accommodation.Type.ToString();
         MaxGuestNumber = accommodation.MaxGuestNumber.ToString();
         MinReservationDays = accommodation.MinReservationDays.ToString();
         CancellationPeriodDays = accommodation.CancellationPeriodDays.ToString();
-        AverageReviewScore = accommodation.AverageReviewScore.ToString();
+        AverageReviewScore = AccommodationReviewService.GetInstance().GetAverageReviewScoreByAccommodationId(accommodation.Id).ToString("0.00");
         Price = accommodation.Price.ToString();
-        NumberOfReviews = "0";
+        NumberOfReviews = AccommodationReviewService.GetInstance().GetByAccommodationId(accommodation.Id).Count.ToString();
         Images = accommodation.Images;
     }
 }
